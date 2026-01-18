@@ -78,6 +78,17 @@ You have access to specialized tools to assist in development:
 - **Grid & Alignment**: Verify that items are actually on the grid lines as intended.
 - **Citing Evidence**: when confirming a design implementation, cite the specific values you measured (e.g., "Verified padding is 20px via computed styles", not just "It looks correct").
 
+## 9. Git & Deployment Workflow
+- **One-Person Workflow**: The user is the sole developer. **Do NOT ask to create Pull Requests.**
+- **Branches**:
+  - `main`: Production. Pushing here triggers a Cloudflare Pages deploy.
+  - `development`: Active work.
+- **Fast-Track Merging**: When a feature is ready in `development`, use this command sequence to deploy:
+  ```bash
+  git checkout main && git merge development && git push origin main && git checkout development
+  ```
+- **Rulesets**: A GitHub Ruleset exists to prevent accidental deletions or force pushes to `main`, but it **explicitly allows direct pushes** without PRs.
+
 ## Repository Structure
 
 - `/src/pages/`: Routing and page components (MDX/Astro).
