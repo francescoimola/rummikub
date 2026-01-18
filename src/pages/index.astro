@@ -1,0 +1,43 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Heading, Text, Button, Flex, Grid } from "@radix-ui/themes";
+---
+
+<Layout>
+  <Grid
+    columns="2"
+    rows="auto auto"
+    gapX="5"
+    px="6"
+    style={{
+      backgroundColor: "var(--yellow-3)",
+      rowGap: "var(--space-12)",
+      paddingTop: "var(--space-11)",
+      paddingBottom: "var(--space-10)",
+    }}
+  >
+    <Heading
+      as="h1"
+      size="8"
+      weight="medium"
+      highContrast
+      trim="both"
+      style={{ gridColumn: "2" }}
+    >
+      Thoughtful pixels and words that connect your work to the people who need
+      it most
+    </Heading>
+    <Text size="3" weight="medium" color="gray" style={{ gridColumn: "1" }}>
+      Web designer and inbound marketer
+    </Text>
+    <Flex direction="column" gap="5" style={{ gridColumn: "2" }}>
+      <Text size="3" color="gray" wrap="pretty">
+        Francesco Imola builds clearer websites and writes unignorable content
+        to set small businesses apart and make them feel in control, again.
+      </Text>
+      <Button size="3" highContrast style={{ alignSelf: "flex-start" }}
+        >Start a project →</Button
+      >
+    </Flex>
+  </Grid>
+</Layout>
