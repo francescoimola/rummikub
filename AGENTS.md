@@ -88,6 +88,10 @@ You have access to specialized tools to assist in development:
   git checkout main && git merge development && git push origin main && git checkout development
   ```
 - **Rulesets**: A GitHub Ruleset exists to prevent accidental deletions or force pushes to `main`, but it **explicitly allows direct pushes** without PRs.
+- **Local Verification**: To check if the build works correctly before pushing (simulating the Cloudflare Pages environment), run:
+  ```bash
+  npx astro build && npx wrangler pages dev
+  ```
 
 ## Repository Structure
 
