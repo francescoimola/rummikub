@@ -1,0 +1,238 @@
+/* Global CSS Overrides */
+
+@font-face {
+    font-family: 'Ronzino';
+    src: url('/fonts/Ronzino-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Ronzino';
+    src: url('/fonts/Ronzino-Oblique.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Ronzino';
+    src: url('/fonts/Ronzino-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Ronzino';
+    src: url('/fonts/Ronzino-MediumOblique.woff2') format('woff2');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Ronzino';
+    src: url('/fonts/Ronzino-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Ronzino';
+    src: url('/fonts/Ronzino-BoldOblique.woff2') format('woff2');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+
+
+/* * {
+    background-color: rgba(255, 0, 0, 0.05);
+    outline: 1px solid rgba(255, 0, 0, 0.1);
+}
+
+*:nth-child(even) {
+    background-color: rgba(255, 0, 0, 0.1);
+} */
+
+
+
+:root,
+.light,
+.light-theme {
+    --yellow-1: #fdfdf9;
+    --yellow-2: #f9faf0;
+    --yellow-3: #f3f6cb;
+    --yellow-4: #ebefa9;
+    --yellow-5: #e0e48c;
+    --yellow-6: #d2d67e;
+    --yellow-7: #bfc36c;
+    --yellow-8: #a9ac55;
+    --yellow-9: #3b3c02;
+    --yellow-10: #4d4e19;
+    --yellow-11: #737517;
+    --yellow-12: #3e3f05;
+
+    --yellow-a1: #aaaa0006;
+    --yellow-a2: #99aa000f;
+    --yellow-a3: #c5d30034;
+    --yellow-a4: #c4d00056;
+    --yellow-a5: #bbc40073;
+    --yellow-a6: #a7ae0081;
+    --yellow-a7: #90970093;
+    --yellow-a8: #7e8300aa;
+    --yellow-a9: #393a00fd;
+    --yellow-a10: #3a3b00e6;
+    --yellow-a11: #656700e8;
+    --yellow-a12: #3a3b00fa;
+
+    --yellow-contrast: #fff;
+    --yellow-surface: #f8f9eccc;
+    --yellow-indicator: #3b3c02;
+    --yellow-track: #3b3c02;
+
+    --orange-1: #fefcfb;
+    --orange-2: #fff6ea;
+    --orange-3: #ffecd0;
+    --orange-4: #ffdeb8;
+    --orange-5: #ffd2a0;
+    --orange-6: #ffc387;
+    --orange-7: #f6b277;
+    --orange-8: #e19e63;
+    --orange-9: #553009;
+    --orange-10: #68421e;
+    --orange-11: #a96a2d;
+    --orange-12: #56310a;
+
+    --orange-a1: #c0400004;
+    --orange-a2: #ff920015;
+    --orange-a3: #ff98002f;
+    --orange-a4: #ff890047;
+    --orange-a5: #ff87005f;
+    --orange-a6: #ff800078;
+    --orange-a7: #ef6f0088;
+    --orange-a8: #ce61009c;
+    --orange-a9: #4f2800f6;
+    --orange-a10: #542900e1;
+    --orange-a11: #974a00d2;
+    --orange-a12: #4f2900f5;
+
+    --orange-contrast: #fff;
+    --orange-surface: #fff4e5cc;
+    --orange-indicator: #553009;
+    --orange-track: #553009;
+
+    /* Custom Spacing Tokens (Extending Radix 1-9 scale) */
+    --space-10: 5rem;
+    /* 80px - xl-space-100 */
+    --space-11: 8rem;
+    /* 128px - xl-space-200 */
+    --space-12: 10rem;
+    /* 160px - xl-space-400 */
+    --space-13: 20rem;
+    /* 320px - xl-space-600 */
+    --space-14: 30rem;
+    /* 480px - xl-space-800 */
+}
+
+@supports (color: color(display-p3 1 1 1)) {
+    @media (color-gamut: p3) {
+
+        :root,
+        .light,
+        .light-theme {
+            --yellow-1: oklch(99.2% 0.0054 110.8);
+            --yellow-2: oklch(98.2% 0.0127 110.8);
+            --yellow-3: oklch(95.9% 0.0561 110.8);
+            --yellow-4: oklch(93.2% 0.089 110.8);
+            --yellow-5: oklch(89.7% 0.1109 110.8);
+            --yellow-6: oklch(85.3% 0.1109 110.8);
+            --yellow-7: oklch(79.5% 0.1109 110.8);
+            --yellow-8: oklch(72.4% 0.1109 110.8);
+            --yellow-9: oklch(34.4% 0.0739 110.8);
+            --yellow-10: oklch(41.1% 0.0739 110.8);
+            --yellow-11: oklch(54.4% 0.1109 110.8);
+            --yellow-12: oklch(35.4% 0.0739 110.8);
+
+            --yellow-a1: color(display-p3 0.6745 0.6745 0.0235 / 0.024);
+            --yellow-a2: color(display-p3 0.5725 0.6471 0.0039 / 0.055);
+            --yellow-a3: color(display-p3 0.7725 0.8157 0.0078 / 0.189);
+            --yellow-a4: color(display-p3 0.7569 0.7961 0.0039 / 0.306);
+            --yellow-a5: color(display-p3 0.7137 0.7412 0.0039 / 0.408);
+            --yellow-a6: color(display-p3 0.6275 0.6549 0.0039 / 0.463);
+            --yellow-a7: color(display-p3 0.5373 0.5608 0 / 0.534);
+            --yellow-a8: color(display-p3 0.4627 0.4745 0 / 0.62);
+            --yellow-a9: color(display-p3 0.1882 0.1922 0 / 0.946);
+            --yellow-a10: color(display-p3 0.1961 0.2 0 / 0.867);
+            --yellow-a11: color(display-p3 0.3412 0.3529 0 / 0.836);
+            --yellow-a12: color(display-p3 0.1882 0.1922 0 / 0.934);
+
+            --yellow-contrast: #fff;
+            --yellow-surface: color(display-p3 0.9725 0.9765 0.9333 / 0.8);
+            --yellow-indicator: oklch(34.4% 0.0739 110.8);
+            --yellow-track: oklch(34.4% 0.0739 110.8);
+
+            --orange-1: oklch(99.3% 0.0031 61.47);
+            --orange-2: oklch(98.2% 0.0234 61.47);
+            --orange-3: oklch(96.3% 0.0632 61.47);
+            --orange-4: oklch(93.2% 0.1101 61.47);
+            --orange-5: oklch(90.3% 0.1101 61.47);
+            --orange-6: oklch(86.8% 0.1101 61.47);
+            --orange-7: oklch(81.5% 0.1101 61.47);
+            --orange-8: oklch(75.1% 0.1101 61.47);
+            --orange-9: oklch(34.9% 0.0734 61.47);
+            --orange-10: oklch(41.6% 0.0734 61.47);
+            --orange-11: oklch(58.1% 0.1101 61.47);
+            --orange-12: oklch(35.1% 0.0734 61.47);
+
+            --orange-a1: color(display-p3 0.7569 0.2667 0.0235 / 0.016);
+            --orange-a2: color(display-p3 0.902 0.5569 0.0078 / 0.079);
+            --orange-a3: color(display-p3 0.9333 0.5922 0.0039 / 0.173);
+            --orange-a4: color(display-p3 0.9255 0.5176 0.0039 / 0.259);
+            --orange-a5: color(display-p3 0.9216 0.5176 0.0039 / 0.35);
+            --orange-a6: color(display-p3 0.9216 0.4784 0.0039 / 0.436);
+            --orange-a7: color(display-p3 0.851 0.4196 0.0039 / 0.499);
+            --orange-a8: color(display-p3 0.7294 0.3608 0 / 0.577);
+            --orange-a9: color(display-p3 0.2627 0.1333 0 / 0.93);
+            --orange-a10: color(display-p3 0.2863 0.1412 0 / 0.855);
+            --orange-a11: color(display-p3 0.5216 0.2627 0 / 0.777);
+            --orange-a12: color(display-p3 0.2627 0.1373 0 / 0.926);
+
+            --orange-contrast: #fff;
+            --orange-surface: color(display-p3 1 0.9608 0.902 / 0.8);
+            --orange-indicator: oklch(34.9% 0.0734 61.47);
+            --orange-track: oklch(34.9% 0.0734 61.47);
+        }
+    }
+}
+
+.radix-themes {
+    --custom-override: inherit;
+    /* Override Radix-specific variables here */
+    --default-font-family: 'Ronzino', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-family: var(--default-font-family);
+}
+
+body {
+    margin: 0;
+    font-family: var(--default-font-family);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+a,
+button,
+label,
+figcaption {
+    text-wrap: balance;
+}
