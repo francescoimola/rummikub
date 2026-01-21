@@ -31,6 +31,10 @@ All web development in this project MUST prioritize **Visual Excellence** and **
 - Use Radix Themes for typography (Text, Heading, Code, Quote).
 - Use Radix Themes for interactive elements (Button, IconButton, Link, etc.).
 - Custom CSS is only for very special cases or Radix style overrides.
+- **Icons**: Always prefer `@radix-ui/react-icons` (installed via `pnpm`).
+  - **Matching**: If a Figma icon resembles a Radix icon, use the Radix icon.
+  - **Mismatch**: If the Figma icon is significantly different, **notify the user** to either source a new icon or select an alternative. 
+  - **Do not import custom SVGs without approval.**
 
 ### 2. Astro Best Practices
 - **Use `pnpm astro add`**: Always prefer `pnpm astro add <integration>` over manual configuration for official integrations.
@@ -128,7 +132,7 @@ You have access to specialized tools to assist in development:
   <Button client:load>Click me</Button>
   ```
 - **Styling**: `src/styles/global.css` matches Radix tokens to brand colors. Vanilla CSS files can be added for deeper overrides.
-- **Icons**: Radix Themes works seamlessly with `lucide-react`.
+- **Icons**: Use `@radix-ui/react-icons` as the primary icon source.
 
 ---
 

@@ -1,0 +1,125 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import {
+    Heading,
+    Text,
+    Button,
+    Flex,
+    Theme,
+    Box,
+    Section,
+} from "@radix-ui/themes";
+import { ArrowDownIcon } from "@radix-ui/react-icons";
+
+// Portfolio images
+import lifecoaching from "../assets/portfolio/life-coaching.png";
+import makeandmind from "../assets/portfolio/make-and-mind.png";
+import folkshomepage from "../assets/portfolio/folks-homepage.png";
+import folksdirectory from "../assets/portfolio/folks-directory.png";
+import tedxjourneys from "../assets/portfolio/tedx-journeys.png";
+---
+
+<Layout backgroundColor="var(--yellow-5)">
+    <Heading
+        slot="heading"
+        as="h1"
+        size="8"
+        weight="medium"
+        highContrast
+        trim="both"
+    >
+        Deliberately simpler web design and development
+    </Heading>
+    <Text slot="role" size="3" weight="medium" color="gray" as="p">
+        Best for independent businesses & established freelancers
+    </Text>
+    <Flex slot="description" direction="column" gap="5">
+        <Text size="3" color="gray" wrap="pretty">
+            <p>
+                The typical website-building project comes with layers that
+                don't serve you, baked with more people, more revisions, and
+                more cost than necessary.
+            </p>
+            <p>I do away with most of that.</p>
+            <p>
+                You get one person handling strategy, copy, design, and
+                development, a website you can update yourself, and a process
+                that takes weeks instead of months.
+            </p>
+        </Text>
+        <Button
+            size="3"
+            variant="soft"
+            color="gray"
+            style={{ alignSelf: "flex-start" }}
+        >
+            Scroll to learn more <ArrowDownIcon />
+        </Button>
+    </Flex>
+
+    <Theme slot="projects-gallery" appearance="light">
+        <Section
+            size="1"
+            py="6"
+            style={{ backgroundColor: "var(--lime-4)", overflow: "hidden" }}
+        >
+            <Flex gap="4" justify="center" align="center">
+                <Image
+                    src={lifecoaching}
+                    alt="Life Coaching Project"
+                    class="portfolio-image"
+                    quality={80}
+                    format="webp"
+                    widths={[400, 600, 800]}
+                    sizes="(max-width: 768px) 40vw, 20vw"
+                />
+                <Image
+                    src={makeandmind}
+                    alt="TC Baffles"
+                    class="portfolio-image"
+                    quality={80}
+                    format="webp"
+                    widths={[400, 600, 800]}
+                    sizes="(max-width: 768px) 40vw, 20vw"
+                />
+                <Image
+                    src={folkshomepage}
+                    alt="Make & Mind"
+                    class="portfolio-image"
+                    quality={80}
+                    format="webp"
+                    widths={[400, 600, 800]}
+                    sizes="(max-width: 768px) 40vw, 20vw"
+                />
+                <Image
+                    src={folksdirectory}
+                    alt="Folks Directory"
+                    class="portfolio-image"
+                    quality={80}
+                    format="webp"
+                    widths={[400, 600, 800]}
+                    sizes="(max-width: 768px) 40vw, 20vw"
+                />
+                <Image
+                    src={tedxjourneys}
+                    alt="TEDx Journeys"
+                    class="portfolio-image"
+                    quality={80}
+                    format="webp"
+                    widths={[400, 600, 800]}
+                    sizes="(max-width: 768px) 40vw, 20vw"
+                    style={{ objectPosition: "top" }}
+                />
+            </Flex>
+        </Section>
+    </Theme>
+</Layout>
+
+<style>
+    .portfolio-image {
+        width: auto;
+        height: clamp(10rem, 18vw, 20rem);
+        flex-shrink: 0;
+    }
+</style>

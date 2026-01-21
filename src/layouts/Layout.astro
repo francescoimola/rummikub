@@ -1,15 +1,29 @@
 ---
-import { Theme } from "@radix-ui/themes";
+import {
+    Theme,
+    Grid,
+    Box,
+    Container,
+    Flex,
+    Link,
+    Text,
+    Button,
+    Heading,
+} from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
-import Header from "../components/Header.jsx";
 import "../styles/global.css";
 import type { ComponentProps } from "react";
 
 interface Props extends ComponentProps<typeof Theme> {
     title?: string;
+    backgroundColor?: string;
 }
 
-const { title = "Rummikub", ...themeProps } = Astro.props;
+const {
+    title = "Rummikub",
+    backgroundColor = "var(--yellow-3)",
+    ...themeProps
+} = Astro.props;
 ---
 
 <html lang="en">
@@ -20,9 +34,121 @@ const { title = "Rummikub", ...themeProps } = Astro.props;
         <title>{title}</title>
     </head>
     <body>
-        <Theme accentColor="yellow" radius="none" client:load {...themeProps}>
-            <Header client:load />
-            <slot />
+        <Theme
+            accentColor="yellow"
+            radius="none"
+            grayColor="olive"
+            panelBackground="solid"
+            client:load
+            {...themeProps}
+            style={{ backgroundColor }}
+        >
+            <Container maxWidth="var(--max-cw)">
+                <Grid
+                    columns={{ initial: "1", sm: "2" }}
+                    gapY="9"
+                    gapX="4"
+                    px="6"
+                    pt="4"
+                    pb="9"
+                    style={{ backgroundColor }}
+                >
+                    {/* Logo - Cell (1,1) */}
+                    <Box
+                        gridRow={{ initial: "auto", sm: "1" }}
+                        style={{
+                            alignSelf: "center",
+                        }}
+                    >
+                        <Heading
+                            size="3"
+                            weight="medium"
+                            highContrast
+                            wrap="nowrap"
+                            as="h1"
+                        >
+                            Francesco Imola
+                        </Heading>
+                    </Box>
+
+                    {/* Navigation + CTA - Cell (2,1) */}
+                    <Flex
+                        gridRow={{ initial: "auto", sm: "1" }}
+                        gridColumn={{ initial: "1", sm: "2" }}
+                        justify="between"
+                        align="center"
+                        className="menu-gap nav-offset-sm"
+                    >
+                        {/* Nav Items */}
+                        <Flex
+                            className="menu-gap"
+                            direction={{ initial: "column", sm: "row" }}
+                        >
+                            <Link
+                                href="/websites"
+                                size="3"
+                                color="gray"
+                                underline="hover"
+                            >
+                                Websites
+                            </Link>
+                            <Link
+                                href="/consulting"
+                                size="3"
+                                color="gray"
+                                underline="hover"
+                            >
+                                Consulting
+                            </Link>
+                            <Link
+                                href="/about"
+                                size="3"
+                                color="gray"
+                                underline="hover"
+                            >
+                                About
+                            </Link>
+                            <Box display={{ initial: "block", md: "none" }}>
+                                <Link
+                                    href="/contact"
+                                    size="3"
+                                    color="gray"
+                                    underline="hover"
+                                >
+                                    Contact
+                                </Link>
+                            </Box>
+                        </Flex>
+
+                        {/* Contact CTA */}
+                        <Box display={{ initial: "none", md: "block" }}>
+                            <Button variant="soft" color="gray" size="3">
+                                Contact
+                            </Button>
+                        </Box>
+                    </Flex>
+                    <Box gridColumn={{ initial: "1", sm: "2" }}>
+                        <slot name="heading" />
+                    </Box>
+
+                    <Box
+                        gridColumn={{ initial: "1", sm: "1" }}
+                        gridRow="auto"
+                        width="full"
+                        maxWidth={{
+                            initial: "4",
+                            sm: "var(--container-xs)",
+                        }}
+                    >
+                        <slot name="role" />
+                    </Box>
+
+                    <Box gridColumn={{ initial: "1", sm: "2" }}>
+                        <slot name="description" />
+                    </Box>
+                </Grid>
+            </Container>
         </Theme>
+        <slot name="projects-gallery" />
     </body>
 </html>
