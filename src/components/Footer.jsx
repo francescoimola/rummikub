@@ -26,14 +26,16 @@ export const Footer = ({ withSignupForm = false }) => {
                 style={{
                     backgroundColor: "var(--brand-surface-dark-olive)",
                 }}
-                py="9"
+                asChild
             >
                 <Container maxWidth="var(--max-cw)">
                     <Grid
                         columns={{ initial: "1", sm: "12" }}
                         gapX="4"
                         gapY="8"
-                        px={{ initial: "var(--section-px-initial)", sm: "var(--section-px-sm)" }}
+                        pt="var(--space-10)"
+                        pb="var(--space-12)"
+                        px={{ initial: "4", sm: "6" }}
                     >
                         {/* Brand Column */}
                         <Box gridColumn={{ initial: "auto", sm: "span 4" }}>
@@ -215,9 +217,11 @@ export const Footer = ({ withSignupForm = false }) => {
                         )}
                     </Grid>
 
-                    <Box px={{ initial: "var(--section-px-initial)", sm: "var(--section-px-sm)" }}>
-                        <Separator size="4" my="8" />
-
+                    <Box
+                        px={{ initial: "4", sm: "6" }}
+                        pb="var(--space-10)"
+                    >
+                        <Separator size="4" my="4" />
                         <Flex
                             justify="between"
                             align="center"
@@ -225,17 +229,11 @@ export const Footer = ({ withSignupForm = false }) => {
                             gap="4"
                         >
                             <Text size="2" color="gray">
-                                Francesco Imola
+                                Francesco Imola © 2024. All rights reserved.
                             </Text>
-
-                            <Flex gap="4" align="center">
-                                <Text size="2" color="gray">
-                                    © 2024 Francesco Imola. All rights reserved.
-                                </Text>
-                                <Text size="2" color="gray">
-                                    Developed by Cantiere Creativo
-                                </Text>
-                            </Flex>
+                            <Text size="2" color="gray">
+                                Developed by Cantiere Creativo
+                            </Text>
                         </Flex>
                     </Box>
                 </Container >

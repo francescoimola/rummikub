@@ -1,14 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import {
-    Heading,
-    Text,
-    Flex,
-    Grid,
-    Box,
-    Badge,
-    AspectRatio,
-} from "@radix-ui/themes";
+import PageHeading from "../components/PageHeading.astro";
+import { Text, Flex, Grid, Box, Badge, AspectRatio } from "@radix-ui/themes";
 import { Image } from "astro:assets";
 import blogPostImage from "../assets/blog-post-image.png";
 ---
@@ -18,16 +11,8 @@ import blogPostImage from "../assets/blog-post-image.png";
     appearance="dark"
     roleFullWidth
 >
-    <Heading
-        slot="heading"
-        as="h1"
-        size="8"
-        weight="medium"
-        highContrast
-        trim="both"
-    >
-        Where have all the monkeys gone?
-    </Heading>
+    <!-- Hero Section -->
+    <PageHeading slot="heading"> Where have all the monkeys gone? </PageHeading>
     <Flex slot="role" justify={{ initial: "start", sm: "end" }} width="100%">
         <Box width="340px">
             <AspectRatio ratio={4 / 3}>

@@ -9,6 +9,7 @@ import {
     Button,
     Heading,
     Separator,
+    Section,
 } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import "../styles/global.css";
@@ -50,16 +51,15 @@ const {
             client:load
             {...themeProps}
             style={{ backgroundColor }}
-            asChild
         >
-            <Container maxWidth="var(--max-cw)">
+            <Container maxWidth="var(--max-cw)" asChild>
                 <Grid
                     columns={{ initial: "1", sm: "2" }}
                     gapY={{ initial: "var(--space-10)", sm: "var(--space-11)" }}
                     gapX="4"
                     px={{
-                        initial: "var(--section-px-initial)",
-                        sm: "var(--section-px-sm)",
+                        initial: "4",
+                        sm: "6",
                     }}
                     pt={{ initial: "4", sm: "6" }}
                     pb="var(--space-10)"

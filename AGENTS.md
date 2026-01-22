@@ -4,16 +4,21 @@ Welcome! This document provides context and guidelines for AI agents working on 
 
 ## Project Overview
 
-This is an **Astro-powered** portfolio website. It is built with React for interactivity and Radix UI Themes for styling. The goal is to provide a premium, modern, and visually stunning portfolio interface to showcase professional work, and land new clients.
+This is an **Astro-powered** portfolio website for Francesco Imola. It is built with React for interactivity and Radix UI Themes for styling. The goal is to provide a premium, modern, and visually stunning portfolio interface to showcase professional work and land new clients.
+
+**Live URL**: [https://francescoimola.com](https://francescoimola.com)
 
 ## Tech Stack
 
-- **Framework**: [Astro 5+](https://astro.build/)
-- **UI Framework**: [React 19+](https://react.dev/)
-- **Design System**: [Radix UI Themes](https://www.radix-ui.com/themes/docs/overview/getting-started) (primary)
-- **Content**: MDX, Sitemap support
-- **Styling**: Radix UI Theme system (Vanilla CSS for overrides)
+- **Framework**: [Astro 5.16+](https://astro.build/)
+- **UI Framework**: [React 19.2+](https://react.dev/)
+- **Design System**: [Radix UI Themes 3.2+](https://www.radix-ui.com/themes/docs/overview/getting-started) (primary)
+- **Icons**: [@radix-ui/react-icons 1.3+](https://www.radix-ui.com/icons)
+- **Content**: MDX support, Sitemap generation
+- **Styling**: Radix UI Theme system + PostCSS (Vanilla CSS for overrides)
+- **Deployment**: Cloudflare Pages (with Cloudflare adapter)
 - **Package Manager**: pnpm
+- **PostCSS**: autoprefixer, cssnano, postcss-preset-env
 
 ## Design Philosophy (CRITICAL)
 
@@ -59,11 +64,44 @@ You have access to specialized tools to assist in development:
 - **Style Threshold**: Maintain a 10% tolerance when matching Figma styles to Radix UI Themes. If a Figma style deviates by more than 10% from existing Radix tokens, create a custom style; otherwise, snap to the nearest Radix equivalent.
 - **Radix Methodology**: Always prioritize Radix design system methodology for spacing, colors, and typography.
 - **No Hardcoding**: Do not copy raw CSS values (pixels, hex codes) from Figma. Map these to Radix design tokens or standard scale variables.
-- **Native Responsiveness**: Identify and use Radix’s built-in responsive solutions (e.g., responsive props) where possible. Propose these options to the user before implementation.
+- **Native Responsiveness**: Identify and use Radix's built-in responsive solutions (e.g., responsive props) where possible. Propose these options to the user before implementation.
 - **Clarification First**: When in doubt or facing ambiguity in design specifications, always ask for clarification instead of making assumptions.
 - **No Rounded Corners**: This design uses sharp, square corners throughout. The Radix Theme is configured with `radius="none"`. Do not add rounded corners to any components.
 
-### 7. Global Design System & Tokens
+### 7. Navigation & Link Patterns
+- **Internal Links**: Use Radix `Link` component with `href` attribute for internal navigation.
+  ```jsx
+  <Link href="/about" size="3" color="gray">About</Link>
+  ```
+- **External Links**: Add `target="_blank"` and `rel="noopener noreferrer"` for external URLs.
+- **Button Links**: Use Radix `Button` with `asChild` when wrapping an anchor element:
+  ```jsx
+  <Button asChild variant="soft">
+    <a href="/contact">Contact</a>
+  </Button>
+  ```
+- **Active States**: Navigation active states are NOT yet implemented. When adding active link highlighting, use URL matching logic in the component.
+
+### 8. Slot Architecture & Page Structure
+The `Layout.astro` component uses **named slots** to structure content:
+- **`heading`**: Page title/main heading (grid column 2, desktop)
+- **`role`**: User role/tagline text (grid column 1, constrained width)
+- **`description`**: Detailed description or intro (grid column 2)
+- **`page-content`**: Full-width content below hero grid (spans both columns)
+
+**Example Page Usage:**
+```astro
+<Layout title="About">
+  <Heading slot="heading" size="9">About Me</Heading>
+  <Text slot="role" size="5">Designer & Developer</Text>
+  <Text slot="description" size="4">Welcome to my portfolio...</Text>
+  <Box slot="page-content">
+    {/* Full-width page content here */}
+  </Box>
+</Layout>
+```
+
+### 9. Global Design System & Tokens
 - **Global Tokens**: Defined in `src/styles/global.css`.
 
 #### A. Spacing Tokens
@@ -90,9 +128,14 @@ The project extends the default Radix 1-9 spacing scale with custom larger steps
   - **Secondary Accent**: Use `color="orange"` for specific components.
 
 
-### 8. CSS Strategy & Best Practices
+### 10. CSS Strategy & Best Practices
 - **No Local `<style>` Blocks**: Do NOT create custom `<style>` blocks or sidecar `.css` files for individual components/pages unless strictly necessary (e.g., complex animations, keyframes, or styles exceeding 20+ lines that would pollute global CSS).
   - **Default**: Add styles to `src/styles/global.css`.
+- **PostCSS Integration**: The project uses PostCSS for optimization. CSS is automatically processed with:
+  - **autoprefixer**: Vendor prefixes based on browserslist
+  - **postcss-preset-env**: Modern CSS features (stage 3+)
+  - **cssnano**: Minification in production
+  - See `POSTCSS_SETUP.md` for details
 - **Commenting Etiquette**:
   - **Do NOT** comment individual properties (e.g., `color: red; /* sets text to red */`).
   - **DO** comment sections (e.g., `/* Blog Grid Layout */`).
@@ -100,12 +143,13 @@ The project extends the default Radix 1-9 spacing scale with custom larger steps
 - **Strong, Responsive CSS**:
   - **Minimalism**: Write the fewest lines of code possible. Use efficient selectors.
   - **Units**: ALWAYS use `rem` for font-size and spacing. Use `dvh`/`dvw` over `vh`/`vw`.
-  - **Variables**: Use Radix variables (`var(--space-3)`, `var(--color-gray-12)`) instead of raw values.
+  - **Variables**: Use Radix variables (`var(--space-3)`, `var(--gray-11)`) instead of raw values.
   - **Layout**: Respect the baseline grid. Ensure containers don't overflow.
   - **Accessibility**: Ensure high contrast and respect system font size preferences.
+  - **Modern Features**: Feel free to use modern CSS (container queries, `:has()`, etc.) - PostCSS will handle compatibility.
 
 
-### 9. Verification Protocol (CRITICAL)
+### 11. Verification Protocol (CRITICAL)
 - **No "Visual Glances"**: Do not rely solely on looking at screenshots. Your eyes can be deceived by small pixel differences.
 - **Computed Styles**: You MUST use browser developer tools (or equivalent MCP capabilities) to inspect computed styles (`getComputedStyle`), specifically checking:
   - Exact pixel values for margins and padding.
@@ -114,7 +158,7 @@ The project extends the default Radix 1-9 spacing scale with custom larger steps
 - **Grid & Alignment**: Verify that items are actually on the grid lines as intended.
 - **Citing Evidence**: when confirming a design implementation, cite the specific values you measured (e.g., "Verified padding is 20px via computed styles", not just "It looks correct").
 
-## 10. Git & Deployment Workflow
+## 12. Git & Deployment Workflow
 - **One-Person Workflow**: The user is the sole developer. **Do NOT ask to create Pull Requests.**
 - **Branches**:
   - `main`: Production. Pushing here triggers a Cloudflare Pages deploy.
@@ -131,20 +175,41 @@ The project extends the default Radix 1-9 spacing scale with custom larger steps
 
 ## Repository Structure
 
-- `/src/pages/`: Routing and page components (MDX/Astro).
-- `/src/components/`: Reusable UI components (React/Astro).
-- `/src/layouts/`: Base page layouts.
-- `/public/`: Static assets.
-- `architecture.md`: Visual map of the project structure.
+- `/src/pages/`: File-based routing. Each `.astro` file becomes a route.
+- `/src/components/`: Reusable UI components (React `.jsx` and Astro `.astro`).
+- `/src/layouts/`: Base page layouts. `Layout.astro` is the master layout.
+- `/public/`: Static assets (fonts, images, favicon, etc.).
+- `/src/assets/`: Optimized/processed assets (Astro's image optimization).
+- `/src/styles/global.css`: Global design tokens, font imports, and overrides.
+- `architecture.md`: Technical overview and project structure.
+- `POSTCSS_SETUP.md`: PostCSS configuration documentation.
+
+**Current Pages:**
+- `index.astro`: Homepage
+- `about.astro`: About page
+- `blog.astro`: Blog listing
+- `blogPost.astro`: Blog post template
+- `consultations.astro`: Consulting services
+- `project.astro`: Project showcase template
+- `webdesign.astro`: Web design services
+
+**Current Components:**
+- `BlogFilters.jsx` (React): Tab-based blog filtering
+- `Footer.jsx` (React): Site footer with optional signup form
+- `ProjectCanvas.astro` (Astro): Image gallery for projects
+- `SkipToNav.astro` (Astro): Accessibility skip-to-nav link
 
 ## Common Workflows
 
 ### Developing a New Component
-1. Search `radix-ui` MCP for a suitable Radix Themes component.
-2. Create the component in `src/components/` (use `.jsx` for React components; avoid `.tsx` as per project preference).
-3. Apply styling using Radix Theme properties (color, size, variant, etc.).
-4. Port to Astro layout/page.
-5. **Verify**: Use browser tools to inspect computed styles and ensuring alignment matches the design exactly.
+1. **Search for Radix component**: Use `radix-ui` MCP to find suitable Radix Themes components.
+2. **Choose file type**:
+   - **`.jsx`** for React components (interactive, with state)
+   - **`.astro`** for static components (server-rendered)
+3. **Create in `src/components/`**: Follow existing naming conventions.
+4. **Apply Radix styling**: Use Radix Theme properties (color, size, variant) instead of custom CSS.
+5. **Add to page**: Import and use. For React components, add `client:load` or `client:idle` directive.
+6. **Verify**: Use browser DevTools to inspect computed styles and ensure exact design match.
 
 ## Development Cheatsheet
 
@@ -159,12 +224,21 @@ The project extends the default Radix 1-9 spacing scale with custom larger steps
 - Use **Primitives** (`@radix-ui/react-*`) when you need completely custom styling AND accessible behavior (e.g., complex Popovers, accessibility-focused non-standard widgets).
 
 ### Astro Integration Notes
-- **Interactivity**: Radix components are React-based. **You MUST add `client:load` or `client:visible` directives** when using interactive components in `.astro` files:
+- **Interactivity**: Radix components are React-based. **You MUST add `client:load`, `client:idle`, or `client:visible` directives** when using interactive components in `.astro` files:
   ```astro
   <Button client:load>Click me</Button>
   ```
+- **Choosing Directives**:
+  - `client:load`: Hydrate immediately on page load (use for critical interactive elements like navigation)
+  - `client:idle`: Hydrate when browser is idle (use for non-critical elements like footer)
+  - `client:visible`: Hydrate when element becomes visible (use for below-fold content)
 - **Styling**: `src/styles/global.css` matches Radix tokens to brand colors. Vanilla CSS files can be added for deeper overrides.
 - **Icons**: Use `@radix-ui/react-icons` as the primary icon source.
+- **Type Safety**: The project uses TypeScript. Add proper type imports when needed:
+  ```tsx
+  import type { ComponentProps } from "react";
+  interface Props extends ComponentProps<typeof Theme> { ... }
+  ```
 
 ---
 
@@ -217,6 +291,34 @@ The project extends the default Radix 1-9 spacing scale with custom larger steps
   color: var(--gray-11);
 }
 ```
+
+---
+
+## Common Pitfalls & Solutions
+
+### Issue: Component Not Interactive
+**Problem**: React component doesn't respond to clicks/interactions.
+**Solution**: Add `client:load` or `client:idle` directive to the component in the `.astro` file.
+
+### Issue: Type Error with Props
+**Problem**: TypeScript errors when passing props to Radix components.
+**Solution**: Import proper types: `import type { ComponentProps } from "react";` and extend them.
+
+### Issue: Styles Not Applying
+**Problem**: Custom CSS not affecting Radix components.
+**Solution**: 
+1. Check CSS specificity - Radix uses data attributes
+2. Add styles to `global.css` with proper selectors
+3. Use Radix's built-in props first (color, size, variant)
+
+### Issue: Build Fails Locally
+**Problem**: `astro build` fails but dev server works.
+**Solution**: 
+1. Check for client-only code (e.g., `window` usage) - wrap in `if (typeof window !== 'undefined')`
+2. Ensure all imports are properly resolved
+3. Test with `npx astro build && npx wrangler pages dev` to simulate production
+
+---
 
 ---
 

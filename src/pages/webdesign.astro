@@ -1,7 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PageHeading from "../components/PageHeading.astro";
 import { Image } from "astro:assets";
-import { Heading, Text, Button, Flex, Theme, Section } from "@radix-ui/themes";
+import { Text, Button, Flex, Theme, Section } from "@radix-ui/themes";
 import { ArrowDownIcon } from "@radix-ui/react-icons";
 
 // Portfolio images
@@ -13,16 +14,10 @@ import tedxjourneys from "../assets/portfolio/tedx-journeys.png";
 ---
 
 <Layout backgroundColor="var(--yellow-5)">
-    <Heading
-        slot="heading"
-        as="h1"
-        size="8"
-        weight="medium"
-        highContrast
-        trim="both"
-    >
+    <!-- Hero Section -->
+    <PageHeading slot="heading">
         Deliberately simpler web design and development
-    </Heading>
+    </PageHeading>
     <Text slot="role" size="3" weight="medium" color="gray" as="p">
         Best for independent businesses & established freelancers
     </Text>
@@ -45,15 +40,15 @@ import tedxjourneys from "../assets/portfolio/tedx-journeys.png";
         </Button>
     </Flex>
 
+    <!-- Page Content -->
     <Theme slot="page-content" appearance="light" asChild>
         <Section
             size="1"
             py="4"
+            px={{ initial: "4", sm: "6" }}
             style={{
                 backgroundColor: "var(--yellow-3)",
                 overflow: "hidden",
-                paddingLeft: "var(--section-px-initial)",
-                paddingRight: "var(--section-px-initial)",
             }}
         >
             <Flex gap="4" justify="center" align="center">

@@ -1,19 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Heading, Text, Box } from "@radix-ui/themes";
+import PageHeading from "../components/PageHeading.astro";
+import { Text, Box } from "@radix-ui/themes";
 ---
 
 <Layout backgroundColor="var(--brand-surface-dark-olive)" appearance="dark">
-    <Heading
-        slot="heading"
-        as="h1"
-        size="8"
-        weight="medium"
-        highContrast
-        trim="both"
-    >
-        Where have all the monkeys gone
-    </Heading>
+    <!-- Hero Section -->
+    <PageHeading slot="heading"> Where have all the monkeys gone </PageHeading>
     <Box slot="description" asChild>
         <Text size="3" color="gray" wrap="pretty">
             By the end of Avatar: The Way of Water, I hated Jake Sully, and I

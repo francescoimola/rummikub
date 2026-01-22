@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Heading, Text, Flex, Link, Box, DataList } from "@radix-ui/themes";
+import PageHeading from "../components/PageHeading.astro";
+import { Text, Flex, Link, Box, DataList } from "@radix-ui/themes";
 
 import { Image } from "astro:assets";
 import francescoImg from "../assets/francesco.png";
@@ -8,16 +9,9 @@ import SkipToNav from "../components/SkipToNav.astro";
 ---
 
 <Layout backgroundColor="var(--orange-5)">
-    <Heading
-        slot="heading"
-        as="h1"
-        size="8"
-        weight="medium"
-        highContrast
-        trim="both"
-    >
+    <PageHeading slot="heading">
         Designer and marketer based in Kent, England
-    </Heading>
+    </PageHeading>
     <SkipToNav slot="role" display={{ initial: "none", sm: "flex" }} />
     <Box slot="description" style={{ containerType: "inline-size" }}>
         <Flex className="about-grid" align="start" gap="5">

@@ -1,30 +1,17 @@
 ---
 import ProjectCanvas from "../components/ProjectCanvas.astro";
+import PageHeading from "../components/PageHeading.astro";
 import Layout from "../layouts/Layout.astro";
-import {
-  Heading,
-  Text,
-  Button,
-  Flex,
-  Container,
-  Grid,
-  Box,
-} from "@radix-ui/themes";
+import { Text, Button, Flex, Container, Grid, Box } from "@radix-ui/themes";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 ---
 
 <Layout backgroundColor="var(--yellow-3)" withSignupForm>
-  <Heading
-    slot="heading"
-    as="h1"
-    size="8"
-    weight="medium"
-    highContrast
-    trim="both"
-  >
+  <!-- Hero Section -->
+  <PageHeading slot="heading">
     Thoughtful pixels and words that connect your work to the people who need it
     most
-  </Heading>
+  </PageHeading>
   <Text slot="role" size="3" weight="medium" color="gray">
     Web designer and inbound marketer
   </Text>
@@ -39,22 +26,15 @@ import { ArrowRightIcon } from "@radix-ui/react-icons";
     >
   </Flex>
 
+  <!-- Page Content -->
   <Box
     slot="page-content"
     style={{ backgroundColor: "var(--gray-1)" }}
-    px={{ initial: "var(--section-px-initial)", sm: "var(--section-px-sm)" }}
+    px={{ initial: "4", sm: "6" }}
+    py="var(--space-10)"
   >
-    <Container maxWidth="var(--max-cw)">
-      <Grid
-        columns={{ initial: "1", sm: "2" }}
-        gapY="var(--space-10)"
-        gapX="4"
-        px={{
-          initial: "var(--section-px-initial)",
-          sm: "var(--section-px-sm)",
-        }}
-        py="var(--space-10)"
-      >
+    <Container maxWidth="var(--max-cw)" asChild>
+      <Grid columns={{ initial: "1", sm: "2" }} gapY="var(--space-10)" gapX="4">
         {/* Projects Section Header */}
         <Flex gap="4" align="start" className="section-header">
           <Text
