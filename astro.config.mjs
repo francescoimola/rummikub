@@ -11,5 +11,7 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   site: 'https://francescoimola.com',
   integrations: [mdx(), sitemap(), react()],
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    imageService: 'compile',
+  }),
 });

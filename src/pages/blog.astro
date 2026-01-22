@@ -1,0 +1,26 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Heading, Text, Flex } from "@radix-ui/themes";
+import BlogFilters from "../components/BlogFilters.jsx";
+---
+
+<Layout backgroundColor="var(--brand-surface-dark-mustard)" appearance="dark">
+    <Heading
+        slot="heading"
+        as="h1"
+        size="8"
+        weight="medium"
+        highContrast
+        trim="both"
+    >
+        Writing
+    </Heading>
+    <Flex slot="description" direction="column" gap="var(--space-10)">
+        <Text size="3" color="gray" wrap="pretty">
+            Notes on marketing and designing your thing without following the
+            usual playbook. For anyone who suspects there might be a better way
+            to go about it. Some answers. Mostly questions.
+        </Text>
+        <BlogFilters client:load />
+    </Flex>
+</Layout>

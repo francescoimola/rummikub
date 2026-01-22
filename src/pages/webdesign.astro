@@ -1,15 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
-import {
-    Heading,
-    Text,
-    Button,
-    Flex,
-    Theme,
-    Box,
-    Section,
-} from "@radix-ui/themes";
+import { Heading, Text, Button, Flex, Theme, Section } from "@radix-ui/themes";
 import { ArrowDownIcon } from "@radix-ui/react-icons";
 
 // Portfolio images
@@ -41,12 +33,7 @@ import tedxjourneys from "../assets/portfolio/tedx-journeys.png";
                 don't serve you, baked with more people, more revisions, and
                 more cost than necessary.
             </p>
-            <p>I do away with most of that.</p>
-            <p>
-                You get one person handling strategy, copy, design, and
-                development, a website you can update yourself, and a process
-                that takes weeks instead of months.
-            </p>
+            <p>I got none of that for you.</p>
         </Text>
         <Button
             size="3"
@@ -58,11 +45,16 @@ import tedxjourneys from "../assets/portfolio/tedx-journeys.png";
         </Button>
     </Flex>
 
-    <Theme slot="projects-gallery" appearance="light">
+    <Theme slot="page-content" appearance="light" asChild>
         <Section
             size="1"
-            py="6"
-            style={{ backgroundColor: "var(--lime-4)", overflow: "hidden" }}
+            py="4"
+            style={{
+                backgroundColor: "var(--yellow-3)",
+                overflow: "hidden",
+                paddingLeft: "var(--section-px-initial)",
+                paddingRight: "var(--section-px-initial)",
+            }}
         >
             <Flex gap="4" justify="center" align="center">
                 <Image

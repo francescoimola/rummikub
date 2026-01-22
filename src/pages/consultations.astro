@@ -1,0 +1,37 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Heading, Text, Button, Flex } from "@radix-ui/themes";
+import { ArrowDownIcon } from "@radix-ui/react-icons";
+---
+
+<Layout backgroundColor="var(--orange-5)">
+    <Heading
+        slot="heading"
+        as="h1"
+        size="8"
+        weight="medium"
+        highContrast
+        trim="both"
+    >
+        Website consultations
+    </Heading>
+    <Text slot="role" size="3" weight="medium" color="gray">
+        Problems with your website?
+    </Text>
+    <Flex slot="description" direction="column" gap="5" width="75%">
+        <Text size="3" color="gray" wrap="pretty">
+            Booking a consultation is the fastest way to get clarity on what's
+            holding your site back and what to do about it. You get a targeted
+            website review and 1 hour of dedicated consultation time to discuss
+            findings, ask questions, and get targeted recommendations.
+        </Text>
+        <Button
+            size="3"
+            variant="soft"
+            color="gray"
+            style={{ alignSelf: "flex-start" }}
+        >
+            Scroll to learn more <ArrowDownIcon />
+        </Button>
+    </Flex>
+</Layout>

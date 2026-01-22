@@ -138,8 +138,17 @@
     --space-14: 30rem;
     /* 480px - xl-space-800 */
 
+
     --max-cw: 1536px;
     /* max container width */
+
+    /* Semantic Brand Tokens - Fixed Colors */
+    --brand-surface-dark-mustard: var(--orange-9);
+    --brand-surface-dark-olive: var(--yellow-9);
+
+    /* Standardized Section Padding */
+    --section-px-initial: var(--space-4);
+    --section-px-sm: var(--space-6);
 }
 
 @supports (color: color(display-p3 1 1 1)) {
@@ -220,32 +229,13 @@
     font-family: var(--default-font-family);
     --container-xs: calc(var(--container-1)/1.618);
 
-    /* Fluid typography overrides (sizes 2-8, tighter ranges) */
-    --font-size-2: clamp(0.75rem, 0.25vw + 0.6875rem, 0.875rem);
-    --font-size-3: clamp(1rem, 0.5vw + 0.875rem, 1.125rem);
-    --font-size-4: clamp(1.125rem, 0.5vw + 1rem, 1.25rem);
-    --font-size-5: clamp(1.25rem, 1vw + 1rem, 1.5rem);
-    --font-size-6: clamp(1.5rem, 1.5vw + 1.125rem, 1.875rem);
-    --font-size-7: clamp(1.875rem, 1.5vw + 1.5rem, 2.25rem);
-    --font-size-8: clamp(2.5rem, 1.5vw + 2rem, 3rem);
+    &:where([data-is-root-theme='true']) {
+        min-height: unset;
+    }
+}
 
-    /* Line-height overrides (unitless, scale with font-size) */
-    --line-height-2: 1.55;
-    --line-height-3: 1.55;
-    --line-height-4: 1.5;
-    --line-height-5: 1.4;
-    --line-height-6: 1.35;
-    --line-height-7: 1.3;
-    --line-height-8: 1.2;
-
-    /* Heading specific line-height overrides */
-    --heading-line-height-2: var(--line-height-2);
-    --heading-line-height-3: var(--line-height-3);
-    --heading-line-height-4: var(--line-height-4);
-    --heading-line-height-5: var(--line-height-5);
-    --heading-line-height-6: var(--line-height-6);
-    --heading-line-height-7: var(--line-height-7);
-    --heading-line-height-8: var(--line-height-8);
+.radix-themes:where([data-scaling='97%']) {
+    --scaling: 0.97;
 }
 
 html {
@@ -255,6 +245,17 @@ html {
 body {
     margin: 0;
     font-family: var(--default-font-family);
+    counter-reset: section-counter;
+}
+
+/* Section Header Counter */
+.section-header {
+    counter-increment: section-counter;
+}
+
+.section-header::before {
+    content: counter(section-counter);
+    letter-spacing: 0.24px;
 }
 
 h1,
@@ -276,18 +277,82 @@ p {
     margin-top: 0;
 }
 
-.menu-gap {
-    gap: clamp(1vh, 2vw, var(--space-5));
-}
-
-/* Apply negative margin only at sm breakpoint and above (Radix sm = 640px) */
-.nav-offset-sm {
-    margin-top: 0;
-}
-
 @media only screen and (max-width: 767px) {
-    .nav-offset-sm {
-        margin-top: calc(var(--space-8) * -1);
-        display: block;
+    .hero-offset-sm {
+        margin-top: calc(var(--space-9) *-1);
+    }
+}
+
+/* Blog Filters - Tab styling to match Figma design */
+
+/* Remove the default underline indicator from the tab list */
+.blog-filters .rt-TabsList::before {
+    display: none;
+}
+
+/* Style the triggers to look like simple text links */
+.blog-filters .rt-TabsTrigger {
+    /* Remove default background/borders */
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+
+    /* Inactive state: regular weight, translucent white */
+    font-weight: var(--font-weight-regular);
+    color: var(--white-a10);
+}
+
+/* Remove the default active indicator underline */
+.blog-filters .rt-TabsTrigger::before {
+    display: none;
+}
+
+/* Active tab: bold, fully opaque white */
+.blog-filters .rt-TabsTrigger[data-state="active"] {
+    font-weight: var(--font-weight-bold);
+    color: var(--white-a12);
+}
+
+/* Hover state for inactive tabs */
+.blog-filters .rt-TabsTrigger:hover:not([data-state="active"]) {
+    color: var(--white-a11);
+}
+
+/* Set gap between tabs */
+.blog-filters .rt-TabsList {
+    gap: var(--space-4);
+}
+
+/* Reset margins so parent Flex gap controls spacing */
+.blog-filters.rt-TabsRoot {
+    margin: 0;
+}
+
+.anchor-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    &>li {
+        margin-top: var(--space-1);
+    }
+}
+
+.about-grid {
+    flex-direction: row;
+}
+
+.about-image {
+    flex-basis: clamp(25%, 33%, 50%);
+}
+
+@container (max-width: 520px) {
+    .about-grid {
+        flex-direction: column;
+    }
+
+    .about-image {
+        flex-basis: 100%;
     }
 }

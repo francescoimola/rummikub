@@ -63,17 +63,49 @@ You have access to specialized tools to assist in development:
 - **Clarification First**: When in doubt or facing ambiguity in design specifications, always ask for clarification instead of making assumptions.
 - **No Rounded Corners**: This design uses sharp, square corners throughout. The Radix Theme is configured with `radius="none"`. Do not add rounded corners to any components.
 
-### 7. Global Color System
-- **Global Tokens**: The project uses custom color tokens defined in `src/styles/global.css`.
-  - **Yellow/Green** (`--yellow-1` to `--yellow-12` and the corresponding alpha values): Primary brand color.
-  - **Mustard/Orange** (`--orange-1` to `--orange-12` and the corresponding alpha values): Secondary brand color.
+### 7. Global Design System & Tokens
+- **Global Tokens**: Defined in `src/styles/global.css`.
+
+#### A. Spacing Tokens
+The project extends the default Radix 1-9 spacing scale with custom larger steps for dramatic layout spacing:
+- `--space-10`: 5rem (80px)
+- `--space-11`: 8rem (128px) 
+- `--space-12`: 10rem (160px)
+- `--space-13`: 20rem (320px)
+- `--space-14`: 30rem (480px)
+
+#### B. Custom Scaling
+- **97% Scaling**: The theme supports a custom `97%` scaling factor (defined in CSS as `0.97`) to slightly condense the UI. Use `scaling="97%"` on the definition of the Theme.
+
+#### C. Typography
+- **Primary Font**: `Ronzino` (Regular, Medium, Bold + Italics).
+- **Fallbacks**: Standard system sans-serif stack.
+
+#### D. Color System
+- **Yellow/Green** (`--yellow-1` to `--yellow-12`): Primary brand color.
+- **Mustard/Orange** (`--orange-1` to `--orange-12`): Secondary brand color.
+- **P3 Support**: High-fidelity P3/oklch colors are defined for supported displays.
+
 - **Accent Strategy**:
-  - **Default Accent**: The `RadixThemeProvider` is configured with `accentColor="yellow"`. All standard Radix components (Button, Link, etc.) use yellow by default.
-  - **Secondary Accent**: Oerride specific components to use the secondary color by passing `color="orange"` (e.g., `<Button color="orange">`).
-- **P3 Support**: The global CSS includes high-fidelity P3/oklch color definitions for supported displays.
+  - **Secondary Accent**: Use `color="orange"` for specific components.
 
 
-### 8. Verification Protocol (CRITICAL)
+### 8. CSS Strategy & Best Practices
+- **No Local `<style>` Blocks**: Do NOT create custom `<style>` blocks or sidecar `.css` files for individual components/pages unless strictly necessary (e.g., complex animations, keyframes, or styles exceeding 20+ lines that would pollute global CSS).
+  - **Default**: Add styles to `src/styles/global.css`.
+- **Commenting Etiquette**:
+  - **Do NOT** comment individual properties (e.g., `color: red; /* sets text to red */`).
+  - **DO** comment sections (e.g., `/* Blog Grid Layout */`).
+  - **DO** comment complex formulas or non-obvious hacks.
+- **Strong, Responsive CSS**:
+  - **Minimalism**: Write the fewest lines of code possible. Use efficient selectors.
+  - **Units**: ALWAYS use `rem` for font-size and spacing. Use `dvh`/`dvw` over `vh`/`vw`.
+  - **Variables**: Use Radix variables (`var(--space-3)`, `var(--color-gray-12)`) instead of raw values.
+  - **Layout**: Respect the baseline grid. Ensure containers don't overflow.
+  - **Accessibility**: Ensure high contrast and respect system font size preferences.
+
+
+### 9. Verification Protocol (CRITICAL)
 - **No "Visual Glances"**: Do not rely solely on looking at screenshots. Your eyes can be deceived by small pixel differences.
 - **Computed Styles**: You MUST use browser developer tools (or equivalent MCP capabilities) to inspect computed styles (`getComputedStyle`), specifically checking:
   - Exact pixel values for margins and padding.
@@ -82,7 +114,7 @@ You have access to specialized tools to assist in development:
 - **Grid & Alignment**: Verify that items are actually on the grid lines as intended.
 - **Citing Evidence**: when confirming a design implementation, cite the specific values you measured (e.g., "Verified padding is 20px via computed styles", not just "It looks correct").
 
-## 9. Git & Deployment Workflow
+## 10. Git & Deployment Workflow
 - **One-Person Workflow**: The user is the sole developer. **Do NOT ask to create Pull Requests.**
 - **Branches**:
   - `main`: Production. Pushing here triggers a Cloudflare Pages deploy.
@@ -133,6 +165,58 @@ You have access to specialized tools to assist in development:
   ```
 - **Styling**: `src/styles/global.css` matches Radix tokens to brand colors. Vanilla CSS files can be added for deeper overrides.
 - **Icons**: Use `@radix-ui/react-icons` as the primary icon source.
+
+---
+
+### 11. Code Examples (Do's and Don'ts)
+
+#### A. Layouts
+**❌ Don't Do This:**
+```jsx
+<div className="flex-container" style={{ display: 'flex', gap: '20px' }}>
+  <div className="item">Item 1</div>
+</div>
+```
+
+**✅ Do This (Radix):**
+```jsx
+<Flex gap="5">
+  <Box>Item 1</Box>
+</Flex>
+```
+
+#### B. Responsive Design
+**❌ Don't Do This:**
+```css
+/* Custom media queries are fragile */
+@media (max-width: 768px) {
+  .my-box { display: none; }
+}
+```
+
+**✅ Do This (Radix Props):**
+```jsx
+<Box display={{ initial: 'none', sm: 'block' }}>
+  Content visible on mobile+
+</Box>
+```
+
+#### C. CSS Variables
+**❌ Don't Do This:**
+```css
+.card {
+  padding: 24px;
+  color: #646464;
+}
+```
+
+**✅ Do This (Tokens):**
+```css
+.card {
+  padding: var(--space-5);
+  color: var(--gray-11);
+}
+```
 
 ---
 
