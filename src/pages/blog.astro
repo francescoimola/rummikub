@@ -1,0 +1,19 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeading from "../components/PageHeading.astro";
+import { Text, Flex } from "@radix-ui/themes";
+import BlogFilters from "../components/BlogFilters.jsx";
+---
+
+<Layout backgroundColor="var(--brand-surface-dark-mustard)" appearance="dark">
+    <!-- Hero Section -->
+    <PageHeading slot="heading"> Writing </PageHeading>
+    <Flex slot="description" direction="column" gap="var(--space-10)">
+        <Text size="3" color="gray" wrap="pretty">
+            Notes on marketing and designing your thing without following the
+            usual playbook. For anyone who suspects there might be a better way
+            to go about it. Some answers. Mostly questions.
+        </Text>
+        <BlogFilters client:load />
+    </Flex>
+</Layout>
