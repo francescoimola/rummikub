@@ -1,5 +1,6 @@
-/* Global CSS Overrides */
-
+/* =========================================
+   1. Fonts
+   ========================================= */
 @font-face {
     font-family: 'Ronzino';
     src: url('/fonts/Ronzino-Regular.woff2') format('woff2');
@@ -48,22 +49,13 @@
     font-display: swap;
 }
 
-
-
-/* * {
-    background-color: rgba(255, 0, 0, 0.05);
-    outline: 1px solid rgba(255, 0, 0, 0.1);
-}
-
-*:nth-child(even) {
-    background-color: rgba(255, 0, 0, 0.1);
-} */
-
-
-
+/* =========================================
+   2. Variables & Tokens
+   ========================================= */
 :root,
 .light,
 .light-theme {
+    /* Yellow Scale */
     --yellow-1: #fdfdf9;
     --yellow-2: #f9faf0;
     --yellow-3: #f3f6cb;
@@ -95,6 +87,7 @@
     --yellow-indicator: #3b3c02;
     --yellow-track: #3b3c02;
 
+    /* Orange Scale */
     --orange-1: #fefcfb;
     --orange-2: #fff6ea;
     --orange-3: #ffecd0;
@@ -127,22 +120,20 @@
     --orange-track: #553009;
 
     /* Custom Spacing Tokens (Extending Radix 1-9 scale) */
-    --space-10: 5rem;
-    /* 80px - xl-space-100 */
-    --space-11: 8rem;
-    /* 128px - xl-space-200 */
-    --space-12: 10rem;
-    /* 160px - xl-space-400 */
-    --space-13: 20rem;
-    /* 320px - xl-space-600 */
-    --space-14: 30rem;
-    /* 480px - xl-space-800 */
-
+    --space-10: clamp(3rem, 5vw, 5rem);
+    /* 48px - 80px */
+    --space-11: clamp(4rem, 8vw, 8rem);
+    /* 64px - 128px */
+    --space-12: clamp(5rem, 10vw, 10rem);
+    /* 80px - 160px */
+    --space-13: clamp(8rem, 20vw, 20rem);
+    /* 128px - 320px */
+    --space-14: clamp(10rem, 30vw, 30rem);
+    /* 160px - 480px */
 
     --max-cw: 1536px;
-    /* max container width */
 
-    /* Semantic Brand Tokens - Fixed Colors */
+    /* Semantic Brand Tokens */
     --brand-surface-dark-mustard: var(--orange-9);
     --brand-surface-dark-olive: var(--yellow-9);
 
@@ -157,6 +148,7 @@
         :root,
         .light,
         .light-theme {
+            /* Yellow Scale P3 */
             --yellow-1: oklch(99.2% 0.0054 110.8);
             --yellow-2: oklch(98.2% 0.0127 110.8);
             --yellow-3: oklch(95.9% 0.0561 110.8);
@@ -188,6 +180,7 @@
             --yellow-indicator: oklch(34.4% 0.0739 110.8);
             --yellow-track: oklch(34.4% 0.0739 110.8);
 
+            /* Orange Scale P3 */
             --orange-1: oklch(99.3% 0.0031 61.47);
             --orange-2: oklch(98.2% 0.0234 61.47);
             --orange-3: oklch(96.3% 0.0632 61.47);
@@ -224,10 +217,23 @@
 
 .radix-themes {
     --custom-override: inherit;
-    /* Override Radix-specific variables here */
     --default-font-family: 'Ronzino', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+
     font-family: var(--default-font-family);
+    color: var(--gray-12);
     --container-xs: calc(var(--container-1)/1.618);
+
+    /* Global Line Height Scaling */
+    --line-height-scale: 1.18;
+
+    .rt-Text,
+    .rt-Heading {
+        line-height: calc(var(--line-height, var(--default-line-height)) * var(--line-height-scale));
+    }
+
+    .rt-Quote {
+        line-height: calc(1.25 * var(--line-height-scale));
+    }
 
     &:where([data-is-root-theme='true']) {
         min-height: unset;
@@ -238,6 +244,9 @@
     --scaling: 0.97;
 }
 
+/* =========================================
+   3. Resets & Base Styles
+   ========================================= */
 html {
     scrollbar-gutter: stable;
 }
@@ -246,16 +255,6 @@ body {
     margin: 0;
     font-family: var(--default-font-family);
     counter-reset: section-counter;
-}
-
-/* Section Header Counter */
-.section-header {
-    counter-increment: section-counter;
-}
-
-.section-header::before {
-    content: counter(section-counter);
-    letter-spacing: 0.24px;
 }
 
 h1,
@@ -277,68 +276,106 @@ p {
     margin-top: 0;
 }
 
-@media only screen and (max-width: 767px) {
-    .hero-offset-sm {
-        margin-top: calc(var(--space-9) *-1);
+/* =========================================
+   4. Utilities
+   ========================================= */
+.page-heading {
+    max-width: 20ch;
+}
+
+.side-margin {
+    padding-inline: min(1rem, 4rem - 3cqi);
+}
+
+/* =========================================
+   5. Components
+   ========================================= */
+
+.service-card-icon {
+    width: 2cqi;
+    height: auto;
+
+    svg {
+        fill: var(--gray-a10);
     }
 }
 
-/* Blog Filters - Tab styling to match Figma design */
+a:has(.service-card-icon) {
+    background-color: var(--yellow-3);
 
-/* Remove the default underline indicator from the tab list */
-.blog-filters .rt-TabsList::before {
+    &:hover {
+        background-color: var(--yellow-5);
+    }
+
+    &[href="/contentwriting"],
+    &[href="/emailmarketing"] {
+        background-color: var(--gray-3);
+
+        &:hover {
+            background-color: var(--gray-5);
+        }
+    }
+}
+
+/* --- Section Counter --- */
+.section-header {
+    counter-increment: section-counter;
+}
+
+.section-header::before {
     display: none;
 }
 
-/* Style the triggers to look like simple text links */
-.blog-filters .rt-TabsTrigger {
-    /* Remove default background/borders */
-    background: none;
-    border: none;
-    box-shadow: none;
-    padding: 0;
-
-    /* Inactive state: regular weight, translucent white */
-    font-weight: var(--font-weight-regular);
-    color: var(--white-a10);
+.section-counter-number::before {
+    content: counter(section-counter) "\00a0\00a0";
 }
 
-/* Remove the default active indicator underline */
+/* --- Blog Filters (Custom Tabs) --- */
+.blog-filters.rt-TabsRoot {
+    margin: 0;
+}
+
+.blog-filters .rt-TabsList {
+    gap: var(--space-4);
+}
+
+/* Remove default indicators */
+.blog-filters .rt-TabsList::before,
 .blog-filters .rt-TabsTrigger::before {
     display: none;
 }
 
-/* Active tab: bold, fully opaque white */
+/* Tab Triggers */
+.blog-filters .rt-TabsTrigger {
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    font-weight: var(--font-weight-regular);
+    color: var(--white-a10);
+}
+
 .blog-filters .rt-TabsTrigger[data-state="active"] {
     font-weight: var(--font-weight-bold);
     color: var(--white-a12);
 }
 
-/* Hover state for inactive tabs */
 .blog-filters .rt-TabsTrigger:hover:not([data-state="active"]) {
     color: var(--white-a11);
 }
 
-/* Set gap between tabs */
-.blog-filters .rt-TabsList {
-    gap: var(--space-4);
-}
-
-/* Reset margins so parent Flex gap controls spacing */
-.blog-filters.rt-TabsRoot {
-    margin: 0;
-}
-
+/* --- Anchor List --- */
 .anchor-list {
     list-style: none;
     padding: 0;
     margin: 0;
-
-    &>li {
-        margin-top: var(--space-1);
-    }
 }
 
+.anchor-list>li {
+    margin-top: var(--space-1);
+}
+
+/* --- About Grid --- */
 .about-grid {
     flex-direction: row;
 }
@@ -355,4 +392,39 @@ p {
     .about-image {
         flex-basis: 100%;
     }
+}
+
+.footer-navigation {
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: start;
+
+    >* {
+        width: calc(100% / 3);
+    }
+
+    * {
+        white-space: nowrap;
+    }
+}
+
+@container (max-width: 397px) {
+    .footer-navigation {
+        flex-direction: column;
+    }
+}
+
+@container (min-width: 1200px) {
+    .footer-navigation {
+        justify-content: space-between;
+
+        >* {
+            width: calc(100% / 5);
+        }
+    }
+}
+
+/* --- Signup Form --- */
+.signup-form-container>* {
+    max-width: calc(var(--container-2) - var(--space-9));
 }

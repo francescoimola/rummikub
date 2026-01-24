@@ -4,7 +4,7 @@ Welcome! This document provides context and guidelines for AI agents working on 
 
 ## Project Overview
 
-This is an **Astro-powered** portfolio website for Francesco Imola. It is built with React for interactivity and Radix UI Themes for styling. The goal is to provide a premium, modern, and visually stunning portfolio interface to showcase professional work and land new clients.
+This is an **Astro-powered** portfolio website for Francesco Imola. It is built with React for interactivity and Radix UI Themes for styling. The goal is to this website is to showcase professional work and strengthen trust for new clients.
 
 **Live URL**: [https://francescoimola.com](https://francescoimola.com)
 
@@ -26,7 +26,7 @@ All web development in this project MUST prioritize **Visual Excellence** and **
 - **Use Radix Components**: Build UI using Radix Themes components (Button, Card, Table, etc.).
 - **Modern Typography**: Radix Themes includes great defaults; customize via Theme config if needed.
 - **Theme System**: Use Radix Theme's built-in color system and design tokens.
-- **Premium Feel**: Avoid generic designs. Aim for a high-end, polished Look & Feel. Use page transitions only where strictly appropriate. Do not use transitions otherwise, except for key components and pre-animated Radix components. No glassmorphism. Follow Swiss-design principles. Implement designs from Figma.
+- **Premium Feel**: Avoid generic designs. Follow Swiss-design principles. Use page transitions only where strictly appropriate. Do not use transitions otherwise, except for key components and pre-animated Radix components. No glassmorphism. Always aim to closely implement designs as shown in Figma, unless explicitly overridden by the user.
 
 ## Guidelines for AI Agents
 

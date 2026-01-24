@@ -1,22 +1,46 @@
 ---
+/* --- Imports --- */
 import ProjectCanvas from "../components/ProjectCanvas.astro";
-import PageHeading from "../components/PageHeading.astro";
+import PageHeading from "../components/PageHeading";
+import { ButtonLink } from "../components/ButtonLink.tsx";
 import Layout from "../layouts/Layout.astro";
-import { Text, Button, Flex, Container, Grid, Box } from "@radix-ui/themes";
+import {
+  Text,
+  Button,
+  Flex,
+  Container,
+  Grid,
+  Box,
+  Heading,
+} from "@radix-ui/themes";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
+import ServiceCard from "../components/ServiceCard.astro";
+import ConsultingIcon from "../components/icons/ConsultingIcon.astro";
+import WebDesignIcon from "../components/icons/WebDesignIcon.astro";
+import ContentWritingIcon from "../components/icons/ContentWritingIcon.astro";
+import EmailMarketingIcon from "../components/icons/EmailMarketingIcon.astro";
 ---
 
 <Layout backgroundColor="var(--yellow-3)" withSignupForm>
-  <!-- Hero Section -->
-  <PageHeading slot="heading">
-    Thoughtful pixels and words that connect your work to the people who need it
-    most
+  <!-- --- Hero --- -->
+
+  <!-- Slot: Main Heading -->
+  <PageHeading slot="heading" className="page-heading">
+    Thoughtful <Text as="span" color="yellow">pixels</Text> and <Text
+      as="span"
+      color="yellow">words</Text
+    > that <Text as="span" color="orange">connect your work</Text> to the people who
+    need it most
   </PageHeading>
-  <Text slot="role" size="3" weight="medium" color="gray">
-    Web designer and inbound marketer
-  </Text>
+
+  <!-- Slot: Job Role (Hidden on mobile) -->
+  <Box slot="role" display={{ initial: "none", sm: "block" }}>
+    <Text size="3" weight="medium"> Web designer and inbound marketer </Text>
+  </Box>
+
+  <!-- Slot: Introduction Text -->
   <Flex slot="description" direction="column" gap="5" width="75%">
-    <Text size="3" color="gray" wrap="pretty">
+    <Text size="3">
       Francesco Imola makes independent businesses fall in love with their
       websites once again. All thanks to unmistakeable copy, fool-proof UX, and
       a digital strategy so intentional you'll never go back to how things were.
@@ -26,26 +50,123 @@ import { ArrowRightIcon } from "@radix-ui/react-icons";
     >
   </Flex>
 
-  <!-- Page Content -->
-  <Box
-    slot="page-content"
-    style={{ backgroundColor: "var(--gray-1)" }}
-    px={{ initial: "4", sm: "6" }}
-    py="var(--space-10)"
-  >
-    <Container maxWidth="var(--max-cw)" asChild>
-      <Grid columns={{ initial: "1", sm: "2" }} gapY="var(--space-10)" gapX="4">
-        {/* Projects Section Header */}
-        <Flex gap="4" align="start" className="section-header">
-          <Text
-            size="3"
-            weight="medium"
-            highContrast
-            style={{ letterSpacing: "-0.032px" }}>Selected work</Text
-          >
+  <!-- --- Page Content --- -->
+  <Box slot="page-content" style={{ backgroundColor: "var(--gray-1)" }}>
+    <Container maxWidth="var(--max-cw)">
+      <!-- Main Content Grid -->
+      <Grid
+        columns={{ initial: "1", sm: "2" }}
+        py="var(--space-10)"
+        gapY="var(--space-12)"
+        gapX="4"
+        className="side-margin"
+      >
+        <!-- --- Selected Work --- -->
+        <Box className="section-header">
+          <Heading size="3" weight="medium" as="h2" highContrast>
+            <Text as="span" className="section-counter-number" />
+            Selected work
+          </Heading>
+        </Box>
+
+        <!-- Projects list -->
+        <Grid columns="1" gapY="8">
+          <ProjectCanvas
+            images={[
+              "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+              "https://images.unsplash.com/photo-1497215728101-856f4ea42174",
+              "https://images.unsplash.com/photo-1558655146-d09347e92766",
+            ]}
+            title="Make & Mind"
+            description="Pizza ipsum dolor meat lovers buffalo. Extra green banana fresh mushrooms red Philly wing. Meatball bacon olives tossed buffalo deep ham tomatoes."
+          />
+          <ProjectCanvas
+            images={[
+              "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+              "https://images.unsplash.com/photo-1497215728101-856f4ea42174",
+              "https://images.unsplash.com/photo-1558655146-d09347e92766",
+            ]}
+            title="Make & Mind"
+            description="Pizza ipsum dolor meat lovers buffalo. Extra green banana fresh mushrooms red Philly wing. Meatball bacon olives tossed buffalo deep ham tomatoes."
+          />
+        </Grid>
+
+        <!-- --- Services --- -->
+        <Box className="section-header">
+          <Heading size="3" weight="medium" as="h2" highContrast>
+            <Text as="span" className="section-counter-number" />
+            Where I can help
+          </Heading>
+        </Box>
+
+        <Flex direction="column" gap="8">
+          <Flex direction="column" gap="4">
+            <Heading size="3" weight="medium" as="h2" highContrast>
+              Bread and butter
+            </Heading>
+            <Grid columns={{ initial: "1", sm: "2" }} gap="4">
+              <ServiceCard
+                title="Web Design & Development"
+                href="/webdesign"
+                icon={WebDesignIcon}
+              />
+              <ServiceCard
+                title="Website Consultations"
+                href="/consultations"
+                icon={ConsultingIcon}
+              />
+            </Grid>
+          </Flex>
+
+          <Flex direction="column" gap="4">
+            <Heading size="3" weight="medium" as="h2" highContrast>
+              À la carte
+            </Heading>
+            <Grid columns={{ initial: "1", sm: "2" }} gap="4">
+              <ServiceCard
+                title="Content Writing"
+                href="/contentwriting"
+                icon={ContentWritingIcon}
+              />
+              <ServiceCard
+                title="Email Marketing"
+                href="/emailmarketing"
+                icon={EmailMarketingIcon}
+              />
+            </Grid>
+          </Flex>
         </Flex>
 
-        <ProjectCanvas />
+        <!-- --- About Snippet --- -->
+        <Box className="section-header">
+          <Heading size="3" weight="medium" as="h2" highContrast>
+            <Text as="span" className="section-counter-number" />
+            About
+          </Heading>
+        </Box>
+
+        <Flex direction="column" gap="6">
+          <Flex direction="column" gap="3">
+            <Text size="3" as="p" highContrast>
+              I've spent years watching businesses of all sizes waste
+              unbelievable amounts of money on erratic marketing and amateurish
+              websites that confuse customers and damage their reputation.
+            </Text>
+            <Text size="3" as="p" highContrast>
+              I can stop that from happening.
+            </Text>
+          </Flex>
+          <ButtonLink
+            href="/about"
+            variant="soft"
+            size="3"
+            color="gray"
+            highContrast
+            style={{ alignSelf: "flex-start" }}
+          >
+            More about how I work <ArrowRightIcon />
+          </ButtonLink>
+        </Flex>
       </Grid>
     </Container>
   </Box>
