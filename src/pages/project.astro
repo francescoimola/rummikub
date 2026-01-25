@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PageHeading from "../components/PageHeading.astro";
+import PageHeading from "../components/PageHeading";
 import { Text, Box } from "@radix-ui/themes";
 ---
 
@@ -8,7 +8,7 @@ import { Text, Box } from "@radix-ui/themes";
     <!-- Hero Section -->
     <PageHeading slot="heading"> Where have all the monkeys gone </PageHeading>
     <Box slot="description" asChild>
-        <Text size="3" color="gray" wrap="pretty">
+        <Text size="3">
             By the end of Avatar: The Way of Water, I hated Jake Sully, and I
             was ready for him to become a human again (impossible,
             unfortunately, unless James Cameron has cooked up something new for

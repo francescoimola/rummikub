@@ -9,11 +9,12 @@ import {
     Button,
     Heading,
     Separator,
-    Section,
 } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import "../styles/global.css";
 import type { ComponentProps } from "react";
+import { Footer } from "../components/Footer";
+import Head from "../components/Head.astro";
 
 import { Footer } from "../components/Footer.jsx";
 
@@ -21,25 +22,18 @@ interface Props extends ComponentProps<typeof Theme> {
     title?: string;
     backgroundColor?: string;
     roleFullWidth?: boolean;
-    withSignupForm?: boolean;
 }
 
 const {
-    title = "Rummikub",
+    title,
     backgroundColor = "var(--yellow-3)",
     roleFullWidth = false,
-    withSignupForm = false,
     ...themeProps
 } = Astro.props;
 ---
 
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="generator" content={Astro.generator} />
-        <title>{title}</title>
-    </head>
+    <Head title={title} />
     <body>
         <Theme
             accentColor="yellow"
@@ -52,17 +46,18 @@ const {
             {...themeProps}
             style={{ backgroundColor }}
         >
-            <Container maxWidth="var(--max-cw)" asChild>
+            <Container maxWidth="var(--max-cw)">
+                <!-- Hero Section -->
                 <Grid
                     columns={{ initial: "1", sm: "2" }}
-                    gapY={{ initial: "var(--space-10)", sm: "var(--space-11)" }}
-                    gapX="4"
-                    px={{
-                        initial: "4",
-                        sm: "6",
+                    gapY={{
+                        initial: "var(--space-10)",
+                        sm: "var(--space-11)",
                     }}
-                    pt={{ initial: "4", sm: "6" }}
+                    gapX="4"
+                    pt="6"
                     pb="var(--space-10)"
+                    className="side-margin"
                 >
                     {/* Logo - Cell (1,1) */}
                     <Box
@@ -76,9 +71,9 @@ const {
                             weight="medium"
                             highContrast
                             wrap="nowrap"
-                            as="h1"
+                            color="gray"
                         >
-                            Francesco Imola
+                            <Link href="/">Francesco Imola</Link>
                         </Heading>
                     </Box>
 
@@ -104,14 +99,19 @@ const {
                                 About
                             </Link>
                             <Separator size="1" orientation="vertical" />
-                            <Link href="/websites" size="3" color="gray">
+                            <Link href="/webdesign" size="3" color="gray">
                                 Websites
                             </Link>
                             <Separator size="1" orientation="vertical" />
-                            <Link href="/consulting" size="3" color="gray">
+                            <Link href="/consultations" size="3" color="gray">
                                 Consulting
                             </Link>
-                            <Box display={{ initial: "contents", sm: "none" }}>
+                            <Box
+                                display={{
+                                    initial: "contents",
+                                    sm: "none",
+                                }}
+                            >
                                 <Separator size="1" orientation="vertical" />
                                 <Link href="/contact" size="3" color="gray">
                                     Contact
@@ -134,7 +134,12 @@ const {
                         </Box>
                     </Flex>
 
-                    <Box gridColumn={{ initial: "1", sm: "2" }}>
+                    <Box
+                        gridColumn={{ initial: "1", sm: "2" }}
+                        style={{
+                            containerType: "inline-size",
+                        }}
+                    >
                         <slot name="heading" />
                     </Box>
 
@@ -152,16 +157,15 @@ const {
                         <slot name="role" />
                     </Box>
 
-                    <Box
-                        gridColumn={{ initial: "1", sm: "2" }}
-                        className="hero-offset-sm"
-                    >
+                    <Box gridColumn={{ initial: "1", sm: "2" }} asChild>
                         <slot name="description" />
                     </Box>
                 </Grid>
             </Container>
+
+            <!-- Page Content -->
             <slot name="page-content" />
-            <Footer client:idle withSignupForm={withSignupForm} />
+            <Footer client:idle />
         </Theme>
     </body>
 </html>

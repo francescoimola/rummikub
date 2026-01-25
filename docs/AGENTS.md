@@ -4,7 +4,7 @@ Welcome! This document provides context and guidelines for AI agents working on 
 
 ## Project Overview
 
-This is an **Astro-powered** portfolio website for Francesco Imola. It is built with React for interactivity and Radix UI Themes for styling. The goal is to provide a premium, modern, and visually stunning portfolio interface to showcase professional work and land new clients.
+This is an **Astro-powered** portfolio website for Francesco Imola. It is built with React for interactivity and Radix UI Themes for styling. The goal is to this website is to showcase professional work and strengthen trust for new clients.
 
 **Live URL**: [https://francescoimola.com](https://francescoimola.com)
 
@@ -26,7 +26,7 @@ All web development in this project MUST prioritize **Visual Excellence** and **
 - **Use Radix Components**: Build UI using Radix Themes components (Button, Card, Table, etc.).
 - **Modern Typography**: Radix Themes includes great defaults; customize via Theme config if needed.
 - **Theme System**: Use Radix Theme's built-in color system and design tokens.
-- **Premium Feel**: Avoid generic designs. Aim for a high-end, polished Look & Feel. Use page transitions only where strictly appropriate. Do not use transitions otherwise, except for key components and pre-animated Radix components. No glassmorphism. Follow Swiss-design principles. Implement designs from Figma.
+- **Premium Feel**: Avoid generic designs. Follow Swiss-design principles. Use page transitions only where strictly appropriate. Do not use transitions otherwise, except for key components and pre-animated Radix components. No glassmorphism. Always aim to closely implement designs as shown in Figma, unless explicitly overridden by the user.
 
 ## Guidelines for AI Agents
 
@@ -46,7 +46,7 @@ All web development in this project MUST prioritize **Visual Excellence** and **
 - **Modern APIs**: Always check the [latest Astro documentation](https://docs.astro.build/) for APIs (Actions, Sessions, Middleware). AI models may have outdated knowledge.
 
 ### 3. Architecture Documentation
-- **Auto-Update `architecture.md`**: Whenever you make major changes to the project structure, inner workings, or core technologies, you MUST update [architecture.md](file:///Users/francescoimola/Repositories/rummikub/architecture.md) to reflect those changes. This ensures the technical documentation stays in sync with the codebase.
+- **Auto-Update `architecture.md`**: Whenever you make major changes to the project structure, inner workings, or core technologies, you MUST update [architecture.md](docs/architecture.md) to reflect those changes. This ensures the technical documentation stays in sync with the codebase.
 
 ### 4. Tools & MCP Servers
 You have access to specialized tools to assist in development:
@@ -135,7 +135,7 @@ The project extends the default Radix 1-9 spacing scale with custom larger steps
   - **autoprefixer**: Vendor prefixes based on browserslist
   - **postcss-preset-env**: Modern CSS features (stage 3+)
   - **cssnano**: Minification in production
-  - See `POSTCSS_SETUP.md` for details
+  - See `docs/POSTCSS_SETUP.md` for details
 - **Commenting Etiquette**:
   - **Do NOT** comment individual properties (e.g., `color: red; /* sets text to red */`).
   - **DO** comment sections (e.g., `/* Blog Grid Layout */`).
@@ -181,8 +181,10 @@ The project extends the default Radix 1-9 spacing scale with custom larger steps
 - `/public/`: Static assets (fonts, images, favicon, etc.).
 - `/src/assets/`: Optimized/processed assets (Astro's image optimization).
 - `/src/styles/global.css`: Global design tokens, font imports, and overrides.
-- `architecture.md`: Technical overview and project structure.
-- `POSTCSS_SETUP.md`: PostCSS configuration documentation.
+- `/docs/`: Project documentation.
+  - `AGENTS.md`: Guidelines for AI agents.
+  - `architecture.md`: Technical overview and project structure.
+  - `POSTCSS_SETUP.md`: PostCSS configuration documentation.
 
 **Current Pages:**
 - `index.astro`: Homepage
