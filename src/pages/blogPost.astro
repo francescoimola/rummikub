@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PageHeading from "../components/PageHeading.astro";
-import { Text, Flex, Grid, Box, Badge, AspectRatio } from "@radix-ui/themes";
+import PageHeading from "../components/PageHeading";
+import { Text, Flex, Box, Badge, AspectRatio } from "@radix-ui/themes";
 import { Image } from "astro:assets";
 import blogPostImage from "../assets/blog-post-image.png";
 ---
@@ -33,7 +33,7 @@ import blogPostImage from "../assets/blog-post-image.png";
     <Flex slot="description" direction="column" justify="between" height="100%">
         {/* Top: Article excerpt */}
 
-        <Text size="3" color="gray" wrap="pretty">
+        <Text size="3">
             Primate-stealing crime wave sweeps zoos nationwide. It's been a
             rough 24 hours for a guy most people do not think about ever. I'm
             sure lots of people fit that bill, but in this specific instance, I
@@ -42,7 +42,7 @@ import blogPostImage from "../assets/blog-post-image.png";
 
         {/* Bottom: Date and tags */}
         <Flex direction="column" gap="4">
-            <Text size="2" color="gray">31 January, 2023</Text>
+            <Text size="2">31 January, 2023</Text>
             <Flex gap="2">
                 <Badge variant="outline" color="gray" size="2" radius="none">
                     SEO
