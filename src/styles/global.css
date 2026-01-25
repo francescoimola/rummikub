@@ -6,7 +6,7 @@
     src: url('/fonts/Ronzino-Regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
-    font-display: swap;
+    font-display: optional;
 }
 
 @font-face {
@@ -14,7 +14,7 @@
     src: url('/fonts/Ronzino-Oblique.woff2') format('woff2');
     font-weight: 400;
     font-style: italic;
-    font-display: swap;
+    font-display: optional;
 }
 
 @font-face {
@@ -22,7 +22,7 @@
     src: url('/fonts/Ronzino-Medium.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
-    font-display: swap;
+    font-display: optional;
 }
 
 @font-face {
@@ -30,7 +30,7 @@
     src: url('/fonts/Ronzino-MediumOblique.woff2') format('woff2');
     font-weight: 500;
     font-style: italic;
-    font-display: swap;
+    font-display: optional;
 }
 
 @font-face {
@@ -38,7 +38,7 @@
     src: url('/fonts/Ronzino-Bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
-    font-display: swap;
+    font-display: optional;
 }
 
 @font-face {
@@ -46,7 +46,7 @@
     src: url('/fonts/Ronzino-BoldOblique.woff2') format('woff2');
     font-weight: 700;
     font-style: italic;
-    font-display: swap;
+    font-display: optional;
 }
 
 /* =========================================
@@ -269,7 +269,7 @@ a,
 button,
 label,
 figcaption {
-    text-wrap: balance;
+    text-wrap: balance !important;
 }
 
 p {
@@ -298,6 +298,12 @@ p {
     svg {
         fill: var(--gray-a10);
     }
+
+}
+
+svg.client-logo,
+svg.star-icon {
+    fill: var(--gray-a12);
 }
 
 a:has(.service-card-icon) {
@@ -328,6 +334,7 @@ a:has(.service-card-icon) {
 
 .section-counter-number::before {
     content: counter(section-counter) "\00a0\00a0";
+    color: var(--gray-a10);
 }
 
 /* --- Blog Filters (Custom Tabs) --- */
@@ -396,11 +403,13 @@ a:has(.service-card-icon) {
 
 .footer-navigation {
     flex-direction: row;
-    justify-content: stretch;
     align-items: start;
+    justify-content: stretch;
+    flex-wrap: wrap;
+    width: 100%;
 
     >* {
-        width: calc(100% / 3);
+        flex: 1 0.5 calc(50% - var(--space-4));
     }
 
     * {
@@ -408,19 +417,10 @@ a:has(.service-card-icon) {
     }
 }
 
-@container (max-width: 397px) {
-    .footer-navigation {
-        flex-direction: column;
-    }
-}
 
-@container (min-width: 1200px) {
-    .footer-navigation {
-        justify-content: space-between;
-
-        >* {
-            width: calc(100% / 5);
-        }
+@container (max-width: 30ch) {
+    .footer-navigation>* {
+        flex: 1 1 100%;
     }
 }
 

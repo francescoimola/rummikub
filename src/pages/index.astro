@@ -4,24 +4,21 @@ import ProjectCanvas from "../components/ProjectCanvas.astro";
 import PageHeading from "../components/PageHeading";
 import { ButtonLink } from "../components/ButtonLink.tsx";
 import Layout from "../layouts/Layout.astro";
-import {
-  Text,
-  Button,
-  Flex,
-  Container,
-  Grid,
-  Box,
-  Heading,
-} from "@radix-ui/themes";
+import { Text, Button, Flex, Grid, Box, Heading, Link } from "@radix-ui/themes";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
-import ServiceCard from "../components/ServiceCard.astro";
+import { ServiceCard } from "../components/ServiceCard";
+
 import ConsultingIcon from "../components/icons/ConsultingIcon.astro";
 import WebDesignIcon from "../components/icons/WebDesignIcon.astro";
 import ContentWritingIcon from "../components/icons/ContentWritingIcon.astro";
 import EmailMarketingIcon from "../components/icons/EmailMarketingIcon.astro";
+import MegaSeatingPlanLogo from "../components/icons/MegaSeatingPlanLogo.astro";
+import Testimonial from "../components/Testimonial";
+import { InnerSection } from "../components/InnerSection";
+import { MainGrid } from "../components/MainGrid";
 ---
 
-<Layout backgroundColor="var(--yellow-3)" withSignupForm>
+<Layout backgroundColor="var(--yellow-3)">
   <!-- --- Hero --- -->
 
   <!-- Slot: Main Heading -->
@@ -52,24 +49,10 @@ import EmailMarketingIcon from "../components/icons/EmailMarketingIcon.astro";
 
   <!-- --- Page Content --- -->
   <Box slot="page-content" style={{ backgroundColor: "var(--gray-1)" }}>
-    <Container maxWidth="var(--max-cw)">
-      <!-- Main Content Grid -->
-      <Grid
-        columns={{ initial: "1", sm: "2" }}
-        py="var(--space-10)"
-        gapY="var(--space-12)"
-        gapX="4"
-        className="side-margin"
-      >
-        <!-- --- Selected Work --- -->
-        <Box className="section-header">
-          <Heading size="3" weight="medium" as="h2" highContrast>
-            <Text as="span" className="section-counter-number" />
-            Selected work
-          </Heading>
-        </Box>
-
-        <!-- Projects list -->
+    <!-- Main Content Grid -->
+    <MainGrid>
+      <!-- --- Selected Work --- -->
+      <InnerSection title="Selected work">
         <Grid columns="1" gapY="8">
           <ProjectCanvas
             images={[
@@ -90,61 +73,45 @@ import EmailMarketingIcon from "../components/icons/EmailMarketingIcon.astro";
             description="Pizza ipsum dolor meat lovers buffalo. Extra green banana fresh mushrooms red Philly wing. Meatball bacon olives tossed buffalo deep ham tomatoes."
           />
         </Grid>
+      </InnerSection>
 
-        <!-- --- Services --- -->
-        <Box className="section-header">
-          <Heading size="3" weight="medium" as="h2" highContrast>
-            <Text as="span" className="section-counter-number" />
-            Where I can help
-          </Heading>
-        </Box>
-
-        <Flex direction="column" gap="8">
-          <Flex direction="column" gap="4">
+      <!-- --- Services --- -->
+      <InnerSection title="Where I can help">
+        <Grid columns="1" gap="8">
+          <Grid columns="1" gap="4">
             <Heading size="3" weight="medium" as="h2" highContrast>
               Bread and butter
             </Heading>
             <Grid columns={{ initial: "1", sm: "2" }} gap="4">
-              <ServiceCard
-                title="Web Design & Development"
-                href="/webdesign"
-                icon={WebDesignIcon}
-              />
-              <ServiceCard
-                title="Website Consultations"
-                href="/consultations"
-                icon={ConsultingIcon}
-              />
-            </Grid>
-          </Flex>
+              <ServiceCard title="Web Design & Development" href="/webdesign">
+                <WebDesignIcon slot="icon" />
+              </ServiceCard>
 
-          <Flex direction="column" gap="4">
+              <ServiceCard title="Website Consultations" href="/consultations">
+                <ConsultingIcon slot="icon" />
+              </ServiceCard>
+            </Grid>
+          </Grid>
+
+          <Grid columns="1" gap="4">
             <Heading size="3" weight="medium" as="h2" highContrast>
               À la carte
             </Heading>
             <Grid columns={{ initial: "1", sm: "2" }} gap="4">
-              <ServiceCard
-                title="Content Writing"
-                href="/contentwriting"
-                icon={ContentWritingIcon}
-              />
-              <ServiceCard
-                title="Email Marketing"
-                href="/emailmarketing"
-                icon={EmailMarketingIcon}
-              />
+              <ServiceCard title="Content Writing" href="/contentwriting">
+                <ContentWritingIcon slot="icon" />
+              </ServiceCard>
+
+              <ServiceCard title="Email Marketing" href="/emailmarketing">
+                <EmailMarketingIcon slot="icon" />
+              </ServiceCard>
             </Grid>
-          </Flex>
-        </Flex>
+          </Grid>
+        </Grid>
+      </InnerSection>
 
-        <!-- --- About Snippet --- -->
-        <Box className="section-header">
-          <Heading size="3" weight="medium" as="h2" highContrast>
-            <Text as="span" className="section-counter-number" />
-            About
-          </Heading>
-        </Box>
-
+      <!-- --- About Snippet --- -->
+      <InnerSection title="About">
         <Flex direction="column" gap="6">
           <Flex direction="column" gap="3">
             <Text size="3" as="p" highContrast>
@@ -167,7 +134,52 @@ import EmailMarketingIcon from "../components/icons/EmailMarketingIcon.astro";
             More about how I work <ArrowRightIcon />
           </ButtonLink>
         </Flex>
-      </Grid>
-    </Container>
+      </InnerSection>
+
+      <!-- --- Testimonials --- -->
+      <InnerSection title="Happy Clients">
+        <Grid columns="1" gap="var(--space-10)">
+          <Testimonial
+            authorName="Rob Cowen"
+            quote="Francesco has the rare talent of being able to embed himself in a niche that he previously knew nothing about, quickly understanding the intricacies and writing with the confidence of an insider"
+            rating={5}
+            client:idle
+          >
+            <aside slot="authorRole">
+              Founder, <Link href="https://seatingplan.com"
+                >Mega Seating Plan</Link
+              >
+            </aside>
+            <MegaSeatingPlanLogo slot="logo" />
+          </Testimonial>
+          <Testimonial
+            authorName="Rob Cowen"
+            quote="Francesco has the rare talent of being able to embed himself in a niche that he previously knew nothing about, quickly understanding the intricacies and writing with the confidence of an insider"
+            rating={5}
+            client:idle
+          >
+            <aside slot="authorRole">
+              Founder, <Link href="https://seatingplan.com"
+                >Mega Seating Plan</Link
+              >
+            </aside>
+            <MegaSeatingPlanLogo slot="logo" />
+          </Testimonial>
+          <Testimonial
+            authorName="Rob Cowen"
+            quote="Francesco has the rare talent of being able to embed himself in a niche that he previously knew nothing about, quickly understanding the intricacies and writing with the confidence of an insider"
+            rating={5}
+            client:idle
+          >
+            <aside slot="authorRole">
+              Founder, <Link href="https://seatingplan.com"
+                >Mega Seating Plan</Link
+              >
+            </aside>
+            <MegaSeatingPlanLogo slot="logo" />
+          </Testimonial>
+        </Grid>
+      </InnerSection>
+    </MainGrid>
   </Box>
 </Layout>

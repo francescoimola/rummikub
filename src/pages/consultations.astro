@@ -1,7 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PageHeading from "../components/PageHeading";
-import { Text, Button, Flex } from "@radix-ui/themes";
+import { Text, Flex, Box } from "@radix-ui/themes";
+import { ButtonLink } from "../components/ButtonLink";
 import { ArrowDownIcon } from "@radix-ui/react-icons";
 ---
 
@@ -12,19 +13,22 @@ import { ArrowDownIcon } from "@radix-ui/react-icons";
         Problems with your website?
     </Text>
     <Flex slot="description" direction="column" gap="5" width="75%">
-        <Text size="3">
-            Booking a consultation is the fastest way to get clarity on what's
-            holding your site back and what to do about it. You get a targeted
-            website review and 1 hour of dedicated consultation time to discuss
-            findings, ask questions, and get targeted recommendations.
+        <Text size="3" as="p">
+            The fastest way to get clarity on what's holding your site back is
+            booking a consultation. Each includes a website review and 1 hour of
+            dedicated time to ask questions and find out exactly what needs
+            fixing (or what's fine as it is).
         </Text>
-        <Button
+        <ButtonLink
             size="3"
-            variant="soft"
+            variant="solid"
             color="gray"
+            highContrast
             style={{ alignSelf: "flex-start" }}
+            href="#info"
         >
             Scroll to learn more <ArrowDownIcon />
-        </Button>
+        </ButtonLink>
     </Flex>
+    <Box id="info" slot="page-content" />
 </Layout>
