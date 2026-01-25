@@ -8,7 +8,6 @@ import {
     Link,
     Button,
     Heading,
-    Text,
     Separator,
 } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
@@ -46,178 +45,124 @@ const {
             style={{ backgroundColor }}
         >
             <Container maxWidth="var(--max-cw)">
-                {/* Header Section */}
+                <!-- Hero Section -->
                 <Grid
-                    asChild
                     columns={{ initial: "1", sm: "2" }}
-                    gapX="4"
                     gapY={{
                         initial: "var(--space-10)",
                         sm: "var(--space-11)",
                     }}
+                    gapX="4"
                     pt="6"
-                    pb={{
-                        initial: "var(--space-10)",
-                        sm: "var(--space-11)",
-                    }}
+                    pb="var(--space-10)"
                     className="side-margin"
                 >
-                    <header>
-                        {/* Logo - Cell (1,1) */}
-                        <Box
-                            gridRow={{ initial: "auto", sm: "1" }}
-                            style={{
-                                alignSelf: "center",
-                            }}
-                        >
-                            <Text
-                                asChild
-                                size="3"
-                                weight="medium"
-                                highContrast
-                                wrap="nowrap"
-                                color="gray"
-                            >
-                                <div>
-                                    <Link href="/">Francesco Imola</Link>
-                                </div>
-                            </Text>
-                        </Box>
-
-                        {/* Navigation + CTA - Cell (2,1) */}
-                        <Flex
-                            asChild
-                            gridRow={{ initial: "auto", sm: "1" }}
-                            gridColumn={{ initial: "1", sm: "2" }}
-                            direction={{ initial: "column", sm: "row" }}
-                            justify="between"
-                            align="center"
-                            gap={{ initial: "3", sm: "5" }}
-                        >
-                            <nav>
-                                {/* Nav Items */}
-                                <Flex
-                                    gap="4"
-                                    direction="row"
-                                    align="center"
-                                    style={{
-                                        width: "100%",
-                                    }}
-                                >
-                                    <Link href="/about" size="3" color="gray">
-                                        About
-                                    </Link>
-                                    <Separator
-                                        size="1"
-                                        orientation="vertical"
-                                    />
-                                    <Link
-                                        href="/webdesign"
-                                        size="3"
-                                        color="gray"
-                                    >
-                                        Websites
-                                    </Link>
-                                    <Separator
-                                        size="1"
-                                        orientation="vertical"
-                                    />
-                                    <Link
-                                        href="/consultations"
-                                        size="3"
-                                        color="gray"
-                                    >
-                                        Consulting
-                                    </Link>
-                                    <Box
-                                        display={{
-                                            initial: "contents",
-                                            sm: "none",
-                                        }}
-                                    >
-                                        <Separator
-                                            size="1"
-                                            orientation="vertical"
-                                        />
-                                        <Link
-                                            href="/contact"
-                                            size="3"
-                                            color="gray"
-                                        >
-                                            Contact
-                                        </Link>
-                                    </Box>
-                                </Flex>
-
-                                <Box
-                                    display={{ initial: "block", sm: "none" }}
-                                    width="100%"
-                                >
-                                    <Separator
-                                        size="4"
-                                        orientation="horizontal"
-                                    />
-                                </Box>
-
-                                {/* Contact CTA */}
-                                <Box display={{ initial: "none", sm: "block" }}>
-                                    <Button
-                                        variant="soft"
-                                        color="gray"
-                                        size="3"
-                                    >
-                                        Contact
-                                    </Button>
-                                </Box>
-                            </nav>
-                        </Flex>
-                    </header>
-                </Grid>
-
-                <main>
-                    <Grid
-                        columns={{ initial: "1", sm: "2" }}
-                        gapY={{
-                            initial: "var(--space-10)",
-                            sm: "var(--space-11)",
+                    {/* Logo - Cell (1,1) */}
+                    <Box
+                        gridRow={{ initial: "auto", sm: "1" }}
+                        style={{
+                            alignSelf: "center",
                         }}
-                        gapX="4"
-                        pb="var(--space-10)"
-                        className="side-margin"
                     >
-                        {/* Hero Content */}
-                        <Box
-                            gridColumn={{ initial: "1", sm: "2" }}
+                        <Heading
+                            size="3"
+                            weight="medium"
+                            highContrast
+                            wrap="nowrap"
+                            color="gray"
+                        >
+                            <Link href="/">Francesco Imola</Link>
+                        </Heading>
+                    </Box>
+
+                    {/* Navigation + CTA - Cell (2,1) */}
+                    <Flex
+                        gridRow={{ initial: "auto", sm: "1" }}
+                        gridColumn={{ initial: "1", sm: "2" }}
+                        direction={{ initial: "column", sm: "row" }}
+                        justify="between"
+                        align="center"
+                        gap={{ initial: "3", sm: "5" }}
+                    >
+                        {/* Nav Items */}
+                        <Flex
+                            gap="4"
+                            direction="row"
+                            align="center"
                             style={{
-                                containerType: "inline-size",
+                                width: "100%",
                             }}
                         >
-                            <slot name="heading" />
-                        </Box>
+                            <Link href="/about" size="3" color="gray">
+                                About
+                            </Link>
+                            <Separator size="1" orientation="vertical" />
+                            <Link href="/webdesign" size="3" color="gray">
+                                Websites
+                            </Link>
+                            <Separator size="1" orientation="vertical" />
+                            <Link href="/consultations" size="3" color="gray">
+                                Consulting
+                            </Link>
+                            <Box
+                                display={{
+                                    initial: "contents",
+                                    sm: "none",
+                                }}
+                            >
+                                <Separator size="1" orientation="vertical" />
+                                <Link href="/contact" size="3" color="gray">
+                                    Contact
+                                </Link>
+                            </Box>
+                        </Flex>
 
                         <Box
-                            gridColumn={{ initial: "1", sm: "1" }}
-                            gridRow="auto"
-                            width="full"
-                            maxWidth={roleFullWidth
-                                ? undefined
-                                : {
-                                      initial: "4",
-                                      sm: "var(--container-xs)",
-                                  }}
+                            display={{ initial: "block", sm: "none" }}
+                            width="100%"
                         >
-                            <slot name="role" />
+                            <Separator size="4" orientation="horizontal" />
                         </Box>
 
-                        <Box gridColumn={{ initial: "1", sm: "2" }} asChild>
-                            <slot name="description" />
+                        {/* Contact CTA */}
+                        <Box display={{ initial: "none", sm: "block" }}>
+                            <Button variant="soft" color="gray" size="3">
+                                Contact
+                            </Button>
                         </Box>
-                    </Grid>
+                    </Flex>
 
-                    <!-- Page Content -->
-                    <slot name="page-content" />
-                </main>
+                    <Box
+                        gridColumn={{ initial: "1", sm: "2" }}
+                        style={{
+                            containerType: "inline-size",
+                        }}
+                    >
+                        <slot name="heading" />
+                    </Box>
+
+                    <Box
+                        gridColumn={{ initial: "1", sm: "1" }}
+                        gridRow="auto"
+                        width="full"
+                        maxWidth={roleFullWidth
+                            ? undefined
+                            : {
+                                  initial: "4",
+                                  sm: "var(--container-xs)",
+                              }}
+                    >
+                        <slot name="role" />
+                    </Box>
+
+                    <Box gridColumn={{ initial: "1", sm: "2" }} asChild>
+                        <slot name="description" />
+                    </Box>
+                </Grid>
             </Container>
+
+            <!-- Page Content -->
+            <slot name="page-content" />
             <Footer client:idle />
         </Theme>
     </body>

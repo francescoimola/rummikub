@@ -1,8 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PageHeading from "../components/PageHeading";
-import { Text, Flex, Box } from "@radix-ui/themes";
-import { ButtonLink } from "../components/ButtonLink";
+import { Text, Button, Flex } from "@radix-ui/themes";
 import { ArrowDownIcon } from "@radix-ui/react-icons";
 ---
 
@@ -19,16 +18,13 @@ import { ArrowDownIcon } from "@radix-ui/react-icons";
             dedicated time to ask questions and find out exactly what needs
             fixing (or what's fine as it is).
         </Text>
-        <ButtonLink
+        <Button
             size="3"
-            variant="solid"
+            variant="soft"
             color="gray"
-            highContrast
             style={{ alignSelf: "flex-start" }}
-            href="#info"
         >
             Scroll to learn more <ArrowDownIcon />
-        </ButtonLink>
+        </Button>
     </Flex>
-    <Box id="info" slot="page-content" />
 </Layout>

@@ -27,8 +27,7 @@ export const Footer = () => {
                     style={{
                         backgroundColor: "var(--brand-surface-dark-olive)",
                     }}
-                    className="side-margin"
-                >
+                    className="side-margin">
                     <Container maxWidth="var(--max-cw)">
                         <Grid
                             columns={{ initial: "1", sm: "2" }} // split 2 cols on sm screens to match page content
@@ -214,7 +213,7 @@ export const Footer = () => {
                         </Box>
                     </Container >
                 </footer>
-            </Box>
+            </Box >
         </Theme >
     );
 };
