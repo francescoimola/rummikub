@@ -38,12 +38,14 @@ The `Layout.astro` component abstracts the complex responsive grid. Pages inject
 ```text
 src/
 ├── components/          # Reusable UI (React .tsx & Astro .astro)
-│   ├── ui/              # (Future) Generic UI primitives
-│   └── icons/           # Astro-based SVG icons
-├── layouts/             # Page skeletons
-│   └── Layout.astro     # The Master Layout
+│   ├── icons/           # Astro-based SVG icons (brand logos, service icons)
+│   └── project/         # Project/case study display components
+├── content/             # MDX content collections
+├── data/                # Static data files (JSON, etc.)
+├── layouts/             # Page skeletons (Layout.astro)
 ├── pages/               # File-based routing (Astro)
 ├── styles/              # Global CSS & Design Tokens
+├── utils/               # Helper functions
 └── assets/              # Optimized images
 ```
 

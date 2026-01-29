@@ -71,8 +71,8 @@ You have access to specialized tools to assist in development:
 - **No Rounded Corners**: This design uses sharp, square corners throughout. The Radix Theme is configured with `radius="none"`. Do not add rounded corners to any components.
 
 ### 7. Navigation & Link Patterns
-- **Internal**: `<Link href="/about">` — External: add `target="_blank" rel="noopener noreferrer"`
-- **Button Links**: `<Button asChild><a href="/contact">Contact</a></Button>`
+- **Internal**: `<Link href="/about">` — External: always add `target="_blank" rel="noopener noreferrer"`
+- **Button Links**: `<ButtonLink href=...></ButtonLink>`
 - **Active States**: Not yet implemented. Use URL matching when adding.
 
 ### 8. Layout Slots
@@ -88,7 +88,7 @@ Defined in `src/styles/global.css`:
 ### 10. Code & CSS Strategy
 - **Self-Documenting**: Descriptive names over comments. Follow existing patterns.
 - **CSS Location**: Add styles to `src/styles/global.css` (avoid component `<style>` blocks).
-- **Units**: Use `rem` for sizing, `dvh`/`dvw` over `vh`/`vw`, Radix variables over raw values.
+- **Units**: Use `rem` for sizing, `dvh`/`dvw` over `vh`/`vw`, Radix variables over raw/hardcoded values.
 - **PostCSS**: autoprefixer, postcss-preset-env, cssnano configured. Modern CSS features supported.
 
 ### 11. Verification Protocol (CRITICAL)
@@ -105,18 +105,23 @@ Don't rely on visual inspection alone. Use browser DevTools to verify computed s
 | Path | Purpose |
 |------|---------|
 | `/src/pages/` | File-based routing (`.astro` files become routes) |
-| `/src/components/` | UI components (`.jsx` for React, `.astro` for static/`<Image>`) |
+| `/src/components/` | UI components (`.tsx` for React, `.astro` for static/`<Image>`) |
+| `/src/components/icons/` | Astro-based SVG icons (brand logos, service icons) |
+| `/src/components/project/` | Project/case study display components |
+| `/src/content/` | MDX content collections |
+| `/src/data/` | Static data files |
 | `/src/layouts/` | Base layouts (`Layout.astro` is the master) |
 | `/src/styles/global.css` | Design tokens, font imports, overrides |
+| `/src/utils/` | Helper functions |
 | `/src/assets/` | Optimized images (Astro image optimization) |
 | `/public/` | Static assets (fonts, favicon) |
-| `/docs/` | Documentation (`architecture.md`, `POSTCSS_SETUP.md`) |
+| `/docs/architecture.md` | Technical documentation 
+| `/docs/POSTCSS_SETUP.md` | POST CSS Configuration 
 
 ## Common Pitfalls
 
 | Issue | Solution |
 |-------|----------|
-| Component not interactive | Add `client:load` or `client:idle` directive |
 | High TBT / slow TTI | Remove unnecessary `client:*` directives from static components |
 | TypeScript prop errors | Import `type { ComponentProps } from "react"` and extend |
 | CSS not applying | Check specificity; use Radix props before custom CSS |
