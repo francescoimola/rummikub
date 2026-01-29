@@ -1,0 +1,94 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import PageHeading from "../../components/PageHeading";
+import { Text, Box, Theme, Flex } from "@radix-ui/themes";
+import { MainGrid } from "../../components/MainGrid";
+import { ProjectInfo } from "../../components/project/ProjectInfo";
+import ProjectImageWrapper from "../../components/project/ProjectImageWrapper.astro";
+import ProjectCanvas from "../../components/project/ProjectCanvas.astro";
+import { ProjectParagraph } from "../../components/project/ProjectParagraph";
+import { ProjectResults } from "../../components/project/ProjectResults";
+
+// 1. Generate a new path for every collection entry
+export const getStaticPaths = (async () => {
+    const projectEntries = await getCollection("projects");
+    return projectEntries.map((entry) => ({
+        params: { slug: entry.data.slug },
+        props: { entry },
+    }));
+}) satisfies GetStaticPaths;
+
+// 2. Access the entry from the prop
+interface Props {
+    entry: CollectionEntry<"projects">;
+}
+
+const { entry } = Astro.props as Props;
+const { Content } = await render(entry);
+
+// 3. Define the component map for MDX
+const components = {
+    p: ProjectParagraph,
+    img: ProjectImageWrapper,
+    ProjectCanvas: ProjectCanvas,
+};
+---
+
+<Layout backgroundColor="var(--brand-surface-dark-olive)" appearance="dark">
+    <!-- Hero Section -->
+    <PageHeading slot="heading"> {entry.data.title} </PageHeading>
+    <Box slot="description" asChild>
+        <Text size="3">
+            {entry.data.heroDescription}
+        </Text>
+    </Box>
+
+    <!-- --- Page Content --- -->
+    <Box slot="page-content" asChild>
+        <Theme
+            appearance="light"
+            accentColor="yellow"
+            radius="none"
+            grayColor="olive"
+            scaling="97%"
+            panelBackground="solid"
+            style={{ backgroundColor: "var(--gray-1)" }}
+        >
+            <!-- Main Content Grid -->
+            <MainGrid>
+                <!-- --- Selected Work --- -->
+                <ProjectInfo
+                    role={entry.data.role}
+                    year={entry.data.year}
+                    visitUrl={entry.data.visitUrl}
+                    visitHeading={entry.data.visitHeading}
+                />
+
+                <Flex direction="column" gap="8">
+                    {/* Optional: Render Cover Canvas if images provided */}
+                    {
+                        entry.data.coverImages && (
+                            <ProjectCanvas images={entry.data.coverImages} />
+                        )
+                    }
+
+                    {/* MDX Content with Custom Components */}
+                    <Flex direction="column" gap="2" className="multi-p">
+                        <Content components={components} />
+                    </Flex>
+                </Flex>
+                {
+                    entry.data.results &&
+                        entry.data.results.items.length > 0 && (
+                            <ProjectResults
+                                heading={entry.data.results.heading}
+                                items={entry.data.results.items}
+                            />
+                        )
+                }
+            </MainGrid>
+        </Theme>
+    </Box>
+</Layout>

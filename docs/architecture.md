@@ -1,161 +1,76 @@
-# Project Architecture: Portfolio (Rummikub)
+# Architecture Guide: Rummikub
 
-> [!IMPORTANT]
-> **AI Agents**: This document MUST be updated whenever major changes are made to the project's structure or inner workings.
+This document provides a high-level technical overview of the portfolio project.
 
-This document outlines the architecture and structure of the portfolio project (codenamed Rummikub). It is intended to be a living document, updated whenever major changes are made to the project's structure.
+**Goal**: A high-performance, design-first portfolio website.
+**Stack**: [Astro 5](https://astro.build) · [React 19](https://react.dev) · [Radix UI Themes](https://www.radix-ui.com) · [Cloudflare Pages](https://pages.cloudflare.com)
 
-## Overview
-The project is a modern portfolio website built using **Astro 5+** as the core framework, integrated with **React 19+** for interactive components and **Radix UI Themes** for the UI design system. The site is deployed on **Cloudflare Pages** and uses PostCSS for CSS optimization.
+---
 
-## Project Structure
-```
-/
-├── .astro/                      # Astro's internal cache and build artifacts
-├── .wrangler/                   # Cloudflare Wrangler development cache
-├── dist/                        # Production build output
-├── node_modules/                # Dependencies
-├── public/                      # Static assets (fonts, images, icons)
-├── src/
-│   ├── assets/                  # Optimized/processed assets
-│   ├── components/              # Reusable UI components
-│   │   ├── BlogFilters.jsx      # React: Tab-based blog post filtering
-│   │   ├── Footer.jsx           # React: Site footer with optional signup form
-│   │   ├── ProjectCanvas.astro  # Astro: Project showcase with image grid
-│   │   └── SkipToNav.astro      # Astro: Accessibility navigation helper
-│   ├── layouts/
-│   │   └── Layout.astro         # Main layout with Theme, Grid, Navigation, and slots
-│   ├── pages/                   # File-based routing
-│   │   ├── index.astro          # Homepage
-│   │   ├── about.astro          # About page
-│   │   ├── blog.astro           # Blog listing
-│   │   ├── blogPost.astro       # Individual blog post template
-│   │   ├── consultations.astro  # Consulting services page
-│   │   ├── project.astro        # Project details template
-│   │   └── webdesign.astro      # Web design services showcase
-│   ├── styles/
-│   │   └── global.css           # Global tokens, font-faces, overrides
-│   └── env.d.ts                 # TypeScript environment types
-├── AGENTS.md                    # AI agent guidelines and workflows
-├── POSTCSS_SETUP.md             # PostCSS configuration documentation
-├── architecture.md              # This file
-├── astro.config.mjs             # Astro configuration (integrations, adapter)
-├── package.json                 # Dependencies and scripts
-├── postcss.config.cjs           # PostCSS configuration (autoprefixer, cssnano)
-├── pnpm-lock.yaml               # Lockfile for pnpm
-├── pnpm-workspace.yaml          # pnpm workspace config
-├── tsconfig.json                # TypeScript configuration
-└── wrangler.jsonc               # Cloudflare deployment configuration
-```
+## 1. Core Architecture Concepts
 
-## Key Technologies
+### A. Zero-JS by Default (Hydration Strategy)
+Performance is paramount. This project follows a strict **"Static First"** approach:
+*   **Default**: All components are server-rendered to static HTML.
+*   **Opt-In**: We only use `client:load` or `client:idle` for components that *strictly require* runtime JavaScript (e.g., state, event listeners, form handling).
+*   **Visuals**: Purely visual components (Stars, Cards) are static, even if written in React.
+*   **The Theme**: The root `<Theme>` provider is static to prevent massive hydration blocking.
 
-### Core Framework
-- **Astro 5.16+**: Static site generator and framework with file-based routing.
-- **React 19.2+**: Used for interactive UI components (with `client:load`/`client:idle` directives).
-- **TypeScript 5.9+**: Type safety for components and configuration.
+### B. Radix UI Design System
+We leverage **Radix UI Themes** as the single source of truth for styling.
+*   **No custom CSS classes** for layout or basic styling. Use `Box`, `Flex`, `Grid` components.
+*   **Global Overrides**: Defined in `src/styles/global.css`, mainly for:
+    *   **Spacing**: Extended scale (`--space-10` to `--space-14`) for dramatic layout gaps.
+    *   **Colors**: Custom P3/oklch brand colors (Yellow/Orange).
+    *   **Reset**: Sharp corners (`radius="none"`) and condensed scaling (`97%`).
 
-### UI & Styling
-- **Radix UI Themes 3.2+**: Primary design system and component library.
-- **Radix UI Primitives**: Accessible component primitives (Navigation Menu, Form).
-- **Radix Icons 1.3+**: Icon library.
-- **PostCSS**: CSS processing with autoprefixer, cssnano, and postcss-preset-env.
+### C. Slot-Based Layouts
+The `Layout.astro` component abstracts the complex responsive grid. Pages inject content into specific named slots:
+*   `heading`: The main page title (top right).
+*   `role`: The job title/tagline (top left, constrained).
+*   `description`: The intro text (top right, below heading).
+*   `page-content`: The main body (spans full width/grid).
 
-### Build & Deployment
-- **Cloudflare Pages**: Hosting platform with edge deployment.
-- **Cloudflare Adapter**: Astro integration for Cloudflare-specific optimizations.
-- **Sharp**: Image optimization.
-- **pnpm**: Package manager with workspace support.
+---
 
-### Content & Features
-- **MDX**: Markdown with JSX support for rich content.
-- **Sitemap**: Automatic XML sitemap generation.
+## 2. Directory Structure
 
-## Design System Architecture
-The project extends **Radix UI Themes** with a specific "Swiss Design" configuration.
-
-### 1. Global Tokens (CSS)
-Defined in `src/styles/global.css`:
-- **Extended Spacing Scale**:
-  - `--space-10`: 5rem (80px)
-  - `--space-11`: 8rem (128px)
-  - `--space-12`: 10rem (160px)
-  - `--space-13`: 20rem (320px)
-  - `--space-14`: 30rem (480px)
-- **Brand Colors**:
-  - `Yellow` (Primary)
-  - `Orange` (Secondary/Mustard)
-  - Full P3/oklch high-fidelity color support.
-
-### 2. Theme Configuration
-- **Scaling**: Custom `97%` scaling factor (condensed UI).
-- **Typography**: `Ronzino` is the primary font family.
-- **Radius**: `none` (Sharp corners).
-
-## Component Architecture
-
-### Layout System
-- **Theme Provider**: Radix `Theme` component wraps the entire application in `Layout.astro`.
-  - Configured with: `accentColor="yellow"`, `radius="none"`, `grayColor="olive"`, `scaling="97%"`.
-- **Master Layout**: `Layout.astro` provides:
-  - HTML shell with meta tags
-  - Two-column responsive Grid (1 column mobile, 2 columns desktop)
-  - Header with logo and navigation
-  - Named slots: `heading`, `role`, `description`, `page-content`
-  - Footer component (lazy-loaded with `client:idle`)
-
-### Component Types
-- **React Components** (`.jsx`):
-  - `BlogFilters.jsx`: Interactive tabbed filtering for blog posts
-  - `Footer.jsx`: Complex footer with conditional signup form
-  - Require `client:*` directive in Astro files
-- **Astro Components** (`.astro`):
-  - `SkipToNav.astro`: Accessibility-focused skip-to-navigation link
-  - `ProjectCanvas.astro`: Image gallery/showcase component
-  - Server-rendered by default, no hydration overhead
-
-### Slot-Based Architecture
-Pages use named slots to inject content into specific grid positions:
-- `heading`: Page title/heading (grid column 2)
-- `role`: User role/tagline (grid column 1, constrained width)
-- `description`: Main descriptive content (grid column 2)
-- `page-content`: Full-width content below the hero grid
-
-## Git & Deployment Workflow
-
-### Branch Strategy
-- **`main`**: Production branch. Direct pushes trigger Cloudflare Pages deployment.
-- **`development`**: Active development branch.
-- **No Pull Requests**: Solo developer workflow; direct merges are enabled via GitHub Rulesets.
-
-### Fast-Track Deployment
-Merge and deploy from `development` to `main`:
-```bash
-git checkout main && git merge development && git push origin main && git checkout development
+```text
+src/
+├── components/          # Reusable UI (React .tsx & Astro .astro)
+│   ├── icons/           # Astro-based SVG icons (brand logos, service icons)
+│   └── project/         # Project/case study display components
+├── content/             # MDX content collections
+├── data/                # Static data files (JSON, etc.)
+├── layouts/             # Page skeletons (Layout.astro)
+├── pages/               # File-based routing (Astro)
+├── styles/              # Global CSS & Design Tokens
+├── utils/               # Helper functions
+└── assets/              # Optimized images
 ```
 
-### Local Verification
-Simulate Cloudflare Pages environment before deploying:
-```bash
-npx astro build && npx wrangler pages dev
-```
+---
 
-## PostCSS Pipeline
-The project uses PostCSS for CSS optimization and compatibility:
-- **autoprefixer**: Adds vendor prefixes based on browserslist
-- **postcss-preset-env**: Modern CSS features with stage 3+ support
-- **cssnano**: Minification for production builds
-- See `POSTCSS_SETUP.md` and `postcss.config.cjs` for details
+## 3. Deployment Workflow
 
-## Development Guidelines
-For detailed behavioral rules, coding standards, and workflow instructions (including Git and CSS guidelines), refer to [AGENTS.md](./AGENTS.md).
+*   **Hosting**: Cloudflare Pages.
+*   **Branching**:
+    *   `development`: Active work.
+    *   `main`: Production. Auto-deploys on push.
+*   **Solo Workflow**: Merge `development` into `main` directly. PRs are optional.
+    ```bash
+    git checkout main && git merge development && git push origin main && git checkout development
+    ```
 
-### Documentation Maintenance
-- **Architecture Updates**: Update this document (`architecture.md`) when:
-  - New structural components, folders, or directories are added
-  - Core technologies or dependencies change
-  - Build/deployment processes are modified
-- **Behavior Updates**: Update `AGENTS.md` when:
-  - Coding standards or conventions change
-  - Design system guidelines are updated
-  - Agent workflows or verification protocols are modified
+---
+
+## 4. Development Cheatsheet
+
+| Task | Command / Action |
+| :--- | :--- |
+| **Run Dev Server** | `pnpm run dev` |
+| **Build Production** | `pnpm build` |
+| **Preview Prod** | `pnpm preview` or `npx wrangler pages dev dist` |
+| **Styling** | Use `<Flex>`, `<Grid>`, and `<Text>` props. **Avoid CSS files.** |
+| **Icons** | Import from `@radix-ui/react-icons`. |
+| **Interactivity** | Add `client:load` ONLY if strictly needed. |

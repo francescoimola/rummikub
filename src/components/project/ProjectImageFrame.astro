@@ -1,0 +1,63 @@
+---
+import { AspectRatio, Flex, Text } from "@radix-ui/themes";
+import { Image } from "astro:assets";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"figure"> {
+    // Direct usage
+    image?: ImageMetadata;
+    caption?: string;
+    // MDX usage (src, title)
+    src?: ImageMetadata;
+    title?: string;
+    // Shared
+    alt: string;
+    className?: string;
+}
+
+const { image, src, alt, caption, title, className, ...rest } = Astro.props;
+const finalImage = (image ?? src)!;
+const finalCaption = caption ?? title;
+---
+
+<figure
+    class={className}
+    style={{
+        display: "flex",
+        margin: 0,
+        flexDirection: "column",
+        gap: "var(--space-4)",
+    }}
+    {...rest}
+>
+    <AspectRatio ratio={3 / 2} style={{ overflow: "hidden" }}>
+        <Flex
+            width="100%"
+            height="100%"
+            pt="9"
+            px={{ initial: "4", sm: "9" }}
+            align="end"
+            justify="center"
+            style={{ backgroundColor: "var(--gray-3)" }}
+        >
+            <Image
+                src={finalImage}
+                alt={alt}
+                style={{
+                    height: "100%",
+                    width: "auto",
+                    objectPosition: "top",
+                    objectFit: "contain",
+                }}
+            />
+        </Flex>
+    </AspectRatio>
+
+    {
+        finalCaption && (
+            <Text size="2" color="gray" asChild>
+                <figcaption>{finalCaption}</figcaption>
+            </Text>
+        )
+    }
+</figure>

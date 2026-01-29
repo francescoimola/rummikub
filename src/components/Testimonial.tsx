@@ -1,4 +1,4 @@
-import { Grid, Flex, Heading, Text } from "@radix-ui/themes";
+import { Flex, Heading, Text } from "@radix-ui/themes";
 import ReviewStars from "./ReviewStars";
 import type { ReactNode } from "react";
 
@@ -23,7 +23,7 @@ export default function Testimonial({
                 <Heading size="3" as="h3" highContrast>
                     {authorName}
                 </Heading>
-                <Text size="3" as="div" wrap="balance">
+                <Text size="2" as="div" wrap="balance">
                     {authorRole}
                 </Text>
                 {logo && <div className="client-logo-wrapper">{logo}</div>}

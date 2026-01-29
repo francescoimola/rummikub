@@ -1,15 +1,78 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PageHeading from "../components/PageHeading";
-import { Text, Flex, Link, DataList } from "@radix-ui/themes";
+import { ContactSHeader } from "../components/ContactSHeader";
+import {
+    Text,
+    Flex,
+    Link,
+    DataList,
+    Box,
+    AspectRatio,
+    Grid,
+    Heading,
+    Card,
+} from "@radix-ui/themes";
 
 import { Image } from "astro:assets";
 import francescoImg from "../assets/francesco.png";
 import SkipToNav from "../components/SkipToNav";
+import { InnerSection } from "../components/InnerSection";
+import { MainGrid } from "../components/MainGrid";
+import FigmaIcon from "../components/icons/FigmaIcon.astro";
+import { ToolCard } from "../components/ToolCard";
+import WebflowIcon from "../components/icons/WebflowIcon.astro";
+import BrevoIcon from "../components/icons/BrevoIcon.astro";
+import FramerIcon from "../components/icons/FramerIcon.astro";
+import ShopifyIcon from "../components/icons/ShopifyIcon.astro";
+import UmamiIcon from "../components/icons/UmamiIcon.astro";
+import creativesForClimate from "../assets/sustainability-windows.png";
+import FAQ from "../components/FAQ";
+import { ContactForm } from "../components/ContactForm";
+import { TemplateDialog } from "../components/TemplateDialog";
+import { ContentCard } from "../components/ContentCard";
+import { AccordionSection } from "../components/AccordionSection";
+import { ArrowDownIcon } from "@radix-ui/react-icons";
+import { ButtonLink } from "../components/ButtonLink";
+
+const faqItems = [
+    {
+        question: "How long does a project take?",
+        answer: "Most website projects take 4-10 weeks depending on scope. I work in phases so you can see progress early and provide feedback as we go. We'll establish a timeline together before we start.",
+    },
+    {
+        question: "Can you work with my existing team?",
+        answer: "Absolutely. I usually take care of the full scope myself, but I'm happy to collaborate with your team if necessary.",
+    },
+    {
+        question: "Can you help with SEO?",
+        answer: "I always ensure that the websites I build are SEO-friendly. This means they have the right structure, load quickly and get Lighthouse scores of 90+ (for SEO), as well as allowing the content displayed in search results to be customised.\n\nAs part of any website project, you can upgrade to receive a detailed SEO analysis of your competitors' websites. This involves looking at over 10 years of data to find tactics and content ideas worth copying, and it includes a plan to help you implement any changes that are needed",
+    },
+    {
+        question: "What if I need changes after launch?",
+        answer: "I build sites that are easy to update and to maintain. You'll understand how everything works and be able to make changes yourself. But if you'd rather have me handle things, I offer ongoing support packages.",
+    },
+    {
+        question: "Do you offer concessions?",
+        answer: "I understand project fees can be a lot to take in. But rest assured, the work I do is always carried out to strengthen your business and generate long-term returns. This means the result should make you money rather than cost you money, and will typically pay for itself.\n\nI'm always open to discussing options and finding a pricing structure that fits, especially for businesses with tighter budgets. And if you're struggling financially, I'm happy to chat about payment plans. The discounts I offer to everyone (these cannot be combined):\n\n• 3 easy instalments at 0% interest for all invoices over £500\n• 6 instalments at 0% interest for all invoices over £3k\n• 10% discount for paying your invoice in full before the work starts.",
+    },
+    {
+        question: "Are meetings free?",
+        answer: "If you need specific help with generating ideas or finding a solution to a problem you're having, this will be a chargeable consultation (unless this meeting was already quoted as part of your project). A consultation won't simply be an informal chat: it's a call I'll do some preparation for, so I can provide you with valuable ideas and options that will help you move forward.",
+    },
+    {
+        question: "What if I'm worried about email overload?",
+        answer: "I'm flexible about how to keep in touch during a project. If you're worried about missing emails, or maybe you flinch at the very thought of following up on something that was said four emails ago, I got you. I can set up private Slack and Trello boards for real-time progress and communication at no extra cost. And if email works for you, great!",
+    },
+    {
+        question: "Can we meet in person?",
+        answer: "Why not! I'm always up for meeting clients face to face. I'm based in Folkestone, South East England, so you'll need to be able to get here. I'm happy to meet anywhere nearby when our schedules coincide.",
+    },
+];
 ---
 
 <Layout backgroundColor="var(--orange-5)">
-    <PageHeading slot="heading">
+    <PageHeading slot="heading" className="page-heading">
         Designer and marketer based in Kent, England
     </PageHeading>
     <SkipToNav slot="role" display={{ initial: "none", sm: "flex" }} />
@@ -20,24 +83,19 @@ import SkipToNav from "../components/SkipToNav";
         gap="5"
         style={{ containerType: "inline-size" }}
     >
-        <Flex
-            className="about-image"
-            flexGrow="1"
-            flexShrink="1"
-            style={{
-                aspectRatio: "1",
-            }}
-        >
-            <Image
-                src={francescoImg}
-                alt="Francesco Imola"
-                style={{
-                    objectFit: "cover",
-                    width: "100%",
-                    height: "100%",
-                }}
-            />
-        </Flex>
+        <Box flexGrow="1" flexShrink="2" className="about-image">
+            <AspectRatio ratio={1}>
+                <Image
+                    src={francescoImg}
+                    alt="Francesco Imola"
+                    style={{
+                        objectFit: "cover",
+                        width: "100%",
+                        height: "100%",
+                    }}
+                />
+            </AspectRatio>
+        </Box>
         <Flex flexGrow="1" direction="row" justify="between">
             <DataList.Root orientation="vertical" size="2">
                 <DataList.Item>
@@ -46,23 +104,24 @@ import SkipToNav from "../components/SkipToNav";
                         <Link
                             href="mailto:hi@francescoimola.com"
                             highContrast
-                            wrap="nowrap">hi@francescoimola.com</Link
+                            wrap="nowrap"
                         >
+                            hi@francescoimola.com
+                        </Link>
                     </DataList.Value>
                 </DataList.Item>
                 <DataList.Item>
                     <DataList.Label>Location</DataList.Label>
-                    <DataList.Value
-                        ><Text wrap="balance">Folkestone, Kent, England</Text
-                        ></DataList.Value
-                    >
+                    <DataList.Value>
+                        <Text wrap="balance">Folkestone, Kent, England</Text>
+                    </DataList.Value>
                 </DataList.Item>
                 <DataList.Item>
                     <DataList.Label>Status</DataList.Label>
                     <DataList.Value>
                         <Flex align="center" gap="2">
-                            <Text color="grass" trim="both" mt="1"
-                                ><svg
+                            <Text color="grass" trim="both" mt="1">
+                                <svg
                                     width="12"
                                     height="12"
                                     viewBox="0 0 10 10"
@@ -70,8 +129,8 @@ import SkipToNav from "../components/SkipToNav";
                                     xmlns="http://www.w3.org/2000/svg"
                                 >
                                     <circle cx="5" cy="5" r="5"></circle>
-                                </svg></Text
-                            >
+                                </svg>
+                            </Text>
                             <Text wrap="balance"
                                 >Currently booking projects for Q1 2026</Text
                             >
@@ -81,4 +140,225 @@ import SkipToNav from "../components/SkipToNav";
             </DataList.Root>
         </Flex>
     </Flex>
+    <Box slot="page-content" style={{ backgroundColor: "var(--gray-1)" }}>
+        <MainGrid>
+            <InnerSection title="Selected work" sectionId="intro">
+                <Flex direction="column" gap="4">
+                    <Text size="3" wrap="pretty">
+                        I’m a designer and marketer based in Folkestone, on the
+                        Kentish coast. My current focus is helping independent
+                        businesses and orgs with their websites + the strategy,
+                        copy, and integrations that makes them useful. Clients
+                        pay less than agency prices and get one person handling
+                        the whole thing, no middlemen.
+                    </Text>
+                    <Text size="3" wrap="pretty">
+                        Before this, I spent six years in galleries,
+                        universities, and an agency that represented freelance
+                        film talent. Different industries but same job,
+                        essentially: making complex things a little less complex
+                        and helping good work find its audience. I'm a Digital
+                        Arts graduate from the University of Greenwich, which is
+                        where a lot of this started.
+                    </Text>
+                </Flex>
+            </InnerSection>
+            <InnerSection title="Principles" sectionId="principles">
+                <Grid gap="4" columns={{ initial: "1", lg: "2" }}>
+                    <ContentCard heading="Good design is invisible">
+                        Well-designed things fit our needs so well that they go
+                        undetected, which is why a good design is harder to spot
+                        than a bad one. I'm careful not to hide behind
+                        decorations, as this forces me to pursue substance over
+                        trends.
+                    </ContentCard>
+                    <ContentCard heading="Marketing is not an afterthought">
+                        Yet too often it feels like it—bolted on after the thing
+                        is built, the store is opened, or the event is
+                        scheduled. I get a kick out working on projects where
+                        marketing can do more than just "promote", but also
+                        shape the thing it's selling and find its audience.
+                    </ContentCard>
+                </Grid>
+            </InnerSection>
+            <InnerSection title="Tools" sectionId="tools">
+                <Flex direction="column" gap="7">
+                    <Text size="3" as="p" wrap="pretty">
+                        The apps and software I usually reach for are reliable,
+                        easy to hand over, and privacy-conscious (at least where
+                        we're dealing with people's data). I also understand the
+                        code that powers the web, and sometimes that's the
+                        better answer.
+                    </Text>
+                    <AccordionSection title="Peek at my toolbox" client:load>
+                        <Flex direction="column" gap="7">
+                            <Grid gap="4" columns={{ initial: "1", md: "2" }}>
+                                <ToolCard
+                                    title="Figma"
+                                    description="A tool for designing and prototyping, allowing feedback and rapid iteration"
+                                >
+                                    <FigmaIcon />
+                                </ToolCard>
+                                <ToolCard
+                                    title="Webflow"
+                                    description="The ideal CMS for complex websites or when accessibility is a key concern"
+                                >
+                                    <WebflowIcon />
+                                </ToolCard>
+                                <ToolCard
+                                    title="Framer"
+                                    description="An all-in-one website platform for businesses who need to move fast"
+                                >
+                                    <FramerIcon />
+                                </ToolCard>
+                                <ToolCard
+                                    title="Shopify"
+                                    description="Everything-managed e-commerce CMS with every feature and more"
+                                >
+                                    <ShopifyIcon />
+                                </ToolCard>
+                                <ToolCard
+                                    title="Umami"
+                                    description="For privacy-focused, GDPR-compliant analytics. Zero annoying cookies"
+                                >
+                                    <UmamiIcon />
+                                </ToolCard>
+                                <ToolCard
+                                    title="Brevo"
+                                    description="Easy to use email and CRM tool that lets you pay for what you need"
+                                >
+                                    <BrevoIcon />
+                                </ToolCard>
+                            </Grid>
+                            <Card size="4">
+                                <Text size="3" as="p" wrap="pretty">
+                                    <Text weight="medium">
+                                        Already committed elsewhere?
+                                    </Text>
+                                    I can adapt to other solutions based on your preferences.
+                                    I've previously tested Wordpress, Mailchimp, Loops,
+                                    Ahrefs, and Luma, among others.
+                                </Text>
+                            </Card>
+                        </Flex>
+                    </AccordionSection>
+                </Flex>
+            </InnerSection>
+            <InnerSection title="Sustainability" sectionId="sustainability">
+                <Flex direction="column" gap="6">
+                    <Image
+                        src={creativesForClimate}
+                        alt="Mockup of two computer windows, one shows a cliff, the other the Creatives for Climate logo"
+                        style={{
+                            height: "100%",
+                            width: "auto",
+                        }}
+                    />
+                    <Flex direction="column" gap="4" className="multi-p">
+                        <Text size="3" as="p" wrap="pretty">
+                            My mission is to do "good" creative work, but this
+                            is only achievable by rethinking what’s important:
+                            putting people and the planet first. In that spirit,
+                            I joined Creatives for Climate, a global network of
+                            creative industry workers using their skills to
+                            fight for the climate, and have been a member since
+                            2025.
+                        </Text>
+                        <Text size="3" as="p" wrap="pretty">
+                            While my practice is far from perfect, I use every
+                            project as an opportunity to shape the change I want
+                            to see. That said, I refuse to work with fossil fuel
+                            clients or those who are directly associated with
+                            the fossil fuel industry.
+                        </Text>
+                    </Flex>
+                </Flex>
+            </InnerSection>
+            <InnerSection title="Frequently asked questions" sectionId="faq">
+                <Flex direction="column" gap="6">
+                    <FAQ client:load items={faqItems} />
+                    <Card size="4">
+                        <Flex direction="column" gap="3">
+                            <Heading size="3" as="h4" weight="medium"
+                                >Have a better question?</Heading
+                            >
+                            <Text size="3" as="p" mb="2">
+                                Send me a message and we'll talk through
+                                everything.
+                            </Text>
+                            <ButtonLink
+                                href="#contact"
+                                size="3"
+                                color="orange"
+                                variant="soft"
+                                style={{ width: "fit-content" }}
+                            >
+                                Scroll down to get in touch <ArrowDownIcon />
+                            </ButtonLink>
+                        </Flex>
+                    </Card>
+                </Flex>
+            </InnerSection>
+        </MainGrid>
+    </Box>
+    <Box
+        slot="bottom-cta"
+        style={{
+            backgroundColor: "var(--orange-5)",
+        }}
+        py="var(--space-10)"
+    >
+        <MainGrid>
+            <InnerSection
+                title="Knock on my door"
+                sectionId="contact"
+                showCounter={false}
+            >
+                <ContactSHeader slot="header" />
+                <Flex direction="column" gap="6">
+                    <Flex direction="column" gap="1">
+                        <Heading size="3" as="h4" weight="medium"
+                            >Send me a good 'ol email</Heading
+                        >
+                        <Link
+                            href="mailto:hi@francescoimola.com"
+                            size="3"
+                            highContrast
+                            underline="always"
+                        >
+                            hi@francescoimola.com
+                        </Link>
+                    </Flex>
+                    <Flex direction="column" gap="1">
+                        <Heading size="3" as="h4" weight="medium"
+                            >Put a face to the name</Heading
+                        >
+                        <Link
+                            href="https://cal.com/francescoimola/intro?description=direct-contact"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            size="3"
+                            highContrast
+                            underline="always"
+                        >
+                            Book a free introduction
+                        </Link>
+                    </Flex>
+                    <Flex direction="column" gap="1">
+                        <Heading size="3" as="h4" weight="medium"
+                            >Prefer a form?</Heading
+                        >
+                        <Text size="3" highContrast> Fill the one below </Text>
+                    </Flex>
+                    <Flex direction="column" gap="1">
+                        <Heading size="3" as="h4" weight="medium"
+                            >Not sure what to say?</Heading
+                        >
+                        <TemplateDialog client:load />
+                    </Flex>
+                    <ContactForm client:load />
+                </Flex>
+            </InnerSection>
+        </MainGrid>
+    </Box>
 </Layout>
