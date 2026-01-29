@@ -1,0 +1,25 @@
+---
+import ProjectImageFrame from "./ProjectImageFrame.astro";
+import ProjectImagePlain from "./ProjectImagePlain.astro";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"figure"> {
+    src?: ImageMetadata;
+    alt: string;
+    title?: string;
+}
+
+const { src, alt, title, ...rest } = Astro.props;
+
+// Parse convention: "plain:Caption" or "plain:" for plain images
+const isPlain = title?.startsWith("plain:");
+const cleanTitle = isPlain ? (title?.slice(6) || undefined) : title;
+---
+
+{
+    isPlain ? (
+        <ProjectImagePlain src={src} alt={alt} title={cleanTitle} {...rest} />
+    ) : (
+        <ProjectImageFrame src={src} alt={alt} title={title} {...rest} />
+    )
+}

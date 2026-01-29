@@ -19,6 +19,9 @@ export const Footer = () => {
             appearance="dark"
             accentColor="yellow"
             grayColor="olive"
+            radius="none"
+            scaling="97%"
+            panelBackground="solid"
             hasBackground={false}
             asChild
         >
@@ -109,16 +112,16 @@ export const Footer = () => {
                                         Elsewhere
                                     </Heading>
                                     <Flex direction="column" gap="1">
-                                        <Link href="https://substack.com" color="gray" size="2" highContrast={false}>
+                                        <Link href="https://substack.com" target="_blank" rel="noopener noreferrer" color="gray" size="2" highContrast={false}>
                                             Substack
                                         </Link>
-                                        <Link href="https://linkedin.com" color="gray" size="2" highContrast={false}>
+                                        <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" color="gray" size="2" highContrast={false}>
                                             Linkedin
                                         </Link>
-                                        <Link href="https://nina.market" color="gray" size="2" highContrast={false}>
+                                        <Link href="https://nina.market" target="_blank" rel="noopener noreferrer" color="gray" size="2" highContrast={false}>
                                             Nina
                                         </Link>
-                                        <Link href="https://sublime.app" color="gray" size="2" highContrast={false}>
+                                        <Link href="https://sublime.app" target="_blank" rel="noopener noreferrer" color="gray" size="2" highContrast={false}>
                                             Sublime
                                         </Link>
                                     </Flex>

@@ -4,13 +4,21 @@ import type { ComponentPropsWithoutRef } from "react";
 
 interface ButtonLinkProps extends ComponentPropsWithoutRef<typeof Button> {
     href: string;
+    external?: boolean;
+    target?: string;
+    rel?: string;
 }
 
 export const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
-    ({ href, children, ...props }, ref) => {
+    ({ href, external, children, target, rel, ...props }, ref) => {
         return (
             <Button {...props} asChild ref={ref as any}>
-                <a href={href} style={{ textDecoration: "none", color: "inherit" }}>
+                <a
+                    href={href}
+                    style={{ textDecoration: "none" }}
+                    target={target ?? (external ? "_blank" : undefined)}
+                    rel={rel ?? (external ? "noopener noreferrer" : undefined)}
+                >
                     {children}
                 </a>
             </Button>

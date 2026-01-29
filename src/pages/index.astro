@@ -1,12 +1,13 @@
 ---
 /* --- Imports --- */
-import ProjectCanvas from "../components/ProjectCanvas.astro";
+import ProjectCanvas from "../components/project/ProjectCanvas.astro";
 import PageHeading from "../components/PageHeading";
-import { ButtonLink } from "../components/ButtonLink.tsx";
+import { ButtonLink } from "../components/ButtonLink";
 import Layout from "../layouts/Layout.astro";
-import { Text, Button, Flex, Grid, Box, Heading, Link } from "@radix-ui/themes";
-import { ArrowRightIcon } from "@radix-ui/react-icons";
+import { Text, Flex, Grid, Box, Heading, Link } from "@radix-ui/themes";
+import { ArrowRightIcon, ArrowTopRightIcon } from "@radix-ui/react-icons";
 import { ServiceCard } from "../components/ServiceCard";
+import { ServiceDialog } from "../components/ServiceDialog";
 
 import ConsultingIcon from "../components/icons/ConsultingIcon.astro";
 import WebDesignIcon from "../components/icons/WebDesignIcon.astro";
@@ -16,6 +17,33 @@ import MegaSeatingPlanLogo from "../components/icons/MegaSeatingPlanLogo.astro";
 import Testimonial from "../components/Testimonial";
 import { InnerSection } from "../components/InnerSection";
 import { MainGrid } from "../components/MainGrid";
+import SarahYLLogo from "../components/icons/SarahYLLogo.astro";
+import BlueberryLogo from "../components/icons/BlueberryLogo.astro";
+import { BottomCTA } from "../components/BottomCTA";
+import { getFeaturedProjects } from "../utils/getFeaturedProjects";
+
+const featuredProjects = await getFeaturedProjects();
+
+const limitDescription = (text: string) => {
+  if (!text) return "";
+  const CHAR_LIMIT = 215;
+  const WORD_LIMIT = 40;
+
+  let truncated = text;
+
+  // Character limit
+  if (truncated.length > CHAR_LIMIT) {
+    truncated = truncated.substring(0, CHAR_LIMIT).trim() + "...";
+  }
+
+  // Word limit
+  const words = truncated.split(/\s+/);
+  if (words.length > WORD_LIMIT) {
+    truncated = words.slice(0, WORD_LIMIT).join(" ") + "...";
+  }
+
+  return truncated;
+};
 ---
 
 <Layout backgroundColor="var(--yellow-3)">
@@ -23,7 +51,7 @@ import { MainGrid } from "../components/MainGrid";
 
   <!-- Slot: Main Heading -->
   <PageHeading slot="heading" className="page-heading">
-    Thoughtful <Text as="span" color="yellow">pixels</Text> and <Text
+    Honest <Text as="span" color="yellow">pixels</Text> and <Text
       as="span"
       color="yellow">words</Text
     > that <Text as="span" color="orange">connect your work</Text> to the people who
@@ -31,19 +59,26 @@ import { MainGrid } from "../components/MainGrid";
   </PageHeading>
 
   <!-- Slot: Job Role (Hidden on mobile) -->
-  <Box slot="role" display={{ initial: "none", sm: "block" }}>
-    <Text size="3" weight="medium"> Web designer and inbound marketer </Text>
+  <Box slot="role" display={{ initial: "none", sm: "block" }} asChild>
+    <Flex direction="column">
+      <Text size="3" weight="medium">Websites and copy, simple by design.</Text>
+      <Text size="3" color="gray">Taking on projects for Q1 2026</Text>
+    </Flex>
   </Box>
 
   <!-- Slot: Introduction Text -->
   <Flex slot="description" direction="column" gap="5" width="75%">
     <Text size="3">
-      Francesco Imola makes independent businesses fall in love with their
-      websites once again. All thanks to unmistakeable copy, fool-proof UX, and
-      a digital strategy so intentional you'll never go back to how things were.
+      I help independent businesses and non-profits who are tired of apologising
+      for their amateurish websites. Mostly by removing what shouldn't be
+      there—until you're left with something clearer, more confident, and worth
+      showing off.
     </Text>
-    <Button size="3" highContrast style={{ alignSelf: "flex-start" }}
-      >Start a project <ArrowRightIcon /></Button
+    <ButtonLink
+      href="/about#contact"
+      size="3"
+      style={{ alignSelf: "flex-start" }}
+      highContrast>Start a project <ArrowRightIcon /></ButtonLink
     >
   </Flex>
 
@@ -54,24 +89,16 @@ import { MainGrid } from "../components/MainGrid";
       <!-- --- Selected Work --- -->
       <InnerSection title="Selected work">
         <Grid columns="1" gapY="8">
-          <ProjectCanvas
-            images={[
-              "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
-              "https://images.unsplash.com/photo-1497215728101-856f4ea42174",
-              "https://images.unsplash.com/photo-1558655146-d09347e92766",
-            ]}
-            title="Make & Mind"
-            description="Pizza ipsum dolor meat lovers buffalo. Extra green banana fresh mushrooms red Philly wing. Meatball bacon olives tossed buffalo deep ham tomatoes."
-          />
-          <ProjectCanvas
-            images={[
-              "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
-              "https://images.unsplash.com/photo-1497215728101-856f4ea42174",
-              "https://images.unsplash.com/photo-1558655146-d09347e92766",
-            ]}
-            title="Make & Mind"
-            description="Pizza ipsum dolor meat lovers buffalo. Extra green banana fresh mushrooms red Philly wing. Meatball bacon olives tossed buffalo deep ham tomatoes."
-          />
+          {
+            featuredProjects.map((project) => (
+              <ProjectCanvas
+                images={project.data.coverImages}
+                title={project.data.title}
+                description={limitDescription(project.data.heroDescription)}
+                href={`/work/${project.data.slug}`}
+              />
+            ))
+          }
         </Grid>
       </InnerSection>
 
@@ -82,7 +109,7 @@ import { MainGrid } from "../components/MainGrid";
             <Heading size="3" weight="medium" as="h2" highContrast>
               Bread and butter
             </Heading>
-            <Grid columns={{ initial: "1", sm: "2" }} gap="4">
+            <Grid columns={{ initial: "1", md: "2" }} gap="4">
               <ServiceCard title="Web Design & Development" href="/webdesign">
                 <WebDesignIcon slot="icon" />
               </ServiceCard>
@@ -97,14 +124,14 @@ import { MainGrid } from "../components/MainGrid";
             <Heading size="3" weight="medium" as="h2" highContrast>
               À la carte
             </Heading>
-            <Grid columns={{ initial: "1", sm: "2" }} gap="4">
-              <ServiceCard title="Content Writing" href="/contentwriting">
-                <ContentWritingIcon slot="icon" />
-              </ServiceCard>
+            <Grid columns={{ initial: "1", md: "2" }} gap="4">
+              <ServiceDialog client:load type="content-writing">
+                <ContentWritingIcon slot="cardIcon" />
+              </ServiceDialog>
 
-              <ServiceCard title="Email Marketing" href="/emailmarketing">
-                <EmailMarketingIcon slot="icon" />
-              </ServiceCard>
+              <ServiceDialog client:load type="email-marketing">
+                <EmailMarketingIcon slot="cardIcon" />
+              </ServiceDialog>
             </Grid>
           </Grid>
         </Grid>
@@ -116,11 +143,12 @@ import { MainGrid } from "../components/MainGrid";
           <Flex direction="column" gap="3">
             <Text size="3" as="p" highContrast>
               I've spent years watching businesses of all sizes waste
-              unbelievable amounts of money on erratic marketing and amateurish
-              websites that confuse customers and damage their reputation.
+              unbelievable amounts of money on erratic marketing and sloppy
+              websites that inevitably confuse people and damage their
+              reputation.
             </Text>
             <Text size="3" as="p" highContrast>
-              I can stop that from happening.
+              Until I learned how to stop that from happening.
             </Text>
           </Flex>
           <ButtonLink
@@ -143,43 +171,83 @@ import { MainGrid } from "../components/MainGrid";
             authorName="Rob Cowen"
             quote="Francesco has the rare talent of being able to embed himself in a niche that he previously knew nothing about, quickly understanding the intricacies and writing with the confidence of an insider"
             rating={5}
-            client:idle
           >
             <aside slot="authorRole">
-              Founder, <Link href="https://seatingplan.com"
-                >Mega Seating Plan</Link
+              Founder, <Link
+                href="https://seatingplan.com"
+                target="_blank"
+                rel="noopener noreferrer">Mega Seating Plan</Link
               >
             </aside>
             <MegaSeatingPlanLogo slot="logo" />
           </Testimonial>
           <Testimonial
-            authorName="Rob Cowen"
-            quote="Francesco has the rare talent of being able to embed himself in a niche that he previously knew nothing about, quickly understanding the intricacies and writing with the confidence of an insider"
+            authorName="Liv Pennington"
+            quote="Francesco provided excellent tech support and reassurance for a web project. He's been very easy to work with."
             rating={5}
-            client:idle
           >
             <aside slot="authorRole">
-              Founder, <Link href="https://seatingplan.com"
-                >Mega Seating Plan</Link
+              <Link
+                href="https://www.livpennington.com/"
+                target="_blank"
+                rel="noopener noreferrer">Artist & Arts Programmer</Link
               >
             </aside>
-            <MegaSeatingPlanLogo slot="logo" />
+          </Testimonial>
+          <MegaSeatingPlanLogo slot="logo" />
+
+          <Testimonial
+            authorName="Sarah Brown"
+            quote="Great to work with. Helped me to rework my website copy to align with a new direction I wanted to take. He’s quick and responsive"
+            rating={5}
+          >
+            <aside slot="authorRole">
+              <Link
+                href="https://www.sarahyuklan.com/"
+                target="_blank"
+                rel="noopener noreferrer">Holistic Coach</Link
+              >
+            </aside>
+            <SarahYLLogo slot="logo" />
           </Testimonial>
           <Testimonial
-            authorName="Rob Cowen"
-            quote="Francesco has the rare talent of being able to embed himself in a niche that he previously knew nothing about, quickly understanding the intricacies and writing with the confidence of an insider"
+            authorName="Carly Anchal"
+            quote="A dream collaborator. Organised and strategic, he asks the right questions, does his research, and presents fantastic options"
             rating={5}
-            client:idle
           >
             <aside slot="authorRole">
-              Founder, <Link href="https://seatingplan.com"
-                >Mega Seating Plan</Link
+              <Link
+                href="https://www.linkedin.com/in/carly-anchal-nee-little-3a9b7112"
+                target="_blank"
+                rel="noopener noreferrer">PR & Marketing Manager</Link
               >
             </aside>
-            <MegaSeatingPlanLogo slot="logo" />
+            <BlueberryLogo slot="logo" />
           </Testimonial>
         </Grid>
       </InnerSection>
     </MainGrid>
   </Box>
+  <BottomCTA
+    slot="bottom-cta"
+    heading="Put a face to the name"
+    text="Schedule a free, 30-min chat. You tell me about your challenges and ideas. I'll tell you if I can help."
+    backgroundColor="var(--yellow-5)"
+  >
+    <Flex justify="center" align="start" gap="4">
+      <ButtonLink
+        href="https://cal.com/francescoimola/intro"
+        target="_blank"
+        rel="noopener noreferrer"
+        size="4"
+        external
+        highContrast
+      >
+        Book a free intro <ArrowTopRightIcon />
+      </ButtonLink>
+      <ButtonLink href="/about#contact" size="4" variant="soft" color="gray"
+        >Contact directly</ButtonLink
+      >
+    </Flex>
+  </BottomCTA>
 </Layout>
