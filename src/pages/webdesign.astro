@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import PageHeading from "../components/PageHeading";
 import { Image } from "astro:assets";
-import { Text, Button, Flex, Theme, Section, Box } from "@radix-ui/themes";
+import { Text, Flex, Theme, Section, Box } from "@radix-ui/themes";
 import { ArrowDownIcon } from "@radix-ui/react-icons";
 
 // Portfolio images
@@ -11,6 +11,13 @@ import makeandmind from "../assets/portfolio/make-and-mind.png";
 import folkshomepage from "../assets/portfolio/folks-homepage.png";
 import folksdirectory from "../assets/portfolio/folks-directory.png";
 import tedxjourneys from "../assets/portfolio/tedx-journeys.png";
+import { InnerSection } from "../components/InnerSection";
+import { MainGrid } from "../components/MainGrid";
+import {
+    KeyServicePoints,
+    KeyServicePoint,
+} from "../components/KeyServicePoints";
+import { ButtonLink } from "../components/ButtonLink";
 ---
 
 <Layout backgroundColor="var(--yellow-5)">
@@ -27,10 +34,10 @@ import tedxjourneys from "../assets/portfolio/tedx-journeys.png";
     </Flex>
     <Box slot="role" display={{ initial: "none", sm: "block" }}>
         <Text size="3" weight="medium" as="p">
-            Best for independent businesses & established freelancers
+            Best for independent businesses, freelancers, and non-profits
         </Text>
     </Box>
-    <Flex slot="description" direction="column" gap="5">
+    <Flex slot="description" direction="column" gap="4">
         <Text size="3">
             <p>
                 The typical website-building project comes with layers that
@@ -39,18 +46,28 @@ import tedxjourneys from "../assets/portfolio/tedx-journeys.png";
             </p>
             <p>I got none of that for you.</p>
         </Text>
-        <Button
+        <ButtonLink
             size="3"
             variant="soft"
             color="gray"
-            style={{ alignSelf: "flex-start" }}
+            href="#what-was-removed"
+            style={{ alignSelf: "start" }}
         >
             Scroll to learn more <ArrowDownIcon />
-        </Button>
+        </ButtonLink>
     </Flex>
 
     <!-- Page Content -->
-    <Theme slot="page-content" appearance="light" asChild>
+    <Theme
+        slot="page-content"
+        appearance="light"
+        accentColor="yellow"
+        grayColor="olive"
+        radius="none"
+        scaling="97%"
+        panelBackground="solid"
+        asChild
+    >
         <Section
             size="1"
             py="4"
@@ -109,13 +126,40 @@ import tedxjourneys from "../assets/portfolio/tedx-journeys.png";
                 />
             </Flex>
         </Section>
+        <Box
+            id="what-was-removed"
+            style={{
+                backgroundColor: "var(--gray-1)",
+                overflow: "hidden",
+            }}
+        >
+            <MainGrid>
+                <InnerSection title="What I've taken out">
+                    <KeyServicePoints>
+                        <KeyServicePoint heading="No agency overhead">
+                            Agencies employ account managers, devs, and
+                            designers who can delay the process and raise costs.
+                            Here you talk to me, I do the work. Which means
+                            decisions happen faster and what you save stays in
+                            your pocket.
+                        </KeyServicePoint>
+
+                        <KeyServicePoint heading="No false promises">
+                            I won't promise to "transform your brand" or "10x
+                            your conversions." All I do is I craft sites that
+                            load quickly, explain what you do, and won't
+                            embarrass your brand.
+                        </KeyServicePoint>
+
+                        <KeyServicePoint heading="No dark patterns">
+                            That means no privacy-aggressive or manipulative
+                            design. Fewer pop-up banners and autoplaying videos.
+                            You can trust your visitors will be respected.
+                        </KeyServicePoint>
+                    </KeyServicePoints>
+                </InnerSection>
+                <Flex />
+            </MainGrid>
+        </Box>
     </Theme>
 </Layout>
-
-<style>
-    .portfolio-image {
-        width: auto;
-        height: clamp(10rem, 18vw, 20rem);
-        flex-shrink: 0;
-    }
-</style>

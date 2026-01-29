@@ -2,7 +2,7 @@
 
 ## Overview
 
-PostCSS is now configured in this project and will automatically process **ALL CSS** from:
+PostCSS configured in this project and it will automatically process **ALL CSS** from:
 - ✅ `<style>` tags in `.astro` files
 - ✅ Scoped styles in React/JSX components
 - ✅ Global CSS files (like those imported in layouts)

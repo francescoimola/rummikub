@@ -40,7 +40,6 @@ const {
             panelBackground="solid"
             scaling="97%"
             hasBackground={false}
-            client:load
             {...themeProps}
             style={{ backgroundColor }}
         >
@@ -163,6 +162,7 @@ const {
 
             <!-- Page Content -->
             <slot name="page-content" />
+            <slot name="bottom-cta" />
             <Footer client:idle />
         </Theme>
     </body>
