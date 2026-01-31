@@ -21,7 +21,7 @@ export const CopyEmailButton = forwardRef<HTMLButtonElement, CopyEmailButtonProp
 
         return (
             <Button {...props} ref={ref} onClick={handleCopy}>
-                {children ? children : (copied ? <em>{successLabel}</em> : label)}
+                {copied ? <em>{successLabel}</em> : (children ?? label)}
             </Button>
         );
     }

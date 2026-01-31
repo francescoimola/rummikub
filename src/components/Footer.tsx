@@ -176,8 +176,8 @@ export const Footer = () => {
                                                     size="3"
                                                     variant="solid"
                                                     style={{
-                                                        color: "var(--yellow-a12)",
-                                                        backgroundColor: "var(--yellow-3)",
+                                                        color: "var(--accent-a12)",
+                                                        backgroundColor: "var(--accent-3)",
                                                     }}
                                                     highContrast
                                                 >

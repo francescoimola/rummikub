@@ -24,11 +24,20 @@ Thanks!`;
     };
 
     return (
+
         <Dialog.Root>
             <Dialog.Trigger asChild>
-                <Button size="3" mt="2" variant="outline" style={{ cursor: 'pointer', width: 'fit-content' }}>
-                    Copy this template
-                </Button>
+                <Theme
+                    panelBackground="solid"
+                    scaling="97%"
+                    hasBackground={false}
+                    accentColor="gray"
+                    radius="none"
+                >
+                    <Button size="3" mt="2" variant="outline" style={{ cursor: 'pointer', width: 'fit-content' }}>
+                        Copy this template
+                    </Button>
+                </Theme>
             </Dialog.Trigger>
             <Dialog.Portal>
                 <Dialog.Overlay className="DialogOverlay" />
@@ -37,7 +46,7 @@ Thanks!`;
                         panelBackground="solid"
                         scaling="97%"
                         hasBackground={false}
-                        accentColor="yellow"
+                        accentColor="orange"
                         radius="none"
                     >
                         <Flex direction="column" justify="between" height="100%" gap="var(--space-10)" p={{ initial: "4", sm: "6" }} style={{ backgroundColor: "var(--color-background)" }}>
@@ -62,10 +71,10 @@ Thanks!`;
                             </Flex>
 
                             <Flex justify="end" gap="3">
-                                <Button variant="solid" onClick={handleCopyMessage}>
+                                <Button variant="solid" highContrast onClick={handleCopyMessage}>
                                     {messageCopied ? <em>Copied!</em> : "Copy this message"}
                                 </Button>
-                                <CopyEmailButton variant="surface" highContrast>
+                                <CopyEmailButton variant="soft" highContrast>
                                     Copy my email
                                 </CopyEmailButton>
                             </Flex>

@@ -2,8 +2,17 @@
 import Layout from "../layouts/Layout.astro";
 import PageHeading from "../components/PageHeading";
 import { Image } from "astro:assets";
-import { Text, Flex, Theme, Section, Box } from "@radix-ui/themes";
-import { ArrowDownIcon } from "@radix-ui/react-icons";
+import {
+    Text,
+    Flex,
+    Theme,
+    Section,
+    Box,
+    Grid,
+    Heading,
+    Card,
+} from "@radix-ui/themes";
+import { ArrowDownIcon, ArrowRightIcon } from "@radix-ui/react-icons";
 
 // Portfolio images
 import lifecoaching from "../assets/portfolio/life-coaching.png";
@@ -18,6 +27,35 @@ import {
     KeyServicePoint,
 } from "../components/KeyServicePoints";
 import { ButtonLink } from "../components/ButtonLink";
+import { VerticalFeatureTabs } from "../components/VerticalFeatureTabs";
+const tabItems = [
+    {
+        id: "update",
+        title: "A website even <i>you</i> can update",
+        content:
+            "That taste on your tongue? That's the freedom of being able to change your own prices, hours, team photos, blog posts, and testimonials... without waiting on anyone.",
+    },
+    {
+        id: "seo",
+        title: "Basic SEO, done proper",
+        content:
+            "Meta descriptions, core keywords, and image compression are always included. The fundamentals done right, and with room to build upon.",
+    },
+    {
+        id: "longevity",
+        title: "Built for longevity",
+        content:
+            "You won't find me relying on fleeting design trends or fiddly plugins that need constant maintenance. The goal is building stuff that won't need replacing any time soon.",
+    },
+    {
+        id: "accessibility",
+        title: "Accessibility taken seriously",
+        content:
+            "We'll always move with the user's needs in mind. Sure, perfection is a moving target, but the baseline is always a responsive site that doesn't unreasonably exclude anyone.",
+    },
+];
+
+import tca from "../assets/tca_megamenu.png";
 ---
 
 <Layout backgroundColor="var(--yellow-5)">
@@ -133,15 +171,14 @@ import { ButtonLink } from "../components/ButtonLink";
                 overflow: "hidden",
             }}
         >
-            <MainGrid>
+            <MainGrid pt="var(--space-11)">
                 <InnerSection title="What I've taken out">
                     <KeyServicePoints>
                         <KeyServicePoint heading="No agency overhead">
-                            Agencies employ account managers, devs, and
-                            designers who can delay the process and raise costs.
-                            Here you talk to me, I do the work. Which means
-                            decisions happen faster and what you save stays in
-                            your pocket.
+                            Working with agencies can be slow and expensive.
+                            Here, you talk to the one person doing the work, so
+                            decisions happen faster, and you waste nothing on
+                            excess overhead.
                         </KeyServicePoint>
 
                         <KeyServicePoint heading="No false promises">
@@ -158,7 +195,62 @@ import { ButtonLink } from "../components/ButtonLink";
                         </KeyServicePoint>
                     </KeyServicePoints>
                 </InnerSection>
-                <Flex />
+                <InnerSection title="What you get">
+                    <Grid gap="4">
+                        <Box
+                            p="6"
+                            style={{
+                                backgroundColor: "var(--gray-3)",
+                            }}
+                        >
+                            <VerticalFeatureTabs items={tabItems} client:idle />
+                        </Box>
+                        <figure style={{ gridColumn: "1 / -1" }}>
+                            <Image
+                                src={tca}
+                                alt="concept for a new website for a local acoustics manufacturer"
+                                style={{
+                                    objectFit: "cover",
+                                    width: "100%",
+                                    height: "100%",
+                                }}
+                            />
+                            <Text asChild>
+                                <figcaption>
+                                    UI concept for acoustics manufacturer The
+                                    Collective, 2025
+                                </figcaption>
+                            </Text>
+                        </figure>
+                    </Grid>
+                </InnerSection>
+                <InnerSection title="The platforms">
+                    <Flex direction="column" gap="6">
+                        <Flex direction="column" gap="3">
+                            <Text size="3" as="p" highContrast>
+                                I work primarily in Webflow, Shopify and
+                                Framer—with a handful of other tools for design,
+                                analytics and email marketing. If you’re already
+                                committed to a CMS or website-builder, I can
+                                usually adapt as most platforms work on similar
+                                principles.
+                            </Text>
+                            <Text size="3" as="p" highContrast>
+                                Until I learned how to stop that from happening.
+                            </Text>
+                        </Flex>
+                        <ButtonLink
+                            href="/about"
+                            variant="soft"
+                            size="3"
+                            color="gray"
+                            highContrast
+                            style={{ alignSelf: "flex-start" }}
+                        >
+                            More about how I work <ArrowRightIcon />
+                        </ButtonLink>
+                    </Flex>
+                </InnerSection>
             </MainGrid>
         </Box>
     </Theme>

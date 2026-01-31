@@ -22,7 +22,7 @@ export const BottomCTA = ({
             py="var(--space-10)"
         >
             <Flex align="center" justify="center" direction="column" gap="6">
-                <Heading size="8" weight="medium" highContrast trim="both">
+                <Heading size="8" weight="medium" as="h2" highContrast trim="both">
                     {heading}
                 </Heading>
                 <Text
@@ -31,6 +31,7 @@ export const BottomCTA = ({
                     highContrast
                     align="center"
                     style={{ maxWidth: "40ch" }}
+                    trim="start"
                 >
                     {text}
                 </Text>

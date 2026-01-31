@@ -14,7 +14,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({ title, description, children
             align="end"
             justify="between"
             gap="var(--space-10)"
-            p="6"
+            p="5"
             style={{ backgroundColor: "var(--gray-3)" }}
         >
             {children}

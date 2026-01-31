@@ -3,7 +3,7 @@ import React from "react";
 
 interface ContentCardProps {
     backgroundColor?: string;
-    heading: string;
+    heading?: React.ReactNode;
     children: React.ReactNode;
     width?: string | number;
 }
@@ -16,7 +16,7 @@ export const ContentCard = ({
 }: ContentCardProps) => {
     return (
         <Flex
-            p="6"
+            p="5"
             direction="column"
             justify="between"
             gap="9"

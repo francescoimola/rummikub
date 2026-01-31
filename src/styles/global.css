@@ -221,6 +221,7 @@ body {
     margin: 0;
     font-family: var(--default-font-family);
     counter-reset: section-counter;
+    background-color: var(--gray-1);
 }
 
 h1,
@@ -246,6 +247,17 @@ p {
     scroll-margin-top: var(--space-8);
 }
 
+figure {
+    all: unset;
+
+    height: fit-content;
+}
+
+figcaption {
+    opacity: 0.75;
+    font-size: var(--font-size-2);
+}
+
 /* =========================================
    4. Radix Themes Overrides
    ========================================= */
@@ -254,6 +266,15 @@ p {
     --default-font-family: 'Ronzino', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     --container-xs: calc(var(--container-1) / 1.618);
     --line-height-scale: 1.18;
+
+    /* Fluid Spacing Overrides */
+    --space-3: clamp(10px, 0.6rem + 0.25vw, 14px);
+    --space-4: clamp(14px, 0.8rem + 0.35vw, 19px);
+    --space-5: clamp(20px, 1.1rem + 0.5vw, 28px);
+    --space-6: clamp(28px, 1.5rem + 0.8vw, 36px);
+    --space-7: clamp(36px, 2rem + 1vw, 46px);
+    --space-8: clamp(42px, 2.4rem + 1.2vw, 54px);
+    --space-9: clamp(56px, 3.2rem + 1.5vw, 72px);
 
     font-family: var(--default-font-family);
     color: var(--gray-12);
@@ -355,7 +376,7 @@ svg.client-logo {
     gap: var(--space-6);
 }
 
-.key-service-point + .key-service-point {
+.key-service-point+.key-service-point {
     padding-top: var(--space-6);
     border-top: 1px solid var(--gray-a6);
 }
@@ -710,9 +731,87 @@ svg.client-logo {
 }
 
 .side-margin {
-    padding-inline: min(1rem, 4rem - 3cqi);
+    padding-inline: 5cqmin;
 }
 
 .multi-p p {
-    text-indent: min(var(--space-8), 15%);
+    text-indent: 7cqmin;
+}
+
+/* =========================================
+   VerticalFeatureTabs
+   ========================================= */
+
+/* VerticalFeatureTabs.css */
+.tabs-list {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: 100%;
+    padding-bottom: var(--space-6);
+    border-bottom: thin solid var(--gray-6);
+}
+
+/* Inactive State */
+.trigger-text {
+    color: var(--gray-10);
+    transition: color 0.2s;
+}
+
+.tabs-content {
+    outline: none;
+}
+
+.tabs-trigger {
+    all: unset;
+    padding: var(--space-2) var(--space-4) var(--space-2) 0;
+    cursor: pointer;
+    text-align: left;
+    border-inline: medium solid transparent;
+    padding-left: var(--space-4);
+    margin-inline: -1px;
+    /* Overlap border */
+
+    &[data-state="active"] {
+        border-left-color: var(--accent-9);
+        border-right-color: transparent;
+
+        .trigger-text {
+            color: var(--accent-12);
+        }
+    }
+
+    &:hover .trigger-text {
+        color: var(--gray-12);
+    }
+}
+
+@media (min-width: 1024px) {
+    .tabs-list {
+        width: max(25cqmin, 48%);
+        border-right: thin solid var(--gray-6);
+        padding-bottom: revert;
+        border-bottom: revert;
+    }
+
+    .tabs-trigger {
+        padding: var(--space-3) var(--space-6) var(--space-3) var(--space-1);
+
+        &[data-state="active"] {
+            border-left-color: transparent;
+            border-right-color: var(--accent-9);
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

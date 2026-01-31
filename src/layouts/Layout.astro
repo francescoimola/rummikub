@@ -161,8 +161,10 @@ const {
             </Container>
 
             <!-- Page Content -->
-            <slot name="page-content" />
-            <slot name="bottom-cta" />
+            <main>
+                <slot name="page-content" />
+                <slot name="bottom-cta" />
+            </main>
             <Footer client:idle />
         </Theme>
     </body>
