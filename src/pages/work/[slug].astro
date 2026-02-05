@@ -3,7 +3,7 @@ import type { GetStaticPaths } from "astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import PageHeading from "../../components/PageHeading";
-import { Text, Box, Theme, Flex } from "@radix-ui/themes";
+import { Text, Box, Theme, Flex, Section } from "@radix-ui/themes";
 import { MainGrid } from "../../components/MainGrid";
 import { ProjectInfo } from "../../components/project/ProjectInfo";
 import ProjectImageWrapper from "../../components/project/ProjectImageWrapper.astro";
@@ -36,7 +36,11 @@ const components = {
 };
 ---
 
-<Layout backgroundColor="var(--brand-surface-dark-olive)" appearance="dark">
+<Layout
+    backgroundColor="var(--brand-surface-dark-olive)"
+    appearance="dark"
+    roleFullWidth
+>
     <!-- Hero Section -->
     <PageHeading slot="heading"> {entry.data.title} </PageHeading>
     <Box slot="description" asChild>
@@ -46,7 +50,7 @@ const components = {
     </Box>
 
     <!-- --- Page Content --- -->
-    <Box slot="page-content" asChild>
+    <Section slot="page-content" asChild>
         <Theme
             appearance="light"
             accentColor="yellow"
@@ -75,7 +79,7 @@ const components = {
                     }
 
                     {/* MDX Content with Custom Components */}
-                    <Flex direction="column" gap="2" className="multi-p">
+                    <Flex direction="column" gap="2">
                         <Content components={components} />
                     </Flex>
                 </Flex>
@@ -90,5 +94,5 @@ const components = {
                 }
             </MainGrid>
         </Theme>
-    </Box>
+    </Section>
 </Layout>

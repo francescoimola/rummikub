@@ -11,7 +11,7 @@ import {
     AspectRatio,
     Grid,
     Heading,
-    Card,
+    Section,
 } from "@radix-ui/themes";
 
 import { Image } from "astro:assets";
@@ -27,6 +27,7 @@ import FramerIcon from "../components/icons/FramerIcon.astro";
 import ShopifyIcon from "../components/icons/ShopifyIcon.astro";
 import UmamiIcon from "../components/icons/UmamiIcon.astro";
 import creativesForClimate from "../assets/sustainability-windows.png";
+import FastForwardAnalogue from "../assets/Fast Forward to the Analogue - Poster Mockup.jpg";
 import FAQ from "../components/FAQ";
 import { ContactForm } from "../components/ContactForm";
 import { TemplateDialog } from "../components/TemplateDialog";
@@ -71,7 +72,7 @@ const faqItems = [
 ];
 ---
 
-<Layout backgroundColor="var(--orange-5)">
+<Layout backgroundColor="var(--orange-5)" roleFullWidth>
     <PageHeading slot="heading" className="page-heading">
         Designer and marketer based in Kent, England
     </PageHeading>
@@ -140,7 +141,7 @@ const faqItems = [
             </DataList.Root>
         </Flex>
     </Flex>
-    <Box slot="page-content" style={{ backgroundColor: "var(--gray-1)" }}>
+    <Section slot="page-content" style={{ backgroundColor: "var(--gray-1)" }}>
         <MainGrid>
             <InnerSection title="Selected work" sectionId="intro">
                 <Flex direction="column" gap="4">
@@ -154,13 +155,30 @@ const faqItems = [
                     </Text>
                     <Text size="3" wrap="pretty">
                         Before this, I spent six years in galleries,
-                        universities, and an agency that represented freelance
+                        institutions, and an agency that represented freelance
                         film talent. Different industries but same job,
                         essentially: making complex things a little less complex
                         and helping good work find its audience. I'm a Digital
                         Arts graduate from the University of Greenwich, which is
                         where a lot of this started.
                     </Text>
+                    <figure style={{ marginTop: "var(--space-6)" }}>
+                        <Image
+                            src={FastForwardAnalogue}
+                            alt="Mockup of two computer windows, one shows a cliff, the other the Creatives for Climate logo"
+                            style={{
+                                width: "100%",
+                                height: "auto",
+                                maxWidth: "100%",
+                            }}
+                        />
+                        <Text wrap="pretty" asChild>
+                            <figcaption>
+                                Poster design for Fast Forward to the Analogue,
+                                University of Greenwich Galleries, 2019
+                            </figcaption>
+                        </Text>
+                    </figure>
                 </Flex>
             </InnerSection>
             <InnerSection title="Principles" sectionId="principles">
@@ -230,7 +248,13 @@ const faqItems = [
                                     <BrevoIcon />
                                 </ToolCard>
                             </Grid>
-                            <Card size="4">
+                            <Box
+                                p="6"
+                                style={{
+                                    backgroundColor: "var(--yellow-2)",
+                                    border: "thin solid var(--yellow-a6)",
+                                }}
+                            >
                                 <Text size="3" as="p" wrap="pretty">
                                     <Text weight="medium">
                                         Already committed elsewhere?
@@ -239,7 +263,7 @@ const faqItems = [
                                     I've previously tested Wordpress, Mailchimp, Loops,
                                     Ahrefs, and Luma, among others.
                                 </Text>
-                            </Card>
+                            </Box>
                         </Flex>
                     </AccordionSection>
                 </Flex>
@@ -255,7 +279,7 @@ const faqItems = [
                             maxWidth: "100%",
                         }}
                     />
-                    <Flex direction="column" gap="4" className="multi-p">
+                    <Flex direction="column" gap="4">
                         <Text size="3" as="p" wrap="pretty">
                             My mission is to do "good" creative work, but this
                             is only achievable by rethinking what’s important:
@@ -276,33 +300,31 @@ const faqItems = [
                 </Flex>
             </InnerSection>
             <InnerSection title="Frequently asked questions" sectionId="faq">
-                <Flex direction="column" gap="6">
+                <Flex direction="column" gap="8">
                     <FAQ client:load items={faqItems} />
-                    <Card size="4">
-                        <Flex direction="column" gap="3">
-                            <Heading size="3" as="h4" weight="medium"
-                                >Have a better question?</Heading
-                            >
-                            <Text size="3" as="p" mb="2">
-                                Send me a message and we'll talk through
-                                everything.
-                            </Text>
-                            <ButtonLink
-                                href="#contact"
-                                size="3"
-                                color="orange"
-                                variant="soft"
-                                style={{ width: "fit-content" }}
-                            >
-                                Scroll down to get in touch <ArrowDownIcon />
-                            </ButtonLink>
-                        </Flex>
-                    </Card>
+
+                    <Flex direction="column" gap="3">
+                        <Heading size="3" as="h4" weight="medium"
+                            >Have a better question?</Heading
+                        >
+                        <Text size="3" as="p" mb="2">
+                            Send me a message and we'll talk through everything.
+                        </Text>
+                        <ButtonLink
+                            href="#contact"
+                            size="3"
+                            color="gray"
+                            variant="soft"
+                            style={{ alignSelf: "flex-start" }}
+                        >
+                            Scroll down to get in touch <ArrowDownIcon />
+                        </ButtonLink>
+                    </Flex>
                 </Flex>
             </InnerSection>
         </MainGrid>
-    </Box>
-    <Box
+    </Section>
+    <Section
         slot="bottom-cta"
         style={{
             backgroundColor: "var(--orange-5)",
@@ -361,5 +383,5 @@ const faqItems = [
                 </Flex>
             </InnerSection>
         </MainGrid>
-    </Box>
+    </Section>
 </Layout>

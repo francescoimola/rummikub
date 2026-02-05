@@ -1,15 +1,25 @@
 import { Tabs, Text } from "@radix-ui/themes";
 
-const filters = [
-    { value: "all", label: "All posts" },
-    { value: "seo", label: "SEO" },
-    { value: "sustainability", label: "Sustainability" },
-    { value: "webdesign", label: "Web Design" },
-];
+interface BlogFiltersProps {
+    tags: string[];
+}
 
-export default function BlogFilters() {
+export default function BlogFilters({ tags }: BlogFiltersProps) {
+    const filters = [
+        { value: "all", label: "All posts" },
+        ...tags.map((tag) => ({ value: tag.toLowerCase(), label: tag })),
+    ];
+
     return (
-        <Tabs.Root defaultValue="all" className="blog-filters">
+        <Tabs.Root
+            defaultValue="all"
+            className="blog-filters"
+            onValueChange={(value) => {
+                document.dispatchEvent(
+                    new CustomEvent("blog-filter", { detail: value })
+                );
+            }}
+        >
             <Tabs.List size="2">
                 {filters.map((filter) => (
                     <Tabs.Trigger key={filter.value} value={filter.value}>

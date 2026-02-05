@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text } from "@radix-ui/themes";
+import { Container, Flex, Heading, Text } from "@radix-ui/themes";
 import type { ReactNode } from "react";
 
 interface BottomCTAProps {
@@ -15,14 +15,15 @@ export const BottomCTA = ({
     children,
 }: BottomCTAProps) => {
     return (
-        <Box
+        <Container
+            className="side-margin"
             style={{
                 backgroundColor: backgroundColor,
             }}
             py="var(--space-10)"
         >
             <Flex align="center" justify="center" direction="column" gap="6">
-                <Heading size="8" weight="medium" highContrast trim="both">
+                <Heading size="8" weight="medium" align="center" as="h2" highContrast trim="both" style={{ maxWidth: "var(--max-cw-sm)" }}>
                     {heading}
                 </Heading>
                 <Text
@@ -31,11 +32,12 @@ export const BottomCTA = ({
                     highContrast
                     align="center"
                     style={{ maxWidth: "40ch" }}
+                    trim="start"
                 >
                     {text}
                 </Text>
                 {children}
             </Flex>
-        </Box>
+        </Container>
     );
 };

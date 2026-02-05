@@ -4,14 +4,12 @@ import {
     Text,
     Link,
     Heading,
-    Button,
-    TextField,
     Separator,
-    Box,
     Container,
     Theme,
+    Box,
 } from "@radix-ui/themes";
-import * as Form from "@radix-ui/react-form";
+import NewsletterForm from "./NewsletterForm";
 
 export const Footer = () => {
     return (
@@ -139,58 +137,7 @@ export const Footer = () => {
                                     </Text>
                                 </Flex>
 
-                                <Form.Root
-                                    onSubmit={(e) => {
-                                        e.preventDefault();
-                                    }}
-                                >
-                                    <Flex gap="2" align="start" width="100%" >
-                                        <Form.Field name="email" asChild>
-                                            <Box flexGrow="1" asChild>
-                                                <Form.Control asChild>
-                                                    <TextField.Root
-                                                        placeholder="Your email"
-                                                        size="3"
-                                                        variant="surface"
-                                                        radius="none"
-                                                        autoComplete="email"
-                                                        style={{
-                                                            padding: 0,
-                                                            minHeight: "auto",
-                                                            border: "none",
-                                                            backgroundColor: "transparent",
-                                                        }}
-                                                    />
-                                                </Form.Control>
-                                            </Box>
-                                        </Form.Field>
-                                        <Form.Submit asChild>
-                                            <Theme
-                                                appearance="light"
-                                                accentColor="yellow"
-                                                radius="none"
-                                                hasBackground={true}
-                                                asChild
-                                            >
-                                                <Button
-                                                    size="3"
-                                                    variant="solid"
-                                                    style={{
-                                                        color: "var(--yellow-a12)",
-                                                        backgroundColor: "var(--yellow-3)",
-                                                    }}
-                                                    highContrast
-                                                >
-                                                    Subscribe
-                                                </Button>
-                                            </Theme>
-                                        </Form.Submit>
-                                    </Flex>
-                                </Form.Root>
-
-                                <Text size="2" as="p" color="gray">
-                                    You agree to receive updates and consent to our Privacy Policy.
-                                </Text>
+                                <NewsletterForm showPrivacyText={true} />
                             </Flex>
                         </Grid>
 
