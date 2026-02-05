@@ -14,7 +14,7 @@ This is an **Astro-powered** portfolio website for Francesco Imola. It is built 
 - **Icons**: [@radix-ui/react-icons 1.3+](https://www.radix-ui.com/icons)
 - **Content**: MDX support, Sitemap generation
 - **Styling**: Radix UI Theme system + PostCSS (Vanilla CSS for overrides)
-- **Deployment**: Cloudflare Pages (with Cloudflare adapter)
+- **Deployment**: Cloudflare Pages (SSR / Hybrid)
 - **Package Manager**: pnpm
 - **PostCSS**: autoprefixer, cssnano, postcss-preset-env
 

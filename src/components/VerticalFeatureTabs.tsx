@@ -50,7 +50,7 @@ export const VerticalFeatureTabs = ({
                 <Box flexGrow="1" pt="2">
                     {items.map((item) => (
                         <Tabs.Content key={item.id} value={item.id} className="tabs-content">
-                            <Text asChild size="3">
+                            <Text asChild wrap="pretty" size="3">
                                 <div dangerouslySetInnerHTML={{ __html: item.content }} />
                             </Text>
                         </Tabs.Content>

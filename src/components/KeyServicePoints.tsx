@@ -4,19 +4,32 @@ import React from "react";
 interface KeyServicePointProps {
     heading: React.ReactNode;
     children: React.ReactNode;
+    /** Number of words (starting from the first) to display in gray. Defaults to 1. */
+    grayWordCount?: number;
+    /** If true, renders children wrapper as div to allow multiple paragraphs. Defaults to false (renders as p). */
+    multiParagraph?: boolean;
 }
 
-export const KeyServicePoint = ({ heading, children }: KeyServicePointProps) => {
+export const KSP = ({ heading, children, grayWordCount = 1, multiParagraph = false }: KeyServicePointProps) => {
     let headingContent: React.ReactNode = heading;
 
     if (typeof heading === "string") {
         const words = heading.split(" ");
-        const firstWord = words[0];
-        const restOfHeading = words.slice(1).join(" ");
+
+        // Warn in development if grayWordCount covers all/more words than available
+        if (process.env.NODE_ENV !== "production" && grayWordCount >= words.length) {
+            console.warn(
+                `[KeyServicePoints -> KSP] grayWordCount (${grayWordCount}) is >= total words (${words.length}) in heading "${heading}". ` +
+                `This means no words will appear in high contrast. Consider reducing grayWordCount.`
+            );
+        }
+
+        const grayWords = words.slice(0, grayWordCount).join(" ");
+        const restOfHeading = words.slice(grayWordCount).join(" ");
         headingContent = (
             <>
                 <Text color="gray" as="span">
-                    {firstWord}
+                    {grayWords}
                 </Text>{" "}
                 <Text as="span" highContrast>
                     {restOfHeading}
@@ -30,7 +43,7 @@ export const KeyServicePoint = ({ heading, children }: KeyServicePointProps) => 
             <Heading size="3" weight="medium">
                 {headingContent}
             </Heading>
-            <Text as="p" size="3" wrap="pretty">
+            <Text as={multiParagraph ? "div" : "p"} size="3">
                 {children}
             </Text>
         </Grid>

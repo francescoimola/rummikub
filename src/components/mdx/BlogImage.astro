@@ -1,0 +1,31 @@
+---
+import { Image } from "astro:assets";
+import { Text } from "@radix-ui/themes";
+
+interface Props {
+    src: ImageMetadata | string;
+    alt: string;
+    title?: string;
+}
+
+const { src, alt, title } = Astro.props;
+---
+
+<figure style={{ marginBlock: "var(--space-4)" }}>
+    <Image
+        src={src as any}
+        alt={alt}
+        style={{
+            width: "100%",
+            height: "auto",
+            maxWidth: "100%",
+        }}
+    />
+    {
+        title && (
+            <Text wrap="pretty" asChild>
+                <figcaption>{title}</figcaption>
+            </Text>
+        )
+    }
+</figure>

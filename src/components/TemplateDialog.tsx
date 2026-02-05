@@ -34,7 +34,7 @@ Thanks!`;
                     accentColor="gray"
                     radius="none"
                 >
-                    <Button size="3" mt="2" variant="outline" style={{ cursor: 'pointer', width: 'fit-content' }}>
+                    <Button size="3" mt="2" variant="outline" style={{ cursor: 'pointer', alignSelf: 'flex-start' }}>
                         Copy this template
                     </Button>
                 </Theme>
@@ -67,7 +67,7 @@ Thanks!`;
                                     Thanks!
                                 </Text>
 
-                                <div style={{ borderBottom: "1px solid var(--gray-a6)", width: "100%", marginTop: "var(--space-4)" }} />
+                                <div style={{ borderBottom: "thin solid var(--gray-a6)", width: "100%", marginTop: "var(--space-4)" }} />
                             </Flex>
 
                             <Flex justify="end" gap="3">

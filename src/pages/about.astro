@@ -11,7 +11,7 @@ import {
     AspectRatio,
     Grid,
     Heading,
-    Card,
+    Section,
 } from "@radix-ui/themes";
 
 import { Image } from "astro:assets";
@@ -72,7 +72,7 @@ const faqItems = [
 ];
 ---
 
-<Layout backgroundColor="var(--orange-5)">
+<Layout backgroundColor="var(--orange-5)" roleFullWidth>
     <PageHeading slot="heading" className="page-heading">
         Designer and marketer based in Kent, England
     </PageHeading>
@@ -141,7 +141,7 @@ const faqItems = [
             </DataList.Root>
         </Flex>
     </Flex>
-    <Box slot="page-content" style={{ backgroundColor: "var(--gray-1)" }}>
+    <Section slot="page-content" style={{ backgroundColor: "var(--gray-1)" }}>
         <MainGrid>
             <InnerSection title="Selected work" sectionId="intro">
                 <Flex direction="column" gap="4">
@@ -279,7 +279,7 @@ const faqItems = [
                             maxWidth: "100%",
                         }}
                     />
-                    <Flex direction="column" gap="4" className="multi-p">
+                    <Flex direction="column" gap="4">
                         <Text size="3" as="p" wrap="pretty">
                             My mission is to do "good" creative work, but this
                             is only achievable by rethinking what’s important:
@@ -315,7 +315,7 @@ const faqItems = [
                             size="3"
                             color="gray"
                             variant="soft"
-                            style={{ width: "fit-content" }}
+                            style={{ alignSelf: "flex-start" }}
                         >
                             Scroll down to get in touch <ArrowDownIcon />
                         </ButtonLink>
@@ -323,8 +323,8 @@ const faqItems = [
                 </Flex>
             </InnerSection>
         </MainGrid>
-    </Box>
-    <Box
+    </Section>
+    <Section
         slot="bottom-cta"
         style={{
             backgroundColor: "var(--orange-5)",
@@ -383,5 +383,5 @@ const faqItems = [
                 </Flex>
             </InnerSection>
         </MainGrid>
-    </Box>
+    </Section>
 </Layout>

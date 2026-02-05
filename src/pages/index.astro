@@ -4,7 +4,15 @@ import ProjectCanvas from "../components/project/ProjectCanvas.astro";
 import PageHeading from "../components/PageHeading";
 import { ButtonLink } from "../components/ButtonLink";
 import Layout from "../layouts/Layout.astro";
-import { Text, Flex, Grid, Box, Heading, Link } from "@radix-ui/themes";
+import {
+  Text,
+  Flex,
+  Grid,
+  Box,
+  Heading,
+  Link,
+  Section,
+} from "@radix-ui/themes";
 import { ArrowRightIcon, ArrowTopRightIcon } from "@radix-ui/react-icons";
 import { ServiceCard } from "../components/ServiceCard";
 import { ServiceDialog } from "../components/ServiceDialog";
@@ -46,7 +54,7 @@ const limitDescription = (text: string) => {
 };
 ---
 
-<Layout backgroundColor="var(--yellow-3)">
+<Layout backgroundColor="var(--yellow-3)" roleFullWidth>
   <!-- --- Hero --- -->
 
   <!-- Slot: Main Heading -->
@@ -83,7 +91,7 @@ const limitDescription = (text: string) => {
   </Flex>
 
   <!-- --- Page Content --- -->
-  <Box slot="page-content" style={{ backgroundColor: "var(--gray-1)" }}>
+  <Section slot="page-content" style={{ backgroundColor: "var(--gray-1)" }}>
     <!-- Main Content Grid -->
     <MainGrid>
       <!-- --- Selected Work --- -->
@@ -222,31 +230,32 @@ const limitDescription = (text: string) => {
                 rel="noopener noreferrer">PR & Marketing Manager</Link
               >
             </aside>
-            <BlueberryLogo slot="logo" />
+            <BlueberryLogo slot="logo" isWrapped />
           </Testimonial>
         </Grid>
       </InnerSection>
     </MainGrid>
-  </Box>
+  </Section>
   <BottomCTA
     slot="bottom-cta"
     heading="Put a face to the name"
     text="Schedule a free, 30-min chat. You tell me about your challenges and ideas. I'll tell you if I can help."
     backgroundColor="var(--yellow-5)"
   >
-    <Flex justify="center" align="start" gap="4">
+    <Flex justify="center" align="start" gap="4" wrap="wrap">
       <ButtonLink
         href="https://cal.com/francescoimola/intro"
-        target="_blank"
-        rel="noopener noreferrer"
-        size="4"
+        size={{ initial: "3", sm: "4" }}
         external
         highContrast
       >
         Book a free intro <ArrowTopRightIcon />
       </ButtonLink>
-      <ButtonLink href="/about#contact" size="4" variant="soft" color="gray"
-        >Contact directly</ButtonLink
+      <ButtonLink
+        href="/about#contact"
+        size={{ initial: "3", sm: "4" }}
+        variant="soft"
+        color="gray">Contact directly</ButtonLink
       >
     </Flex>
   </BottomCTA>

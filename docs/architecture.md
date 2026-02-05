@@ -3,7 +3,7 @@
 This document provides a high-level technical overview of the portfolio project.
 
 **Goal**: A high-performance, design-first portfolio website.
-**Stack**: [Astro 5](https://astro.build) · [React 19](https://react.dev) · [Radix UI Themes](https://www.radix-ui.com) · [Cloudflare Pages](https://pages.cloudflare.com)
+**Stack**: [Astro 5](https://astro.build) · [React 19](https://react.dev) · [Radix UI Themes](https://www.radix-ui.com) · [Cloudflare Pages (SSR)](https://pages.cloudflare.com)
 
 ---
 
@@ -11,7 +11,8 @@ This document provides a high-level technical overview of the portfolio project.
 
 ### A. Zero-JS by Default (Hydration Strategy)
 Performance is paramount. This project follows a strict **"Static First"** approach:
-*   **Default**: All components are server-rendered to static HTML.
+*   **Default**: Pages are server-rendered on-demand (SSR) by Cloudflare Workers, allowing for dynamic content and auth.
+*   **Static Support**: Pages can be explicitly pre-rendered using `export const prerender = true`.
 *   **Opt-In**: We only use `client:load` or `client:idle` for components that *strictly require* runtime JavaScript (e.g., state, event listeners, form handling).
 *   **Visuals**: Purely visual components (Stars, Cards) are static, even if written in React.
 *   **The Theme**: The root `<Theme>` provider is static to prevent massive hydration blocking.

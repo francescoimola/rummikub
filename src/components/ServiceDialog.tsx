@@ -146,6 +146,7 @@ export function ServiceDialog({ type, cardIcon }: ServiceDialogProps) {
                                                 <Flex direction="column" align="center" gap="2" width="100%">
                                                     <ButtonLink
                                                         href={option.link}
+                                                        external={option.link.startsWith("http")}
                                                         size="2"
                                                         highContrast
                                                         variant="solid"

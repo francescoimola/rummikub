@@ -1,11 +1,28 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PageHeading from "../components/PageHeading";
-import { Text, Flex } from "@radix-ui/themes";
+import { Text, Flex, Section, Theme } from "@radix-ui/themes";
 import BlogFilters from "../components/BlogFilters";
+import { BlogCard } from "../components/BlogCard";
+import { InnerSection } from "../components/InnerSection";
+import { MainGrid } from "../components/MainGrid";
+import { getCollection } from "astro:content";
+
+const allPosts = (await getCollection("blog")).sort(
+    (a, b) =>
+        new Date(b.data.publishedDate).valueOf() -
+        new Date(a.data.publishedDate).valueOf(),
+);
+const recentPosts = allPosts.slice(0, 2);
+
+const uniqueTags = [...new Set(allPosts.flatMap((p) => p.data.tags))];
 ---
 
-<Layout backgroundColor="var(--brand-surface-dark-mustard)" appearance="dark">
+<Layout
+    backgroundColor="var(--brand-surface-dark-mustard)"
+    appearance="dark"
+    roleFullWidth
+>
     <!-- Hero Section -->
     <PageHeading slot="heading"> Writing </PageHeading>
     <Flex slot="description" direction="column" gap="var(--space-10)">
@@ -14,6 +31,95 @@ import BlogFilters from "../components/BlogFilters";
             usual playbook. For anyone who suspects there might be a better way
             to go about it. Some answers. Mostly questions.
         </Text>
-        <BlogFilters client:load />
+        <BlogFilters tags={uniqueTags} client:load />
     </Flex>
+    <Section slot="page-content" asChild>
+        <Theme
+            appearance="light"
+            accentColor="orange"
+            radius="none"
+            grayColor="olive"
+            scaling="97%"
+            style={{ backgroundColor: "var(--gray-1)" }}
+        >
+            <MainGrid>
+                <InnerSection title="Recent" showCounter={false}>
+                    <Flex direction="column" gap="4" data-section="recent">
+                        {
+                            recentPosts.map((post) => {
+                                const slug =
+                                    post.data.slug ||
+                                    post.id.replace(/\.mdx$/, "");
+                                return (
+                                    <div
+                                        data-tags={post.data.tags
+                                            .map((t) => t.toLowerCase())
+                                            .join(",")}
+                                    >
+                                        <BlogCard
+                                            title={post.data.title}
+                                            excerpt={post.data.excerpt}
+                                            tags={post.data.tags}
+                                            coverImage={post.data.coverImage}
+                                            href={`/blog/${slug}`}
+                                        />
+                                    </div>
+                                );
+                            })
+                        }
+                    </Flex>
+                </InnerSection>
+                <InnerSection title="All" showCounter={false}>
+                    <Flex direction="column" gap="4" data-section="all">
+                        {
+                            allPosts.map((post) => {
+                                const slug =
+                                    post.data.slug ||
+                                    post.id.replace(/\.mdx$/, "");
+                                return (
+                                    <div
+                                        data-tags={post.data.tags
+                                            .map((t) => t.toLowerCase())
+                                            .join(",")}
+                                    >
+                                        <BlogCard
+                                            variant="compact"
+                                            title={post.data.title}
+                                            excerpt={post.data.excerpt}
+                                            href={`/blog/${slug}`}
+                                        />
+                                    </div>
+                                );
+                            })
+                        }
+                    </Flex>
+                </InnerSection>
+            </MainGrid>
+        </Theme>
+    </Section>
 </Layout>
+
+<script>
+    document.addEventListener("blog-filter", (e: Event) => {
+        const filter = (e as CustomEvent<string>).detail;
+        const cards = document.querySelectorAll<HTMLElement>("[data-tags]");
+        const recentSection = document
+            .querySelector("[data-section='recent']")
+            ?.closest("section");
+
+        // Show/hide the "Recent" section — only visible when "all" is selected
+        if (recentSection) {
+            recentSection.style.display = filter === "all" ? "" : "none";
+        }
+
+        // Filter individual cards in the "All" section
+        cards.forEach((card) => {
+            if (filter === "all") {
+                card.style.display = "";
+                return;
+            }
+            const tags = card.dataset.tags?.split(",") ?? [];
+            card.style.display = tags.includes(filter) ? "" : "none";
+        });
+    });
+</script>

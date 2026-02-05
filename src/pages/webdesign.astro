@@ -2,17 +2,12 @@
 import Layout from "../layouts/Layout.astro";
 import PageHeading from "../components/PageHeading";
 import { Image } from "astro:assets";
+import { Text, Flex, Theme, Section, Box, Grid, Card } from "@radix-ui/themes";
 import {
-    Text,
-    Flex,
-    Theme,
-    Section,
-    Box,
-    Grid,
-    Heading,
-    Card,
-} from "@radix-ui/themes";
-import { ArrowDownIcon, ArrowRightIcon } from "@radix-ui/react-icons";
+    ArrowDownIcon,
+    ArrowRightIcon,
+    ArrowTopRightIcon,
+} from "@radix-ui/react-icons";
 
 // Portfolio images
 import lifecoaching from "../assets/portfolio/life-coaching.png";
@@ -22,13 +17,19 @@ import folksdirectory from "../assets/portfolio/folks-directory.png";
 import tedxjourneys from "../assets/portfolio/tedx-journeys.png";
 import { InnerSection } from "../components/InnerSection";
 import { MainGrid } from "../components/MainGrid";
-import {
-    KeyServicePoints,
-    KeyServicePoint,
-} from "../components/KeyServicePoints";
+import { KeyServicePoints, KSP } from "../components/KeyServicePoints";
 import { ButtonLink } from "../components/ButtonLink";
 import { VerticalFeatureTabs } from "../components/VerticalFeatureTabs";
+import { ProcessAccordion } from "../components/ProcessAccordion";
+import { PricingTable } from "../components/PricingTable";
+import { ContentCard } from "../components/ContentCard";
 const tabItems = [
+    {
+        id: "longevity",
+        title: "Built for longevity",
+        content:
+            "You won't find me relying on fleeting design trends or fiddly plugins that need constant maintenance. The goal is building stuff that won't need replacing any time soon.",
+    },
     {
         id: "update",
         title: "A website even <i>you</i> can update",
@@ -42,23 +43,18 @@ const tabItems = [
             "Meta descriptions, core keywords, and image compression are always included. The fundamentals done right, and with room to build upon.",
     },
     {
-        id: "longevity",
-        title: "Built for longevity",
-        content:
-            "You won't find me relying on fleeting design trends or fiddly plugins that need constant maintenance. The goal is building stuff that won't need replacing any time soon.",
-    },
-    {
         id: "accessibility",
         title: "Accessibility taken seriously",
         content:
-            "We'll always move with the user's needs in mind. Sure, perfection is a moving target, but the baseline is always a responsive site that doesn't unreasonably exclude anyone.",
+            "We'll always move with the user's needs in mind. Perfection is a moving target of course, but the baseline is always a responsive site that doesn't unreasonably exclude anyone.",
     },
 ];
 
 import tca from "../assets/tca_megamenu.png";
+import { BottomCTA } from "../components/BottomCTA";
 ---
 
-<Layout backgroundColor="var(--yellow-5)">
+<Layout backgroundColor="var(--yellow-5)" roleFullWidth>
     <!-- Hero Section -->
     <Flex direction="column" gap="4" slot="heading">
         <PageHeading>
@@ -71,19 +67,21 @@ import tca from "../assets/tca_megamenu.png";
         </Box>
     </Flex>
     <Box slot="role" display={{ initial: "none", sm: "block" }}>
-        <Text size="3" weight="medium" as="p">
+        <Text size="3" weight="medium" as="p" highContrast>
             Best for independent businesses, freelancers, and non-profits
         </Text>
     </Box>
     <Flex slot="description" direction="column" gap="4">
-        <Text size="3">
-            <p>
-                The typical website-building project comes with layers that
-                don't serve you, baked with more people, more revisions, and
-                more cost than necessary.
-            </p>
-            <p>I got none of that for you.</p>
-        </Text>
+        <Box>
+            <Text size="3" highContrast asChild>
+                <p>
+                    The typical website-building project comes with layers that
+                    don't serve you, baked with more people, more revisions, and
+                    more cost than necessary.
+                </p>
+                <p>I got none of that for you.</p>
+            </Text>
+        </Box>
         <ButtonLink
             size="3"
             variant="soft"
@@ -115,7 +113,17 @@ import tca from "../assets/tca_megamenu.png";
                 overflow: "hidden",
             }}
         >
-            <Flex gap="4" justify="center" align="center">
+            <Flex
+                id="portfolio-reel"
+                gap="4"
+                justify="center"
+                align="center"
+                wrap="nowrap"
+                style={{
+                    width: "max-content",
+                    minWidth: "120%",
+                }}
+            >
                 <Image
                     src={lifecoaching}
                     alt="Life Coaching Project"
@@ -164,6 +172,14 @@ import tca from "../assets/tca_megamenu.png";
                 />
             </Flex>
         </Section>
+        <script>
+            import { initParallax } from "../utils/parallax";
+
+            // Run on load and after View Transitions
+            initParallax();
+            document.addEventListener("astro:page-load", initParallax);
+        </script>
+
         <Box
             id="what-was-removed"
             style={{
@@ -174,37 +190,39 @@ import tca from "../assets/tca_megamenu.png";
             <MainGrid pt="var(--space-11)">
                 <InnerSection title="What I've taken out">
                     <KeyServicePoints>
-                        <KeyServicePoint heading="No agency overhead">
+                        <KSP heading="No agency overhead">
                             Working with agencies can be slow and expensive.
                             Here, you talk to the one person doing the work, so
                             decisions happen faster, and you waste nothing on
                             excess overhead.
-                        </KeyServicePoint>
+                        </KSP>
 
-                        <KeyServicePoint heading="No false promises">
+                        <KSP heading="No false promises">
                             I won't promise to "transform your brand" or "10x
                             your conversions." All I do is I craft sites that
                             load quickly, explain what you do, and won't
                             embarrass your brand.
-                        </KeyServicePoint>
+                        </KSP>
 
-                        <KeyServicePoint heading="No dark patterns">
+                        <KSP heading="No dark patterns">
                             That means no privacy-aggressive or manipulative
                             design. Fewer pop-up banners and autoplaying videos.
                             You can trust your visitors will be respected.
-                        </KeyServicePoint>
+                        </KSP>
                     </KeyServicePoints>
                 </InnerSection>
                 <InnerSection title="What you get">
                     <Grid gap="4">
-                        <Box
-                            p="6"
+                        <Card
+                            variant="ghost"
+                            size="4"
                             style={{
-                                backgroundColor: "var(--gray-3)",
+                                margin: "unset",
+                                backgroundColor: "var(--yellow-a3)",
                             }}
                         >
                             <VerticalFeatureTabs items={tabItems} client:idle />
-                        </Box>
+                        </Card>
                         <figure style={{ gridColumn: "1 / -1" }}>
                             <Image
                                 src={tca}
@@ -213,6 +231,7 @@ import tca from "../assets/tca_megamenu.png";
                                     objectFit: "cover",
                                     width: "100%",
                                     height: "100%",
+                                    backgroundColor: "var(--yellow-a3)",
                                 }}
                             />
                             <Text asChild>
@@ -229,29 +248,206 @@ import tca from "../assets/tca_megamenu.png";
                         <Flex direction="column" gap="3">
                             <Text size="3" as="p" highContrast>
                                 I work primarily in Webflow, Shopify and
-                                Framer—with a handful of other tools for design,
+                                Framer—with a few other tools for design,
                                 analytics and email marketing. If you’re already
                                 committed to a CMS or website-builder, I can
                                 usually adapt as most platforms work on similar
                                 principles.
                             </Text>
-                            <Text size="3" as="p" highContrast>
-                                Until I learned how to stop that from happening.
-                            </Text>
                         </Flex>
                         <ButtonLink
-                            href="/about"
+                            href="/about#tools"
                             variant="soft"
                             size="3"
                             color="gray"
                             highContrast
                             style={{ alignSelf: "flex-start" }}
                         >
-                            More about how I work <ArrowRightIcon />
+                            More about my tools <ArrowRightIcon />
                         </ButtonLink>
                     </Flex>
+                </InnerSection>
+                <InnerSection title="The process">
+                    <ProcessAccordion
+                        client:idle
+                        steps={[
+                            {
+                                number: 1,
+                                title: "Discovery",
+                                content: [
+                                    "You tell me what's not working and what you wish your site could do. I ask a lot of questions, and then I start researching.",
+                                    "What this phase looks like depends on the project. Sometimes it's competitor analysis. Sometimes, it's talking to your customers. Sometimes, you already have data and I just need to make sense of it. The goal is always: understand who's coming to your site and what they need to find—and give it to them.",
+                                ],
+                            },
+                            {
+                                number: 2,
+                                title: "Copy & Design",
+                                content: [
+                                    "This is where the website takes shape — though how we get there depends on the project. We might start with wireframes, or with copy, or with a quick AI prototype that lets us react to something concrete before we've invested days in it. ",
+                                    "In terms of speed, some projects need several design rounds while others click into place quickly. Either way, you get to see work early and give feedback, which I’ll refine until it feels right.",
+                                ],
+                            },
+                            {
+                                number: 3,
+                                title: "Production & Launch",
+                                content: [
+                                    "Once the direction is clear, I build, meaning I translate the design into a working site. This involves setting up page structure, making layouts adapt to different screen sizes, connecting the content management system, handling integrations, and testing everything.",
+                                    "Before launch, I show how to update the site yourself. Then it's yours. For ongoing projects, I stick around to keep things rolling.",
+                                ],
+                            },
+                        ]}
+                    />
+                </InnerSection>
+                <InnerSection title="Your other options">
+                    <KeyServicePoints>
+                        <KSP
+                            heading="Doing it yourself"
+                            grayWordCount={2}
+                            multiParagraph
+                        >
+                            <p style={{ textWrap: "pretty" }}>
+                                You could ask AI or find a template and figure
+                                it out yourself. But experience tells me DIY
+                                websites sit half-finished for years. You'll
+                                likely never write all the copy and you'll spend
+                                weeks wrestling with hosting.
+                            </p>
+                            <p style={{ textWrap: "pretty" }}>
+                                Leave the hard work to me and you'll get a truly
+                                finished product.
+                            </p>
+                        </KSP>
+                        <KSP
+                            heading="Hiring an agency"
+                            grayWordCount={2}
+                            multiParagraph
+                        >
+                            <p style={{ textWrap: "pretty" }}>
+                                I handle strategy, copywriting, design and
+                                development. You talk directly to me. There are
+                                no account managers and no internal meetings
+                                you’re not looped in.
+                            </p>
+                            <p style={{ textWrap: "pretty" }}>
+                                This usually means faster delivery, lower costs,
+                                and zero pressure to sign a retainer.
+                            </p>
+                        </KSP>
+                    </KeyServicePoints>
+                </InnerSection>
+                <InnerSection title="Investment">
+                    <PricingTable
+                        introText={[
+                            "How many hours have you spent trying to fix your broken website? How many more will you spend if nothing changes?",
+                            "I can't tell you exactly what a functioning website is worth to your business. But I can tell you what it costs to stop fighting with the one you have:",
+                        ]}
+                        items={[
+                            {
+                                title: "Website + CMS",
+                                asterisks: 1,
+                                price: "£3,500",
+                                description:
+                                    "Up to 6 static pages + 2 CMS page templates. Ideal if you publish often and want your site regularly updated with fresh content (i.e. you're a commercial photographer or local museum)",
+                            },
+                            {
+                                title: "Standard 3-6 page site",
+                                asterisks: 1,
+                                price: "£2,500",
+                                description:
+                                    "A site with no CMS (meaning no blog or content to update dynamically). Ideal for venues, hospitality businesses, and service professionals looking for a robust but simple solution.",
+                            },
+                            {
+                                title: "One-pager",
+                                asterisks: 1,
+                                price: "£600",
+                                description:
+                                    "Up to 10 sections on a single page. Great for launches, events, cafes, and mini portfolios.",
+                            },
+                            {
+                                title: "Design only",
+                                asterisks: 2,
+                                price: "£1895",
+                                description:
+                                    "I design and write the website, then hand it off ready-to-build to a developer, or to you.",
+                            },
+                        ]}
+                        closingText="All prices are starting points and you'll get an exact quote before we begin. Worried about revisions? Two rounds are always included and more available for a custom fee."
+                        footnotes={[
+                            "* Includes design, content writing, and development.",
+                            "** Includes design and content writing.",
+                        ]}
+                    />
+                </InnerSection>
+                <InnerSection title="Add-ons">
+                    <PricingTable
+                        items={[
+                            {
+                                title: "SEO deep-dive",
+                                price: "£395",
+                                description:
+                                    "Competitor analysis focused on improving your SEO, complete with an implementation plan. Involves sifting through 10+ years of data to find tactics and content ideas worth replicating.",
+                            },
+                            {
+                                title: "E-commerce setup",
+                                price: "£395",
+                                description:
+                                    "Get you ready to handle high-volume orders. Includes notifications, item and shipping options, payment integration, and ad-hoc support.",
+                            },
+                            {
+                                title: "Email marketing starter",
+                                price: "£395",
+                                description:
+                                    "Mailing list setup and creation of 1 welcome campaign. Also gets you 1 custom template design and 1 email strategy session at no extra cost.",
+                            },
+                        ]}
+                    />
+                </InnerSection>
+                <InnerSection title="Is this for you?">
+                    <Grid columns={{ initial: "1", sm: "2" }} gap="4">
+                        <ContentCard
+                            heading="Absolutely yes, if"
+                            backgroundColor="var(--yellow-a3)"
+                            items={[
+                                "Your current website is broken, slow, or plain embarrassing.",
+                                "You want good value for money.",
+                                "You'd rather work with one person than be at the mercy of an agency.",
+                            ]}
+                        />
+                        <ContentCard
+                            heading="Probably not, if"
+                            backgroundColor="var(--orange-a3)"
+                            items={[
+                                "You want a complex web app with several custom features.",
+                                'You need promises about "transforming" anything.',
+                                "You don't believe it's worth the effort.",
+                            ]}
+                        />
+                    </Grid>
                 </InnerSection>
             </MainGrid>
         </Box>
     </Theme>
+    <BottomCTA
+        slot="bottom-cta"
+        heading="Made you curious? Let's talk"
+        text="Book a free intro call to see if working together makes sense. There’s no pitch and no pressure. And if we're not a good fit, we’re free to say so."
+        backgroundColor="var(--yellow-5)"
+    >
+        <Flex justify="center" align="start" gap="4" wrap="wrap">
+            <ButtonLink
+                href="https://cal.com/francescoimola/intro"
+                size={{ initial: "3", sm: "4" }}
+                external
+                highContrast
+            >
+                Book a free call <ArrowTopRightIcon />
+            </ButtonLink>
+            <ButtonLink
+                href="/about#contact"
+                size={{ initial: "3", sm: "4" }}
+                variant="soft"
+                color="gray">Contact directly</ButtonLink
+            >
+        </Flex>
+    </BottomCTA>
 </Layout>
