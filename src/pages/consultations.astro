@@ -1,11 +1,64 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PageHeading from "../components/PageHeading";
-import { Text, Button, Flex } from "@radix-ui/themes";
-import { ArrowDownIcon } from "@radix-ui/react-icons";
+import {
+    Text,
+    Flex,
+    Separator,
+    Grid,
+    Card,
+    Heading,
+    Section,
+    Link,
+} from "@radix-ui/themes";
+
+import {
+    ArrowDownIcon,
+    ArrowRightIcon,
+    ArrowTopRightIcon,
+} from "@radix-ui/react-icons";
+import { MainGrid } from "../components/MainGrid";
+import { InnerSection } from "../components/InnerSection";
+import { ContentCard } from "../components/ContentCard";
+import MakeMindLogo from "../components/icons/MakeMindLogo.astro";
+import TCLogo from "../components/icons/TCLogo.astro";
+import BlueberryLogo from "../components/icons/BlueberryLogo.astro";
+import Testimonial from "../components/Testimonial";
+import { ButtonLink } from "../components/ButtonLink";
+import { ProcessAccordion } from "../components/ProcessAccordion";
+import FAQ from "../components/FAQ";
+import { BottomCTA } from "../components/BottomCTA";
+
+const faqItems = [
+    {
+        question: "Will it be a long process?",
+        answer: "No, this is a pretty straightforward website health check for busy people who want answers quickly. There is no admin beside the actual meeting. I just need 5 minutes of your time to complete a short questionnaire which I'll send to you immediately after booking.",
+    },
+    {
+        question: "How thorough is the website review?",
+        answer: "The website review is thorough but not exhaustive. Before the session, I will spend up to 4 hours auditing your website to get a rounded idea of what it is doing well and what needs work. I will focus my review on the area you told me you're struggling with the most (e.g. SEO, UX, UI, or something else).",
+    },
+    {
+        question: "Can we record the session?",
+        answer: "Of course. Sessions can be recorded so you can watch them back or share them with a colleague. You can also opt to receive a transcript of our conversation, and a summary of all my findings (delivered within 3-5 business days).",
+    },
+    {
+        question: "Do you guarantee results?",
+        answer: "I can't promise results, but I can promise to do my absolute best to help you improve your website based on my experience and the research I'll do. You should be wary of anyone who claims guaranteed results because every situation is different and running a business is not a science.",
+    },
+    {
+        question: "What if I need to cancel?",
+        answer: "Life happens. You can cancel free of charge up to 72 hours before the session. After that, no refunds are available, as I'll have already invested time reviewing your website. If you need to reschedule with less than 24 hours notice, I'll be happy to find another time.",
+    },
+    {
+        question:
+            "What's the difference between a free intro and a consultation?",
+        answer: "Where you see “free intro” mentioned on this page, that’s a 15/30-min conversation to see if we're a good fit. I won’t offer any advice, it’s just a chat. The consultation, on the other hand, is a service and it’s here that the work happens. Consultations include a mini website review, a 1:1 session, and a targeted action plan.",
+    },
+];
 ---
 
-<Layout backgroundColor="var(--orange-5)">
+<Layout backgroundColor="var(--orange-5)" roleFullWidth>
     <!-- Hero Section -->
     <PageHeading slot="heading"> Website consultations </PageHeading>
     <Text slot="role" size="3" weight="medium">
@@ -18,13 +71,312 @@ import { ArrowDownIcon } from "@radix-ui/react-icons";
             plus 1 hour of dedicated time to grill me and find out exactly what
             needs fixing.
         </Text>
-        <Button
+        <ButtonLink
             size="3"
             variant="soft"
             color="gray"
             style={{ alignSelf: "flex-start" }}
+            href="#why"
         >
             Scroll to learn more <ArrowDownIcon />
-        </Button>
+        </ButtonLink>
     </Flex>
+    <Section slot="page-content" style={{ backgroundColor: "var(--gray-1)" }}>
+        <MainGrid>
+            <InnerSection
+                title="Does any of this sound familiar?"
+                sectionId="why"
+            >
+                <Flex direction="column" gap="8">
+                    <Flex direction="column" gap="3">
+                        <Text size="3" as="p"
+                            >You sense enquiries or sales are leaking somewhere
+                            but can't prove it.</Text
+                        >
+                        <Separator size="4" />
+                        <Text size="3" as="p"
+                            >You cringe when sharing links to your website.</Text
+                        >
+                        <Separator size="4" />
+                        <Text size="3" as="p"
+                            >On Google, you rank below competitors you <em
+                                >know</em
+                            > are worse at the job.</Text
+                        >
+                        <Separator size="4" />
+                        <Text size="3" as="p"
+                            >People keep asking you basic questions that your
+                            site should be able to answer.</Text
+                        >
+                    </Flex>
+                    <Text size="3" as="p"
+                        >If you nodded at any of these, booking a consultation
+                        will tell you exactly what's going wrong, what you're
+                        doing well, and what needs tweaking.</Text
+                    >
+                </Flex>
+            </InnerSection>
+            <InnerSection title="What's covered in a consultation?">
+                <Grid columns={{ initial: "1", md: "2" }} gap="4">
+                    <ContentCard heading="Words & Design">
+                        Pointers on how to improve your website design and
+                        copywriting, or how to better align these elements with
+                        your brand.
+                    </ContentCard>
+                    <ContentCard heading="Issues with Tech & User Experience">
+                        Navigation problems, SEO basics, poorly sized media, and
+                        other snags that affect conversions, accessibility and
+                        site speed.
+                    </ContentCard>
+                    <ContentCard heading="Missed opportunities">
+                        Ways to highlight services/products, leverage
+                        testimonials, or whatever pertains to your particular
+                        case.
+                    </ContentCard>
+                    <ContentCard heading="Next steps">
+                        1-4 specific actions ranked by long-term impact, what to
+                        fix first, what you can handle yourself, and what's not
+                        worth your time.
+                    </ContentCard>
+                </Grid>
+            </InnerSection>
+            <InnerSection title="What's in it for you?">
+                <Flex direction="column" gap="6">
+                    <Grid columns={{ initial: "1", sm: "2" }} gapX="6" gapY="3">
+                        <Text size="3" weight="medium" color="gray">
+                            Gain <Text color="gray" highContrast>answers</Text>
+                        </Text>
+                        <Text size="3" as="p">
+                            Maybe you know what's broken and need validation. Or
+                            you sense something isn't working, but don't know
+                            what exactly. A consultation gives you clarity in
+                            both cases.
+                        </Text>
+                    </Grid>
+                    <Separator size="4" />
+                    <Grid columns={{ initial: "1", sm: "2" }} gapX="6" gapY="3">
+                        <Text size="3" weight="medium" color="gray">
+                            Gain <Text color="gray" highContrast>focus</Text>
+                        </Text>
+                        <Text size="3" as="p">
+                            I'd hate to panic you by showing you a giant pile of
+                            stuff to fix. Instead, I typically suggest specific,
+                            practical solutions (don't be surprised if you leave
+                            with a shorter to-do list than the one you came in
+                            with!).
+                        </Text>
+                    </Grid>
+                    <Separator size="4" />
+                    <Grid columns={{ initial: "1", sm: "2" }} gapX="6" gapY="3">
+                        <Text size="3" weight="medium" color="gray">
+                            Gain <Text color="gray" highContrast
+                                >perspective</Text
+                            >
+                        </Text>
+                        <Text size="3" as="p">
+                            If you're already doing well in some areas, the
+                            answer might be "leave it alone". I don't want you
+                            worrying about the wrong things or reinventing the
+                            wheel just because.
+                        </Text>
+                    </Grid>
+                </Flex>
+            </InnerSection>
+            <InnerSection title="People who trusted my advice">
+                <Grid columns="3" rows="auto" gap="2">
+                    <Card variant="ghost" size="3" className="logo-card">
+                        <MakeMindLogo />
+                    </Card>
+                    <Card variant="ghost" size="3" className="logo-card">
+                        <TCLogo />
+                    </Card>
+                    <Card variant="ghost" size="3" className="logo-card">
+                        <BlueberryLogo />
+                    </Card>
+                    <Card
+                        variant="ghost"
+                        size="3"
+                        className="logo-card"
+                        style={{ gridColumn: "1 / -1" }}
+                    >
+                        <Testimonial
+                            authorName="Carly Anchal"
+                            authorRole="PR & Marketing Manager"
+                            quote="A dream collaborator. Organised and strategic, he asks the right questions, does his research, and presents fantastic options"
+                            rating={5}
+                        />
+                    </Card>
+                </Grid>
+            </InnerSection>
+            <InnerSection title="What makes this different?">
+                <Flex direction="column" gap="6">
+                    <Flex direction="column" gap="3">
+                        <Text size="3" as="p" className="indent">
+                            Most digital agencies offer “free website reports”,
+                            “free site health checks” or some variation on those
+                            lines. But are they really free services? Or are
+                            they just sales conversations dressed up as advice?
+                        </Text>
+                        <Text size="3" as="p" className="indent">
+                            On the flip side, booking a website
+                            consultation—yes, a paid website consultation—will
+                            spare you the embarrassment of sitting through some
+                            agency’s 45-min chat that builds rapport but leaves
+                            you nothing but a strange taste in your mouth and a
+                            £5,000 proposal for a rebrand you didn't ask for.
+                        </Text>
+                        <Text size="3" as="p">Why my consultations differ:</Text
+                        >
+                    </Flex>
+                    <Flex direction="column" gap="3">
+                        <ProcessAccordion
+                            client:idle
+                            steps={[
+                                {
+                                    title: "Honest guidance",
+                                    content: [
+                                        'I have no marketing funnel to shove you in, no SEO packages to upsell, no account manager waiting to "onboard" you.',
+                                        "The consultation is the whole thing. If we never speak again, that's a perfectly good outcome.",
+                                    ],
+                                },
+                                {
+                                    title: "Priorities > Noise",
+                                    content: [
+                                        "The businesses I work with are usually overwhelmed, if not burned out. There are always too many best practices to read about, and everyone has soooo many ideas to share!",
+                                        "You'll leave with a concise to-do list, a lot of encouragement, and a clear idea of what to prioritise and what to skip.",
+                                    ],
+                                },
+
+                                {
+                                    title: "Practical advice, actually",
+                                    content: [
+                                        "No abstractions or 17-page audit that needs a degree to decode. You get up to 4 specific things to focus on—either shared during the call or sent via email shortly after—ranked by impact, what you can DIY, and what needs outside help.",
+                                    ],
+                                },
+                            ]}
+                        />
+                    </Flex>
+                </Flex>
+            </InnerSection>
+            <InnerSection title="Investment">
+                <Flex direction="column" gap="5">
+                    <Text size="3" as="p" wrap="pretty"
+                        >How much would it cost to know exactly where your
+                        website is falling short? Or to get guidance that saves
+                        you months of trial and error? The insights are hard to
+                        price. The consultation isn't.</Text
+                    >
+                    <Text size="3" as="p" weight="medium" highContrast
+                        >£225</Text
+                    >
+                    <Text size="3" as="p" wrap="pretty"
+                        >This gets you a website review (including 4 hours of
+                        dedicated research time) followed by a 1-hour
+                        consultation, and a clear plan you can act on
+                        immediately.</Text
+                    >
+                    <ButtonLink
+                        href="https://cal.com/francescoimola/website-consultation"
+                        size="3"
+                        variant="solid"
+                        external
+                        style={{
+                            alignSelf: "flex-start",
+                        }}
+                    >
+                        Schedule a consultation <ArrowRightIcon />
+                    </ButtonLink>
+                    <Text size="2" as="p" color="gray" wrap="pretty"
+                        >Not sure yet? <Link
+                            href="https://cal.com/francescoimola/intro"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            color="gray"
+                            underline="always"
+                            >Book a free 30-min introduction first</Link
+                        >: rather than jumping straight into a consultation,
+                        this will help us get to know each other and quickly see
+                        if we're a good fit.</Text
+                    >
+                </Flex>
+            </InnerSection>
+            <InnerSection title="If this for you?">
+                <Grid columns={{ initial: "1", sm: "2" }} gap="4">
+                    <ContentCard
+                        heading="Absolutely yes, if"
+                        backgroundColor="var(--yellow-a3)"
+                        items={[
+                            "You're have exciting plans for your website or business, but can't proceed because you’re overwhelmed.",
+                            "You need an expert to assess your website and tell you what fix is actually going to move the needle.",
+                            "You're tired of generic tips, and want advice tailored to your situation.",
+                        ]}
+                    />
+                    <ContentCard
+                        heading="Probably not, if"
+                        backgroundColor="var(--orange-a3)"
+                        items={[
+                            "You have highly technical questions about your CMS, analytics, hosting, paid-ads strategy, or site builder.",
+                            "You're looking for someone to tell you everything is fine. I'll be honest, even when it might be unpleasant.",
+                            {
+                                text: "You don't already have a website and just want to chat about ideas. It's better to book a free intro instead.",
+                                linkText: "book a free intro",
+                                linkHref:
+                                    "https://cal.com/francescoimola/intro",
+                            },
+                        ]}
+                    />
+                </Grid>
+            </InnerSection>
+            <InnerSection title="Consultations FAQs">
+                <Flex direction="column" gap="8">
+                    <FAQ client:load items={faqItems} />
+                    <Flex direction="column" gap="3">
+                        <Heading size="3" as="h4" weight="medium"
+                            >Can't afford a consultation?</Heading
+                        >
+                        <Text size="3" as="p" mb="2">
+                            Consulting fees can be a lot to take in, but rest
+                            assured that the work I do is always carried out to
+                            strengthen your business and generate returns. This
+                            means the result should make you money rather than
+                            cost you money, and will typically pay for itself.
+                            If your business is struggling financially, I'm
+                            happy to chat about payment plans.
+                        </Text>
+                        <ButtonLink
+                            href="/about#contact"
+                            size="3"
+                            color="gray"
+                            variant="soft"
+                            style={{ alignSelf: "flex-start" }}
+                            >Ask about concessions <ArrowRightIcon />
+                        </ButtonLink>
+                    </Flex>
+                </Flex>
+            </InnerSection>
+        </MainGrid>
+    </Section>
+    <BottomCTA
+        slot="bottom-cta"
+        heading="Ready to get unstuck?"
+        text="Book a consultation to see what's really holding your website back and what to do about it."
+        backgroundColor="var(--orange-4)"
+    >
+        <Flex justify="center" align="start" gap="4" wrap="wrap">
+            <ButtonLink
+                href="https://cal.com/francescoimola/website-consultation"
+                size={{ initial: "3", sm: "4" }}
+                external
+                highContrast
+            >
+                Book a consultation <ArrowTopRightIcon />
+            </ButtonLink>
+            <ButtonLink
+                href="/about#contact"
+                size={{ initial: "3", sm: "4" }}
+                variant="soft"
+                color="gray">Contact me directly</ButtonLink
+            >
+        </Flex>
+    </BottomCTA>
 </Layout>

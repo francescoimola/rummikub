@@ -1,4 +1,4 @@
-import { Grid, Box, Heading, Text, Section } from "@radix-ui/themes";
+import { Grid, Box, Heading, Text } from "@radix-ui/themes";
 import type { ReactNode } from "react";
 
 interface InnerSectionProps {
@@ -17,12 +17,12 @@ export function InnerSection({
     children
 }: InnerSectionProps) {
     return (
-        <Section py="0" asChild>
-            <Grid
-                gapY="8"
-                style={{ gridColumn: "1 / -1", gridTemplateColumns: "subgrid" }}
-                id={sectionId}
-            >
+        <Grid
+            asChild
+            gapY="8"
+            style={{ gridColumn: "1 / -1", gridTemplateColumns: "subgrid" }}
+        >
+            <section id={sectionId}>
                 {/* Section Header */}
                 <Box className="section-header">
                     {header ? (
@@ -47,7 +47,7 @@ export function InnerSection({
 
                 {/* Section Content */}
                 {children}
-            </Grid>
-        </Section>
+            </section>
+        </Grid>
     );
 }
