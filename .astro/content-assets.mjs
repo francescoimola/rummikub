@@ -1,1 +1,7 @@
-export default new Map();
+
+import __ASTRO_IMAGE_IMPORT_Z1uSeRu from "../../assets/project-canvas.png?astroContentImageFlag=&importer=src%2Fcontent%2Fprojects%2Fmonkeys.mdx";
+import __ASTRO_IMAGE_IMPORT_Z1zPJ53 from "../../assets/blog/How_to_write_a_website_brief_oktkpe.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fhow-to-write-a-website-brief.mdx";
+import __ASTRO_IMAGE_IMPORT_ABNYi from "../../assets/blog/Write_a_welcome_email_f3lztn.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fwelcome-emails-why-bother.mdx";
+import __ASTRO_IMAGE_IMPORT_Z26s9P9 from "../../assets/blog/timothy-dykes-KCjzVioAG6A-unsplash_z0kuee.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fshould-i-care-about-website-speed.mdx";
+export default new Map([["../../assets/project-canvas.png?astroContentImageFlag=&importer=src%2Fcontent%2Fprojects%2Fmonkeys.mdx", __ASTRO_IMAGE_IMPORT_Z1uSeRu], ["../../assets/blog/How_to_write_a_website_brief_oktkpe.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fhow-to-write-a-website-brief.mdx", __ASTRO_IMAGE_IMPORT_Z1zPJ53], ["../../assets/blog/Write_a_welcome_email_f3lztn.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fwelcome-emails-why-bother.mdx", __ASTRO_IMAGE_IMPORT_ABNYi], ["../../assets/blog/timothy-dykes-KCjzVioAG6A-unsplash_z0kuee.png?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fshould-i-care-about-website-speed.mdx", __ASTRO_IMAGE_IMPORT_Z26s9P9]]);
+		
