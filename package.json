@@ -25,11 +25,13 @@
     "@types/react": "^19.2.8",
     "@types/react-dom": "^19.2.3",
     "astro": "^5.17.1",
+    "formik": "^2.4.9",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-icons": "^5.5.0",
     "typescript": "^5.9.3",
-    "unist-util-visit": "^5.1.0"
+    "unist-util-visit": "^5.1.0",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20260129.0",
