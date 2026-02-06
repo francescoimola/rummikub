@@ -22,26 +22,39 @@ export const server = {
     handler: async ({ email, turnstileToken }, context) => {
       const env = context.locals.runtime.env;
 
+      if (!env.TURNSTILE_SECRET_KEY) {
+        console.error('TURNSTILE_SECRET_KEY is not defined');
+        throw new Error('System configuration error');
+      }
+
       // 1. Verify Turnstile token
+      const formData = new FormData();
+      formData.append('secret', env.TURNSTILE_SECRET_KEY);
+      formData.append('response', turnstileToken);
+      // Optional: append remoteip
+      // formData.append('remoteip', context.request.headers.get('CF-Connecting-IP') || '');
+
       const turnstileRes = await fetch(
         'https://challenges.cloudflare.com/turnstile/v0/siteverify',
         {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            secret: env.TURNSTILE_SECRET_KEY,
-            response: turnstileToken,
-          }),
+          body: formData,
         }
       );
 
       const turnstile: TurnstileVerifyResponse = await turnstileRes.json();
 
       if (!turnstile.success) {
+        console.error('Turnstile verification failed:', JSON.stringify(turnstile));
         throw new Error('Verification failed. Please try again.');
       }
 
       // 2. Add/update contact in Loops
+      if (!env.LOOPS_API_KEY) {
+        console.error('LOOPS_API_KEY is not defined');
+        throw new Error('System configuration error');
+      }
+
       const loopsRes = await fetch(
         'https://app.loops.so/api/v1/contacts/update',
         {
@@ -56,6 +69,7 @@ export const server = {
 
       if (!loopsRes.ok) {
         const errorData: LoopsApiResponse = await loopsRes.json();
+        console.error('Loops API error:', JSON.stringify(errorData));
         throw new Error(errorData.message || 'Subscription failed. Please try again.');
       }
 
