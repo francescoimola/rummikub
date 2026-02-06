@@ -5,8 +5,12 @@
     "nodejs_compat",
     "global_fetch_strictly_public"
   ],
+  "main": "./dist/_worker.js/index.js",
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./dist"
+  },
   "observability": {
     "enabled": true
-  },
-  "pages_build_output_dir": "./dist"
+  }
 }
