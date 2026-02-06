@@ -22,9 +22,13 @@ export const server = {
     handler: async ({ email, turnstileToken }, context) => {
       const env = context.locals.runtime.env;
 
+      console.log('Available Env Keys:', Object.keys(env || {}));
+      console.log('TURNSTILE_SECRET_KEY present:', !!env.TURNSTILE_SECRET_KEY);
+      console.log('LOOPS_API_KEY present:', !!env.LOOPS_API_KEY);
+
       if (!env.TURNSTILE_SECRET_KEY) {
         console.error('TURNSTILE_SECRET_KEY is not defined');
-        throw new Error('System configuration error');
+        throw new Error('System configuration error: Turnstile Key Missing');
       }
 
       // 1. Verify Turnstile token
