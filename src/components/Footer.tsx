@@ -11,6 +11,7 @@ import {
 } from "@radix-ui/themes";
 import NewsletterForm from "./NewsletterForm";
 
+// Force rebuild: Footer update verification
 export const Footer = () => {
     return (
         <Theme
