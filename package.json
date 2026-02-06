@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "preview:cloudflare": "npm run build && wrangler pages dev ./dist",
     "astro": "astro"
   },
   "dependencies": {
@@ -14,6 +15,7 @@
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/react": "^4.4.2",
     "@astrojs/sitemap": "^3.7.0",
+    "@marsidev/react-turnstile": "^1.4.2",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-form": "^0.1.8",
