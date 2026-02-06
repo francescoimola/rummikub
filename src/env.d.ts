@@ -4,16 +4,14 @@
 type Runtime = import('@astrojs/cloudflare').Runtime<Env>;
 
 interface Env {
-  LOOPS_API_KEY: string;
-  TURNSTILE_SECRET_KEY: string;
+  // No secrets required - newsletter uses public Loops form endpoint
 }
 
 declare namespace App {
-  interface Locals extends Runtime {}
+  interface Locals extends Runtime { }
 }
 
 interface ImportMetaEnv {
-  readonly PUBLIC_TURNSTILE_SITE_KEY: string;
 }
 
 interface ImportMeta {

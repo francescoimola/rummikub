@@ -37,3 +37,8 @@ Thumbs.db
 # Testing
 coverage/
 .claude/
+.deftform-custom.css
+.deftform-test.html
+
+
+
