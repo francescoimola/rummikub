@@ -1,6 +1,6 @@
 {
   "name": "rummikub",
-  "compatibility_date": "2026-01-28",
+  "compatibility_date": "2026-02-06",
   "compatibility_flags": [
     "nodejs_compat",
     "global_fetch_strictly_public"
