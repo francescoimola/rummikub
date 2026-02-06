@@ -1,16 +1,13 @@
 {
   "name": "rummikub",
-  "compatibility_date": "2026-02-05",
+  "compatibility_date": "2026-01-28",
   "compatibility_flags": [
     "nodejs_compat",
     "global_fetch_strictly_public"
   ],
   "main": "./dist/_worker.js/index.js",
-  "assets": {
-    "binding": "ASSETS",
-    "directory": "./dist"
-  },
   "observability": {
     "enabled": true
-  }
+  },
+  "pages_build_output_dir": "./dist"
 }
