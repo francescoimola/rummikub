@@ -29,8 +29,7 @@ import { ButtonLink } from "../../components/ButtonLink";
 import { InnerSection } from "../../components/InnerSection";
 import { TfiFacebook } from "react-icons/tfi";
 import BlogImage from "../../components/mdx/BlogImage.astro";
-import { BlogHeading } from "../../components/mdx/BlogHeading";
-import { BlogParagraph } from "../../components/mdx/BlogParagraph";
+import { CommonMDXComponents } from "../../components/mdx/MDXComponents";
 
 export async function getStaticPaths() {
     const posts = await getCollection("blog");
@@ -46,6 +45,12 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+// 3. Define the component map for MDX
+const components = {
+    ...CommonMDXComponents,
+    img: BlogImage,
+};
 
 // Date Formatting: "31 January, 2023"
 const formattedDate = post.data.publishedDate.toLocaleDateString("en-GB", {
@@ -164,18 +169,8 @@ const relatedPosts = allPosts
                     <!-- Article Content (Right Column) -->
                     <Flex direction="column" gap="8">
                         <!-- Article Body -->
-                        <Flex
-                            direction="column"
-                            gap="5"
-                            style={{ maxWidth: "680px" }}
-                        >
-                            <Content
-                                components={{
-                                    img: BlogImage,
-                                    p: BlogParagraph,
-                                    h2: BlogHeading,
-                                }}
-                            />
+                        <Flex direction="column">
+                            <Content components={components} />
                             <Separator size="4" my="4" />
                         </Flex>
 
