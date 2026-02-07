@@ -309,6 +309,10 @@ figcaption {
     text-wrap: balance;
 }
 
+td {
+    text-wrap: pretty;
+}
+
 p {
     margin-top: 0;
 }
@@ -599,6 +603,16 @@ svg.client-logo {
     width: auto;
     height: clamp(11rem, 19vw, 21rem);
     filter: drop-shadow(0.25rem 0.25rem 0.33rem var(--gray-a3));
+}
+
+.mdx-table td:first-child,
+.mdx-table th:first-child {
+    white-space: nowrap;
+    width: 25cqmin;
+}
+
+.mdx-table:not(:last-child) {
+    margin-bottom: var(--space-5);
 }
 
 /* --- Forms --- */

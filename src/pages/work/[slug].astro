@@ -11,7 +11,7 @@ import { MainGrid } from "../../components/MainGrid";
 import { ProjectInfo } from "../../components/project/ProjectInfo";
 import ProjectImageWrapper from "../../components/project/ProjectImageWrapper.astro";
 import ProjectCanvas from "../../components/project/ProjectCanvas.astro";
-import { ProjectParagraph } from "../../components/project/ProjectParagraph";
+import { CommonMDXComponents } from "../../components/mdx/MDXComponents";
 import { ProjectResults } from "../../components/project/ProjectResults";
 
 // 1. Generate a new path for every collection entry
@@ -33,7 +33,7 @@ const { Content } = await render(entry);
 
 // 3. Define the component map for MDX
 const components = {
-    p: ProjectParagraph,
+    ...CommonMDXComponents,
     img: ProjectImageWrapper,
     ProjectCanvas: ProjectCanvas,
 };
@@ -82,7 +82,7 @@ const components = {
                     }
 
                     {/* MDX Content with Custom Components */}
-                    <Flex direction="column" gap="2">
+                    <Flex direction="column">
                         <Content components={components} />
                     </Flex>
                 </Flex>
