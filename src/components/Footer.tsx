@@ -75,7 +75,7 @@ export const Footer = () => {
                                         <Link href="/selected-works" color="gray" size="2" highContrast={false}>
                                             Selected works
                                         </Link>
-                                        <Link href="/contact" color="gray" size="2" highContrast={false}>
+                                        <Link href="/about#contact" color="gray" size="2" highContrast={false}>
                                             Contact
                                         </Link>
                                         <Link href="/privacy-notice" color="gray" size="2" highContrast={false}>

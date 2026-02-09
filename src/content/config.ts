@@ -9,9 +9,13 @@ const projects = defineCollection({
             slug: z.string(), // URL slug, e.g. "where-have-all-the-monkeys-gone"
             year: z.string(),
             role: z.string(),
+            skills: z.array(z.string()).optional(),
             visitUrl: z.string().optional(),
             visitHeading: z.string().optional(),
             heroDescription: z.string(),
+            caseStudyStatus: z
+                .enum(["coming-soon", "on-request"])
+                .optional(), // If set, project is a draft: appears on homepage with badge, but no individual page is generated
             featuredPosition: z
                 .union([z.literal(1), z.literal(2), z.literal(3)])
                 .optional(), // Pin to position 1, 2, or 3 on homepage

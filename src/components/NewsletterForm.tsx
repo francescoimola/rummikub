@@ -119,6 +119,7 @@ export const NewsletterForm = ({
                                 <Theme
                                     appearance="light"
                                     accentColor="yellow"
+                                    grayColor="olive"
                                     radius="none"
                                     hasBackground={true}
                                     asChild
