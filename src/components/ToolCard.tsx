@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Heading, Text } from "@radix-ui/themes";
+import { Flex, Heading, Text, Box } from "@radix-ui/themes";
 
 interface ToolCardProps {
     title: string;
@@ -17,7 +17,9 @@ export const ToolCard: React.FC<ToolCardProps> = ({ title, description, children
             p="5"
             style={{ backgroundColor: "var(--gray-3)" }}
         >
-            {children}
+            <Box style={{ userSelect: "none" }}>
+                {children}
+            </Box>
             <Flex direction="column" gap="1">
                 <Heading size="3" as="h4" weight="medium">
                     {title}

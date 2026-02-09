@@ -17,10 +17,15 @@ import { ProjectResults } from "../../components/project/ProjectResults";
 // 1. Generate a new path for every collection entry
 export const getStaticPaths = (async () => {
     const projectEntries = await getCollection("projects");
-    return projectEntries.map((entry) => ({
-        params: { slug: entry.data.slug },
-        props: { entry },
-    }));
+
+    // Filter out draft projects (those with caseStudyStatus set)
+    // They appear on homepage but don't get individual pages
+    return projectEntries
+        .filter((entry) => !entry.data.caseStudyStatus)
+        .map((entry) => ({
+            params: { slug: entry.data.slug },
+            props: { entry },
+        }));
 }) satisfies GetStaticPaths;
 
 // 2. Access the entry from the prop
@@ -53,7 +58,7 @@ const components = {
     </Box>
 
     <!-- --- Page Content --- -->
-    <Section slot="page-content" asChild>
+    <Section slot="page-content" asChild pt="0">
         <Theme
             appearance="light"
             accentColor="yellow"

@@ -14,6 +14,7 @@ import {
     Separator,
     Card,
     Section,
+    Grid,
 } from "@radix-ui/themes";
 import { Image } from "astro:assets";
 import { MainGrid } from "../../components/MainGrid";
@@ -82,14 +83,14 @@ const relatedPosts = allPosts
 <Layout backgroundColor="var(--orange-5)" roleFullWidth>
     <!-- Hero Section -->
     <PageHeading slot="heading"> {post.data.title} </PageHeading>
-    <Flex slot="role" justify={{ initial: "start", sm: "end" }} width="100%">
-        <Box width="340px">
+    <Grid slot="role" columns="3" width="100%">
+        <Box gridColumn={{ initial: "span 3", sm: "2 / span 2" }}>
             <AspectRatio ratio={4 / 3}>
                 <Image
                     src={post.data.coverImage}
                     alt={post.data.title}
-                    width={340}
-                    height={255}
+                    widths={[400, 600, 900]}
+                    sizes="(max-width: 640px) 100vw, 450px"
                     style={{
                         objectFit: "cover",
                         width: "100%",
@@ -99,7 +100,7 @@ const relatedPosts = allPosts
                 />
             </AspectRatio>
         </Box>
-    </Flex>
+    </Grid>
     <Flex slot="description" direction="column" justify="between" height="100%">
         {/* Top: Article excerpt */}
 
@@ -140,7 +141,12 @@ const relatedPosts = allPosts
             <!-- Main Content Grid -->
             <MainGrid>
                 <InnerSection showCounter={false}>
-                    <Flex slot="header" direction="column" gap="3">
+                    <Flex
+                        slot="header"
+                        direction="column"
+                        gap="3"
+                        display={{ initial: "none", sm: "flex" }}
+                    >
                         <Heading size="3" color="gray" weight="medium">
                             Share
                         </Heading>
@@ -172,6 +178,32 @@ const relatedPosts = allPosts
                         <Flex direction="column">
                             <Content components={components} />
                             <Separator size="4" my="4" />
+                        </Flex>
+
+                        <!-- Share Section (mobile only) -->
+                        <Flex
+                            direction="column"
+                            gap="3"
+                            display={{ initial: "flex", sm: "none" }}
+                            mt="-4"
+                        >
+                            <Heading size="3" color="gray" weight="medium">
+                                Share
+                            </Heading>
+                            <Flex gap="3" align="center">
+                                <Box className="share-icon">
+                                    <LinkedInLogoIcon />
+                                </Box>
+                                <Box className="share-icon">
+                                    <TwitterLogoIcon />
+                                </Box>
+                                <Box className="share-icon">
+                                    <TfiFacebook />
+                                </Box>
+                                <Box className="share-icon">
+                                    <Link2Icon />
+                                </Box>
+                            </Flex>
                         </Flex>
 
                         <!-- You might also like Section -->

@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import {
     AspectRatio,
+    Badge,
     Box,
     Button,
     Flex,
@@ -13,11 +14,20 @@ import { ArrowRightIcon } from "@radix-ui/react-icons";
 interface Props {
     images?: (string | ImageMetadata)[];
     title?: string;
-    description?: string;
+    skills?: string[];
     href?: string;
+    caseStudyStatus?: "coming-soon" | "on-request";
 }
 
-const { images = [], title, description, href } = Astro.props;
+const { images = [], title, skills = [], href, caseStudyStatus } = Astro.props;
+
+// Badge text based on status
+const statusBadgeText =
+    caseStudyStatus === "coming-soon"
+        ? "Case study coming soon"
+        : caseStudyStatus === "on-request"
+          ? "Available on request"
+          : null;
 
 const PLACEHOLDERS = [
     "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe",
@@ -27,6 +37,7 @@ const PLACEHOLDERS = [
 
 const finalImages = [...images, ...PLACEHOLDERS.slice(images.length, 3)];
 
+const isDraft = !href && caseStudyStatus;
 const Container: any = href ? "a" : Flex;
 const elementProps = href
     ? {
@@ -34,9 +45,10 @@ const elementProps = href
           class: "project-canvas-container project-canvas-link",
       }
     : {
-          class: "project-canvas-container",
+          className: `project-canvas-container${isDraft ? " project-canvas-draft" : ""}`,
           direction: "column",
           gap: "5",
+          tabIndex: isDraft ? 0 : undefined,
       };
 ---
 
@@ -51,15 +63,38 @@ const elementProps = href
                     justify="center"
                     className="project-canvas-image-wrapper"
                 >
-                    <Button
-                        variant="ghost"
-                        tabIndex={-1}
-                        className="hover-button"
-                    >
-                        <ArrowRightIcon
-                            style={{ width: "var(--space-5)", height: "auto" }}
-                        />
-                    </Button>
+                    {/* Status badge - always visible when set */}
+                    {statusBadgeText && (
+                        <Badge
+                            size="1"
+                            color="gray"
+                            variant="soft"
+                            className="project-canvas-status-badge"
+                        >
+                            {statusBadgeText}
+                        </Badge>
+                    )}
+
+                    {/* Hover content: arrow for regular projects, status text for drafts */}
+                    {isDraft ? (
+                        <Text size="2" weight="medium" className="hover-text">
+                            {statusBadgeText}
+                        </Text>
+                    ) : (
+                        <Button
+                            variant="ghost"
+                            tabIndex={-1}
+                            className="hover-button"
+                            highContrast
+                        >
+                            <ArrowRightIcon
+                                style={{
+                                    width: "var(--space-4)",
+                                    height: "auto",
+                                }}
+                            />
+                        </Button>
+                    )}
 
                     <Flex
                         width="120%"
@@ -90,29 +125,39 @@ const elementProps = href
                 </Flex>
             </AspectRatio>
 
-            {/* Title and Description */}
-            {(title || description) && (
-                <Flex direction="column" gap="2">
+            {/* Title and Skills */}
+            {(title || skills.length > 0) && (
+                <Flex
+                    direction="row"
+                    justify="between"
+                    align="baseline"
+                    gapX="6"
+                    gapY="3"
+                    wrap="wrap"
+                >
                     {title && (
                         <Heading
                             as="h2"
                             size="3"
                             weight="medium"
                             highContrast
-                            className="project-canvas-heading"
+                            style={{ alignSelf: "flex-start" }}
                         >
                             {title}
                         </Heading>
                     )}
-                    {description && (
-                        <Text
-                            size="3"
-                            as="p"
-                            wrap="pretty"
-                            className="project-desc-clip"
+                    {skills.length > 0 && (
+                        <Flex
+                            gap="2"
+                            wrap="wrap"
+                            style={{ alignSelf: "flex-start" }}
                         >
-                            {description}
-                        </Text>
+                            {skills.map((skill) => (
+                                <Badge size="2" color="gray" variant="surface">
+                                    {skill}
+                                </Badge>
+                            ))}
+                        </Flex>
                     )}
                 </Flex>
             )}
