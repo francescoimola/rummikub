@@ -32,6 +32,7 @@ Thanks!`;
                     scaling="97%"
                     hasBackground={false}
                     accentColor="gray"
+                    grayColor="olive"
                     radius="none"
                 >
                     <Button size="3" mt="2" variant="outline" style={{ cursor: 'pointer', alignSelf: 'flex-start' }}>
@@ -47,6 +48,7 @@ Thanks!`;
                         scaling="97%"
                         hasBackground={false}
                         accentColor="orange"
+                        grayColor="olive"
                         radius="none"
                     >
                         <Flex direction="column" justify="between" height="100%" gap="var(--space-10)" p={{ initial: "4", sm: "6" }} style={{ backgroundColor: "var(--color-background)" }}>

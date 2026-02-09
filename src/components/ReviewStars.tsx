@@ -10,7 +10,7 @@ export default function ReviewStars({ count = 5 }: Props) {
 
     return (
 
-        <Text size="2" color="gray" highContrast>
+        <Text size="2" color="gray" highContrast style={{ userSelect: "none" }}>
             <Flex gap="1" align="center">
                 {Array.from({ length: starCount }).map((_, i) => (
                     <StarFilledIcon key={i} />
