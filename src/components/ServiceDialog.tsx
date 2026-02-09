@@ -114,18 +114,21 @@ export function ServiceDialog({ type, cardIcon }: ServiceDialogProps) {
                                     <Text
                                         size="3"
                                         as="p"
+                                        wrap="pretty"
                                     >
                                         {content.descriptionP1}
                                     </Text>
                                     {content.descriptionP2 && <Text
                                         size="3"
                                         as="p"
+                                        wrap="pretty"
                                     >
                                         {content.descriptionP2}
                                     </Text>}
                                     {content.descriptionP3 && <Text
                                         size="3"
                                         as="p"
+                                        wrap="pretty"
                                     >
                                         {content.descriptionP3}
                                     </Text>}

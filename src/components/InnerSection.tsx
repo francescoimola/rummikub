@@ -7,6 +7,7 @@ interface InnerSectionProps {
     showCounter?: boolean;
     sectionId?: string;
     children?: ReactNode;
+    headerBottomOnMobile?: boolean;
 }
 
 export function InnerSection({
@@ -14,8 +15,23 @@ export function InnerSection({
     header,
     showCounter = true,
     sectionId,
-    children
+    children,
+    headerBottomOnMobile = false
 }: InnerSectionProps) {
+    const headerContent = header ?? (
+        <Heading
+            size={{ initial: "6", sm: "3" }}
+            weight="medium"
+            as="h2"
+            highContrast
+        >
+            {showCounter && (
+                <Text as="span" className="section-counter-number" />
+            )}
+            {title}
+        </Heading>
+    );
+
     return (
         <Grid
             asChild
@@ -23,30 +39,26 @@ export function InnerSection({
             style={{ gridColumn: "1 / -1", gridTemplateColumns: "subgrid" }}
         >
             <section id={sectionId}>
-                {/* Section Header */}
-                <Box className="section-header">
-                    {header ? (
-                        header
-                    ) : (
-                        <Heading
-                            size={{ initial: "6", sm: "3" }}
-                            weight="medium"
-                            as="h2"
-                            highContrast
-                        >
-                            {showCounter && (
-                                <Text
-                                    as="span"
-                                    className="section-counter-number"
-                                />
-                            )}
-                            {title}
-                        </Heading>
-                    )}
+                {/* Section Header - top position (hidden on mobile if headerBottomOnMobile) */}
+                <Box
+                    className="section-header"
+                    display={headerBottomOnMobile ? { initial: "none", sm: "block" } : "block"}
+                >
+                    {headerContent}
                 </Box>
 
                 {/* Section Content */}
                 {children}
+
+                {/* Section Header - bottom position (only on mobile when headerBottomOnMobile) */}
+                {headerBottomOnMobile && (
+                    <Box
+                        className="section-header"
+                        display={{ initial: "block", sm: "none" }}
+                    >
+                        {headerContent}
+                    </Box>
+                )}
             </section>
         </Grid>
     );

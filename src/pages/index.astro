@@ -31,27 +31,6 @@ import { BottomCTA } from "../components/BottomCTA";
 import { getFeaturedProjects } from "../utils/getFeaturedProjects";
 
 const featuredProjects = await getFeaturedProjects();
-
-const limitDescription = (text: string) => {
-  if (!text) return "";
-  const CHAR_LIMIT = 215;
-  const WORD_LIMIT = 40;
-
-  let truncated = text;
-
-  // Character limit
-  if (truncated.length > CHAR_LIMIT) {
-    truncated = truncated.substring(0, CHAR_LIMIT).trim() + "...";
-  }
-
-  // Word limit
-  const words = truncated.split(/\s+/);
-  if (words.length > WORD_LIMIT) {
-    truncated = words.slice(0, WORD_LIMIT).join(" ") + "...";
-  }
-
-  return truncated;
-};
 ---
 
 <Layout backgroundColor="var(--yellow-3)" roleFullWidth>
@@ -91,7 +70,11 @@ const limitDescription = (text: string) => {
   </Flex>
 
   <!-- --- Page Content --- -->
-  <Section slot="page-content" style={{ backgroundColor: "var(--gray-1)" }}>
+  <Section
+    slot="page-content"
+    style={{ backgroundColor: "var(--gray-1)" }}
+    pt="0"
+  >
     <!-- Main Content Grid -->
     <MainGrid>
       <!-- --- Selected Work --- -->
@@ -102,8 +85,13 @@ const limitDescription = (text: string) => {
               <ProjectCanvas
                 images={project.data.coverImages}
                 title={project.data.title}
-                description={limitDescription(project.data.heroDescription)}
-                href={`/work/${project.data.slug}`}
+                skills={project.data.skills ?? []}
+                href={
+                  project.data.caseStudyStatus
+                    ? undefined
+                    : `/work/${project.data.slug}`
+                }
+                caseStudyStatus={project.data.caseStudyStatus}
               />
             ))
           }

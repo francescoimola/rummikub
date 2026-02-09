@@ -2,13 +2,13 @@ import { Flex, Box, Heading } from "@radix-ui/themes";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { type ReactNode, type ComponentPropsWithoutRef, forwardRef } from "react";
 
-export interface ServiceCardProps extends ComponentPropsWithoutRef<"div"> {
+export interface ServiceCardProps extends ComponentPropsWithoutRef<"button"> {
     title: string;
     href?: string;
     icon?: ReactNode;
 }
 
-export const ServiceCard = forwardRef<HTMLDivElement | HTMLAnchorElement, ServiceCardProps>(
+export const ServiceCard = forwardRef<HTMLButtonElement | HTMLAnchorElement, ServiceCardProps>(
     ({ title, href, icon, style, className, ...props }, ref) => {
         const content = (
             <Flex
@@ -42,7 +42,6 @@ export const ServiceCard = forwardRef<HTMLDivElement | HTMLAnchorElement, Servic
                     style={{
                         textDecoration: "none",
                         color: "inherit",
-                        transition: "filter 0.2s ease",
                         ...style
                     }}
                     {...(props as ComponentPropsWithoutRef<"a">)}
@@ -53,20 +52,23 @@ export const ServiceCard = forwardRef<HTMLDivElement | HTMLAnchorElement, Servic
         }
 
         return (
-            <div
-                ref={ref as React.Ref<HTMLDivElement>}
+            <button
+                type="button"
+                ref={ref as React.Ref<HTMLButtonElement>}
                 className={`service-card ${className || ""}`}
                 style={{
+                    border: "none",
+                    font: "inherit",
+                    textAlign: "inherit",
                     textDecoration: "none",
                     color: "inherit",
-                    transition: "filter 0.2s ease",
                     cursor: "pointer",
                     ...style
                 }}
                 {...props}
             >
                 {content}
-            </div>
+            </button>
         );
     }
 );

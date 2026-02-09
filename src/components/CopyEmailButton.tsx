@@ -20,7 +20,7 @@ export const CopyEmailButton = forwardRef<HTMLButtonElement, CopyEmailButtonProp
         };
 
         return (
-            <Button {...props} ref={ref} onClick={handleCopy}>
+            <Button {...props} ref={ref} onClick={handleCopy} style={{ userSelect: "none", ...props.style }}>
                 {copied ? <em>{successLabel}</em> : (children ?? label)}
             </Button>
         );
