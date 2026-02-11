@@ -2,7 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import PageHeading from "../../components/PageHeading";
 import ProjectCanvas from "../../components/project/ProjectCanvas.astro";
-import { Text, Flex, Grid, Section } from "@radix-ui/themes";
+import { Text, Flex, Grid, Section, Theme } from "@radix-ui/themes";
 import { InnerSection } from "../../components/InnerSection";
 import { MainGrid } from "../../components/MainGrid";
 import { getAllPublishedProjects } from "../../utils/getAllPublishedProjects";
@@ -10,7 +10,11 @@ import { getAllPublishedProjects } from "../../utils/getAllPublishedProjects";
 const projects = await getAllPublishedProjects();
 ---
 
-<Layout backgroundColor="var(--yellow-5)">
+<Layout
+    backgroundColor="var(--brand-surface-dark-mustard)"
+    appearance="dark"
+    roleFullWidth
+>
     <!-- Slot: Main Heading -->
     <PageHeading slot="heading">Selected Work</PageHeading>
 
@@ -25,32 +29,39 @@ const projects = await getAllPublishedProjects();
     </Flex>
 
     <!-- Page Content -->
-    <Section
-        slot="page-content"
-        style={{ backgroundColor: "var(--gray-1)" }}
-        pt="0"
-    >
-        <MainGrid>
-            <InnerSection title="All projects" showCounter={false}>
-                <Grid columns="1" gapY="8">
-                    {
-                        projects.map((project) => (
-                            <ProjectCanvas
-                                images={project.data.coverImages}
-                                layout={project.data.coverLayout}
-                                title={project.data.title}
-                                skills={project.data.skills ?? []}
-                                href={
-                                    project.data.caseStudyStatus
-                                        ? undefined
-                                        : `/work/${project.data.slug}`
-                                }
-                                caseStudyStatus={project.data.caseStudyStatus}
-                            />
-                        ))
-                    }
-                </Grid>
-            </InnerSection>
-        </MainGrid>
+    <Section slot="page-content" asChild>
+        <Theme
+            appearance="light"
+            accentColor="orange"
+            radius="none"
+            grayColor="olive"
+            scaling="97%"
+            style={{ backgroundColor: "var(--gray-1)" }}
+        >
+            <MainGrid>
+                <InnerSection title="All projects" showCounter={false}>
+                    <Grid columns="1" gapY="8">
+                        {
+                            projects.map((project) => (
+                                <ProjectCanvas
+                                    images={project.data.coverImages}
+                                    layout={project.data.coverLayout}
+                                    title={project.data.title}
+                                    skills={project.data.skills ?? []}
+                                    href={
+                                        project.data.caseStudyStatus
+                                            ? undefined
+                                            : `/work/${project.data.slug}`
+                                    }
+                                    caseStudyStatus={
+                                        project.data.caseStudyStatus
+                                    }
+                                />
+                            ))
+                        }
+                    </Grid>
+                </InnerSection>
+            </MainGrid>
+        </Theme>
     </Section>
 </Layout>

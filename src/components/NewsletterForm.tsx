@@ -18,17 +18,19 @@ const NewsletterSchema = Yup.object().shape({
 });
 
 // Custom Radix TextField that works with Formik
-const EmailField = ({ name }: { name: string }) => {
+const EmailField = ({ name, id }: { name: string; id?: string }) => {
     const [field] = useField(name);
     return (
         <TextField.Root
             {...field}
+            id={id || name}
             placeholder="Your email"
             size="3"
             variant="surface"
             radius="none"
             type="email"
             autoComplete="email"
+            aria-label="Email address for newsletter"
             style={{
                 padding: 0,
                 minHeight: "auto",
@@ -98,7 +100,7 @@ export const NewsletterForm = ({
                         <Flex direction="column" gap="2" width="100%">
                             <Flex gap="2" align="start" width="100%">
                                 <Box flexGrow="1">
-                                    <EmailField name="email" />
+                                    <EmailField name="email" id="newsletter-email" />
                                 </Box>
 
                                 {/* Honeypot field - invisible to humans, bots fill it */}
@@ -140,41 +142,44 @@ export const NewsletterForm = ({
                                 </Theme>
                             </Flex>
 
-                            {/* Validation error */}
-                            {errors.email && touched.email && (
-                                <Text color="red" size="2">
-                                    {errors.email}
-                                </Text>
-                            )}
-
-                            {/* Success message */}
-                            {submitStatus.success && (
-                                <Card variant="ghost" size="2" mt="2" style={{ margin: "unset", backgroundColor: "var(--gray-a3)" }}>
-                                    <Text size="2" weight="bold" style={{ color: "var(--accent-12)" }}>
-                                        Wonderful, you're in!
+                            {/* Status messages with aria-live for screen reader announcements */}
+                            <Box aria-live="polite" aria-atomic="true">
+                                {/* Validation error */}
+                                {errors.email && touched.email && (
+                                    <Text color="red" size="2">
+                                        {errors.email}
                                     </Text>
-                                </Card>
-                            )}
+                                )}
 
-                            {/* Server error */}
-                            {submitStatus.error && (
-                                <Card variant="ghost" size="2" mt="2" style={{ margin: "unset", backgroundColor: "var(--gray-a3)" }}>
-                                    <Flex direction="column" justify="center" gap="4" wrap="wrap">
-                                        <Text color="red" size="2" trim="end" weight="medium">
-                                            {submitStatus.error}
+                                {/* Success message */}
+                                {submitStatus.success && (
+                                    <Card variant="ghost" size="2" mt="2" style={{ margin: "unset", backgroundColor: "var(--gray-a3)" }}>
+                                        <Text size="2" weight="bold" style={{ color: "var(--accent-12)" }}>
+                                            Wonderful, you're in!
                                         </Text>
-                                        <Text size="2" color="gray" trim="both">
-                                            Having trouble? I want to fix that. Could you drop me a message?{" "}
-                                            <CopyEmailButton
-                                                variant="surface"
-                                                size="1"
-                                                ml="2"
-                                                style={{ display: "inline-flex" }}
-                                            />
-                                        </Text>
-                                    </Flex>
-                                </Card>
-                            )}
+                                    </Card>
+                                )}
+
+                                {/* Server error */}
+                                {submitStatus.error && (
+                                    <Card variant="ghost" size="2" mt="2" style={{ margin: "unset", backgroundColor: "var(--gray-a3)" }}>
+                                        <Flex direction="column" justify="center" gap="4" wrap="wrap">
+                                            <Text color="red" size="2" trim="end" weight="medium">
+                                                {submitStatus.error}
+                                            </Text>
+                                            <Text size="2" color="gray" trim="both">
+                                                Having trouble? I want to fix that. Could you drop me a message?{" "}
+                                                <CopyEmailButton
+                                                    variant="surface"
+                                                    size="1"
+                                                    ml="2"
+                                                    style={{ display: "inline-flex" }}
+                                                />
+                                            </Text>
+                                        </Flex>
+                                    </Card>
+                                )}
+                            </Box>
                         </Flex>
                     </Form>
                 )}
