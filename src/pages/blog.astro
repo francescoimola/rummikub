@@ -49,7 +49,7 @@ const uniqueTags = [...new Set(allPosts.flatMap((p) => p.data.tags))];
         </Text>
         <BlogFilters tags={uniqueTags} client:load />
     </Flex>
-    <Section slot="page-content" asChild>
+    <Section slot="page-content" pt="0" asChild>
         <Theme
             appearance="light"
             accentColor="orange"

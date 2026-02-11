@@ -104,13 +104,17 @@ const faqItems = [
             Scroll to learn more <ArrowDownIcon />
         </ButtonLink>
     </Flex>
-    <Section slot="page-content" style={{ backgroundColor: "var(--gray-1)" }}>
+    <Section
+        slot="page-content"
+        pt="0"
+        style={{ backgroundColor: "var(--gray-1)" }}
+    >
         <MainGrid>
             <InnerSection
                 title="Does any of this sound familiar?"
                 sectionId="why"
             >
-                <Flex direction="column" gap="8">
+                <Flex direction="column" gap="9">
                     <Flex direction="column" gap="3">
                         <Text size="3" as="p"
                             >You sense enquiries or sales are leaking somewhere
@@ -132,7 +136,7 @@ const faqItems = [
                             site should be able to answer.</Text
                         >
                     </Flex>
-                    <Text size="3" as="p"
+                    <Text size="3" as="p" color="gray"
                         >If you nodded at any of these, booking a consultation
                         will tell you exactly what's going wrong, what you're
                         doing well, and what needs tweaking.</Text

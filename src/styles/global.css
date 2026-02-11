@@ -679,6 +679,14 @@ svg.client-logo {
     border: thin solid var(--gray-a3);
 }
 
+.project-canvas-plain-image {
+    height: clamp(10rem, 60% + 3vw, 80%);
+    width: auto;
+    max-width: 85%;
+    object-fit: contain;
+    filter: drop-shadow(0.25rem 0.25rem 0.5rem var(--gray-a4)) drop-shadow(0 0 0.5px var(--gray-a4)) drop-shadow(0 0 0.5px var(--gray-a4));
+}
+
 .portfolio-image {
     flex-shrink: 0;
     width: auto;

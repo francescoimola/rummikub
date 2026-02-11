@@ -100,7 +100,10 @@ const isoDate = post.data.publishedDate.toISOString();
                 "@type": "Article",
                 headline: post.data.title,
                 description: post.data.excerpt,
-                image: new URL(coverImageSrc, Astro.site || Astro.url).toString(),
+                image: new URL(
+                    coverImageSrc,
+                    Astro.site || Astro.url,
+                ).toString(),
                 datePublished: isoDate,
                 dateModified: isoDate,
                 author: SEO.person,
@@ -166,7 +169,7 @@ const isoDate = post.data.publishedDate.toISOString();
         </Flex>
     </Flex>
     <!-- --- Page Content --- -->
-    <Section slot="page-content" asChild>
+    <Section slot="page-content" asChild pt="0">
         <Theme
             appearance="light"
             accentColor="yellow"
