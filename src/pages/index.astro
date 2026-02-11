@@ -16,7 +16,8 @@ import {
 import { ArrowRightIcon, ArrowTopRightIcon } from "@radix-ui/react-icons";
 import { ServiceCard } from "../components/ServiceCard";
 import { ServiceDialog } from "../components/ServiceDialog";
-import { EXTERNAL_URLS } from "../constants";
+import { EXTERNAL_URLS, SEO } from "../constants";
+import JsonLd from "../components/JsonLd.astro";
 
 import ConsultingIcon from "../components/icons/ConsultingIcon.astro";
 import WebDesignIcon from "../components/icons/WebDesignIcon.astro";
@@ -34,7 +35,24 @@ import { getFeaturedProjects } from "../utils/getFeaturedProjects";
 const featuredProjects = await getFeaturedProjects();
 ---
 
-<Layout backgroundColor="var(--yellow-3)" roleFullWidth>
+<Layout
+  title={SEO.pages.home.title}
+  description={SEO.pages.home.description}
+  backgroundColor="var(--yellow-3)"
+  roleFullWidth
+>
+  <Fragment slot="structured-data">
+    <JsonLd
+      data={{
+        "@type": "WebSite",
+        name: "Francesco Imola",
+        url: "https://francescoimola.com",
+        description: SEO.pages.home.description,
+      }}
+    />
+    <JsonLd data={SEO.person} />
+  </Fragment>
+
   <!-- --- Hero --- -->
 
   <!-- Slot: Main Heading -->

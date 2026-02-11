@@ -13,6 +13,8 @@ import ProjectImage from "../../components/project/ProjectImage.astro";
 import ProjectCanvas from "../../components/project/ProjectCanvas.astro";
 import { CommonMDXComponents } from "../../components/mdx/MDXComponents";
 import { ProjectResults } from "../../components/project/ProjectResults";
+import { SEO } from "../../constants";
+import JsonLd from "../../components/JsonLd.astro";
 
 // 1. Generate a new path for every collection entry
 export const getStaticPaths = (async () => {
@@ -42,13 +44,39 @@ const components = {
     img: ProjectImage,
     ProjectCanvas: ProjectCanvas,
 };
+
+// SEO metadata
+const seoTitle = `${entry.data.title} | Francesco Imola`;
+const seoDescription = entry.data.heroDescription;
+let coverImageSrc: string | undefined;
+if (entry.data.coverImages && entry.data.coverImages.length > 0) {
+    const firstImage = entry.data.coverImages[0];
+    coverImageSrc =
+        typeof firstImage === "string" ? firstImage : firstImage.src;
+}
 ---
 
 <Layout
+    title={seoTitle}
+    description={seoDescription}
+    image={coverImageSrc}
     backgroundColor="var(--brand-surface-dark-olive)"
     appearance="dark"
     roleFullWidth
 >
+    <Fragment slot="structured-data">
+        <JsonLd
+            data={{
+                "@type": "CreativeWork",
+                name: entry.data.title,
+                description: entry.data.heroDescription,
+                creator: SEO.person,
+                dateCreated: entry.data.year,
+                ...(entry.data.visitUrl && { url: entry.data.visitUrl }),
+            }}
+        />
+    </Fragment>
+
     <!-- Hero Section -->
     <PageHeading slot="heading"> {entry.data.title} </PageHeading>
     <Box slot="description" asChild>

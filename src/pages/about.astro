@@ -35,7 +35,8 @@ import { ContentCard } from "../components/ContentCard";
 import { AccordionSection } from "../components/AccordionSection";
 import { ArrowDownIcon } from "@radix-ui/react-icons";
 import { ButtonLink } from "../components/ButtonLink";
-import { EXTERNAL_URLS, SITE_DATA } from "../constants";
+import { EXTERNAL_URLS, SITE_DATA, SEO } from "../constants";
+import JsonLd from "../components/JsonLd.astro";
 
 const faqItems = [
     {
@@ -73,7 +74,16 @@ const faqItems = [
 ];
 ---
 
-<Layout backgroundColor="var(--orange-5)" roleFullWidth>
+<Layout
+    title={SEO.pages.about.title}
+    description={SEO.pages.about.description}
+    backgroundColor="var(--orange-5)"
+    roleFullWidth
+>
+    <Fragment slot="structured-data">
+        <JsonLd data={SEO.person} />
+    </Fragment>
+
     <PageHeading slot="heading" className="page-heading">
         Designer and marketer based in Kent, England
     </PageHeading>

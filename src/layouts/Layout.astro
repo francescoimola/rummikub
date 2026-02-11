@@ -18,12 +18,18 @@ import { ButtonLink } from "../components/ButtonLink";
 
 interface Props extends ComponentProps<typeof Theme> {
     title?: string;
+    description?: string;
+    image?: string;
+    ogType?: "website" | "article";
     backgroundColor?: string;
     roleFullWidth?: boolean;
 }
 
 const {
     title,
+    description,
+    image,
+    ogType,
     backgroundColor = "var(--yellow-3)",
     roleFullWidth = false,
     ...themeProps
@@ -31,7 +37,9 @@ const {
 ---
 
 <html lang="en">
-    <Head title={title} />
+    <Head title={title} description={description} image={image} ogType={ogType}>
+        <slot name="structured-data" slot="structured-data" />
+    </Head>
     <body>
         <!-- Theme scaling at 97% is a UI preference with negligible accessibility impact -->
         <Theme

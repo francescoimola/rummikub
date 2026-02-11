@@ -11,7 +11,8 @@ import {
     Section,
     Link,
 } from "@radix-ui/themes";
-import { EXTERNAL_URLS } from "../constants";
+import { EXTERNAL_URLS, SEO } from "../constants";
+import JsonLd from "../components/JsonLd.astro";
 
 import {
     ArrowDownIcon,
@@ -59,7 +60,28 @@ const faqItems = [
 ];
 ---
 
-<Layout backgroundColor="var(--orange-5)" roleFullWidth>
+<Layout
+    title={SEO.pages.consultations.title}
+    description={SEO.pages.consultations.description}
+    backgroundColor="var(--orange-5)"
+    roleFullWidth
+>
+    <Fragment slot="structured-data">
+        <JsonLd
+            data={{
+                "@type": "Service",
+                name: "Website Consultations",
+                description: SEO.pages.consultations.description,
+                provider: SEO.person,
+                offers: {
+                    "@type": "Offer",
+                    price: "225",
+                    priceCurrency: "GBP",
+                },
+            }}
+        />
+    </Fragment>
+
     <!-- Hero Section -->
     <PageHeading slot="heading"> Website consultations </PageHeading>
     <Text slot="role" size="3" weight="medium">

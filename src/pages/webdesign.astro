@@ -3,7 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import PageHeading from "../components/PageHeading";
 import { Image } from "astro:assets";
 import { Text, Flex, Theme, Section, Box, Grid, Card } from "@radix-ui/themes";
-import { EXTERNAL_URLS } from "../constants";
+import { EXTERNAL_URLS, SEO } from "../constants";
+import JsonLd from "../components/JsonLd.astro";
 import {
     ArrowDownIcon,
     ArrowRightIcon,
@@ -55,7 +56,27 @@ import tca from "../assets/tca_megamenu.png";
 import { BottomCTA } from "../components/BottomCTA";
 ---
 
-<Layout backgroundColor="var(--yellow-5)" roleFullWidth>
+<Layout
+    title={SEO.pages.webdesign.title}
+    description={SEO.pages.webdesign.description}
+    backgroundColor="var(--yellow-5)"
+    roleFullWidth
+>
+    <Fragment slot="structured-data">
+        <JsonLd
+            data={{
+                "@type": "Service",
+                name: "Web Design & Development",
+                description: SEO.pages.webdesign.description,
+                provider: SEO.person,
+                areaServed: {
+                    "@type": "Place",
+                    name: "Kent, United Kingdom",
+                },
+            }}
+        />
+    </Fragment>
+
     <!-- Hero Section -->
     <Flex direction="column" gap="4" slot="heading">
         <PageHeading>
