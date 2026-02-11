@@ -81,9 +81,16 @@ You have access to specialized tools to assist in development:
 ### 9. Design Tokens
 Defined in `src/styles/global.css`:
 - **Extended Spacing**: `--space-10` (5rem) through `--space-14` (30rem) for dramatic layouts
-- **Scaling**: Theme uses `scaling="97%"` for slightly condensed UI
+- **Scaling**: Theme uses `scaling="97%"` for slightly condensed UI — a minimalist UI preference with negligible accessibility impact
 - **Typography**: `Ronzino` font family (Regular, Medium, Bold + Italics)
 - **Colors**: Yellow/green (primary), Orange (secondary accent via `color="orange"`), P3 support included
+
+#### 9.1 Custom Color Scales
+The project uses custom `--yellow-*` and `--orange-*` color scales (defined in `global.css`) instead of Radix's `--accent-*` tokens.
+
+**Rationale:** Radix accent tokens (`--accent-*`) are contextual and resolve based on the nearest `<Theme accentColor="...">` wrapper. This project uses multiple nested Theme components (in `ServiceDialog`, `ContactForm`, `Footer`, `NewsletterForm`) with different `accentColor` settings. Using `--accent-*` would produce inconsistent colors depending on DOM location.
+
+Custom scales ensure color consistency regardless of Theme wrapper nesting.
 
 ### 10. Code & CSS Strategy
 - **Self-Documenting**: Descriptive names over comments. Follow existing patterns.

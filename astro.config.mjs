@@ -32,4 +32,9 @@ export default defineConfig({
     imageService: 'compile',
   }),
   output: 'server',
+  vite: {
+    esbuild: {
+      drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : [],
+    },
+  },
 });
