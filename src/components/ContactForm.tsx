@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { EXTERNAL_URLS } from "../constants";
 import { Formik, Form, Field, useField, useFormikContext } from "formik";
 import * as Yup from "yup";
 import {
@@ -148,11 +149,11 @@ const TermsCheckbox = () => {
             />
             <Text as="label" htmlFor="terms" size="2">
                 I accept the{" "}
-                <Link href="/terms" color="gray" underline="always">
+                <Link href={EXTERNAL_URLS.termsOfBusiness} color="gray" underline="always">
                     terms
                 </Link>{" "}
                 and{" "}
-                <Link href="/privacy-notice" color="gray" underline="always">
+                <Link href={EXTERNAL_URLS.privacyNotice} color="gray" underline="always">
                     privacy notice
                 </Link>
             </Text>
@@ -203,9 +204,9 @@ export const ContactForm = () => {
         }
 
         try {
-            // Build FormData and submit directly to Web3Forms
+            // Build FormData and submit to server-side API
             const formData = new FormData();
-            formData.append("access_key", "REDACTED_API_KEY");
+
             formData.append("subject", `New Contact Form: ${values.service}`);
             formData.append("from_name", values.lastName ? `${values.firstName} ${values.lastName}` : values.firstName);
             formData.append("replyto", values.email);
@@ -216,7 +217,8 @@ export const ContactForm = () => {
             formData.append("role", values.roles.length > 0 ? values.roles.join(", ") : "Not specified");
             formData.append("message", values.message);
 
-            const response = await fetch("https://api.web3forms.com/submit", {
+            // Send to our server-side API route which handles the Web3Forms submission securely
+            const response = await fetch("/api/contact", {
                 method: "POST",
                 body: formData,
             });

@@ -11,6 +11,7 @@ import {
     Section,
     Link,
 } from "@radix-ui/themes";
+import { EXTERNAL_URLS } from "../constants";
 
 import {
     ArrowDownIcon,
@@ -276,7 +277,7 @@ const faqItems = [
                         immediately.</Text
                     >
                     <ButtonLink
-                        href="https://cal.com/francescoimola/website-consultation"
+                        href={EXTERNAL_URLS.calendar.consultation}
                         size="3"
                         variant="solid"
                         external
@@ -288,7 +289,7 @@ const faqItems = [
                     </ButtonLink>
                     <Text size="2" as="p" color="gray" wrap="pretty"
                         >Not sure yet? <Link
-                            href="https://cal.com/francescoimola/intro"
+                            href={EXTERNAL_URLS.calendar.intro}
                             target="_blank"
                             rel="noopener noreferrer"
                             color="gray"
@@ -320,8 +321,7 @@ const faqItems = [
                             {
                                 text: "You don't already have a website and just want to chat about ideas. It's better to book a free intro instead.",
                                 linkText: "book a free intro",
-                                linkHref:
-                                    "https://cal.com/francescoimola/intro",
+                                linkHref: EXTERNAL_URLS.calendar.intro,
                             },
                         ]}
                     />
@@ -364,7 +364,7 @@ const faqItems = [
     >
         <Flex justify="center" align="start" gap="4" wrap="wrap">
             <ButtonLink
-                href="https://cal.com/francescoimola/website-consultation"
+                href={EXTERNAL_URLS.calendar.consultation}
                 size={{ initial: "3", sm: "4" }}
                 external
                 highContrast
