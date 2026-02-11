@@ -142,7 +142,7 @@ export function ServiceDialog({ type, cardIcon }: ServiceDialogProps) {
                                         <Card key={index} variant="surface">
                                             <Flex direction="column" gap="var(--space-10)" p="3" height="100%" justify="between" align="start">
                                                 <Flex direction="column" gap="4">
-                                                    <Heading size="3">{option.title}</Heading>
+                                                    <Heading as="h4" size="3">{option.title}</Heading>
                                                     <Text size="2" color="gray" as="p" style={{ textWrap: "balance" }}>
                                                         {option.description}
                                                     </Text>

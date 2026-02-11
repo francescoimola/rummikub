@@ -68,8 +68,6 @@ const elementProps = href
                         justify="center"
                         width="100%"
                         height="100%"
-                        py="9"
-                        px={{ initial: "4", sm: "9" }}
                         className="project-canvas-image-wrapper"
                     >
                         {/* Status badge - always visible when set */}
@@ -115,27 +113,13 @@ const elementProps = href
                                     src={images[0]}
                                     alt=""
                                     inferSize={true}
-                                    style={{
-                                        height: "100%",
-                                        width: "auto",
-                                        maxWidth: "100%",
-                                        objectFit: "contain",
-                                        objectPosition: "top",
-                                        filter: "drop-shadow(0.25rem 0.25rem 0.5rem var(--gray-a4)) drop-shadow(0 0 0.5px var(--gray-a4)) drop-shadow(0 0 0.5px var(--gray-a4))",
-                                    }}
+                                    class="project-canvas-plain-image"
                                 />
                             ) : (
                                 <Image
                                     src={images[0]}
                                     alt=""
-                                    style={{
-                                        height: "100%",
-                                        width: "auto",
-                                        maxWidth: "100%",
-                                        objectFit: "contain",
-                                        objectPosition: "top",
-                                        filter: "drop-shadow(0.25rem 0.25rem 0.5rem var(--gray-a4)) drop-shadow(0 0 0.5px var(--gray-a4)) drop-shadow(0 0 0.5px var(--gray-a4))",
-                                    }}
+                                    class="project-canvas-plain-image"
                                 />
                             ))}
                     </Flex>

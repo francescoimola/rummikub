@@ -1,4 +1,4 @@
-import * as Form from "@radix-ui/react-form";
+import { useState } from "react";
 import {
     Grid,
     Flex,
@@ -15,6 +15,7 @@ import {
 import { Link } from "@radix-ui/themes";
 import * as Yup from "yup";
 import { Formik, useField, useFormikContext, Field } from "formik";
+import { EXTERNAL_URLS } from "../constants";
 
 // Validation schema
 const ContactSchema = Yup.object().shape({
@@ -166,6 +167,58 @@ const TermsCheckbox = () => {
 };
 
 export const ContactForm = () => {
+    const [submitStatus, setSubmitStatus] = useState<{ success: boolean; error: string | null }>({
+        success: false,
+        error: null,
+    });
+
+    const handleSubmit = async (
+        values: {
+            firstName: string;
+            lastName: string;
+            email: string;
+            phone: string;
+            service: string;
+            roles: string[];
+            message: string;
+            acceptedTerms: boolean;
+            botcheck: string;
+        },
+        { setSubmitting, resetForm }: { setSubmitting: (isSubmitting: boolean) => void; resetForm: () => void }
+    ) => {
+        setSubmitStatus({ success: false, error: null });
+
+        try {
+            const formData = new FormData();
+            formData.append("firstName", values.firstName);
+            formData.append("lastName", values.lastName);
+            formData.append("email", values.email);
+            formData.append("phone", values.phone);
+            formData.append("service", values.service);
+            formData.append("roles", values.roles.join(", "));
+            formData.append("message", values.message);
+            formData.append("botcheck", values.botcheck);
+
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                body: formData,
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                setSubmitStatus({ success: true, error: null });
+                resetForm();
+            } else {
+                setSubmitStatus({ success: false, error: data.error || "Something went wrong. Please try again." });
+            }
+        } catch {
+            setSubmitStatus({ success: false, error: "Network error. Please check your connection and try again." });
+        } finally {
+            setSubmitting(false);
+        }
+    };
+
     return (
         <Theme
             accentColor="yellow"
@@ -192,7 +245,7 @@ export const ContactForm = () => {
                 onSubmit={handleSubmit}
             >
                 {({ isSubmitting, errors, touched }) => (
-                    <Form style={{ marginTop: "var(--space-8)" }}>
+                    <form style={{ marginTop: "var(--space-8)" }}>
                         <Grid columns={{ initial: "1", md: "2" }} gap="5">
                             {/* First Name */}
                             <Flex direction="column" gap="1">
@@ -326,7 +379,7 @@ export const ContactForm = () => {
                                 )}
                             </Box>
                         </Grid>
-                    </Form>
+                    </form>
                 )}
             </Formik>
         </Theme>
