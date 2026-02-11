@@ -10,6 +10,7 @@ import {
     Box,
 } from "@radix-ui/themes";
 import NewsletterForm from "./NewsletterForm";
+import { EXTERNAL_URLS, SITE_DATA } from "../constants";
 
 // Force rebuild: Footer update verification
 export const Footer = () => {
@@ -78,10 +79,10 @@ export const Footer = () => {
                                         <Link href="/about#contact" color="gray" size="2" highContrast={false}>
                                             Contact
                                         </Link>
-                                        <Link href="/privacy-notice" color="gray" size="2" highContrast={false}>
+                                        <Link href={EXTERNAL_URLS.privacyNotice} target="_blank" rel="noopener noreferrer" color="gray" size="2" highContrast={false}>
                                             Privacy Notice
                                         </Link>
-                                        <Link href="/terms-of-business" color="gray" size="2" highContrast={false}>
+                                        <Link href={EXTERNAL_URLS.termsOfBusiness} target="_blank" rel="noopener noreferrer" color="gray" size="2" highContrast={false}>
                                             Terms of Business
                                         </Link>
                                     </Flex>
@@ -111,16 +112,16 @@ export const Footer = () => {
                                         Elsewhere
                                     </Heading>
                                     <Flex direction="column" gap="1">
-                                        <Link href="https://substack.com" target="_blank" rel="noopener noreferrer" color="gray" size="2" highContrast={false}>
+                                        <Link href={EXTERNAL_URLS.socials.substack} target="_blank" rel="noopener noreferrer" color="gray" size="2" highContrast={false}>
                                             Substack
                                         </Link>
-                                        <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" color="gray" size="2" highContrast={false}>
+                                        <Link href={EXTERNAL_URLS.socials.linkedin} target="_blank" rel="noopener noreferrer" color="gray" size="2" highContrast={false}>
                                             Linkedin
                                         </Link>
-                                        <Link href="https://nina.market" target="_blank" rel="noopener noreferrer" color="gray" size="2" highContrast={false}>
+                                        <Link href={EXTERNAL_URLS.socials.nina} target="_blank" rel="noopener noreferrer" color="gray" size="2" highContrast={false}>
                                             Nina
                                         </Link>
-                                        <Link href="https://sublime.app" target="_blank" rel="noopener noreferrer" color="gray" size="2" highContrast={false}>
+                                        <Link href={EXTERNAL_URLS.socials.sublime} target="_blank" rel="noopener noreferrer" color="gray" size="2" highContrast={false}>
                                             Sublime
                                         </Link>
                                     </Flex>
@@ -155,10 +156,10 @@ export const Footer = () => {
                                 wrap="wrap"
                             >
                                 <Text size="2" style={{ color: "var(--gray-a11)" }}>
-                                    Francesco Imola © 2024. All rights reserved.
+                                    {SITE_DATA.name} © {SITE_DATA.copyrightYear}. All rights reserved.
                                 </Text>
                                 <Text size="2" style={{ color: "var(--gray-a11)" }}>
-                                    Built with love and anxiety in Folkestone, UK
+                                    Built with love and anxiety in {SITE_DATA.location}
                                 </Text>
                             </Flex>
                         </Box>

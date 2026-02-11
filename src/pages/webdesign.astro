@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import PageHeading from "../components/PageHeading";
 import { Image } from "astro:assets";
 import { Text, Flex, Theme, Section, Box, Grid, Card } from "@radix-ui/themes";
+import { EXTERNAL_URLS } from "../constants";
 import {
     ArrowDownIcon,
     ArrowRightIcon,
@@ -282,6 +283,7 @@ import { BottomCTA } from "../components/BottomCTA";
                             {
                                 number: 2,
                                 title: "Copy & Design",
+                                linkHref: EXTERNAL_URLS.calendar.intro,
                                 content: [
                                     "This is where the website takes shape — though how we get there depends on the project. We might start with wireframes, or with copy, or with a quick AI prototype that lets us react to something concrete before we've invested days in it. ",
                                     "In terms of speed, some projects need several design rounds while others click into place quickly. Either way, you get to see work early and give feedback, which I’ll refine until it feels right.",
@@ -435,7 +437,7 @@ import { BottomCTA } from "../components/BottomCTA";
     >
         <Flex justify="center" align="start" gap="4" wrap="wrap">
             <ButtonLink
-                href="https://cal.com/francescoimola/intro"
+                href={EXTERNAL_URLS.calendar.intro}
                 size={{ initial: "3", sm: "4" }}
                 external
                 highContrast

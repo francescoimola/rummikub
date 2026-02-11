@@ -35,6 +35,7 @@ import { ContentCard } from "../components/ContentCard";
 import { AccordionSection } from "../components/AccordionSection";
 import { ArrowDownIcon } from "@radix-ui/react-icons";
 import { ButtonLink } from "../components/ButtonLink";
+import { EXTERNAL_URLS, SITE_DATA } from "../constants";
 
 const faqItems = [
     {
@@ -104,18 +105,18 @@ const faqItems = [
                     <DataList.Label>Email</DataList.Label>
                     <DataList.Value>
                         <Link
-                            href="mailto:hi@francescoimola.com"
+                            href={`mailto:${SITE_DATA.email}`}
                             highContrast
                             wrap="nowrap"
                         >
-                            hi@francescoimola.com
+                            {SITE_DATA.email}
                         </Link>
                     </DataList.Value>
                 </DataList.Item>
                 <DataList.Item>
                     <DataList.Label>Location</DataList.Label>
                     <DataList.Value>
-                        <Text wrap="balance">Folkestone, Kent, England</Text>
+                        <Text wrap="balance">{SITE_DATA.location}</Text>
                     </DataList.Value>
                 </DataList.Item>
                 <DataList.Item>
@@ -345,12 +346,12 @@ const faqItems = [
                             >Send me a good 'ol email</Heading
                         >
                         <Link
-                            href="mailto:hi@francescoimola.com"
+                            href={`mailto:${SITE_DATA.email}`}
                             size="3"
                             highContrast
                             underline="always"
                         >
-                            hi@francescoimola.com
+                            {SITE_DATA.email}
                         </Link>
                     </Flex>
                     <Flex direction="column" gap="1">
@@ -358,7 +359,7 @@ const faqItems = [
                             >Put a face to the name</Heading
                         >
                         <Link
-                            href="https://cal.com/francescoimola/intro?description=direct-contact"
+                            href={`${EXTERNAL_URLS.calendar.intro}?description=direct-contact`}
                             target="_blank"
                             rel="noopener noreferrer"
                             size="3"
