@@ -6,7 +6,7 @@ export const CommonMDXComponents = {
         <Heading size="9" weight="bold" mt="8" mb="4" highContrast {...props} />
     ),
     h2: (props: any) => (
-        <Heading as="h2" size="6" weight="medium" mt="6" mb="5" highContrast {...props} />
+        <Heading as="h2" size="6" weight="medium" mt="6" mb="4" highContrast {...props} />
     ),
     h3: (props: any) => (
         <Heading as="h3" size="4" weight="medium" my="5" {...props} />
