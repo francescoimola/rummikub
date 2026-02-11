@@ -3,13 +3,17 @@ interface Props {
     title?: string;
     description?: string;
     image?: string;
+    ogType?: "website" | "article";
 }
 
 const {
     title = "Francesco Imola | Web designer & Creative Marketer in Kent",
     description = "I help small businesses, freelancers and creatives drive long-term growth with futureproof websites, UX copy, email marketing and strategic consultations.",
     image = "/assets/images/og-image.png",
+    ogType = "website",
 } = Astro.props;
+
+const absoluteImageUrl = new URL(image, Astro.site || Astro.url);
 ---
 
 <head>
@@ -20,19 +24,28 @@ const {
     <meta name="description" content={description} />
     <link rel="canonical" href={Astro.url} />
 
+    <!-- RSS Feed -->
+    <link
+        rel="alternate"
+        type="application/rss+xml"
+        title="Francesco Imola's Blog"
+        href="/rss.xml"
+    />
+
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(image, Astro.url)} />
+    <meta property="og:image" content={absoluteImageUrl} />
+    <meta property="og:site_name" content="Francesco Imola" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={new URL(image, Astro.url)} />
+    <meta property="twitter:image" content={absoluteImageUrl} />
 
     <link
         rel="preload"
@@ -66,4 +79,7 @@ const {
         href="/assets/favicons/favicon-16x16.png"
     />
     <link rel="manifest" href="/assets/favicons/site.webmanifest" />
+
+    <!-- JSON-LD Structured Data -->
+    <slot name="structured-data" />
 </head>

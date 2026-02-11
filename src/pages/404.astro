@@ -6,9 +6,14 @@ import { ButtonLink } from "../components/ButtonLink";
 import { MainGrid } from "../components/MainGrid";
 import { InnerSection } from "../components/InnerSection";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
+import { SEO } from "../constants";
 ---
 
-<Layout title="Page not found" backgroundColor="var(--gray-3)">
+<Layout
+    title={SEO.pages.notFound.title}
+    description={SEO.pages.notFound.description}
+    backgroundColor="var(--gray-3)"
+>
     <PageHeading slot="heading" className="page-heading">
         Page not found
     </PageHeading>

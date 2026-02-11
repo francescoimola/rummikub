@@ -20,17 +20,14 @@ import { Image } from "astro:assets";
 import { MainGrid } from "../../components/MainGrid";
 import { BottomCTA } from "../../components/BottomCTA";
 import NewsletterForm from "../../components/NewsletterForm";
-import {
-    Link2Icon,
-    ArrowRightIcon,
-    LinkedInLogoIcon,
-    TwitterLogoIcon,
-} from "@radix-ui/react-icons";
+import { ArrowRightIcon } from "@radix-ui/react-icons";
+import { ShareButtons } from "../../components/ShareButtons";
 import { ButtonLink } from "../../components/ButtonLink";
 import { InnerSection } from "../../components/InnerSection";
-import { TfiFacebook } from "react-icons/tfi";
 import BlogImage from "../../components/mdx/BlogImage.astro";
 import { CommonMDXComponents } from "../../components/mdx/MDXComponents";
+import { SEO } from "../../constants";
+import JsonLd from "../../components/JsonLd.astro";
 
 export async function getStaticPaths() {
     const posts = await getCollection("blog");
@@ -78,9 +75,49 @@ const relatedPosts = allPosts
         );
     })
     .slice(0, 2);
+
+// SEO metadata from frontmatter
+const seoTitle = `${post.data.title} | Francesco Imola`;
+const seoDescription = post.data.excerpt;
+const coverImageSrc =
+    typeof post.data.coverImage === "string"
+        ? post.data.coverImage
+        : post.data.coverImage.src;
+const isoDate = post.data.publishedDate.toISOString();
 ---
 
-<Layout backgroundColor="var(--orange-5)" roleFullWidth>
+<Layout
+    title={seoTitle}
+    description={seoDescription}
+    image={coverImageSrc}
+    ogType="article"
+    backgroundColor="var(--orange-5)"
+    roleFullWidth
+>
+    <Fragment slot="structured-data">
+        <JsonLd
+            data={{
+                "@type": "Article",
+                headline: post.data.title,
+                description: post.data.excerpt,
+                image: new URL(coverImageSrc, Astro.site || Astro.url).toString(),
+                datePublished: isoDate,
+                dateModified: isoDate,
+                author: SEO.person,
+                publisher: {
+                    "@type": "Person",
+                    name: "Francesco Imola",
+                    url: "https://francescoimola.com",
+                },
+                mainEntityOfPage: {
+                    "@type": "WebPage",
+                    "@id": Astro.url.toString(),
+                },
+                keywords: post.data.tags.join(", "),
+            }}
+        />
+    </Fragment>
+
     <!-- Hero Section -->
     <PageHeading slot="heading"> {post.data.title} </PageHeading>
     <Grid slot="role" columns="3" width="100%">
@@ -151,27 +188,11 @@ const relatedPosts = allPosts
                         <Heading size="3" color="gray" weight="medium">
                             Share
                         </Heading>
-                        <Flex gap="3" align="center">
-                            {/* LinkedIn - using LinkedInLogoIcon */}
-                            <Box className="share-icon">
-                                <LinkedInLogoIcon />
-                            </Box>
-
-                            {/* X/Twitter placeholder - using ChatBubbleIcon */}
-                            <Box className="share-icon">
-                                <TwitterLogoIcon />
-                            </Box>
-
-                            {/* Facebook placeholder - using PersonIcon */}
-                            <Box className="share-icon">
-                                <TfiFacebook />
-                            </Box>
-
-                            {/* Copy link - Link2Icon is appropriate */}
-                            <Box className="share-icon">
-                                <Link2Icon />
-                            </Box>
-                        </Flex>
+                        <ShareButtons
+                            title={post.data.title}
+                            url={Astro.url.href}
+                            client:load
+                        />
                     </Flex>
                     <!-- Article Content (Right Column) -->
                     <Flex direction="column" gap="8">
@@ -191,20 +212,11 @@ const relatedPosts = allPosts
                             <Heading size="3" color="gray" weight="medium">
                                 Share
                             </Heading>
-                            <Flex gap="3" align="center">
-                                <Box className="share-icon">
-                                    <LinkedInLogoIcon />
-                                </Box>
-                                <Box className="share-icon">
-                                    <TwitterLogoIcon />
-                                </Box>
-                                <Box className="share-icon">
-                                    <TfiFacebook />
-                                </Box>
-                                <Box className="share-icon">
-                                    <Link2Icon />
-                                </Box>
-                            </Flex>
+                            <ShareButtons
+                                title={post.data.title}
+                                url={Astro.url.href}
+                                client:load
+                            />
                         </Flex>
 
                         <!-- You might also like Section -->
