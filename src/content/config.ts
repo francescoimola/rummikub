@@ -20,7 +20,7 @@ const projects = defineCollection({
                 .union([z.literal(1), z.literal(2), z.literal(3)])
                 .optional(), // Pin to position 1, 2, or 3 on homepage
             publishDate: z.coerce.date().optional(), // Used for sorting projects
-            coverImages: z.array(image().or(z.string())).optional(),
+            coverImages: z.array(image().or(z.string())),
             coverLayout: z.enum(["default", "plain"]).default("default").optional(),
             results: z
                 .object({
@@ -41,7 +41,7 @@ const blog = defineCollection({
     schema: ({ image }) =>
         z.object({
             title: z.string(),
-            slug: z.string().optional(),
+            slug: z.string().default(""),
             publishedDate: z.coerce.date(),
             excerpt: z.string(),
             coverImage: image(),
