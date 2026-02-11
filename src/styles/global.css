@@ -473,9 +473,9 @@ svg.client-logo {
         outline-offset: 2px;
     }
 
-    &[href="/contentwriting"],
+    &[href="/copywriting"],
     &[href="/emailmarketing"],
-    &[data-slug="/contentwriting"],
+    &[data-slug="/copywriting"],
     &[data-slug="/emailmarketing"] {
         background-color: var(--gray-3);
 
