@@ -1,0 +1,96 @@
+---
+import { AspectRatio, Flex, Text } from "@radix-ui/themes";
+import { Image } from "astro:assets";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"figure"> {
+    image?: ImageMetadata;
+    caption?: string;
+    src?: ImageMetadata;
+    title?: string;
+    alt: string;
+    className?: string;
+}
+
+const { image, src, alt, caption, title, className, ...rest } = Astro.props;
+const finalImage = (image ?? src)!;
+const isPlain = title?.startsWith("plain:");
+const isFilled = title?.startsWith("filled:");
+const finalCaption =
+    caption ??
+    (isPlain
+        ? title?.slice(6) || undefined
+        : isFilled
+          ? title?.slice(7) || undefined
+          : title);
+const isFramed = !!finalCaption && !isPlain && !isFilled;
+---
+
+<figure
+    class={className}
+    style={{
+        display: "flex",
+        margin: "var(--space-3) 0",
+        flexDirection: "column",
+        gap: "var(--space-2)",
+    }}
+    {...rest}
+>
+    {
+        isFramed ? (
+            <AspectRatio ratio={3 / 2} style={{ overflow: "hidden" }}>
+                <Flex
+                    width="100%"
+                    height="100%"
+                    py="9"
+                    px={{ initial: "4", sm: "8" }}
+                    align="end"
+                    justify="center"
+                    style={{
+                        backgroundColor: "var(--gray-3)",
+                    }}
+                >
+                    <Image
+                        src={finalImage}
+                        alt={alt}
+                        style={{
+                            height: "100%",
+                            width: "auto",
+                            maxWidth: "100%",
+                            objectPosition: "top",
+                            objectFit: "contain",
+                            filter: "drop-shadow(0.25rem 0.25rem 0.5rem var(--gray-a4)) drop-shadow(0 0 0.5px var(--gray-a4)) drop-shadow(0 0 0.5px var(--gray-a4))",
+                        }}
+                    />
+                </Flex>
+            </AspectRatio>
+        ) : isFilled ? (
+            <Image
+                src={finalImage}
+                alt={alt}
+                style={{
+                    width: "100%",
+                    height: "auto",
+                    backgroundColor: "var(--gray-3)",
+                }}
+            />
+        ) : (
+            <Image
+                src={finalImage}
+                alt={alt}
+                style={{
+                    width: "100%",
+                    height: "auto",
+                }}
+            />
+        )
+    }
+
+    {
+        finalCaption && (
+            <Text size="2" color="gray" asChild>
+                <figcaption>{finalCaption}</figcaption>
+            </Text>
+        )
+    }
+</figure>

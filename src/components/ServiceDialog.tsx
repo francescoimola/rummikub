@@ -25,8 +25,8 @@ interface ServiceData {
 
 const SERVICE_CONTENT: Record<ServiceType, ServiceData> = {
     "content-writing": {
-        title: "Content writing",
-        slug: "/contentwriting",
+        title: "Copywriting",
+        slug: "/copywriting",
         descriptionP1: "Your website reads fine. And no one’s complained about your content.",
         descriptionP2: "Why pay extra for... better writing?",
         descriptionP3: "I can’t put a price on words so spot on they’ll make your people think, “you know what, they get it!”. But treating copy as an afterthought? Does hardly anything.",

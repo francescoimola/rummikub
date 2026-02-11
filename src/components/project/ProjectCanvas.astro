@@ -13,13 +13,22 @@ import { ArrowRightIcon } from "@radix-ui/react-icons";
 
 interface Props {
     images?: (string | ImageMetadata)[];
+    layout?: "default" | "plain";
     title?: string;
     skills?: string[];
     href?: string;
     caseStudyStatus?: "coming-soon" | "on-request";
 }
 
-const { images = [], title, skills = [], href, caseStudyStatus } = Astro.props;
+const {
+    images = [],
+    layout = "default",
+    title,
+    skills = [],
+    href,
+    caseStudyStatus,
+} = Astro.props;
+const isPlainLayout = layout === "plain";
 
 // Badge text based on status
 const statusBadgeText =
@@ -29,13 +38,8 @@ const statusBadgeText =
           ? "Available on request"
           : null;
 
-const PLACEHOLDERS = [
-    "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe",
-    "https://images.unsplash.com/photo-1614851099511-773084f6911d",
-    "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e",
-];
-
-const finalImages = [...images, ...PLACEHOLDERS.slice(images.length, 3)];
+// Duo layout for exactly 2 images (side-by-side landscape)
+const isDuoLayout = images.length === 2;
 
 const isDraft = !href && caseStudyStatus;
 const Container: any = href ? "a" : Flex;
@@ -56,74 +60,166 @@ const elementProps = href
     (
         <Container {...elementProps}>
             {/* Image Canvas */}
-            <AspectRatio ratio={3 / 2}>
-                <Flex
-                    overflow="hidden"
-                    align="center"
-                    justify="center"
-                    className="project-canvas-image-wrapper"
-                >
-                    {/* Status badge - always visible when set */}
-                    {statusBadgeText && (
-                        <Badge
-                            size="1"
-                            color="gray"
-                            variant="soft"
-                            className="project-canvas-status-badge"
-                        >
-                            {statusBadgeText}
-                        </Badge>
-                    )}
-
-                    {/* Hover content: arrow for regular projects, status text for drafts */}
-                    {isDraft ? (
-                        <Text size="2" weight="medium" className="hover-text">
-                            {statusBadgeText}
-                        </Text>
-                    ) : (
-                        <Button
-                            variant="ghost"
-                            tabIndex={-1}
-                            className="hover-button"
-                            highContrast
-                        >
-                            <ArrowRightIcon
-                                style={{
-                                    width: "var(--space-4)",
-                                    height: "auto",
-                                }}
-                            />
-                        </Button>
-                    )}
-
+            {isPlainLayout ? (
+                <AspectRatio ratio={3 / 2}>
                     <Flex
-                        width="120%"
-                        height="80%"
+                        overflow="hidden"
                         align="center"
                         justify="center"
-                        gap="4"
+                        width="100%"
+                        height="100%"
+                        py="9"
+                        px={{ initial: "4", sm: "9" }}
+                        className="project-canvas-image-wrapper"
                     >
-                        {finalImages.map((src, i) => (
-                            <Box key={i} className="project-canvas-image-item">
-                                {typeof src === "string" ? (
-                                    <Image
-                                        src={src}
-                                        alt=""
-                                        inferSize={true}
-                                        class="project-canvas-image"
-                                    />
-                                ) : (
-                                    <Image
-                                        src={src}
-                                        alt=""
-                                        class="project-canvas-image"
-                                    />
-                                )}
-                            </Box>
-                        ))}
+                        {/* Status badge - always visible when set */}
+                        {statusBadgeText && (
+                            <Badge
+                                size="1"
+                                color="gray"
+                                variant="soft"
+                                className="project-canvas-status-badge"
+                            >
+                                {statusBadgeText}
+                            </Badge>
+                        )}
+
+                        {/* Hover content: arrow for regular projects, status text for drafts */}
+                        {isDraft ? (
+                            <Text
+                                size="2"
+                                weight="medium"
+                                className="hover-text"
+                            >
+                                {statusBadgeText}
+                            </Text>
+                        ) : href ? (
+                            <Button
+                                variant="ghost"
+                                tabIndex={-1}
+                                className="hover-button"
+                                highContrast
+                            >
+                                <ArrowRightIcon
+                                    style={{
+                                        width: "var(--space-4)",
+                                        height: "auto",
+                                    }}
+                                />
+                            </Button>
+                        ) : null}
+
+                        {images[0] &&
+                            (typeof images[0] === "string" ? (
+                                <Image
+                                    src={images[0]}
+                                    alt=""
+                                    inferSize={true}
+                                    style={{
+                                        height: "100%",
+                                        width: "auto",
+                                        maxWidth: "100%",
+                                        objectFit: "contain",
+                                        objectPosition: "top",
+                                        filter: "drop-shadow(0.25rem 0.25rem 0.5rem var(--gray-a4)) drop-shadow(0 0 0.5px var(--gray-a4)) drop-shadow(0 0 0.5px var(--gray-a4))",
+                                    }}
+                                />
+                            ) : (
+                                <Image
+                                    src={images[0]}
+                                    alt=""
+                                    style={{
+                                        height: "100%",
+                                        width: "auto",
+                                        maxWidth: "100%",
+                                        objectFit: "contain",
+                                        objectPosition: "top",
+                                        filter: "drop-shadow(0.25rem 0.25rem 0.5rem var(--gray-a4)) drop-shadow(0 0 0.5px var(--gray-a4)) drop-shadow(0 0 0.5px var(--gray-a4))",
+                                    }}
+                                />
+                            ))}
                     </Flex>
-                </Flex>
-            </AspectRatio>
+                </AspectRatio>
+            ) : (
+                <AspectRatio ratio={3 / 2}>
+                    <Flex
+                        overflow="hidden"
+                        align="center"
+                        justify="center"
+                        className="project-canvas-image-wrapper"
+                    >
+                        {/* Status badge - always visible when set */}
+                        {statusBadgeText && (
+                            <Badge
+                                size="1"
+                                color="gray"
+                                variant="soft"
+                                className="project-canvas-status-badge"
+                            >
+                                {statusBadgeText}
+                            </Badge>
+                        )}
+
+                        {/* Hover content: arrow for regular projects, status text for drafts */}
+                        {isDraft ? (
+                            <Text
+                                size="2"
+                                weight="medium"
+                                className="hover-text"
+                            >
+                                {statusBadgeText}
+                            </Text>
+                        ) : (
+                            <Button
+                                variant="ghost"
+                                tabIndex={-1}
+                                className="hover-button"
+                                highContrast
+                            >
+                                <ArrowRightIcon
+                                    style={{
+                                        width: "var(--space-4)",
+                                        height: "auto",
+                                    }}
+                                />
+                            </Button>
+                        )}
+
+                        <Flex
+                            width={isDuoLayout ? "100%" : "120%"}
+                            height={isDuoLayout ? "100%" : "80%"}
+                            align="center"
+                            justify="center"
+                            gap="3"
+                            className={
+                                isDuoLayout ? "project-canvas-duo" : undefined
+                            }
+                        >
+                            {images.map((src, i) => (
+                                <Box
+                                    key={i}
+                                    className={`project-canvas-image-item${isDuoLayout ? " project-canvas-image-duo" : ""}`}
+                                >
+                                    {typeof src === "string" ? (
+                                        <Image
+                                            src={src}
+                                            alt=""
+                                            inferSize={true}
+                                            class="project-canvas-image"
+                                        />
+                                    ) : (
+                                        <Image
+                                            src={src}
+                                            alt=""
+                                            class="project-canvas-image"
+                                        />
+                                    )}
+                                </Box>
+                            ))}
+                        </Flex>
+                    </Flex>
+                </AspectRatio>
+            )}
 
             {/* Title and Skills */}
             {(title || skills.length > 0) && (
