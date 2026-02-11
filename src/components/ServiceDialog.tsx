@@ -1,4 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog";
+import { EXTERNAL_URLS } from "../constants";
 import { ArrowTopRightIcon, Cross1Icon } from "@radix-ui/react-icons";
 import { type ReactNode } from "react";
 import { ServiceCard } from "./ServiceCard";
@@ -34,14 +35,14 @@ const SERVICE_CONTENT: Record<ServiceType, ServiceData> = {
             {
                 title: "I only need words",
                 description: "For those who need unmistakable words or copy-editing. Think creating landing pages, unf*cking AI-generated content or structuring blog posts. You're in good hands.",
-                link: "https://cal.com/francescoimola/intro?description=website-copy",
+                link: `${EXTERNAL_URLS.calendar.intro}?description=website-copy`,
                 smallPrint: "Share your brief",
                 buttonText: "Let's chat"
             },
             {
                 title: "I also need a website",
                 description: "Need a website to go with your copy? Content writing (aka UX writing) is included in my website packages. And if you need more than that, like ongoing SEO content, we can make it happen.",
-                link: "https://cal.com/francescoimola/intro?description=blog-posts",
+                link: `${EXTERNAL_URLS.calendar.intro}?description=blog-posts`,
                 smallPrint: "Free 30-min intro call",
                 buttonText: "Schedule a call to discuss"
             }
@@ -64,7 +65,7 @@ const SERVICE_CONTENT: Record<ServiceType, ServiceData> = {
             {
                 title: "I need a website too",
                 description: "I can add an email starter package or a custom email campaign to any website project. Let's scope it together.",
-                link: "https://cal.com/francescoimola/intro?description=automations",
+                link: `${EXTERNAL_URLS.calendar.intro}?description=automations`,
                 buttonText: "Book a free intro",
                 smallPrint: "Schedule a 30-min call to discuss",
             }
