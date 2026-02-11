@@ -21,6 +21,7 @@ const projects = defineCollection({
                 .optional(), // Pin to position 1, 2, or 3 on homepage
             publishDate: z.coerce.date().optional(), // Used for sorting projects
             coverImages: z.array(image().or(z.string())).optional(),
+            coverLayout: z.enum(["default", "plain"]).default("default").optional(),
             results: z
                 .object({
                     heading: z.string().optional(),

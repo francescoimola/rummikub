@@ -1,0 +1,56 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PageHeading from "../../components/PageHeading";
+import ProjectCanvas from "../../components/project/ProjectCanvas.astro";
+import { Text, Flex, Grid, Section } from "@radix-ui/themes";
+import { InnerSection } from "../../components/InnerSection";
+import { MainGrid } from "../../components/MainGrid";
+import { getAllPublishedProjects } from "../../utils/getAllPublishedProjects";
+
+const projects = await getAllPublishedProjects();
+---
+
+<Layout backgroundColor="var(--yellow-5)">
+    <!-- Slot: Main Heading -->
+    <PageHeading slot="heading">Selected Work</PageHeading>
+
+    <!-- Slot: Description/Subtitle -->
+    <Flex slot="description" direction="column" gap="5">
+        <Text size="3"
+            >I've been working at the intersection of marketing and design for 5
+            years, with a focus on digital products and marketing campaigns for
+            ambitious small businesses, non-profits, and higher education.
+            Here's a selection of projects I've worked on, ordered by recency.
+        </Text>
+    </Flex>
+
+    <!-- Page Content -->
+    <Section
+        slot="page-content"
+        style={{ backgroundColor: "var(--gray-1)" }}
+        pt="0"
+    >
+        <MainGrid>
+            <InnerSection title="All projects" showCounter={false}>
+                <Grid columns="1" gapY="8">
+                    {
+                        projects.map((project) => (
+                            <ProjectCanvas
+                                images={project.data.coverImages}
+                                layout={project.data.coverLayout}
+                                title={project.data.title}
+                                skills={project.data.skills ?? []}
+                                href={
+                                    project.data.caseStudyStatus
+                                        ? undefined
+                                        : `/work/${project.data.slug}`
+                                }
+                                caseStudyStatus={project.data.caseStudyStatus}
+                            />
+                        ))
+                    }
+                </Grid>
+            </InnerSection>
+        </MainGrid>
+    </Section>
+</Layout>

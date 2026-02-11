@@ -84,6 +84,7 @@ const featuredProjects = await getFeaturedProjects();
             featuredProjects.map((project) => (
               <ProjectCanvas
                 images={project.data.coverImages}
+                layout={project.data.coverLayout}
                 title={project.data.title}
                 skills={project.data.skills ?? []}
                 href={
@@ -95,6 +96,15 @@ const featuredProjects = await getFeaturedProjects();
               />
             ))
           }
+          <ButtonLink
+            href="/work"
+            variant="soft"
+            color="gray"
+            size="3"
+            style={{ width: "fit-content" }}
+          >
+            View all projects
+          </ButtonLink>
         </Grid>
       </InnerSection>
 
