@@ -23,7 +23,7 @@ export default function Testimonial({
                 <Heading size="3" as="h3" highContrast>
                     {authorName}
                 </Heading>
-                <Text size="2" as="div" wrap="balance">
+                <Text size="2" as="div" wrap="balance" color="gray">
                     {authorRole}
                 </Text>
                 {logo && <div className="client-logo-wrapper">{logo}</div>}

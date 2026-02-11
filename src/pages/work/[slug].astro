@@ -9,7 +9,7 @@ import PageHeading from "../../components/PageHeading";
 import { Text, Box, Theme, Flex, Section } from "@radix-ui/themes";
 import { MainGrid } from "../../components/MainGrid";
 import { ProjectInfo } from "../../components/project/ProjectInfo";
-import ProjectImageWrapper from "../../components/project/ProjectImageWrapper.astro";
+import ProjectImage from "../../components/project/ProjectImage.astro";
 import ProjectCanvas from "../../components/project/ProjectCanvas.astro";
 import { CommonMDXComponents } from "../../components/mdx/MDXComponents";
 import { ProjectResults } from "../../components/project/ProjectResults";
@@ -39,7 +39,7 @@ const { Content } = await render(entry);
 // 3. Define the component map for MDX
 const components = {
     ...CommonMDXComponents,
-    img: ProjectImageWrapper,
+    img: ProjectImage,
     ProjectCanvas: ProjectCanvas,
 };
 ---
@@ -82,7 +82,10 @@ const components = {
                     {/* Optional: Render Cover Canvas if images provided */}
                     {
                         entry.data.coverImages && (
-                            <ProjectCanvas images={entry.data.coverImages} />
+                            <ProjectCanvas
+                                images={entry.data.coverImages}
+                                layout={entry.data.coverLayout}
+                            />
                         )
                     }
 

@@ -85,7 +85,7 @@ const FormSelect = ({ name }: { name: string }) => {
             <Select.Content>
                 <Select.Item value="web-design">Web Design & Development</Select.Item>
                 <Select.Item value="consulting">Website Consultation</Select.Item>
-                <Select.Item value="copywriting">Content Writing</Select.Item>
+                <Select.Item value="copywriting">Copywriting</Select.Item>
                 <Select.Item value="email-marketing">Email Marketing</Select.Item>
                 <Select.Item value="other">Other</Select.Item>
             </Select.Content>
