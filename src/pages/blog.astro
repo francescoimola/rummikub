@@ -7,6 +7,8 @@ import BlogCard from "../components/BlogCard.astro";
 import { InnerSection } from "../components/InnerSection";
 import { MainGrid } from "../components/MainGrid";
 import { getCollection } from "astro:content";
+import { SEO } from "../constants";
+import JsonLd from "../components/JsonLd.astro";
 
 const allPosts = (await getCollection("blog")).sort(
     (a, b) =>
@@ -19,10 +21,24 @@ const uniqueTags = [...new Set(allPosts.flatMap((p) => p.data.tags))];
 ---
 
 <Layout
+    title={SEO.pages.blog.title}
+    description={SEO.pages.blog.description}
     backgroundColor="var(--brand-surface-dark-mustard)"
     appearance="dark"
     roleFullWidth
 >
+    <Fragment slot="structured-data">
+        <JsonLd
+            data={{
+                "@type": "Blog",
+                name: "Francesco Imola's Blog",
+                description: SEO.pages.blog.description,
+                url: "https://francescoimola.com/blog",
+                author: SEO.person,
+            }}
+        />
+    </Fragment>
+
     <!-- Hero Section -->
     <PageHeading slot="heading"> Writing </PageHeading>
     <Flex slot="description" direction="column" gap="var(--space-10)">

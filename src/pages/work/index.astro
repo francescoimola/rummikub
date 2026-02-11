@@ -6,15 +6,30 @@ import { Text, Flex, Grid, Section, Theme } from "@radix-ui/themes";
 import { InnerSection } from "../../components/InnerSection";
 import { MainGrid } from "../../components/MainGrid";
 import { getAllPublishedProjects } from "../../utils/getAllPublishedProjects";
+import { SEO } from "../../constants";
+import JsonLd from "../../components/JsonLd.astro";
 
 const projects = await getAllPublishedProjects();
 ---
 
 <Layout
+    title={SEO.pages.work.title}
+    description={SEO.pages.work.description}
     backgroundColor="var(--brand-surface-dark-mustard)"
     appearance="dark"
     roleFullWidth
 >
+    <Fragment slot="structured-data">
+        <JsonLd
+            data={{
+                "@type": "CollectionPage",
+                name: "Selected Work",
+                description: SEO.pages.work.description,
+                author: SEO.person,
+            }}
+        />
+    </Fragment>
+
     <!-- Slot: Main Heading -->
     <PageHeading slot="heading">Selected Work</PageHeading>
 
