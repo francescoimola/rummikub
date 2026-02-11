@@ -15,6 +15,7 @@ const { src, alt, title } = Astro.props;
     <Image
         src={src as any}
         alt={alt}
+        loading="lazy"
         style={{
             width: "100%",
             height: "auto",

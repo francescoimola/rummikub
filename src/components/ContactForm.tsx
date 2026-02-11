@@ -36,15 +36,18 @@ const FormTextField = ({
     name,
     type = "text",
     required = false,
+    id,
 }: {
     name: string;
     type?: TextFieldType;
     required?: boolean;
+    id?: string;
 }) => {
     const [field] = useField(name);
     return (
         <TextField.Root
             {...field}
+            id={id || name}
             type={type}
             required={required}
             variant="soft"
@@ -55,11 +58,12 @@ const FormTextField = ({
 };
 
 // Custom TextArea component for Formik
-const FormTextArea = ({ name }: { name: string }) => {
+const FormTextArea = ({ name, id }: { name: string; id?: string }) => {
     const [field] = useField(name);
     return (
         <TextArea
             {...field}
+            id={id || name}
             required
             variant="soft"
             placeholder="Tell me about your project..."
@@ -70,7 +74,7 @@ const FormTextArea = ({ name }: { name: string }) => {
 };
 
 // Custom Select component for Formik
-const FormSelect = ({ name }: { name: string }) => {
+const FormSelect = ({ name, id }: { name: string; id?: string }) => {
     const { setFieldValue, values } = useFormikContext<{ service: string }>();
     return (
         <Select.Root
@@ -79,6 +83,7 @@ const FormSelect = ({ name }: { name: string }) => {
             onValueChange={(value) => setFieldValue(name, value)}
         >
             <Select.Trigger
+                id={id || name}
                 variant="soft"
                 className="contact-form-input"
                 style={{ marginTop: "0.75rem", width: "100%", justifyContent: "space-between" }}
@@ -269,10 +274,10 @@ export const ContactForm = () => {
                         <Grid columns={{ initial: "1", md: "2" }} gap="5">
                             {/* First Name */}
                             <Flex direction="column" gap="1">
-                                <Text as="div" size="3" weight="medium" mb="1">
+                                <Text as="label" htmlFor="firstName" size="3" weight="medium" mb="1">
                                     First name
                                 </Text>
-                                <FormTextField name="firstName" required />
+                                <FormTextField name="firstName" id="firstName" required />
                                 {errors.firstName && touched.firstName && (
                                     <Text color="red" size="1">{errors.firstName}</Text>
                                 )}
@@ -280,18 +285,18 @@ export const ContactForm = () => {
 
                             {/* Last Name */}
                             <Flex direction="column" gap="1">
-                                <Text as="div" size="3" weight="medium" mb="1">
+                                <Text as="label" htmlFor="lastName" size="3" weight="medium" mb="1">
                                     Last name <Text as="span" color="gray" weight="regular">(optional)</Text>
                                 </Text>
-                                <FormTextField name="lastName" />
+                                <FormTextField name="lastName" id="lastName" />
                             </Flex>
 
                             {/* Email */}
                             <Flex direction="column" gap="1">
-                                <Text as="div" size="3" weight="medium" mb="1">
+                                <Text as="label" htmlFor="email" size="3" weight="medium" mb="1">
                                     Email
                                 </Text>
-                                <FormTextField name="email" type="email" required />
+                                <FormTextField name="email" id="email" type="email" required />
                                 {errors.email && touched.email && (
                                     <Text color="red" size="1">{errors.email}</Text>
                                 )}
@@ -299,19 +304,19 @@ export const ContactForm = () => {
 
                             {/* Phone */}
                             <Flex direction="column" gap="1">
-                                <Text as="div" size="3" weight="medium" mb="1">
+                                <Text as="label" htmlFor="phone" size="3" weight="medium" mb="1">
                                     Phone number <Text as="span" color="gray" weight="regular">(optional)</Text>
                                 </Text>
-                                <FormTextField name="phone" type="tel" />
+                                <FormTextField name="phone" id="phone" type="tel" />
                             </Flex>
 
                             {/* Service Select */}
                             <Box gridColumn={{ initial: "1", sm: "span 2" }}>
                                 <Flex direction="column" gap="1">
-                                    <Text as="span" size="3" weight="medium">
+                                    <Text as="label" htmlFor="service" size="3" weight="medium">
                                         What can I help with?
                                     </Text>
-                                    <FormSelect name="service" />
+                                    <FormSelect name="service" id="service" />
                                     {errors.service && touched.service && (
                                         <Text color="red" size="2">{errors.service}</Text>
                                     )}
@@ -330,10 +335,10 @@ export const ContactForm = () => {
                             {/* Message */}
                             <Box gridColumn={{ initial: "1", sm: "span 2" }} mt="2">
                                 <Flex direction="column" gap="1">
-                                    <Text as="div" size="3" weight="medium" mb="1">
+                                    <Text as="label" htmlFor="message" size="3" weight="medium" mb="1">
                                         Message
                                     </Text>
-                                    <FormTextArea name="message" />
+                                    <FormTextArea name="message" id="message" />
                                     {errors.message && touched.message && (
                                         <Text color="red" size="2">{errors.message}</Text>
                                     )}
@@ -377,27 +382,27 @@ export const ContactForm = () => {
                                 </Button>
                             </Box>
 
-                            {/* Success Message */}
-                            {submitStatus.success && (
-                                <Box gridColumn={{ initial: "1", sm: "span 2" }}>
+                            {/* Status Messages with aria-live for screen reader announcements */}
+                            <Box
+                                gridColumn={{ initial: "1", sm: "span 2" }}
+                                aria-live="polite"
+                                aria-atomic="true"
+                            >
+                                {submitStatus.success && (
                                     <Card variant="ghost" size="2" style={{ backgroundColor: "var(--gray-a3)" }}>
                                         <Text size="2" weight="bold" style={{ color: "var(--accent-12)" }}>
                                             Message sent! I'll get back to you soon.
                                         </Text>
                                     </Card>
-                                </Box>
-                            )}
-
-                            {/* Error Message */}
-                            {submitStatus.error && (
-                                <Box gridColumn={{ initial: "1", sm: "span 2" }}>
+                                )}
+                                {submitStatus.error && (
                                     <Card variant="ghost" size="2" style={{ backgroundColor: "var(--gray-a3)" }}>
                                         <Text color="red" size="2" weight="medium">
                                             {submitStatus.error}
                                         </Text>
                                     </Card>
-                                </Box>
-                            )}
+                                )}
+                            </Box>
                         </Grid>
                     </Form>
                 )}
