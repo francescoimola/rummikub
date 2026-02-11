@@ -9,6 +9,8 @@ interface ProcessStepData {
     title: string;
     /** Content paragraphs - can be a single string or array of strings */
     content: string | string[];
+    /** Optional link URL (unused but passed in some usages) */
+    linkHref?: string;
 }
 
 interface ProcessAccordionProps {
