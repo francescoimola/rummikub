@@ -6,6 +6,7 @@ import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
 
 import cloudflare from '@astrojs/cloudflare';
+import inline from '@playform/inline';
 
 import { visit } from 'unist-util-visit';
 
@@ -33,7 +34,7 @@ export default defineConfig({
     remarkPlugins: [remarkUnwrapImages]
   }), sitemap({
     filter: (page) => !page.includes('/work-with-me'),
-  }), react()],
+  }), react(), inline()],
   adapter: cloudflare({
     imageService: 'compile',
   }),

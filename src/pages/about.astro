@@ -225,7 +225,7 @@ const faqItems = [
                         code that powers the web, and sometimes that's the
                         better answer.
                     </Text>
-                    <AccordionSection title="Peek at my toolbox" client:load>
+                    <AccordionSection title="Peek at my toolbox" client:visible>
                         <Flex direction="column" gap="7">
                             <Grid gap="4" columns={{ initial: "1", md: "2" }}>
                                 <ToolCard
@@ -319,7 +319,7 @@ const faqItems = [
             </InnerSection>
             <InnerSection title="Frequently asked questions" sectionId="faq">
                 <Flex direction="column" gap="8">
-                    <FAQ client:load items={faqItems} />
+                    <FAQ client:visible items={faqItems} />
 
                     <Flex direction="column" gap="3">
                         <Heading size="3" as="h4" weight="medium"
@@ -395,9 +395,9 @@ const faqItems = [
                         <Heading size="3" as="h4" weight="medium"
                             >Not sure what to say?</Heading
                         >
-                        <TemplateDialog client:load />
+                        <TemplateDialog client:visible />
                     </Flex>
-                    <ContactForm client:load />
+                    <ContactForm client:visible />
                 </Flex>
             </InnerSection>
         </MainGrid>
