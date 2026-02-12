@@ -81,7 +81,6 @@ You have access to specialized tools to assist in development:
 ### 9. Design Tokens
 Defined in `src/styles/global.css`:
 - **Extended Spacing**: `--space-10` (5rem) through `--space-14` (30rem) for dramatic layouts
-- **Scaling**: Theme uses `scaling="97%"` for slightly condensed UI — a minimalist UI preference with negligible accessibility impact
 - **Typography**: `Ronzino` font family (Regular, Medium, Bold + Italics)
 - **Colors**: Yellow/green (primary), Orange (secondary accent via `color="orange"`), P3 support included
 

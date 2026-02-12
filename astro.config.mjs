@@ -25,6 +25,10 @@ function remarkUnwrapImages() {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://francescoimola.com',
+  image: {
+    layout: 'constrained',
+    responsiveStyles: true,
+  },
   integrations: [mdx({
     remarkPlugins: [remarkUnwrapImages]
   }), sitemap(), react()],

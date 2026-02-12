@@ -360,10 +360,6 @@ figcaption {
         min-height: unset;
     }
 
-    &:where([data-scaling='97%']) {
-        --scaling: 0.97;
-    }
-
     .rt-Text,
     .rt-Heading {
         line-height: calc(var(--line-height, var(--default-line-height)) * var(--line-height-scale));
@@ -680,7 +676,7 @@ svg.client-logo {
 }
 
 .project-canvas-plain-image {
-    height: clamp(10rem, 60% + 3vw, 80%);
+    height: clamp(12rem, 60% + 3vw, 80%);
     width: auto;
     max-width: 85%;
     object-fit: contain;
