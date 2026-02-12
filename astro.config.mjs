@@ -31,7 +31,9 @@ export default defineConfig({
   },
   integrations: [mdx({
     remarkPlugins: [remarkUnwrapImages]
-  }), sitemap(), react()],
+  }), sitemap({
+    filter: (page) => !page.includes('/work-with-me'),
+  }), react()],
   adapter: cloudflare({
     imageService: 'compile',
   }),

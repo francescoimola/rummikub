@@ -23,6 +23,7 @@ interface Props extends ComponentProps<typeof Theme> {
     ogType?: "website" | "article";
     backgroundColor?: string;
     roleFullWidth?: boolean;
+    noIndex?: boolean;
 }
 
 const {
@@ -32,12 +33,13 @@ const {
     ogType,
     backgroundColor = "var(--yellow-3)",
     roleFullWidth = false,
+    noIndex = false,
     ...themeProps
 } = Astro.props;
 ---
 
 <html lang="en">
-    <Head title={title} description={description} image={image} ogType={ogType}>
+    <Head title={title} description={description} image={image} ogType={ogType} noIndex={noIndex}>
         <slot name="structured-data" slot="structured-data" />
     </Head>
     <body>

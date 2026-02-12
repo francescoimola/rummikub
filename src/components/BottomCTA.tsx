@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 
 interface BottomCTAProps {
     heading: string;
-    text: string;
+    text?: string;
     backgroundColor?: string;
     children: ReactNode;
 }
@@ -26,16 +26,18 @@ export const BottomCTA = ({
                 <Heading size="8" weight="medium" align="center" as="h2" highContrast trim="both" style={{ maxWidth: "var(--max-cw-sm)" }}>
                     {heading}
                 </Heading>
-                <Text
-                    size="3"
-                    as="p"
-                    highContrast
-                    align="center"
-                    style={{ maxWidth: "40ch" }}
-                    trim="start"
-                >
-                    {text}
-                </Text>
+                {text && (
+                    <Text
+                        size="3"
+                        as="p"
+                        highContrast
+                        align="center"
+                        style={{ maxWidth: "40ch" }}
+                        trim="start"
+                    >
+                        {text}
+                    </Text>
+                )}
                 {children}
             </Flex>
         </Container>
