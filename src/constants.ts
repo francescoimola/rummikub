@@ -77,6 +77,11 @@ export const SEO = {
             description:
                 "The page you're looking for doesn't exist or has been moved.",
         },
+        workWithMe: {
+            title: "Work With Me | Francesco Imola",
+            description:
+                "Designer, writer, and strategist. I make things clearer and simpler — for websites, campaigns, brand messaging, and anything that needs to communicate well.",
+        },
     },
     person: {
         "@type": "Person" as const,

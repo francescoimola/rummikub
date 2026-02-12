@@ -1,8 +1,9 @@
 import { useState, useRef } from "react";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
-import { Flex, Box, TextField, Theme, Button, Text, Card } from "@radix-ui/themes";
+import { Flex, Box, TextField, Theme, Button, Text, Card, Link } from "@radix-ui/themes";
 import { CopyEmailButton } from "./CopyEmailButton";
+import { SITE_DATA, EXTERNAL_URLS } from "../constants";
 
 interface NewsletterFormProps {
     showPrivacyText?: boolean;
@@ -187,7 +188,7 @@ export const NewsletterForm = ({
 
             {showPrivacyText && (
                 <Text size="2" as="p" color="gray" align={textAlign}>
-                    You agree to receive updates and consent to our Privacy Policy.
+                    You agree to receive updates and consent to the <Link href={EXTERNAL_URLS.privacyNotice} target="_blank" rel="noopener noreferrer">Privacy Notice</Link>.
                 </Text>
             )}
         </Flex>

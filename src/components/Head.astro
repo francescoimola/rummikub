@@ -4,6 +4,7 @@ interface Props {
     description?: string;
     image?: string;
     ogType?: "website" | "article";
+    noIndex?: boolean;
 }
 
 const {
@@ -11,6 +12,7 @@ const {
     description = "I help small businesses, freelancers and creatives drive long-term growth with futureproof websites, UX copy, email marketing and strategic consultations.",
     image = "/assets/images/og-image.png",
     ogType = "website",
+    noIndex = false,
 } = Astro.props;
 
 const absoluteImageUrl = new URL(image, Astro.site || Astro.url);
@@ -22,6 +24,7 @@ const absoluteImageUrl = new URL(image, Astro.site || Astro.url);
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noIndex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={Astro.url} />
 
     <!-- RSS Feed -->

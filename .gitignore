@@ -40,5 +40,9 @@ coverage/
 .deftform-custom.css
 .deftform-test.html
 
-
-
+# AI
+.gemini/
+.claude/
+.antigravity/
+.agent/
+docs/voice-guide.md

@@ -1,0 +1,271 @@
+---
+export const prerender = true;
+
+import Layout from "../layouts/Layout.astro";
+import PageHeading from "../components/PageHeading";
+import ProjectCanvas from "../components/project/ProjectCanvas.astro";
+import { Text, Flex, Grid, Section, Box, Theme } from "@radix-ui/themes";
+import { ArrowTopRightIcon } from "@radix-ui/react-icons";
+import { InnerSection } from "../components/InnerSection";
+import { MainGrid } from "../components/MainGrid";
+import { KeyServicePoints, KSP } from "../components/KeyServicePoints";
+import { BottomCTA } from "../components/BottomCTA";
+import { ButtonLink } from "../components/ButtonLink";
+import { CopyEmailButton } from "../components/CopyEmailButton";
+import { getCollection } from "astro:content";
+import { SEO, SITE_DATA } from "../constants";
+
+// ── Project display order ──────────────────────────────────────
+// Reorder this array to change the sequence of featured projects.
+const projectOrder = [
+    "thecollective",
+    "blueberry",
+    "make-and-mind",
+    "mega-seating-plan",
+    "the-folkestone-bookshop",
+];
+
+// ── Per-project overrides ──────────────────────────────────────
+const projectConfig: Record<
+    string,
+    {
+        skills?: string[];
+        description?: string;
+        href?: string;
+        hrefExternal?: boolean;
+        expanded?: boolean;
+    }
+> = {
+    blueberry: {
+        skills: [
+            "Content Marketing",
+            "Graphic Design",
+            "Internal Comms",
+            "Project Management",
+        ],
+        description: "[BLUEBERRY CASE STUDY — FRANCESCO WILL WRITE]",
+        expanded: true,
+    },
+    thecollective: {
+        href: "/work/thecollective",
+    },
+    "make-and-mind": {
+        href: "/work/make-and-mind",
+    },
+    "mega-seating-plan": {
+        href: "https://megaseatingplan.com",
+        hrefExternal: true,
+    },
+};
+
+// Fetch and order projects
+const allProjects = await getCollection("projects");
+const featuredProjects = projectOrder
+    .map((slug) => {
+        const project = allProjects.find((p) => p.data.slug === slug);
+        if (!project) return null;
+        const config = projectConfig[slug] || {};
+        return { data: project.data, config };
+    })
+    .filter((p) => p !== null);
+---
+
+<Layout
+    title={SEO.pages.workWithMe.title}
+    description={SEO.pages.workWithMe.description}
+    noIndex
+    roleFullWidth
+>
+    <!-- Hero -->
+    <PageHeading slot="heading"> I simplify things for a living </PageHeading>
+
+    <Flex slot="description" direction="column" gap="4">
+        <Box>
+            <Text size="3" highContrast as="p">
+                I'm a designer, writer, and strategist. My thing is subtraction
+                — I look at what's there, remove what isn't working, and make
+                what's left do more. That applies to websites, campaigns, brand
+                messaging, and anything else that needs to communicate clearly.
+            </Text>
+        </Box>
+        <Box>
+            <Text size="3" highContrast as="p">
+                I build things on my own, but I work best as part of a team.
+                Different perspectives keep the work honest.
+            </Text>
+        </Box>
+    </Flex>
+
+    <!-- Page Content -->
+    <Section slot="page-content" asChild pt="0">
+        <Theme
+            appearance="light"
+            accentColor="yellow"
+            radius="none"
+            grayColor="olive"
+            style={{ backgroundColor: "var(--gray-1)" }}
+        >
+            <MainGrid>
+                <!-- Capabilities -->
+                <InnerSection title="What I do">
+                    <KeyServicePoints>
+                        <KSP heading="Web design & development">
+                            Webflow, Framer, HTML/CSS. Accessible, responsive,
+                            built to last.
+                        </KSP>
+                        <KSP heading="Copywriting & content strategy">
+                            Websites, emails, campaigns. Words that earn their
+                            place.
+                        </KSP>
+                        <KSP heading="Brand messaging & voice">
+                            Helping brands sound like themselves, consistently.
+                        </KSP>
+                        <KSP heading="Editorial writing">
+                            Monthly newsletter to an engaged audience of 100+.
+                        </KSP>
+                        <KSP heading="UX writing">
+                            Microcopy, interface text, and user flows that don't
+                            get in the way.
+                        </KSP>
+                        <KSP heading="Visual & graphic design">
+                            Primarily Figma these days, with Adobe suite and
+                            Canva in the toolkit.
+                        </KSP>
+                        <KSP heading="Event curation & community">
+                            Programming, coordinating, and showing up for the
+                            boring bits too.
+                        </KSP>
+                    </KeyServicePoints>
+                </InnerSection>
+
+                <!-- Featured Projects -->
+                <InnerSection title="Selected work">
+                    <Grid columns="1" gapY="9">
+                        {
+                            featuredProjects.map((project) => {
+                                const { data, config } = project;
+                                const skills =
+                                    config.skills || data.skills || [];
+                                const description =
+                                    config.description ?? data.heroDescription;
+                                const isExpanded = config.expanded || false;
+                                const href = config.href;
+                                const isExternal = config.hrefExternal || false;
+
+                                return (
+                                    <Flex direction="column" gap="5">
+                                        <ProjectCanvas
+                                            images={data.coverImages}
+                                            layout={data.coverLayout}
+                                            title={data.title}
+                                            skills={skills}
+                                            href={href}
+                                        />
+                                        {isExpanded && description ? (
+                                            <Box
+                                                py="4"
+                                                px="5"
+                                                style={{
+                                                    backgroundColor:
+                                                        "var(--orange-a2)",
+                                                }}
+                                            >
+                                                <Text
+                                                    size="3"
+                                                    as="p"
+                                                    style={{
+                                                        maxWidth: "65ch",
+                                                        fontStyle: "italic",
+                                                    }}
+                                                >
+                                                    {description}
+                                                </Text>
+                                            </Box>
+                                        ) : description ? (
+                                            <Text
+                                                size="3"
+                                                as="p"
+                                                color="gray"
+                                                style={{
+                                                    maxWidth: "65ch",
+                                                }}
+                                            >
+                                                {description}
+                                            </Text>
+                                        ) : null}
+                                        {href && (
+                                            <ButtonLink
+                                                href={href}
+                                                variant="soft"
+                                                color="gray"
+                                                size="2"
+                                                highContrast
+                                                external={isExternal}
+                                                style={{
+                                                    alignSelf: "flex-start",
+                                                }}
+                                            >
+                                                {isExternal ? (
+                                                    <>
+                                                        Visit site{" "}
+                                                        <ArrowTopRightIcon />
+                                                    </>
+                                                ) : (
+                                                    "Read case study"
+                                                )}
+                                            </ButtonLink>
+                                        )}
+                                    </Flex>
+                                );
+                            })
+                        }
+                    </Grid>
+                </InnerSection>
+            </MainGrid>
+        </Theme>
+    </Section>
+
+    <!-- Closing -->
+    <BottomCTA slot="bottom-cta" heading="What's the catch?">
+        <Flex
+            direction="column"
+            gap="3"
+            align="center"
+            mt="-2"
+            style={{ maxWidth: "60ch" }}
+        >
+            <Text size="3" as="p" align="center">
+                I'm in the market for part-time and freelance work with teams
+                who are stuck in the weeds. I'll be that someone who can edit,
+                simplify, and bring focus. I will also consider full-time
+                opportunities for the right match.
+            </Text>
+            <Text size="3" as="p" align="center" color="gray" mb="4">
+                If you're thinking "I gotta speak to this guy" or you know a
+                team who might be a perfect fit, I'd love to hear from you.
+            </Text>
+            <ButtonLink
+                variant="surface"
+                href={`mailto:${SITE_DATA.email}`}
+                size="3"
+            >
+                {SITE_DATA.email}
+            </ButtonLink>
+            <Text size="2" color="gray" trim="both">
+                or click here to <CopyEmailButton
+                    client:visible
+                    email={SITE_DATA.email}
+                    variant="ghost"
+                    style={{
+                        margin: "unset",
+                        padding: "unset",
+                        height: "auto",
+                        verticalAlign: "baseline",
+                        cursor: "pointer",
+                        textDecoration: "underline",
+                    }}>copy my email</CopyEmailButton
+                >
+            </Text>
+        </Flex>
+    </BottomCTA>
+</Layout>
