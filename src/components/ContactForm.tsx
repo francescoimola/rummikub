@@ -225,7 +225,7 @@ export const ContactForm = () => {
             grayColor="olive"
             panelBackground="solid"
             radius="none"
-            scaling="97%"
+
             hasBackground={false}
             asChild
         >

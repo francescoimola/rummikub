@@ -100,7 +100,7 @@ export function ServiceDialog({ type, cardIcon }: ServiceDialogProps) {
                         grayColor="olive"
                         radius="none"
                         panelBackground="solid"
-                        scaling="97%"
+
                     >
                         <Flex direction="column" justify="between" height="100%" gap="var(--space-10)" p={{ initial: "4", sm: "6" }}>
                             <Flex direction="column" gap="6">

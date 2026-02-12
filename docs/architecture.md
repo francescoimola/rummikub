@@ -26,7 +26,7 @@ We leverage **Radix UI Themes** as the single source of truth for styling.
 *   **Global Overrides**: Defined in `src/styles/global.css`, mainly for:
     *   **Spacing**: Extended scale (`--space-10` to `--space-14`) for dramatic layout gaps.
     *   **Colors**: Custom P3/oklch brand colors (`--yellow-*`, `--orange-*`). See AGENTS.md §9.1 for rationale.
-    *   **Reset**: Sharp corners (`radius="none"`) and condensed scaling (`97%`).
+    *   **Reset**: Sharp corners (`radius="none"`)
 
 ### C. Image Optimization
 All images use Astro's `<Image>` component with strategic loading:

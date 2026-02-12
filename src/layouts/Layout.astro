@@ -41,13 +41,11 @@ const {
         <slot name="structured-data" slot="structured-data" />
     </Head>
     <body>
-        <!-- Theme scaling at 97% is a UI preference with negligible accessibility impact -->
         <Theme
             accentColor="yellow"
             radius="none"
             grayColor="olive"
             panelBackground="solid"
-            scaling="97%"
             hasBackground={false}
             {...themeProps}
             style={{ backgroundColor }}
@@ -64,15 +62,13 @@ const {
                     pt="6"
                     pb="var(--space-10)"
                     className="side-margin"
-                    style={{
-                        alignItems: "center",
-                    }}
                 >
                     {/* Logo - Cell (1,1) */}
                     <Box
                         gridRow={{ initial: "auto", md: "1" }}
                         style={{
                             viewTransitionName: "site-logo",
+                            alignSelf: "center",
                         }}
                     >
                         <Heading
@@ -187,7 +183,7 @@ const {
                     </Box>
 
                     <Box
-                        gridColumn={{ initial: "1", md: "1" }}
+                        gridColumn="1"
                         gridRow="auto"
                         width="full"
                         maxWidth={roleFullWidth

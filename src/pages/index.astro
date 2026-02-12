@@ -1,4 +1,5 @@
 ---
+export const prerender = true;
 /* --- Imports --- */
 import ProjectCanvas from "../components/project/ProjectCanvas.astro";
 import PageHeading from "../components/PageHeading";
@@ -74,11 +75,10 @@ const featuredProjects = await getFeaturedProjects();
 
   <!-- Slot: Introduction Text -->
   <Flex slot="description" direction="column" gap="5" width="75%">
-    <Text size="3">
+    <Text size="3" as="p" wrap="pretty">
       I help independent businesses and non-profits who are tired of apologising
-      for their amateurish websites. Mostly by removing what shouldn't be
-      there—until you're left with something clearer, more confident, and worth
-      showing off.
+      for their amateurish websites. I remove what shouldn't be there until you
+      are left with something clearer, more confident, and worth showing off.
     </Text>
     <ButtonLink
       href="/about#contact"

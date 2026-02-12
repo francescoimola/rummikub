@@ -29,7 +29,7 @@ Thanks!`;
             <Dialog.Trigger asChild>
                 <Theme
                     panelBackground="solid"
-                    scaling="97%"
+
                     hasBackground={false}
                     accentColor="gray"
                     grayColor="olive"
@@ -45,7 +45,6 @@ Thanks!`;
                 <Dialog.Content className="DialogContent">
                     <Theme
                         panelBackground="solid"
-                        scaling="97%"
                         hasBackground={false}
                         accentColor="orange"
                         grayColor="olive"

@@ -20,7 +20,7 @@ export const Footer = () => {
             accentColor="yellow"
             grayColor="olive"
             radius="none"
-            scaling="97%"
+
             panelBackground="solid"
             hasBackground={false}
             asChild
