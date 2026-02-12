@@ -39,7 +39,13 @@ const {
 ---
 
 <html lang="en">
-    <Head title={title} description={description} image={image} ogType={ogType} noIndex={noIndex}>
+    <Head
+        title={title}
+        description={description}
+        image={image}
+        ogType={ogType}
+        noIndex={noIndex}
+    >
         <slot name="structured-data" slot="structured-data" />
     </Head>
     <body>
@@ -210,7 +216,7 @@ const {
                 <slot name="bottom-cta" />
             </main>
             <Box style={{ viewTransitionName: "site-footer" }}>
-                <Footer client:idle />
+                <Footer client:visible />
             </Box>
         </Theme>
     </body>
