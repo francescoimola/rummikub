@@ -61,7 +61,7 @@ export const Footer = () => {
                                         <Link href="/consultations" color="gray" size="2" highContrast={false}>
                                             Consulting
                                         </Link>
-                                        <Link href="/faq" color="gray" size="2" highContrast={false}>
+                                        <Link href="/about#faq" color="gray" size="2" highContrast={false}>
                                             FAQ
                                         </Link>
                                     </Flex>
