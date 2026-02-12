@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import {
     AspectRatio,
     Badge,
@@ -110,16 +110,18 @@ const elementProps = href
 
                         {images[0] &&
                             (typeof images[0] === "string" ? (
-                                <Image
+                                <Picture
                                     src={images[0]}
                                     alt=""
                                     inferSize={true}
+                                    formats={['avif', 'webp']}
                                     class="project-canvas-plain-image"
                                 />
                             ) : (
-                                <Image
+                                <Picture
                                     src={images[0]}
                                     alt=""
+                                    formats={['avif', 'webp']}
                                     class="project-canvas-plain-image"
                                 />
                             ))}
@@ -187,16 +189,18 @@ const elementProps = href
                                     className={`project-canvas-image-item${isDuoLayout ? " project-canvas-image-duo" : ""}`}
                                 >
                                     {typeof src === "string" ? (
-                                        <Image
+                                        <Picture
                                             src={src}
                                             alt=""
                                             inferSize={true}
+                                            formats={['avif', 'webp']}
                                             class="project-canvas-image"
                                         />
                                     ) : (
-                                        <Image
+                                        <Picture
                                             src={src}
                                             alt=""
+                                            formats={['avif', 'webp']}
                                             class="project-canvas-image"
                                         />
                                     )}
