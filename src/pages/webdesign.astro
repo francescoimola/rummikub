@@ -61,6 +61,7 @@ import { BottomCTA } from "../components/BottomCTA";
     description={SEO.pages.webdesign.description}
     backgroundColor="var(--yellow-5)"
     roleFullWidth
+    noMobileRole
 >
     <Fragment slot="structured-data">
         <JsonLd
@@ -78,21 +79,12 @@ import { BottomCTA } from "../components/BottomCTA";
     </Fragment>
 
     <!-- Hero Section -->
-    <Flex direction="column" gap="4" slot="heading">
-        <PageHeading>
-            Deliberately simpler web design and development
-        </PageHeading>
-        <Box display={{ initial: "block", sm: "none" }}>
-            <Text size="3" weight="regular" as="p">
-                For independent businesses & freelancers
-            </Text>
-        </Box>
-    </Flex>
-    <Box slot="role" display={{ initial: "none", sm: "block" }}>
-        <Text size="3" weight="medium" as="p" highContrast>
-            Best for independent businesses, freelancers, and non-profits
-        </Text>
-    </Box>
+    <PageHeading slot="heading">
+        Deliberately simpler web design and development
+    </PageHeading>
+    <Text slot="role" size="3" weight="medium" as="p">
+        Built for independent businesses and non-profits
+    </Text>
     <Flex slot="description" direction="column" gap="4">
         <Box>
             <Text size="3" highContrast asChild>

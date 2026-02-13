@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "preview:cloudflare": "npm run build && wrangler pages dev ./dist",
+    "preview:cloudflare": "pnpm run build && wrangler pages dev ./dist",
+    "preinstall": "npx only-allow pnpm",
     "astro": "astro"
   },
   "dependencies": {
@@ -44,6 +45,7 @@
     "sharp": "^0.34.5",
     "wrangler": "^4.61.1"
   },
+  "packageManager": "pnpm@10.28.2",
   "browserslist": [
     "defaults",
     ">0.3%",

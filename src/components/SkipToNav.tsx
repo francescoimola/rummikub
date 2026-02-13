@@ -1,16 +1,18 @@
 import { Flex, Text, Link, Heading } from "@radix-ui/themes";
 import type { ComponentProps } from "react";
 
-const anchors = [
-    { href: "#intro", label: "Intro" },
-    { href: "#principles", label: "Principles" },
-    { href: "#tools", label: "Tools" },
-    { href: "#sustainability", label: "Sustainability" },
-    { href: "#faqs", label: "FAQs" },
-    { href: "#contact", label: "Contact details" },
-];
+export interface Anchor {
+    href: string;
+    label: string;
+}
 
-export default function SkipToNav(props: ComponentProps<typeof Flex>) {
+type SkipToNavProps = ComponentProps<typeof Flex> & {
+    anchors: Anchor[];
+};
+
+export default function SkipToNav({ anchors, ...props }: SkipToNavProps) {
+    if (!anchors || anchors.length === 0) return null;
+
     return (
         <Flex direction="column" gap="4" {...props}>
             <Heading size="3" weight="medium" highContrast as="h4">
