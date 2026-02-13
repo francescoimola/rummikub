@@ -16,14 +16,20 @@ const { image, src, alt, caption, title, className, ...rest } = Astro.props;
 const finalImage = (image ?? src)!;
 const isPlain = title?.startsWith("plain:");
 const isFilled = title?.startsWith("filled:");
+const isExplicitlyFramed = title === "framed" || title?.startsWith("framed:");
+
 const finalCaption =
     caption ??
     (isPlain
-        ? title?.slice(6) || undefined
+        ? title?.slice(6).trim() || undefined
         : isFilled
-          ? title?.slice(7) || undefined
-          : title);
-const isFramed = !!finalCaption && !isPlain && !isFilled;
+          ? title?.slice(7).trim() || undefined
+          : isExplicitlyFramed
+            ? title?.slice(7).trim() || undefined
+            : title);
+
+const isFramed =
+    (!!finalCaption || isExplicitlyFramed) && !isPlain && !isFilled;
 ---
 
 <figure class={`${className ?? ""} image-text-spacing`} {...rest}>
