@@ -6,7 +6,7 @@ export const prerender = true;
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import PageHeading from "../../components/PageHeading";
-import { Text, Box, Theme, Flex, Section } from "@radix-ui/themes";
+import { Text, Box, Theme, Flex, Section, Link } from "@radix-ui/themes";
 import { MainGrid } from "../../components/MainGrid";
 import { ProjectInfo } from "../../components/project/ProjectInfo";
 import ProjectImage from "../../components/project/ProjectImage.astro";
@@ -15,6 +15,8 @@ import { CommonMDXComponents } from "../../components/mdx/MDXComponents";
 import { ProjectResults } from "../../components/project/ProjectResults";
 import { SEO } from "../../constants";
 import JsonLd from "../../components/JsonLd.astro";
+import { ArrowLeftIcon } from "@radix-ui/react-icons";
+import { ButtonLink } from "../../components/ButtonLink";
 
 // 1. Generate a new path for every collection entry
 export const getStaticPaths = (async () => {
@@ -63,6 +65,7 @@ if (entry.data.coverImages && entry.data.coverImages.length > 0) {
     backgroundColor="var(--brand-surface-dark-olive)"
     appearance="dark"
     roleFullWidth
+    noMobileRole
 >
     <Fragment slot="structured-data">
         <JsonLd
@@ -79,8 +82,9 @@ if (entry.data.coverImages && entry.data.coverImages.length > 0) {
 
     <!-- Hero Section -->
     <PageHeading slot="heading"> {entry.data.title} </PageHeading>
+
     <Box slot="description" asChild>
-        <Text size="3">
+        <Text size="3" as="p">
             {entry.data.heroDescription}
         </Text>
     </Box>
@@ -130,6 +134,16 @@ if (entry.data.coverImages && entry.data.coverImages.length > 0) {
                             />
                         )
                 }
+                <ButtonLink
+                    href="/work"
+                    size="3"
+                    variant="outline"
+                    color="gray"
+                    radius="none"
+                    style={{ width: "fit-content", gridColumn: "2 / 3" }}
+                >
+                    <ArrowLeftIcon />Back to Work
+                </ButtonLink>
             </MainGrid>
         </Theme>
     </Section>

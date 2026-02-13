@@ -26,16 +26,7 @@ const finalCaption =
 const isFramed = !!finalCaption && !isPlain && !isFilled;
 ---
 
-<figure
-    class={className}
-    style={{
-        display: "flex",
-        margin: "var(--space-3) 0",
-        flexDirection: "column",
-        gap: "var(--space-2)",
-    }}
-    {...rest}
->
+<figure class={`${className ?? ""} image-text-spacing`} {...rest}>
     {
         isFramed ? (
             <AspectRatio ratio={3 / 2} style={{ overflow: "hidden" }}>

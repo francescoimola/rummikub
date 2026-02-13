@@ -3,7 +3,7 @@ import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import { Flex, Box, TextField, Theme, Button, Text, Card, Link } from "@radix-ui/themes";
 import { CopyEmailButton } from "./CopyEmailButton";
-import { SITE_DATA, EXTERNAL_URLS } from "../constants";
+import { EXTERNAL_URLS } from "../constants";
 
 interface NewsletterFormProps {
     showPrivacyText?: boolean;

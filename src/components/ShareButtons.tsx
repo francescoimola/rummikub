@@ -5,7 +5,7 @@ import {
     CheckIcon,
 } from "@radix-ui/react-icons";
 import { TfiFacebook } from "react-icons/tfi";
-import { Flex, Box } from "@radix-ui/themes";
+import { Flex } from "@radix-ui/themes";
 import { useState } from "react";
 
 interface ShareButtonsProps {

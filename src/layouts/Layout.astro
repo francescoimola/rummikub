@@ -23,6 +23,7 @@ interface Props extends ComponentProps<typeof Theme> {
     ogType?: "website" | "article";
     backgroundColor?: string;
     roleFullWidth?: boolean;
+    noMobileRole?: boolean;
     noIndex?: boolean;
 }
 
@@ -33,6 +34,7 @@ const {
     ogType,
     backgroundColor = "var(--yellow-3)",
     roleFullWidth = false,
+    noMobileRole = false,
     noIndex = false,
     ...themeProps
 } = Astro.props;
@@ -48,7 +50,7 @@ const {
     >
         <slot name="structured-data" slot="structured-data" />
     </Head>
-    <body>
+    <body style={{ backgroundColor }}>
         <Theme
             accentColor="yellow"
             radius="none"
@@ -193,6 +195,7 @@ const {
                     <Box
                         gridColumn="1"
                         gridRow="auto"
+                        className={noMobileRole ? "role-hidden" : ""}
                         width="full"
                         maxWidth={roleFullWidth
                             ? undefined
