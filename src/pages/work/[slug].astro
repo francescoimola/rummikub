@@ -112,12 +112,13 @@ if (entry.data.coverImages && entry.data.coverImages.length > 0) {
                 <Flex direction="column" gap="8">
                     {/* Optional: Render Cover Canvas if images provided */}
                     {
-                        entry.data.coverImages && (
-                            <ProjectCanvas
-                                images={entry.data.coverImages}
-                                layout={entry.data.coverLayout}
-                            />
-                        )
+                        entry.data.coverImages &&
+                            entry.data.showCover !== false && (
+                                <ProjectCanvas
+                                    images={entry.data.coverImages}
+                                    layout={entry.data.coverLayout}
+                                />
+                            )
                     }
 
                     {/* MDX Content with Custom Components */}

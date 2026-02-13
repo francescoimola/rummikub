@@ -22,6 +22,7 @@ const projects = defineCollection({
             publishDate: z.coerce.date().optional(), // Used for sorting projects
             coverImages: z.array(image().or(z.string())),
             coverLayout: z.enum(["default", "plain"]).default("default").optional(),
+            showCover: z.boolean().default(true),
             results: z
                 .object({
                     heading: z.string().optional(),
