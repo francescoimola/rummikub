@@ -1,40 +1,65 @@
 ---
 export const prerender = true;
 
+import { getCollection, type CollectionEntry } from "astro:content";
+import { Flex, Grid, Section, Text, Theme } from "@radix-ui/themes";
 import Layout from "../layouts/Layout.astro";
 import PageHeading from "../components/PageHeading";
 import ProjectCanvas from "../components/project/ProjectCanvas.astro";
-import { Text, Flex, Grid, Section, Theme } from "@radix-ui/themes";
-
 import { InnerSection } from "../components/InnerSection";
 import { MainGrid } from "../components/MainGrid";
 import { KeyServicePoints, KSP } from "../components/KeyServicePoints";
 import { BottomCTA } from "../components/BottomCTA";
 import { ButtonLink } from "../components/ButtonLink";
 import { CopyEmailButton } from "../components/CopyEmailButton";
-import { getCollection } from "astro:content";
 import { SEO, SITE_DATA } from "../constants";
 
-// ── Project display order ──────────────────────────────────────
 // Reorder this array to change the sequence of featured projects.
 const projectOrder = [
-    "thecollective",
+    "the-collective",
     "blueberry",
-    "makeandmind",
-    "megaseatingplan",
-    "thefolkestonebookshop",
+    "make-and-mind",
+    "mega-seating-plan",
+    "folks-directory",
+    "folkestone-bookshop",
+    "not-bad",
 ];
 
 // Fetch and order projects
-const allProjects = await getCollection("projects");
+const projects = await getCollection(
+    "projects",
+    ({ data }: CollectionEntry<"projects">) => projectOrder.includes(data.slug),
+);
 const featuredProjects = projectOrder
-    .map((slug) => allProjects.find((p) => p.data.slug === slug))
+    .map((slug) =>
+        projects.find((p: { data: { slug: string } }) => p.data.slug === slug),
+    )
     .filter((p): p is NonNullable<typeof p> => !!p);
+
+const capabilities = [
+    {
+        heading: "Website design & development",
+        text: "I make building great sites from messy briefs look easy. Bilingual in Figma, Webflow, Framer, HTML and CSS.",
+    },
+    {
+        heading: "Copywriting & content research",
+        text: "As long as you're willing for me to taint your name with odd lexicon and inaccurate sentence structure, I'm in",
+    },
+    {
+        heading: "Email marketing",
+        text: "Big big fan of welcome emails, automations, and hyper-personalized campaigns. Quality > quantity.",
+    },
+    {
+        heading: "Graphic design",
+        text: "Top of the range rectangles and circles, sure, but really be prepared to have long chats about the meaning of life.",
+    },
+];
 ---
 
 <Layout
     title={SEO.pages.workWithMe.title}
     description={SEO.pages.workWithMe.description}
+    backgroundColor="var(--yellow-4)"
     noIndex
     roleFullWidth
 >
@@ -43,16 +68,15 @@ const featuredProjects = projectOrder
 
     <Flex slot="description" direction="column" gap="4">
         <Text size="3" as="p" wrap="pretty">
-            I'm a designer, writer, and strategist. My obsession is peanut
-            butter and products so good they don't need any marketing.
-            Unfortunately, not everyone is as lucky with what they're selling.
-            So that's where I come in. I help brands to simplify, to hold space
-            for big ideas, and to make them happen.
+            I'm a designer, writer, and strategist. Folkestone is home. My
+            obsession is peanut butter (on everything) and products so good they
+            don't need any marketing. Unfortunately, not everyone is as lucky
+            with what they're selling. So that's where I come in.
         </Text>
         <Text size="3" as="p" wrap="pretty">
-            I'm proud to do work that helps people make informed choices. And I
-            believe design, marketing, and all that is to do with long-term
-            relationship-building can play a massive role in that.
+            I help brands to simplify, to hold space for big ideas, and to make
+            them happen. I'm proudest when my work helps people make informed
+            decisions.
         </Text>
     </Flex>
 
@@ -69,25 +93,13 @@ const featuredProjects = projectOrder
                 <!-- Capabilities -->
                 <InnerSection title="What I do">
                     <KeyServicePoints>
-                        <KSP heading="Web design & no-code development">
-                            I make building great sites from messy briefs look
-                            easy. Bilingual in Figma, Webflow, Framer, HTML and
-                            CSS.
-                        </KSP>
-                        <KSP heading="Copywriting & content research">
-                            As long as you're willing for me to taint your name
-                            with odd lexicon and inaccurate sentence structure,
-                            I'm in
-                        </KSP>
-                        <KSP heading="Email marketing">
-                            Big big fan of welcome emails, automations, and
-                            hyper-personalized campaigns. Quality > quantity.
-                        </KSP>
-                        <KSP heading="Graphic design">
-                            Top of the range rectangles and circles, sure, but
-                            really be prepared to have long chats about the
-                            meaning of life.
-                        </KSP>
+                        {
+                            capabilities.map((capability) => (
+                                <KSP heading={capability.heading}>
+                                    {capability.text}
+                                </KSP>
+                            ))
+                        }
                     </KeyServicePoints>
                 </InnerSection>
 
@@ -106,7 +118,7 @@ const featuredProjects = projectOrder
                                             images={data.coverImages}
                                             layout={data.coverLayout}
                                             title={data.title}
-                                            skills={data.skills || []}
+                                            skills={data.skills}
                                             href={href}
                                             caseStudyStatus={
                                                 data.caseStudyStatus
@@ -146,29 +158,41 @@ const featuredProjects = projectOrder
                         </ButtonLink>
                     </Grid>
                 </InnerSection>
+                <InnerSection title="What I'm looking for">
+                    <Flex direction="column" gap="4">
+                        <Text size="3" as="p" wrap="pretty">
+                            Good people working on things that matter to them.
+                            That's it. I've done my best work in small teams
+                            where trust is high and ego is low, where I can roll
+                            up my sleeves, do what I do best, and leave things
+                            better than I found them.
+                        </Text>
+                        <Text size="3" as="p" wrap="pretty">
+                            If you're in the weeds, I'll be in the weeds with
+                            you. Marketing's gone rogue, design team's stretched
+                            thin, nobody can agree on what the website should
+                            actually say — that kind of thing.
+                        </Text>
+                        <Text size="3" as="p" wrap="pretty">
+                            I'm open to part-time, freelance, or full-time for
+                            the right fit. If your team needs someone who can
+                            edit, simplify, and bring focus, you know where to
+                            find me.
+                        </Text>
+                    </Flex>
+                </InnerSection>
             </MainGrid>
         </Theme>
     </Section>
 
     <!-- Closing -->
-    <BottomCTA slot="bottom-cta" heading="What's the catch?">
-        <Flex
-            direction="column"
-            gap="3"
-            align="center"
-            mt="-2"
-            style={{ maxWidth: "60ch" }}
-        >
-            <Text size="3" as="p" align="center">
-                I'm in the market for part-time and freelance work with teams
-                who are stuck in the weeds. I'll be that someone who can edit,
-                simplify, and bring focus. I will also consider full-time
-                opportunities for the right match.
-            </Text>
-            <Text size="3" as="p" align="center" color="gray" mb="4">
-                If you're thinking "I gotta speak to this guy" or you know a
-                team who might be a perfect fit, I'd love to hear from you.
-            </Text>
+    <BottomCTA
+        slot="bottom-cta"
+        backgroundColor="var(--yellow-3)"
+        heading="What's the catch?"
+        text="There's no catch. Say hello, and maybe we'll grab a coffee if you're nearby."
+    >
+        <Flex direction="column" gap="3" align="center">
             <ButtonLink
                 variant="surface"
                 href={`mailto:${SITE_DATA.email}`}
