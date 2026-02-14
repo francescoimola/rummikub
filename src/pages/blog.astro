@@ -115,8 +115,8 @@ const uniqueTags = [...new Set(allPosts.flatMap((p) => p.data.tags))];
 </Layout>
 
 <script>
-    document.addEventListener("blog-filter", (e: Event) => {
-        const filter = (e as CustomEvent<string>).detail;
+    document.addEventListener("blog-filter", (event) => {
+        const filter = (event as CustomEvent<string>).detail;
         const cards = document.querySelectorAll<HTMLElement>("[data-tags]");
         const recentSection = document
             .querySelector("[data-section='recent']")

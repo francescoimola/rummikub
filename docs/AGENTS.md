@@ -98,7 +98,7 @@ Custom scales ensure color consistency regardless of Theme wrapper nesting.
 - **PostCSS**: autoprefixer, postcss-preset-env, cssnano configured. Modern CSS features supported.
 
 ### 11. Verification Protocol (CRITICAL)
-Don't rely on visual inspection alone. Use browser DevTools to verify computed styles (margins, padding, grid gaps, alignment). Cite specific measured values when confirming implementations.
+Never rely on visual inspection. Do not spin a browser instance unless specifically requested. Use custom debugging code and best frontend practices to verify computed styles.
 
 ## 12. Git & Deployment
 - **No PRs**: Solo developer workflow. Push directly to branches.

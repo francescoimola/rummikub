@@ -1,9 +1,7 @@
 import { Heading } from "@radix-ui/themes";
 import type { ComponentProps } from "react";
 
-interface PageHeadingProps extends ComponentProps<typeof Heading> { }
-
-export default function PageHeading({ className = "", children, ...props }: PageHeadingProps) {
+export default function PageHeading(props: ComponentProps<typeof Heading>) {
     return (
         <Heading
             as="h1"
@@ -11,10 +9,7 @@ export default function PageHeading({ className = "", children, ...props }: Page
             weight="medium"
             highContrast
             trim="both"
-            className={className}
             {...props}
-        >
-            {children}
-        </Heading>
+        />
     );
 }

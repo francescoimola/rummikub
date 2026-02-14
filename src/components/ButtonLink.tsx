@@ -1,6 +1,5 @@
 import { Button } from "@radix-ui/themes";
-import { forwardRef } from "react";
-import type { ComponentPropsWithoutRef } from "react";
+import { forwardRef, type ComponentPropsWithoutRef } from "react";
 
 interface ButtonLinkProps extends ComponentPropsWithoutRef<typeof Button> {
     href: string;
@@ -10,19 +9,17 @@ interface ButtonLinkProps extends ComponentPropsWithoutRef<typeof Button> {
 }
 
 export const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
-    ({ href, external, children, target, rel, ...props }, ref) => {
-        return (
-            <Button {...props} asChild ref={ref as any}>
-                <a
-                    href={href}
-                    style={{ textDecoration: "none" }}
-                    target={target ?? (external ? "_blank" : undefined)}
-                    rel={rel ?? (external ? "noopener noreferrer" : undefined)}
-                >
-                    {children}
-                </a>
-            </Button>
-        );
-    }
+    ({ href, external, children, target, rel, ...props }, ref) => (
+        <Button {...props} asChild ref={ref as any}>
+            <a
+                href={href}
+                target={target ?? (external ? "_blank" : undefined)}
+                rel={rel ?? (external ? "noopener noreferrer" : undefined)}
+            >
+                {children}
+            </a>
+        </Button>
+    )
 );
+
 ButtonLink.displayName = "ButtonLink";

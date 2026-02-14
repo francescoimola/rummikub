@@ -13,33 +13,41 @@ export const BottomCTA = ({
     text,
     backgroundColor = "var(--yellow-5)",
     children,
-}: BottomCTAProps) => {
-    return (
-        <Container
-            className="side-margin"
-            style={{
-                backgroundColor: backgroundColor,
-            }}
-            py="var(--space-10)"
-        >
-            <Flex align="center" justify="center" direction="column" gap="6">
-                <Heading size="8" weight="medium" align="center" as="h2" highContrast trim="both" style={{ maxWidth: "var(--max-cw-sm)" }}>
-                    {heading}
-                </Heading>
-                {text && (
-                    <Text
-                        size="3"
-                        as="p"
-                        highContrast
-                        align="center"
-                        style={{ maxWidth: "40ch" }}
-                        trim="start"
-                    >
-                        {text}
-                    </Text>
-                )}
-                {children}
-            </Flex>
-        </Container>
-    );
-};
+}: BottomCTAProps) => (
+    <Container
+        style={{
+            backgroundColor,
+            paddingBlock: "var(--space-10)",
+        }}
+        px={{ initial: "5", sm: "9" }}
+    >
+        <Flex align="center" direction="column" gap="6">
+            <Heading
+                as="h2"
+                size="8"
+                weight="medium"
+                align="center"
+                highContrast
+                trim="both"
+                style={{ maxWidth: "var(--max-cw-sm)" }}
+            >
+                {heading}
+            </Heading>
+
+            {text && (
+                <Text
+                    as="p"
+                    size="3"
+                    align="center"
+                    highContrast
+                    trim="start"
+                    style={{ maxWidth: "40ch" }}
+                >
+                    {text}
+                </Text>
+            )}
+
+            {children}
+        </Flex>
+    </Container>
+);

@@ -5,9 +5,11 @@ interface Props {
 
 const { data } = Astro.props;
 
-const jsonLdData = Array.isArray(data)
-    ? data.map((item) => ({ "@context": "https://schema.org", ...item }))
-    : { "@context": "https://schema.org", ...data };
+const schema = JSON.stringify(
+    Array.isArray(data)
+        ? data.map((item) => ({ "@context": "https://schema.org", ...item }))
+        : { "@context": "https://schema.org", ...data },
+);
 ---
 
-<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLdData)} />
+<script type="application/ld+json" set:html={schema} />

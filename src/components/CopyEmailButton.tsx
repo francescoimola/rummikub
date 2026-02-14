@@ -1,6 +1,6 @@
 import { Button } from "@radix-ui/themes";
-import { forwardRef, useState } from "react";
-import type { ComponentPropsWithoutRef } from "react";
+import { type ComponentPropsWithoutRef, forwardRef, useState } from "react";
+import { SITE_DATA } from "../constants";
 
 interface CopyEmailButtonProps extends ComponentPropsWithoutRef<typeof Button> {
     email?: string;
@@ -9,18 +9,21 @@ interface CopyEmailButtonProps extends ComponentPropsWithoutRef<typeof Button> {
 }
 
 export const CopyEmailButton = forwardRef<HTMLButtonElement, CopyEmailButtonProps>(
-    ({ email = "hi@francescoimola.com", label = "Copy email", successLabel = "Copied!", onClick, children, ...props }, ref) => {
+    ({ email = SITE_DATA.email, label = "Copy email", successLabel = "Copied!", onClick, children, style, ...props }, ref) => {
         const [copied, setCopied] = useState(false);
 
-        const handleCopy = (e: React.MouseEvent<HTMLButtonElement>) => {
-            navigator.clipboard.writeText(email);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 2000);
-            onClick?.(e);
-        };
-
         return (
-            <Button {...props} ref={ref} onClick={handleCopy} style={{ userSelect: "none", ...props.style }}>
+            <Button
+                {...props}
+                ref={ref}
+                style={{ userSelect: "none", ...style }}
+                onClick={(e) => {
+                    void navigator.clipboard.writeText(email);
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                    onClick?.(e);
+                }}
+            >
                 {copied ? <em>{successLabel}</em> : (children ?? label)}
             </Button>
         );

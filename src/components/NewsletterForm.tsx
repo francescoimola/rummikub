@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Formik, Form, useField } from "formik";
+import { Formik, Form, useField, type FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { Flex, Box, TextField, Theme, Button, Text, Card, Link } from "@radix-ui/themes";
 import { CopyEmailButton } from "./CopyEmailButton";
@@ -11,20 +11,23 @@ interface NewsletterFormProps {
     align?: "start" | "center" | "end" | "stretch" | "baseline";
 }
 
-// Validation schema
+interface FormValues {
+    email: string;
+    website: string;
+}
+
 const NewsletterSchema = Yup.object().shape({
     email: Yup.string()
         .email("Please enter a valid email address")
         .required("Email is required"),
 });
 
-// Custom Radix TextField that works with Formik
-const EmailField = ({ name, id }: { name: string; id?: string }) => {
-    const [field] = useField(name);
+const EmailField = (props: { name: string; id?: string }) => {
+    const [field] = useField(props);
     return (
         <TextField.Root
             {...field}
-            id={id || name}
+            {...props}
             placeholder="Your email"
             size="3"
             variant="surface"
@@ -47,24 +50,19 @@ export const NewsletterForm = ({
     textAlign = "left",
     align = "start",
 }: NewsletterFormProps) => {
-    const [submitStatus, setSubmitStatus] = useState<{
-        success?: boolean;
-        error?: string;
-    }>({});
-
-    // Timestamp for bot detection (set on mount)
+    const [submitStatus, setSubmitStatus] = useState<{ success?: boolean; error?: string }>({});
     const mountTime = useRef(Date.now());
 
     const handleSubmit = async (
-        values: { email: string; website: string },
-        { setSubmitting, resetForm }: { setSubmitting: (isSubmitting: boolean) => void; resetForm: () => void }
+        values: FormValues,
+        { setSubmitting, resetForm }: FormikHelpers<FormValues>
     ) => {
         setSubmitStatus({});
 
         try {
             const formData = new FormData();
             formData.append("email", values.email);
-            formData.append("website", values.website); // honeypot
+            formData.append("website", values.website);
             formData.append("timestamp", mountTime.current.toString());
 
             const response = await fetch("/api/newsletter", {
@@ -77,12 +75,11 @@ export const NewsletterForm = ({
             if (result.success) {
                 setSubmitStatus({ success: true });
                 resetForm();
-                // Reset mount time for next submission attempt
                 mountTime.current = Date.now();
             } else {
                 setSubmitStatus({ error: result.error || "Subscription failed. Please try again." });
             }
-        } catch (error) {
+        } catch {
             setSubmitStatus({ error: "Something went wrong. Please try again." });
         } finally {
             setSubmitting(false);
@@ -104,7 +101,6 @@ export const NewsletterForm = ({
                                     <EmailField name="email" id="newsletter-email" />
                                 </Box>
 
-                                {/* Honeypot field - invisible to humans, bots fill it */}
                                 <input
                                     name="website"
                                     type="text"
@@ -143,16 +139,13 @@ export const NewsletterForm = ({
                                 </Theme>
                             </Flex>
 
-                            {/* Status messages with aria-live for screen reader announcements */}
                             <Box aria-live="polite" aria-atomic="true">
-                                {/* Validation error */}
                                 {errors.email && touched.email && (
                                     <Text color="red" size="2">
                                         {errors.email}
                                     </Text>
                                 )}
 
-                                {/* Success message */}
                                 {submitStatus.success && (
                                     <Card variant="ghost" size="2" mt="2" style={{ margin: "unset", backgroundColor: "var(--gray-a3)" }}>
                                         <Text size="2" weight="bold" style={{ color: "var(--accent-12)" }}>
@@ -161,7 +154,6 @@ export const NewsletterForm = ({
                                     </Card>
                                 )}
 
-                                {/* Server error */}
                                 {submitStatus.error && (
                                     <Card variant="ghost" size="2" mt="2" style={{ margin: "unset", backgroundColor: "var(--gray-a3)" }}>
                                         <Flex direction="column" justify="center" gap="4" wrap="wrap">

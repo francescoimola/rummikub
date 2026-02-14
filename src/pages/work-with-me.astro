@@ -4,8 +4,8 @@ export const prerender = true;
 import Layout from "../layouts/Layout.astro";
 import PageHeading from "../components/PageHeading";
 import ProjectCanvas from "../components/project/ProjectCanvas.astro";
-import { Text, Flex, Grid, Section, Box, Theme } from "@radix-ui/themes";
-import { ArrowTopRightIcon } from "@radix-ui/react-icons";
+import { Text, Flex, Grid, Section, Theme } from "@radix-ui/themes";
+
 import { InnerSection } from "../components/InnerSection";
 import { MainGrid } from "../components/MainGrid";
 import { KeyServicePoints, KSP } from "../components/KeyServicePoints";
@@ -20,53 +20,16 @@ import { SEO, SITE_DATA } from "../constants";
 const projectOrder = [
     "thecollective",
     "blueberry",
-    "make-and-mind",
-    "mega-seating-plan",
-    "the-folkestone-bookshop",
+    "makeandmind",
+    "megaseatingplan",
+    "thefolkestonebookshop",
 ];
-
-// ── Per-project overrides ──────────────────────────────────────
-const projectConfig: Record<
-    string,
-    {
-        skills?: string[];
-        description?: string;
-        href?: string;
-        hrefExternal?: boolean;
-        expanded?: boolean;
-    }
-> = {
-    blueberry: {
-        skills: [
-            "Content Marketing",
-            "Graphic Design",
-            "Internal Comms",
-            "Project Management",
-        ],
-        expanded: true,
-    },
-    thecollective: {
-        href: "/work/thecollective",
-    },
-    "make-and-mind": {
-        href: "/work/make-and-mind",
-    },
-    "mega-seating-plan": {
-        href: "https://megaseatingplan.com",
-        hrefExternal: true,
-    },
-};
 
 // Fetch and order projects
 const allProjects = await getCollection("projects");
 const featuredProjects = projectOrder
-    .map((slug) => {
-        const project = allProjects.find((p) => p.data.slug === slug);
-        if (!project) return null;
-        const config = projectConfig[slug] || {};
-        return { data: project.data, config };
-    })
-    .filter((p) => p !== null);
+    .map((slug) => allProjects.find((p) => p.data.slug === slug))
+    .filter((p): p is NonNullable<typeof p> => !!p);
 ---
 
 <Layout
@@ -132,15 +95,10 @@ const featuredProjects = projectOrder
                 <InnerSection title="Selected work">
                     <Grid columns="1" gapY="9">
                         {
-                            featuredProjects.map((project) => {
-                                const { data, config } = project;
-                                const skills =
-                                    config.skills || data.skills || [];
-                                const description =
-                                    config.description ?? data.heroDescription;
-                                const isExpanded = config.expanded || false;
-                                const href = config.href;
-                                const isExternal = config.hrefExternal || false;
+                            featuredProjects.map(({ data }) => {
+                                const href = data.caseStudyStatus
+                                    ? undefined
+                                    : `/work/${data.slug}`;
 
                                 return (
                                     <Flex direction="column" gap="5">
@@ -148,67 +106,44 @@ const featuredProjects = projectOrder
                                             images={data.coverImages}
                                             layout={data.coverLayout}
                                             title={data.title}
-                                            skills={skills}
+                                            skills={data.skills || []}
                                             href={href}
+                                            caseStudyStatus={
+                                                data.caseStudyStatus
+                                            }
                                         />
-                                        {isExpanded && description ? (
-                                            <Box
-                                                py="4"
-                                                px="5"
-                                                style={{
-                                                    backgroundColor:
-                                                        "var(--orange-a2)",
-                                                }}
-                                            >
-                                                <Text
-                                                    size="3"
-                                                    as="p"
-                                                    style={{
-                                                        maxWidth: "65ch",
-                                                        fontStyle: "italic",
-                                                    }}
-                                                >
-                                                    {description}
-                                                </Text>
-                                            </Box>
-                                        ) : description ? (
-                                            <Text
-                                                size="3"
-                                                as="p"
-                                                color="gray"
-                                                style={{
-                                                    maxWidth: "65ch",
-                                                }}
-                                            >
-                                                {description}
+                                        {data.heroDescription && (
+                                            <Text size="3" as="p" wrap="pretty">
+                                                {data.heroDescription}
                                             </Text>
-                                        ) : null}
+                                        )}
                                         {href && (
                                             <ButtonLink
                                                 href={href}
                                                 variant="soft"
                                                 color="gray"
                                                 size="2"
-                                                highContrast
-                                                external={isExternal}
                                                 style={{
                                                     alignSelf: "flex-start",
                                                 }}
                                             >
-                                                {isExternal ? (
-                                                    <>
-                                                        Visit site{" "}
-                                                        <ArrowTopRightIcon />
-                                                    </>
-                                                ) : (
-                                                    "Read case study"
-                                                )}
+                                                Read case study
                                             </ButtonLink>
                                         )}
                                     </Flex>
                                 );
                             })
                         }
+                        <ButtonLink
+                            href="/work"
+                            variant="outline"
+                            size="3"
+                            style={{
+                                width: "fit-content",
+                            }}
+                        >
+                            See more projects
+                        </ButtonLink>
                     </Grid>
                 </InnerSection>
             </MainGrid>
