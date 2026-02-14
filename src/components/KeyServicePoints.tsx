@@ -1,42 +1,26 @@
 import { Grid, Heading, Text } from "@radix-ui/themes";
-import React from "react";
+import type { ReactNode } from "react";
 
-interface KeyServicePointProps {
-    heading: React.ReactNode;
-    children: React.ReactNode;
-    /** Number of words (starting from the first) to display in gray. Defaults to 1. */
+interface KSPProps {
+    heading: ReactNode;
+    children: ReactNode;
     grayWordCount?: number;
-    /** If true, renders children wrapper as div to allow multiple paragraphs. Defaults to false (renders as p). */
     multiParagraph?: boolean;
 }
 
-export const KSP = ({ heading, children, grayWordCount = 1, multiParagraph = false }: KeyServicePointProps) => {
-    let headingContent: React.ReactNode = heading;
-
-    if (typeof heading === "string") {
-        const words = heading.split(" ");
-
-        // Warn in development if grayWordCount covers all/more words than available
-        if (process.env.NODE_ENV !== "production" && grayWordCount >= words.length) {
-            console.warn(
-                `[KeyServicePoints -> KSP] grayWordCount (${grayWordCount}) is >= total words (${words.length}) in heading "${heading}". ` +
-                `This means no words will appear in high contrast. Consider reducing grayWordCount.`
-            );
-        }
-
-        const grayWords = words.slice(0, grayWordCount).join(" ");
-        const restOfHeading = words.slice(grayWordCount).join(" ");
-        headingContent = (
-            <>
-                <Text color="gray" as="span">
-                    {grayWords}
-                </Text>{" "}
-                <Text as="span" highContrast>
-                    {restOfHeading}
-                </Text>
-            </>
-        );
-    }
+export const KSP = ({ heading, children, grayWordCount = 1, multiParagraph }: KSPProps) => {
+    const headingContent = typeof heading === "string" ? (
+        <>
+            <Text color="gray" as="span">
+                {heading.split(" ").slice(0, grayWordCount).join(" ")}
+            </Text>{" "}
+            <Text as="span" highContrast>
+                {heading.split(" ").slice(grayWordCount).join(" ")}
+            </Text>
+        </>
+    ) : (
+        heading
+    );
 
     return (
         <Grid columns={{ initial: "1", md: "2" }} gapX="6" gapY="2" className="key-service-point">
@@ -50,14 +34,6 @@ export const KSP = ({ heading, children, grayWordCount = 1, multiParagraph = fal
     );
 };
 
-interface KeyServicePointsProps {
-    children: React.ReactNode;
-}
-
-export const KeyServicePoints = ({ children }: KeyServicePointsProps) => {
-    return (
-        <div className="key-service-points">
-            {children}
-        </div>
-    );
-};
+export const KeyServicePoints = ({ children }: { children: ReactNode }) => (
+    <div className="key-service-points">{children}</div>
+);

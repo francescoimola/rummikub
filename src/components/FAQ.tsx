@@ -1,14 +1,12 @@
 import * as Accordion from "@radix-ui/react-accordion";
-import { Flex, Text, Box, Heading } from "@radix-ui/themes";
+import { Flex, Text, Box } from "@radix-ui/themes";
 import { PlusIcon, MinusIcon } from "@radix-ui/react-icons";
 
-interface FAQItem {
-    question: string;
-    answer: string;
-}
-
 interface FAQProps {
-    items: FAQItem[];
+    items: {
+        question: string;
+        answer: string;
+    }[];
 }
 
 export default function FAQ({ items }: FAQProps) {
@@ -19,18 +17,17 @@ export default function FAQ({ items }: FAQProps) {
                     key={index}
                     value={`item-${index}`}
                     style={{
-                        margin: "0",
-                        borderTop: index === 0 ? "none" : "thin solid var(--gray-a6)",
+                        margin: 0,
+                        borderTop: index === 0 ? undefined : "thin solid var(--gray-a6)",
                     }}
                 >
-                    <Accordion.Header style={{ margin: "0" }} asChild>
-                        <Accordion.Trigger
-                            className="AccordionTrigger">
-                            <Flex justify="between" align="center" pb="6" gap="4" pt={index === 0 ? "0" : "6"}>
-                                <Heading size="3" weight="medium" highContrast as="h3">
+                    <Accordion.Header style={{ margin: 0 }}>
+                        <Accordion.Trigger className="AccordionTrigger">
+                            <Flex justify="between" align="center" pb="6" gap="4" pt={index === 0 ? undefined : "6"}>
+                                <Text size="3" weight="medium" highContrast>
                                     {item.question}
-                                </Heading>
-                                <Box style={{ color: "var(--gray-a11)" }}>
+                                </Text>
+                                <Text color="gray">
                                     <PlusIcon
                                         className="AccordionIconPlus"
                                         width="18"
@@ -41,12 +38,12 @@ export default function FAQ({ items }: FAQProps) {
                                         width="18"
                                         height="18"
                                     />
-                                </Box>
+                                </Text>
                             </Flex>
                         </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content className="AccordionContent">
-                        <Box pb="6" pr="8" asChild m="0" >
+                        <Box pb="6" pr="8" asChild m="0">
                             <Text size="3" as="p" color="gray" wrap="pretty" style={{ whiteSpace: "pre-line" }}>
                                 {item.answer}
                             </Text>

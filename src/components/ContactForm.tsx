@@ -11,13 +11,21 @@ import {
     Box,
     Theme,
     Card,
+    Link,
 } from "@radix-ui/themes";
-import { Link } from "@radix-ui/themes";
 import * as Yup from "yup";
-import { Formik, useField, useFormikContext, Field } from "formik";
+import { Formik, useField, useFormikContext, Field, Form } from "formik";
 import { EXTERNAL_URLS } from "../constants";
 
-// Validation schema
+const ROLES = [
+    "Small business owner",
+    "Marketing manager",
+    "Agency partner",
+    "Freelancer",
+    "Startup founder",
+    "Other",
+];
+
 const ContactSchema = Yup.object().shape({
     firstName: Yup.string().required("First name is required"),
     lastName: Yup.string(),
@@ -29,96 +37,85 @@ const ContactSchema = Yup.object().shape({
     acceptedTerms: Yup.boolean().oneOf([true], "You must accept the terms"),
 });
 
-// Custom TextField component for Formik
-type TextFieldType = "text" | "email" | "tel" | "password" | "url" | "search";
-
-const FormTextField = ({
-    name,
-    type = "text",
-    required = false,
-    id,
-}: {
-    name: string;
-    type?: TextFieldType;
-    required?: boolean;
-    id?: string;
-}) => {
-    const [field] = useField(name);
+const FormInput = ({ label, name, required, ...props }: React.ComponentProps<typeof TextField.Root> & { label: React.ReactNode; name: string; required?: boolean }) => {
+    const [field, meta] = useField(name);
     return (
-        <TextField.Root
-            {...field}
-            id={id || name}
-            type={type}
-            required={required}
-            variant="soft"
-            placeholder=""
-            className="contact-form-input"
-        />
-    );
-};
-
-// Custom TextArea component for Formik
-const FormTextArea = ({ name, id }: { name: string; id?: string }) => {
-    const [field] = useField(name);
-    return (
-        <TextArea
-            {...field}
-            id={id || name}
-            required
-            variant="soft"
-            placeholder="Tell me about your project..."
-            className="contact-form-input"
-            style={{ minHeight: "100px", resize: "vertical" }}
-        />
-    );
-};
-
-// Custom Select component for Formik
-const FormSelect = ({ name, id }: { name: string; id?: string }) => {
-    const { setFieldValue, values } = useFormikContext<{ service: string }>();
-    return (
-        <Select.Root
-            required
-            value={values.service}
-            onValueChange={(value) => setFieldValue(name, value)}
-        >
-            <Select.Trigger
-                id={id || name}
+        <Flex direction="column" gap="1">
+            <Text as="label" htmlFor={name} size="3" weight="medium" mb="1">
+                {label} {!required && <Text as="span" color="gray" weight="regular">(optional)</Text>}
+            </Text>
+            <TextField.Root
+                {...field}
+                {...props}
+                id={name}
+                required={required}
                 variant="soft"
                 className="contact-form-input"
-                style={{ marginTop: "0.75rem", width: "100%", justifyContent: "space-between" }}
             />
-            <Select.Content>
-                <Select.Item value="web-design">Web Design & Development</Select.Item>
-                <Select.Item value="consulting">Website Consultation</Select.Item>
-                <Select.Item value="copywriting">Copywriting</Select.Item>
-                <Select.Item value="email-marketing">Email Marketing</Select.Item>
-                <Select.Item value="other">Other</Select.Item>
-            </Select.Content>
-        </Select.Root>
+            {meta.touched && meta.error && <Text color="red" size="1">{meta.error}</Text>}
+        </Flex>
     );
 };
 
-// Role checkbox group
-const ROLES = [
-    "Small business owner",
-    "Marketing manager",
-    "Agency partner",
-    "Freelancer",
-    "Startup founder",
-    "Other",
-];
+const FormTextArea = ({ label, name, ...props }: React.ComponentProps<typeof TextArea> & { label: string; name: string }) => {
+    const [field, meta] = useField(name);
+    return (
+        <Flex direction="column" gap="1">
+            <Text as="label" htmlFor={name} size="3" weight="medium" mb="1">{label}</Text>
+            <TextArea
+                {...field}
+                {...props}
+                id={name}
+                required
+                variant="soft"
+                className="contact-form-input"
+                style={{ minHeight: "100px", resize: "vertical", ...props.style }}
+            />
+            {meta.touched && meta.error && <Text color="red" size="2">{meta.error}</Text>}
+        </Flex>
+    );
+};
 
-const RoleCheckboxes = () => {
+const FormSelect = ({ label, name }: { label: string; name: string }) => {
+    const { setFieldValue, values, touched, errors } = useFormikContext<{ service: string }>();
+    const hasError = touched.service && errors.service;
+
+    return (
+        <Flex direction="column" gap="1">
+            <Text as="label" htmlFor={name} size="3" weight="medium">{label}</Text>
+            <Select.Root
+                required
+                value={values.service}
+                onValueChange={(value) => setFieldValue(name, value)}
+            >
+                <Select.Trigger
+                    id={name}
+                    variant="soft"
+                    className="contact-form-input"
+                    style={{ marginTop: "0.75rem", width: "100%", justifyContent: "space-between" }}
+                />
+                <Select.Content>
+                    <Select.Item value="web-design">Web Design & Development</Select.Item>
+                    <Select.Item value="consulting">Website Consultation</Select.Item>
+                    <Select.Item value="copywriting">Copywriting</Select.Item>
+                    <Select.Item value="email-marketing">Email Marketing</Select.Item>
+                    <Select.Item value="other">Other</Select.Item>
+                </Select.Content>
+            </Select.Root>
+            {hasError && <Text color="red" size="2">{errors.service}</Text>}
+        </Flex>
+    );
+};
+
+const FormCheckboxes = () => {
     const { setFieldValue, values } = useFormikContext<{ roles: string[] }>();
+    const currentRoles = values.roles || [];
 
-    const handleRoleChange = (role: string, checked: boolean) => {
-        const currentRoles = values.roles || [];
-        if (checked) {
-            setFieldValue("roles", [...currentRoles, role]);
-        } else {
-            setFieldValue("roles", currentRoles.filter((r) => r !== role));
-        }
+    const handleChange = (role: string, checked: boolean) => {
+        const nextRoles = checked
+            ? [...currentRoles, role]
+            : currentRoles.filter((r) => r !== role);
+        setFieldValue("roles", nextRoles);
     };
 
     return (
@@ -128,107 +125,21 @@ const RoleCheckboxes = () => {
                     <Checkbox
                         id={role}
                         color="gray"
-                        checked={(values.roles || []).includes(role)}
-                        onCheckedChange={(checked) => handleRoleChange(role, checked === true)}
+                        checked={currentRoles.includes(role)}
+                        onCheckedChange={(c) => handleChange(role, c === true)}
                     />
-                    <Text as="label" htmlFor={role} size="2">
-                        {role}
-                    </Text>
+                    <Text as="label" htmlFor={role} size="2">{role}</Text>
                 </Flex>
             ))}
         </Grid>
     );
 };
 
-// Terms checkbox
-const TermsCheckbox = () => {
-    const { setFieldValue, values } = useFormikContext<{ acceptedTerms: boolean }>();
-
-    return (
-        <Flex align="center" gap="2">
-            <Checkbox
-                id="terms"
-                color="gray"
-                checked={values.acceptedTerms}
-                onCheckedChange={(checked) => setFieldValue("acceptedTerms", checked === true)}
-            />
-            <Text as="label" htmlFor="terms" size="2">
-                I accept the{" "}
-                <Link href={EXTERNAL_URLS.termsOfBusiness} color="gray" underline="always">
-                    terms
-                </Link>{" "}
-                and{" "}
-                <Link href={EXTERNAL_URLS.privacyNotice} color="gray" underline="always">
-                    privacy notice
-                </Link>
-            </Text>
-        </Flex>
-    );
-};
-
 export const ContactForm = () => {
-    const [submitStatus, setSubmitStatus] = useState<{ success: boolean; error: string | null }>({
-        success: false,
-        error: null,
-    });
-
-    const handleSubmit = async (
-        values: {
-            firstName: string;
-            lastName: string;
-            email: string;
-            phone: string;
-            service: string;
-            roles: string[];
-            message: string;
-            acceptedTerms: boolean;
-            botcheck: string;
-        },
-        { setSubmitting, resetForm }: { setSubmitting: (isSubmitting: boolean) => void; resetForm: () => void }
-    ) => {
-        setSubmitStatus({ success: false, error: null });
-
-        try {
-            const formData = new FormData();
-            formData.append("firstName", values.firstName);
-            formData.append("lastName", values.lastName);
-            formData.append("email", values.email);
-            formData.append("phone", values.phone);
-            formData.append("service", values.service);
-            formData.append("roles", values.roles.join(", "));
-            formData.append("message", values.message);
-            formData.append("botcheck", values.botcheck);
-
-            const response = await fetch("/api/contact", {
-                method: "POST",
-                body: formData,
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                setSubmitStatus({ success: true, error: null });
-                resetForm();
-            } else {
-                setSubmitStatus({ success: false, error: data.error || "Something went wrong. Please try again." });
-            }
-        } catch {
-            setSubmitStatus({ success: false, error: "Network error. Please check your connection and try again." });
-        } finally {
-            setSubmitting(false);
-        }
-    };
+    const [status, setStatus] = useState<{ success: boolean; error: string | null }>({ success: false, error: null });
 
     return (
-        <Theme
-            accentColor="yellow"
-            grayColor="olive"
-            panelBackground="solid"
-            radius="none"
-
-            hasBackground={false}
-            asChild
-        >
+        <Theme accentColor="yellow" grayColor="olive" panelBackground="solid" radius="none" hasBackground={false} asChild>
             <Formik
                 initialValues={{
                     firstName: "",
@@ -239,149 +150,106 @@ export const ContactForm = () => {
                     roles: [] as string[],
                     message: "",
                     acceptedTerms: false,
-                    botcheck: "", // honeypot
+                    botcheck: "",
                 }}
                 validationSchema={ContactSchema}
-                onSubmit={handleSubmit}
+                onSubmit={async (values, { setSubmitting, resetForm }) => {
+                    setStatus({ success: false, error: null });
+                    try {
+                        const formData = new FormData();
+                        Object.entries(values).forEach(([key, value]) => {
+                            formData.append(key, Array.isArray(value) ? value.join(", ") : String(value));
+                        });
+
+                        const res = await fetch("/api/contact", { method: "POST", body: formData });
+                        const data = await res.json();
+
+                        if (data.success) {
+                            setStatus({ success: true, error: null });
+                            resetForm();
+                        } else {
+                            setStatus({ success: false, error: data.error || "Something went wrong. Please try again." });
+                        }
+                    } catch {
+                        setStatus({ success: false, error: "Network error. Please check your connection and try again." });
+                    } finally {
+                        setSubmitting(false);
+                    }
+                }}
             >
                 {({ isSubmitting, errors, touched }) => (
-                    <form style={{ marginTop: "var(--space-8)" }}>
+                    <Form style={{ marginTop: "var(--space-8)" }}>
                         <Grid columns={{ initial: "1", md: "2" }} gap="5">
-                            {/* First Name */}
-                            <Flex direction="column" gap="1">
-                                <Text as="label" htmlFor="firstName" size="3" weight="medium" mb="1">
-                                    First name
-                                </Text>
-                                <FormTextField name="firstName" id="firstName" required />
-                                {errors.firstName && touched.firstName && (
-                                    <Text color="red" size="1">{errors.firstName}</Text>
-                                )}
-                            </Flex>
+                            <FormInput name="firstName" label="First name" required />
+                            <FormInput name="lastName" label="Last name" />
+                            <FormInput name="email" label="Email" type="email" required />
+                            <FormInput name="phone" label="Phone number" type="tel" />
 
-                            {/* Last Name */}
-                            <Flex direction="column" gap="1">
-                                <Text as="label" htmlFor="lastName" size="3" weight="medium" mb="1">
-                                    Last name <Text as="span" color="gray" weight="regular">(optional)</Text>
-                                </Text>
-                                <FormTextField name="lastName" id="lastName" />
-                            </Flex>
-
-                            {/* Email */}
-                            <Flex direction="column" gap="1">
-                                <Text as="label" htmlFor="email" size="3" weight="medium" mb="1">
-                                    Email
-                                </Text>
-                                <FormTextField name="email" id="email" type="email" required />
-                                {errors.email && touched.email && (
-                                    <Text color="red" size="1">{errors.email}</Text>
-                                )}
-                            </Flex>
-
-                            {/* Phone */}
-                            <Flex direction="column" gap="1">
-                                <Text as="label" htmlFor="phone" size="3" weight="medium" mb="1">
-                                    Phone number <Text as="span" color="gray" weight="regular">(optional)</Text>
-                                </Text>
-                                <FormTextField name="phone" id="phone" type="tel" />
-                            </Flex>
-
-                            {/* Service Select */}
                             <Box gridColumn={{ initial: "1", sm: "span 2" }}>
-                                <Flex direction="column" gap="1">
-                                    <Text as="label" htmlFor="service" size="3" weight="medium">
-                                        What can I help with?
-                                    </Text>
-                                    <FormSelect name="service" id="service" />
-                                    {errors.service && touched.service && (
-                                        <Text color="red" size="2">{errors.service}</Text>
-                                    )}
-                                </Flex>
+                                <FormSelect name="service" label="What can I help with?" />
                             </Box>
 
-                            {/* Role Checkboxes */}
                             <Box gridColumn={{ initial: "1", sm: "span 2" }} mt="4">
                                 <Text as="p" size="3" weight="medium" mb="3">
-                                    Which best describes you?{" "}
-                                    <Text as="span" color="gray" weight="regular">(optional)</Text>
+                                    Which best describes you? <Text as="span" color="gray" weight="regular">(optional)</Text>
                                 </Text>
-                                <RoleCheckboxes />
+                                <FormCheckboxes />
                             </Box>
 
-                            {/* Message */}
                             <Box gridColumn={{ initial: "1", sm: "span 2" }} mt="2">
-                                <Flex direction="column" gap="1">
-                                    <Text as="label" htmlFor="message" size="3" weight="medium" mb="1">
-                                        Message
+                                <FormTextArea name="message" label="Message" placeholder="Tell me about your project..." />
+                            </Box>
+
+                            <Box gridColumn={{ initial: "1", sm: "span 2" }} mt="2">
+                                <Flex align="center" gap="2">
+                                    <Field name="acceptedTerms">
+                                        {({ field, form }: { field: any, form: any }) => (
+                                            <Checkbox
+                                                {...field}
+                                                id="terms"
+                                                color="gray"
+                                                checked={field.value}
+                                                onCheckedChange={(c) => form.setFieldValue("acceptedTerms", c === true)}
+                                            />
+                                        )}
+                                    </Field>
+                                    <Text as="label" htmlFor="terms" size="2">
+                                        I accept the <Link href={EXTERNAL_URLS.termsOfBusiness} color="gray" underline="always">terms</Link> and <Link href={EXTERNAL_URLS.privacyNotice} color="gray" underline="always">privacy notice</Link>
                                     </Text>
-                                    <FormTextArea name="message" id="message" />
-                                    {errors.message && touched.message && (
-                                        <Text color="red" size="2">{errors.message}</Text>
-                                    )}
                                 </Flex>
-                            </Box>
-
-                            {/* Terms Checkbox */}
-                            <Box gridColumn={{ initial: "1", sm: "span 2" }} mt="2">
-                                <TermsCheckbox />
                                 {errors.acceptedTerms && touched.acceptedTerms && (
-                                    <Text color="red" size="2" mt="1" asChild>
-                                        <span>{errors.acceptedTerms}</span>
-                                    </Text>
+                                    <Text color="red" size="2" mt="1" as="div">{errors.acceptedTerms}</Text>
                                 )}
                             </Box>
 
-                            {/* Honeypot - hidden from humans */}
                             <Field
                                 name="botcheck"
-                                type="text"
+                                style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none" }}
                                 tabIndex={-1}
                                 autoComplete="off"
                                 aria-hidden="true"
-                                style={{
-                                    position: "absolute",
-                                    left: "-9999px",
-                                    opacity: 0,
-                                    pointerEvents: "none",
-                                }}
                             />
 
-                            {/* Submit Button */}
                             <Box mt="4">
-                                <Button
-                                    type="submit"
-                                    size="4"
-                                    variant="surface"
-                                    disabled={isSubmitting}
-                                >
+                                <Button type="submit" size="4" variant="surface" disabled={isSubmitting}>
                                     {isSubmitting ? "Sending..." : "Send"}
                                 </Button>
                             </Box>
 
-                            {/* Status Messages with aria-live for screen reader announcements */}
-                            <Box
-                                gridColumn={{ initial: "1", sm: "span 2" }}
-                                aria-live="polite"
-                                aria-atomic="true"
-                            >
-                                {submitStatus.success && (
+                            <Box gridColumn={{ initial: "1", sm: "span 2" }} aria-live="polite">
+                                {(status.success || status.error) && (
                                     <Card variant="ghost" size="2" style={{ backgroundColor: "var(--gray-a3)" }}>
-                                        <Text size="2" weight="bold" style={{ color: "var(--accent-12)" }}>
-                                            Message sent! I'll get back to you soon.
-                                        </Text>
-                                    </Card>
-                                )}
-                                {submitStatus.error && (
-                                    <Card variant="ghost" size="2" style={{ backgroundColor: "var(--gray-a3)" }}>
-                                        <Text color="red" size="2" weight="medium">
-                                            {submitStatus.error}
+                                        <Text color={status.success ? undefined : "red"} size="2" weight={status.success ? "bold" : "medium"} style={status.success ? { color: "var(--accent-12)" } : undefined}>
+                                            {status.success ? "Message sent! I'll get back to you soon." : status.error}
                                         </Text>
                                     </Card>
                                 )}
                             </Box>
                         </Grid>
-                    </form>
+                    </Form>
                 )}
             </Formik>
         </Theme>
     );
 };
+
