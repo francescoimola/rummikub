@@ -1,5 +1,6 @@
 import {
     Box,
+    Card,
     Container,
     Flex,
     Grid,
@@ -70,7 +71,7 @@ export const Footer = () => {
             accentColor="yellow"
             grayColor="olive"
             radius="none"
-            panelBackground="solid"
+            panelBackground="translucent"
             asChild
         >
             <footer
@@ -124,22 +125,27 @@ export const Footer = () => {
                         </Flex>
 
                         {/* RIGHT COLUMN: Signup Form */}
-                        <Flex
-                            direction="column"
-                            gap="4"
-                            style={{ containerType: "inline-size" }}
-                            className="signup-form-container"
-                        >
-                            <Flex direction="column">
-                                <Heading as="h3" size="3" weight="medium" highContrast>
-                                    Finally, something decent in your inbox
-                                </Heading>
-                                <Text size="3" as="p" mt="2" color="gray">
-                                    Sign up and get occasional emails about new projects, special offers, and event invites.
-                                </Text>
-                            </Flex>
+                        <Flex direction="column" gapY={{ initial: "var(--space-11)", sm: "var(--space-12)" }}>
+                            <Flex
+                                direction="column"
+                                gap="4"
+                                style={{ containerType: "inline-size" }}
+                                className="signup-form-container"
+                            >
+                                <Flex direction="column">
+                                    <Heading as="h3" size="3" weight="medium" highContrast>
+                                        Finally, something decent in your inbox
+                                    </Heading>
+                                    <Text size="3" as="p" mt="2" color="gray">
+                                        Sign up and get occasional emails about new projects, special offers, and event invites.
+                                    </Text>
+                                </Flex>
 
-                            <NewsletterForm showPrivacyText={true} />
+                                <NewsletterForm showPrivacyText={true} />
+                            </Flex>
+                            <Card size="2" variant="surface" style={{ backgroundColor: "var(--gray-a2)" }} mt={{ initial: "var(--space-8)", sm: "0" }} mb={{ initial: "-9", sm: "0" }}>
+                                <Text size="2" color="gray"><Link href="https://www.websitecarbon.com/website/francescoimola-com/" target="_blank" rel="noopener noreferrer">This website runs on sustainable energy and consumes ~80% less energy than all websites globally</Link></Text>
+                            </Card>
                         </Flex>
                     </Grid>
 

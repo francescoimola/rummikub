@@ -14,7 +14,6 @@ import {
     Section,
 } from "@radix-ui/themes";
 
-import { Image } from "astro:assets";
 import francescoImg from "../assets/francesco.jpg";
 import SkipToNav from "../components/SkipToNav";
 import { InnerSection } from "../components/InnerSection";
@@ -37,6 +36,7 @@ import { ArrowDownIcon } from "@radix-ui/react-icons";
 import { ButtonLink } from "../components/ButtonLink";
 import { EXTERNAL_URLS, SITE_DATA, SEO } from "../constants";
 import JsonLd from "../components/JsonLd.astro";
+import { Picture } from "astro:assets";
 
 const faqItems = [
     {
@@ -108,9 +108,10 @@ const faqItems = [
     >
         <Box flexGrow="1" flexShrink="2" className="about-image">
             <AspectRatio ratio={1}>
-                <Image
+                <Picture
                     src={francescoImg}
                     alt="Francesco Imola"
+                    formats={["avif", "webp"]}
                     loading="eager"
                     style={{
                         objectFit: "cover",
@@ -190,9 +191,10 @@ const faqItems = [
                         where a lot of this started.
                     </Text>
                     <figure style={{ marginTop: "var(--space-6)" }}>
-                        <Image
+                        <Picture
                             src={FastForwardAnalogue}
                             alt="Mockup of two computer windows, one shows a cliff, the other the Creatives for Climate logo"
+                            formats={["avif", "webp"]}
                             loading="lazy"
                             style={{
                                 width: "100%",
@@ -298,9 +300,10 @@ const faqItems = [
             </InnerSection>
             <InnerSection title="Sustainability" sectionId="sustainability">
                 <Flex direction="column" gap="6">
-                    <Image
+                    <Picture
                         src={creativesForClimate}
                         alt="Mockup of two computer windows, one shows a cliff, the other the Creatives for Climate logo"
+                        formats={["avif", "webp"]}
                         loading="lazy"
                         style={{
                             width: "100%",
@@ -333,7 +336,7 @@ const faqItems = [
                     <FAQ client:visible items={faqItems} />
 
                     <Flex direction="column" gap="3">
-                        <Heading size="3" as="h4" weight="medium"
+                        <Heading size="3" as="h3" weight="medium"
                             >Have a better question?</Heading
                         >
                         <Text size="3" as="p" mb="2">
@@ -369,7 +372,7 @@ const faqItems = [
                 <ContactSHeader slot="header" />
                 <Flex direction="column" gap="6">
                     <Flex direction="column" gap="1">
-                        <Heading size="3" as="h4" weight="medium"
+                        <Heading size="3" as="h3" weight="medium"
                             >Send me a good 'ol email</Heading
                         >
                         <Link
@@ -382,7 +385,7 @@ const faqItems = [
                         </Link>
                     </Flex>
                     <Flex direction="column" gap="1">
-                        <Heading size="3" as="h4" weight="medium"
+                        <Heading size="3" as="h3" weight="medium"
                             >Put a face to the name</Heading
                         >
                         <Link
@@ -397,13 +400,13 @@ const faqItems = [
                         </Link>
                     </Flex>
                     <Flex direction="column" gap="1">
-                        <Heading size="3" as="h4" weight="medium"
+                        <Heading size="3" as="h3" weight="medium"
                             >Prefer a form?</Heading
                         >
                         <Text size="3" highContrast> Fill the one below </Text>
                     </Flex>
                     <Flex direction="column" gap="1">
-                        <Heading size="3" as="h4" weight="medium"
+                        <Heading size="3" as="h3" weight="medium"
                             >Not sure what to say?</Heading
                         >
                         <TemplateDialog client:visible />

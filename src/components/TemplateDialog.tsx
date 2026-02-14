@@ -26,20 +26,19 @@ Thanks!`;
     return (
 
         <Dialog.Root>
-            <Dialog.Trigger asChild>
-                <Theme
-                    panelBackground="solid"
-
-                    hasBackground={false}
-                    accentColor="gray"
-                    grayColor="olive"
-                    radius="none"
-                >
+            <Theme
+                panelBackground="solid"
+                hasBackground={false}
+                accentColor="gray"
+                grayColor="olive"
+                radius="none"
+            >
+                <Dialog.Trigger asChild>
                     <Button size="3" mt="2" variant="outline" style={{ cursor: 'pointer', alignSelf: 'flex-start' }}>
                         Copy this template
                     </Button>
-                </Theme>
-            </Dialog.Trigger>
+                </Dialog.Trigger>
+            </Theme>
             <Dialog.Portal>
                 <Dialog.Overlay className="DialogOverlay" />
                 <Dialog.Content className="DialogContent">

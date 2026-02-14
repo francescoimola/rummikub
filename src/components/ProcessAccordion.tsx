@@ -95,7 +95,7 @@ export function ProcessAccordion({
                                     {contentArray.map((paragraph, index) => (
                                         <Text
                                             key={index}
-                                            size="2"
+                                            size="3"
                                             as="p"
                                             wrap="pretty"
                                         >
