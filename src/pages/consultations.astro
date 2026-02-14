@@ -55,7 +55,7 @@ const faqItems = [
     {
         question:
             "What's the difference between a free intro and a consultation?",
-        answer: "Where you see “free intro” mentioned on this page, that’s a 15/30-min conversation to see if we're a good fit. I won’t offer any advice, it’s just a chat. The consultation, on the other hand, is a service and it’s here that the work happens. Consultations include a mini website review, a 1:1 session, and a targeted action plan.",
+        answer: "Where you see “free intro” mentioned on this page, that’s a 15/30-min conversation to see if we're a good fit. I won’t offer any advice, it’s just a chat. The consultation, on the other hand, is a service and it’s where the real work happens. Consultations include a mini website review, a 1:1 session, and a targeted action plan.",
     },
 ];
 ---
@@ -117,12 +117,8 @@ const faqItems = [
                 <Flex direction="column" gap="9">
                     <Flex direction="column" gap="3">
                         <Text size="3" as="p"
-                            >You sense enquiries or sales are leaking somewhere
-                            but can't prove it.</Text
-                        >
-                        <Separator size="4" />
-                        <Text size="3" as="p"
-                            >You cringe when sharing links to your website.</Text
+                            >You sense sales are leaking somewhere but can't
+                            prove it.</Text
                         >
                         <Separator size="4" />
                         <Text size="3" as="p"
@@ -333,17 +329,17 @@ const faqItems = [
                         heading="Absolutely yes, if"
                         backgroundColor="var(--yellow-a3)"
                         items={[
-                            "You're have exciting plans for your website or business, but can't proceed because you’re overwhelmed.",
-                            "You need an expert to assess your website and tell you what fix is actually going to move the needle.",
-                            "You're tired of generic tips, and want advice tailored to your situation.",
+                            "You have big plans for your website or marketing, but can't start because you’re overwhelmed.",
+                            "You want to know what changes are actually going to move the needle.",
+                            "You're tired of generic tips, and need advice tailored to your situation.",
                         ]}
                     />
                     <ContentCard
                         heading="Probably not, if"
                         backgroundColor="var(--orange-a3)"
                         items={[
-                            "You have highly technical questions about your CMS, analytics, hosting, paid-ads strategy, or site builder.",
-                            "You're looking for someone to tell you everything is fine. I'll be honest, even when it might be unpleasant.",
+                            "You have highly technical questions about your CMS, analytics, hosting, or paid-ads.",
+                            "You're looking for someone to tell you your site is all good as it is.",
                             {
                                 text: "You don't already have a website and just want to chat about ideas. It's better to book a free intro instead.",
                                 linkText: "book a free intro",
@@ -360,14 +356,13 @@ const faqItems = [
                         <Heading size="3" as="h4" weight="medium"
                             >Can't afford a consultation?</Heading
                         >
-                        <Text size="3" as="p" mb="2">
+                        <Text size="3" as="p" color="gray" mb="2" wrap="pretty">
                             Consulting fees can be a lot to take in, but rest
-                            assured that the work I do is always carried out to
-                            strengthen your business and generate returns. This
-                            means the result should make you money rather than
-                            cost you money, and will typically pay for itself.
-                            If your business is struggling financially, I'm
-                            happy to chat about payment plans.
+                            assured. the work I do is carried out to strengthen
+                            your business. This means the result should make you
+                            money rather than cost you money, and will typically
+                            pay for itself. If you're struggling financially,
+                            I'm happy to chat about payment plans.
                         </Text>
                         <ButtonLink
                             href="/about#contact"

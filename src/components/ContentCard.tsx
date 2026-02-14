@@ -35,7 +35,7 @@ export const ContentCard = ({
                 ))}
             </Flex>
         ) : (
-            <Text as="p" size="3" wrap="pretty">
+            <Text as="p" size="3" wrap="pretty" color="gray">
                 {children}
             </Text>
         )}
