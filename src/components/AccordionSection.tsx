@@ -5,7 +5,7 @@ import {
     Trigger,
     Content,
 } from "@radix-ui/react-accordion";
-import { Flex, Box, Heading, Text } from "@radix-ui/themes";
+import { Flex, Box, Text } from "@radix-ui/themes";
 import { PlusIcon, MinusIcon } from "@radix-ui/react-icons";
 import type { ReactNode } from "react";
 
