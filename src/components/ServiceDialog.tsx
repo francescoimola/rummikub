@@ -1,36 +1,37 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { EXTERNAL_URLS } from "../constants";
 import { ArrowTopRightIcon, Cross1Icon } from "@radix-ui/react-icons";
-import { type ReactNode } from "react";
-import { ServiceCard } from "./ServiceCard";
-import { Theme, Flex, Heading, Text, Grid, Card } from "@radix-ui/themes";
+import { Card, Flex, Grid, Heading, Text, Theme } from "@radix-ui/themes";
+import type { ReactNode } from "react";
+import { EXTERNAL_URLS } from "../constants";
 import { ButtonLink } from "./ButtonLink";
-import "../styles/global.css";
+import { ServiceCard } from "./ServiceCard";
 
 type ServiceType = "content-writing" | "email-marketing";
+
+interface ServiceOption {
+    title: string;
+    description: string;
+    link: string;
+    buttonText: string;
+    smallPrint?: string;
+}
 
 interface ServiceData {
     title: string;
     slug: string;
-    descriptionP1: string;
-    descriptionP2?: string;
-    descriptionP3?: string;
-    options: {
-        title: string;
-        description: string;
-        link: string;
-        smallPrint?: string;
-        buttonText: string;
-    }[];
+    descriptions: string[];
+    options: ServiceOption[];
 }
 
 const SERVICE_CONTENT: Record<ServiceType, ServiceData> = {
     "content-writing": {
         title: "Copywriting",
         slug: "/copywriting",
-        descriptionP1: "Your website reads fine. And no one’s complained about your content.",
-        descriptionP2: "Why pay extra for... better writing?",
-        descriptionP3: "I can’t put a price on words so spot on they’ll make your people think, “you know what, they get it!”. But treating copy as an afterthought? Does hardly anything.",
+        descriptions: [
+            "Your website reads fine. And no one’s complained about your content.",
+            "Why pay extra for... better writing?",
+            "I can’t put a price on words so spot on they’ll make your people think, “you know what, they get it!”. But treating copy as an afterthought? Does hardly anything."
+        ],
         options: [
             {
                 title: "I only need words",
@@ -51,9 +52,11 @@ const SERVICE_CONTENT: Record<ServiceType, ServiceData> = {
     "email-marketing": {
         title: "Email marketing",
         slug: "/emailmarketing",
-        descriptionP1: "People don’t hate emails. They hate bad emails.",
-        descriptionP2: "I’ve helped B2B agencies and brick-and-mortar shops push their open and click rates way up by cutting the corporate tone, sticking with the basics, and keeping it consistent.",
-        descriptionP3: "If email’s never worked for you, that’s usually why. And I say it's worth another go.",
+        descriptions: [
+            "People don’t hate emails. They hate bad emails.",
+            "I’ve helped B2B agencies and brick-and-mortar shops push their open and click rates way up by cutting the corporate tone, sticking with the basics, and keeping it consistent.",
+            "If email’s never worked for you, that’s usually why. And I say it's worth another go."
+        ],
         options: [
             {
                 title: "I need ad-hoc email marketing",
@@ -79,66 +82,45 @@ interface ServiceDialogProps {
 }
 
 export function ServiceDialog({ type, cardIcon }: ServiceDialogProps) {
-    const content = SERVICE_CONTENT[type];
+    const { title, slug, descriptions, options } = SERVICE_CONTENT[type];
 
     return (
         <Dialog.Root>
             <Dialog.Trigger asChild>
                 <ServiceCard
-                    title={content.title}
+                    title={title}
                     icon={cardIcon}
-                    data-slug={content.slug}
+                    data-slug={slug}
                 />
             </Dialog.Trigger>
+
             <Dialog.Portal>
                 <Dialog.Overlay className="DialogOverlay" />
 
                 <Dialog.Content className="DialogContent">
-
                     <Theme
                         accentColor="yellow"
                         grayColor="olive"
                         radius="none"
                         panelBackground="solid"
-
                     >
                         <Flex direction="column" justify="between" height="100%" gap="var(--space-10)" p={{ initial: "4", sm: "6" }}>
                             <Flex direction="column" gap="6">
-                                <Heading
-                                    size="6"
-                                    as="h3"
-                                    highContrast
-                                >
-                                    {content.title}
+                                <Heading size="6" as="h3" highContrast>
+                                    {title}
                                 </Heading>
                                 <Flex direction="column" gap="4">
-                                    <Text
-                                        size="3"
-                                        as="p"
-                                        wrap="pretty"
-                                    >
-                                        {content.descriptionP1}
-                                    </Text>
-                                    {content.descriptionP2 && <Text
-                                        size="3"
-                                        as="p"
-                                        wrap="pretty"
-                                    >
-                                        {content.descriptionP2}
-                                    </Text>}
-                                    {content.descriptionP3 && <Text
-                                        size="3"
-                                        as="p"
-                                        wrap="pretty"
-                                    >
-                                        {content.descriptionP3}
-                                    </Text>}
+                                    {descriptions.map((desc, i) => (
+                                        <Text key={i} size="3" as="p" wrap="pretty">
+                                            {desc}
+                                        </Text>
+                                    ))}
                                 </Flex>
                             </Flex>
 
                             <Flex direction="column" gap="4">
                                 <Grid columns={{ initial: "1", sm: "2" }} gap="4">
-                                    {content.options.map((option, index) => (
+                                    {options.map((option, index) => (
                                         <Card key={index} variant="surface">
                                             <Flex direction="column" gap="var(--space-10)" p="3" height="100%" justify="between" align="start">
                                                 <Flex direction="column" gap="4">
@@ -154,13 +136,11 @@ export function ServiceDialog({ type, cardIcon }: ServiceDialogProps) {
                                                         size="2"
                                                         highContrast
                                                         variant="solid"
-                                                        style={{
-                                                            width: "100%",
-                                                        }}
+                                                        style={{ width: "100%" }}
                                                     >
                                                         {option.buttonText || "Get Started"} {index === 1 && (<ArrowTopRightIcon />)}
                                                     </ButtonLink>
-                                                    <Text size="1" color="gray" >
+                                                    <Text size="1" color="gray">
                                                         {option.smallPrint}
                                                     </Text>
                                                 </Flex>
@@ -172,7 +152,7 @@ export function ServiceDialog({ type, cardIcon }: ServiceDialogProps) {
                         </Flex>
                     </Theme>
 
-                    <Dialog.Close asChild >
+                    <Dialog.Close asChild>
                         <button className="DialogClose" aria-label="Close">
                             <Cross1Icon />
                         </button>

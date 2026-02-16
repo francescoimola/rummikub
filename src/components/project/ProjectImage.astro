@@ -4,37 +4,64 @@ import { Image } from "astro:assets";
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"figure"> {
-    image?: ImageMetadata;
-    caption?: string;
     src?: ImageMetadata;
-    title?: string;
+    image?: ImageMetadata; // Legacy support
     alt: string;
-    className?: string;
+    caption?: string;
+    title?: string;
+    className?: string; // Legacy support
 }
 
-const { image, src, alt, caption, title, className, ...rest } = Astro.props;
-const finalImage = (image ?? src)!;
-const isPlain = title?.startsWith("plain:");
-const isFilled = title?.startsWith("filled:");
-const isExplicitlyFramed = title === "framed" || title?.startsWith("framed:");
+const {
+    src,
+    image,
+    alt,
+    caption,
+    title,
+    className,
+    class: clazz,
+    ...rest
+} = Astro.props;
+const finalImage = image ?? src;
 
-const finalCaption =
-    caption ??
-    (isPlain
-        ? title?.slice(6).trim() || undefined
-        : isFilled
-          ? title?.slice(7).trim() || undefined
-          : isExplicitlyFramed
-            ? title?.slice(7).trim() || undefined
-            : title);
+if (!finalImage) {
+    throw new Error("ProjectImage: 'src' or 'image' prop is required");
+}
 
-const isFramed =
-    (!!finalCaption || isExplicitlyFramed) && !isPlain && !isFilled;
+let mode: "plain" | "filled" | "framed" = "plain";
+let finalCaption = caption;
+
+if (title) {
+    if (title === "framed" || title.startsWith("framed:")) {
+        mode = "framed";
+        finalCaption ??= title === "framed" ? undefined : title.slice(7).trim();
+    } else if (title.startsWith("filled:")) {
+        mode = "filled";
+        finalCaption ??= title.slice(7).trim();
+    } else if (title.startsWith("plain:")) {
+        mode = "plain";
+        finalCaption ??= title.slice(6).trim();
+    } else {
+        // No explicit mode prefix, treat as caption
+        finalCaption ??= title;
+        // Default behavior: frame if there is a caption
+        if (finalCaption) mode = "framed";
+    }
+} else if (finalCaption) {
+    // No title, but caption prop exists -> default to framed
+    mode = "framed";
+}
+
+// Clean up empty strings
+if (!finalCaption) finalCaption = undefined;
+
+const FRAMED_SHADOW =
+    "drop-shadow(0.25rem 0.25rem 0.5rem var(--gray-a4)) drop-shadow(0 0 0.5px var(--gray-a4)) drop-shadow(0 0 0.5px var(--gray-a4))";
 ---
 
-<figure class={`${className ?? ""} image-text-spacing`} {...rest}>
+<figure class:list={[className, clazz, "image-text-spacing"]} {...rest}>
     {
-        isFramed ? (
+        mode === "framed" ? (
             <AspectRatio ratio={3 / 2} style={{ overflow: "hidden" }}>
                 <Flex
                     width="100%"
@@ -43,9 +70,7 @@ const isFramed =
                     px={{ initial: "4", sm: "8" }}
                     align="end"
                     justify="center"
-                    style={{
-                        backgroundColor: "var(--gray-3)",
-                    }}
+                    style={{ backgroundColor: "var(--gray-3)" }}
                 >
                     <Image
                         src={finalImage}
@@ -57,22 +82,11 @@ const isFramed =
                             maxWidth: "100%",
                             objectPosition: "top",
                             objectFit: "contain",
-                            filter: "drop-shadow(0.25rem 0.25rem 0.5rem var(--gray-a4)) drop-shadow(0 0 0.5px var(--gray-a4)) drop-shadow(0 0 0.5px var(--gray-a4))",
+                            filter: FRAMED_SHADOW,
                         }}
                     />
                 </Flex>
             </AspectRatio>
-        ) : isFilled ? (
-            <Image
-                src={finalImage}
-                alt={alt}
-                loading="lazy"
-                style={{
-                    width: "100%",
-                    height: "auto",
-                    backgroundColor: "var(--gray-3)",
-                }}
-            />
         ) : (
             <Image
                 src={finalImage}
@@ -81,6 +95,8 @@ const isFramed =
                 style={{
                     width: "100%",
                     height: "auto",
+                    backgroundColor:
+                        mode === "filled" ? "var(--gray-3)" : undefined,
                 }}
             />
         )

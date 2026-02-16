@@ -1,38 +1,48 @@
 export function initParallax() {
-    // Respect reduced motion preference
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        return;
-    }
-
     const reel = document.getElementById("portfolio-reel");
     if (!reel) return;
 
-    const section = reel.closest("section"); // Get the wrapper section
+    const section = reel.closest("section");
     if (!section) return;
+
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    // Slightly reduced range for reduced-motion users
+    const moveRange = prefersReducedMotion ? 300 : 400;
+
+    reel.style.willChange = "transform";
+
+    let ticking = false;
 
     const updatePosition = () => {
         const rect = section.getBoundingClientRect();
         const viewHeight = window.innerHeight;
 
         // Calculate progress: 0 when entering bottom, 1 when leaving top
-        // extending the range slightly ensures movement while visible
         const progress =
             (viewHeight - rect.top) / (viewHeight + rect.height);
 
-        // Only animate when in view (with buffer)
         if (progress >= -0.1 && progress <= 1.1) {
-            // Move from Left (-X) to Right (+X) as we scroll down
-            // Range: -400px to 0px
-            // This prevents white space on the left by ensuring we never shift "positive" (Right) past the center
-            const moveAmount = -400 + progress * 400;
+            const moveAmount = -moveRange + progress * moveRange;
             reel.style.transform = `translate3d(${moveAmount}px, 0, 0)`;
+        }
+
+        ticking = false;
+    };
+
+    const requestTick = () => {
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(updatePosition);
         }
     };
 
-    window.addEventListener("scroll", () => {
-        requestAnimationFrame(updatePosition);
-    });
+    window.addEventListener("scroll", requestTick, { passive: true });
+    // iOS Safari throttles scroll events during momentum scrolling,
+    // so also listen to touchmove to keep updates smooth
+    window.addEventListener("touchmove", requestTick, { passive: true });
 
-    // Initial call
     updatePosition();
 }

@@ -1,77 +1,53 @@
 import * as Accordion from "@radix-ui/react-accordion";
-import { Flex, Box, Text, Heading } from "@radix-ui/themes";
 import { PlusIcon, MinusIcon } from "@radix-ui/react-icons";
+import { Box, Flex, Text } from "@radix-ui/themes";
 
 interface ProcessStepData {
-    /** Step number displayed before the title (optional) */
     number?: number;
-    /** Title of the step */
     title: string;
-    /** Content paragraphs - can be a single string or array of strings */
     content: string | string[];
-    /** Optional link URL (unused but passed in some usages) */
     linkHref?: string;
 }
 
 interface ProcessAccordionProps {
-    /** Array of step data objects */
     steps: ProcessStepData[];
-    /** Default expanded step number (optional) */
     defaultStep?: number;
 }
 
-export function ProcessAccordion({
-    steps,
-    defaultStep,
-}: ProcessAccordionProps) {
+export function ProcessAccordion({ steps, defaultStep }: ProcessAccordionProps) {
     return (
         <Accordion.Root
             type="single"
             collapsible
             defaultValue={defaultStep ? `step-${defaultStep}` : undefined}
-            style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "var(--space-4)",
-            }}
+            asChild
         >
-            {steps.map((step) => {
-                const contentArray = Array.isArray(step.content)
-                    ? step.content
-                    : [step.content];
-
-                return (
+            <Flex direction="column" gap="4">
+                {steps.map(({ number, title, content }) => (
                     <Accordion.Item
-                        key={step.number ?? step.title}
-                        value={`step-${step.number ?? step.title}`}
-                        style={{
-                            margin: 0,
-                            backgroundColor: "var(--gray-a3)",
-                        }}
+                        key={number ?? title}
+                        value={`step-${number ?? title}`}
+                        style={{ backgroundColor: "var(--gray-a3)" }}
                     >
-                        <Accordion.Header style={{ margin: 0 }} asChild>
+                        <Accordion.Header style={{ margin: 0 }}>
                             <Accordion.Trigger className="AccordionTrigger">
-                                <Flex
-                                    justify="between"
-                                    align="center"
-                                    py="6"
-                                    px="5"
-                                    gap="4"
-                                >
-                                    <Heading size="5" weight="medium" as="h3" trim="both">
-                                        {step.number && (
-                                            <Text
-                                                as="span"
-                                                style={{
-                                                    color: "var(--gray-a10)",
-                                                    marginRight: "var(--space-2)",
-                                                }}
-                                            >
-                                                {step.number}
-                                            </Text>
-                                        )}{step.number && " "}
-                                        {step.title}
-                                    </Heading>
+                                <Flex justify="between" align="center" py="6" px="5" gap="4">
+                                    <Text size="5" weight="medium" trim="both">
+                                        {number && (
+                                            <>
+                                                <Text
+                                                    as="span"
+                                                    style={{
+                                                        color: "var(--gray-a10)",
+                                                        marginRight: "var(--space-2)",
+                                                    }}
+                                                >
+                                                    {number}
+                                                </Text>{" "}
+                                            </>
+                                        )}
+                                        {title}
+                                    </Text>
                                     <Box style={{ color: "var(--gray-a11)" }}>
                                         <PlusIcon
                                             className="AccordionIconPlus"
@@ -92,13 +68,8 @@ export function ProcessAccordion({
                         <Accordion.Content className="AccordionContent">
                             <Box pt="8" pb="5" px="5">
                                 <Flex direction="column" gap="3" className="AccordionInnerContent">
-                                    {contentArray.map((paragraph, index) => (
-                                        <Text
-                                            key={index}
-                                            size="3"
-                                            as="p"
-                                            wrap="pretty"
-                                        >
+                                    {[content].flat().map((paragraph, index) => (
+                                        <Text key={index} size="3" as="p" wrap="pretty">
                                             {paragraph}
                                         </Text>
                                     ))}
@@ -106,8 +77,8 @@ export function ProcessAccordion({
                             </Box>
                         </Accordion.Content>
                     </Accordion.Item>
-                );
-            })}
+                ))}
+            </Flex>
         </Accordion.Root>
     );
 }
