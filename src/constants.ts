@@ -73,9 +73,14 @@ export const SEO = {
                 "A selection of web design, marketing, and content projects for small businesses, non-profits, and higher education.",
         },
         notFound: {
-            title: "Page Not Found | Francesco Imola",
+            title: "404 | Page Not Found | Francesco Imola",
             description:
                 "The page you're looking for doesn't exist or has been moved.",
+        },
+        comingSoon: {
+            title: "Coming Soon | Francesco Imola",
+            description:
+                "This page isn't quite ready yet, but it will be soon. Sign up to stay in the loop.",
         },
         workWithMe: {
             title: "Work With Me | Francesco Imola",

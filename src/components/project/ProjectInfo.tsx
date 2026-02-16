@@ -1,6 +1,7 @@
 import { Flex, Heading, Text } from "@radix-ui/themes";
 import { ButtonLink } from "../ButtonLink";
 import { ArrowLeftIcon, ArrowTopRightIcon } from "@radix-ui/react-icons";
+import { GoBackButton } from "../GoBackButton";
 
 interface ProjectInfoProps {
     role: string;
@@ -45,10 +46,9 @@ export const ProjectInfo = ({
                         <ArrowTopRightIcon />
                     </ButtonLink>
                 )}
-                <ButtonLink href="/work" size="3" variant="outline" color="gray" radius="none">
-                    <ArrowLeftIcon
-                    />Back to Work
-                </ButtonLink>
+                <GoBackButton size="3" variant="outline" color="gray" fallbackHref="/work">
+                    Go back
+                </GoBackButton>
             </aside>
         </Flex>
     );
