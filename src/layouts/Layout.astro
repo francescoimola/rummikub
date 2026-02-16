@@ -224,3 +224,18 @@ const {
         </Theme>
     </body>
 </html>
+
+<style>
+    /* 3. Content Entrance (Slide Up) */
+    /* This animates the entering content specifically */
+    .content-enter {
+        animation: slide-up-fade 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slide-up-fade {
+        from {
+            opacity: 0;
+            transform: translateY(12px);
+        }
+    }
+</style>

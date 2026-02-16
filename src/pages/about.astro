@@ -417,3 +417,22 @@ const faqItems = [
         </MainGrid>
     </Section>
 </Layout>
+
+<style>
+    .about-grid {
+        display: flex;
+        flex-direction: row;
+
+        @container (max-width: 520px) {
+            flex-direction: column;
+
+            .about-image {
+                flex-basis: 100%;
+            }
+        }
+    }
+
+    .about-image {
+        flex-basis: clamp(25%, 33%, 50%);
+    }
+</style>

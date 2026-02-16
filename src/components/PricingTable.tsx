@@ -1,75 +1,74 @@
-import { Flex, Grid, Text, Separator, Box } from "@radix-ui/themes";
+import { Flex, Grid, Text, Separator } from "@radix-ui/themes";
+import { Fragment } from "react";
 
 interface PricingItem {
-    title: string;
-    asterisks?: number;
-    price: string;
-    description: string;
+    readonly title: string;
+    readonly asterisks?: number;
+    readonly price: string;
+    readonly description: string;
 }
 
 interface PricingTableProps {
-    items: PricingItem[];
-    footnotes?: string[];
-    introText?: string[];
-    closingText?: string;
+    readonly items: readonly PricingItem[];
+    readonly footnotes?: readonly string[];
+    readonly introText?: readonly string[];
+    readonly closingText?: string;
 }
 
-function PricingItemRow({ item }: { item: PricingItem }) {
-    const asteriskStr = item.asterisks ? "*".repeat(item.asterisks) : "";
-
-    return (
-        <Grid gap="4" columns={{ initial: "1", md: "2" }}>
-            <Flex direction="column">
-                <Text size="3" weight="medium" highContrast>
-                    {item.title}{" "}
-                    {asteriskStr && (
-                        <Text color="gray" weight="regular">
-                            {asteriskStr}
-                        </Text>
-                    )}
-                </Text>
-                <Text size="3" color="gray">
-                    {item.price}
-                </Text>
-            </Flex>
-            <Text size="2" color="gray" wrap="pretty">
-                {item.description}
+const PricingItemRow = ({ title, asterisks, price, description }: PricingItem) => (
+    <Grid gap="4" columns={{ initial: "1", md: "2" }}>
+        <Flex direction="column">
+            <Text size="3" weight="medium" highContrast>
+                {title}{" "}
+                {!!asterisks && (
+                    <Text color="gray" weight="regular">
+                        {"*".repeat(asterisks)}
+                    </Text>
+                )}
             </Text>
-        </Grid>
-    );
-}
+            <Text size="3" color="gray">
+                {price}
+            </Text>
+        </Flex>
+        <Text size="2" color="gray" wrap="pretty">
+            {description}
+        </Text>
+    </Grid>
+);
 
 export function PricingTable({ items, footnotes, introText, closingText }: PricingTableProps) {
     return (
         <Flex direction="column" gap="9">
-            {introText && introText.length > 0 && (
+            {!!introText?.length && (
                 <Flex direction="column" gap="3">
-                    {introText.map((text, index) => (
-                        <Text key={index} size="3" highContrast as="p">
+                    {introText.map((text, i) => (
+                        <Text key={i} size="3" highContrast as="p">
                             {text}
                         </Text>
                     ))}
                 </Flex>
             )}
+
             <Flex direction="column" gap="6">
-                {items.map((item, index) => (
-                    <Box key={index}>
-                        {index > 0 && <Separator size="4" mb="6" />}
-                        <PricingItemRow item={item} />
-                    </Box>
+                {items.map((item, i) => (
+                    <Fragment key={i}>
+                        {i > 0 && <Separator size="4" />}
+                        <PricingItemRow {...item} />
+                    </Fragment>
                 ))}
             </Flex>
-            {(closingText || (footnotes && footnotes.length > 0)) && (
+
+            {(closingText || !!footnotes?.length) && (
                 <Flex direction="column" gap="4">
                     {closingText && (
                         <Text size="3" as="p">
                             {closingText}
                         </Text>
                     )}
-                    {footnotes && footnotes.length > 0 && (
+                    {!!footnotes?.length && (
                         <Flex direction="column" gap="1">
-                            {footnotes.map((note, index) => (
-                                <Text key={index} size="2" color="gray" wrap="pretty">
+                            {footnotes.map((note, i) => (
+                                <Text key={i} size="2" color="gray" wrap="pretty">
                                     {note}
                                 </Text>
                             ))}
