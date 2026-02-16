@@ -37,7 +37,7 @@ const FOOTER_SECTIONS: FooterSection[] = [
     {
         title: "About",
         items: [
-            { label: "Selected works", href: "/selected-works" },
+            { label: "Work", href: "/work" },
             { label: "Contact", href: "/about#contact" },
             { label: "Privacy Notice", href: EXTERNAL_URLS.privacyNotice, external: true },
             { label: "Terms of Business", href: EXTERNAL_URLS.termsOfBusiness, external: true },
@@ -47,9 +47,9 @@ const FOOTER_SECTIONS: FooterSection[] = [
         title: "Procrastinate",
         headingWrap: "nowrap",
         items: [
-            { label: "Playground", href: "/playground" },
-            { label: "Newsletter", href: "/newsletter" },
-            { label: "Colophon", href: "/colophon" },
+            { label: "For agencies", href: "/work-with-me" },
+            { label: "Colophon", href: "/soon" },
+            { label: "Playground", href: "/soon" },
         ],
     },
     {
