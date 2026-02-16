@@ -231,7 +231,7 @@ export const ContactForm = () => {
                             />
 
                             <Box mt="4">
-                                <Button type="submit" size="4" variant="surface" disabled={isSubmitting}>
+                                <Button type="submit" size="4" variant="solid" disabled={isSubmitting}>
                                     {isSubmitting ? "Sending..." : "Send"}
                                 </Button>
                             </Box>
