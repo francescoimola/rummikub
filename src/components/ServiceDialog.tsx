@@ -35,14 +35,14 @@ const SERVICE_CONTENT: Record<ServiceType, ServiceData> = {
         options: [
             {
                 title: "I only need words",
-                description: "For those who need unmistakable words or copy-editing. Think creating landing pages, unf*cking AI-generated content or structuring blog posts. You're in good hands.",
+                description: "For those who need copywriting or editing, or a second opinion on their landing page, but also unf*cking AI-generated content, structuring blog posts, and most things in between.",
                 link: `${EXTERNAL_URLS.calendar.intro}?description=website-copy`,
                 smallPrint: "Share your brief",
                 buttonText: "Let's chat"
             },
             {
                 title: "I also need a website",
-                description: "Need a website to go with your copy? Content writing (aka UX writing) is included in my website packages. And if you need more than that, like ongoing SEO content, we can make it happen.",
+                description: "Need a website to go with your copy? Content writing—or UX/UI writing, like they call it—is included in my website packages. And if you need more, like ongoing SEO content, we can make it happen.",
                 link: `${EXTERNAL_URLS.calendar.intro}?description=blog-posts`,
                 smallPrint: "Free 30-min intro call",
                 buttonText: "Schedule a call to discuss"

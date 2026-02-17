@@ -275,6 +275,7 @@
    ========================================= */
 html {
     scrollbar-gutter: stable;
+    overflow-x: hidden;
 
     @media (prefers-reduced-motion: no-preference) {
         scroll-behavior: smooth;
@@ -286,6 +287,7 @@ body {
     font-family: var(--default-font-family);
     counter-reset: section-counter;
     background-color: var(--gray-1);
+    overflow-x: hidden;
 }
 
 h1,
@@ -417,6 +419,7 @@ figcaption {
     fill: var(--gray-a10);
     width: auto;
     height: 2cqi;
+    min-height: 2rem;
 }
 
 svg.client-logo {
@@ -734,11 +737,13 @@ svg.client-logo {
 
 .role-hidden {
     display: none;
+    visibility: hidden;
 }
 
 @media only screen and (min-width: 1024px) {
     .role-hidden {
         display: block;
+        visibility: visible;
     }
 }
 
