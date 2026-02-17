@@ -143,7 +143,7 @@ export const Footer = () => {
 
                                 <NewsletterForm showPrivacyText={true} />
                             </Flex>
-                            <Card size="2" variant="surface" style={{ backgroundColor: "var(--gray-a2)", inlineSize: "max-content" }} mt={{ initial: "var(--space-8)", sm: "0" }} mb={{ initial: "-9", sm: "0" }}>
+                            <Card size="2" variant="surface" style={{ backgroundColor: "var(--gray-a2)", inlineSize: "fit-content" }} mt={{ initial: "var(--space-8)", sm: "0" }} mb={{ initial: "-9", sm: "0" }}>
                                 <Text size="2" color="gray"><Link href="https://www.websitecarbon.com/website/francescoimola-com/" target="_blank" rel="noopener noreferrer">This website runs on sustainable energy and consumes ~80% less energy than all websites globally</Link></Text>
                             </Card>
                         </Flex>

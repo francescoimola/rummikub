@@ -9,6 +9,7 @@ export default function PageHeading(props: ComponentProps<typeof Heading>) {
             weight="medium"
             highContrast
             trim="both"
+
             {...props}
         />
     );

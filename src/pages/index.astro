@@ -41,6 +41,7 @@ const featuredProjects = await getFeaturedProjects();
   description={SEO.pages.home.description}
   backgroundColor="var(--yellow-3)"
   roleFullWidth
+  noMobileRole
 >
   <Fragment slot="structured-data">
     <JsonLd
@@ -58,19 +59,15 @@ const featuredProjects = await getFeaturedProjects();
 
   <!-- Slot: Main Heading -->
   <PageHeading slot="heading" className="page-heading">
-    Honest <Text as="span" color="yellow">pixels</Text> and <Text
+    Organic and grass-fed <Text as="span" color="yellow">websites</Text> and <Text
       as="span"
-      color="yellow">words</Text
-    > that <Text as="span" color="orange">connect your work</Text> to the people who
-    need it most
+      color="orange">copy</Text
+    >. Human by nature, simple by design.
   </PageHeading>
 
   <!-- Slot: Job Role (Hidden on mobile) -->
-  <Box slot="role" display={{ initial: "none", sm: "block" }} asChild>
-    <Flex direction="column">
-      <Text size="3" weight="medium">Websites and copy, simple by design.</Text>
-      <Text size="3" color="gray">Taking on projects for Q1 2026</Text>
-    </Flex>
+  <Box slot="role" asChild>
+    <Text size="3" as="p" weight="medium">Taking on projects for Q1 2026</Text>
   </Box>
 
   <!-- Slot: Introduction Text -->
@@ -168,9 +165,8 @@ const featuredProjects = await getFeaturedProjects();
           <Flex direction="column" gap="3">
             <Text size="3" as="p" highContrast>
               I've spent years watching businesses of all sizes waste
-              unbelievable amounts of money on erratic marketing and sloppy
-              websites that inevitably confuse people and damage their
-              reputation.
+              unbelievable amounts of money on sloppy marketing and websites
+              that inevitably confuse people and sh*t on their reputation.
             </Text>
             <Text size="3" as="p" highContrast>
               Until I learned how to stop that from happening.
@@ -184,7 +180,7 @@ const featuredProjects = await getFeaturedProjects();
             highContrast
             style={{ alignSelf: "flex-start" }}
           >
-            More about how I work <ArrowRightIcon />
+            More about that <ArrowRightIcon />
           </ButtonLink>
         </Flex>
       </InnerSection>
@@ -255,8 +251,8 @@ const featuredProjects = await getFeaturedProjects();
   </Section>
   <BottomCTA
     slot="bottom-cta"
-    heading="Put a face to the name"
-    text="Schedule a free, 30-min chat. You tell me about your challenges and ideas. I'll tell you if I can help."
+    heading="Is this guy for real?"
+    text="I could be, if you give me a chance. Shall we chat first?"
     backgroundColor="var(--yellow-5)"
   >
     <Flex justify="center" align="start" gap="4" wrap="wrap">

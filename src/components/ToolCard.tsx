@@ -20,7 +20,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({ title, description, children
             <Box style={{ userSelect: "none" }}>
                 {children}
             </Box>
-            <Flex direction="column" gap="1">
+            <Flex direction="column" gap="1" style={{ width: "100%" }}>
                 <Heading size="3" as="h4" weight="medium">
                     {title}
                 </Heading>
