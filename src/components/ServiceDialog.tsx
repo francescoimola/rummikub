@@ -36,7 +36,7 @@ const SERVICE_CONTENT: Record<ServiceType, ServiceData> = {
             {
                 title: "I only need words",
                 description: "For those who need copywriting or editing, or a second opinion on their landing page, but also unf*cking AI-generated content, structuring blog posts, and most things in between.",
-                link: `${EXTERNAL_URLS.calendar.intro}?description=website-copy`,
+                link: `/about#contact`,
                 smallPrint: "Share your brief",
                 buttonText: "Let's chat"
             },
