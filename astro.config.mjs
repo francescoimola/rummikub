@@ -26,6 +26,7 @@ function remarkUnwrapImages() {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://francescoimola.com',
+  trailingSlash: 'never',
   image: {
     layout: 'constrained',
     responsiveStyles: true,
@@ -33,7 +34,14 @@ export default defineConfig({
   integrations: [mdx({
     remarkPlugins: [remarkUnwrapImages]
   }), sitemap({
-    filter: (page) => !page.includes('/work-with-me'),
+    filter: (page) => !page.includes('/work-with-me') && !page.includes('/soon'),
+    serialize: (item) => {
+      // Strip trailing slashes (except homepage) to match internal links
+      if (item.url !== 'https://francescoimola.com/' && item.url.endsWith('/')) {
+        item.url = item.url.slice(0, -1);
+      }
+      return item;
+    },
   }), react(), inline()],
   adapter: cloudflare({
     imageService: 'compile',

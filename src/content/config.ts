@@ -1,6 +1,8 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
+const MAX_META_DESCRIPTION_LENGTH = 160;
+
 const projects = defineCollection({
     loader: glob({ pattern: "**/*.mdx", base: "./src/content/projects" }),
     schema: ({ image }) =>
@@ -13,6 +15,7 @@ const projects = defineCollection({
             visitUrl: z.string().optional(),
             visitHeading: z.string().optional(),
             heroDescription: z.string(),
+            metaDescription: z.string().max(MAX_META_DESCRIPTION_LENGTH).optional(),
             caseStudyStatus: z
                 .enum(["coming-soon", "on-request"])
                 .optional(), // If set, project is a draft: appears on homepage with badge, but no individual page is generated
@@ -21,6 +24,7 @@ const projects = defineCollection({
                 .optional(), // Pin to position 1, 2, or 3 on homepage
             publishDate: z.coerce.date().optional(), // Used for sorting projects
             coverImages: z.array(image().or(z.string())).min(1),
+            coverAlts: z.array(z.string()).min(1),
             coverLayout: z.enum(["default", "plain"]).default("default").optional(),
             showCover: z.boolean().default(true),
             results: z
@@ -34,6 +38,14 @@ const projects = defineCollection({
                     ),
                 })
                 .optional(),
+        }).superRefine((data, ctx) => {
+            if (data.heroDescription.length > MAX_META_DESCRIPTION_LENGTH && !data.metaDescription) {
+                ctx.addIssue({
+                    code: z.ZodIssueCode.custom,
+                    message: `"${data.slug}": heroDescription is ${data.heroDescription.length} chars (max ${MAX_META_DESCRIPTION_LENGTH}) and no metaDescription is set. Add a metaDescription to avoid an overly long meta tag.`,
+                    path: ["metaDescription"],
+                });
+            }
         }),
 });
 
