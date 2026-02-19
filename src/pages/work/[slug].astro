@@ -49,7 +49,7 @@ const components = {
 
 // SEO metadata
 const seoTitle = `${entry.data.title} | Francesco Imola`;
-const seoDescription = entry.data.heroDescription;
+const seoDescription = entry.data.metaDescription || entry.data.heroDescription;
 let coverImageSrc: string | undefined;
 if (entry.data.coverImages && entry.data.coverImages.length > 0) {
     const firstImage = entry.data.coverImages[0];
@@ -116,6 +116,7 @@ if (entry.data.coverImages && entry.data.coverImages.length > 0) {
                             entry.data.showCover !== false && (
                                 <ProjectCanvas
                                     images={entry.data.coverImages}
+                                    alts={entry.data.coverAlts}
                                     layout={entry.data.coverLayout}
                                 />
                             )

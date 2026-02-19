@@ -63,6 +63,7 @@ const projects = await getAllPublishedProjects();
                             projects.map((project) => (
                                 <ProjectCanvas
                                     images={project.data.coverImages}
+                                    alts={project.data.coverAlts}
                                     layout={project.data.coverLayout}
                                     title={project.data.title}
                                     skills={project.data.skills ?? []}

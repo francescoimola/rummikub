@@ -14,6 +14,7 @@ import type { ImageMetadata } from "astro";
 
 interface Props {
     images?: (string | ImageMetadata)[];
+    alts?: string[];
     layout?: "default" | "plain";
     title?: string;
     skills?: string[];
@@ -23,6 +24,7 @@ interface Props {
 
 const {
     images = [],
+    alts = [],
     layout = "default",
     title,
     skills = [],
@@ -103,7 +105,7 @@ const containerProps = href
                     (typeof images[0] === "string" ? (
                         <Picture
                             src={images[0]}
-                            alt=""
+                            alt={alts[0] || ""}
                             formats={["avif", "webp"]}
                             class="project-canvas-plain-image"
                             inferSize={true}
@@ -111,7 +113,7 @@ const containerProps = href
                     ) : (
                         <Picture
                             src={images[0]}
-                            alt=""
+                            alt={alts[0] || ""}
                             formats={["avif", "webp"]}
                             class="project-canvas-plain-image"
                         />
@@ -133,7 +135,7 @@ const containerProps = href
                                 {typeof src === "string" ? (
                                     <Picture
                                         src={src}
-                                        alt=""
+                                        alt={alts[i] || ""}
                                         formats={["avif", "webp"]}
                                         class="project-canvas-image"
                                         inferSize={true}
@@ -141,7 +143,7 @@ const containerProps = href
                                 ) : (
                                     <Picture
                                         src={src}
-                                        alt=""
+                                        alt={alts[i] || ""}
                                         formats={["avif", "webp"]}
                                         class="project-canvas-image"
                                     />
