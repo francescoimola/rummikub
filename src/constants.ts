@@ -45,7 +45,7 @@ export const SEO = {
         home: {
             title: "Francesco Imola | Web Designer & Creative Marketer in Kent",
             description:
-                "Honest pixels and words that connect your work to the people who need it most. Web design and development for small businesses in Kent.",
+                "Unapologetically simple web design and copywriting for small businesses in Kent.",
         },
         about: {
             title: "About | Francesco Imola",
