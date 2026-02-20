@@ -254,7 +254,6 @@ export default function FAQ({
                                         as="p"
                                         color="gray"
                                         wrap="pretty"
-                                        style={{ whiteSpace: "pre-line" }}
                                     >
                                         {item.answer}
                                     </Text>

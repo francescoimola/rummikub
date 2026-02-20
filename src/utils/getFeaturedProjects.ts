@@ -30,7 +30,7 @@ export async function getFeaturedProjects(): Promise<CollectionEntry<"projects">
     const result: CollectionEntry<"projects">[] = [];
     let unfeaturedIdx = 0;
 
-    for (let pos = 1; pos <= 3; pos++) {
+    for (let pos = 1; pos <= 4; pos++) {
         const project = featured.get(pos) ?? unfeatured[unfeaturedIdx++];
         if (project) result.push(project);
     }
