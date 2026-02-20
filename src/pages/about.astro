@@ -37,41 +37,6 @@ import { ButtonLink } from "../components/ButtonLink";
 import { EXTERNAL_URLS, SITE_DATA, SEO } from "../constants";
 import JsonLd from "../components/JsonLd.astro";
 import { Picture } from "astro:assets";
-
-const faqItems = [
-    {
-        question: "How long does a project take?",
-        answer: "Most website projects take 4-10 weeks depending on scope. I work in phases so you can see progress early and provide feedback as we go. We'll establish a timeline together before we start.",
-    },
-    {
-        question: "Can you work with my existing team?",
-        answer: "Absolutely. I usually take care of the full scope myself, but I'm happy to collaborate with your team if necessary.",
-    },
-    {
-        question: "Can you help with SEO?",
-        answer: "I always ensure that the websites I build are SEO-friendly. This means they have the right structure, load quickly and get Lighthouse scores of 90+ (for SEO), as well as allowing the content displayed in search results to be customised.\n\nAs part of any website project, you can upgrade to receive a detailed SEO analysis of your competitors' websites. This involves looking at over 10 years of data to find tactics and content ideas worth copying, and it includes a plan to help you implement any changes that are needed",
-    },
-    {
-        question: "What if I need changes after launch?",
-        answer: "I build sites that are easy to update and to maintain. You'll understand how everything works and be able to make changes yourself. But if you'd rather have me handle things, I offer ongoing support packages.",
-    },
-    {
-        question: "Do you offer concessions?",
-        answer: "I understand project fees can be a lot to take in. But rest assured, the work I do is always carried out to strengthen your business and generate long-term returns. This means the result should make you money rather than cost you money, and will typically pay for itself.\n\nI'm always open to discussing options and finding a pricing structure that fits, especially for businesses with tighter budgets. And if you're struggling financially, I'm happy to chat about payment plans. The discounts I offer to everyone (these cannot be combined):\n\n• 3 easy instalments at 0% interest for all invoices over £500\n• 6 instalments at 0% interest for all invoices over £3k\n• 10% discount for paying your invoice in full before the work starts.",
-    },
-    {
-        question: "Are meetings free?",
-        answer: "If you need specific help with generating ideas or finding a solution to a problem you're having, this will be a chargeable consultation (unless this meeting was already quoted as part of your project). A consultation won't simply be an informal chat: it's a call I'll do some preparation for, so I can provide you with valuable ideas and options that will help you move forward.",
-    },
-    {
-        question: "What if I'm worried about email overload?",
-        answer: "I'm flexible about how to keep in touch during a project. If you're worried about missing emails, or maybe you flinch at the very thought of following up on something that was said four emails ago, I got you. I can set up private Slack and Trello boards for real-time progress and communication at no extra cost. And if email works for you, great!",
-    },
-    {
-        question: "Can we meet in person?",
-        answer: "Why not! I'm always up for meeting clients face to face. I'm based in Folkestone, South East England, so you'll need to be able to get here. I'm happy to meet anywhere nearby when our schedules coincide.",
-    },
-];
 ---
 
 <Layout
@@ -91,7 +56,6 @@ const faqItems = [
     <SkipToNav
         anchors={[
             { href: "#intro", label: "About" },
-            { href: "#principles", label: "Principles" },
             { href: "#tools", label: "Tools" },
             { href: "#sustainability", label: "Sustainability" },
             { href: "#faqs", label: "FAQs" },
@@ -146,19 +110,20 @@ const faqItems = [
                     <DataList.Label>Status</DataList.Label>
                     <DataList.Value>
                         <Flex align="center" gap="2">
-                            <Text color="grass" trim="both" mt="1">
+                            <Text color="grass">
                                 <svg
                                     width="12"
                                     height="12"
                                     viewBox="0 0 10 10"
                                     fill="currentColor"
                                     xmlns="http://www.w3.org/2000/svg"
+                                    aria-hidden="true"
                                 >
                                     <circle cx="5" cy="5" r="5"></circle>
                                 </svg>
                             </Text>
                             <Text wrap="balance"
-                                >Currently booking projects for Q1 2026</Text
+                                >Available for collaborations in 2026</Text
                             >
                         </Flex>
                     </DataList.Value>
@@ -180,8 +145,7 @@ const faqItems = [
                         helping independent businesses and orgs with their
                         websites + the strategy, copy, and integrations that
                         makes them useful. Clients pay less than agency prices
-                        and get one person handling the whole thing, no
-                        middlemen.
+                        and get one person handling the whole thing.
                     </Text>
                     <Text size="3" wrap="pretty">
                         Before this, I spent six years in galleries,
@@ -192,7 +156,7 @@ const faqItems = [
                         Arts graduate from the University of Greenwich, which is
                         where a lot of this started.
                     </Text>
-                    <figure style={{ marginTop: "var(--space-6)" }}>
+                    <figure style={{ marginBlock: "var(--space-5)" }}>
                         <Picture
                             src={FastForwardAnalogue}
                             alt="Mockup of two computer windows, one shows a cliff, the other the Creatives for Climate logo"
@@ -211,24 +175,35 @@ const faqItems = [
                             </figcaption>
                         </Text>
                     </figure>
+                    <Text size="3" as="p" wrap="pretty">
+                        In life, I'm as curious as I am practical. In work, I'm
+                        especially allergic to pretension.
+                    </Text>
+                    <Text size="3" as="p" wrap="pretty">
+                        For example, when I design something I try not to hide
+                        behind decorations. The question I ask is "can this go
+                        to undetencted?" If the answer is yes, it's likely this
+                        thing (be it a strategy, website, event, etc.) is going
+                        to better fit the needs of the person who is going to
+                        experience it. Which is also why a good design is harder
+                        to spot than a bad one.
+                    </Text>
+                    <Text size="3" as="p" wrap="pretty">
+                        I came to marketing from a wobbly trajectory that let me
+                        dip my toes many a role, from working in hospitality to
+                        curating exhibitions, running social media campaigns and
+                        many more things that make my CV hard to keep updated.
+                    </Text>
+                    <Text size="3" as="p" wrap="pretty"
+                        >Something important I learned about marketing is that
+                        when it's an afterthought, bolted on at the end of a
+                        project, it's destined for failure, minus a few
+                        exceptions. Marketing should really be a key part of the
+                        process from the outset, and I love working on projects
+                        it can do more than just "promote", but also shape the
+                        thing it's selling and help it find its audience.</Text
+                    >
                 </Flex>
-            </InnerSection>
-            <InnerSection title="Principles" sectionId="principles">
-                <Grid gap="4" columns={{ initial: "1", lg: "2" }}>
-                    <ContentCard heading="Good design is invisible">
-                        Well-designed things fit our needs so well that they go
-                        undetected, which is why a good design is harder to spot
-                        than a bad one. I try not to hide behind decorations and
-                        pursue substance over trends.
-                    </ContentCard>
-                    <ContentCard heading="Marketing is not an afterthought">
-                        Yet too often it feels like it's bolted on after the
-                        thing is built, the store is opened, or the event is
-                        scheduled. I love working on projects where marketing
-                        can do more than just "promote", but also shape the
-                        thing it's selling.
-                    </ContentCard>
-                </Grid>
             </InnerSection>
             <InnerSection title="Tools" sectionId="tools">
                 <Flex direction="column" gap="7">
@@ -333,8 +308,7 @@ const faqItems = [
             </InnerSection>
             <InnerSection title="Frequently asked questions" sectionId="faq">
                 <Flex direction="column" gap="8">
-                    <FAQ client:visible items={faqItems} />
-
+                    <FAQ variant="about" client:visible />
                     <Flex direction="column" gap="3">
                         <Heading size="3" as="h3" weight="medium"
                             >Have a better question?</Heading

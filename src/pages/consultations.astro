@@ -30,34 +30,6 @@ import { ButtonLink } from "../components/ButtonLink";
 import { ProcessAccordion } from "../components/ProcessAccordion";
 import FAQ from "../components/FAQ";
 import { BottomCTA } from "../components/BottomCTA";
-
-const faqItems = [
-    {
-        question: "Will it be a long process?",
-        answer: "No, this is a pretty straightforward website health check for busy people who want answers quickly. There is no admin beside the actual meeting. I just need 5 minutes of your time to complete a short questionnaire which I'll send to you immediately after booking.",
-    },
-    {
-        question: "How thorough is the website review?",
-        answer: "The website review is thorough but not exhaustive. Before the session, I will spend up to 4 hours auditing your website to get a rounded idea of what it is doing well and what needs work. I will focus my review on the area you told me you're struggling with the most (e.g. SEO, UX, UI, or something else).",
-    },
-    {
-        question: "Can we record the session?",
-        answer: "Of course. Sessions can be recorded so you can watch them back or share them with a colleague. You can also opt to receive a transcript of our conversation, and a summary of all my findings (delivered within 3-5 business days).",
-    },
-    {
-        question: "Do you guarantee results?",
-        answer: "I can't promise results, but I can promise to do my absolute best to help you improve your website based on my experience and the research I'll do. You should be wary of anyone who claims guaranteed results because every situation is different and running a business is not a science.",
-    },
-    {
-        question: "What if I need to cancel?",
-        answer: "Life happens. You can cancel free of charge up to 72 hours before the session. After that, no refunds are available, as I'll have already invested time reviewing your website. If you need to reschedule with less than 24 hours notice, I'll be happy to find another time.",
-    },
-    {
-        question:
-            "What's the difference between a free intro and a consultation?",
-        answer: "Where you see “free intro” mentioned on this page, that’s a 15/30-min conversation to see if we're a good fit. I won’t offer any advice, it’s just a chat. The consultation, on the other hand, is a service and it’s where the real work happens. Consultations include a mini website review, a 1:1 session, and a targeted action plan.",
-    },
-];
 ---
 
 <Layout
@@ -351,7 +323,7 @@ const faqItems = [
             </InnerSection>
             <InnerSection title="Consultations FAQs">
                 <Flex direction="column" gap="8">
-                    <FAQ client:visible items={faqItems} />
+                    <FAQ client:visible variant="consultations" />
                     <Flex direction="column" gap="3">
                         <Heading size="3" as="h4" weight="medium"
                             >Can't afford a consultation?</Heading
