@@ -30,6 +30,7 @@ import { ButtonLink } from "../components/ButtonLink";
 import { ProcessAccordion } from "../components/ProcessAccordion";
 import FAQ from "../components/FAQ";
 import { BottomCTA } from "../components/BottomCTA";
+import SkipToNav from "../components/SkipToNav";
 ---
 
 <Layout
@@ -57,12 +58,21 @@ import { BottomCTA } from "../components/BottomCTA";
 
     <!-- Hero Section -->
     <PageHeading slot="heading"
-        >You don't need a website consultation, but getting one will help</PageHeading
+        >Like a doctor's check-up for your website</PageHeading
     >
-    <Text slot="role" size="3" weight="medium" wrap="pretty">
-        Problems with your website?
-    </Text>
-    <Flex slot="description" direction="column" gap="5" width="75%">
+    <SkipToNav
+        anchors={[
+            { href: "#who", label: "Who it's for" },
+            { href: "#what-is-covered", label: "What is covered" },
+            { href: "#what-you-get", label: "Results" },
+            { href: "#how-different", label: "How it's different" },
+            { href: "#pricing", label: "Pricing" },
+            { href: "#faq", label: "FAQ" },
+        ]}
+        slot="role"
+        display={{ initial: "none", sm: "flex" }}
+    />
+    <Flex slot="description" direction="column" gap="5">
         <Text size="3" as="p" wrap="pretty">
             The fastest way to get clarity on what's holding your site back is
             booking a consultation. Each session includes a mini website review,
@@ -74,7 +84,7 @@ import { BottomCTA } from "../components/BottomCTA";
             variant="soft"
             color="gray"
             style={{ alignSelf: "flex-start" }}
-            href="#why"
+            href="#who"
         >
             Scroll to learn more <ArrowDownIcon />
         </ButtonLink>
@@ -87,7 +97,7 @@ import { BottomCTA } from "../components/BottomCTA";
         <MainGrid>
             <InnerSection
                 title="Does any of this sound familiar?"
-                sectionId="why"
+                sectionId="who"
             >
                 <Flex direction="column" gap="9">
                     <Flex direction="column" gap="3">
@@ -114,7 +124,10 @@ import { BottomCTA } from "../components/BottomCTA";
                     >
                 </Flex>
             </InnerSection>
-            <InnerSection title="What's covered in a consultation?">
+            <InnerSection
+                title="What's covered in a consultation?"
+                sectionId="what-is-covered"
+            >
                 <Grid columns={{ initial: "1", md: "2" }} gap="4">
                     <ContentCard heading="Words & Design">
                         Pointers on how to improve your website design and
@@ -138,7 +151,10 @@ import { BottomCTA } from "../components/BottomCTA";
                     </ContentCard>
                 </Grid>
             </InnerSection>
-            <InnerSection title="What's in it for you?">
+            <InnerSection
+                title="What's in it for you?"
+                sectionId="what-you-get"
+            >
                 <Flex direction="column" gap="3">
                     <Text size="3" as="p" wrap="pretty">
                         Maybe you know what's broken and need validation. Or you
@@ -185,25 +201,20 @@ import { BottomCTA } from "../components/BottomCTA";
                     </Card>
                 </Grid>
             </InnerSection>
-            <InnerSection title="What makes this different?">
+            <InnerSection
+                title="What makes this different?"
+                sectionId="how-different"
+            >
                 <Flex direction="column" gap="6">
                     <Flex direction="column" gap="3">
                         <Text size="3" as="p" className="indent" wrap="pretty">
-                            Most digital agencies offer “free website reports”,
-                            “free site health checks” or some variation on those
-                            lines. But are they really free services? Or are
-                            they just sales conversations dressed up as advice?
+                            Free website reports or "health checks" are
+                            everywhere. Most tell you what's wrong and then
+                            offer to fix it for a fee. A paid consultation is
+                            different: you get independent advice with no upsell
+                            attached or bad taste in your mouth. The session is
+                            the whole thing, and this is how it's different:
                         </Text>
-                        <Text size="3" as="p" className="indent" wrap="pretty">
-                            Booking a paid website consultation will spare you
-                            the embarrassment of sitting through a 45-minute
-                            chat with an agency that builds rapport but leaves
-                            you with nothing but a bad taste in your mouth and a
-                            proposal for an expensive rebrand you didn't ask
-                            for.
-                        </Text>
-                        <Text size="3" as="p">Why my consultations differ:</Text
-                        >
                     </Flex>
                     <Flex direction="column" gap="3">
                         <ProcessAccordion
@@ -235,7 +246,7 @@ import { BottomCTA } from "../components/BottomCTA";
                     </Flex>
                 </Flex>
             </InnerSection>
-            <InnerSection title="Investment">
+            <InnerSection title="Pricing" sectionId="pricing">
                 <Flex direction="column" gap="5">
                     <Text size="3" as="p" wrap="pretty"
                         >How much would it cost to know exactly where your

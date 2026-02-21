@@ -57,8 +57,8 @@ import { BottomCTA } from "../components/BottomCTA";
 ---
 
 <Layout
-    title={SEO.pages.webdesign.title}
-    description={SEO.pages.webdesign.description}
+    title={SEO.pages.websites.title}
+    description={SEO.pages.websites.description}
     backgroundColor="var(--yellow-5)"
     roleFullWidth
     noMobileRole
@@ -68,7 +68,7 @@ import { BottomCTA } from "../components/BottomCTA";
             data={{
                 "@type": "Service",
                 name: "Web Design & Development",
-                description: SEO.pages.webdesign.description,
+                description: SEO.pages.websites.description,
                 provider: SEO.person,
                 areaServed: {
                     "@type": "Place",
@@ -80,16 +80,17 @@ import { BottomCTA } from "../components/BottomCTA";
 
     <!-- Hero Section -->
     <PageHeading slot="heading" className="page-heading">
-        I design, write and build websites. Simple as.
+        Unapologetically simple websites and copy
     </PageHeading>
     <Text slot="role" size="3" weight="medium" as="p">
-        Built for independent businesses and non-profits
+        Taking on projects for Q1 2026
     </Text>
     <Flex slot="description" direction="column" gap="4">
-        <Text size="3" highContrast wrap="pretty">
-            The typical website-building project comes with layers that don't
-            serve you, baked with more people, more revisions, and more cost
-            than necessary. I got none of that for you.
+        <Text size="3" as="p" wrap="pretty" highContrast>
+            I help independent businesses and non-profits who are tired of
+            apologising for their amateurish websites. I remove what shouldn't
+            be there until you are left with something clearer, more confident,
+            and worth showing off.
         </Text>
 
         <ButtonLink
@@ -204,13 +205,11 @@ import { BottomCTA } from "../components/BottomCTA";
             <MainGrid pt="var(--space-11)">
                 <InnerSection title="What I've taken out">
                     <KeyServicePoints>
-                        <KSP heading="No agency overhead">
-                            Working with agencies can be slow and expensive.
-                            Here, you talk to the one person doing the work, so
-                            decisions happen faster, and you waste nothing on
-                            excess overhead.
+                        <KSP heading="No hidden costs">
+                            No way I'll surprise you with charges you weren't
+                            expecting. Everything will be transparent from the
+                            outset. The price I quote is the price you pay.
                         </KSP>
-
                         <KSP heading="No false promises">
                             I won't promise to "transform your brand" or "10x
                             your conversions." All I do is I craft sites that
@@ -318,36 +317,32 @@ import { BottomCTA } from "../components/BottomCTA";
                     <KeyServicePoints>
                         <KSP
                             heading="Doing it yourself"
-                            grayWordCount={2}
+                            grayWordCount={0}
                             multiParagraph
                         >
-                            <p style={{ textWrap: "pretty" }}>
-                                You could ask AI or find a template and figure
-                                it out yourself. But experience tells me DIY
-                                websites sit half-finished for years. You'll
-                                likely never write all the copy and you'll spend
-                                weeks wrestling with hosting.
-                            </p>
-                            <p style={{ textWrap: "pretty" }}>
-                                Leave the hard work to me and you'll get a truly
-                                finished product.
-                            </p>
+                            <Text wrap="pretty" as="p" color="gray">
+                                You could ask AI or find a template, but
+                                experience tells me DIY sites sit half-finished
+                                for years. You'll likely never write all the
+                                copy and you'll spend forever wrestling with
+                                hosting. Leave the hard work to me and you'll
+                                get a truly finished product.
+                            </Text>
                         </KSP>
                         <KSP
-                            heading="Hiring an agency"
-                            grayWordCount={2}
+                            heading="Shopping around"
+                            grayWordCount={0}
                             multiParagraph
                         >
-                            <p style={{ textWrap: "pretty" }}>
-                                I handle strategy, copywriting, design and
-                                development. You talk directly to me. There are
-                                no account managers and no internal meetings
-                                you’re not looped in.
-                            </p>
-                            <p style={{ textWrap: "pretty" }}>
-                                This usually means faster delivery, lower costs,
-                                and zero pressure to sign a retainer.
-                            </p>
+                            <Text wrap="pretty" as="p" color="gray">
+                                I won’t be the cheapest, and I don't do 1-week
+                                turnarounds. But you get results that you can
+                                still afford (and enjoy!) to run a year later.
+                                No storefront that stops working the minute you
+                                take a day off. No blog if you don’t have time
+                                to write. No designing around high-end stock
+                                photos you can’t replicate.
+                            </Text>
                         </KSP>
                     </KeyServicePoints>
                 </InnerSection>
@@ -426,7 +421,7 @@ import { BottomCTA } from "../components/BottomCTA";
                             items={[
                                 "Your current website is broken, slow, or plain embarrassing.",
                                 "Value for money is your love language.",
-                                "You'd rather work with one reliable human than be at the mercy of an agency.",
+                                "You'd rather work with one reliable person than manage a large team.",
                             ]}
                         />
                         <ContentCard

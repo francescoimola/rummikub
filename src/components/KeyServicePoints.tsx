@@ -1,35 +1,41 @@
-import { Grid, Heading, Text } from "@radix-ui/themes";
+import { Grid, Heading, Text, Flex, Link } from "@radix-ui/themes";
 import type { ReactNode } from "react";
+
+import { ButtonLink } from "./ButtonLink";
 
 interface KSPProps {
     heading: ReactNode;
     children: ReactNode;
     grayWordCount?: number;
     multiParagraph?: boolean;
+    href?: string;
+    buttonText?: string;
 }
 
-export const KSP = ({ heading, children, grayWordCount = 1, multiParagraph }: KSPProps) => {
-    const headingContent = typeof heading === "string" ? (
-        <>
-            <Text color="gray" as="span">
-                {heading.split(" ").slice(0, grayWordCount).join(" ")}
-            </Text>{" "}
-            <Text as="span" highContrast>
-                {heading.split(" ").slice(grayWordCount).join(" ")}
-            </Text>
-        </>
-    ) : (
-        heading
-    );
+export const KSP = ({ heading, children, grayWordCount = 1, multiParagraph, href, buttonText }: KSPProps) => {
+
 
     return (
         <Grid columns={{ initial: "1", md: "2" }} gapX="6" gapY="2" className="key-service-point">
-            <Heading size="3" weight="medium">
-                {headingContent}
+            <Heading size="3" weight="medium" className="ksp-heading" asChild={!!href}>
+                {href ? (
+                    <Link href={href} style={{ color: "inherit", textDecoration: "none" }}>
+                        {heading}
+                    </Link>
+                ) : (
+                    <>{heading}</>
+                )}
             </Heading>
-            <Text as={multiParagraph ? "div" : "p"} size="3">
-                {children}
-            </Text>
+            <Flex direction="column" gap="3" align="start">
+                <Text as={multiParagraph ? "div" : "p"} size="3">
+                    {children}
+                </Text>
+                {href && buttonText && (
+                    <ButtonLink variant="soft" size="1" color="gray" href={href} style={{ alignSelf: "start" }}>
+                        {buttonText}
+                    </ButtonLink>
+                )}
+            </Flex>
         </Grid>
     );
 };

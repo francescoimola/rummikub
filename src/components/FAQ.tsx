@@ -21,7 +21,49 @@ interface FAQItem {
 
 const homeItems: FAQItem[] = [
     {
-        question: "Content writing",
+        question: "Websites",
+        answer: (
+            <>
+                <Flex direction="column" gap="3">
+                    <Text size="3" as="p" color="gray" wrap="pretty">
+                        I take bloated websites and remove what shouldn't
+                        be there until you are left with something clearer, more confident,
+                        and worth showing off.
+                    </Text>
+                    <Text size="3" as="p" color="gray" wrap="pretty">
+                        I work primarily in Figma, Webflow and Framer. If you’re already committed to a CMS or website-builder, I can usually adapt as most platforms work on similar principles.
+                    </Text>
+                    <ButtonLink variant="solid" color="gray" href="/websites" mt="2" style={{ alignSelf: "start" }}>
+                        Learn more about web design & development
+                    </ButtonLink>
+                </Flex>
+            </>
+        ),
+    },
+    {
+        question: "Consultations",
+        answer: (
+            <>
+                <Flex direction="column" gap="3">
+                    <Text size="3" as="p" color="gray" wrap="pretty">
+                        Maybe you know what's broken and need validation. Or you
+                        sense something isn't working, but don't know what
+                        exactly. A consultation gives you clarity in both cases.
+                    </Text>
+                    <Text size="3" as="p" color="gray" wrap="pretty">
+                        You leave with a handful of specific and practical
+                        solutions that you can implement right away. No more
+                        guessing.
+                    </Text>
+                    <ButtonLink variant="solid" color="gray" href="/consultations" mt="2" style={{ alignSelf: "start" }}>
+                        Learn more about consultations
+                    </ButtonLink>
+                </Flex>
+            </>
+        ),
+    },
+    {
+        question: "Content",
         answer: (
             <>
                 <Flex direction="column" gap="3">
@@ -35,7 +77,7 @@ const homeItems: FAQItem[] = [
                         it!&rdquo;. But treating copy as an afterthought? Does
                         hardly anything.
                     </Text>
-                    <ButtonLink variant="soft" color="gray" href="/about#contact" style={{ alignSelf: "start" }}>
+                    <ButtonLink variant="solid" color="gray" href="/about#contact" mt="2" style={{ alignSelf: "start" }}>
                         Share your brief
                     </ButtonLink>
                 </Flex>
@@ -43,7 +85,7 @@ const homeItems: FAQItem[] = [
         ),
     },
     {
-        question: "Email marketing",
+        question: "Emails",
         answer: (
             <>
                 <Text size="3" as="p" color="gray" wrap="pretty">
@@ -54,7 +96,7 @@ const homeItems: FAQItem[] = [
                     their open and click rates way up by cutting the corporate
                     tone, sticking with the basics, and keeping it consistent. If email's never worked for you, that's usually why. And I say it's worth another go.
                 </Text>
-                <ButtonLink variant="soft" color="gray" href="/about#contact" style={{ alignSelf: "start" }}>
+                <ButtonLink variant="solid" color="gray" href="/about#contact" mt="2" style={{ alignSelf: "start" }}>
                     Share your brief
                 </ButtonLink>
             </>
@@ -223,6 +265,7 @@ export default function FAQ({
                                     pt={index === 0 ? undefined : py}
                                 >
                                     <Text
+                                        className="AccordionQuestion"
                                         size="3"
                                         weight={
                                             isOpen ? activeWeight : weight

@@ -442,6 +442,15 @@ svg.client-logo {
     border-block-start: thin solid var(--gray-a6);
 }
 
+.key-service-point .ksp-heading {
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.key-service-point:hover .ksp-heading,
+.key-service-point:focus-within .ksp-heading {
+    transform: translateX(var(--space-2));
+}
+
 /* --- Cards --- */
 .service-card {
     background-color: var(--yellow-3);
@@ -658,38 +667,6 @@ svg.client-logo {
     }
 }
 
-/* --- Service Link Button --- */
-.service-link-btn {
-    all: unset;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    cursor: pointer;
-    box-sizing: border-box;
-}
-
-.service-link-btn .rt-Text {
-    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
-        font-weight 0.2s ease;
-}
-
-.service-link-btn:hover .rt-Text {
-    transform: translateX(var(--space-2));
-    font-weight: 500 !important;
-}
-
-.service-link-btn svg {
-    transition: color 0.2s ease, stroke-width 0.2s ease;
-}
-
-.service-link-btn:hover svg {
-    color: var(--gray-12) !important;
-    stroke: currentColor;
-    stroke-width: 0.5px;
-}
-
 /* --- Accordion --- */
 .AccordionTrigger {
     all: unset;
@@ -697,6 +674,17 @@ svg.client-logo {
     width: 100%;
     cursor: pointer;
     box-sizing: border-box;
+
+    & .AccordionQuestion {
+        transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+            font-weight 0.2s ease;
+    }
+
+    &:hover .AccordionQuestion,
+    &:focus-visible .AccordionQuestion {
+        transform: translateX(var(--space-2));
+        font-weight: 500 !important;
+    }
 
     &[data-state='open'] .AccordionIconPlus {
         display: none;
@@ -764,7 +752,7 @@ svg.client-logo {
    ========================================= */
 
 .page-heading {
-    max-width: 20ch;
+    max-width: 25ch;
 }
 
 .side-margin {
