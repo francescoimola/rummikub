@@ -27,7 +27,34 @@ import BlueberryLogo from "../components/icons/BlueberryLogo.astro";
 import { BottomCTA } from "../components/BottomCTA";
 import { getFeaturedProjects } from "../utils/getFeaturedProjects";
 import FAQ from "../components/FAQ";
+import { KeyServicePoints, KSP } from "../components/KeyServicePoints";
 const featuredProjects = await getFeaturedProjects();
+const capabilities = [
+  {
+    heading: "Website design & development",
+    text: "I make building great sites from messy briefs look easy. Bilingual in Figma, Webflow, Framer, HTML and CSS.",
+    href: "/websites",
+    buttonText: "Tell me more",
+  },
+  {
+    heading: "Consulting",
+    text: "Sense something isn't working, but don't know what exactly? A website consultation gives you what your therapist never could.",
+    href: "/consultations",
+    buttonText: "What's that?",
+  },
+  {
+    heading: "Copywriting & content research",
+    text: "As long as you're willing for me to taint your name with odd lexicon and inaccurate sentence structure, I'm in",
+    href: "/about#contact",
+    buttonText: "Share your brief",
+  },
+  {
+    heading: "Email marketing",
+    text: "Big big fan of welcome emails, automations, and hyper-personalized campaigns. Quality > quantity.",
+    href: "/about#contact",
+    buttonText: "Share your brief",
+  },
+];
 ---
 
 <Layout
@@ -53,29 +80,38 @@ const featuredProjects = await getFeaturedProjects();
 
   <!-- Slot: Main Heading -->
   <PageHeading slot="heading" className="page-heading">
-    Unapologetically simple <Text as="span" color="orange">websites</Text> and
-    <Text as="span" color="yellow">copywriting</Text>
+    Francesco Imola is a <Text as="span" color="orange">designer</Text> and
+    <Text as="span" color="yellow">copywriter</Text> in Kent.
   </PageHeading>
 
   <!-- Slot: Job Role (Hidden on mobile) -->
   <Box slot="role" asChild>
-    <Text size="3" as="p" weight="medium">Taking on projects for Q1 2026</Text>
+    <Text size="3" as="p" weight="medium"
+      >Open to new collaborations in 2026</Text
+    >
   </Box>
 
   <!-- Slot: Introduction Text -->
-  <Flex slot="description" direction="column" gap="5" width="75%">
+  <Flex slot="description" direction="column" gap="3">
     <Text size="3" as="p" wrap="pretty" highContrast>
-      I help independent businesses and non-profits who are tired of apologising
-      for their amateurish websites. I remove what shouldn't be there until you
-      are left with something clearer, more confident, and worth showing off.
+      I'm a designer, writer, and strategist. Folkestone is home. My obsession
+      is peanut butter (on everything) and products so good they don't need any
+      marketing.
+    </Text>
+    <Text size="3" as="p" wrap="pretty" highContrast>
+      Unfortunately, not everyone is as lucky with what they're selling. So
+      that's where I come in. I help brands to simplify and create space for big
+      ideas. The hardest challenge is making it look easy.
     </Text>
     <ButtonLink
       href="/about#contact"
+      variant="surface"
+      color="gray"
+      mt="3"
       size="3"
       style={{ alignSelf: "flex-start" }}
-      highContrast
     >
-      Start a project <ArrowRightIcon />
+      Say hello<ArrowRightIcon />
     </ButtonLink>
   </Flex>
 
@@ -119,41 +155,20 @@ const featuredProjects = await getFeaturedProjects();
         </Grid>
       </InnerSection>
 
-      <!-- --- Services --- -->
       <InnerSection title="Where I can help">
-        <Flex direction="column" gap="9">
-          <Flex direction="column" gap="3">
-            <Heading as="h3" size="3" color="gray" weight="regular" mb="4"
-              >Bread and butter</Heading
-            >
-            <Link href="/web-design" className="service-link-btn">
-              <Text size="3" as="span" weight="medium" highContrast
-                >Web design & development</Text
+        <KeyServicePoints>
+          {
+            capabilities.map((capability) => (
+              <KSP
+                heading={capability.heading}
+                href={capability.href}
+                buttonText={capability.buttonText}
               >
-              <ArrowRightIcon color="gray" width="18" height="18" />
-            </Link>
-            <Separator size="4" />
-            <Link href="/consultations" className="service-link-btn">
-              <Text size="3" as="span" weight="medium" highContrast
-                >Marketing consulting</Text
-              >
-              <ArrowRightIcon color="gray" width="18" height="18" />
-            </Link>
-          </Flex>
-          <Flex direction="column" gap="3">
-            <Heading as="h3" size="3" color="gray" weight="regular" mb="4"
-              >À la carte</Heading
-            >
-            <FAQ variant="home" py="3" client:visible />
-          </Flex>
-          <!--  <Flex direction="column" gap="3">
-            <Text size="3" as="p" highContrast
-              >Content writing (SEO, blog posts, emails)</Text
-            >
-            <Separator size="4" />
-            <Text size="3" as="p" highContrast>Email marketing</Text>
-          </Flex> -->
-        </Flex>
+                {capability.text}
+              </KSP>
+            ))
+          }
+        </KeyServicePoints>
       </InnerSection>
 
       <!-- --- Testimonials --- -->

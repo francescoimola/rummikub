@@ -57,7 +57,7 @@ export const SEO = {
             description:
                 "Notes on marketing and designing your thing without following the usual playbook. For anyone who suspects there might be a better way.",
         },
-        webdesign: {
+        websites: {
             title: "Web Design & Development | Francesco Imola",
             description:
                 "Deliberately simpler web design for independent businesses and freelancers. No agency overhead, no false promises, no dark patterns.",

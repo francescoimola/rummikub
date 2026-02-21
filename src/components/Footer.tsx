@@ -27,18 +27,18 @@ interface FooterSection {
 
 const FOOTER_SECTIONS: FooterSection[] = [
     {
-        title: "Services",
+        title: "Ways to collaborate",
         items: [
-            { label: "Web design", href: "/webdesign" },
-            { label: "Consulting", href: "/consultations" },
-            { label: "FAQ", href: "/about#faq" },
+            { label: "Web design & development", href: "/websites" },
+            { label: "Website consulting", href: "/consultations" },
+            { label: "Hire me as a partner", href: "/work-with-me" },
         ],
     },
     {
-        title: "About",
+        title: "What you need to know",
         items: [
-            { label: "Work", href: "/work" },
             { label: "Contact", href: "/about#contact" },
+            { label: "Work", href: "/work" },
             { label: "Privacy Notice", href: EXTERNAL_URLS.privacyNotice, external: true },
             { label: "Terms of Business", href: EXTERNAL_URLS.termsOfBusiness, external: true },
         ],
@@ -47,9 +47,10 @@ const FOOTER_SECTIONS: FooterSection[] = [
         title: "Procrastinate",
         headingWrap: "nowrap",
         items: [
-            { label: "For agencies", href: "/work-with-me" },
+            { label: "FAQs", href: "/about#faq" },
             { label: "Colophon", href: "/soon" },
             { label: "Playground", href: "/soon" },
+
         ],
     },
     {

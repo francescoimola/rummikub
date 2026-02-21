@@ -95,7 +95,7 @@ const FormSelect = ({ label, name }: { label: string; name: string }) => {
                     style={{ marginTop: "0.75rem", width: "100%", justifyContent: "space-between" }}
                 />
                 <Select.Content>
-                    <Select.Item value="web-design">Web Design & Development</Select.Item>
+                    <Select.Item value="websites">Web Design & Development</Select.Item>
                     <Select.Item value="consulting">Website Consultation</Select.Item>
                     <Select.Item value="copywriting">Copywriting</Select.Item>
                     <Select.Item value="email-marketing">Email Marketing</Select.Item>
@@ -146,7 +146,7 @@ export const ContactForm = () => {
                     lastName: "",
                     email: "",
                     phone: "",
-                    service: "web-design",
+                    service: "websites",
                     roles: [] as string[],
                     message: "",
                     acceptedTerms: false,
@@ -187,13 +187,6 @@ export const ContactForm = () => {
 
                             <Box gridColumn={{ initial: "1", sm: "span 2" }}>
                                 <FormSelect name="service" label="What can I help with?" />
-                            </Box>
-
-                            <Box gridColumn={{ initial: "1", sm: "span 2" }} mt="4">
-                                <Text as="p" size="3" weight="medium" mb="3">
-                                    Which best describes you? <Text as="span" color="gray" weight="regular">(optional)</Text>
-                                </Text>
-                                <FormCheckboxes />
                             </Box>
 
                             <Box gridColumn={{ initial: "1", sm: "span 2" }} mt="2">
