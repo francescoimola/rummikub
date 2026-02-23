@@ -23,10 +23,11 @@ export function InnerSection({
             style={{ gridColumn: "1 / -1", gridTemplateColumns: "subgrid" }}
         >
             <section id={sectionId}>
-                <Box className="section-header">
+                <Box className="section-header" my={{ initial: "4", md: "0" }}>
                     {header ?? (
                         <Heading
-                            size={{ initial: "6", sm: "3" }}
+                            size={{ initial: "8", sm: "6", md: "3" }}
+                            align={{ initial: "center", sm: "left" }}
                             weight="medium"
                             as="h2"
                             highContrast
