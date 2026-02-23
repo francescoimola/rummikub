@@ -36,51 +36,59 @@ export const SITE_DATA = {
  */
 export const SEO = {
     defaults: {
-        title: "Francesco Imola | Web Designer & Creative Marketer in Kent",
+        title: "Francesco Imola | Designer & Creative Marketer in Kent",
         description:
-            "I help small businesses, freelancers and creatives drive long-term growth with futureproof websites, UX copy, email marketing and strategic consultations.",
+            "I help businesses, freelancers and creatives grow sustainably with unapologetically simple websites, UX copy, email marketing and strategic consultations",
         image: "/assets/images/og-image.png",
     },
     pages: {
         home: {
             title: "Francesco Imola | Web Designer & Creative Marketer in Kent",
             description:
-                "I design simple websites and write copy that actually works. For small businesses and freelancers in Kent.",
+                "I help businesses, freelancers and creatives grow sustainably with unapologetically simple websites, UX copy, email marketing and strategic consultations",
+
         },
         about: {
             title: "About | Francesco Imola",
             description:
-                "Designer and marketer based in Folkestone, Kent. I help independent businesses with websites, strategy, copy, and integrations.",
+                "Francesco Imola is a designer who writes, a writer who designs, and a strategist who does both.",
+
         },
         blog: {
             title: "Blog | Francesco Imola",
             description:
-                "Notes on marketing and designing your thing without following the usual playbook. For anyone who suspects there might be a better way.",
+                "Notes on marketing and designing your thing without following the playbook everyone is following.",
+
         },
         websites: {
             title: "Web Design & Development | Francesco Imola",
             description:
-                "Deliberately simpler web design for independent businesses and freelancers. You work directly with me on strategy, copy, and design.",
+                "Unapologetically simple web design and development for independent businesses and freelancers.",
+
         },
         consultations: {
             title: "Website Consultations | Francesco Imola",
             description:
                 "Get clarity on what's holding your site back. Each session includes a mini website review plus 1 hour of honest, focused conversation.",
+
         },
         work: {
             title: "Selected Work | Francesco Imola",
             description:
-                "Web design, marketing, and content projects I've done for small businesses, non-profits, and higher education.",
+                "A selection of projects I have worked on at the infamous roundabout where marketing and design perpetually chase each other.",
+
         },
         notFound: {
             title: "404 | Page Not Found | Francesco Imola",
             description:
                 "The page you're looking for doesn't exist or has been moved.",
+
         },
         comingSoon: {
             title: "Coming Soon | Francesco Imola",
             description:
-                "This page isn't quite ready yet, but it will be soon. Sign up to stay in the loop.",
+                "This page isn't quite ready yet.",
+
         },
         collaborate: {
             title: "Collaborate | Francesco Imola",
