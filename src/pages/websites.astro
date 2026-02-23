@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import PageHeading from "../components/PageHeading";
 import { Image } from "astro:assets";
-import { Text, Flex, Theme, Section, Box, Grid, Card } from "@radix-ui/themes";
+import { Text, Flex, Theme, Section, Box, Grid } from "@radix-ui/themes";
 import { EXTERNAL_URLS, SEO } from "../constants";
 import JsonLd from "../components/JsonLd.astro";
 import {
@@ -25,33 +25,7 @@ import { VerticalFeatureTabs } from "../components/VerticalFeatureTabs";
 import { ProcessAccordion } from "../components/ProcessAccordion";
 import { PricingTable } from "../components/PricingTable";
 import { ContentCard } from "../components/ContentCard";
-const tabItems = [
-    {
-        id: "longevity",
-        title: "Built for longevity",
-        content:
-            "You won't find me relying on fleeting design trends or fiddly plugins that need constant maintenance. The goal is building stuff that won't need replacing any time soon.",
-    },
-    {
-        id: "update",
-        title: "A website even <i>you</i> can update",
-        content:
-            "That taste on your tongue? That's the freedom of being able to change your own prices, hours, team photos, blog posts, and testimonials... without waiting on anyone.",
-    },
-    {
-        id: "seo",
-        title: "Basic SEO, done proper",
-        content:
-            "Meta descriptions, core keywords, and image compression are always included. The fundamentals done right, and with room to build upon.",
-    },
-    {
-        id: "accessibility",
-        title: "Accessibility taken seriously",
-        content:
-            "We'll always move with the user's needs in mind. Perfection is a moving target of course, but the baseline is always a responsive site that doesn't unreasonably exclude anyone.",
-    },
-];
-
+import FAQ from "../components/FAQ";
 import tca from "../assets/tca_megamenu.png";
 import { BottomCTA } from "../components/BottomCTA";
 ---
@@ -225,17 +199,42 @@ import { BottomCTA } from "../components/BottomCTA";
                     </KeyServicePoints>
                 </InnerSection>
                 <InnerSection title="What you get">
-                    <Grid gap="4">
-                        <Card
-                            variant="ghost"
-                            size="4"
-                            style={{
-                                margin: "unset",
-                                backgroundColor: "var(--yellow-a3)",
-                            }}
+                    <Grid columns={{ initial: "1", md: "2" }} gap="4">
+                        <ContentCard
+                            heading="Built for longevity"
+                            backgroundColor="var(--yellow-3)"
                         >
-                            <VerticalFeatureTabs items={tabItems} client:idle />
-                        </Card>
+                            You won't find me relying on fleeting design trends
+                            or fiddly plugins that need constant maintenance.
+                            The goal is building stuff that won't need replacing
+                            any time soon.x
+                        </ContentCard>
+                        <ContentCard
+                            heading="A website even you can update"
+                            backgroundColor="var(--yellow-3)"
+                        >
+                            That taste on your tongue? That's the freedom of
+                            being able to change your own prices, hours, team
+                            photos, blog posts, and testimonials... without
+                            waiting on anyone.
+                        </ContentCard>
+                        <ContentCard
+                            heading="Basic SEO, done proper"
+                            backgroundColor="var(--yellow-3)"
+                        >
+                            Meta descriptions, core keywords, and image
+                            compression are always included. The fundamentals
+                            done right, and with room to build upon.
+                        </ContentCard>
+                        <ContentCard
+                            heading="Accessibility taken seriously"
+                            backgroundColor="var(--yellow-3)"
+                        >
+                            We'll always move with the user's needs in mind.
+                            Perfection is a moving target of course, but the
+                            baseline is always a responsive site that doesn't
+                            unreasonably exclude anyone.
+                        </ContentCard>
                         <figure style={{ gridColumn: "1 / -1" }}>
                             <Image
                                 src={tca}
@@ -434,6 +433,11 @@ import { BottomCTA } from "../components/BottomCTA";
                             ]}
                         />
                     </Grid>
+                </InnerSection>
+                <InnerSection title="Consultations FAQs">
+                    <Flex direction="column" gap="8">
+                        <FAQ client:visible variant="websites" />
+                    </Flex>
                 </InnerSection>
             </MainGrid>
         </Box>

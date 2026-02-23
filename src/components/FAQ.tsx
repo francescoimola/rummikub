@@ -19,39 +19,47 @@ interface FAQItem {
 /*  Variant content                                                    */
 /* ------------------------------------------------------------------ */
 
-const homeItems: FAQItem[] = [
+const webdesignItems: FAQItem[] = [
     {
-        question: "Websites",
+        question: "How long does a project take?",
+        answer: "Most website projects take 4-10 weeks depending on scope. I work in phases so you can see progress early and provide feedback as we go. We'll establish a timeline together before we start.",
+    },
+    {
+        question: "Can you help with SEO?",
         answer: (
             <>
-                <Flex direction="column" gap="3">
-                    <Text size="3" as="p" color="gray" wrap="pretty">
-                        I take bloated websites and remove what shouldn't
-                        be there until you are left with something clearer, more confident,
-                        and worth showing off.
-                    </Text>
-                    <Text size="3" as="p" color="gray" wrap="pretty">
-                        I work primarily in Figma, Webflow and Framer. If you’re already committed to a CMS or website-builder, I can usually adapt as most platforms work on similar principles.
-                    </Text>
-                    <ButtonLink variant="solid" color="gray" href="/websites" mt="2" style={{ alignSelf: "start" }}>
-                        Learn more about web design & development
-                    </ButtonLink>
-                </Flex>
+                <Text size="3" as="p" color="gray" wrap="pretty">
+                    I always ensure that the websites I build are SEO-friendly.
+                    This means they have the right structure, load quickly and
+                    get Lighthouse scores of 90+ (for SEO), as well as allowing
+                    the content displayed in search results to be customised.
+                </Text>
+                <Text size="3" as="p" color="gray" wrap="pretty">
+                    As part of any website project, you can upgrade to receive a
+                    detailed SEO analysis of your competitors' websites. This
+                    involves looking at over 10 years of data to find tactics and
+                    content ideas worth copying, and it includes a plan to help
+                    you implement any changes that are needed.
+                </Text>
             </>
         ),
     },
     {
-        question: "Consultations",
+        question: "What if I need changes after launch?",
+        answer: "I build sites that are easy to update and to maintain. You'll understand how everything works and be able to make changes yourself. But if you'd rather have me handle things, I offer ongoing support packages.",
+    },
+    {
+        question: "Do you offer consultations?",
         answer: (
             <>
                 <Flex direction="column" gap="3">
                     <Text size="3" as="p" color="gray" wrap="pretty">
-                        Maybe you know what's broken and need validation. Or you
+                        If you know what's broken and need validation, or if you
                         sense something isn't working, but don't know what
-                        exactly. A consultation gives you clarity in both cases.
+                        exactly, it's worth chatting about it.
                     </Text>
                     <Text size="3" as="p" color="gray" wrap="pretty">
-                        You leave with a handful of specific and practical
+                        A consultation gives you clarity on what's wrong and a handful of specific and practical
                         solutions that you can implement right away. No more
                         guessing.
                     </Text>
@@ -63,44 +71,57 @@ const homeItems: FAQItem[] = [
         ),
     },
     {
-        question: "Content",
+        question: "Are meetings free?",
+        answer: "If you need specific help with generating ideas or finding a solution to a problem you're having, this will be a chargeable consultation (unless this meeting was already quoted as part of your project). A consultation won't simply be an informal chat: it's a call I'll do some preparation for, so I can provide you with valuable ideas and options that will help you move forward.",
+    },
+    {
+        question: "Can you work with my existing team?",
+        answer: "Absolutely. I usually take care of the full scope myself, but I'm happy to collaborate with your team if necessary.",
+    },
+    {
+        question: "What if I'm worried about email overload?",
+        answer: "I'm flexible about how to keep in touch during a project. If you're worried about missing emails, or maybe you flinch at the very thought of following up on something that was said four emails ago, I got you. I can set up private Slack and Trello boards for real-time progress and communication at no extra cost. And if email works for you, great!",
+    },
+    {
+        question: "Do you offer concessions?",
         answer: (
             <>
-                <Flex direction="column" gap="3">
-                    <Text size="3" as="p" color="gray" wrap="pretty">
-                        Your website reads fine. And no one's complained about
-                        your content. Why pay extra for, what? Better writing?
-                    </Text>
-                    <Text size="3" as="p" color="gray" wrap="pretty">
-                        I can't put a price on words so spot on they'll make
-                        your people think, &ldquo;you know what, they get
-                        it!&rdquo;. But treating copy as an afterthought? Does
-                        hardly anything.
-                    </Text>
-                    <ButtonLink variant="solid" color="gray" href="/about#contact" mt="2" style={{ alignSelf: "start" }}>
-                        Share your brief
-                    </ButtonLink>
+                <Text size="3" as="p" color="gray" wrap="pretty">
+                    I understand project fees can be a lot to take in. But rest
+                    assured, the work I do is always carried out to strengthen
+                    your business and generate long-term returns. This means the
+                    result should make you money rather than cost you money, and
+                    will typically pay for itself.
+                </Text>
+                <Text size="3" as="p" color="gray" wrap="pretty">
+                    I'm always open to discussing options and finding a pricing
+                    structure that fits, especially for businesses with tighter
+                    budgets. And if you're struggling financially, I'm happy to
+                    chat about payment plans. The discounts I offer to everyone
+                    (these cannot be combined):
+                </Text>
+                <Flex direction="column" gap="2" asChild>
+                    <ul>
+                        <Text size="3" color="gray" asChild><li>
+                            3 easy instalments at 0% interest for all
+                            invoices over £500
+                        </li></Text>
+                        <Text size="3" color="gray" asChild><li>
+                            6 instalments at 0% interest for all invoices
+                            over £3k
+                        </li></Text>
+                        <Text size="3" color="gray" asChild><li>
+                            10% discount for paying your invoice in full
+                            before the work starts.
+                        </li></Text>
+                    </ul>
                 </Flex>
             </>
         ),
     },
     {
-        question: "Emails",
-        answer: (
-            <>
-                <Text size="3" as="p" color="gray" wrap="pretty">
-                    People don't hate emails. They hate bad emails.
-                </Text>
-                <Text size="3" as="p" color="gray" wrap="pretty">
-                    I've helped B2B agencies and brick-and-mortar shops push
-                    their open and click rates way up by cutting the corporate
-                    tone, sticking with the basics, and keeping it consistent. If email's never worked for you, that's usually why. And I say it's worth another go.
-                </Text>
-                <ButtonLink variant="solid" color="gray" href="/about#contact" mt="2" style={{ alignSelf: "start" }}>
-                    Share your brief
-                </ButtonLink>
-            </>
-        ),
+        question: "Can we meet in person?",
+        answer: "Why not! I'm always up for meeting clients face to face. I'm based in Folkestone, South East England, so you'll need to be able to get here. I'm happy to meet anywhere nearby when our schedules coincide.",
     },
 ];
 
@@ -133,80 +154,21 @@ const consultationsItems: FAQItem[] = [
 
 const aboutItems: FAQItem[] = [
     {
-        question: "How long does a project take?",
-        answer: "Most website projects take 4-10 weeks depending on scope. I work in phases so you can see progress early and provide feedback as we go. We'll establish a timeline together before we start.",
+        question: "What's your approach to design?",
+        answer: "I try not to hide behind decorations. The question I ask myself is \"can this go undetected?\" If the answer is yes, it's likely the thing I'm designing — be it a strategy, website, event, or something else — is going to better fit the needs of the person experiencing it. Which is also why good design is harder to spot than bad design.",
     },
     {
-        question: "Can you work with my existing team?",
-        answer: "Absolutely. I usually take care of the full scope myself, but I'm happy to collaborate with your team if necessary.",
+        question: "What's your background?",
+        answer: "I came to marketing and designfrom a wobbly trajectory that let me dip my toes into many a role, from working in hospitality to curating exhibitions, running social media campaigns, and many more things that make my CV hard to keep updated. In life, I'm as curious as I am practical. In work, I'm especially allergic to pretension.",
     },
     {
-        question: "Can you help with SEO?",
-        answer: (
-            <>
-                <Text size="3" as="p" color="gray" wrap="pretty">
-                    I always ensure that the websites I build are SEO-friendly.
-                    This means they have the right structure, load quickly and
-                    get Lighthouse scores of 90+ (for SEO), as well as allowing
-                    the content displayed in search results to be customised.
-                </Text>
-                <Text size="3" as="p" color="gray" wrap="pretty">
-                    As part of any website project, you can upgrade to receive a
-                    detailed SEO analysis of your competitors' websites. This
-                    involves looking at over 10 years of data to find tactics and
-                    content ideas worth copying, and it includes a plan to help
-                    you implement any changes that are needed.
-                </Text>
-            </>
-        ),
-    },
-    {
-        question: "What if I need changes after launch?",
-        answer: "I build sites that are easy to update and to maintain. You'll understand how everything works and be able to make changes yourself. But if you'd rather have me handle things, I offer ongoing support packages.",
-    },
-    {
-        question: "Do you offer concessions?",
-        answer: (
-            <>
-                <Text size="3" as="p" color="gray" wrap="pretty">
-                    I understand project fees can be a lot to take in. But rest
-                    assured, the work I do is always carried out to strengthen
-                    your business and generate long-term returns. This means the
-                    result should make you money rather than cost you money, and
-                    will typically pay for itself.
-                </Text>
-                <Text size="3" as="p" color="gray" wrap="pretty">
-                    I'm always open to discussing options and finding a pricing
-                    structure that fits, especially for businesses with tighter
-                    budgets. And if you're struggling financially, I'm happy to
-                    chat about payment plans. The discounts I offer to everyone
-                    (these cannot be combined):
-                </Text>
-                <Text size="3" as="p" color="gray" wrap="pretty">
-                    • 3 easy instalments at 0% interest for all invoices over
-                    £500{"\n"}• 6 instalments at 0% interest for all invoices
-                    over £3k{"\n"}• 10% discount for paying your invoice in full
-                    before the work starts.
-                </Text>
-            </>
-        ),
-    },
-    {
-        question: "Are meetings free?",
-        answer: "If you need specific help with generating ideas or finding a solution to a problem you're having, this will be a chargeable consultation (unless this meeting was already quoted as part of your project). A consultation won't simply be an informal chat: it's a call I'll do some preparation for, so I can provide you with valuable ideas and options that will help you move forward.",
-    },
-    {
-        question: "What if I'm worried about email overload?",
-        answer: "I'm flexible about how to keep in touch during a project. If you're worried about missing emails, or maybe you flinch at the very thought of following up on something that was said four emails ago, I got you. I can set up private Slack and Trello boards for real-time progress and communication at no extra cost. And if email works for you, great!",
-    },
-    {
-        question: "Can we meet in person?",
-        answer: "Why not! I'm always up for meeting clients face to face. I'm based in Folkestone, South East England, so you'll need to be able to get here. I'm happy to meet anywhere nearby when our schedules coincide.",
+        question: "How do you think about marketing?",
+        answer: "The marketing I love and recommend works best when it's part of the process from the very beginning, rather than bolted on at the end. I love working on projects where marketing can do more than just promote but also shape the thing it's selling and help it find its audience.",
     },
 ];
 
 const variantMap = {
-    home: homeItems,
+    websites: webdesignItems,
     consultations: consultationsItems,
     about: aboutItems,
 } as const;

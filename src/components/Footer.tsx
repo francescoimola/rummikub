@@ -31,7 +31,7 @@ const FOOTER_SECTIONS: FooterSection[] = [
         items: [
             { label: "Web design & development", href: "/websites" },
             { label: "Website consulting", href: "/consultations" },
-            { label: "Hire me as a partner", href: "/work-with-me" },
+            { label: "Hire me as a partner", href: "/collaborate" },
         ],
     },
     {
