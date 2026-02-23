@@ -45,7 +45,7 @@ export const SEO = {
         home: {
             title: "Francesco Imola | Web Designer & Creative Marketer in Kent",
             description:
-                "Unapologetically simple web design and copywriting for small businesses in Kent.",
+                "I design simple websites and write copy that actually works. For small businesses and freelancers in Kent.",
         },
         about: {
             title: "About | Francesco Imola",
@@ -60,17 +60,17 @@ export const SEO = {
         websites: {
             title: "Web Design & Development | Francesco Imola",
             description:
-                "Deliberately simpler web design for independent businesses and freelancers. No agency overhead, no false promises, no dark patterns.",
+                "Deliberately simpler web design for independent businesses and freelancers. You work directly with me on strategy, copy, and design.",
         },
         consultations: {
             title: "Website Consultations | Francesco Imola",
             description:
-                "Get clarity on what's holding your site back. Each session includes a mini website review plus 1 hour of dedicated consultation time.",
+                "Get clarity on what's holding your site back. Each session includes a mini website review plus 1 hour of honest, focused conversation.",
         },
         work: {
             title: "Selected Work | Francesco Imola",
             description:
-                "A selection of web design, marketing, and content projects for small businesses, non-profits, and higher education.",
+                "Web design, marketing, and content projects I've done for small businesses, non-profits, and higher education.",
         },
         notFound: {
             title: "404 | Page Not Found | Francesco Imola",
@@ -82,10 +82,10 @@ export const SEO = {
             description:
                 "This page isn't quite ready yet, but it will be soon. Sign up to stay in the loop.",
         },
-        workWithMe: {
-            title: "Work With Me | Francesco Imola",
+        collaborate: {
+            title: "Collaborate | Francesco Imola",
             description:
-                "Designer, writer, and strategist. I make things clearer and simpler — for websites, campaigns, brand messaging, and anything that needs to communicate well.",
+                "Folkestone-based designer, writer, and strategist. I help businesses simplify their websites, campaigns, and messaging. Available freelance or part-time.",
         },
     },
     person: {

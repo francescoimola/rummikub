@@ -5,16 +5,7 @@ import ProjectCanvas from "../components/project/ProjectCanvas.astro";
 import PageHeading from "../components/PageHeading";
 import { ButtonLink } from "../components/ButtonLink";
 import Layout from "../layouts/Layout.astro";
-import {
-  Text,
-  Flex,
-  Grid,
-  Box,
-  Link,
-  Section,
-  Separator,
-  Heading,
-} from "@radix-ui/themes";
+import { Text, Flex, Grid, Box, Link, Section } from "@radix-ui/themes";
 import { ArrowRightIcon, ArrowTopRightIcon } from "@radix-ui/react-icons";
 import { EXTERNAL_URLS, SEO } from "../constants";
 import JsonLd from "../components/JsonLd.astro";
@@ -26,7 +17,6 @@ import SarahYLLogo from "../components/icons/SarahYLLogo.astro";
 import BlueberryLogo from "../components/icons/BlueberryLogo.astro";
 import { BottomCTA } from "../components/BottomCTA";
 import { getFeaturedProjects } from "../utils/getFeaturedProjects";
-import FAQ from "../components/FAQ";
 import { KeyServicePoints, KSP } from "../components/KeyServicePoints";
 const featuredProjects = await getFeaturedProjects();
 const capabilities = [
@@ -233,12 +223,27 @@ const capabilities = [
           </Testimonial>
         </Grid>
       </InnerSection>
+      <InnerSection title="The work I do best">
+        <Flex direction="column" gap="4">
+          <Text size="3" as="p" wrap="pretty">
+            I love working with good people working on things that matter to
+            them. If you're in the weeds, I'll be in the weeds with you.
+            Marketing's gone rogue, design team's stretched thin, nobody can
+            agree on what the website should actually say, that kind of thing.
+          </Text>
+          <Text size="3" as="p" wrap="pretty">
+            I'm open to part-time, freelance, or full-time for the right fit. If
+            you need someone who can edit, simplify, and bring focus, you know
+            where to find me.
+          </Text>
+        </Flex>
+      </InnerSection>
     </MainGrid>
   </Section>
   <BottomCTA
     slot="bottom-cta"
     heading="Is this guy for real?"
-    text="I could be, if you give me a chance. Shall we chat first?"
+    text="I could be, if you give me a chance. Whether it's a project or something bigger, let's chat first?"
     backgroundColor="var(--yellow-5)"
   >
     <Flex justify="center" align="start" gap="4" wrap="wrap">
