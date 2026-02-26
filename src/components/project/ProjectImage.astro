@@ -68,7 +68,7 @@ const containerProps = href
 {
     isCard ? (
         <Container {...containerProps}>
-            <AspectRatio ratio={3 / 2}>
+            <AspectRatio ratio={4 / 3}>
                 <Flex
                     overflow="hidden"
                     align="center"
@@ -160,10 +160,7 @@ const containerProps = href
             )}
         </Container>
     ) : (
-        <figure
-            class:list={[className, clazz, "image-text-spacing"]}
-            {...rest}
-        >
+        <figure class:list={[className, clazz, "image-text-spacing"]} {...rest}>
             <Picture
                 src={finalImage}
                 alt={alt}
@@ -272,8 +269,8 @@ const containerProps = href
 
     .project-card-status-badge {
         position: absolute;
-        top: var(--space-3);
-        right: var(--space-3);
+        top: var(--space-2);
+        right: var(--space-2);
         z-index: 11;
         transition:
             transform var(--transition-fast) ease-in-out,
