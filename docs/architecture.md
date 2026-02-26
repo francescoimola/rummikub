@@ -73,7 +73,7 @@ src/
 
 ### Content Collections Schema
 Defined in `src/content/config.ts`:
-*   **Projects**: `coverImages` required, `slug` required
+*   **Projects**: `coverImage` required, `slug` required
 *   **Blog**: `slug` defaults to empty string (page falls back to file ID), `coverImage` required
 
 ---

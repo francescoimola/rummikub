@@ -2,7 +2,7 @@
 export const prerender = true;
 import Layout from "../../layouts/Layout.astro";
 import PageHeading from "../../components/PageHeading";
-import ProjectCanvas from "../../components/project/ProjectCanvas.astro";
+import ProjectImage from "../../components/project/ProjectImage.astro";
 import { Text, Flex, Grid, Section, Theme } from "@radix-ui/themes";
 import { InnerSection } from "../../components/InnerSection";
 import { MainGrid } from "../../components/MainGrid";
@@ -61,11 +61,10 @@ const projects = await getAllPublishedProjects();
                     <Grid columns="1" gapY="var(--space-11)" mb="4">
                         {
                             projects.map((project) => (
-                                <ProjectCanvas
-                                    images={project.data.coverImages}
-                                    alts={project.data.coverAlts}
-                                    layout={project.data.coverLayout}
-                                    title={project.data.title}
+                                <ProjectImage
+                                    src={project.data.coverImage}
+                                    alt={project.data.coverAlt}
+                                    cardTitle={project.data.title}
                                     skills={project.data.skills ?? []}
                                     href={
                                         project.data.caseStudyStatus

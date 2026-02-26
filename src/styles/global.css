@@ -332,10 +332,6 @@ figcaption {
     font-size: var(--font-size-2);
 }
 
-.image-text-spacing {
-    margin-block-end: var(--space-4);
-}
-
 /* =========================================
    4. Radix Themes Overrides
    ========================================= */

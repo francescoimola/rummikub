@@ -23,9 +23,8 @@ const projects = defineCollection({
                 .union([z.literal(1), z.literal(2), z.literal(3)])
                 .optional(), // Pin to position 1, 2, or 3 on homepage
             publishDate: z.coerce.date().optional(), // Used for sorting projects
-            coverImages: z.array(image().or(z.string())).min(1),
-            coverAlts: z.array(z.string()).min(1),
-            coverLayout: z.enum(["default", "plain"]).default("default").optional(),
+            coverImage: image(),
+            coverAlt: z.string(),
             showCover: z.boolean().default(true),
             results: z
                 .object({
