@@ -1,5 +1,6 @@
 import { Container, Flex, Heading, Text } from "@radix-ui/themes";
 import type { ReactNode } from "react";
+import { ScrollReveal } from "./ScrollReveal";
 
 interface BottomCTAProps {
     heading: string;
@@ -21,33 +22,35 @@ export const BottomCTA = ({
         }}
         px={{ initial: "5", sm: "9" }}
     >
-        <Flex align="center" direction="column" gap="6">
-            <Heading
-                as="h2"
-                size="8"
-                weight="medium"
-                align="center"
-                highContrast
-                trim="both"
-                style={{ maxWidth: "var(--max-cw-sm)" }}
-            >
-                {heading}
-            </Heading>
-
-            {text && (
-                <Text
-                    as="p"
-                    size="3"
+        <ScrollReveal>
+            <Flex align="center" direction="column" gap="6">
+                <Heading
+                    as="h2"
+                    size="8"
+                    weight="medium"
                     align="center"
                     highContrast
-                    trim="start"
-                    style={{ maxWidth: "40ch" }}
+                    trim="both"
+                    style={{ maxWidth: "var(--max-cw-sm)" }}
                 >
-                    {text}
-                </Text>
-            )}
+                    {heading}
+                </Heading>
 
-            {children}
-        </Flex>
+                {text && (
+                    <Text
+                        as="p"
+                        size="3"
+                        align="center"
+                        highContrast
+                        trim="start"
+                        style={{ maxWidth: "40ch" }}
+                    >
+                        {text}
+                    </Text>
+                )}
+
+                {children}
+            </Flex>
+        </ScrollReveal>
     </Container>
 );
