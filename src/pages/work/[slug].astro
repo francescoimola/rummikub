@@ -6,7 +6,7 @@ export const prerender = true;
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import PageHeading from "../../components/PageHeading";
-import { Text, Box, Theme, Section } from "@radix-ui/themes";
+import { Text, Box, Theme, Flex, Section } from "@radix-ui/themes";
 import { MainGrid } from "../../components/MainGrid";
 import { ProjectInfo } from "../../components/project/ProjectInfo";
 import ProjectImage from "../../components/project/ProjectImage.astro";
@@ -109,7 +109,7 @@ if (entry.data.coverImages && entry.data.coverImages.length > 0) {
                     visitHeading={entry.data.visitHeading}
                 />
 
-                <div class="project-content-area">
+                <Flex direction="column" gap="8">
                     {/* Optional: Render Cover Canvas if images provided */}
                     {
                         entry.data.coverImages &&
@@ -123,10 +123,10 @@ if (entry.data.coverImages && entry.data.coverImages.length > 0) {
                     }
 
                     {/* MDX Content with Custom Components */}
-                    <div class="project-mdx-content">
+                    <Flex direction="column">
                         <Content components={components} />
-                    </div>
-                </div>
+                    </Flex>
+                </Flex>
                 {
                     entry.data.results &&
                         entry.data.results.items.length > 0 && (
