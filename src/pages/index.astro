@@ -18,6 +18,7 @@ import BlueberryLogo from "../components/icons/BlueberryLogo.astro";
 import { BottomCTA } from "../components/BottomCTA";
 import { getFeaturedProjects } from "../utils/getFeaturedProjects";
 import { KeyServicePoints, KSP } from "../components/KeyServicePoints";
+import { ScrollReveal } from "../components/ScrollReveal";
 const featuredProjects = await getFeaturedProjects();
 const capabilities = [
   {
@@ -114,7 +115,7 @@ const capabilities = [
     <!-- Main Content Grid -->
     <MainGrid>
       <!-- --- Selected Work --- -->
-      <InnerSection title="Selected work">
+      <InnerSection client:visible title="Selected work" animate>
         <Grid columns="1" gapY="8">
           {
             featuredProjects.map((project) => (
@@ -145,7 +146,7 @@ const capabilities = [
         </Grid>
       </InnerSection>
 
-      <InnerSection title="Where I can help">
+      <InnerSection client:visible title="Where I can help" animate>
         <KeyServicePoints>
           {
             capabilities.map((capability) => (
@@ -162,7 +163,7 @@ const capabilities = [
       </InnerSection>
 
       <!-- --- Testimonials --- -->
-      <InnerSection title="Happy Clients">
+      <InnerSection client:visible title="Happy Clients" animate>
         <Grid columns="1" gap="var(--space-10)">
           <Testimonial
             authorName="Rob Cowen"
@@ -195,7 +196,7 @@ const capabilities = [
 
           <Testimonial
             authorName="Sarah Brown"
-            quote="Great to work with. Helped me to rework my website copy to align with a new direction I wanted to take. He’s quick and responsive"
+            quote="Great to work with. Helped me to rework my website copy to align with a new direction I wanted to take. He's quick and responsive"
             rating={5}
           >
             <aside slot="authorRole">
@@ -223,7 +224,7 @@ const capabilities = [
           </Testimonial>
         </Grid>
       </InnerSection>
-      <InnerSection title="The work I do best">
+      <InnerSection client:visible title="The work I do best" animate>
         <Flex direction="column" gap="4">
           <Text size="3" as="p" wrap="pretty">
             I love working with good people working on things that matter to
@@ -241,10 +242,11 @@ const capabilities = [
     </MainGrid>
   </Section>
   <BottomCTA
-    slot="bottom-cta"
+    client:visible
     heading="Is this guy for real?"
     text="I could be, if you give me a chance. Whether it's a project or something bigger, let's chat first?"
     backgroundColor="var(--yellow-5)"
+    slot="bottom-cta"
   >
     <Flex justify="center" align="start" gap="4" wrap="wrap">
       <ButtonLink

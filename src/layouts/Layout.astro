@@ -207,13 +207,62 @@ const {
             <Box style={{ viewTransitionName: "site-footer" }}>
                 <Footer client:visible />
             </Box>
+            <div class="edge-blur edge-blur--top" aria-hidden="true"></div>
+            <div class="edge-blur edge-blur--bottom" aria-hidden="true"></div>
         </Theme>
+        <script>
+            const topBlur = document.querySelector(".edge-blur--top");
+            function update() {
+                topBlur?.toggleAttribute("data-visible", window.scrollY > 40);
+            }
+            update();
+            window.addEventListener("scroll", update, { passive: true });
+        </script>
     </body>
 </html>
 
+<style is:global>
+    /* Edge blur overlays */
+    .edge-blur {
+        position: fixed;
+        left: 0;
+        right: 0;
+        height: clamp(5rem, 12vh, 15rem);
+        z-index: var(--z-overlay);
+        pointer-events: none;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+
+    .edge-blur--top {
+        top: 0;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        mask-image: linear-gradient(to bottom, black, transparent);
+        -webkit-mask-image: linear-gradient(to bottom, black, transparent);
+        view-transition-name: blur-top;
+    }
+
+    .edge-blur--top[data-visible] {
+        opacity: 1;
+    }
+
+    .edge-blur--bottom {
+        bottom: 0;
+        mask-image: linear-gradient(to top, black, transparent);
+        -webkit-mask-image: linear-gradient(to top, black, transparent);
+        view-transition-name: blur-bottom;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .edge-blur--top {
+            transition-duration: 0.15s;
+        }
+    }
+</style>
+
 <style>
-    /* 3. Content Entrance (Slide Up) */
-    /* This animates the entering content specifically */
+    /* Content Entrance (Slide Up) */
     .content-enter {
         animation: slide-up-fade 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }

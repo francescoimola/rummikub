@@ -1,4 +1,5 @@
 import { Grid, Box, Heading, Text } from "@radix-ui/themes";
+import { motion } from "motion/react";
 import type { ReactNode } from "react";
 
 interface InnerSectionProps {
@@ -7,6 +8,7 @@ interface InnerSectionProps {
     showCounter?: boolean;
     sectionId?: string;
     children?: ReactNode;
+    animate?: boolean;
 }
 
 export function InnerSection({
@@ -15,8 +17,9 @@ export function InnerSection({
     showCounter = true,
     sectionId,
     children,
+    animate = false,
 }: InnerSectionProps) {
-    return (
+    const content = (
         <Grid
             asChild
             gapY="8"
@@ -45,5 +48,23 @@ export function InnerSection({
                 {children}
             </section>
         </Grid>
+    );
+
+    if (!animate) return content;
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            style={{
+                gridColumn: "1 / -1",
+                display: "grid",
+                gridTemplateColumns: "subgrid",
+            }}
+        >
+            {content}
+        </motion.div>
     );
 }
