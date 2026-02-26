@@ -782,6 +782,38 @@ svg.client-logo {
     }
 }
 
+/* --- Project Page: Full-width images via subgrid --- */
+.project-content-area {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+.project-mdx-content {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+    .project-content-area {
+        display: contents;
+    }
+
+    .project-mdx-content {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: subgrid;
+    }
+
+    .project-mdx-content > * {
+        grid-column: 2;
+    }
+
+    .project-mdx-content > figure.image-text-spacing {
+        grid-column: 1 / -1;
+    }
+}
+
 /* =========================================
    VerticalFeatureTabs
    ========================================= */
