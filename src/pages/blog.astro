@@ -26,6 +26,7 @@ const uniqueTags = [...new Set(allPosts.flatMap((p) => p.data.tags))];
     backgroundColor="var(--brand-surface-dark-mustard)"
     appearance="dark"
     roleFullWidth
+    noMobileRole
 >
     <Fragment slot="structured-data">
         <JsonLd
