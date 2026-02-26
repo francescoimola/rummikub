@@ -10,7 +10,6 @@ import { Text, Box, Theme, Flex, Section } from "@radix-ui/themes";
 import { MainGrid } from "../../components/MainGrid";
 import { ProjectInfo } from "../../components/project/ProjectInfo";
 import ProjectImage from "../../components/project/ProjectImage.astro";
-import ProjectCanvas from "../../components/project/ProjectCanvas.astro";
 import { CommonMDXComponents } from "../../components/mdx/MDXComponents";
 import { ProjectResults } from "../../components/project/ProjectResults";
 import { SEO } from "../../constants";
@@ -44,18 +43,12 @@ const { Content } = await render(entry);
 const components = {
     ...CommonMDXComponents,
     img: ProjectImage,
-    ProjectCanvas: ProjectCanvas,
 };
 
 // SEO metadata
 const seoTitle = `${entry.data.title} | Francesco Imola`;
 const seoDescription = entry.data.metaDescription || entry.data.heroDescription;
-let coverImageSrc: string | undefined;
-if (entry.data.coverImages && entry.data.coverImages.length > 0) {
-    const firstImage = entry.data.coverImages[0];
-    coverImageSrc =
-        typeof firstImage === "string" ? firstImage : firstImage.src;
-}
+const coverImageSrc = entry.data.coverImage?.src;
 ---
 
 <Layout
@@ -110,14 +103,13 @@ if (entry.data.coverImages && entry.data.coverImages.length > 0) {
                 />
 
                 <Flex direction="column" gap="8">
-                    {/* Optional: Render Cover Canvas if images provided */}
+                    {/* Optional: Render Cover Image */}
                     {
-                        entry.data.coverImages &&
+                        entry.data.coverImage &&
                             entry.data.showCover !== false && (
-                                <ProjectCanvas
-                                    images={entry.data.coverImages}
-                                    alts={entry.data.coverAlts}
-                                    layout={entry.data.coverLayout}
+                                <ProjectImage
+                                    src={entry.data.coverImage}
+                                    alt={entry.data.coverAlt}
                                 />
                             )
                     }
@@ -136,16 +128,18 @@ if (entry.data.coverImages && entry.data.coverImages.length > 0) {
                             />
                         )
                 }
-                <ButtonLink
-                    href="/work"
-                    size="3"
-                    variant="outline"
-                    color="gray"
-                    radius="none"
-                    style={{ width: "fit-content", gridColumn: "2 / 3" }}
-                >
-                    <ArrowLeftIcon />Back to Work
-                </ButtonLink>
+                <Box gridColumn={{ initial: "1", md: "2" }}>
+                    <ButtonLink
+                        href="/work"
+                        size="3"
+                        variant="outline"
+                        color="gray"
+                        radius="none"
+                        style={{ width: "fit-content" }}
+                    >
+                        <ArrowLeftIcon />Back to Work
+                    </ButtonLink>
+                </Box>
             </MainGrid>
         </Theme>
     </Section>

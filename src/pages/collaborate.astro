@@ -5,7 +5,7 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import { Flex, Grid, Section, Text, Theme } from "@radix-ui/themes";
 import Layout from "../layouts/Layout.astro";
 import PageHeading from "../components/PageHeading";
-import ProjectCanvas from "../components/project/ProjectCanvas.astro";
+import ProjectImage from "../components/project/ProjectImage.astro";
 import { InnerSection } from "../components/InnerSection";
 import { MainGrid } from "../components/MainGrid";
 import { KeyServicePoints, KSP } from "../components/KeyServicePoints";
@@ -112,11 +112,10 @@ const capabilities = [
 
                                 return (
                                     <Flex direction="column" gap="5">
-                                        <ProjectCanvas
-                                            images={data.coverImages}
-                                            alts={data.coverAlts}
-                                            layout={data.coverLayout}
-                                            title={data.title}
+                                        <ProjectImage
+                                            src={data.coverImage}
+                                            alt={data.coverAlt}
+                                            cardTitle={data.title}
                                             skills={data.skills}
                                             href={href}
                                             caseStudyStatus={

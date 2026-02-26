@@ -1,15 +1,27 @@
 ---
-import { AspectRatio, Flex, Text } from "@radix-ui/themes";
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
+import {
+    AspectRatio,
+    Badge,
+    Button,
+    Flex,
+    Heading,
+    Text,
+} from "@radix-ui/themes";
+import { ArrowRightIcon } from "@radix-ui/react-icons";
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"figure"> {
     src?: ImageMetadata;
-    image?: ImageMetadata; // Legacy support
+    image?: ImageMetadata;
     alt: string;
     caption?: string;
     title?: string;
-    className?: string; // Legacy support
+    className?: string;
+    cardTitle?: string;
+    skills?: string[];
+    href?: string;
+    caseStudyStatus?: "coming-soon" | "on-request";
 }
 
 const {
@@ -20,93 +32,282 @@ const {
     title,
     className,
     class: clazz,
+    cardTitle,
+    skills = [],
+    href,
+    caseStudyStatus,
     ...rest
 } = Astro.props;
-const finalImage = image ?? src;
 
+const finalImage = image ?? src;
 if (!finalImage) {
     throw new Error("ProjectImage: 'src' or 'image' prop is required");
 }
 
-let mode: "plain" | "filled" | "framed" = "plain";
-let finalCaption = caption;
+const finalCaption = caption ?? title ?? undefined;
+const isCard = !!(cardTitle || href || skills.length > 0);
+const isDraft = !href && !!caseStudyStatus;
 
-if (title) {
-    if (title === "framed" || title.startsWith("framed:")) {
-        mode = "framed";
-        finalCaption ??= title === "framed" ? undefined : title.slice(7).trim();
-    } else if (title.startsWith("filled:")) {
-        mode = "filled";
-        finalCaption ??= title.slice(7).trim();
-    } else if (title.startsWith("plain:")) {
-        mode = "plain";
-        finalCaption ??= title.slice(6).trim();
-    } else {
-        // No explicit mode prefix, treat as caption
-        finalCaption ??= title;
-        // Default behavior: frame if there is a caption
-        if (finalCaption) mode = "framed";
-    }
-} else if (finalCaption) {
-    // No title, but caption prop exists -> default to framed
-    mode = "framed";
-}
+const statusText =
+    {
+        "coming-soon": "Case study coming soon",
+        "on-request": "Available on request",
+    }[caseStudyStatus as string] ?? null;
 
-// Clean up empty strings
-if (!finalCaption) finalCaption = undefined;
-
-const FRAMED_SHADOW =
-    "drop-shadow(0.25rem 0.25rem 0.5rem var(--gray-a4)) drop-shadow(0 0 0.5px var(--gray-a4)) drop-shadow(0 0 0.5px var(--gray-a4))";
+const Container = href ? "a" : Flex;
+const containerProps = href
+    ? { href, class: "project-card-container project-card-link" }
+    : {
+          className: `project-card-container${isDraft ? " project-card-draft" : ""}`,
+          direction: "column" as const,
+          gap: "5",
+          tabIndex: isDraft ? 0 : undefined,
+      };
 ---
 
-<figure class:list={[className, clazz, "image-text-spacing"]} {...rest}>
-    {
-        mode === "framed" ? (
-            <AspectRatio ratio={3 / 2} style={{ overflow: "hidden" }}>
+{
+    isCard ? (
+        <Container {...containerProps}>
+            <AspectRatio ratio={3 / 2}>
                 <Flex
+                    overflow="hidden"
+                    align="center"
+                    justify="center"
                     width="100%"
                     height="100%"
-                    py="9"
-                    px={{ initial: "4", sm: "8" }}
-                    align="end"
-                    justify="center"
-                    style={{ backgroundColor: "var(--gray-3)" }}
+                    className="project-card-image-wrapper"
                 >
-                    <Image
+                    {statusText && (
+                        <Badge
+                            size="2"
+                            color="gray"
+                            variant="surface"
+                            className="project-card-status-badge"
+                        >
+                            {statusText}
+                        </Badge>
+                    )}
+
+                    {isDraft ? (
+                        <Text size="2" weight="medium" className="hover-text">
+                            {statusText}
+                        </Text>
+                    ) : href ? (
+                        <Button
+                            variant="ghost"
+                            tabIndex={-1}
+                            className="hover-button"
+                            highContrast
+                            aria-label="View project details"
+                        >
+                            <ArrowRightIcon
+                                style={{
+                                    width: "var(--space-4)",
+                                    height: "auto",
+                                }}
+                            />
+                        </Button>
+                    ) : null}
+
+                    <Picture
                         src={finalImage}
                         alt={alt}
-                        loading="lazy"
-                        style={{
-                            height: "100%",
-                            width: "auto",
-                            maxWidth: "100%",
-                            objectPosition: "top",
-                            objectFit: "contain",
-                            filter: FRAMED_SHADOW,
-                        }}
+                        formats={["avif", "webp"]}
+                        class="project-card-image"
                     />
                 </Flex>
             </AspectRatio>
-        ) : (
-            <Image
+
+            {(cardTitle || skills.length > 0) && (
+                <Flex
+                    direction="row"
+                    justify="between"
+                    align="baseline"
+                    gapX="6"
+                    gapY="3"
+                    wrap="wrap"
+                >
+                    {cardTitle && (
+                        <Heading
+                            as="h2"
+                            size="3"
+                            weight="medium"
+                            highContrast
+                            style={{ alignSelf: "flex-start" }}
+                        >
+                            {cardTitle}
+                        </Heading>
+                    )}
+                    {skills.length > 0 && (
+                        <Flex
+                            gap="2"
+                            wrap="wrap"
+                            style={{ alignSelf: "flex-start" }}
+                        >
+                            {skills.map((skill) => (
+                                <Badge
+                                    key={skill}
+                                    size="2"
+                                    color="gray"
+                                    variant="surface"
+                                >
+                                    {skill}
+                                </Badge>
+                            ))}
+                        </Flex>
+                    )}
+                </Flex>
+            )}
+        </Container>
+    ) : (
+        <figure
+            class:list={[className, clazz, "image-text-spacing"]}
+            {...rest}
+        >
+            <Picture
                 src={finalImage}
                 alt={alt}
+                formats={["avif", "webp"]}
                 loading="lazy"
                 style={{
                     width: "100%",
                     height: "auto",
-                    backgroundColor:
-                        mode === "filled" ? "var(--gray-3)" : undefined,
+                    backgroundColor: "var(--gray-3)",
                 }}
             />
-        )
+            {finalCaption && (
+                <Text size="2" color="gray" asChild>
+                    <figcaption>{finalCaption}</figcaption>
+                </Text>
+            )}
+        </figure>
+    )
+}
+
+<style>
+    .project-card-container {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+        color: inherit;
+        text-decoration: none;
+
+        &:hover .hover-button {
+            transform: scale(1);
+            opacity: 1;
+        }
     }
 
-    {
-        finalCaption && (
-            <Text size="2" color="gray" asChild>
-                <figcaption>{finalCaption}</figcaption>
-            </Text>
-        )
+    .project-card-link {
+        &:focus-visible {
+            outline: 2px solid var(--accent-a8);
+            outline-offset: 2px;
+        }
+
+        &:hover,
+        &:focus-visible {
+            .project-card-image-wrapper::after {
+                opacity: 1;
+            }
+
+            .hover-button {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
     }
-</figure>
+
+    .project-card-image-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: var(--gray-3);
+        transition:
+            opacity var(--transition-fast) ease-in-out,
+            background-color var(--transition-fast) ease-in-out;
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 9;
+            background-color: var(--yellow-6);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out;
+        }
+    }
+
+    .project-card-image-wrapper picture {
+        display: contents;
+    }
+
+    .project-card-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+    }
+
+    .hover-button {
+        position: absolute;
+        z-index: 10;
+        transform: scale(0.8);
+        opacity: 0;
+        cursor: pointer;
+        transition:
+            opacity var(--transition-fast) ease-in-out,
+            transform var(--transition-fast) ease-in-out;
+    }
+
+    .hover-text {
+        position: absolute;
+        z-index: 10;
+        opacity: 0;
+        color: var(--gray-a12);
+        text-align: center;
+        transition: opacity var(--transition-fast) ease-in-out;
+        user-select: none;
+    }
+
+    .project-card-status-badge {
+        position: absolute;
+        top: var(--space-3);
+        right: var(--space-3);
+        z-index: 11;
+        transition:
+            transform var(--transition-fast) ease-in-out,
+            opacity var(--transition-fast) ease-in-out;
+        user-select: none;
+    }
+
+    .project-card-draft {
+        .project-card-image-wrapper::after {
+            background-color: var(--yellow-3);
+        }
+
+        &:hover,
+        &:focus-visible {
+            .project-card-image-wrapper::after {
+                opacity: 1;
+            }
+
+            .hover-text {
+                opacity: 1;
+            }
+
+            .project-card-status-badge {
+                opacity: 0;
+            }
+        }
+
+        &:focus-visible {
+            outline: 2px solid var(--accent-a8);
+            outline-offset: 2px;
+        }
+
+        &:active .project-card-status-badge {
+            transform: scale(1.1);
+        }
+    }
+</style>

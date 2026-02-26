@@ -1,7 +1,7 @@
 ---
 export const prerender = true;
 /* --- Imports --- */
-import ProjectCanvas from "../components/project/ProjectCanvas.astro";
+import ProjectImage from "../components/project/ProjectImage.astro";
 import PageHeading from "../components/PageHeading";
 import { ButtonLink } from "../components/ButtonLink";
 import Layout from "../layouts/Layout.astro";
@@ -119,11 +119,10 @@ const capabilities = [
         <Grid columns="1" gapY="8">
           {
             featuredProjects.map((project) => (
-              <ProjectCanvas
-                images={project.data.coverImages}
-                alts={project.data.coverAlts}
-                layout={project.data.coverLayout}
-                title={project.data.title}
+              <ProjectImage
+                src={project.data.coverImage}
+                alt={project.data.coverAlt}
+                cardTitle={project.data.title}
                 skills={project.data.skills ?? []}
                 href={
                   project.data.caseStudyStatus
