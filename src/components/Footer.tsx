@@ -49,7 +49,7 @@ const FOOTER_SECTIONS: FooterSection[] = [
         items: [
             { label: "FAQs", href: "/about#faq" },
             { label: "Colophon", href: "/soon" },
-            { label: "Playground", href: "/soon" },
+            { label: "Playground", href: "/playground" },
 
         ],
     },

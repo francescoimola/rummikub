@@ -95,6 +95,11 @@ export const SEO = {
             description:
                 "Folkestone-based designer, writer, and strategist. I help businesses simplify their websites, campaigns, and messaging. Available freelance or part-time.",
         },
+        playground: {
+            title: "Playground | Francesco Imola",
+            description:
+                "Net art, essays, poems, exhibitions, and other creative projects.",
+        },
     },
     person: {
         "@type": "Person" as const,
