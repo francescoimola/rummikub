@@ -773,7 +773,8 @@ svg.client-logo {
     flex-direction: column;
     gap: var(--space-2);
 
-    &:has(+ p) {
+    &:has(+ p),
+    &:has(+ script + p) {
         margin-block-end: var(--space-7);
     }
 }
