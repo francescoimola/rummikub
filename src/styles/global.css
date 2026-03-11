@@ -333,7 +333,7 @@ figcaption {
 }
 
 figure+figure {
-    margin-block-start: 0 !important;
+    margin-block-start: var(--space-5) !important;
 }
 
 /* =========================================
