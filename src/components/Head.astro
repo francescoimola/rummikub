@@ -16,12 +16,18 @@ const {
 } = Astro.props;
 
 const absoluteImageUrl = new URL(image, Astro.site || Astro.url);
-const canonicalUrl = Astro.url.pathname === "/" ? Astro.url.href : Astro.url.href.replace(/\/+$/, "");
+const canonicalUrl =
+    Astro.url.pathname === "/"
+        ? Astro.url.href
+        : Astro.url.href.replace(/\/+$/, "");
 ---
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />

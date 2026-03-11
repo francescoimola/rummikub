@@ -76,7 +76,10 @@ export const Footer = () => {
             asChild
         >
             <footer
-                style={{ backgroundColor: "var(--brand-surface-dark-olive)" }}
+                style={{
+                    backgroundColor: "var(--brand-surface-dark-olive)",
+                    paddingBottom: "env(safe-area-inset-bottom, 0px)",
+                }}
                 className="side-margin"
             >
                 <Container maxWidth="var(--max-cw)">
