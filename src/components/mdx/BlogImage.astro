@@ -11,7 +11,7 @@ interface Props {
 const { src, alt, title } = Astro.props;
 ---
 
-<figure style={{ marginBlock: "var(--space-4)" }}>
+<figure style={{ marginBlockStart: "var(--space-4)", marginBlockEnd: title ? "var(--space-6)" : "var(--space-4)" }}>
     <Image
         src={src as any}
         alt={alt}
