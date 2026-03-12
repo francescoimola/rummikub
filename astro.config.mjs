@@ -48,6 +48,9 @@ export default defineConfig({
   }),
   output: 'server',
   vite: {
+    resolve: {
+      dedupe: ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'],
+    },
     server: {
       allowedHosts: ['.trycloudflare.com'],
     },
