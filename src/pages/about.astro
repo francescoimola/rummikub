@@ -30,8 +30,7 @@ import FastForwardAnalogue from "../assets/Fast Forward to the Analogue - Poster
 import FAQ from "../components/FAQ";
 import { ContactForm } from "../components/ContactForm";
 import { TemplateDialog } from "../components/TemplateDialog";
-import { ContentCard } from "../components/ContentCard";
-import { AccordionSection } from "../components/AccordionSection";
+
 import { ArrowDownIcon } from "@radix-ui/react-icons";
 import { ButtonLink } from "../components/ButtonLink";
 import { EXTERNAL_URLS, SITE_DATA, SEO } from "../constants";
@@ -195,7 +194,7 @@ import { Picture } from "astro:assets";
                         with people's data. I also understand the code that
                         powers the web, and sometimes that's the better answer.
                     </Text>
-                    <AccordionSection title="Peek at my toolbox" client:visible>
+                    <FAQ title="Peek at my toolbox" client:visible>
                         <Flex direction="column" gap="7">
                             <Grid gap="4" columns={{ initial: "1", md: "2" }}>
                                 <ToolCard
@@ -252,7 +251,7 @@ import { Picture } from "astro:assets";
                                 </Text>
                             </Box>
                         </Flex>
-                    </AccordionSection>
+                    </FAQ>
                 </Flex>
             </InnerSection>
             <InnerSection title="Sustainability" sectionId="sustainability">
@@ -291,7 +290,7 @@ import { Picture } from "astro:assets";
             <InnerSection title="Recognitions" sectionId="recognitions">
                 <Flex direction="column" gap="5">
                     <Text size="2" weight="medium">2026</Text>
-                    <DataList.Root size="3">
+                    <DataList.Root size="3" orientation={{ initial: "vertical", sm: "horizontal" }}>
                         <DataList.Item>
                             <DataList.Label>CSS Design Awards</DataList.Label>
                             <DataList.Value
@@ -307,7 +306,7 @@ import { Picture } from "astro:assets";
                         </DataList.Item>
                     </DataList.Root>
                     <Text size="2" weight="medium">2023</Text>
-                    <DataList.Root size="3">
+                    <DataList.Root size="3" orientation={{ initial: "vertical", sm: "horizontal" }}>
                         <DataList.Item>
                             <DataList.Label
                                 >Read CV Homepage Feature</DataList.Label
@@ -346,7 +345,7 @@ import { Picture } from "astro:assets";
                         </DataList.Item>
                     </DataList.Root>
                     <Text size="2" weight="medium">2021</Text>
-                    <DataList.Root size="3">
+                    <DataList.Root size="3" orientation={{ initial: "vertical", sm: "horizontal" }}>
                         <DataList.Item>
                             <DataList.Label>Special Special</DataList.Label>
                             <DataList.Value
@@ -393,8 +392,10 @@ import { Picture } from "astro:assets";
         slot="bottom-cta"
         style={{
             backgroundColor: "var(--orange-5)",
+            margin: "unset",
+            padding: "unset",
+            paddingBottom: "var(--space-10)",
         }}
-        py="var(--space-10)"
     >
         <MainGrid>
             <InnerSection

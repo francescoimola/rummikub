@@ -48,6 +48,9 @@ export default defineConfig({
   }),
   output: 'server',
   vite: {
+    server: {
+      allowedHosts: ['.trycloudflare.com'],
+    },
     esbuild: {
       drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : [],
     },

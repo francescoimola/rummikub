@@ -12,7 +12,7 @@ interface KSPProps {
     buttonText?: string;
 }
 
-export const KSP = ({ heading, children, grayWordCount = 1, multiParagraph, href, buttonText }: KSPProps) => {
+export const KSP = ({ heading, children, multiParagraph, href, buttonText }: KSPProps) => {
 
 
     return (
