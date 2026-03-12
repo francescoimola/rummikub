@@ -1,8 +1,8 @@
 import * as Accordion from "@radix-ui/react-accordion";
-import { Flex, Text, Box, Link } from "@radix-ui/themes";
+import { Flex, Text, Box } from "@radix-ui/themes";
 import { PlusIcon, MinusIcon } from "@radix-ui/react-icons";
 
-import type { ComponentProps, ReactNode } from "react";
+import type { ComponentProps, ReactNode, PropsWithChildren } from "react";
 
 import { useState } from "react";
 import { ButtonLink } from "./ButtonLink";
@@ -179,20 +179,83 @@ type Variant = keyof typeof variantMap;
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
 
-interface FAQProps {
+type FAQVariantProps = {
     variant: Variant;
+    title?: never;
+    children?: never;
+};
+
+type FAQSectionProps = PropsWithChildren<{
+    variant?: never;
+    title: string;
+}>;
+
+type FAQProps = (FAQVariantProps | FAQSectionProps) & {
     py?: FlexProps["py"];
     weight?: TextProps["weight"];
     activeWeight?: TextProps["weight"];
-}
+};
 
 export default function FAQ({
     variant,
+    title,
+    children,
     py = "6",
     weight = "medium",
     activeWeight = "medium",
 }: FAQProps) {
     const [openItem, setOpenItem] = useState<string | undefined>();
+
+    /* ------ Single-section mode (replaces AccordionSection) ------ */
+    if (title && children) {
+        return (
+            <Accordion.Root type="single" collapsible>
+                <Accordion.Item
+                    value="content"
+                    style={{ borderTop: "thin solid var(--gray-a6)" }}
+                >
+                    <Accordion.Header style={{ margin: 0 }} asChild>
+                        <h3>
+                            <Accordion.Trigger className="AccordionTrigger">
+                                <Flex
+                                    justify="between"
+                                    align="center"
+                                    py={py}
+                                    gap="4"
+                                >
+                                    <Text
+                                        size="3"
+                                        weight={weight}
+                                        highContrast
+                                    >
+                                        {title}
+                                    </Text>
+                                    <Text color="gray">
+                                        <PlusIcon
+                                            className="AccordionIconPlus"
+                                            width="18"
+                                            height="18"
+                                        />
+                                        <MinusIcon
+                                            className="AccordionIconMinus"
+                                            width="18"
+                                            height="18"
+                                        />
+                                    </Text>
+                                </Flex>
+                            </Accordion.Trigger>
+                        </h3>
+                    </Accordion.Header>
+                    <Accordion.Content className="AccordionContent">
+                        <Box pb="6">{children}</Box>
+                    </Accordion.Content>
+                </Accordion.Item>
+            </Accordion.Root>
+        );
+    }
+
+    /* ------ Variant mode (FAQ list) ------ */
+    if (!variant) return null;
     const items = variantMap[variant];
 
     return (

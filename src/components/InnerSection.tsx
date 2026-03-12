@@ -35,13 +35,15 @@ export function InnerSection({
                             as="h2"
                             highContrast
                         >
-                            {showCounter && (
-                                <Text
-                                    as="span"
-                                    className="section-counter-number"
-                                />
-                            )}
-                            {title}
+                            <span className="inner-section-title">
+                                {showCounter && (
+                                    <Text
+                                        as="span"
+                                        className="section-counter-number"
+                                    />
+                                )}
+                                <span>{title}</span>
+                            </span>
                         </Heading>
                     )}
                 </Box>

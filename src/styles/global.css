@@ -287,6 +287,7 @@ body {
     margin: 0;
     font-family: var(--default-font-family);
     counter-reset: section-counter;
+    background-color: var(--olive-1);
     overflow-x: hidden;
 }
 
@@ -531,8 +532,24 @@ svg.client-logo {
     }
 }
 
+.inner-section-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+@media (min-width: 520px) {
+    .inner-section-title {
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: flex-start;
+        gap: var(--space-3);
+    }
+}
+
 .section-counter-number::before {
-    content: counter(section-counter) "\00a0\00a0";
+    content: counter(section-counter);
     color: var(--gray-a10);
 }
 

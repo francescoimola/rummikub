@@ -17,15 +17,6 @@ import * as Yup from "yup";
 import { Formik, useField, useFormikContext, Field, Form } from "formik";
 import { EXTERNAL_URLS } from "../constants";
 
-const ROLES = [
-    "Small business owner",
-    "Marketing manager",
-    "Agency partner",
-    "Freelancer",
-    "Startup founder",
-    "Other",
-];
-
 const ContactSchema = Yup.object().shape({
     firstName: Yup.string().required("First name is required"),
     lastName: Yup.string(),
@@ -104,34 +95,6 @@ const FormSelect = ({ label, name }: { label: string; name: string }) => {
             </Select.Root>
             {hasError && <Text color="red" size="2">{errors.service}</Text>}
         </Flex>
-    );
-};
-
-const FormCheckboxes = () => {
-    const { setFieldValue, values } = useFormikContext<{ roles: string[] }>();
-    const currentRoles = values.roles || [];
-
-    const handleChange = (role: string, checked: boolean) => {
-        const nextRoles = checked
-            ? [...currentRoles, role]
-            : currentRoles.filter((r) => r !== role);
-        setFieldValue("roles", nextRoles);
-    };
-
-    return (
-        <Grid columns={{ initial: "1", sm: "2", md: "3" }} gap="3">
-            {ROLES.map((role) => (
-                <Flex key={role} align="center" gap="2">
-                    <Checkbox
-                        id={role}
-                        color="gray"
-                        checked={currentRoles.includes(role)}
-                        onCheckedChange={(c) => handleChange(role, c === true)}
-                    />
-                    <Text as="label" htmlFor={role} size="2">{role}</Text>
-                </Flex>
-            ))}
-        </Grid>
     );
 };
 
