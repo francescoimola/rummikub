@@ -159,11 +159,11 @@ const aboutItems: FAQItem[] = [
     },
     {
         question: "What's your background?",
-        answer: "I came to marketing and designfrom a wobbly trajectory that let me dip my toes into many a role, from working in hospitality to curating exhibitions, running social media campaigns, and many more things that make my CV hard to keep updated. In life, I'm as curious as I am practical. In work, I'm especially allergic to pretension.",
+        answer: "I came to do what I do from a wobbly trajectory that let me dip my toes into many a role, from working in hospitality to curating exhibitions, running social media campaigns, and many more things that make my CV hard to keep updated. In life, I'm as curious as I am practical. In work, I'm especially allergic to pretension.",
     },
     {
         question: "How do you think about marketing?",
-        answer: "The marketing I love and recommend works best when it's part of the process from the very beginning, rather than bolted on at the end. I love working on projects where marketing can do more than just promote but also shape the thing it's selling and help it find its audience.",
+        answer: "The marketing I love and recommend it's the marketing that's part of the process from the very beginning. Not an afterthought. Not bolted on at the end. I love working on projects where this centuries-old practice can do more than just 'promote' but also shape the thing it's selling and help it find its audience.",
     },
 ];
 

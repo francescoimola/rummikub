@@ -31,7 +31,7 @@ export const KSP = ({ heading, children, multiParagraph, href, buttonText }: KSP
                     {children}
                 </Text>
                 {href && buttonText && (
-                    <ButtonLink variant="soft" size="1" color="gray" href={href} style={{ alignSelf: "start" }}>
+                    <ButtonLink variant="soft" size="2" color="solid" href={href} style={{ alignSelf: "start" }}>
                         {buttonText}
                     </ButtonLink>
                 )}

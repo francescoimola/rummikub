@@ -16,7 +16,7 @@ import lifecoaching from "../assets/portfolio/life-coaching.png";
 import tcaexperiment from "../assets/portfolio/tca_experiment.png";
 import makemind from "../assets/portfolio/makemind_homepage.png";
 import folksdirectory from "../assets/portfolio/folks-directory.png";
-import tedxjourneys from "../assets/portfolio/tedx-journeys.png";
+import tedxjourneys from "../assets/portfolio/tedx.png";
 import { InnerSection } from "../components/InnerSection";
 import { MainGrid } from "../components/MainGrid";
 import { KeyServicePoints, KSP } from "../components/KeyServicePoints";
@@ -119,28 +119,18 @@ import { BottomCTA } from "../components/BottomCTA";
                     sizes="(max-width: 768px) 40vw, 20vw"
                 />
                 <Image
-                    src={tcaexperiment}
-                    alt="TC Baffles"
-                    class="portfolio-image"
-                    loading="lazy"
-                    quality={80}
-                    format="webp"
-                    widths={[400, 600, 800]}
-                    sizes="(max-width: 768px) 40vw, 20vw"
-                />
-                <Image
-                    src={makemind}
-                    alt="Make & Mind"
-                    class="portfolio-image"
-                    loading="lazy"
-                    quality={80}
-                    format="webp"
-                    widths={[400, 600, 800]}
-                    sizes="(max-width: 768px) 40vw, 20vw"
-                />
-                <Image
                     src={folksdirectory}
                     alt="Folks Directory"
+                    class="portfolio-image"
+                    loading="lazy"
+                    quality={80}
+                    format="webp"
+                    widths={[400, 600, 800]}
+                    sizes="(max-width: 768px) 40vw, 20vw"
+                />
+                <Image
+                    src={tcaexperiment}
+                    alt="TC Baffles"
                     class="portfolio-image"
                     loading="lazy"
                     quality={80}
@@ -158,6 +148,16 @@ import { BottomCTA } from "../components/BottomCTA";
                     widths={[400, 600, 800]}
                     sizes="(max-width: 768px) 40vw, 20vw"
                     style={{ objectPosition: "top" }}
+                />
+                <Image
+                    src={makemind}
+                    alt="Make & Mind"
+                    class="portfolio-image"
+                    loading="lazy"
+                    quality={80}
+                    format="webp"
+                    widths={[400, 600, 800]}
+                    sizes="(max-width: 768px) 40vw, 20vw"
                 />
             </Flex>
         </Section>
@@ -473,6 +473,7 @@ import { BottomCTA } from "../components/BottomCTA";
         flex-shrink: 0;
         width: auto;
         height: clamp(11rem, 19vw, 21rem);
+        background-color: var(--gray-a2);
         filter: drop-shadow(0.25rem 0.25rem 0.33rem var(--gray-a3));
         border: thin solid var(--gray-a3);
     }

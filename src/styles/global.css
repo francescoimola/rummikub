@@ -447,8 +447,8 @@ svg.client-logo {
     transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.key-service-point:hover .ksp-heading,
-.key-service-point:focus-within .ksp-heading {
+.key-service-point:hover a.ksp-heading,
+.key-service-point:focus-within a.ksp-heading {
     transform: translateX(var(--space-2));
 }
 
