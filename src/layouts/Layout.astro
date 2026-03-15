@@ -203,50 +203,34 @@ const {
             <Box style={{ viewTransitionName: "site-footer" }}>
                 <Footer client:visible />
             </Box>
-            <div class="edge-blur edge-blur--top" aria-hidden="true"></div>
-            <div class="edge-blur edge-blur--bottom" aria-hidden="true"></div>
         </Theme>
         <script>
             import Lenis from "lenis";
 
             const reducedMotion = window.matchMedia(
-                "(prefers-reduced-motion: reduce)"
+                "(prefers-reduced-motion: reduce)",
             ).matches;
 
-            function initLenis() {
-                if (window.lenis) {
-                    window.lenis.destroy();
-                    window.lenis = undefined;
-                }
+            let lenisInstance: Lenis | undefined;
 
-                const lenis = new Lenis({
-                    duration: reducedMotion ? 0.5 : 1.2,
-                    orientation: "vertical",
+            function initLenis() {
+                lenisInstance?.destroy();
+
+                lenisInstance = new Lenis({
+                    duration: reducedMotion ? 0.5 : 1.0,
                     easing: reducedMotion
                         ? (t: number) => t
                         : (t: number) =>
                               Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-                    smoothWheel: true,
-                    wheelMultiplier: 1,
-                    smoothTouch: false,
                     autoRaf: true,
                     anchors: true,
                 });
-
-                window.lenis = lenis;
             }
 
             initLenis();
             document.addEventListener("astro:page-load", initLenis);
         </script>
         <script>
-            const topBlur = document.querySelector(".edge-blur--top");
-            function update() {
-                topBlur?.toggleAttribute("data-visible", window.scrollY > 40);
-            }
-            update();
-            window.addEventListener("scroll", update, { passive: true });
-
             // Match Safari 26 Liquid Glass toolbar tint to visible section.
             // Hero visible → hero color, footer visible → footer color,
             // otherwise → olive-1 (from CSS).
@@ -273,7 +257,8 @@ const {
                     (entries) => {
                         for (const e of entries) {
                             if (e.target === hero) heroVis = e.isIntersecting;
-                            else if (e.target === foot) footVis = e.isIntersecting;
+                            else if (e.target === foot)
+                                footVis = e.isIntersecting;
                         }
                         syncBg();
                     },
