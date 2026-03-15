@@ -45,7 +45,7 @@ export function TemplateDialog() {
             </Theme>
             <Dialog.Portal>
                 <Dialog.Overlay className="DialogOverlay" />
-                <Dialog.Content className="DialogContent">
+                <Dialog.Content className="DialogContent" data-lenis-prevent>
                     <Theme
                         panelBackground="solid"
                         hasBackground={false}

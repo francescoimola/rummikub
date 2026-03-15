@@ -1,3 +1,5 @@
+@import 'lenis/dist/lenis.css';
+
 /* =========================================
    1. Fonts
    ========================================= */
@@ -277,10 +279,7 @@ html {
     scrollbar-gutter: stable;
     overflow-x: hidden;
     overscroll-behavior-y: none;
-
-    @media (prefers-reduced-motion: no-preference) {
-        scroll-behavior: smooth;
-    }
+    scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.08);
 }
 
 body {
