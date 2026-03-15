@@ -141,7 +141,7 @@ export const Footer = () => {
                                         Finally, something decent in your inbox
                                     </Heading>
                                     <Text size="3" as="p" mt="2" color="gray">
-                                        Sign up and get occasional emails about new projects, special offers, and event invites.
+                                        Sign up to hear about new articles, projects, special offers, and event invites.
                                     </Text>
                                 </Flex>
 

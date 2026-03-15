@@ -17,3 +17,9 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+declare global {
+  interface Window {
+    lenis?: import("lenis").default;
+  }
+}
