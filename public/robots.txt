@@ -1,24 +1,5 @@
-# Allow all regular crawlers
+# Allow all crawlers
 User-agent: *
 Allow: /
-
-# Block AI training and scraping bots
-User-agent: Amazonbot
-Disallow: /
-
-User-agent: ChatGPT-User
-Disallow: /
-
-User-agent: ClaudeBot
-Disallow: /
-
-User-agent: Claude-Web
-Disallow: /
-
-User-agent: FacebookBot
-Disallow: /
-
-User-agent: PerplexityBot
-Disallow: /
 
 Sitemap: https://francescoimola.com/sitemap-index.xml
