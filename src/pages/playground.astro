@@ -1,12 +1,22 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import PlaygroundLayout from "../layouts/PlaygroundLayout.astro";
 import PageHeading from "../components/PageHeading";
 import PlaygroundProject from "../components/PlaygroundProject.astro";
-import { Text, Flex, Section, Theme } from "@radix-ui/themes";
-import { SEO, SITE_DATA } from "../constants";
+import {
+    Text,
+    Flex,
+    Section,
+    Theme,
+    Link,
+    Heading,
+    Separator,
+    Box,
+} from "@radix-ui/themes";
+import { SEO } from "../constants";
 import { MainGrid } from "../components/MainGrid";
 import { InnerSection } from "../components/InnerSection";
-import { ButtonLink } from "../components/ButtonLink";
+import { Picture } from "astro:assets";
+import { CopyEmailButton } from "../components/CopyEmailButton";
 
 // ── Project images ──
 import oddAndWonderful from "../assets/playground/Odd-and-Wonderful.png";
@@ -54,54 +64,121 @@ import readcv3 from "../assets/playground/Readcv-Features-3.png";
 import readcv4 from "../assets/playground/Readcv-Features-4.png";
 import htfmah3 from "../assets/playground/How-to-feel-more-at-home-3.jpeg";
 import imageAsset from "../assets/playground/image-asset.jpeg";
+
+// ── Hero images ──
+import heroImage1 from "../assets/playground/adrien-olichon-tgh42ykxLWU-unsplash.jpg";
+import heroImage2 from "../assets/playground/kenny-aPFlupgG0fU-unsplash.jpg";
+import heroImage3 from "../assets/playground/tiago-ferreira-5N1a9DXommY-unsplash.jpg";
+
+// ── Random hero image selection ──
+const heroImages = [heroImage1, heroImage2, heroImage3];
+const randomImage = heroImages[Math.floor(Math.random() * heroImages.length)];
 ---
 
-<Layout
+<PlaygroundLayout
     title={SEO.pages.playground.title}
     description={SEO.pages.playground.description}
-    backgroundColor="var(--brand-surface-dark-mustard)"
     appearance="dark"
-    roleFullWidth
-    noMobileRole
 >
-    <PageHeading slot="heading" className="page-heading">
-        Experiments in art, connection, and technology
-    </PageHeading>
+    <!-- LEFT COLUMN: Random image -->
+    <Picture
+        slot="image"
+        src={randomImage}
+        alt=""
+        widths={[400, 800, 1200]}
+        sizes="(min-width: 1024px) 40vw, 100vw"
+        formats={["avif", "webp"]}
+        loading="eager"
+        class="hero-image"
+    />
 
-    <Flex slot="description" direction="column" gap="4">
-        <Text size="3" as="p" wrap="pretty">
-            Because what you see elsewhere on this site is only a fraction of
-            what I do, this is where you get to peek behind the scenes and at my
-            creative practice.
-        </Text>
-        <Text size="3" as="p" wrap="pretty">
-            I work with <Text weight="medium">words</Text> (poems, essays), <Text
-                weight="medium">pixels</Text
-            > (photography, code, net art) and <Text weight="medium"
-                >the collective making of meaning</Text
-            > (resources and gatherings). My practice changes frequently, and so likely
-            will this page.
-        </Text>
-        <Text size="3" as="p" wrap="pretty">
-            If you are interested in a collaboration of the creative kind, feel
-            free to send me a message. I will never say no to sharing new ideas
-            and meeting artists who do new and exciting things.
-        </Text>
-        <Flex gap="3" wrap="wrap" mt="2">
-            <ButtonLink
-                href={`mailto:${SITE_DATA.email}`}
-                variant="outline"
+    <!-- RIGHT COLUMN: Hero content -->
+    <div slot="hero" class="playground-hero-inner">
+        <!-- Nav bar (matches main site structure) -->
+        <Flex
+            direction={{ initial: "column", md: "row" }}
+            justify="between"
+            align={{ initial: "start", md: "center" }}
+            gap={{ initial: "3", md: "5" }}
+            pt="6"
+            pb="var(--space-10)"
+            wrap="wrap"
+        >
+            {/* Logo */}
+            <Heading
+                size="3"
+                weight="medium"
+                highContrast
                 color="gray"
-                size="2"
+                mb={{ initial: "var(--space-12)", md: "0" }}
             >
-                Get in touch
-            </ButtonLink>
-            <ButtonLink href="/work" variant="soft" color="gray" size="2">
-                See my commercial portfolio
-            </ButtonLink>
-        </Flex>
-    </Flex>
+                <Link href="/">Francesco Imola</Link>
+            </Heading>
 
+            {/* Nav Items */}
+            <Flex gap="4" direction="row" align="center" wrap="wrap">
+                <Link href="/" size="3" color="gray">
+                    Design & Copywriting
+                </Link>
+                <Separator size="1" orientation="vertical" />
+                <CopyEmailButton
+                    client:load
+                    variant="ghost"
+                    size={{ initial: "2", md: "3" }}
+                    color="gray"
+                    label="Contact"
+                    successLabel="Copied!"
+                    style={{ cursor: "pointer" }}
+                />
+            </Flex>
+
+            {/* Separator below nav on mobile only */}
+            <Box display={{ initial: "block", md: "none" }} width="100%">
+                <Separator size="4" orientation="horizontal" />
+            </Box>
+        </Flex>
+
+        <!-- Heading -->
+        <PageHeading className="page-heading">
+            Experiments in art, connection, and technology
+        </PageHeading>
+
+        <!-- Description -->
+        <Flex direction="column" gap="4" mt="8" pb="var(--space-10)">
+            <Text size="3" as="p" wrap="pretty">
+                Hi, Francesco here. If you can catch in those rare moments when
+                I'm not fixing peoples problems for a fee, you might find me
+                creating, often in collaboration. I work with{" "}
+                <Text weight="bold" as="span">words</Text> (poems, essays),{" "}
+                <Text weight="bold" as="span">pixels</Text> (photography, code, net
+                art) and{" "}
+                <Text weight="bold" as="span"
+                    >the collective making of meaning</Text
+                >{" "}
+                (resources and gatherings).
+            </Text>
+            <Text as="p" wrap="pretty"
+                >If you'd like to chat about these kinds of things, then do get
+                in touch {" "}
+                <CopyEmailButton
+                    client:load
+                    variant="ghost"
+                    size="3"
+                    label="(copy email)"
+                    successLabel="Copied!"
+                    style={{
+                        all: "unset",
+                        cursor: "pointer",
+                        color: "inherit",
+                        textDecoration: "underline",
+                    }}
+                />—I love hearing from people who do things I've never seen
+                before.
+            </Text>
+        </Flex>
+    </div>
+
+    <!-- PAGE CONTENT: Projects section -->
     <Section
         slot="page-content"
         pt="0"
@@ -361,7 +438,7 @@ import imageAsset from "../assets/playground/image-asset.jpeg";
             </MainGrid>
         </Theme>
     </Section>
-</Layout>
+</PlaygroundLayout>
 
 <style is:global>
     /* ── Playground Project Layout ── */
