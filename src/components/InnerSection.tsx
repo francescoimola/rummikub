@@ -8,7 +8,9 @@ interface InnerSectionProps {
     showCounter?: boolean;
     sectionId?: string;
     children?: ReactNode;
-    animate?: boolean;
+     animate?: boolean;
+    headerMargin?: any;
+    headerDisplay?: any;
 }
 
 export function InnerSection({
@@ -18,6 +20,8 @@ export function InnerSection({
     sectionId,
     children,
     animate = false,
+    headerMargin,
+    headerDisplay,
 }: InnerSectionProps) {
     const content = (
         <Grid
@@ -26,7 +30,7 @@ export function InnerSection({
             style={{ gridColumn: "1 / -1", gridTemplateColumns: "subgrid" }}
         >
             <section id={sectionId}>
-                <Box className="section-header" my={{ initial: "8", sm: "4", md: "0" }}>
+                <Box className="section-header" display={headerDisplay} my={headerMargin ?? { initial: "8", sm: "4", md: "0" }}>
                     {header ?? (
                         <Heading
                             size={{ initial: "8", sm: "6", md: "3" }}
