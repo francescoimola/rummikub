@@ -44,12 +44,19 @@ const {
             >
                 <Flex justify="between" align="center" gap="8">
                     <Flex direction="column" gap="2">
-                        <Heading as="h3" size="3" weight="medium" highContrast>
+                        <Heading
+                            as="h3"
+                            size="3"
+                            weight="medium"
+                            wrap="pretty"
+                            highContrast
+                        >
                             {title}
                         </Heading>
                         <Text
                             size="3"
                             color="gray"
+                            wrap="wrap"
                             className="project-desc-clip"
                         >
                             {excerpt}
@@ -100,6 +107,7 @@ const {
                             <Text
                                 size="3"
                                 color="gray"
+                                wrap="pretty"
                                 className="project-desc-clip"
                             >
                                 {excerpt}
@@ -145,7 +153,6 @@ const {
     }
 
     .project-desc-clip {
-        text-wrap: pretty;
         transition:
             opacity var(--transition-fast) ease-in-out,
             background-color var(--transition-fast) ease-in-out;
