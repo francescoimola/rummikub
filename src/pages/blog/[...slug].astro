@@ -123,8 +123,8 @@ const isoDate = post.data.publishedDate.toISOString();
 
     <!-- Hero Section -->
     <PageHeading slot="heading"> {post.data.title} </PageHeading>
-    <Grid slot="role" columns="3" width="100%">
-        <Box gridColumn={{ initial: "span 3", sm: "2 / span 2" }}>
+    <Grid slot="role" columns={{ initial: "1", sm: "3" }} width="100%">
+        <Box gridColumn={{ initial: "1", sm: "2 / span 2" }}>
             <AspectRatio ratio={4 / 3}>
                 <Image
                     src={post.data.coverImage}
@@ -142,7 +142,13 @@ const isoDate = post.data.publishedDate.toISOString();
             </AspectRatio>
         </Box>
     </Grid>
-    <Flex slot="description" direction="column" justify="between" height="100%">
+    <Flex
+        slot="description"
+        direction="column"
+        justify="between"
+        height="100%"
+        className="blog-excerpt-container"
+    >
         {/* Top: Article excerpt */}
 
         <Text size="3" wrap="pretty" highContrast>
@@ -179,8 +185,12 @@ const isoDate = post.data.publishedDate.toISOString();
             style={{ backgroundColor: "var(--gray-1)" }}
         >
             <!-- Main Content Grid -->
-            <MainGrid>
-                <InnerSection showCounter={false}>
+            <MainGrid className="blog-main-grid">
+                <InnerSection
+                    showCounter={false}
+                    headerDisplay={{ initial: "none", sm: "block" }}
+                    headerMargin={{ initial: "0", sm: "4", md: "0" }}
+                >
                     <Flex
                         slot="header"
                         direction="column"
@@ -316,3 +326,15 @@ const isoDate = post.data.publishedDate.toISOString();
         <NewsletterForm client:visible textAlign="center" align="center" />
     </BottomCTA>
 </Layout>
+
+<style is:global>
+    @media (max-width: 768px) {
+        .blog-excerpt-container {
+            margin-top: calc(var(--space-4) * -1);
+        }
+
+        .blog-hero-grid {
+            padding-bottom: var(--space-12);
+        }
+    }
+</style>
