@@ -148,8 +148,8 @@ export const NewsletterForm = ({
 
                                 {submitStatus.success && (
                                     <Card variant="ghost" size="2" mt="2" style={{ margin: "unset", backgroundColor: "var(--gray-a3)" }}>
-                                        <Text size="2" weight="bold" style={{ color: "var(--accent-12)" }}>
-                                            Wonderful, you're in!
+                                        <Text size="2" weight="medium" style={{ color: "var(--accent-12)" }}>
+                                            You're almost in. Please check your inbox (and spam folder) and confirm your subscription—this tells me you're a good human and not a bot 😉
                                         </Text>
                                     </Card>
                                 )}
