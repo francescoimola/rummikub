@@ -1,29 +1,23 @@
 import type { APIRoute } from 'astro';
 import { EXTERNAL_URLS } from '../../constants';
+import { json } from '../../utils/http';
 
 export const POST: APIRoute = async ({ request, locals }) => {
     try {
         const formData = await request.formData();
 
-        // Fast path: Honeypot check
+        // Return fake success so bots can't detect the honeypot
         if (formData.get('botcheck')) {
-            return new Response(JSON.stringify({ success: true }), {
-                status: 200,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            return json({ success: true });
         }
 
-        const accessKey = (locals as any).runtime?.env?.WEB3FORMS_ACCESS_KEY || import.meta.env.WEB3FORMS_ACCESS_KEY;
+        const accessKey = locals.runtime?.env?.WEB3FORMS_ACCESS_KEY || import.meta.env.WEB3FORMS_ACCESS_KEY;
 
         if (!accessKey) {
             console.error('WEB3FORMS_ACCESS_KEY not configured');
-            return new Response(JSON.stringify({ success: false, error: 'Server configuration error' }), {
-                status: 500,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            return json({ success: false, error: 'Server configuration error' }, 500);
         }
 
-        // Attach secret key server-side
         formData.append("access_key", accessKey);
 
         const response = await fetch(EXTERNAL_URLS.services.web3forms, {
@@ -31,18 +25,16 @@ export const POST: APIRoute = async ({ request, locals }) => {
             body: formData,
         });
 
-        const data = await response.json();
+        const data = await response.json() as { success?: boolean; message?: string };
 
-        return new Response(JSON.stringify(data), {
-            status: response.status,
-            headers: { 'Content-Type': 'application/json' }
-        });
+        if (!data.success) {
+            return json({ success: false, error: 'Submission failed. Please try again.' }, response.status);
+        }
+
+        return json({ success: true });
 
     } catch (error) {
         console.error('Contact form error:', error);
-        return new Response(JSON.stringify({ success: false, error: 'Submission failed' }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' }
-        });
+        return json({ success: false, error: 'Submission failed' }, 500);
     }
 };

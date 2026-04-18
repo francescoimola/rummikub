@@ -18,6 +18,7 @@ export const EXTERNAL_URLS = {
     },
     services: {
         web3forms: "https://api.web3forms.com/submit",
+        loops: "https://app.loops.so/api/newsletter-form/cmhepd87qfls01b0i7veoodr3",
     },
 } as const;
 
