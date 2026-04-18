@@ -4,7 +4,7 @@
 type Runtime = import('@astrojs/cloudflare').Runtime<Env>;
 
 interface Env {
-  // No secrets required - newsletter uses public Loops form endpoint
+  WEB3FORMS_ACCESS_KEY?: string;
 }
 
 declare namespace App {
@@ -12,6 +12,7 @@ declare namespace App {
 }
 
 interface ImportMetaEnv {
+  readonly WEB3FORMS_ACCESS_KEY?: string;
 }
 
 interface ImportMeta {

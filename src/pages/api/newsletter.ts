@@ -1,76 +1,49 @@
 import type { APIRoute } from 'astro';
-
-const LOOPS_FORM_ID = 'cmhepd87qfls01b0i7veoodr3';
-const LOOPS_NEWSLETTER_URL = `https://app.loops.so/api/newsletter-form/${LOOPS_FORM_ID}`;
+import { EXTERNAL_URLS } from '../../constants';
+import { json } from '../../utils/http';
 
 export const POST: APIRoute = async ({ request }) => {
     try {
         const formData = await request.formData();
         const email = formData.get('email') as string;
-        const website = formData.get('website') as string; // honeypot
+        const website = formData.get('website') as string;
         const timestamp = formData.get('timestamp') as string;
 
-        // Honeypot check - bots fill hidden fields
+        // Return fake success so bots can't detect the honeypot or timing checks
         if (website) {
-            // Return fake success to not reveal detection
-            return new Response(
-                JSON.stringify({ success: true }),
-                { status: 200, headers: { 'Content-Type': 'application/json' } }
-            );
+            return json({ success: true });
         }
 
-        // Time-based check - reject submissions faster than 2 seconds
         if (timestamp) {
             const elapsed = Date.now() - parseInt(timestamp, 10);
             if (elapsed < 2000) {
-                // Return fake success to not reveal detection
-                return new Response(
-                    JSON.stringify({ success: true }),
-                    { status: 200, headers: { 'Content-Type': 'application/json' } }
-                );
+                return json({ success: true });
             }
         }
 
-        // Validate email
         if (!email || !email.includes('@')) {
-            return new Response(
-                JSON.stringify({ success: false, error: 'Please enter a valid email address' }),
-                { status: 400, headers: { 'Content-Type': 'application/json' } }
-            );
+            return json({ success: false, error: 'Please enter a valid email address' }, 400);
         }
 
-        // Send to Loops newsletter form (per docs: https://loops.so/docs/forms/custom-form)
         const formBody = `email=${encodeURIComponent(email)}&source=${encodeURIComponent('website')}`;
 
-        const loopsResponse = await fetch(LOOPS_NEWSLETTER_URL, {
+        const loopsResponse = await fetch(EXTERNAL_URLS.services.loops, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: formBody,
         });
 
-        const data = await loopsResponse.json();
-        console.log('Loops response:', loopsResponse.status, data);
+        const data = await loopsResponse.json() as { success?: boolean; message?: string };
 
         if (!data.success) {
             console.error('Loops API error:', data.message);
-            return new Response(
-                JSON.stringify({ success: false, error: data.message || 'Subscription failed. Please try again.' }),
-                { status: loopsResponse.status, headers: { 'Content-Type': 'application/json' } }
-            );
+            return json({ success: false, error: data.message || 'Subscription failed. Please try again.' }, loopsResponse.status);
         }
 
-        return new Response(
-            JSON.stringify({ success: true }),
-            { status: 200, headers: { 'Content-Type': 'application/json' } }
-        );
+        return json({ success: true });
 
     } catch (error) {
         console.error('Newsletter subscription error:', error);
-        return new Response(
-            JSON.stringify({ success: false, error: 'Something went wrong. Please try again.' }),
-            { status: 500, headers: { 'Content-Type': 'application/json' } }
-        );
+        return json({ success: false, error: 'Something went wrong. Please try again.' }, 500);
     }
 };
