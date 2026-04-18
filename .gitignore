@@ -42,10 +42,10 @@ coverage/
 .deftform-test.html
 
 # AI
+.agent/
 .gemini/
 .claude/
 .antigravity/
-.agent/
 docs/voice-guide.md
 SITE_AUDIT.md
 site-fixes.xlsx

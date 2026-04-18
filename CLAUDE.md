@@ -4,10 +4,10 @@ Astro 5 + React 19 + Radix UI Themes v3. Deploys to Cloudflare Pages. Package ma
 
 ## Reference docs (load before major work)
 
-- **Visual system:** [../design.md](../design.md) — tokens, components, motion, patterns
-- **Architecture:** [architecture.md](architecture.md) — technical deep-dive
-- **Voice & tone:** user skill `francesco-imola` (auto-loads in Claude Code)
-- **PostCSS:** [POSTCSS_SETUP.md](POSTCSS_SETUP.md)
+- **Visual system:** [design.md](design.md) — tokens, components, motion, patterns
+- **Architecture:** [docs/architecture.md](docs/architecture.md) — technical deep-dive
+- **Voice & tone:** user skill `francesco-imola` (auto-loads)
+- **PostCSS:** [docs/POSTCSS_SETUP.md](docs/POSTCSS_SETUP.md)
 
 ## Commands
 
@@ -41,7 +41,7 @@ Solo workflow, no PRs. `main` auto-deploys to Cloudflare. Active work happens on
 9. **Icon matching:** if a Figma icon resembles a Radix icon, use the Radix one. If significantly different, ask the user — do not import custom SVGs without approval.
 10. **Figma fidelity:** don't hardcode px/hex values from Figma — map to Radix tokens or the custom scales in `global.css`. If a value doesn't map, ask.
 11. **Verification:** never rely on visual inspection or spin a browser unless asked. Use computed-style checks and code inspection.
-12. **Update [architecture.md](architecture.md)** when project structure, inner workings, or core tech change.
+12. **Update [docs/architecture.md](docs/architecture.md)** when project structure, inner workings, or core tech change.
 
 ## Layout slots
 
@@ -76,4 +76,6 @@ Solo workflow, no PRs. `main` auto-deploys to Cloudflare. Active work happens on
 
 ## When in doubt
 
-Modern Astro APIs (Actions, Sessions, Middleware) may be newer than model knowledge — check [docs.astro.build](https://docs.astro.build/). When a design decision is ambiguous, ask rather than assume.
+Modern Astro APIs (Actions, Sessions, Middleware) may be newer than model knowledge — check [docs.astro.build](https://docs.astro.build/). 
+
+When a decision is ambiguous, ask rather than assume.
