@@ -139,27 +139,22 @@ const randomImage = heroImages[Math.floor(Math.random() * heroImages.length)];
         </Flex>
 
         <!-- Heading -->
-        <PageHeading className="page-heading">
+        <PageHeading
+            className="page-heading"
+            mt={{ initial: "0", md: "var(--space-11)" }}
+        >
             Experiments in art, connection, and technology
         </PageHeading>
 
         <!-- Description -->
         <Flex direction="column" gap="4" mt="8" pb="var(--space-10)">
             <Text size="3" as="p" wrap="pretty">
-                Hi, Francesco here. If you can catch in those rare moments when
-                I'm not fixing peoples problems for a fee, you might find me
-                creating, often in collaboration. I work with{" "}
-                <Text weight="bold" as="span">words</Text> (poems, essays),{" "}
-                <Text weight="bold" as="span">pixels</Text> (photography, code, net
-                art) and{" "}
-                <Text weight="bold" as="span"
-                    >the collective making of meaning</Text
-                >{" "}
-                (resources and gatherings).
-            </Text>
-            <Text as="p" wrap="pretty"
-                >If you'd like to chat about these kinds of things, then do get
-                in touch {" "}
+                Hi, Francesco here. If you catch me in one of those rare moments
+                when I'm not fixing people's problems, you might find me
+                creating, often in collaboration. I work with words (poems,
+                essays), pixels (photography, code, net art) and the collective
+                making of meaning (resources and gatherings). If you'd like to
+                chat about these kinds of things, then do get in touch {" "}
                 <CopyEmailButton
                     client:load
                     variant="ghost"
@@ -172,7 +167,7 @@ const randomImage = heroImages[Math.floor(Math.random() * heroImages.length)];
                         color: "inherit",
                         textDecoration: "underline",
                     }}
-                />—I love hearing from people who do things I've never seen
+                />. I love hearing from people who do things I've never seen
                 before.
             </Text>
         </Flex>
@@ -205,9 +200,9 @@ const randomImage = heroImages[Math.floor(Math.random() * heroImages.length)];
                     >
                         <PlaygroundProject
                             title="Odd & Wonderful"
-                            year="2024 – On hiatus"
+                            year="2024 – Present"
                             link="https://oddandwonderful.substack.com/"
-                            description="Personal essays in newsletter form for people who dare to live creative lives. We talk about the nature of being creative and living through trauma, and share cool stuff I find on the web."
+                            description="Newsletter for people who can't live without a little bit of absurdity, featuring art, stories, and personal essays."
                             images={[oddAndWonderful]}
                             alts={["Graphic design for Odd & Wonderful"]}
                         />
