@@ -85,7 +85,11 @@ const uniqueTags = [...new Set(allPosts.flatMap((p) => p.data.tags))];
                         }
                     </Flex>
                 </InnerSection>
-                <InnerSection title="All" showCounter={false}>
+                <InnerSection
+                    title="All"
+                    showCounter={false}
+                    sectionId="all-posts-section"
+                >
                     <Flex direction="column" gap="4" data-section="all">
                         {
                             allPosts.map((post) => {
@@ -116,6 +120,41 @@ const uniqueTags = [...new Set(allPosts.flatMap((p) => p.data.tags))];
 </Layout>
 
 <script>
+    const allSection = document.getElementById("all-posts-section");
+    const allTitleSpan = allSection?.querySelector<HTMLElement>(
+        ".inner-section-title > span:last-child",
+    );
+
+    function updateAllTitle(filter: string) {
+        if (!allTitleSpan) return;
+        allTitleSpan.textContent = "";
+
+        if (filter === "all") {
+            allTitleSpan.textContent = "All";
+        } else {
+            let label;
+            const acronyms: Record<string, string> = { "ui/ux": "UI/UX", "seo": "SEO" };
+            label = filter.replace(/-/g, " ").replace(/\b\w+/g, (word) => acronyms[word.toLowerCase()] ?? (word.charAt(0).toUpperCase() + word.slice(1)));
+            const btn = document.createElement("button");
+            btn.className = "section-breadcrumb-all";
+            btn.textContent = "All";
+            allTitleSpan.appendChild(btn);
+            allTitleSpan.appendChild(
+                document.createTextNode("  " + "›" + "  " + label),
+            );
+        }
+    }
+
+    document.addEventListener("click", (e) => {
+        const btn = (e.target as HTMLElement).closest<HTMLElement>(
+            ".section-breadcrumb-all",
+        );
+        if (!btn) return;
+        document.dispatchEvent(
+            new CustomEvent("blog-filter", { detail: "all" }),
+        );
+    });
+
     document.addEventListener("blog-filter", (event) => {
         const filter = (event as CustomEvent<string>).detail;
         const cards = document.querySelectorAll<HTMLElement>("[data-tags]");
@@ -123,12 +162,10 @@ const uniqueTags = [...new Set(allPosts.flatMap((p) => p.data.tags))];
             .querySelector("[data-section='recent']")
             ?.closest("section");
 
-        // Show/hide the "Recent" section — only visible when "all" is selected
         if (recentSection) {
             recentSection.style.display = filter === "all" ? "" : "none";
         }
 
-        // Filter individual cards in the "All" section
         cards.forEach((card) => {
             if (filter === "all") {
                 card.style.display = "";
@@ -137,5 +174,7 @@ const uniqueTags = [...new Set(allPosts.flatMap((p) => p.data.tags))];
             const tags = card.dataset.tags?.split(",") ?? [];
             card.style.display = tags.includes(filter) ? "" : "none";
         });
+
+        updateAllTitle(filter);
     });
 </script>

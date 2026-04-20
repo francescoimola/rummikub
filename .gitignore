@@ -23,6 +23,7 @@ pnpm-debug.log*
 
 # OS specific
 .DS_Store
+*.DS_Store
 src/assets/.DS_Store
 Thumbs.db
 
@@ -52,3 +53,4 @@ site-fixes.xlsx
 docs/francescoimola - lighthouse scores - march 2026.png
 docs/francescoimola - mobile lighthouse scores - march 2026.png
 web-design-process.excalidraw
+*.code-workspace

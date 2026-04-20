@@ -8,7 +8,7 @@ interface InnerSectionProps {
     showCounter?: boolean;
     sectionId?: string;
     children?: ReactNode;
-     animate?: boolean;
+    animate?: boolean;
     headerMargin?: any;
     headerDisplay?: any;
 }
