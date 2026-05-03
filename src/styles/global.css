@@ -913,3 +913,73 @@ svg.client-logo {
         transform: scale(0.98);
     }
 }
+/* ── Hero background: safe-area padding ── */
+.hero-background {
+    padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* ── Edge blur overlays ──
+   Effects live on ::after so Safari 26 doesn't sample them
+   for Liquid Glass toolbar tinting (pseudo-elements are ignored). */
+.edge-blur {
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: clamp(5rem, 12vh, 15rem);
+    z-index: var(--z-overlay);
+    pointer-events: none;
+}
+
+.edge-blur::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.edge-blur--top {
+    top: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    view-transition-name: blur-top;
+}
+
+.edge-blur--top::after {
+    mask-image: linear-gradient(to bottom, black, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, black, transparent);
+}
+
+.edge-blur--top[data-visible] {
+    opacity: 1;
+}
+
+.edge-blur--bottom {
+    bottom: 0;
+    view-transition-name: blur-bottom;
+}
+
+.edge-blur--bottom::after {
+    mask-image: linear-gradient(to top, black, transparent);
+    -webkit-mask-image: linear-gradient(to top, black, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .edge-blur--top {
+        transition-duration: 0.15s;
+    }
+}
+
+/* ── Content entrance animation ── */
+@media (prefers-reduced-motion: no-preference) {
+    .content-enter {
+        animation: slide-up-fade 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+}
+
+@keyframes slide-up-fade {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+}

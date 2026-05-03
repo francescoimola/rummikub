@@ -2,7 +2,7 @@
 export const prerender = true;
 
 import { getCollection, type CollectionEntry } from "astro:content";
-import { Flex, Grid, Section, Text, Theme } from "@radix-ui/themes";
+import { Flex, Grid, Section, Text, Box, Theme, Link } from "@radix-ui/themes";
 import Layout from "../layouts/Layout.astro";
 import PageHeading from "../components/PageHeading";
 import ProjectImage from "../components/project/ProjectImage.astro";
@@ -63,20 +63,35 @@ const capabilities = [
     roleFullWidth
 >
     <!-- Hero -->
-    <PageHeading slot="heading">I make things simpler for a living</PageHeading>
+    <PageHeading slot="heading"
+        >A web and content designer. Strong on UX, copy, email, ops, and the
+        unfashionable work of being a decent colleague.</PageHeading
+    >
 
     <Flex slot="description" direction="column" gap="4">
-        <Text size="3" as="p" wrap="pretty">
-            I'm a designer, writer, and strategist. Folkestone is home. My
-            obsession is peanut butter (on everything) and products so good they
-            don't need any marketing. Unfortunately, not everyone is as lucky
-            with what they're selling. So that's where I come in.
-        </Text>
-        <Text size="3" as="p" wrap="pretty">
-            I help brands to simplify and create space for big ideas. The
-            hardest challenge is making it look easy.
-        </Text>
+        <Text size="3" as="p" wrap="pretty"
+            >Born in Italy, based in Folkestone, I take on project work for
+            small businesses, white-label briefs from agencies, and I'll
+            consider an in-house role when the fit's right. The sections below
+            cover what I've made. If you want the marketing pitch, it's on the
+            homepage.</Text
+        >
     </Flex>
+
+    <Box slot="role" asChild>
+        <Text
+            size="3"
+            as="p"
+            weight="medium"
+            style={{ fontFamily: "var(--space-mono)" }}
+        >
+            🎧 Currently listening to
+            <Link
+                href="https://bloodorangenyc.bandcamp.com/track/time-will-tell"
+                ><i>Time Will Tell</i> by Blood Orange</Link
+            >
+        </Text>
+    </Box>
 
     <!-- Page Content -->
     <Section slot="page-content" asChild pt="0">
@@ -159,23 +174,22 @@ const capabilities = [
                 <InnerSection title="What I'm looking for">
                     <Flex direction="column" gap="4">
                         <Text size="3" as="p" wrap="pretty">
-                            Good people working on things that matter to them.
-                            That's it. I've done my best work in small teams
-                            where trust is high and ego is low, where I can roll
-                            up my sleeves, do what I do best, and leave things
-                            better than I found them.
+                            Good people working on things that matter to them. I
+                            do my best work in small teams where trust is high
+                            and ego is low, where I can roll up my sleeves, do
+                            what I do best, and leave things better than how I
+                            found them.
                         </Text>
                         <Text size="3" as="p" wrap="pretty">
                             If you're in the weeds, I'll be in the weeds with
                             you. Marketing's gone rogue, design team's stretched
                             thin, nobody can agree on what the website should
-                            actually say — that kind of thing.
+                            actually say. That kind of thing.
                         </Text>
                         <Text size="3" as="p" wrap="pretty">
                             I'm open to part-time, freelance, or full-time for
                             the right fit. If your team needs someone who can
-                            edit, simplify, and bring focus, you know where to
-                            find me.
+                            edit, simplify, and bring focus, let's chat.
                         </Text>
                     </Flex>
                 </InnerSection>

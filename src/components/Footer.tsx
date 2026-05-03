@@ -1,5 +1,4 @@
 import {
-    Box,
     Card,
     Container,
     Flex,
@@ -10,6 +9,7 @@ import {
     Text,
     Theme,
 } from "@radix-ui/themes";
+import { ArrowTopRightIcon } from "@radix-ui/react-icons";
 import { EXTERNAL_URLS, SITE_DATA } from "../constants";
 import NewsletterForm from "./NewsletterForm";
 
@@ -22,7 +22,7 @@ interface FooterLinkItem {
 interface FooterSection {
     title: string;
     items: FooterLinkItem[];
-    headingWrap?: "wrap" | "nowrap"; // strict typing for Radix Heading 'wrap' prop if needed, or string
+    headingWrap?: "wrap" | "nowrap";
 }
 
 const FOOTER_SECTIONS: FooterSection[] = [
@@ -63,7 +63,6 @@ const FOOTER_SECTIONS: FooterSection[] = [
     },
 ];
 
-// Force rebuild: Footer update verification
 export const Footer = () => {
     return (
         <Theme
@@ -83,14 +82,13 @@ export const Footer = () => {
             >
                 <Container maxWidth="var(--max-cw)">
                     <Grid
-                        columns={{ initial: "1", sm: "2" }} // split 2 cols on sm screens to match page content
+                        columns={{ initial: "1", sm: "2" }}
                         gapX="4"
                         gapY="calc(var(--space-12) + var(--space-8))"
                         pt="var(--space-10)"
                         pb="calc(var(--space-12) + var(--space-8))"
                         style={{ containerType: "inline-size" }}
                     >
-                        {/* LEFT COLUMN: Brand + Navigation */}
                         <Flex
                             gapX="4"
                             gapY="8"
@@ -120,6 +118,7 @@ export const Footer = () => {
                                                 rel={item.external ? "noopener noreferrer" : undefined}
                                             >
                                                 {item.label}
+                                                {item.external && <ArrowTopRightIcon style={{ display: "inline", marginLeft: "2px" }} />}
                                             </Link>
                                         ))}
                                     </Flex>
@@ -127,7 +126,6 @@ export const Footer = () => {
                             ))}
                         </Flex>
 
-                        {/* RIGHT COLUMN: Signup Form */}
                         <Flex direction="column" gapY={{ initial: "var(--space-11)", sm: "var(--space-12)" }}>
                             <Flex
                                 direction="column"
@@ -135,41 +133,42 @@ export const Footer = () => {
                                 style={{ containerType: "inline-size" }}
                                 className="signup-form-container"
                             >
-                                <Flex direction="column">
-                                    <Heading as="h3" size="3" weight="medium" highContrast>
-                                        Finally, something decent in your inbox
-                                    </Heading>
-                                    <Text size="3" as="p" mt="2" color="gray">
-                                        Sign up to hear about new articles, projects, special offers, and event invites.
-                                    </Text>
-                                </Flex>
-
+                                <Heading as="h3" size="3" weight="medium" highContrast>
+                                    Finally, something decent in your inbox
+                                </Heading>
+                                <Text size="3" as="p" color="gray">
+                                    Sign up to hear about new articles, projects, special offers, and event invites.
+                                </Text>
                                 <NewsletterForm showPrivacyText={true} />
                             </Flex>
                             <Card size="2" variant="surface" style={{ backgroundColor: "var(--gray-a2)", inlineSize: "fit-content" }} mt={{ initial: "var(--space-8)", sm: "0" }} mb={{ initial: "-9", sm: "0" }}>
-                                <Text size="2" color="gray"><Link href="https://www.websitecarbon.com/website/francescoimola-com/" target="_blank" rel="noopener noreferrer">This website runs on sustainable energy and consumes ~80% less energy than all websites globally</Link></Text>
+                                <Text size="2" color="gray">
+                                    <Link href="https://www.websitecarbon.com/website/francescoimola-com/" target="_blank" rel="noopener noreferrer">
+                                        This website runs on sustainable energy and consumes ~80% less energy than all websites globally
+                                        <ArrowTopRightIcon style={{ display: "inline", marginLeft: "2px" }} />
+                                    </Link>
+                                </Text>
                             </Card>
                         </Flex>
                     </Grid>
 
-                    <Box pb="var(--space-10)">
-                        <Separator size="4" my="4" />
-                        <Flex
-                            justify="between"
-                            align="stretch"
-                            direction="row"
-                            gapX="6"
-                            gapY="1"
-                            wrap="wrap"
-                        >
-                            <Text size="2" style={{ color: "var(--gray-a11)" }}>
-                                {SITE_DATA.name} © {SITE_DATA.copyrightYear}. All rights reserved.
-                            </Text>
-                            <Text size="2" style={{ color: "var(--gray-a11)" }}>
-                                Built with love and anxiety in {SITE_DATA.location}
-                            </Text>
-                        </Flex>
-                    </Box>
+                    <Flex
+                        justify="between"
+                        align="stretch"
+                        direction="row"
+                        gapX="6"
+                        gapY="1"
+                        wrap="wrap"
+                        pb="var(--space-10)"
+                    >
+                        <Separator size="4" my="4" style={{ width: "100%" }} />
+                        <Text size="2" color="gray">
+                            {SITE_DATA.name} © {SITE_DATA.copyrightYear}. All rights reserved.
+                        </Text>
+                        <Text size="2" color="gray">
+                            Built with love and anxiety in {SITE_DATA.location}
+                        </Text>
+                    </Flex>
                 </Container>
             </footer>
         </Theme>
