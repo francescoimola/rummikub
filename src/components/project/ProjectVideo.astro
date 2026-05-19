@@ -89,6 +89,12 @@ const finalCaption = caption ?? title ?? undefined;
             "(prefers-reduced-motion: reduce)",
         );
 
+        const conn = (navigator as any).connection;
+        const slowConnection =
+            conn?.saveData === true ||
+            conn?.effectiveType === "slow-2g" ||
+            conn?.effectiveType === "2g";
+
         wrappers.forEach((wrapper) => {
             const video = wrapper.querySelector(
                 ".project-video-el",
@@ -126,8 +132,8 @@ const finalCaption = caption ?? title ?? undefined;
                     .catch(() => showBtn());
             };
 
-            // Reduced-motion: show button, don't autoplay
-            if (reducedMotion.matches) showBtn();
+            // Reduced-motion or slow connection: show button, don't autoplay
+            if (reducedMotion.matches || slowConnection) showBtn();
 
             // Toggle on click
             btn.addEventListener("click", () => {
@@ -144,7 +150,7 @@ const finalCaption = caption ?? title ?? undefined;
             const observer = new IntersectionObserver(
                 ([entry]) => {
                     inView = entry.isIntersecting;
-                    if (inView && !reducedMotion.matches) {
+                    if (inView && !reducedMotion.matches && !slowConnection) {
                         tryPlay();
                     } else if (!inView && !video.paused) {
                         video.pause();
