@@ -15,6 +15,7 @@ import { InnerSection } from "../components/InnerSection";
 import { MainGrid } from "../components/MainGrid";
 import SarahYLLogo from "../components/icons/SarahYLLogo.astro";
 import BlueberryLogo from "../components/icons/BlueberryLogo.astro";
+import TheLoftLogo from "../components/icons/TheLoftLogo.astro";
 import { BottomCTA } from "../components/BottomCTA";
 import { getFeaturedProjects } from "../utils/getFeaturedProjects";
 import { KeyServicePoints, KSP } from "../components/KeyServicePoints";
@@ -187,7 +188,6 @@ const capabilities = [
               >
             </aside>
           </Testimonial>
-          <MegaSeatingPlanLogo slot="logo" />
 
           <Testimonial
             authorName="Sarah Brown"
@@ -216,6 +216,20 @@ const capabilities = [
               >
             </aside>
             <BlueberryLogo slot="logo" isWrapped />
+          </Testimonial>
+          <Testimonial
+            authorName="Cairo Woodward"
+            quote="I have never worked with someone so deeply reliable, who has gone above and beyond my expectations. The sheer detail, diligence and attention Fran has to his work is worth its weight in gold, tenfold! [...] Fran turned the weight on my shoulders into air."
+            rating={5}
+          >
+            <aside slot="authorRole">
+              Co-founder, <Link
+                href="https://www.theloftstudio.uk"
+                target="_blank"
+                rel="noopener noreferrer">The Loft</Link
+              >
+            </aside>
+            <TheLoftLogo slot="logo" />
           </Testimonial>
         </Grid>
       </InnerSection>
