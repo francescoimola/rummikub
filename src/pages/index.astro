@@ -162,6 +162,20 @@ const capabilities = [
       <InnerSection client:visible title="Happy Clients" animate>
         <Grid columns="1" gap="var(--space-10)">
           <Testimonial
+            authorName="Cairo Woodward"
+            quote="I have never worked with someone so deeply reliable, who has gone above and beyond my expectations. The sheer detail, diligence and attention Fran has to his work is worth its weight in gold, tenfold! [...] He's turned the weight on my shoulders into air."
+            rating={5}
+          >
+            <aside slot="authorRole">
+              Co-founder, <Link
+                href="https://www.theloftstudio.uk"
+                target="_blank"
+                rel="noopener noreferrer">The Loft</Link
+              >
+            </aside>
+            <TheLoftLogo slot="logo" />
+          </Testimonial>
+          <Testimonial
             authorName="Rob Cowen"
             quote="Francesco has the rare talent of being able to embed himself in a niche that he previously knew nothing about, quickly understanding the intricacies and writing with the confidence of an insider"
             rating={5}
@@ -216,20 +230,6 @@ const capabilities = [
               >
             </aside>
             <BlueberryLogo slot="logo" isWrapped />
-          </Testimonial>
-          <Testimonial
-            authorName="Cairo Woodward"
-            quote="I have never worked with someone so deeply reliable, who has gone above and beyond my expectations. The sheer detail, diligence and attention Fran has to his work is worth its weight in gold, tenfold! [...] Fran turned the weight on my shoulders into air."
-            rating={5}
-          >
-            <aside slot="authorRole">
-              Co-founder, <Link
-                href="https://www.theloftstudio.uk"
-                target="_blank"
-                rel="noopener noreferrer">The Loft</Link
-              >
-            </aside>
-            <TheLoftLogo slot="logo" />
           </Testimonial>
         </Grid>
       </InnerSection>
