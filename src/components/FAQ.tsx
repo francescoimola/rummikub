@@ -155,15 +155,46 @@ const consultationsItems: FAQItem[] = [
 const aboutItems: FAQItem[] = [
     {
         question: "What's your approach to design?",
-        answer: "I try not to hide behind decorations. The question I ask myself is \"can this go undetected?\" If the answer is yes, it's likely the thing I'm designing — be it a strategy, website, event, or something else — is going to better fit the needs of the person experiencing it. Which is also why good design is harder to spot than bad design.",
-    },
-    {
-        question: "What's your background?",
-        answer: "I came to do what I do from a wobbly trajectory that let me dip my toes into many a role, from working in hospitality to curating exhibitions, running social media campaigns, and many more things that make my CV hard to keep updated. In life, I'm as curious as I am practical. In work, I'm especially allergic to pretension.",
+        answer: (
+            <>
+                <Text size="3" as="p" color="gray" wrap="pretty">
+                    Without going into too much detail and risking getting
+                    bogged down in aesthetic debates, design-wise I follow a few core
+                    principles:
+                </Text>
+                <Flex direction="column" gap="2" asChild>
+                    <ul>
+                        <Text size="3" color="gray" asChild><li>Keep it short and simple</li></Text>
+                        <Text size="3" color="gray" asChild><li>Only consider decorations if the brief calls for it</li></Text>
+                        <Text size="3" color="gray" asChild><li>Know how to bend the process in your favor. Skip steps when you deem them unnecessary. Backtrack when you're unsatisfied. Maybe start from the solution first, or operate on intuition, or make something just for the sake of making people smile.</li></Text>
+                        <Text size="3" color="gray" asChild><li>Good design is harder to spot than poor design</li></Text>
+                        <Text size="3" color="gray" asChild><li>You'll know when you nailed it</li></Text>
+                    </ul>
+                </Flex>
+                <Text size="3" as="p" color="gray" wrap="pretty">
+                    Whenever I'm working on UX, UI, or graphic design, I ask
+                    myself: will the element I'm designing — be it an
+                    interface, layout, or whatever — go unnoticed, or will it
+                    be the centre of attention? Generally speaking, the more
+                    a design obstructs what it stands to communicate, the
+                    less likely users are to understand it.
+                </Text>
+                <Text size="3" as="p" color="gray" wrap="pretty">
+                    Of course, it's a different ball game when it comes to
+                    advertising, where attention = money. Nevertheless, I’m
+                    pretty good at staying on brief, and when grit, character
+                    and oomph are required, I can deliver.
+                </Text>
+            </>
+        ),
     },
     {
         question: "How do you think about marketing?",
-        answer: "The marketing I love and recommend it's the marketing that's part of the process from the very beginning. Not an afterthought. Not bolted on at the end. I love working on projects where this centuries-old practice can do more than just 'promote' but also shape the thing it's selling and help it find its audience.",
+        answer: "The kind of marketing I admire and recommend is the kind that's an integral part of the product or service right from the start. Not an afterthought. Not bolted on at the end. I enjoy working on projects where this long-established practice isn’t simply called upon when it’s time to “promote”, but is used to also help shape what’s being offered and connect it with the right audience.",
+    },
+     {
+        question: "What's your background?",
+        answer: "I came to do what I do from a wobbly trajectory that let me dip my toes into many a role, from working in hospitality to curating exhibitions, running social media campaigns, and many more things that make my CV hard to keep updated.",
     },
 ];
 
