@@ -19,12 +19,13 @@ import SkipToNav from "../components/SkipToNav";
 import { InnerSection } from "../components/InnerSection";
 import { MainGrid } from "../components/MainGrid";
 import FigmaIcon from "../components/icons/FigmaIcon.astro";
+
 import { ToolCard } from "../components/ToolCard";
 import WebflowIcon from "../components/icons/WebflowIcon.astro";
 import BrevoIcon from "../components/icons/BrevoIcon.astro";
-import FramerIcon from "../components/icons/FramerIcon.astro";
-import ShopifyIcon from "../components/icons/ShopifyIcon.astro";
+import FramerIcon from "../components/icons/FramerIcon.astro";         
 import UmamiIcon from "../components/icons/UmamiIcon.astro";
+import HTMLicon from "../components/icons/HTMLicon.astro";
 import creativesForClimate from "../assets/sustainability-windows.png";
 import FastForwardAnalogue from "../assets/Fast Forward to the Analogue - Poster Mockup.jpg";
 import FAQ from "../components/FAQ";
@@ -50,8 +51,7 @@ import { Picture } from "astro:assets";
     </Fragment>
 
     <PageHeading slot="heading" className="page-heading">
-        A designer who writes, a writer who designs, and a strategist who does
-        both
+        A web and content designer. A creative with a conscience. A friend.
     </PageHeading>
     <SkipToNav
         anchors={[
@@ -141,29 +141,26 @@ import { Picture } from "astro:assets";
             <InnerSection title="About" sectionId="intro">
                 <Flex direction="column" gap="4">
                     <Text size="3" wrap="pretty">
-                        Hi, I'm Francesco, a UI/UX designer and trust-based
-                        marketer based in Folkestone, on the Kentish coast. I
-                        spent half of my career watching businesses of all sizes
-                        waste unbelievable amounts of money on sloppy marketing
-                        and websites that inevitably confuse people and sh*t on
-                        their reputation. Until I learned how to stop that from
-                        happening.
+                        Hi, I'm Francesco, a designer and trust-based marketer from Italy, now based in Folkestone, on the Kent coast. My strengths lie
+                        in UX, copywriting, brand messaging, and the often unglamorous work of being
+                        reliable.
                     </Text>
                     <Text size="3" wrap="pretty">
-                        My current focus is helping independent businesses and
-                        orgs with their websites + the strategy, copy, and
-                        integrations that makes them useful. I handle the whole
-                        thing, from strategy to copy, design, and build. This
-                        means fewer moving parts and less overhead.
+                        Throughout my career, I have seen innumerable businesses
+                        squander staggering sums of money on sloppy marketing,
+                        graphic design and websites that inevitably confuse
+                        people and ruin their brand's reputation. Thankfully, I
+                        soon learned how to stop that from happening.
                     </Text>
                     <Text size="3" wrap="pretty">
-                        Before this, I spent six years in galleries,
-                        institutions, and an agency that represented freelance
-                        film talent. Different industries but same job,
-                        essentially: making complex things a little less complex
-                        and helping good work find its audience. I'm a Digital
-                        Arts graduate from the University of Greenwich, which is
-                        where a lot of this started.
+                        Before landing in this sector, I spent six years working
+                        in cultural institutions and at a film and TV talent
+                        agency. Different sectors, but broadly the same job:
+                        making complex realities a little less complex and
+                        drawing audiences closer to worthwhile ideas, services
+                        and creative talent. I graduated with a degree in
+                        Digital Arts from the University of Greenwich, and that
+                        is where much of this all began.
                     </Text>
                     <figure style={{ marginBlock: "var(--space-5)" }}>
                         <Picture
@@ -186,10 +183,33 @@ import { Picture } from "astro:assets";
                     </figure>
                 </Flex>
             </InnerSection>
+            <InnerSection
+                title="What makes the difference"
+                sectionId="difference"
+            >
+                <Flex direction="column" gap="4">
+                    <Text size="3" wrap="pretty">
+                        If you’re a business or an independent organisation
+                        looking for help with your website or with the strategy,
+                        content and integrations that surround it, I’ll bend
+                        over backwards to lighten your workload and set your
+                        business on the path to success.
+                    </Text>
+                    <Text size="3" wrap="pretty"
+                        >What sets me apart is my hands-on approach: I
+                        personally handle virtually every aspect of every
+                        project, from strategy to copywriting, design and
+                        development. This means fewer variables, lower overheads
+                        for you, and a more cohesive end product. I also keep
+                        sustainability and longevity top of mind, both in the
+                        final result and in how I achieve it.
+                    </Text>
+                </Flex>
+            </InnerSection>
             <InnerSection title="Tools" sectionId="tools">
                 <Flex direction="column" gap="7">
                     <Text size="3" as="p" wrap="pretty">
-                        The software I usually reach for is reliable, easy to
+                        The software I tend to reach for is reliable, easy to
                         hand over, and privacy-conscious where we're dealing
                         with people's data. I also understand the code that
                         powers the web, and sometimes that's the better answer.
@@ -204,10 +224,10 @@ import { Picture } from "astro:assets";
                                     <FigmaIcon />
                                 </ToolCard>
                                 <ToolCard
-                                    title="Webflow"
-                                    description="The ideal CMS for complex websites or when accessibility is a key concern"
+                                    title="Plain code"
+                                    description="I can build simple 1-3 page sites with unbreakable HTML, CSS and JavaScript."
                                 >
-                                    <WebflowIcon />
+                                    <HTMLicon />
                                 </ToolCard>
                                 <ToolCard
                                     title="Framer"
@@ -216,11 +236,12 @@ import { Picture } from "astro:assets";
                                     <FramerIcon />
                                 </ToolCard>
                                 <ToolCard
-                                    title="Shopify"
-                                    description="Everything-managed e-commerce CMS with every feature and more"
+                                    title="Webflow"
+                                    description="The ideal CMS for complex websites or when accessibility is a key concern"
                                 >
-                                    <ShopifyIcon />
+                                    <WebflowIcon />
                                 </ToolCard>
+                                
                                 <ToolCard
                                     title="Umami"
                                     description="For privacy-focused, GDPR-compliant analytics. Zero annoying cookies"
@@ -246,7 +267,7 @@ import { Picture } from "astro:assets";
                                         Already committed elsewhere?
                                     </Text>
                                     I can adapt to other solutions based on your preferences.
-                                    I've previously tested Wordpress, Mailchimp, Loops,
+                                    I've previously tested Mailchimp, Astro, Loops,
                                     Ahrefs, and Luma, among others.
                                 </Text>
                             </Box>
@@ -269,20 +290,26 @@ import { Picture } from "astro:assets";
                     />
                     <Flex direction="column" gap="4">
                         <Text size="3" as="p" wrap="pretty">
-                            My mission is to do "good" creative work, but this
-                            is only achievable by rethinking what’s important:
-                            putting people and the planet first. In that spirit,
-                            I joined Creatives for Climate, a global network of
-                            creative industry workers using their skills to
-                            fight for the climate, and have been a member since
-                            2025.
+                            If there is one constant in my journey, it has been
+                            the desire to work for worthy causes, and the only
+                            way to fulfil this desire is to rethink what matters
+                            most. It took around 4.6 billion years for a cosmic
+                            swirl of gas and dust to become a planet suitable
+                            for birds and flowers and children. The last thing I
+                            want to do is devote my time to furthering its
+                            destruction. As such, in 2025, I joined Creatives
+                            for Climate, a global network of creative
+                            professionals who are putting their skills to work
+                            in the fight for the climate. I'm also a member of
+                            Good Folk, a collective that offers pro-bono support
+                            to charities with a lot on their plate.
                         </Text>
                         <Text size="3" as="p" wrap="pretty">
-                            While my practice is far from perfect, I use every
-                            project as an opportunity to shape the change I want
-                            to see. That said, I refuse to work with fossil fuel
-                            clients or those who are directly associated with
-                            the fossil fuel industry.
+                            Although my practice is far from perfect, I see
+                            every project as an opportunity to shape the change
+                            I wish to see. For the record, I will not work with
+                            clients in the fossil fuel sector, or those directly
+                            associated with this industry.
                         </Text>
                     </Flex>
                 </Flex>
