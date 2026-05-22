@@ -175,9 +175,9 @@ const aboutItems: FAQItem[] = [
                     Whenever I'm working on UX, UI, or graphic design, I ask
                     myself: will the element I'm designing — be it an
                     interface, layout, or whatever — go unnoticed, or will it
-                    be the centre of attention? Generally speaking, the more
+                    be the centre of attention? Generally speaking, the less
                     a design obstructs what it stands to communicate, the
-                    less likely users are to understand it.
+                    more likely users are to understand what you're telling them.
                 </Text>
                 <Text size="3" as="p" color="gray" wrap="pretty">
                     Of course, it's a different ball game when it comes to
