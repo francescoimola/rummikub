@@ -1,4 +1,6 @@
 ---
+import { ClientRouter } from "astro:transitions";
+
 interface Props {
     title?: string;
     description?: string;
@@ -90,4 +92,6 @@ const canonicalUrl =
 
     <!-- JSON-LD Structured Data -->
     <slot name="structured-data" />
+
+    <ClientRouter />
 </head>

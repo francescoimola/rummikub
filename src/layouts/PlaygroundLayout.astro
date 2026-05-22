@@ -35,7 +35,7 @@ const {
         ogType={ogType}
         noIndex={noIndex}
     />
-    <body>
+    <body style="background-color: var(--brand-surface-dark-mustard)">
         <Theme
             accentColor="yellow"
             radius="none"
@@ -74,8 +74,6 @@ const {
                 <Footer client:visible />
             </Box>
 
-            <div class="edge-blur edge-blur--top" aria-hidden="true"></div>
-            <div class="edge-blur edge-blur--bottom" aria-hidden="true"></div>
         </Theme>
 
         <script>
@@ -84,13 +82,6 @@ const {
 
         <script>
             import "../scripts/liquid-glass";
-
-            const topBlur = document.querySelector(".edge-blur--top");
-            function update() {
-                topBlur?.toggleAttribute("data-visible", window.scrollY > 40);
-            }
-            update();
-            window.addEventListener("scroll", update, { passive: true });
         </script>
 
         <!-- Copy email link functionality -->
