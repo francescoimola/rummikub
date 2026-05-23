@@ -50,15 +50,16 @@ const isDraft = !href && !!caseStudyStatus;
 
 const statusText =
     {
-        "coming-soon": "Case study coming soon",
+        "coming-soon": "Coming soon",
         "on-request": "Available on request",
     }[caseStudyStatus as string] ?? null;
 
 const Container = href ? "a" : Flex;
 const containerProps = href
-    ? { href, class: "project-card-container project-card-link" }
+    ? { href, class: "project-card-container project-card-link", "data-status": caseStudyStatus }
     : {
           className: `project-card-container${isDraft ? " project-card-draft" : ""}`,
+          "data-status": caseStudyStatus,
           direction: "column" as const,
           gap: "5",
           tabIndex: isDraft ? 0 : undefined,
@@ -81,7 +82,8 @@ const containerProps = href
                         <Badge
                             size="2"
                             color="gray"
-                            variant="surface"
+                            
+                            variant="solid"
                             className="project-card-status-badge"
                         >
                             {statusText}
@@ -235,6 +237,15 @@ const containerProps = href
         }
     }
 
+    /* status-specific overlay colors (revealed on hover by existing opacity rules) */
+    .project-card-container[data-status="coming-soon"] .project-card-image-wrapper::after {
+        background-color: var(--orange-6);
+    }
+
+    .project-card-container[data-status="on-request"] .project-card-image-wrapper::after {
+        background-color: var(--cyan-6);
+    }
+
     .project-card-image-wrapper picture {
         display: contents;
     }
@@ -269,8 +280,8 @@ const containerProps = href
 
     .project-card-status-badge {
         position: absolute;
-        top: var(--space-2);
-        right: var(--space-2);
+        bottom: var(--space-5);
+        margin: 0 auto;
         z-index: 11;
         transition:
             transform var(--transition-fast) ease-in-out,
