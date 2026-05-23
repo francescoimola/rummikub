@@ -16,6 +16,7 @@ pnpm install
 pnpm astro build                    # Build
 npx wrangler pages dev ./dist       # Test built output locally
 pnpm astro add <integration>        # Add official integrations (preferred over manual config)
+pnpm compress:assets                # Losslessly recompress src/assets PNGs/JPEGs (run after adding new source images)
 ```
 
 **Never run `pnpm dev` / `npm run dev`** unless the user explicitly asks. They manage their own running processes.
@@ -42,6 +43,8 @@ Solo workflow, no PRs. `main` auto-deploys to Cloudflare. Active work happens on
 10. **Figma fidelity:** don't hardcode px/hex values from Figma — map to Radix tokens or the custom scales in `global.css`. If a value doesn't map, ask.
 11. **Verification:** never rely on visual inspection or spin a browser unless asked. Use computed-style checks and code inspection.
 12. **Update [architecture.md](architecture.md)** when project structure, inner workings, or core tech change.
+13. **Prerender static pages.** Every `.astro` page in `src/pages/` that doesn't need runtime SSR APIs (`Astro.request`, cookies, sessions, dynamic redirects) MUST start with `export const prerender = true;`. Without it, Cloudflare serves the page via SSR and the `<Image>` component falls back to a runtime `/_image?` endpoint that bypasses the build-time optimised variants — shipping the original full-resolution image instead. Symptom: PageSpeed/Ecograder reports flag `_image?href=...` URLs in the multi-MB range.
+14. **`<Image>` / `<Picture>` MUST declare `widths` and `sizes`.** Without `widths`, Astro keeps the source-resolution image as the `<img>` fallback in the generated srcset, so the original ships even when avif/webp variants exist. Use widths that match the actual displayed size at common breakpoints (typically `[400, 600, 800]` for cards, `[600, 900, 1200, 1600]` for full-bleed in-page images, `[300, 500, 700, 900]` for portraits/avatars).
 
 ## Layout slots
 
@@ -73,6 +76,10 @@ Solo workflow, no PRs. `main` auto-deploys to Cloudflare. Active work happens on
 | Inconsistent accent colour across nested `<Theme>` | Use `--yellow-*` / `--orange-*`, not `--accent-*` |
 | TypeScript prop errors | Import `type { ComponentProps } from "react"` and extend |
 | CSS not applying | Check specificity; prefer Radix props before custom CSS |
+| Audit tool flags multi-MB `_image?href=...` URLs | Page is missing `export const prerender = true;` — add it (see rule #13) |
+| Audit tool flags large image transfer despite `<Picture>` | `<Image>`/`<Picture>` is missing `widths`/`sizes` — add them (see rule #14) |
+| New source image is huge | Run `pnpm compress:assets` (idempotent, only rewrites if smaller) |
+| Project case study video loading too eagerly for audit bots | Already mitigated: `ProjectVideo.astro` IntersectionObserver uses `rootMargin: "25% 0px"`, so headless audit bots without scroll never trigger a fetch |
 
 ## When in doubt
 
