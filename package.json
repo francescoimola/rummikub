@@ -8,7 +8,9 @@
     "preview": "astro preview",
     "preview:cloudflare": "pnpm run build && wrangler pages dev ./dist",
     "preinstall": "npx only-allow pnpm",
-    "astro": "astro"
+    "astro": "astro",
+    "compress:assets": "node scripts/compress-assets.mjs",
+    "prepare": "husky"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
@@ -42,6 +44,7 @@
     "@playform/inline": "0.1.2",
     "autoprefixer": "^10.4.23",
     "cssnano": "^7.1.2",
+    "husky": "^9.1.7",
     "postcss": "^8.5.6",
     "postcss-preset-env": "^11.1.1",
     "sharp": "^0.34.5",
