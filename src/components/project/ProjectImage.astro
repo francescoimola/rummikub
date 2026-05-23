@@ -115,6 +115,8 @@ const containerProps = href
                         src={finalImage}
                         alt={alt}
                         formats={["avif", "webp"]}
+                        widths={[400, 600, 800]}
+                        sizes="(max-width: 768px) 90vw, 400px"
                         class="project-card-image"
                     />
                 </Flex>
@@ -167,6 +169,8 @@ const containerProps = href
                 src={finalImage}
                 alt={alt}
                 formats={["avif", "webp"]}
+                widths={[600, 900, 1200, 1600]}
+                sizes="(max-width: 768px) 90vw, 1200px"
                 loading="lazy"
                 style={{
                     width: "100%",
