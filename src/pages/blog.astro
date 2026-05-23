@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PageHeading from "../components/PageHeading";
-import { Text, Flex, Section, Theme } from "@radix-ui/themes";
+import { Text, Flex, Section, Theme, Link } from "@radix-ui/themes";
 import BlogFilters from "../components/BlogFilters";
 import BlogCard from "../components/BlogCard.astro";
 import { InnerSection } from "../components/InnerSection";
@@ -23,7 +23,7 @@ const uniqueTags = [...new Set(allPosts.flatMap((p) => p.data.tags))];
 <Layout
     title={SEO.pages.blog.title}
     description={SEO.pages.blog.description}
-    backgroundColor="var(--brand-surface-dark-mustard)"
+    backgroundColor="var(--brand-surface-dark-olive)"
     appearance="dark"
     roleFullWidth
     noMobileRole
@@ -44,9 +44,7 @@ const uniqueTags = [...new Set(allPosts.flatMap((p) => p.data.tags))];
     <PageHeading slot="heading"> Writing </PageHeading>
     <Flex slot="description" direction="column" gap="var(--space-10)">
         <Text size="3">
-            Notes on marketing and designing your thing without following the
-            usual playbook. For anyone who suspects there might be a better way
-            to go about it. Some answers. Mostly questions.
+        Notes on marketing, design, and whether it's possible to make a living without following the playbook. Everything is told through my own experiences, failures, and successes. Some answers. Mostly questions. An extension of <Link href="https://notbadnotbad.substack.com">Not Bad</Link>.
         </Text>
         <BlogFilters tags={uniqueTags} client:load />
     </Flex>

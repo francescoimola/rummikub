@@ -25,6 +25,22 @@ const webdesignItems: FAQItem[] = [
         answer: "Most website projects take 4-10 weeks depending on scope. I work in phases so you can see progress early and provide feedback as we go. We'll establish a timeline together before we start.",
     },
     {
+        question: "How are design and copy decisions made?",
+        answer: (
+            <>
+                <Text size="3" as="p" color="gray" wrap="pretty">
+                    Client input is extremely important, and I will always listen to your feedback. I tend to say "yes" a lot, but sometimes I have to push back on feedback that will hurt the end result, and I'll always explain why.
+                </Text>
+                <Text size="3" as="p" color="gray" wrap="pretty">
+                    When it comes to the craft itself, the final say on design and copy sits with me. Because you're paying me to solve a business problem, and because both our brands are on the line.
+                </Text>
+                <Text size="3" as="p" color="gray" wrap="pretty">
+                    If you do have something specific in mind, and you'd rather brief someone to build exactly that, it's a fair way to work. It's just not what I do.
+                </Text>
+            </>
+        ),
+    },
+    {
         question: "Can you help with SEO?",
         answer: (
             <>
@@ -43,10 +59,6 @@ const webdesignItems: FAQItem[] = [
                 </Text>
             </>
         ),
-    },
-    {
-        question: "What if I need changes after launch?",
-        answer: "I build sites that are easy to update and to maintain. You'll understand how everything works and be able to make changes yourself. But if you'd rather have me handle things, I offer ongoing support packages.",
     },
     {
         question: "Do you offer consultations?",
@@ -73,14 +85,6 @@ const webdesignItems: FAQItem[] = [
     {
         question: "Are meetings free?",
         answer: "If you need specific help with generating ideas or finding a solution to a problem you're having, this will be a chargeable consultation (unless this meeting was already quoted as part of your project). A consultation won't simply be an informal chat: it's a call I'll do some preparation for, so I can provide you with valuable ideas and options that will help you move forward.",
-    },
-    {
-        question: "Can you work with my existing team?",
-        answer: "Absolutely. I usually take care of the full scope myself, but I'm happy to collaborate with your team if necessary.",
-    },
-    {
-        question: "What if I'm worried about email overload?",
-        answer: "I'm flexible about how to keep in touch during a project. If you're worried about missing emails, or maybe you flinch at the very thought of following up on something that was said four emails ago, I got you. I can set up private Slack and Trello boards for real-time progress and communication at no extra cost. And if email works for you, great!",
     },
     {
         question: "Do you offer concessions?",
@@ -121,7 +125,7 @@ const webdesignItems: FAQItem[] = [
     },
     {
         question: "Can we meet in person?",
-        answer: "Why not! I'm always up for meeting clients face to face. I'm based in Folkestone, South East England, so you'll need to be able to get here. I'm happy to meet anywhere nearby when our schedules coincide.",
+        answer: "Why not! I'm always up for meeting clients face to face when our schedules coincide. I'm based in Folkestone, Kent, so you'll need to be able to get here.",
     },
 ];
 
@@ -164,23 +168,16 @@ const aboutItems: FAQItem[] = [
                 </Text>
                 <Flex direction="column" gap="2" asChild>
                     <ul>
-                        <Text size="3" color="gray" asChild><li>Keep it short and simple</li></Text>
-                        <Text size="3" color="gray" asChild><li>Only consider decorations if the brief calls for it</li></Text>
+                        <Text size="3" color="gray" asChild><li>Good design is opinionated</li></Text>
+                        <Text size="3" color="gray" asChild><li>Good design is choosing the right compromise for your audience.</li></Text>
                         <Text size="3" color="gray" asChild><li>Know how to bend the process in your favor. Skip steps when you deem them unnecessary. Backtrack when you're unsatisfied. Maybe start from the solution first, or operate on intuition, or make something just for the sake of making people smile.</li></Text>
+                        <Text size="3" color="gray" asChild><li>Only consider decorations when they serve a purpose</li></Text>
                         <Text size="3" color="gray" asChild><li>Good design is harder to spot than poor design</li></Text>
                         <Text size="3" color="gray" asChild><li>You'll know when you nailed it</li></Text>
                     </ul>
                 </Flex>
                 <Text size="3" as="p" color="gray" wrap="pretty">
-                    Whenever I'm working on UX, UI, or graphic design, I ask
-                    myself: will the element I'm designing — be it an
-                    interface, layout, or whatever — go unnoticed, or will it
-                    be the centre of attention? Generally speaking, the less
-                    a design obstructs what it stands to communicate, the
-                    more likely users are to understand what you're telling them.
-                </Text>
-                <Text size="3" as="p" color="gray" wrap="pretty">
-                    Of course, it's a different ball game when it comes to
+                    Most of my work, generally speaking, is focused on the last three principles. I like to make sure that the interfaces and experiences I design don't get in the way of what they're trying to communicate. Of course, it's a different ball game when it comes to
                     advertising, where attention = money. Nevertheless, I’m
                     pretty good at staying on brief, and when grit, character
                     and oomph are required, I can deliver.
@@ -192,9 +189,18 @@ const aboutItems: FAQItem[] = [
         question: "How do you think about marketing?",
         answer: "The kind of marketing I admire and recommend is the kind that's an integral part of the product or service right from the start. Not an afterthought. Not bolted on at the end. I enjoy working on projects where this long-established practice isn’t simply called upon when it’s time to “promote”, but is used to also help shape what’s being offered and connect it with the right audience.",
     },
-     {
+    {
         question: "What's your background?",
-        answer: "I came to do what I do from a wobbly trajectory that let me dip my toes into many a role, from working in hospitality to curating exhibitions, running social media campaigns, and many more things that make my CV hard to keep updated.",
+        answer: (
+            <>
+                <Text size="3" as="p" color="gray" wrap="pretty">
+                    I came to do what I do from a wobbly trajectory that let me dip my toes into many a role, from working in hospitality to curating exhibitions, running social media campaigns, and many more things that make my CV hard to keep updated.
+                </Text>
+                <ButtonLink variant="solid" color="gray" href="https://www.linkedin.com/in/francesco-imola/" target="_blank" rel="noopener noreferrer" mt="2" style={{ alignSelf: "start" }}>
+                    Follow me on Linkedin
+                </ButtonLink>
+            </>
+        ),
     },
 ];
 
