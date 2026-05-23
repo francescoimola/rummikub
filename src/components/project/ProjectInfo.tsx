@@ -23,7 +23,7 @@ export const ProjectInfo = ({
 }) => (
     <Flex direction="column" justify="start" align="start" gap="4" asChild>
         <aside>
-            <Heading as="h3" size="3" highContrast mb="4">Project Info</Heading>
+            <Heading as="h2" size="3" highContrast mb="4">Project Info</Heading>
 
             <InfoItem label="Role" value={role} />
             <InfoItem label="Date" value={year} />

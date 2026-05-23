@@ -145,8 +145,9 @@ const finalCaption = caption ?? title ?? undefined;
                 }
             });
 
-            // Start loading when near viewport (200% margin),
-            // play/pause when actually visible (25% threshold)
+            // Load and play only when the video is genuinely near the viewport.
+            // A tight margin means headless audit bots (no scroll) never trigger
+            // a fetch, while real users still get autoplay just-in-time on scroll.
             const observer = new IntersectionObserver(
                 ([entry]) => {
                     inView = entry.isIntersecting;
@@ -157,7 +158,7 @@ const finalCaption = caption ?? title ?? undefined;
                         if (reducedMotion.matches) showBtn();
                     }
                 },
-                { threshold: 0.25, rootMargin: "200% 0px" },
+                { threshold: 0.25, rootMargin: "25% 0px" },
             );
             observer.observe(video);
 

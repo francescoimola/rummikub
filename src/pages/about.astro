@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import Layout from "../layouts/Layout.astro";
 import PageHeading from "../components/PageHeading";
 import { ContactSHeader } from "../components/ContactSHeader";
@@ -78,6 +80,8 @@ import { Picture } from "astro:assets";
                     src={francescoImg}
                     alt="Francesco Imola"
                     formats={["avif", "webp"]}
+                    widths={[300, 500, 700, 900]}
+                    sizes="(max-width: 768px) 60vw, 450px"
                     loading="eager"
                     style={{
                         objectFit: "cover",
@@ -167,6 +171,8 @@ import { Picture } from "astro:assets";
                             src={FastForwardAnalogue}
                             alt="Mockup of two computer windows, one shows a cliff, the other the Creatives for Climate logo"
                             formats={["avif", "webp"]}
+                            widths={[600, 900, 1200, 1600]}
+                            sizes="(max-width: 768px) 90vw, 1000px"
                             loading="lazy"
                             style={{
                                 width: "100%",
@@ -281,6 +287,8 @@ import { Picture } from "astro:assets";
                         src={creativesForClimate}
                         alt="Mockup of two computer windows, one shows a cliff, the other the Creatives for Climate logo"
                         formats={["avif", "webp"]}
+                        widths={[600, 900, 1200, 1600]}
+                        sizes="(max-width: 768px) 90vw, 1000px"
                         loading="lazy"
                         style={{
                             width: "100%",

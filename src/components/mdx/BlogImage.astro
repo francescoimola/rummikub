@@ -16,6 +16,8 @@ const { src, alt, title } = Astro.props;
         src={src as any}
         alt={alt}
         loading="lazy"
+        widths={[600, 900, 1200, 1600]}
+        sizes="(max-width: 768px) 90vw, 800px"
         style={{
             width: "100%",
             height: "auto",

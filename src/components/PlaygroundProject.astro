@@ -63,6 +63,8 @@ const { title, year, link, description, images, alts } = Astro.props;
                                 src={image}
                                 alt={alts[i] || ""}
                                 formats={["avif", "webp"]}
+                                widths={[400, 800, 1200, 1600]}
+                                sizes="(max-width: 768px) 90vw, 800px"
                                 loading="lazy"
                                 decoding="async"
                             />
