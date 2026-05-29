@@ -1,6 +1,6 @@
 # Rummikub — Francesco Imola's portfolio
 
-Astro 5 + React 19 + Radix UI Themes v3. Deploys to Cloudflare Pages. Package manager: **pnpm**.
+Astro 5.17+ + React 19.2+ (@astrojs/react 5.0.6+) + Radix UI Themes v3. Deploys to Cloudflare Pages. Package manager: **pnpm**.
 
 ## Reference docs (load before major work)
 
@@ -80,6 +80,7 @@ Solo workflow, no PRs. `main` auto-deploys to Cloudflare. Active work happens on
 | Audit tool flags large image transfer despite `<Picture>` | `<Image>`/`<Picture>` is missing `widths`/`sizes` — add them (see rule #14) |
 | New source image is huge | Run `pnpm compress:assets` (idempotent, only rewrites if smaller) |
 | Project case study video loading too eagerly for audit bots | Already mitigated: `ProjectVideo.astro` IntersectionObserver uses `rootMargin: "25% 0px"`, so headless audit bots without scroll never trigger a fetch |
+| SPA navigation fails silently; page content doesn't update on next/back but URL changes | React 19 + @astrojs/react <5.0.6 incompatibility: unmounting throws error #424. Upgrade @astrojs/react to 5.0.6+ (see top of file). React 19 requires 5.0.6+ to properly handle component unmounting during page transitions. |
 
 ## When in doubt
 
