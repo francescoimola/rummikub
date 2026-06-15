@@ -47,6 +47,14 @@ export default defineConfig({
     imageService: 'compile',
   }),
   output: 'server',
+  // The site uses no sessions. Set an explicit in-memory driver so the
+  // Cloudflare adapter doesn't auto-require a KV "SESSION" binding (which
+  // would otherwise emit "Invalid binding `SESSION`" build notes). If session
+  // support is ever needed, switch to the KV driver and bind a SESSION KV
+  // namespace in wrangler.json.
+  session: {
+    driver: 'memory',
+  },
   vite: {
     resolve: {
       dedupe: ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'],
