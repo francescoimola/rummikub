@@ -18,4 +18,3 @@ function initLenis() {
 }
 
 initLenis();
-document.addEventListener("astro:page-load", initLenis);
