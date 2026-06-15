@@ -80,7 +80,7 @@ Solo workflow, no PRs. `main` auto-deploys to Cloudflare. Active work happens on
 | Audit tool flags large image transfer despite `<Picture>` | `<Image>`/`<Picture>` is missing `widths`/`sizes` — add them (see rule #14) |
 | New source image is huge | Run `pnpm compress:assets` (idempotent, only rewrites if smaller) |
 | Project case study video loading too eagerly for audit bots | Already mitigated: `ProjectVideo.astro` IntersectionObserver uses `rootMargin: "25% 0px"`, so headless audit bots without scroll never trigger a fetch |
-| SPA navigation fails silently; page content doesn't update on next/back but URL changes | React 19 + @astrojs/react <5.0.6 incompatibility: unmounting throws error #424. Upgrade @astrojs/react to 5.0.6+ (see top of file). React 19 requires 5.0.6+ to properly handle component unmounting during page transitions. |
+| Page content (e.g. the About TOC) only shows after a hard reload, not on normal navigation | Two competing view-transition systems were active at once: Astro's `<ClientRouter />` (SPA client-side DOM swap) **and** native `@view-transition { navigation: auto }` (cross-document) — Astro treats these as mutually exclusive. Fix: keep **only** native cross-document transitions. **Do not re-add `<ClientRouter />`.** The crossfade + persistent header/footer come from `@view-transition` in `global.css` plus the `viewTransitionName` styles on the logo/nav/footer in `Layout.astro`. Every navigation is now a full document load (behaves like a hard reload), which also sidesteps the React 19 + ClientRouter island-unmount bug (error #424) entirely. |
 
 ## When in doubt
 
