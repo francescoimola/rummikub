@@ -8,9 +8,9 @@ overrides:
   rollup: '>=4.59.0'
   fast-xml-parser: '>=5.3.6'
   ajv: '>=8.18.0'
-  lodash: '>=4.18.1'
-  undici: '>=7.18.2'
-  wrangler: '>=4.59.1'
+  lodash@>=4.0.0 <=4.17.22: '>=4.17.23'
+  undici@>=7.0.0 <7.18.2: '>=7.18.2'
+  wrangler@>=4.0.0 <4.59.1: '>=4.59.1'
 
 importers:
 
@@ -117,7 +117,7 @@ importers:
         specifier: ^0.34.5
         version: 0.34.5
       wrangler:
-        specifier: '>=4.59.1'
+        specifier: ^4.61.1
         version: 4.61.1(@cloudflare/workers-types@4.20260129.0)
 
 packages:
