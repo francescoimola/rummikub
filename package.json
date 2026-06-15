@@ -50,16 +50,6 @@
     "sharp": "^0.34.5",
     "wrangler": "^4.61.1"
   },
-  "pnpm": {
-    "overrides": {
-      "rollup": ">=4.59.0",
-      "fast-xml-parser": ">=5.3.6",
-      "ajv": ">=8.18.0",
-      "lodash": ">=4.18.1",
-      "undici": ">=7.18.2",
-      "wrangler": ">=4.59.1"
-    }
-  },
   "packageManager": "pnpm@10.28.2",
   "browserslist": [
     "defaults",
