@@ -7,6 +7,7 @@ interface Props {
     image?: string;
     ogType?: "website" | "article";
     noIndex?: boolean;
+    colorScheme?: "light" | "dark";
 }
 
 const {
@@ -15,6 +16,7 @@ const {
     image = "/assets/images/og-image.png",
     ogType = "website",
     noIndex = false,
+    colorScheme = "light",
 } = Astro.props;
 
 const absoluteImageUrl = new URL(image, Astro.site || Astro.url);
@@ -31,6 +33,7 @@ const canonicalUrl =
         content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
     <meta name="generator" content={Astro.generator} />
+    <meta name="color-scheme" content={colorScheme} />
     <title>{title}</title>
     <meta name="description" content={description} />
     {noIndex && <meta name="robots" content="noindex" />}
