@@ -38,15 +38,20 @@ const {
     noIndex = false,
     ...themeProps
 } = Astro.props;
+
+// Pin the page's color-scheme to its design (dark pages use appearance="dark")
+// so Safari's toolbar chrome matches the page instead of the OS setting.
+const colorScheme = themeProps.appearance === "dark" ? "dark" : "light";
 ---
 
-<html lang="en">
+<html lang="en" style={`color-scheme: ${colorScheme}`}>
     <Head
         title={title}
         description={description}
         image={image}
         ogType={ogType}
         noIndex={noIndex}
+        colorScheme={colorScheme}
     >
         <slot name="structured-data" slot="structured-data" />
     </Head>
@@ -206,9 +211,6 @@ const {
         </Theme>
         <script>
             import "../scripts/smooth-scroll";
-        </script>
-        <script>
-            import "../scripts/liquid-glass";
         </script>
     </body>
 </html>

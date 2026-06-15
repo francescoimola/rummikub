@@ -183,8 +183,12 @@
     --max-cw-sm: calc(var(--max-cw) / 2);
 
     /* Semantic Brand Tokens */
-    --brand-surface-dark-mustard: var(--orange-9);
-    --brand-surface-dark-olive: var(--yellow-9);
+    /* Pinned to concrete values so they resolve identically on <body> (outside
+       the Theme) and inside a dark Radix Theme, where Radix overrides
+       --orange-9 / --yellow-9 to bright values. Keeps hero, body/toolbar tint,
+       and footer consistent. */
+    --brand-surface-dark-mustard: #553009;
+    --brand-surface-dark-olive: #3b3c02;
 
     /* Standardized Section Padding */
     --section-px-initial: var(--space-4);
@@ -268,6 +272,9 @@
             --orange-surface: color(display-p3 1 0.9608 0.902 / 0.8);
             --orange-indicator: oklch(34.9% 0.0734 61.47);
             --orange-track: oklch(34.9% 0.0734 61.47);
+
+            --brand-surface-dark-mustard: oklch(34.9% 0.0734 61.47);
+            --brand-surface-dark-olive: oklch(34.4% 0.0739 110.8);
         }
     }
 }
@@ -288,7 +295,6 @@ body {
     counter-reset: section-counter;
     background-color: var(--olive-1);
     overflow-x: hidden;
-    transition: background-color 900ms ease-in-out;
 }
 
 h1,

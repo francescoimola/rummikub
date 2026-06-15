@@ -25,15 +25,20 @@ const {
     noIndex = false,
     ...themeProps
 } = Astro.props;
+
+// The playground body is the dark mustard surface, so pin dark chrome
+// regardless of OS appearance.
+const colorScheme = themeProps.appearance === "light" ? "light" : "dark";
 ---
 
-<html lang="en">
+<html lang="en" style={`color-scheme: ${colorScheme}`}>
     <Head
         title={title}
         description={description}
         image={image}
         ogType={ogType}
         noIndex={noIndex}
+        colorScheme={colorScheme}
     />
     <body style="background-color: var(--brand-surface-dark-mustard)">
         <Theme
@@ -78,10 +83,6 @@ const {
 
         <script>
             import "../scripts/smooth-scroll";
-        </script>
-
-        <script>
-            import "../scripts/liquid-glass";
         </script>
 
         <!-- Copy email link functionality -->

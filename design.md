@@ -97,8 +97,12 @@ Radix default `olive` gray family — warm, earthy, slightly green-leaning grey.
 
 ### Semantic tokens
 ```css
---brand-surface-dark-mustard: var(--orange-9);  /* Deep warm brown */
---brand-surface-dark-olive: var(--yellow-9);    /* Deep olive — footer */
+/* Pinned to literal values so they resolve identically on <body> (outside
+   the Theme) and inside a dark Radix Theme, where Radix overrides
+   --orange-9 / --yellow-9 to bright values. P3 equivalents defined
+   in the @supports block for colour-gamut accuracy. */
+--brand-surface-dark-mustard: #553009;  /* Deep warm brown */
+--brand-surface-dark-olive: #3b3c02;    /* Deep olive — footer */
 ```
 
 ### Colour application rules
@@ -226,9 +230,6 @@ Fixed-position top/bottom blur strips that fade content at viewport edges during
 ```
 - Top blur: fades in after scroll, masked `linear-gradient(to bottom, black, transparent)`.
 - Bottom blur: always visible, masked upward.
-
-### Safari 26 toolbar tint sync
-JS observer sets `body` background-color to match the currently-visible hero or footer, so iOS Safari 26 samples the right tint for the Liquid Glass toolbar. (Pseudo-elements, absolute children, and `display: none` elements are ignored by Safari; fixed elements with `opacity: 0` are not.)
 
 ### Shadows
 Essentially none in default UI. The only shadow is `box-shadow: var(--shadow-6)` on `.DialogContent` modals.
