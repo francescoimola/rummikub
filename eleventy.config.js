@@ -165,9 +165,6 @@ module.exports = function (eleventyConfig) {
       return encodeURIComponent(String(str));
     });
 
-    // Excerpt shortcode
-    eleventyConfig.addShortcode("teaser", (post) => extractExcerpt(post));
-
     // Helper shortcode for Cloudinary/remote images (automatically adds eleventy:ignore)
     eleventyConfig.addShortcode("remoteImg", function(src, width, height, alt, attrs = "") {
       return `<img src="${src}" width="${width}" height="${height}" alt="${alt}" ${attrs} eleventy:ignore>`;
