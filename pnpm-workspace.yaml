@@ -1,8 +1,13 @@
+allowBuilds:
+  '@parcel/watcher': true
+  sharp: true
+
 onlyBuiltDependencies:
   - esbuild
   - workerd
 
 overrides:
+  browserslist: 4.24.0
   rollup: '>=4.59.0'
   ajv: '>=8.18.0'
   lodash@>=4.0.0 <=4.17.22: '>=4.17.23'
