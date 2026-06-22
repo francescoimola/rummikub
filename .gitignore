@@ -58,3 +58,6 @@ ASTRO-6-CLOUDFLARE-UPGRADE.md
 public/
 .cache/
 node_modules/
+
+# SDD scratch
+.superpowers/
