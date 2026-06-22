@@ -57,6 +57,78 @@ for the new design. **Reuse-with-review, never blind copy-paste.**
 6. When the Figma design is final, expand Phases 2–5 into their own detailed plans before
    building pages/migrating content.
 
+## Four risks to avoid — read carefully
+
+### 1. Phases 2–5 are NOT detailed yet; you must write them before executing
+
+The plan gives you **Phase 1 in full bite-sized detail** and **Phases 2–5 as roadmaps only**.
+Do NOT start building Phase 2 (design system & chrome) by guessing. When Phase 1 is done:
+- Read the Phase 2 roadmap in the plan.
+- Use the Figma designs + the old 11ty project to understand what components/layout are needed.
+- **Write a detailed Phase 2 plan (same format, same granularity as Phase 1)** before you touch code.
+- Same for Phases 3, 4, 5 — one detailed plan per phase, then execute it.
+
+**Why:** Scope creep and wasted work happen when phases are vague. The bite-sized approach
+that protected Phase 1 must apply to every phase.
+
+### 2. "Reference not source of truth" — you will be tempted to copy-paste from the old 11ty site. Don't.
+
+The old 11ty project (`/Users/francescoimola/Repositories/francescoimola - old/`) is a
+**working reference for HOW to build**, not WHAT to build. Its plumbing (image pipeline,
+SCSS config, base layout structure) is sound — reuse that. But its **styling, HTML
+structure, and layout are for a different Figma design**. You MUST adapt everything for
+the new design.
+
+**Concrete examples of "reuse vs. adapt":**
+- ✅ **Reuse:** Copy `eleventy.config.js` verbatim — the image pipeline, RSS, markdown-it
+  config are proven and unchanged.
+- ❌ **Don't copy-paste:** The old site has a `_header.njk` with a megamenu and
+  testimonials — the new design probably doesn't. Look at the Figma, design the NEW header,
+  then use the old site's *structure* (if it helps) but not its content/layout.
+- ✅ **Reuse:** The old site has `_post-base.njk` (blog post layout) — reuse its structure.
+- ❌ **Don't copy-paste:** But the new design might have a different color scheme, spacing,
+  or typography — adapt those from the Figma tokens.
+
+**If you catch yourself writing "similar to the old site," pause. Refer to the Figma instead.**
+
+### 3. Local toolchain: never work on `main`, only `eleventy-rebuild`. Protect it.
+
+This branch has **Eleventy** (npm, different toolchain). `main` has **Astro** (pnpm, different
+toolchain). Switching branches means reinstalling `node_modules` each time.
+
+**You will almost never need to switch back to `main`.** Work entirely on `eleventy-rebuild`
+until cutover. If you do switch:
+```bash
+git checkout eleventy-rebuild  # Switch back IMMEDIATELY
+npm install  # Reinstall for Eleventy
+```
+
+**Critical:** Do not commit to `main` by accident. Every commit goes on `eleventy-rebuild`.
+Confirm your branch: `git branch --show-current` should always print `eleventy-rebuild`.
+
+### 4. Content migration is real work; don't underestimate
+
+**Blog:** Markdown in `src/content/blog` on `main` (Astro) → Markdown in `src/blog/` on the
+new Eleventy branch. Near 1:1 port. ✅ Mechanical.
+
+**Playground:** NOT a content collection in rummikub — content is **hardcoded in
+`src/pages/playground.astro` and/or `src/constants.ts`**. You must **extract** that
+content into individual Markdown files for the new `src/playground/` collection. ⚠️ Real
+work. Budget time.
+
+**Images:** rummikub uses Cloudinary URLs in many places (remote images, auto-optimized).
+The new site uses local images + `@11ty/eleventy-img`. You will need to:
+- Swap Cloudinary URLs for local paths.
+- Reconcile MDX-embedded components to Nunjucks/simple markup.
+- Ensure paths work in the new image shortcode.
+
+**Webfonts:** The old 11ty repo is mid-way through **removing Ronzino woff files**. Decide
+NOW what fonts the new site uses (from the Figma design). Don't assume Ronzino is the
+answer.
+
+**Bottom line:** Content migration is not "copy the Markdown" — it's "extract, reconcile,
+and adapt." Budget a full task per content type (blog, playground, images).
+
 ## Watch-outs flagged during planning
 - **Blog** ports near 1:1 from `src/content/blog`; **Playground** is NOT a content
   collection (content is in pages/`constants.ts`) — extracting it is real work.
