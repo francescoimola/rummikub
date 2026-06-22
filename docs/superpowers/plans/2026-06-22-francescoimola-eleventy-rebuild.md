@@ -114,9 +114,11 @@ node_modules/
 
 ```bash
 cd /Users/francescoimola/Repositories/rummikub
-npm install
+pnpm install
 npx @11ty/eleventy
 ```
+
+> **Package manager: pnpm** (the repo's house tool — `main` uses it too). Use `pnpm`, never `npm`. Commit `pnpm-lock.yaml`. Dependency overrides go in `pnpm-workspace.yaml` (`overrides:`), per project convention — not npm's `package.json` `overrides`. Known override: `browserslist` must be pinned to a Node-26-safe version (`4.24.0`) — the latest (4.28.x) ships a multiline regex that Node 26 rejects, crashing the build.
 
 Expected: build completes with no error. (It writes `public/` even with no templates yet, or reports "0 files"; either is acceptable — the requirement is **no crash**.)
 
@@ -359,11 +361,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-      - run: npm ci
-      - run: npm run build
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build
       - name: Link check
         uses: lycheeverse/lychee-action@v2
         with:
@@ -377,7 +381,7 @@ jobs:
 
 ```bash
 rm -rf node_modules public
-npm ci && npm run build
+pnpm install --frozen-lockfile && pnpm run build
 ```
 
 Expected: clean install and build succeed (mirrors what CI runs).
