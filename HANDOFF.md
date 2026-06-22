@@ -50,7 +50,11 @@ for the new design. **Reuse-with-review, never blind copy-paste.**
    or superpowers:executing-plans.
 4. "Tests" here are build/serve/grep/CI assertions (the plan explains this) — there is no
    unit-test framework.
-5. When the Figma design is final, expand Phases 2–5 into their own detailed plans before
+5. **Figma MCP:** bring it in at **Phase 2** (design system & global chrome) — that is
+   the first moment the agent needs to know what things look like. Phase 1 is pure
+   plumbing (no visual work), so Figma is irrelevant there. From Phase 2 onwards, use
+   the Figma designs as the primary reference for every layout, component, and page.
+6. When the Figma design is final, expand Phases 2–5 into their own detailed plans before
    building pages/migrating content.
 
 ## Watch-outs flagged during planning
