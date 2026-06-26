@@ -71,9 +71,7 @@ squarely in Eleventy's sweet spot, so this is a low-likelihood risk with a cheap
   tokens are carried into the Eleventy site's SCSS layer. Eleventy's SCSS pipeline comes
   from the old 11ty project.
 - **`@11ty/eleventy-img`** for image compression.
-- **Lenis** as a single optional `<script>` for smooth scroll; CSS for the rest of the
-  motion/polish (modern CSS covers scroll-driven animation, view transitions,
-  transitions).
+- **Lenis** as a single optional `<script>` for smooth scroll;
 - **Cloudflare Pages**, static output, **no functions** (none needed once the form is
   dropped). Build command `npx @11ty/eleventy`, plus output directory.
 

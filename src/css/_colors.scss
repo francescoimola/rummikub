@@ -1,47 +1,32 @@
 @layer colors {
 
   :root {
-    /* Green scale — native oklch, hue 110.8 */
-    --green-1:  oklch(99.2% 0.0054 110.8);
-    --green-2:  oklch(98.2% 0.0127 110.8);
-    --green-3:  oklch(95.9% 0.0561 110.8);
-    --green-4:  oklch(93.2% 0.089  110.8);
-    --green-5:  oklch(89.7% 0.1109 110.8);
-    --green-6:  oklch(85.3% 0.1109 110.8);
-    --green-7:  oklch(79.5% 0.1109 110.8);
-    --green-8:  oklch(72.4% 0.1109 110.8);
-    --green-9:  oklch(34.4% 0.0739 110.8);
-    --green-10: oklch(41.1% 0.0739 110.8);
-    --green-11: oklch(54.4% 0.1109 110.8);
-    --green-12: oklch(35.4% 0.0739 110.8);
+    /* Radix-style 1–12 steps: 1–2 app/subtle backgrounds, 3–5 component/UI surfaces, 6–8 borders, 9 solid fill, 10 hovered solid, 11 accent text/icons, 12 high-contrast text */
 
-    /* Orange scale — native oklch, hue 61.47 */
-    --orange-1:  oklch(99.3% 0.0031 61.47);
-    --orange-2:  oklch(98.2% 0.0234 61.47);
-    --orange-3:  oklch(96.3% 0.0632 61.47);
-    --orange-4:  oklch(93.2% 0.1101 61.47);
-    --orange-5:  oklch(90.3% 0.1101 61.47);
-    --orange-6:  oklch(86.8% 0.1101 61.47);
-    --orange-7:  oklch(81.5% 0.1101 61.47);
-    --orange-8:  oklch(75.1% 0.1101 61.47);
-    --orange-9:  oklch(34.9% 0.0734 61.47);
-    --orange-10: oklch(41.6% 0.0734 61.47);
-    --orange-11: oklch(58.1% 0.1101 61.47);
-    --orange-12: oklch(35.1% 0.0734 61.47);
+    /* Green scale — hue 110.8 */
+    --green-1: oklch(99.2% 0.0054 110.8);
+    --green-2: oklch(98.2% 0.0127 110.8);
+    --green-3: oklch(95.9% 0.0561 110.8);
+    --green-4: oklch(93.2% 0.089 110.8);
+    --green-5: oklch(89.7% 0.1109 110.8);
+    --green-6: oklch(85.3% 0.1109 110.8);
+    --green-7: oklch(79.5% 0.1109 110.8);
+    --green-8: oklch(72.4% 0.1109 110.8);
+    --green-9: oklch(34.4% 0.0739 110.8);
+    --green-10: oklch(54.4% 0.21683 130);
 
     /* Surface anchors */
-    --sidebar-orange-light: var(--orange-5);
-    --sidebar-orange-dark:  oklch(22% 0.06 61.47);
     --sidebar-green-light: var(--green-5);
-    --sidebar-green-dark:  oklch(22% 0.06 110.8);
-    --content-light:        oklch(100% 0 0);
-    --content-dark:         oklch(30% 0.01 90);
+    --sidebar-green-dark: oklch(22% 0.05 130);
+    --content-light: oklch(100% 0 0);
+    --content-dark: color-mix(in oklch, var(--sidebar-green-dark) 50%, var(--color-black));
+    ;
 
     /* Neutral text — theme-independent alpha scale */
     --text-strongest: light-dark(oklch(20% 0 0 / 0.95), oklch(95% 0 0 / 0.95));
-    --text-standard:  light-dark(oklch(20% 0 0 / 0.85), oklch(95% 0 0 / 0.85));
-    --text-subdued:   light-dark(oklch(20% 0 0 / 0.70), oklch(95% 0 0 / 0.70));
-    --text-light:   light-dark(oklch(20% 0 0 / 0.33), oklch(95% 0 0 / 0.33));
+    --text-standard: light-dark(oklch(20% 0 0 / 0.85), oklch(95% 0 0 / 0.85));
+    --text-subdued: light-dark(oklch(20% 0 0 / 0.70), oklch(95% 0 0 / 0.70));
+    --text-light: light-dark(oklch(20% 0 0 / 0.33), oklch(95% 0 0 / 0.33));
   }
 
 }

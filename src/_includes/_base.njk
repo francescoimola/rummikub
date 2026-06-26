@@ -2,13 +2,14 @@
 <html lang="en">
 {% include "_head.njk" %}
 <body>
-  <div class="layout" data-theme="{{ theme | default('orange') }}" data-content="{{ contentMode | default('contrast') }}">
+  <div class="layout"{% if contentMode == "contrast" %} data-content="contrast"{% endif %}>
     <aside class="sidebar">
       {%- include "_header.njk" -%}
-      {%- include "_footer.njk" -%}
+      <div class="desktop-only">{%- include "_footer.njk" -%}</div>
     </aside>
     <div class="content">
-      <main class="flow has-gap-3xl has-pb-2xl">{{ content | safe }}</main>
+      <main class="flow has-gap-2xl-3xl">{{ content | safe }}</main>
+      <div class="mobile-only">{%- include "_footer.njk" -%}</div>
     </div>
   </div>
   <script src="/assets/app-core.js" defer></script>

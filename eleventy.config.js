@@ -45,6 +45,8 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addPlugin(eleventySass);
     eleventyConfig.addPlugin(pluginRss);
 
+    eleventyConfig.setServerOptions({ domDiff: false });
+
     // Add eleventy:ignore to remote images BEFORE image transform runs
     eleventyConfig.addTransform("ignoreRemoteImages", (content, outputPath) => {
       if (outputPath?.endsWith(".html")) {
