@@ -1,5 +1,5 @@
 ## Documentation
 
-- [Project Architecture](docs/architecture.md)
-- [PostCSS Setup](docs/POSTCSS_SETUP.md)
 - [Agent Guidelines](docs/AGENTS.md)
+- [Phase 2 Handoff](docs/phase2-handoff.md)
+- [Voice & Tone](docs/voice-guide.md)

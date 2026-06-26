@@ -2,15 +2,15 @@
 <html lang="en">
 {% include "_head.njk" %}
 <body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-  <header>{%- include "_header.njk" -%}</header>
-  <main class="page-margins">
-    {% if page.url != '/' %}
-    <div class="secondary-header pad-btt-lg"><h1>{{ navtitle | default(title) }}</h1></div>
-    {% endif %}
-    <div id="main-content">{{ content | safe }}</div>
-  </main>
-  {%- include "_footer.njk" -%}
+  <div class="layout" data-theme="{{ theme | default('orange') }}" data-content="{{ contentMode | default('contrast') }}">
+    <aside class="sidebar">
+      {%- include "_header.njk" -%}
+      {%- include "_footer.njk" -%}
+    </aside>
+    <div class="content">
+      <main class="flow has-gap-3xl has-pb-2xl">{{ content | safe }}</main>
+    </div>
+  </div>
   <script src="/assets/app-core.js" defer></script>
 </body>
 </html>

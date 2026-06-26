@@ -1,0 +1,115 @@
+{%- set isHomepage = page.url == '/' -%}
+{%- set isBlogPost = layout == '_post-base.njk' -%}
+{%- set isBlogListing = '/blog' in page.url and not isBlogPost -%}
+
+{%- if isHomepage -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "{{ site.url }}/#person",
+      "name": "{{ site.name }}",
+      "url": "{{ site.url }}",
+      "image": "{{ site.image }}",
+      "description": "{{ site.description }}",
+      "jobTitle": "Web Designer & Developer"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ site.url }}/#website",
+      "url": "{{ site.url }}",
+      "name": "{{ site.name }}",
+      "description": "{{ site.description }}",
+      "publisher": { "@id": "{{ site.url }}/#person" },
+      "inLanguage": "en-GB"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "{{ site.url }}{{ page.url }}#webpage",
+      "url": "{{ site.url }}{{ page.url }}",
+      "name": "{{ title }}",
+      "isPartOf": { "@id": "{{ site.url }}/#website" },
+      "about": { "@id": "{{ site.url }}/#person" },
+      "description": "{{ description | default(site.description) }}",
+      "inLanguage": "en-GB"
+    }
+  ]
+}
+</script>
+{%- endif -%}
+
+{%- if isBlogPost and date -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ title }}",
+  "description": "{{ teaser }}",
+  "image": "{{ image }}",
+  "datePublished": "{{ date | dateToRfc3339 }}",
+  "dateModified": "{{ date | dateToRfc3339 }}",
+  "author": {
+    "@type": "Person",
+    "@id": "{{ site.url }}/#person",
+    "name": "{{ site.name }}",
+    "url": "{{ site.url }}"
+  },
+  "publisher": {
+    "@type": "Person",
+    "@id": "{{ site.url }}/#person",
+    "name": "{{ site.name }}",
+    "url": "{{ site.url }}"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ site.url }}{{ page.url }}"
+  },
+  "url": "{{ site.url }}{{ page.url }}",
+  "inLanguage": "en-GB"
+  {%- if categories %},
+  "keywords": "{{ categories | join(', ') }}",
+  "articleSection": "{{ categories[0] }}"
+  {%- endif %}
+}
+</script>
+{%- endif -%}
+
+{%- if isBlogListing -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "{{ site.name }} — Blog",
+  "description": "{{ site.description }}",
+  "url": "{{ site.url }}/blog/",
+  "publisher": {
+    "@type": "Person",
+    "@id": "{{ site.url }}/#person",
+    "name": "{{ site.name }}",
+    "url": "{{ site.url }}"
+  },
+  "inLanguage": "en-GB"
+}
+</script>
+{%- endif -%}
+
+{%- if not isHomepage and not (isBlogPost and date) and not isBlogListing -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "{{ title }} | {{ site.name }}",
+  "description": "{{ description | default(site.description) }}",
+  "url": "{{ site.url }}{{ page.url }}",
+  "publisher": {
+    "@type": "Person",
+    "@id": "{{ site.url }}/#person",
+    "name": "{{ site.name }}",
+    "url": "{{ site.url }}"
+  },
+  "inLanguage": "en-GB"
+}
+</script>
+{%- endif -%}
