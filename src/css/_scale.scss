@@ -25,15 +25,18 @@
     "maxSize": 18,
     "positiveSteps": (1.5, 2, 3, 4, 6, 8),
     "negativeSteps": (0.75, 0.5, 0.25, 0.125),
-    "customSizes": ("s-l", "s-xl", "s-2xl", "m-xl", "l-2xl", "l-3xl", "xl-3xl", "xl-4xl", "3xl-4xl"),
+    "customSizes": ("s-l", "s-xl", "s-2xl", "m-xl", "l-2xl", "l-3xl", "l-4xl", "xl-3xl", "xl-4xl", "3xl-4xl"),
     "prefix": "space-",
     "relativeTo": "container",
   ));
 
 
+    /* Utopia type-scale ratio (matches minTypeScale / maxTypeScale above) */
+    --type-ratio: 1.333;
+
     --gutter-y: var(--space-s-l);
     --gutter-x: var(--space-s-2xl);
-    --max-width: calc(var(--grid-width-2xl) * 1.333);
+    --max-width: calc(var(--grid-width-2xl) * var(--type-ratio));
   }
 
 }

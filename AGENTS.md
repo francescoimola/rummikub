@@ -30,7 +30,8 @@ pnpm clean            # rm -rf public
 | `src/css/index.scss` | SCSS entry point + all styles (theme, content modes, interactive, typography, layout) |
 | `src/css/_fonts.scss` | Ronzino `@font-face` declarations (`@layer fonts`) |
 | `src/css/_colors.scss` | Green/orange colour scales, surface anchor tokens, neutral text alpha scale (`@layer colors`) |
-| `src/css/_type.scss` | Utopia fluid type + space scale tokens (`@layer type`) |
+| `src/css/_scale.scss` | Utopia fluid type + space scale tokens (`@layer type`) |
+| `src/css/_view-transitions.scss` | View transition names and animations (`@layer view-transitions`) |
 | `src/css/vendor/cleacss.css` | Vendored cleacss v3.2.0 — do NOT npm-install |
 | `src/assets/fonts/` | Ronzino woff2 files (passthrough copied to `public/assets/fonts/`) |
 | `src/assets/favicon/` | Favicon files (passthrough copied) |
@@ -43,7 +44,7 @@ pnpm clean            # rm -rf public
 
 2. **cleacss is vendored** — Lives at `src/css/vendor/cleacss.css`. Do not `pnpm add` it. Imported with `@import "vendor/cleacss"` (extensionless, forces Sass to pass it through as plain CSS).
 
-3. **`@layer` names in use:** `reset` (cleacss — do not write to it), `fonts`, `colors`, `type`. Layers are for variable/token declarations only. All actual styles go unlayered in `index.scss`.
+3. **`@layer` names in use:** `reset` (cleacss — do not write to it), `fonts`, `colors`, `type`, `view-transitions`. Layers are for variable/token declarations only, except `view-transitions` which also contains `view-transition-name` assignments and keyframes. All other styles go unlayered in `index.scss`.
 
 4. **Colour mode** — cleacss uses `light-dark()` natively. Set `[data-theme="dark"]` on `<html>` to force dark mode manually. OS preference works automatically.
 

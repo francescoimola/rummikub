@@ -1,12 +1,12 @@
 {# _header.njk #}
 <nav>
     <a href="/">Francesco Imola</a>
-    <ul class="flow has-gap-2xs">
-        <li><a href="/">Home</a></li>
-        <li><a href="/services">Studio Services</a></li>
-        <li><a href="/work">Selected Work</a></li>
-        <li><a href="/writing">Writing</a></li>
-        <li><a href="/art">Artmaking</a></li>
-        <li><a href="/contact">Contact</a></li>
+    <ul class="flow has-gap-2xs has-mb-s-m">
+        <li><a href="/"{{ ' aria-current="page"' | safe if page.url == '/' }}>Home</a></li>
+        <li><a href="/services/"{{ ' aria-current="page"' | safe if page.url == '/services/' }}>Studio Services</a></li>
+        <li><a href="/work/"{{ ' aria-current="page"' | safe if page.url == '/work/' }}>Selected Work</a></li>
+        <li><a href="/writing/"{{ ' aria-current="page"' | safe if page.url == '/writing/' }}>Writing</a></li>
+        <li><a href="/art/"{{ ' aria-current="page"' | safe if page.url == '/art/' }}>Artmaking</a></li>
+        <li><a href="/contact/"{{ ' aria-current="page"' | safe if page.url == '/contact/' }}>Contact</a></li>
     </ul>
 </nav>
