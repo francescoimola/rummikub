@@ -54,9 +54,8 @@ Four SCSS partials + one vendored CSS file, imported in `src/css/index.scss`:
 
 **`_colors.scss`** — inside `@layer colors`:
 - Full 12-step yellow scale (native oklch, hue 110.8) as `--yellow-1` through `--yellow-12`
-- Full 12-step orange scale (native oklch, hue 61.47) as `--orange-1` through `--orange-12`
 - Named surface anchor tokens at `:root`
-- Three paired surface classes: `.surface-sidebar-orange`, `.surface-sidebar-yellow`, `.surface-content`
+- Three paired surface classes: `.surface-sidebar-yellow`, `.surface-content`
 - Each class sets both `--color-base-background` and `--color-base` via `light-dark()` so background + text flip together automatically
 
 **`_layout.scss`** — inside `@layer layout`:
@@ -70,7 +69,7 @@ Four SCSS partials + one vendored CSS file, imported in `src/css/index.scss`:
 
 ### Page structure
 - `src/_includes/_base.njk` — sidebar + content layout with surface classes applied:
-  - `<aside class="sidebar surface-sidebar-orange">` contains `_header.njk` (top) and `_footer.njk` (bottom, pushed down by `space-between`)
+  - `<aside class="sidebar">` contains `_header.njk` (top) and `_footer.njk` (bottom, pushed down by `space-between`)
   - `<div class="content surface-content">` contains `<main id="main-content">`
 - `src/_includes/_header.njk` — bare stub: logo link in `<nav>`
 - `src/_includes/_footer.njk` — bare stub: copyright line
@@ -176,7 +175,7 @@ Four SCSS partials + one vendored CSS file, imported in `src/css/index.scss`:
 {% include "_head.njk" %}
 <body>
   <div class="layout">
-    <aside class="sidebar surface-sidebar-orange">
+    <aside class="sidebar">
       {%- include "_header.njk" -%}
       {%- include "_footer.njk" -%}
     </aside>
@@ -230,34 +229,11 @@ Four SCSS partials + one vendored CSS file, imported in `src/css/index.scss`:
     --yellow-11: oklch(54.4% 0.1109 110.8);
     --yellow-12: oklch(35.4% 0.0739 110.8);
 
-    /* Orange scale — native oklch, hue 61.47 */
-    --orange-1:  oklch(99.3% 0.0031 61.47);
-    --orange-2:  oklch(98.2% 0.0234 61.47);
-    --orange-3:  oklch(96.3% 0.0632 61.47);
-    --orange-4:  oklch(93.2% 0.1101 61.47);
-    --orange-5:  oklch(90.3% 0.1101 61.47);
-    --orange-6:  oklch(86.8% 0.1101 61.47);
-    --orange-7:  oklch(81.5% 0.1101 61.47);
-    --orange-8:  oklch(75.1% 0.1101 61.47);
-    --orange-9:  oklch(34.9% 0.0734 61.47);
-    --orange-10: oklch(41.6% 0.0734 61.47);
-    --orange-11: oklch(58.1% 0.1101 61.47);
-    --orange-12: oklch(35.1% 0.0734 61.47);
-
     /* Surface anchors — tune these to adjust the palette */
-    --sidebar-orange-light: var(--orange-3);
-    --sidebar-orange-dark:  oklch(22% 0.06 61.47);
     --sidebar-yellow-light: var(--yellow-3);
     --sidebar-yellow-dark:  oklch(22% 0.06 110.8);
     --content-light:        oklch(100% 0 0);
     --content-dark:         oklch(30% 0.01 90);
-  }
-
-  .surface-sidebar-orange {
-    --color-base-background: light-dark(var(--sidebar-orange-light), var(--sidebar-orange-dark));
-    --color-base:            light-dark(var(--orange-9),             var(--orange-3));
-    background-color: var(--color-base-background);
-    color: var(--color-base);
   }
 
   .surface-sidebar-yellow {
@@ -283,10 +259,10 @@ Four SCSS partials + one vendored CSS file, imported in `src/css/index.scss`:
 
 The site has a **sidebar + main content** layout:
 
-- A narrow sidebar (default `16rem`) sits on the left with an orange tint; the main content area fills the rest with a white background in light mode
+- A narrow sidebar (default `16rem`) sits on the left with a green tint; the main content area fills the rest with a white background in light mode
 - The sidebar holds the site nav (top) and the footer (bottom) — `justify-content: space-between` on the flex column pushes the footer to the base of the sidebar
 - In dark mode: the sidebar goes deepest (`oklch(22%)`) and the content area goes slightly lighter (`oklch(30%)`) — a deliberate depth gap to maintain visual separation
-- The surface classes (`.surface-sidebar-orange`, `.surface-sidebar-yellow`, `.surface-content`) are all defined in `_colors.scss` and already applied to the HTML
+- The surface classes (`.surface-sidebar-yellow`, `.surface-content`) are all defined in `_colors.scss` and already applied to the HTML
 
 The overall feel: warm, typographically-led, understated. Font is Ronzino (a humanist sans-serif).
 

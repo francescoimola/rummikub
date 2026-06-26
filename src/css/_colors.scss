@@ -1,32 +1,91 @@
+@use 'sass:math';
+
+// ── Rounding helper ───────────────────────────────────
+// Keeps output CSS clean (3 decimal places) when Sass computes float powers.
+
+@function _r3($v) { @return math.div(math.round($v * 1000), 1000); }
+
+// ── Tuning knobs ──────────────────────────────────────
+// Change these, rebuild, and the whole palette follows.
+
+$dark-ramp-k:  0.931;   // geometric multiplier for the darker half of the scale
+$text-warmth:  0.40;    // chroma borrowed from green-1 (0 = grey, ~0.60 = visibly warm)
+$text-dark-l:  0.20;    // L channel for dark text (light mode)
+$text-light-l: 0.95;    // L channel for light text (dark mode)
+
+// ── Derived geometric multipliers ─────────────────────
+// Computed at build time from $dark-ramp-k.
+// You should never need to edit these directly.
+
+$_k2:  _r3(math.pow($dark-ramp-k, 2));   // k²  ≈ 0.867
+$_k3:  _r3(math.pow($dark-ramp-k, 3));   // k³  ≈ 0.807
+$_k7:  _r3(math.pow($dark-ramp-k, 7));   // k⁷  ≈ 0.606
+$_k13: _r3(math.pow($dark-ramp-k, 13));  // k¹³ ≈ 0.395
+// Chroma dampener for step 9 — sqrt(k¹³) so chroma fades roughly as √L.
+// NOTE: this couples chroma to the lightness ramp. Changing $dark-ramp-k
+// changes both the L multiplier AND the C dampener.
+$_c13: _r3(math.sqrt($_k13));            // √(k¹³) ≈ 0.628
+
 @layer colors {
 
+  /*
+    Green colour scale — derived from a single anchor (--green-5).
+    Change it and the whole palette follows.
+    L = lightness (0%→100%)  C = chroma (0=grey)  H = hue (degrees)
+  */
+
   :root {
-    /* Radix-style 1–12 steps: 1–2 app/subtle backgrounds, 3–5 component/UI surfaces, 6–8 borders, 9 solid fill, 10 hovered solid, 11 accent text/icons, 12 high-contrast text */
 
-    /* Green scale — hue 110.8 */
-    --green-1: oklch(99.2% 0.0054 110.8);
-    --green-2: oklch(98.2% 0.0127 110.8);
-    --green-3: oklch(95.9% 0.0561 110.8);
-    --green-4: oklch(93.2% 0.089 110.8);
-    --green-5: oklch(89.7% 0.1109 110.8);
-    --green-6: oklch(85.3% 0.1109 110.8);
-    --green-7: oklch(79.5% 0.1109 110.8);
-    --green-8: oklch(72.4% 0.1109 110.8);
-    --green-9: oklch(34.4% 0.0739 110.8);
-    --green-10: oklch(54.4% 0.21683 130);
+    /* Anchor — the only hand-picked value */
+    --green-5: oklch(89.7% 0.1109 110.8);    /* peak chroma surface */
 
-    /* Surface anchors */
+    /* Lighter ramp (1–4): quadratic blend of peak green + white  (n² / 5²) */
+    --green-1: color-mix(in oklch, var(--green-5)  4%, white);
+    --green-2: color-mix(in oklch, var(--green-5) 16%, white);
+    --green-3: color-mix(in oklch, var(--green-5) 36%, white);
+    --green-4: color-mix(in oklch, var(--green-5) 64%, white);
+
+    /* Darker ramp (6–8): geometric L progression, C stays at peak */
+    --green-6: oklch(from var(--green-5) calc(l * #{$dark-ramp-k}) c h);
+    --green-7: oklch(from var(--green-5) calc(l * #{$_k2}) c h);
+    --green-8: oklch(from var(--green-5) calc(l * #{$_k3}) c h);
+
+    /* Dark solid (9): k¹³ on the ramp, C damped by √(k¹³) to avoid neon */
+    --green-9: oklch(from var(--green-5) calc(l * #{$_k13}) calc(c * #{$_c13}) h);
+
+    /* Accent (10): k⁷ on the ramp, then C ×1.95 and hue +18° for warmth */
+    --green-10: oklch(from var(--green-5) calc(l * #{$_k7}) calc(c * 1.95) calc(h + 18));
+
+    /* Sidebar backgrounds */
     --sidebar-green-light: var(--green-5);
-    --sidebar-green-dark: oklch(22% 0.05 130);
-    --content-light: oklch(100% 0 0);
-    --content-dark: color-mix(in oklch, var(--sidebar-green-dark) 50%, var(--color-black));
-    ;
+    --sidebar-green-dark: oklch(from var(--green-10) calc(l * 0.40) calc(c * 0.23) h);
 
-    /* Neutral text — theme-independent alpha scale */
-    --text-strongest: light-dark(oklch(20% 0 0 / 0.95), oklch(95% 0 0 / 0.95));
-    --text-standard: light-dark(oklch(20% 0 0 / 0.85), oklch(95% 0 0 / 0.85));
-    --text-subdued: light-dark(oklch(20% 0 0 / 0.70), oklch(95% 0 0 / 0.70));
-    --text-light: light-dark(oklch(20% 0 0 / 0.33), oklch(95% 0 0 / 0.33));
+    /* Content area — faintly tinted neutrals */
+    --content-light: color-mix(in oklch, var(--green-1) 30%, white);
+    --content-dark: color-mix(in oklch, var(--sidebar-green-dark) 50%, var(--color-black));
+
+    /* Text scale — borrows chroma from green-1 */
+    --text-strongest:
+      light-dark(
+        oklch(from var(--green-1) #{$text-dark-l} calc(c * #{$text-warmth}) h / 0.95),
+        oklch(from var(--green-1) #{$text-light-l} calc(c * #{$text-warmth}) h / 0.95)
+      );
+    --text-standard:
+      light-dark(
+        oklch(from var(--green-1) #{$text-dark-l} calc(c * #{$text-warmth}) h / 0.85),
+        oklch(from var(--green-1) #{$text-light-l} calc(c * #{$text-warmth}) h / 0.85)
+      );
+    --text-subdued:
+      light-dark(
+        oklch(from var(--green-1) #{$text-dark-l} calc(c * #{$text-warmth}) h / 0.70),
+        oklch(from var(--green-1) #{$text-light-l} calc(c * #{$text-warmth}) h / 0.70)
+      );
+    --text-light:
+      light-dark(
+        oklch(from var(--green-1) #{$text-dark-l} calc(c * #{$text-warmth}) h / 0.33),
+        oklch(from var(--green-1) #{$text-light-l} calc(c * #{$text-warmth}) h / 0.33)
+      );
+
   }
 
 }

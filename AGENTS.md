@@ -29,7 +29,7 @@ pnpm clean            # rm -rf public
 | `src/_data/site.json` | Global site data (`url`, `name`, `description`, `image`) |
 | `src/css/index.scss` | SCSS entry point + all styles (theme, content modes, interactive, typography, layout) |
 | `src/css/_fonts.scss` | Ronzino `@font-face` declarations (`@layer fonts`) |
-| `src/css/_colors.scss` | Green/orange colour scales, surface anchor tokens, neutral text alpha scale (`@layer colors`) |
+| `src/css/_colors.scss` | Green colour scale, surface anchor tokens, neutral text alpha scale (`@layer colors`) |
 | `src/css/_scale.scss` | Utopia fluid type + space scale tokens (`@layer type`) |
 | `src/css/_view-transitions.scss` | View transition names and animations (`@layer view-transitions`) |
 | `src/css/vendor/cleacss.css` | Vendored cleacss v3.2.0 — do NOT npm-install |
@@ -50,7 +50,7 @@ pnpm clean            # rm -rf public
 
 5. **OKLCH colours** — native oklch renders P3-wide automatically. No `@supports (color: color(display-p3))` block needed.
 
-6. **Page theming** — Pages set `theme` (`orange` or `green`) and `contentMode` (`flush` or `contrast`) in frontmatter. These render as `data-theme` and `data-content` attributes on `.layout` in `_base.njk`. `[data-theme]` sets `--color-accent` and `--sidebar-bg`. `[data-content="flush"]` makes sidebar and content share the same background (homepage). `[data-content="contrast"]` gives content a white background with accent-coloured links (other pages). Defaults: `theme: orange`, `contentMode: contrast`.
+6. **Content modes** — Pages set `contentMode: contrast` in frontmatter to give content a white background with accent-coloured links. Omit `contentMode` for the default flush layout where sidebar and content share the same background. Renders as `data-content="contrast"` on `.layout` in `_base.njk`.
 
 7. **Text colour tokens** — `--text-strongest`, `--text-standard`, `--text-subdued` are theme-independent neutral alpha values defined in `_colors.scss`. They use `light-dark()` for dark mode. Headings use `--text-strongest`, body text uses `--text-standard`, `small`/`figcaption`/`blockquote`/`time` use `--text-subdued`.
 
@@ -70,7 +70,7 @@ pnpm clean            # rm -rf public
 |---|---|
 | Sass error: `@use` after `@import` | Move all `@use` statements above `@import "vendor/cleacss"` in `index.scss` |
 | cleacss not applying dark mode | Check `[data-theme]` attribute on `<html>`; or verify LightningCSS is processing the output |
-| Text colour not changing with theme | Text uses `--text-*` tokens which are theme-independent — this is intentional; only `--color-accent` changes with theme |
+| Text colour not changing with the palette | Text uses `--text-*` tokens which are intentionally near-neutral — only `--color-accent` changes with the palette |
 | Font not loading | Check `src/assets/fonts/` has the woff2 file; passthrough copy requires the file to exist at build time |
 | Build fails on Node 22+ | Confirm `browserslist@4.24.0` override is in `pnpm-workspace.yaml` |
 | VS Code TypeScript error in `.njk` or `.js` | `tsconfig.json` at root is intentionally minimal — `checkJs: false` |
