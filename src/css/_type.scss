@@ -1,0 +1,39 @@
+@use '../../node_modules/utopia-core-scss/src/utopia' as utopia;
+
+@layer type {
+
+  :root {
+    /* @link https://utopia.fyi/type/calculator?c=360,16,1.333,1920,18,1.333,2,1, */
+    @include utopia.generateTypeScale((
+      "minWidth": 360,
+      "maxWidth": 1920,
+      "minFontSize": 16,
+      "maxFontSize": 18,
+      "minTypeScale": 1.333,
+      "maxTypeScale": 1.333,
+      "positiveSteps": 2,
+      "negativeSteps": 1,
+      "prefix": "step-",
+      "relativeTo": "container"
+    ));
+
+    /* @link https://utopia.fyi/space/calculator?c=360,16,1.2,1920,18,1.25,5,2,&s=0.75|0.5|0.25|0.125,1.5|2|3|4|6,s-l|m-xl|l-2xl|s-2xl&g=s,l,xl,12 */
+    @include utopia.generateSpaceScale((
+    "minWidth": 360,
+    "maxWidth": 1920,
+    "minSize": 16,
+    "maxSize": 18,
+    "positiveSteps": (1.5, 2, 3, 4, 6, 8),
+    "negativeSteps": (0.75, 0.5, 0.25, 0.125),
+    "customSizes": ("s-l", "s-xl", "s-2xl", "m-xl", "l-2xl", "l-3xl", "xl-3xl", "xl-4xl", "3xl-4xl"),
+    "prefix": "space-",
+    "relativeTo": "container",
+  ));
+
+
+    --gutter-y: var(--space-s-l);
+    --gutter-x: var(--space-s-2xl);
+    --max-width: calc(var(--grid-width-2xl) * 1.333);
+  }
+
+}

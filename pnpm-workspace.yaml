@@ -4,27 +4,16 @@ allowBuilds:
 
 onlyBuiltDependencies:
   - esbuild
-  - workerd
 
 overrides:
   browserslist: 4.24.0
   rollup: '>=4.59.0'
   ajv: '>=8.18.0'
   lodash@>=4.0.0 <=4.17.22: '>=4.17.23'
-  wrangler@>=4.0.0 <4.59.1: '>=4.59.1'
-  # refreshed / added for current advisories:
   undici: '^7.24.0'
   fast-xml-parser: '^5.7.0'
   fast-xml-builder: '>=1.1.7'
-  vite: '^6.4.3'
-  h3: '^1.15.9'
-  defu: '>=6.1.5'
-  devalue: '^5.6.4'
   svgo: '^4.0.1'
-  # NOTE: esbuild NOT overridden — its only patched version (0.28.1) breaks the
-  # build (can't lower destructuring for old browserslist targets). esbuild is a
-  # build-time-only dep (not in the shipped Cloudflare bundle), so the advisory's
-  # risk surface is the local dev environment. Resolved properly by the Astro 6 upgrade.
   ws: '^8.21.0'
   fast-uri: '^3.1.2'
   yaml: '^2.8.3'

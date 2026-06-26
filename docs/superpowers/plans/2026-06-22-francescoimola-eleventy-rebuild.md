@@ -155,7 +155,6 @@ Start from the old 11ty `_base.njk` (see `/Users/francescoimola/Repositories/fra
 <html lang="en">
 {% include "_head.njk" %}
 <body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
   <header>{%- include "_header.njk" -%}</header>
   <main class="page-margins">
     {% if page.url != '/' %}

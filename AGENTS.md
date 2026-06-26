@@ -1,0 +1,75 @@
+# Rummikub — Francesco Imola's portfolio
+
+**Stack:** Eleventy 3 · Nunjucks templates · SCSS (compiled via `@11tyrocks/eleventy-plugin-sass-lightningcss` → LightningCSS) · pnpm · Deploys to Netlify (or Cloudflare Pages — TBD).
+
+**Branch:** `eleventy-rebuild` — active development. `main` holds the old Astro site (do not touch).
+
+## Reference docs
+
+- **Phase 2 handoff:** [phase2-handoff.md](phase2-handoff.md) — full context on what's built and what's next
+- **Voice & tone:** [voice-guide.md](voice-guide.md)
+
+## Commands
+
+```bash
+pnpm install          # Install dependencies
+pnpm start            # Dev server (Eleventy --serve)
+pnpm build            # Production build
+pnpm clean            # rm -rf public
+```
+
+**Never run `pnpm dev` / `npm run dev`** — the dev script is `pnpm start`. Do not spin up a dev server unless the user explicitly asks.
+
+## Project structure
+
+| Path | Purpose |
+|---|---|
+| `src/` | All source files |
+| `src/_includes/` | Nunjucks partials (`_base.njk`, `_head.njk`, `_header.njk`, `_footer.njk`, `_meta.njk`, `_schema.njk`) |
+| `src/_data/site.json` | Global site data (`url`, `name`, `description`, `image`) |
+| `src/css/index.scss` | SCSS entry point + all styles (theme, content modes, interactive, typography, layout) |
+| `src/css/_fonts.scss` | Ronzino `@font-face` declarations (`@layer fonts`) |
+| `src/css/_colors.scss` | Green/orange colour scales, surface anchor tokens, neutral text alpha scale (`@layer colors`) |
+| `src/css/_type.scss` | Utopia fluid type + space scale tokens (`@layer type`) |
+| `src/css/vendor/cleacss.css` | Vendored cleacss v3.2.0 — do NOT npm-install |
+| `src/assets/fonts/` | Ronzino woff2 files (passthrough copied to `public/assets/fonts/`) |
+| `src/assets/favicon/` | Favicon files (passthrough copied) |
+| `public/` | Build output — gitignored, do not commit |
+| `eleventy.config.js` | Eleventy configuration |
+
+## CSS architecture rules
+
+1. **`@use` before `@import`** — Dart Sass requires all `@use` statements to appear before any `@import` or CSS at-rules in the same file. Always add new partials as `@use 'partial'` at the top of `index.scss`, before `@import "vendor/cleacss"`.
+
+2. **cleacss is vendored** — Lives at `src/css/vendor/cleacss.css`. Do not `pnpm add` it. Imported with `@import "vendor/cleacss"` (extensionless, forces Sass to pass it through as plain CSS).
+
+3. **`@layer` names in use:** `reset` (cleacss — do not write to it), `fonts`, `colors`, `type`. Layers are for variable/token declarations only. All actual styles go unlayered in `index.scss`.
+
+4. **Colour mode** — cleacss uses `light-dark()` natively. Set `[data-theme="dark"]` on `<html>` to force dark mode manually. OS preference works automatically.
+
+5. **OKLCH colours** — native oklch renders P3-wide automatically. No `@supports (color: color(display-p3))` block needed.
+
+6. **Page theming** — Pages set `theme` (`orange` or `green`) and `contentMode` (`flush` or `contrast`) in frontmatter. These render as `data-theme` and `data-content` attributes on `.layout` in `_base.njk`. `[data-theme]` sets `--color-accent` and `--sidebar-bg`. `[data-content="flush"]` makes sidebar and content share the same background (homepage). `[data-content="contrast"]` gives content a white background with accent-coloured links (other pages). Defaults: `theme: orange`, `contentMode: contrast`.
+
+7. **Text colour tokens** — `--text-strongest`, `--text-standard`, `--text-subdued` are theme-independent neutral alpha values defined in `_colors.scss`. They use `light-dark()` for dark mode. Headings use `--text-strongest`, body text uses `--text-standard`, `small`/`figcaption`/`blockquote`/`time` use `--text-subdued`.
+
+## Non-negotiable rules
+
+1. **Nunjucks, not Astro.** Templates are `.njk`. There are no `.astro` files on this branch.
+2. **No TypeScript.** `eleventy.config.js` is CommonJS. `tsconfig.json` exists only to keep VS Code quiet — `checkJs` is off.
+3. **`public/` is build output.** Never commit files to `public/`. Recover missing static assets from `git show main:public/<path>` if needed.
+4. **Semantic HTML.** Single `<h1>` per page. Use `<article>`, `<nav>`, `<section>`, `<aside>` correctly. Skip link (`#main-content`) must remain.
+5. **`rem` for sizing, `dvh`/`dvw` over `vh`/`vw`.** No raw `px` values for layout.
+6. **External links:** always `target="_blank" rel="noopener noreferrer"`.
+7. **`browserslist` pin:** `pnpm-workspace.yaml` pins `browserslist@4.24.0`. Required for Node 22+. Do not remove.
+
+## Common gotchas
+
+| Issue | Fix |
+|---|---|
+| Sass error: `@use` after `@import` | Move all `@use` statements above `@import "vendor/cleacss"` in `index.scss` |
+| cleacss not applying dark mode | Check `[data-theme]` attribute on `<html>`; or verify LightningCSS is processing the output |
+| Text colour not changing with theme | Text uses `--text-*` tokens which are theme-independent — this is intentional; only `--color-accent` changes with theme |
+| Font not loading | Check `src/assets/fonts/` has the woff2 file; passthrough copy requires the file to exist at build time |
+| Build fails on Node 22+ | Confirm `browserslist@4.24.0` override is in `pnpm-workspace.yaml` |
+| VS Code TypeScript error in `.njk` or `.js` | `tsconfig.json` at root is intentionally minimal — `checkJs: false` |

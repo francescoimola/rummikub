@@ -75,7 +75,7 @@ module.exports = function (eleventyConfig) {
       urlPath: "/assets/images/",
 
       // Output image widths
-      widths: ["auto"],
+      widths: [400, 800, 1200, 1440, "auto"],
 
       // Optional, attributes assigned on <img> nodes override these values
       defaultAttributes: {
@@ -116,6 +116,7 @@ module.exports = function (eleventyConfig) {
     // Passthrough copy for static assets (exclude images - handled by plugin)
     eleventyConfig.addPassthroughCopy("src/assets/favicon");
     eleventyConfig.addPassthroughCopy("src/assets/fonts");
+    eleventyConfig.addPassthroughCopy({ "src/css/vendor": "css/vendor" });
     eleventyConfig.addPassthroughCopy("src/assets/*.js");
     eleventyConfig.addPassthroughCopy("src/robots.txt");
     eleventyConfig.addPassthroughCopy("src/_redirects");

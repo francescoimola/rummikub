@@ -2,14 +2,12 @@
 node_modules/
 
 # Build Output
-dist/
-.astro/
+public/
+.cache/
 
-# Cloudflare Wrangler
+# Secrets
 .wrangler/
 .dev.vars
-
-# Environment Variables
 .env
 .env.*
 !.env.example
@@ -45,18 +43,10 @@ coverage/
 .claude/
 .antigravity/
 .kilo/
-.husky/
 SITE_AUDIT.md
 site-fixes.xlsx
-docs/francescoimola - lighthouse scores - march 2026.png
-docs/francescoimola - mobile lighthouse scores - march 2026.png
 web-design-process.excalidraw
 *.code-workspace
-ASTRO-6-CLOUDFLARE-UPGRADE.md
-
-# Eleventy
-public/
-.cache/
 
 # SDD scratch
 .superpowers/

@@ -1,0 +1,16 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{%- if noindex %}<meta name="robots" content="noindex" />{%- endif %}
+
+{%- if teaser or description -%}
+<meta name="description" content="{{ teaser | default(description) }}" />
+{%- endif -%}
+
+<link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+<link rel="alternate" hreflang="en" href="{{ site.url }}{{ page.url }}" />
+
+<meta property="og:title" content="{{ title }}" />
+<meta property="og:site_name" content="{{ site.name }}" />
+<meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+<meta property="og:description" content="{{ teaser | default(description) | default(site.description) }}" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="{{ image | default('https://res.cloudinary.com/dax6x2pto/image/upload/c_lfill,w_1200,f_auto,q_auto/Open_Graph_Image_rfqysu.png') }}" />
