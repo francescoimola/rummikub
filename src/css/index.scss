@@ -135,12 +135,8 @@ section:not([data-headings="minimal"])>h2 {
 }
 
 a, button {
-
-    .layout & {
-        color: var(--color-accent);
-        text-decoration-color: color-mix(in oklch, var(--color-accent) 75%, transparent);
-        transition: color var(--dur-fast) var(--ease);
-    }
+    color: var(--color-accent);
+    text-decoration-color: color-mix(in oklch, var(--color-accent) 75%, transparent);
 
     @media (hover: hover) {
         &:hover {
