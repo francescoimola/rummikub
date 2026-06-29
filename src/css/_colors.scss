@@ -1,72 +1,104 @@
-@use 'sass:math';
-
-// Rounding helper: Keeps output CSS clean (3 decimal places) when Sass computes float powers.
-@function _r3($v) {
-  @return math.div(math.round($v * 1000), 1000);
-}
-
-// Tuning knobs: Change these, rebuild, and the whole palette follows.
-$dark-ramp-k: 0.931; // geometric multiplier for the darker half of the scale
-$text-warmth: 0.40; // chroma borrowed from green-1 (0 = grey, ~0.60 = visibly warm)
-$text-dark-l: 0.20; // L channel for dark text (light mode)
-$text-light-l: 0.95; // L channel for light text (dark mode)
-$neutral-min: 0.08; // alpha floor for neutral-6 (lower = lighter image bg)
-$neutral-gamma: 0.70; // power-curve exponent — lower values compress the top, higher values preserve it
-
-// Derived geometric multipliers: Computed at build time from $dark-ramp-k. You should never need to edit these directly.
-$_k2: _r3(math.pow($dark-ramp-k, 2)); // k²  ≈ 0.867
-$_k3: _r3(math.pow($dark-ramp-k, 3)); // k³  ≈ 0.807
-$_k7: _r3(math.pow($dark-ramp-k, 7)); // k⁷  ≈ 0.606
-$_k8: _r3(math.pow($dark-ramp-k, 8)); // k⁸  ≈ 0.560
-$_k13: _r3(math.pow($dark-ramp-k, 13)); // k¹³ ≈ 0.395
-
-// Chroma dampener for step 9 — sqrt(k¹³) so chroma fades roughly as √L.
-// NOTE: this couples chroma to the lightness ramp. Changing $dark-ramp-k changes both the L multiplier AND the C dampener.
-$_c8: _r3(math.sqrt($_k8)); // √(k⁸) ≈ 0.748
-$_c13: _r3(math.sqrt($_k13)); // √(k¹³) ≈ 0.628
-
 @layer colors {
-
-  // Green colour scale: Derived from a single anchor (--green-5). Change it and the whole palette follows. L = lightness (0%→100%)  C = chroma (0=grey)  H = hue (degrees)
   :root {
 
-    /* Anchor: The only hand-picked value */
-    --green-5: oklch(89.7% 0.1109 110.8);
-    /* peak chroma surface */
+    /* Brand scale (Figma) */
+    --green-50: light-dark(oklch(0.983 0.049 119.4), oklch(0.143 0.041 134.0));
+    --green-100: light-dark(oklch(0.958 0.061 119.7), oklch(0.332 0.088 129.1));
+    --green-200: light-dark(oklch(0.928 0.085 118.7), oklch(0.465 0.114 123.1));
+    --green-300: light-dark(oklch(0.875 0.131 117.2), oklch(0.555 0.132 120.3));
+    --green-400: light-dark(oklch(0.819 0.188 116.8), oklch(0.627 0.147 119.0));
+    --green-500: light-dark(oklch(0.764 0.179 118.8), oklch(0.688 0.160 118.0));
+    --green-600: light-dark(oklch(0.702 0.168 120.7), oklch(0.742 0.171 117.2));
+    --green-700: light-dark(oklch(0.630 0.154 122.6), oklch(0.790 0.181 116.5));
+    --green-800: light-dark(oklch(0.541 0.136 125.3), oklch(0.836 0.172 116.2));
+    --green-900: light-dark(oklch(0.420 0.116 131.7), oklch(0.886 0.112 117.8));
+    --green-950: light-dark(oklch(0.262 0.089 142.5), oklch(0.928 0.085 118.7));
 
-    /* Lighter ramp (1–4): quadratic blend of peak green + white  (n² / 5²) */
-    --green-1: color-mix(in oklch, var(--green-5) 4%, white);
-    --green-2: color-mix(in oklch, var(--green-5) 16%, white);
-    --green-3: color-mix(in oklch, var(--green-5) 36%, white);
-    --green-4: color-mix(in oklch, var(--green-5) 64%, white);
+    /* Neutral scale (Figma) */
+    --neutral-50: light-dark(oklch(0.987 0.006 123.1), oklch(0.118 0.030 125.9));
+    --neutral-100: light-dark(oklch(0.969 0.006 123.0), oklch(0.351 0.034 123.8));
+    --neutral-200: light-dark(oklch(0.940 0.007 122.9), oklch(0.470 0.021 123.2));
+    --neutral-300: light-dark(oklch(0.906 0.007 122.8), oklch(0.564 0.015 123.7));
+    --neutral-400: light-dark(oklch(0.853 0.008 122.6), oklch(0.638 0.013 124.0));
+    --neutral-500: light-dark(oklch(0.795 0.009 122.4), oklch(0.694 0.011 124.2));
+    --neutral-600: light-dark(oklch(0.730 0.010 122.1), oklch(0.743 0.010 124.4));
+    --neutral-700: light-dark(oklch(0.655 0.012 121.9), oklch(0.782 0.009 124.6));
+    --neutral-800: light-dark(oklch(0.564 0.016 121.5), oklch(0.842 0.008 124.8));
+    --neutral-900: light-dark(oklch(0.441 0.024 120.9), oklch(0.896 0.007 125.0));
+    --neutral-950: light-dark(oklch(0.351 0.034 121.6), oklch(0.945 0.007 125.2));
 
-    /* Darker ramp (6–9): geometric L progression, C stays at peak */
-    --green-6: oklch(from var(--green-5) calc(l * #{$dark-ramp-k}) c h);
-    --green-7: oklch(from var(--green-5) calc(l * #{$_k2}) c h);
-    --green-8: oklch(from var(--green-5) calc(l * #{$_k3}) c h);
-    --green-9: oklch(from var(--green-5) calc(l * #{$_k8}) calc(c * #{$_c8}) h);
+    /* Neutral alpha scale — base swaps via light-dark(), alpha is consistent */
+    --neutral-100-alpha: light-dark(oklch(0.351 0.034 121.6 / 0.05), oklch(0.945 0.007 125.2 / 0.05));
+    --neutral-200-alpha: light-dark(oklch(0.351 0.034 121.6 / 0.07), oklch(0.945 0.007 125.2 / 0.07));
+    --neutral-300-alpha: light-dark(oklch(0.351 0.034 121.6 / 0.14), oklch(0.945 0.007 125.2 / 0.14));
+    --neutral-400-alpha: light-dark(oklch(0.351 0.034 121.6 / 0.22), oklch(0.945 0.007 125.2 / 0.22));
+    --neutral-500-alpha: light-dark(oklch(0.351 0.034 121.6 / 0.33), oklch(0.945 0.007 125.2 / 0.33));
+    --neutral-600-alpha: light-dark(oklch(0.351 0.034 121.6 / 0.45), oklch(0.945 0.007 125.2 / 0.45));
+    --neutral-700-alpha: light-dark(oklch(0.351 0.034 121.6 / 0.56), oklch(0.945 0.007 125.2 / 0.56));
+    --neutral-800-alpha: light-dark(oklch(0.351 0.034 121.6 / 0.69), oklch(0.945 0.007 125.2 / 0.69));
+    --neutral-900-alpha: light-dark(oklch(0.351 0.034 121.6 / 0.83), oklch(0.945 0.007 125.2 / 0.83));
+    --neutral-950-alpha: light-dark(oklch(0.351 0.034 121.6 / 0.95), oklch(0.945 0.007 125.2 / 0.95));
 
-    /* Dark solid (10): k¹³ on the ramp, C damped by √(k¹³) */
-    --green-10: oklch(from var(--green-5) calc(l * #{$_k13}) calc(c * #{$_c13}) h);
+    /* Success scale (Figma) */
+    --success-50: light-dark(oklch(0.986 0.018 165.8), oklch(0.132 0.045 142.5));
+    --success-100: light-dark(oklch(0.967 0.031 166.1), oklch(0.357 0.098 150.1));
+    --success-200: light-dark(oklch(0.936 0.047 167.2), oklch(0.459 0.112 155.7));
+    --success-300: light-dark(oklch(0.897 0.064 168.6), oklch(0.542 0.118 162.6));
+    --success-400: light-dark(oklch(0.832 0.095 171.9), oklch(0.609 0.126 166.1));
+    --success-500: light-dark(oklch(0.752 0.140 176.9), oklch(0.657 0.129 170.7));
+    --success-600: light-dark(oklch(0.696 0.133 173.5), oklch(0.721 0.099 167.2));
+    --success-700: light-dark(oklch(0.627 0.122 171.6), oklch(0.772 0.067 163.3));
+    --success-800: light-dark(oklch(0.545 0.110 168.0), oklch(0.837 0.046 161.4));
+    --success-900: light-dark(oklch(0.435 0.096 161.8), oklch(0.894 0.029 160.3));
+    --success-950: light-dark(oklch(0.351 0.078 161.1), oklch(0.945 0.016 160.2));
 
-    /* Accent (11): k⁷ on the ramp, then C ×1.95 and hue +18°  */
-    --green-11: oklch(from var(--green-5) calc(l * #{$_k7}) calc(c * 1.95) calc(h + 18));
+    /* Warning scale (Figma) */
+    --warning-50: light-dark(oklch(0.984 0.016 83.3), oklch(0.126 0.052 29.2));
+    --warning-100: light-dark(oklch(0.966 0.030 78.5), oklch(0.335 0.088 50.0));
+    --warning-200: light-dark(oklch(0.937 0.047 78.1), oklch(0.445 0.100 64.6));
+    --warning-300: light-dark(oklch(0.900 0.064 80.4), oklch(0.540 0.113 75.9));
+    --warning-400: light-dark(oklch(0.842 0.096 85.3), oklch(0.614 0.127 81.0));
+    --warning-500: light-dark(oklch(0.776 0.147 92.9), oklch(0.672 0.134 86.3));
+    --warning-600: light-dark(oklch(0.710 0.145 90.3), oklch(0.729 0.091 77.3));
+    --warning-700: light-dark(oklch(0.636 0.130 87.9), oklch(0.774 0.062 71.1));
+    --warning-800: light-dark(oklch(0.547 0.112 83.1), oklch(0.838 0.043 67.4));
+    --warning-900: light-dark(oklch(0.427 0.091 73.8), oklch(0.894 0.027 64.7));
+    --warning-950: light-dark(oklch(0.345 0.073 72.7), oklch(0.945 0.015 62.5));
 
-    /* Sidebar backgrounds */
-    --sidebar-green-light: var(--green-5);
-    --sidebar-green-dark: oklch(from var(--green-11) calc(l * 0.40) calc(c * 0.23) h);
+    /* Error scale (Figma) */
+    --error-50: light-dark(oklch(0.983 0.008 24.6), oklch(0.126 0.052 29.2));
+    --error-100: light-dark(oklch(0.963 0.018 24.2), oklch(0.322 0.104 22.5));
+    --error-200: light-dark(oklch(0.936 0.032 23.3), oklch(0.421 0.108 20.0));
+    --error-300: light-dark(oklch(0.900 0.042 23.2), oklch(0.528 0.092 20.4));
+    --error-400: light-dark(oklch(0.843 0.053 22.9), oklch(0.607 0.087 20.8));
+    --error-500: light-dark(oklch(0.782 0.059 22.7), oklch(0.672 0.074 21.9));
+    --error-600: light-dark(oklch(0.712 0.068 22.2), oklch(0.727 0.066 22.4));
+    --error-700: light-dark(oklch(0.636 0.068 22.1), oklch(0.773 0.051 23.0));
+    --error-800: light-dark(oklch(0.541 0.071 21.9), oklch(0.837 0.038 23.3));
+    --error-900: light-dark(oklch(0.415 0.077 22.5), oklch(0.894 0.025 23.1));
+    --error-950: light-dark(oklch(0.340 0.062 23.7), oklch(0.945 0.014 22.2));
 
-    /* Content area: faintly tinted neutrals */
-    --content-light: color-mix(in oklch, var(--green-1) 30%, white);
-    --content-dark: color-mix(in oklch, var(--sidebar-green-dark) 50%, var(--color-black));
+    /* Info scale (Figma) */
+    --info-50: light-dark(oklch(0.985 0.015 205.5), oklch(0.131 0.037 250.4));
+    --info-100: light-dark(oklch(0.966 0.027 213.9), oklch(0.357 0.068 224.9));
+    --info-200: light-dark(oklch(0.936 0.041 213.5), oklch(0.461 0.083 217.7));
+    --info-300: light-dark(oklch(0.897 0.056 211.9), oklch(0.544 0.095 213.4));
+    --info-400: light-dark(oklch(0.832 0.086 208.8), oklch(0.611 0.106 211.3));
+    --info-500: light-dark(oklch(0.753 0.129 204.6), oklch(0.659 0.113 208.6));
+    --info-600: light-dark(oklch(0.697 0.119 206.6), oklch(0.721 0.087 211.7));
+    --info-700: light-dark(oklch(0.629 0.108 207.8), oklch(0.773 0.057 216.2));
+    --info-800: light-dark(oklch(0.547 0.095 209.9), oklch(0.837 0.038 218.8));
+    --info-900: light-dark(oklch(0.436 0.077 213.7), oklch(0.894 0.024 220.9));
+    --info-950: light-dark(oklch(0.352 0.062 214.4), oklch(0.945 0.013 222.9));
 
-    /* Neutral scale: power-curve alpha ramp, tinted with green-1 chroma */
-    @for $i from 1 through 6 {
-      $t: math.div($i - 1, 5);
-      $alpha: _r3(0.95 - (0.95 - $neutral-min) * math.pow($t, $neutral-gamma));
-      --neutral-#{$i}: light-dark(
-        oklch(from var(--green-1) #{$text-dark-l} calc(c * #{$text-warmth}) h / #{$alpha}),
-        oklch(from var(--green-1) #{$text-light-l} calc(c * #{$text-warmth}) h / #{$alpha}));
-    }
+    /* Cleacss semantic overrides — link cleacss utility classes and form states to our scales */
+    --color-success: var(--success-500);
+    --color-warning: var(--warning-500);
+    --color-error: var(--error-500);
+    --color-info: var(--info-500);
+
+    /* Semantic tokens */
+    --content-light: color-mix(in oklch, var(--green-50) 30%, white);
+    --content-dark: var(--green-100);
   }
 }
