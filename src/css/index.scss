@@ -5,6 +5,9 @@
 
 // Breakpoints — Sass vars, because custom properties can't be used in media conditions
 $bp-mobile: 49rem;
+$font-weight-base: 400;
+$font-weight-medium: 425;
+$font-weight-bold: 550;
 
 // Reveal animation — shared collapsed/open states for .expandable and <details>
 @mixin reveal-collapsed($content-visibility: false) {
@@ -58,10 +61,10 @@ $bp-mobile: 49rem;
 /* ---- Theme ---- */
 
 .layout {
-    --color-accent: var(--text-strongest);
-    --accent-hover: light-dark(var(--green-10), var(--green-6));
+    --color-accent: var(--neutral-1);
+    --accent-hover: light-dark(var(--green-11), var(--green-6));
     --sidebar-bg: light-dark(var(--sidebar-green-light), var(--sidebar-green-dark));
-    --accent-surface: light-dark(var(--green-4), var(--green-9));
+    --accent-surface: light-dark(var(--green-4), var(--green-10));
 
     >.sidebar,
     >.content {
@@ -77,6 +80,8 @@ $bp-mobile: 49rem;
 
     >.content {
         background-color: light-dark(var(--content-light), var(--sidebar-bg));
+        --color-accent: light-dark(var(--green-9), var(--green-7));
+        --accent-hover: light-dark(var(--green-8), var(--green-5));
     }
 }
 
@@ -100,30 +105,39 @@ html {
 
 body {
     font-size: var(--step-0);
-    color: var(--text-standard);
+    font-weight: $font-weight-base;
+    color: var(--neutral-2);
     margin: 0;
     background-color: light-dark(var(--content-light), var(--content-dark));
     text-underline-offset: calc(var(--space-3xs) / var(--type-ratio));
 }
 
-:where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
-    font-weight: 550; /* Ronzino is a variable font — non-standard weight is intentional */
+:where(h1, h2, .h1, .h2) {
+    font-weight: $font-weight-bold; /* Ronzino is a variable font — non-standard weight is intentional */
     font-size: var(--step-0);
     line-height: 1.2;
     text-wrap: balance;
     margin: 0;
-    color: var(--text-strongest);
+    color: var(--neutral-1);
 }
 
-section:not([data-headings="minimal"])>h2 {
-    background-color: var(--accent-surface);
-    inline-size: fit-content;
-    padding-block: var(--space-3xs-2xs);
-    padding-inline: var(--space-xs-s);
+:where(h3, h4, h5, h6, .h3, .h4, .h5, .h6) {
+    font-weight: $font-weight-medium;
+    font-size: var(--step-0);
+    line-height: revert;
+    max-width: var(--max-width-size-4);
 }
 
 :where(small, figcaption, blockquote, time) {
-    color: var(--text-subdued);
+    color: var(--neutral-3);
+}
+
+:where(img) {
+    background-color: var(--neutral-6);
+
+    &.img-padded {
+        padding: var(--space-s-l);
+    }
 }
 
 :where(a) {
@@ -155,16 +169,16 @@ a, button {
 
 nav a[aria-current="page"] {
     cursor: default;
-    color: var(--text-standard);
+    color: var(--neutral-2);
 
     @media (hover: hover) {
         &:hover {
-            color: var(--text-standard);
+            color: var(--neutral-2);
         }
     }
 
     &:focus-visible {
-        color: var(--text-standard);
+        color: var(--neutral-2);
     }
 }
 
@@ -197,6 +211,13 @@ a[data-icon="arrow-ext"]::after {
     rotate: 90deg;
 }
 
+[data-icon="email"]::after {
+    /* feather icon "email": horizontal arrow, currentColor stroke */
+    --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9ImN1cnJlbnRDb2xvciIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0xNC4yNSAxOEgzTDIuOTk3IDYuNjhsOC41NzYgNS45MzdhLjc1Ljc1IDAgMCAwIC44NTQgMEwyMSA2LjY4MlYxMy41aDEuNVY2QTEuNTAyIDEuNTAyIDAgMCAwIDIxIDQuNUgzQTEuNTAyIDEuNTAyIDAgMCAwIDEuNSA2djEyQTEuNTAyIDEuNTAyIDAgMCAwIDMgMTkuNWgxMS4yNVYxOFptNS4wOTktMTJMMTIgMTEuMDg4IDQuNjUxIDZoMTQuNjk4WiI+PC9wYXRoPgogIDxwYXRoIGQ9Ik0xOS41IDIxYTMgMyAwIDEgMCAwLTYgMyAzIDAgMCAwIDAgNloiPjwvcGF0aD4KPC9zdmc+);
+    margin-inline-start: var(--space-3xs);
+    vertical-align: -0.175em; /* optical alignment, eyeballed */
+}
+
 button {
     all: unset;
     cursor: pointer;
@@ -217,20 +238,15 @@ button {
     }
 }
 
-.expandable {
-    @include reveal-collapsed;
-}
-
-.expandable.is-open {
-    @include reveal-open;
-
-    &:is(.has-gap-3xl) {
-        margin-block-end: var(--space-2xl-3xl);
-    }
-}
-
 .subtitle {
-    color: var(--text-subdued);
+    color: var(--neutral-3);
+}
+
+section:not([data-headings="minimal"])>h2 {
+    background-color: var(--accent-surface);
+    inline-size: fit-content;
+    padding-block: var(--space-3xs-2xs);
+    padding-inline: var(--space-xs-s);
 }
 
 /* ---- Layout ---- */
@@ -308,8 +324,9 @@ nav {
 .content {
     display: flex;
     flex-direction: column;
-    padding-block: var(--gutter-y);
     padding-inline: var(--gutter-x);
+    padding-block-start: var(--gutter-y);
+    padding-block-end: var(--space-2xl-3xl);
 
     &:has(.expandable.is-open) footer {
         margin-block-end: var(--space-s-m);
@@ -320,6 +337,14 @@ nav {
     flex: 1;
     max-inline-size: 60ch;
     margin-inline: auto;
+}
+
+.expandable {
+    @include reveal-collapsed;
+
+    &.is-open {
+    @include reveal-open;
+    }
 }
 
 details {
@@ -369,9 +394,9 @@ summary {
 
 hr {
     inline-size: 100%;
-    color: var(--text-light);
+    color: var(--neutral-5);
     border-style: unset;
-    border-block-start: 1px solid var(--text-light);
+    border-block-start: 1px solid var(--neutral-5);
 }
 
 footer a {
@@ -383,6 +408,21 @@ footer a {
         inset: calc(-1 * var(--tap-extend));
     }
 }
+
+/* ---- Utilities ---- */
+
+.has-counter {
+    counter-reset: standard;
+}
+
+.has-counter>.service > h3::before {
+    counter-increment: standard;
+    content: counter(standard, decimal-leading-zero);
+    margin-inline-end: var(--space-xs);
+    color: var(--neutral-3);
+    font-weight: $font-weight-base;
+}
+
 
 /* ---- Responsive visibility ---- */
 
@@ -426,7 +466,7 @@ footer a {
 
 .data-list__label {
     display: flex;
-    color: var(--text-subdued);
+    color: var(--neutral-3);
     min-inline-size: 10rem;
 }
 
