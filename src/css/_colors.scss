@@ -1,18 +1,35 @@
+/* Brand re-tint knobs — registered so they animate as real numbers.
+   Outside @layer because @property is not subject to cascade layers. */
+@property --brand-hue {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 119.4;
+}
+@property --brand-chroma {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
 @layer colors {
   :root {
 
-    /* Brand scale (Figma) */
-    --green-50: light-dark(oklch(0.983 0.049 119.4), oklch(0.143 0.041 134.0));
-    --green-100: light-dark(oklch(0.958 0.061 119.7), oklch(0.332 0.088 129.1));
-    --green-200: light-dark(oklch(0.928 0.085 118.7), oklch(0.465 0.114 123.1));
-    --green-300: light-dark(oklch(0.875 0.131 117.2), oklch(0.555 0.132 120.3));
-    --green-400: light-dark(oklch(0.819 0.188 116.8), oklch(0.627 0.147 119.0));
-    --green-500: light-dark(oklch(0.764 0.179 118.8), oklch(0.688 0.160 118.0));
-    --green-600: light-dark(oklch(0.702 0.168 120.7), oklch(0.742 0.171 117.2));
-    --green-700: light-dark(oklch(0.630 0.154 122.6), oklch(0.790 0.181 116.5));
-    --green-800: light-dark(oklch(0.541 0.136 125.3), oklch(0.836 0.172 116.2));
-    --green-900: light-dark(oklch(0.420 0.116 131.7), oklch(0.886 0.112 117.8));
-    --green-950: light-dark(oklch(0.262 0.089 142.5), oklch(0.928 0.085 118.7));
+    /* Brand re-tint knobs — change these directly (or via a data-brand hook / JS) to rotate the whole brand scale's hue and scale its chroma */
+    --brand-hue: 119.4;   /* 50-step hue = base; rotate the whole scale here */
+    --brand-chroma: 1;     /* single chroma multiplier for the entire scale */
+
+    /* Brand scale (Figma) — hue = base + per-step offset, chroma = orig × knob */
+    --brand-50: light-dark(oklch(0.983 calc(0.049 * var(--brand-chroma)) var(--brand-hue)), oklch(0.143 calc(0.041 * var(--brand-chroma)) calc(var(--brand-hue) + 14.6)));
+    --brand-100: light-dark(oklch(0.958 calc(0.061 * var(--brand-chroma)) calc(var(--brand-hue) + 0.3)), oklch(0.332 calc(0.088 * var(--brand-chroma)) calc(var(--brand-hue) + 9.7)));
+    --brand-200: light-dark(oklch(0.928 calc(0.085 * var(--brand-chroma)) calc(var(--brand-hue) - 0.7)), oklch(0.465 calc(0.114 * var(--brand-chroma)) calc(var(--brand-hue) + 3.7)));
+    --brand-300: light-dark(oklch(0.875 calc(0.131 * var(--brand-chroma)) calc(var(--brand-hue) - 2.2)), oklch(0.555 calc(0.132 * var(--brand-chroma)) calc(var(--brand-hue) + 0.9)));
+    --brand-400: light-dark(oklch(0.819 calc(0.188 * var(--brand-chroma)) calc(var(--brand-hue) - 2.6)), oklch(0.627 calc(0.147 * var(--brand-chroma)) calc(var(--brand-hue) - 0.4)));
+    --brand-500: light-dark(oklch(0.764 calc(0.179 * var(--brand-chroma)) calc(var(--brand-hue) - 0.6)), oklch(0.688 calc(0.160 * var(--brand-chroma)) calc(var(--brand-hue) - 1.4)));
+    --brand-600: light-dark(oklch(0.702 calc(0.168 * var(--brand-chroma)) calc(var(--brand-hue) + 1.3)), oklch(0.742 calc(0.171 * var(--brand-chroma)) calc(var(--brand-hue) - 2.2)));
+    --brand-700: light-dark(oklch(0.630 calc(0.154 * var(--brand-chroma)) calc(var(--brand-hue) + 3.2)), oklch(0.790 calc(0.181 * var(--brand-chroma)) calc(var(--brand-hue) - 2.9)));
+    --brand-800: light-dark(oklch(0.541 calc(0.136 * var(--brand-chroma)) calc(var(--brand-hue) + 5.9)), oklch(0.836 calc(0.172 * var(--brand-chroma)) calc(var(--brand-hue) - 3.2)));
+    --brand-900: light-dark(oklch(0.420 calc(0.116 * var(--brand-chroma)) calc(var(--brand-hue) + 12.3)), oklch(0.886 calc(0.112 * var(--brand-chroma)) calc(var(--brand-hue) - 1.6)));
+    --brand-950: light-dark(oklch(0.262 calc(0.089 * var(--brand-chroma)) calc(var(--brand-hue) + 23.1)), oklch(0.928 calc(0.085 * var(--brand-chroma)) calc(var(--brand-hue) - 0.7)));
 
     /* Neutral scale (Figma) */
     --neutral-50: light-dark(oklch(0.987 0.006 123.1), oklch(0.118 0.030 125.9));
@@ -98,7 +115,19 @@
     --color-info: var(--info-500);
 
     /* Semantic tokens */
-    --content-light: color-mix(in oklch, var(--green-50) 30%, white);
-    --content-dark: var(--green-100);
+    --content-light: color-mix(in oklch, var(--brand-50) 30%, white);
+    --content-dark: var(--brand-100);
+  }
+
+  /* Brand re-tint hooks — re-tint the whole scale by rotating --brand-hue.
+     MUST target :root, since the --brand-* tokens are declared on :root and
+     their var(--brand-hue) is substituted there; overriding the hue on a
+     descendant would not recompute them. Set data-brand on <html>.
+     Cascades to --color-accent, hover, surfaces and content tokens. */
+  :root[data-brand="pink"] {
+    --brand-hue: 360; /* green ≈119° → pink ≈350° */
+  }
+  :root[data-brand="orange"] {
+    --brand-hue: 55; /* green ≈119° → orange ≈55° */
   }
 }

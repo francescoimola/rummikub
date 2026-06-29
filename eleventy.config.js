@@ -45,6 +45,11 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addPlugin(eleventySass);
     eleventyConfig.addPlugin(pluginRss);
 
+    // The sass plugin only watches the index.scss entry, not its @use'd
+    // partials (_colors.scss, _scale.scss, etc.). Watch the whole css dir so
+    // editing a partial triggers a rebuild + recompile in --serve mode.
+    eleventyConfig.addWatchTarget("./src/css/");
+
     eleventyConfig.setServerOptions({ domDiff: false });
 
     // Add eleventy:ignore to remote images BEFORE image transform runs

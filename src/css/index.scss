@@ -48,9 +48,9 @@ $bp-mobile: 49rem;
     --opacity-disabled: 0.5;
 
     /* ---- Theme variables */
-    --color-accent: light-dark(var(--green-800), var(--green-900));
-    --accent-hover: light-dark(var(--green-700), var(--green-950));
-    --accent-surface: var(--green-100);
+    --color-accent: light-dark(var(--brand-800), var(--brand-900));
+    --accent-hover: light-dark(var(--brand-700), var(--brand-950));
+    --accent-surface: var(--brand-100);
     --card-bg: var(--neutral-100-alpha);
 
     /* Motion: values are enabled only under prefers-reduced-motion: no-preference */
@@ -73,8 +73,8 @@ $bp-mobile: 49rem;
     --color-accent: var(--neutral-950-alpha);
 
     footer {
-        --color-accent: light-dark(var(--green-800), var(--green-900));
-        --accent-hover: light-dark(var(--green-700), var(--green-950));
+        --color-accent: light-dark(var(--brand-800), var(--brand-900));
+        --accent-hover: light-dark(var(--brand-700), var(--brand-950));
     }
 }
 
@@ -106,7 +106,7 @@ body {
     color: var(--neutral-950-alpha);
     margin: 0;
     text-underline-offset: calc(var(--space-3xs) / var(--type-ratio));
-    background-color: var(--green-50);
+    background-color: var(--brand-50);
     text-wrap: avoid-orphans;
 }
 
@@ -187,7 +187,7 @@ button {
 
 nav a[aria-current="page"] {
     cursor: default;
-    color: var(--green-900);
+    color: var(--brand-900);
 
     @media (hover: hover) {
         &:hover {
