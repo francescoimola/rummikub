@@ -7,9 +7,26 @@
     "scripts/optimize-videos.mjs",
     "scripts/compress-assets.mjs"
   ],
+  "ignorePatterns": [
+    "src/css/vendor/cleacss.css"
+  ],
   "ignoreDependencies": [
     "markdown-it",
     "markdown-it-attrs",
-    "@11tyrocks/eleventy-plugin-sass-lightningcss"
+    "@11tyrocks/eleventy-plugin-sass-lightningcss",
+    "lenis"
+  ],
+  "ignoreDependencyOverrides": [
+    { "package": "rollup", "source": "pnpm-workspace.yaml" },
+    { "package": "ajv", "source": "pnpm-workspace.yaml" },
+    { "package": "lodash", "source": "pnpm-workspace.yaml" },
+    { "package": "undici", "source": "pnpm-workspace.yaml" },
+    { "package": "fast-xml-parser", "source": "pnpm-workspace.yaml" },
+    { "package": "fast-xml-builder", "source": "pnpm-workspace.yaml" },
+    { "package": "svgo", "source": "pnpm-workspace.yaml" },
+    { "package": "fast-uri", "source": "pnpm-workspace.yaml" },
+    { "package": "yaml", "source": "pnpm-workspace.yaml" },
+    { "package": "smol-toml", "source": "pnpm-workspace.yaml" },
+    { "package": "lodash-es", "source": "pnpm-workspace.yaml" }
   ]
 }

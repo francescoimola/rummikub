@@ -7,9 +7,10 @@
     "start": "npx @11ty/eleventy --serve",
     "build": "npx @11ty/eleventy",
     "clean": "rm -rf public",
-    "optimize:video": "node scripts/optimize-videos.mjs"
+    "optimize:video": "node scripts/optimize-videos.mjs",
+    "compress:assets": "node scripts/compress-assets.mjs"
   },
-  "browserslist": "last 2 Chrome versions, last 2 Edge versions, last 2 Firefox versions, last 2 Safari versions",
+  "browserslist": "last 2 Chrome versions, last 3 Edge versions, last 2 Firefox versions, last 3 Safari versions",
   "license": "ISC",
   "dependencies": {
     "@11tyrocks/eleventy-plugin-sass-lightningcss": "^1.2.0",
@@ -22,6 +23,7 @@
     "@11ty/eleventy": "^3.1.2",
     "@11ty/eleventy-img": "^6.0.4",
     "@11ty/eleventy-plugin-rss": "^2.0.4",
-    "jsdom": "^27.2.0"
+    "jsdom": "^27.2.0",
+    "sharp": "^0.33.5"
   }
 }
