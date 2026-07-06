@@ -3,7 +3,7 @@
 @use 'scale';
 @import "vendor/cleacss.css";
 
-/* Lenis smooth scroll — minimal required styles */
+// Lenis smooth scroll — minimal required styles
 html.lenis,
 html.lenis body { height: auto; }
 
@@ -60,7 +60,7 @@ $bp-tablet: 64rem;
 
     --font-weight-base: 400;
     --font-weight-medium: 425;
-    /* Ronzino is a variable font — non-standard weight is intentional */
+    // Ronzino is a variable font — non-standard weight is intentional
     --font-weight-bold: 550;
 
     --tap-extend: var(--space-xs);
@@ -68,13 +68,13 @@ $bp-tablet: 64rem;
     --opacity-active: 0.8;
     --opacity-disabled: 0.5;
 
-    /* ---- Theme variables */
+    // ---- Theme variables
     --color-accent: light-dark(var(--brand-800), var(--brand-900));
     --accent-hover: light-dark(var(--brand-700), var(--brand-950));
     --accent-surface: var(--brand-100);
     --card-bg: var(--neutral-100-alpha);
 
-    /* Motion: values are enabled only under prefers-reduced-motion: no-preference */
+    // Motion: values are enabled only under prefers-reduced-motion: no-preference
     --ease: ease-in-out;
     --dur-fast: 0s;
     --dur-medium: 0s;
@@ -89,7 +89,7 @@ $bp-tablet: 64rem;
     }
 }
 
-/* ---- Theming ---- */
+// ---- Theming ----
 .sidebar {
     --color-accent: var(--neutral-950-alpha);
 
@@ -103,7 +103,7 @@ $bp-tablet: 64rem;
     background-color: light-dark(var(--content-light), transparent);
 }
 
-/* ---- Interactive ---- */
+// ---- Interactive ----
 
 ::selection {
     background: color-mix(in oklch, var(--color-accent) 25%, transparent);
@@ -114,7 +114,7 @@ $bp-tablet: 64rem;
     outline-offset: 2px;
 }
 
-/* ---- Typography ---- */
+// ---- Typography ----
 
 html {
     overscroll-behavior: auto none;
@@ -250,19 +250,17 @@ a[href^="tel:"]::after,
 }
 
 a[data-icon="arrow-ext"]::after {
-    /* arrow-up-right icon */
     --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik03IDE3IDE3IDciPjwvcGF0aD4KICA8cGF0aCBkPSJNNyA3aDEwdjEwIj48L3BhdGg+Cjwvc3ZnPg==);
     margin-inline-start: var(--space-4xs);
     vertical-align: -0.15em;
-    /* optical alignment, eyeballed */
+    // optical alignment, eyeballed
 }
 
 [data-icon="arrow-right"]::after {
-    /* arrow-right icon */
     --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik01IDEyaDE0Ij48L3BhdGg+CiAgPHBhdGggZD0ibTEyIDUgNyA3LTcgNyI+PC9wYXRoPgo8L3N2Zz4=);
     margin-inline-start: var(--space-3xs);
     vertical-align: -0.20em;
-    /* optical alignment, eyeballed */
+    // optical alignment, eyeballed
     transition: rotate var(--dur-medium) var(--ease);
 }
 
@@ -271,14 +269,13 @@ a[data-icon="arrow-ext"]::after {
 }
 
 :is([data-icon="email"], a[href^="mailto:"])::after {
-    /* email icon */
     --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9ImN1cnJlbnRDb2xvciIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0xNC4yNSAxOEgzTDIuOTk3IDYuNjhsOC41NzYgNS45MzdhLjc1Ljc1IDAgMCAwIC44NTQgMEwyMSA2LjY4MlYxMy41aDEuNVY2QTEuNTAyIDEuNTAyIDAgMCAwIDIxIDQuNUgzQTEuNTAyIDEuNTAyIDAgMCAwIDEuNSA2djEyQTEuNTAyIDEuNTAyIDAgMCAwIDMgMTkuNWgxMS4yNVYxOFptNS4wOTktMTJMMTIgMTEuMDg4IDQuNjUxIDZoMTQuNjk4WiI+PC9wYXRoPgogIDxwYXRoIGQ9Ik0xOS41IDIxYTMgMyAwIDEgMCAwLTYgMyAzIDAgMCAwIDAgNloiPjwvcGF0aD4KPC9zdmc+);
     margin-inline-start: var(--space-3xs);
     vertical-align: -0.175em;
-    /* optical alignment, eyeballed */
+    // optical alignment, eyeballed
 }
 
-/* suppress ::after on links that use data-icon-before — icon is before the text instead */
+// suppress ::after on links that use data-icon-before — icon is before the text instead
 a[data-icon-before][href^="mailto:"]::after,
 a[data-icon-before][href^="tel:"]::after,
 a[data-icon-before][href*="cal.com"]::after {
@@ -293,13 +290,13 @@ a[data-icon-before][href*="cal.com"]::after {
 :is([data-icon="phone"], a[href^="tel:"], [href*="cal.com"])::after {
     margin-inline-start: var(--space-3xs);
     vertical-align: -0.20em;
-    /* optical alignment, eyeballed */
+    // optical alignment, eyeballed
 }
 
 :is([data-icon-before="phone"], a[data-icon-before][href^="tel:"], a[data-icon-before][href*="cal.com"])::before {
     margin-inline-end: var(--space-3xs);
     vertical-align: -0.20em;
-    /* optical alignment, eyeballed */
+    // optical alignment, eyeballed
 }
 
 button {
@@ -326,12 +323,12 @@ button {
     color: var(--neutral-900-alpha);
 }
 
-/* ---- Layout ---- */
+// ---- Layout ----
 
 nav {
 
     --nav-indent: 0.7em;
-    /* drives bullet inset and hover shift — keep them equal */
+    // drives bullet inset and hover shift — keep them equal
     display: grid;
     column-gap: var(--space-l-4xl);
     grid-template-columns: 1fr 1fr;
@@ -513,7 +510,7 @@ a[data-icon-before] {
     }
 }
 
-/* ---- Cards ---- */
+// ---- Cards ----
 
 .card {
     background: var(--card-bg);
@@ -609,7 +606,7 @@ a.card {
     }
 }
 
-/* ---- Utilities ---- */
+// ---- Utilities ----
 
 .stick {
     position: sticky;
@@ -628,7 +625,7 @@ a.card {
 }
 
 
-/* ---- Responsive visibility ---- */
+// ---- Responsive visibility ----
 
 .mobile-only {
     @media (width >=#{$bp-mobile}) {
@@ -646,7 +643,7 @@ a.card {
     }
 }
 
-/* ---- Data list ---- */
+// ---- Data list ----
 
 .data-list {
     display: grid;
@@ -685,7 +682,7 @@ a.card {
     min-inline-size: 0;
 }
 
-/* Video styling (see projectVideo shortcode + app-core.js). Neutral placeholder background shows while the video is deferred / loading. */
+// Video styling — neutral placeholder visible while video deferred/loading (see projectVideo shortcode + app-core.js)
 .project-video-wrapper {
     position: relative;
     width: 100%;
@@ -718,7 +715,7 @@ a.card {
     pointer-events: auto;
 }
 
-/* ---- Responsive ---- */
+// ---- Responsive ----
 
 @media (width < #{$bp-mobile}) {
     .layout {

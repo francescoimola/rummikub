@@ -3,7 +3,7 @@
 @layer type {
 
   :root {
-    /* @link https://utopia.fyi/type/calculator?c=360,16,1.333,1920,18,1.333,2,1, */
+    // @link https://utopia.fyi/type/calculator?c=360,16,1.333,1920,18,1.333,2,1,
     @include utopia.generateTypeScale((
       "minWidth": 360,
       "maxWidth": 1920,
@@ -17,7 +17,7 @@
       "relativeTo": "container"
     ));
 
-    /* @link https://utopia.fyi/space/calculator?c=360,16,1.2,1920,18,1.25,5,2,&s=0.75|0.5|0.25|0.125,1.5|2|3|4|6,s-l|m-xl|l-2xl|s-2xl&g=s,l,xl,12 */
+    // @link https://utopia.fyi/space/calculator?c=360,16,1.2,1920,18,1.25,5,2,&s=0.75|0.5|0.25|0.125,1.5|2|3|4|6,s-l|m-xl|l-2xl|s-2xl&g=s,l,xl,12
     @include utopia.generateSpaceScale((
     "minWidth": 360,
     "maxWidth": 1920,
@@ -31,7 +31,7 @@
   ));
 
 
-    /* Utopia type-scale ratio (matches minTypeScale / maxTypeScale above) */
+    // Utopia type-scale ratio (matches minTypeScale / maxTypeScale above)
     --type-ratio: 1.333;
 
     --gutter-y: var(--space-s-m);
