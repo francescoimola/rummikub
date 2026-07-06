@@ -8,6 +8,7 @@
 
 - **Phase 2 handoff:** [phase2-handoff.md](phase2-handoff.md) — full context on what's built and what's next
 - **Voice & tone:** [voice-guide.md](voice-guide.md)
+- **Testing:** [testing-guide.md](testing-guide.md) — run `pnpm test` before committing
 
 ## Commands
 
