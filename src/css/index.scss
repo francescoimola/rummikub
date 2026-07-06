@@ -229,6 +229,31 @@ nav a[aria-current="page"] {
     }
 }
 
+// ---- Icons ----
+
+.icon {
+    display: inline-block;
+    color: var(--color-link);
+    stroke: inherit;
+    fill: none;
+
+    &--lg {
+        inline-size: var(--step-4);
+    }
+
+    &--base {
+        inline-size: var(--step-3);
+    }
+
+    &--sm {
+        inline-size: var(--step-1);
+    }
+
+    &--center {
+        margin-inline: auto;
+    }
+}
+
 [data-icon]::after,
 a[href^="mailto:"]::after,
 a[href*="cal.com"]::after,
@@ -298,6 +323,8 @@ a[data-icon-before][href*="cal.com"]::after {
     vertical-align: -0.20em;
     // optical alignment, eyeballed
 }
+
+// ---- Buttons ----
 
 button {
     all: unset;

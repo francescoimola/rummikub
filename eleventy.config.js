@@ -5,6 +5,7 @@ const { JSDOM } = require("jsdom");
 
 const eleventySass = require("@11tyrocks/eleventy-plugin-sass-lightningcss");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
+const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
 const eleventyImage = require("@11ty/eleventy-img");
 
@@ -27,6 +28,7 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addPlugin(eleventySass);
   eleventyConfig.addPlugin(pluginRss);
+  eleventyConfig.addPlugin(eleventyNavigationPlugin);
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
     formats: ["webp", "jpeg"],
     outputDir: "./public/assets/images",
