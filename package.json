@@ -8,7 +8,9 @@
     "build": "npx @11ty/eleventy",
     "clean": "rm -rf public",
     "optimize:video": "node scripts/optimize-videos.mjs",
-    "compress:assets": "node scripts/compress-assets.mjs"
+    "compress:assets": "node scripts/compress-assets.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "browserslist": "last 2 Chrome versions, last 3 Edge versions, last 2 Firefox versions, last 3 Safari versions",
   "license": "ISC",
@@ -24,6 +26,7 @@
     "@11ty/eleventy-img": "^6.0.4",
     "@11ty/eleventy-plugin-rss": "^2.0.4",
     "jsdom": "^27.2.0",
-    "sharp": "^0.33.5"
+    "sharp": "^0.33.5",
+    "vitest": "^4.1.9"
   }
 }
