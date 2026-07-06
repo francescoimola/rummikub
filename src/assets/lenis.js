@@ -1,0 +1,1 @@
+new Lenis({ autoRaf: true });
