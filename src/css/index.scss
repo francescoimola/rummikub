@@ -5,6 +5,7 @@
 
 // Breakpoints — Sass vars because custom properties can't be used in media conditions
 $bp-mobile: 49rem;
+$bp-tablet: 64rem;
 
 // Reveal animation — shared collapsed/open states for .expandable and <details>
 @mixin reveal-collapsed($content-visibility: false) {
@@ -155,6 +156,11 @@ blockquote+figcaption {
 
 :where(img) {
     background-color: var(--neutral-100-alpha);
+    object-fit: cover;
+}
+
+img.ratio-1-1 {
+    aspect-ratio: 1 / 1;
 }
 
 :where(a) {
@@ -300,6 +306,7 @@ button {
 /* ---- Layout ---- */
 
 nav {
+
     --nav-indent: 0.7em;
     /* drives bullet inset and hover shift — keep them equal */
     display: grid;
@@ -369,14 +376,15 @@ nav {
     overflow-y: auto;
     white-space: nowrap;
     z-index: 1;
+    background: var(--brand-50);
 }
 
 .content {
     display: flex;
     flex-direction: column;
-    padding-inline: var(--gutter-x);
+    padding-inline: var(--gutter-y);
     padding-block-start: var(--gutter-y);
-    padding-block-end: var(--space-2xl-3xl);
+    padding-block-end: var(--space-l);
 
     &:has(.expandable.is-open) footer {
         margin-block-end: var(--space-s-m);
@@ -385,12 +393,28 @@ nav {
 
 :where(main) {
     flex: 1;
-    max-inline-size: 60ch;
-    margin-inline: auto;
+    container-type: inline-size;
+    border-block-start: 1px solid var(--neutral-500-alpha);
+    padding-block-start: var(--space-s);
+
+    &>* {
+        max-inline-size: 60ch;
+        margin-inline: auto;
+    }
+}
+
+main:has(.expandable.is-open) {
+    padding-block-end: var(--space-2xl-3xl);
+}
+
+[data-max-width="false"] {
+    max-inline-size: unset;
+    margin-inline: unset;
 }
 
 .expandable {
     @include reveal-collapsed;
+    scroll-margin-top: var(--space-m-l);
 
     &.is-open {
         @include reveal-open;
@@ -553,15 +577,22 @@ a.card {
     }
 }
 
-// Grid layout for multiple cards, which auto fills the available space.
 .layout-card {
     display: grid;
-    grid-template-columns: repeat(auto-fill,
-            minmax(var(--min-card-width, 18rem), 1fr));
-    gap: var(--space-m-l);
+    grid-template-columns: 1fr;
+}
+
+@container (min-width: 64rem) {
+    .layout-card {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /* ---- Utilities ---- */
+
+.stick {
+    position: sticky;
+}
 
 .has-counter {
     counter-reset: standard;
@@ -632,6 +663,39 @@ a.card {
     min-inline-size: 0;
 }
 
+/* Video styling (see projectVideo shortcode + app-core.js). Neutral placeholder background shows while the video is deferred / loading. */
+.project-video-wrapper {
+    position: relative;
+    width: 100%;
+    background-color: var(--neutral-100);
+}
+
+.project-video-el {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.project-video-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-fast) var(--ease);
+    z-index: 1;
+}
+
+.project-video-play[data-visible] {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 /* ---- Responsive ---- */
 
 @media (width < #{$bp-mobile}) {
@@ -640,15 +704,33 @@ a.card {
         grid-template-rows: auto 1fr;
     }
 
+    .content {
+        padding-inline: var(--gutter-x);
+    }
+
     .sidebar {
         position: sticky;
         block-size: auto;
         row-gap: var(--space-l-2xl);
+        background: var(--neutral-100-alpha);
     }
 
-    :where(main) {
-        margin-inline: 0;
-        padding-block-start: 4dvh;
+    nav {
+        border-block-start: revert;
+        padding-block-start: revert;
+    }
+
+    main {
+        border-block-start: revert;
+        padding-block-start: var(--space-m-l);
+
+        &:has([data-hero-media="true"]) {
+            padding-block-start: var(--space-4xs-3xs);
+        }
+
+        &>* {
+            margin-inline: 0;
+        }
     }
 
     .data-list {
@@ -660,5 +742,11 @@ a.card {
         display: flex;
         flex-direction: column;
         gap: var(--space-4xs);
+    }
+}
+
+@media (width < #{$bp-tablet}) {
+    main.flow-row {
+        flex-direction: column;
     }
 }

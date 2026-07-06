@@ -8,7 +8,7 @@
       <div class="desktop-only">{%- include "_footer.njk" -%}</div>
     </aside>
     <div class="content">
-      <main class="flow has-gap-2xl-3xl">{{ content | safe }}</main>
+      <main {% if page.url == "/" %}class="flow-row has-gap-s-m " data-max-width="false"{% else %}class="flow"{% endif %}>{{ content | safe }}</main>
       <div class="mobile-only">{%- include "_footer.njk" -%}</div>
     </div>
   </div>
