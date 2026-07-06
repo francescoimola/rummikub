@@ -1,0 +1,30 @@
+var markdownIt = require("markdown-it");
+var markdownItAttrs = require("markdown-it-attrs");
+
+module.exports = function (eleventyConfig) {
+  var markdownItOptions = {
+    html: true,
+  };
+
+  var md = markdownIt(markdownItOptions).use(markdownItAttrs);
+
+  var defaultImageRender = md.renderer.rules.image || function (tokens, idx, options, env, self) {
+    return self.renderToken(tokens, idx, options);
+  };
+
+  md.renderer.rules.image = function (tokens, idx, options, env, self) {
+    var token = tokens[idx];
+    var srcIndex = token.attrIndex("src");
+
+    if (srcIndex >= 0) {
+      var src = token.attrs[srcIndex][1];
+      if (src.startsWith("http://") || src.startsWith("https://")) {
+        token.attrPush(["eleventy:ignore", ""]);
+      }
+    }
+
+    return defaultImageRender(tokens, idx, options, env, self);
+  };
+
+  eleventyConfig.setLibrary("md", md);
+};

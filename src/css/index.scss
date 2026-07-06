@@ -162,6 +162,10 @@ h6,
     color: var(--neutral-900-alpha);
 }
 
+.small, .small>* {
+    font-size: var(--step--1);
+}
+
 figcaption {
     margin-top: var(--space-xs);
     text-align: end;
@@ -646,8 +650,9 @@ a.card {
 
 .data-list {
     display: grid;
+    inline-size: 100%;
     grid-template-columns: auto 1fr;
-    gap: var(--space-s);
+    gap: var(--space-xs);
     overflow-wrap: anywhere;
     text-align: start;
     margin: 0;
