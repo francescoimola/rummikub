@@ -1,4 +1,5 @@
 var path = require("path");
+var fs = require("fs");
 
 function renderSources(webm, fallback) {
   if (!webm) return "";
@@ -72,5 +73,11 @@ module.exports = function (eleventyConfig, eleventyImage, filenameFormat) {
       '  </div>' + figcaption + '\n' +
       '</figure>'
     );
+  });
+
+  eleventyConfig.addShortcode("icon", function (name, attrs) {
+    attrs = attrs || "";
+    var svg = fs.readFileSync(path.resolve("src/assets/icons", name + ".svg"), "utf8");
+    return svg.replace("<svg", '<svg aria-hidden="true" focusable="false" ' + attrs);
   });
 };
