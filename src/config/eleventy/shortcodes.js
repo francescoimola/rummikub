@@ -15,6 +15,10 @@ function renderFigcaption(caption) {
   return '\n  <figcaption class="has-text-grey">' + caption + "</figcaption>";
 }
 
+module.exports.renderSources = renderSources;
+module.exports.renderAttr = renderAttr;
+module.exports.renderFigcaption = renderFigcaption;
+
 module.exports = function (eleventyConfig, eleventyImage, filenameFormat) {
   eleventyConfig.addShortcode("remoteImg", function (src, width, height, alt, attrs) {
     attrs = attrs || "";
