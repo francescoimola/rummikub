@@ -1,0 +1,15 @@
+{
+  "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  "entry": [
+    "eleventy.config.js",
+    "src/assets/app-core.js",
+    "src/css/index.scss",
+    "scripts/optimize-videos.mjs",
+    "scripts/compress-assets.mjs"
+  ],
+  "ignoreDependencies": [
+    "markdown-it",
+    "markdown-it-attrs",
+    "@11tyrocks/eleventy-plugin-sass-lightningcss"
+  ]
+}
