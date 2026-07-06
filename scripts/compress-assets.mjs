@@ -1,12 +1,11 @@
-// Truly lossless recompression of images under src/assets/.
-//   PNG: max-effort DEFLATE only — no palette quantisation, no bit-depth
-//        changes, no colour conversion. Output is pixel-identical to source.
-//   JPEG: mozjpeg at quality 95 with chroma subsampling disabled (4:4:4).
-//        Visually indistinguishable from typical source JPEGs even on flat
-//        colour, gradients, and text.
-// Idempotent: only overwrites when the new file is smaller.
-//
-// Run: pnpm compress:assets
+/**
+ * Lossless recompression of src/assets/ images.
+ *   PNG: max-effort DEFLATE (pixel-identical).
+ *   JPEG: mozjpeg q=95, 4:4:4 chroma (near-lossless).
+ *   Idempotent: only overwrites when the new file is smaller.
+ *
+ * Usage: pnpm compress:assets
+ */
 
 import sharp from "sharp";
 import fs from "node:fs/promises";
@@ -57,8 +56,7 @@ for await (const file of walk(ROOT)) {
                 })
                 .toBuffer();
         } else {
-            // Near-lossless: mozjpeg q=95 with full chroma (4:4:4) and no
-            // subsampling — preserves sharp text, edges, and saturated colour.
+            // Near-lossless: mozjpeg q=95, 4:4:4 chroma, no subsampling — preserves sharp text, edges, and saturated colour.
             buffer = await sharp(file, { failOn: "none" })
                 .jpeg({
                     mozjpeg: true,
