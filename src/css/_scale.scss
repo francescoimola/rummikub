@@ -34,8 +34,8 @@
     /* Utopia type-scale ratio (matches minTypeScale / maxTypeScale above) */
     --type-ratio: 1.333;
 
-    --gutter-y: var(--space-s-l);
-    --gutter-x: var(--space-s-2xl);
+    --gutter-y: var(--space-s-m);
+    --gutter-x: var(--space-s-m);
     --max-width: calc(var(--grid-width-2xl) * var(--type-ratio));
   }
 

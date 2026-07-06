@@ -35,8 +35,23 @@ pnpm clean            # rm -rf public
 | `src/css/vendor/cleacss.css` | Vendored cleacss v3.2.0 — do NOT npm-install |
 | `src/assets/fonts/` | Ronzino woff2 files (passthrough copied to `public/assets/fonts/`) |
 | `src/assets/favicon/` | Favicon files (passthrough copied) |
+| `src/assets/portfolio/` | Project videos (mp4/webm) + posters (passthrough copied to `public/assets/portfolio/`) |
+| `scripts/optimize-videos.mjs` | Opt-in ffmpeg optimizer for project videos (`pnpm optimize:video`) |
 | `public/` | Build output — gitignored, do not commit |
 | `eleventy.config.js` | Eleventy configuration |
+
+## Project videos
+
+Embed lazy, autoplay-in-view videos with the `projectVideo` shortcode (defined in `eleventy.config.js`). Nothing downloads until an `IntersectionObserver` in `src/assets/app-core.js` sees the video near the viewport (`preload="none"` + `data-src`); it then autoplays muted and pauses when scrolled away. `prefers-reduced-motion` and slow connections (`navigator.connection`) get the play button instead of autoplay. Styling: `.project-video*` in `index.scss`.
+
+```njk
+{% projectVideo "/assets/portfolio/x.webm", "Alt text" %}                                  {# webm-only (Safari 16+) #}
+{% projectVideo "/assets/portfolio/x.mp4", "Alt", webm="/assets/portfolio/x.webm",
+                poster="/assets/portfolio/x.jpg", caption="Optional caption" %}             {# webm + mp4 fallback #}
+```
+
+- **Formats:** WebM (small) with an MP4 fallback is the safe default — WebM-only drops pre-16 Safari/iOS. Single-format `src` may be `.webm` or `.mp4` (no `type` attr; browser sniffs).
+- **Optimize raw uploads:** drop `<name>.src.{mp4,mov,webm}` into `src/assets/portfolio/`, run `pnpm optimize:video` (needs system `ffmpeg` on PATH) → emits `<name>.mp4`, `<name>.webm`, and a `<name>.jpg` poster.
 
 ## CSS architecture rules
 

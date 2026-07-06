@@ -1,0 +1,3 @@
+# Project videos (mp4/webm) + poster images live here.
+# Copied to public/assets/portfolio/ via passthrough in eleventy.config.js.
+# Optimize raw uploads with: pnpm optimize:video
