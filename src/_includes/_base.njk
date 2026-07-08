@@ -5,6 +5,7 @@
   <div class="layout"{% if contentMode == "contrast" %} data-content="contrast"{% endif %}>
     <aside class="sidebar">
       {%- include "_header.njk" -%}
+      {% include "_breadcrumb.njk" %}
       <div class="desktop-only">{%- include "_footer.njk" -%}</div>
     </aside>
     <div class="content">

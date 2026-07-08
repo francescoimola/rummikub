@@ -23,9 +23,15 @@ html.lenis body { height: auto; }
   transition-behavior: allow-discrete;
 }
 
-// Breakpoints — Sass vars because custom properties can't be used in media conditions
+// Breakpoints - Sass vars because custom properties can't be used in media conditions
 $bp-mobile: 49rem;
 $bp-tablet: 64rem;
+
+// reversed "xs-2xs" token that cleacss doesn't ship with
+.flow.has-gap-xs-2xs,
+.flow-row.has-gap-xs-2xs {
+    --flow-gap: var(--space-xs-2xs);
+}
 
 // Reveal animation — shared collapsed/open states for .expandable and <details>
 @mixin reveal-collapsed($content-visibility: false) {
@@ -54,33 +60,36 @@ $bp-tablet: 64rem;
 
 :root {
     interpolate-size: allow-keywords;
+    // Base typography variables (the rest are in _scale.scss)
     --font-family: 'Ronzino', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji';
     --line-height: 1.5;
-    --line-height-title: 1.1;
 
-    --font-weight-base: 400;
-    --font-weight-medium: 425;
-    // Ronzino is a variable font — non-standard weight is intentional
-    --font-weight-bold: 550;
+    --tap-extend: var(--space-xs); // Extend tap targets by this much
 
-    --tap-extend: var(--space-xs);
-
+    // Opacity
     --opacity-active: 0.8;
     --opacity-disabled: 0.5;
 
-    // ---- Theme variables
+    // Theme variables
     --color-accent: light-dark(var(--brand-800), var(--brand-900));
     --accent-hover: light-dark(var(--brand-700), var(--brand-950));
     --accent-surface: var(--brand-100);
     --card-bg: var(--neutral-100-alpha);
 
-    // Motion: values are enabled only under prefers-reduced-motion: no-preference
+    // Motion
     --ease: ease-in-out;
     --dur-fast: 0s;
     --dur-medium: 0s;
     --dur-slow: 0s;
 
-    @media (prefers-reduced-motion: no-preference) {
+    // Icon optical alignment — eyeballed vertical-align corrections
+    --icon-align-xs: -0.15em;
+    --icon-align-s: -0.175em;
+    --icon-align-m: -0.20em;
+    --icon-align-l: -0.225em;
+
+    @media (prefers-reduced-motion: no-preference) { 
+        // Values are disabled for users who prefer reduced motion
         & {
             --dur-fast: 0.2s;
             --dur-medium: 0.25s;
@@ -128,16 +137,17 @@ body {
     text-underline-offset: calc(var(--space-3xs) / var(--type-ratio));
     background-color: var(--brand-50);
     text-wrap: avoid-orphans;
-    letter-spacing: 0.01em;
+    letter-spacing: var(--letter-spacing-base);
 }
 
 :where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
     font-weight: var(--font-weight-bold);
+    line-height: inherit;
     font-size: var(--step-0);
-    line-height: 1.45;
     text-wrap: balance;
     color: var(--neutral-950-alpha);
     max-inline-size: var(--max-width-size-6);
+    letter-spacing: var(--letter-spacing-bold);
 }
 
 h3,
@@ -149,14 +159,14 @@ h6,
 .h5,
 .h6 {
     font-weight: var(--font-weight-medium);
-    line-height: revert;
+    letter-spacing: var(--letter-spacing-medium);
 }
 
-[data-headings="highlight-h2"]>h2:first-child {
+[data-headings="highlight-h2"]>h2:first-child { // Puts targeted headings in a highlighted box
     background-color: var(--accent-surface);
     inline-size: fit-content;
     padding-block: var(--space-3xs-2xs);
-    padding-inline: var(--space-xs-s);
+    padding-inline: var(--space-xs);
 }
 
 :where(small, figcaption, blockquote, time) {
@@ -277,21 +287,19 @@ a[href^="tel:"]::after,
 :is([data-icon-before="email"], a[data-icon-before][href^="mailto:"])::before {
     --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9ImN1cnJlbnRDb2xvciIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0xNC4yNSAxOEgzTDIuOTk3IDYuNjhsOC41NzYgNS45MzdhLjc1Ljc1IDAgMCAwIC44NTQgMEwyMSA2LjY4MlYxMy41aDEuNVY2QTEuNTAyIDEuNTAyIDAgMCAwIDIxIDQuNUgzQTEuNTAyIDEuNTAyIDAgMCAwIDEuNSA2djEyQTEuNTAyIDEuNTAyIDAgMCAwIDMgMTkuNWgxMS4yNVYxOFptNS4wOTktMTJMMTIgMTEuMDg4IDQuNjUxIDZoMTQuNjk4WiI+PC9wYXRoPgogIDxwYXRoIGQ9Ik0xOS41IDIxYTMgMyAwIDEgMCAwLTYgMyAzIDAgMCAwIDAgNloiPjwvcGF0aD4KPC9zdmc+);
     margin-inline-end: var(--space-3xs);
-    vertical-align: -0.175em;
+    vertical-align: var(--icon-align-s);
 }
 
 a[data-icon="arrow-ext"]::after {
     --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik03IDE3IDE3IDciPjwvcGF0aD4KICA8cGF0aCBkPSJNNyA3aDEwdjEwIj48L3BhdGg+Cjwvc3ZnPg==);
     margin-inline-start: var(--space-4xs);
-    vertical-align: -0.15em;
-    // optical alignment, eyeballed
+    vertical-align: var(--icon-align-xs);
 }
 
 [data-icon="arrow-right"]::after {
     --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik01IDEyaDE0Ij48L3BhdGg+CiAgPHBhdGggZD0ibTEyIDUgNyA3LTcgNyI+PC9wYXRoPgo8L3N2Zz4=);
     margin-inline-start: var(--space-3xs);
-    vertical-align: -0.20em;
-    // optical alignment, eyeballed
+    vertical-align: var(--icon-align-m);
     transition: rotate var(--dur-medium) var(--ease);
 }
 
@@ -302,8 +310,7 @@ a[data-icon="arrow-ext"]::after {
 :is([data-icon="email"], a[href^="mailto:"])::after {
     --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9ImN1cnJlbnRDb2xvciIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0xNC4yNSAxOEgzTDIuOTk3IDYuNjhsOC41NzYgNS45MzdhLjc1Ljc1IDAgMCAwIC44NTQgMEwyMSA2LjY4MlYxMy41aDEuNVY2QTEuNTAyIDEuNTAyIDAgMCAwIDIxIDQuNUgzQTEuNTAyIDEuNTAyIDAgMCAwIDEuNSA2djEyQTEuNTAyIDEuNTAyIDAgMCAwIDMgMTkuNWgxMS4yNVYxOFptNS4wOTktMTJMMTIgMTEuMDg4IDQuNjUxIDZoMTQuNjk4WiI+PC9wYXRoPgogIDxwYXRoIGQ9Ik0xOS41IDIxYTMgMyAwIDEgMCAwLTYgMyAzIDAgMCAwIDAgNloiPjwvcGF0aD4KPC9zdmc+);
     margin-inline-start: var(--space-3xs);
-    vertical-align: -0.175em;
-    // optical alignment, eyeballed
+    vertical-align: var(--icon-align-s);
 }
 
 // suppress ::after on links that use data-icon-before — icon is before the text instead
@@ -320,14 +327,12 @@ a[data-icon-before][href*="cal.com"]::after {
 
 :is([data-icon="phone"], a[href^="tel:"], [href*="cal.com"])::after {
     margin-inline-start: var(--space-3xs);
-    vertical-align: -0.20em;
-    // optical alignment, eyeballed
+    vertical-align: var(--icon-align-m);
 }
 
 :is([data-icon-before="phone"], a[data-icon-before][href^="tel:"], a[data-icon-before][href*="cal.com"])::before {
     margin-inline-end: var(--space-3xs);
-    vertical-align: -0.20em;
-    // optical alignment, eyeballed
+    vertical-align: var(--icon-align-m);
 }
 
 [data-marker]::before {
@@ -340,7 +345,7 @@ a[data-icon-before][href*="cal.com"]::after {
     mask: var(--icon) center / contain no-repeat;
     -webkit-mask: var(--icon) center / contain no-repeat;
     margin-inline-end: var(--space-2xs-xs);
-    vertical-align: -0.15em;
+    vertical-align: var(--icon-align-xs);
 }
 
 [data-marker="tick"]::before {
@@ -440,6 +445,7 @@ nav {
     max-inline-size: var(--max-width);
     margin-inline: auto;
     min-block-size: 100dvh;
+    container-type: inline-size;
 }
 
 .sidebar {

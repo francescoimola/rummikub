@@ -53,7 +53,7 @@ public/           Build output (gitignored)
 
 ## Deployment
 
-CI runs on GitHub Actions: build + link check on every push to `eleventy-rebuild` and on PRs. Deploys to Netlify (Cloudflare Pages cutover planned — see `docs/cutover-runbook.md`).
+CI runs on GitHub Actions: build + link check on every push to `development` and on PRs. Deploys to Netlify (Cloudflare Pages cutover planned — see `docs/cutover-runbook.md`).
 
 ## License
 

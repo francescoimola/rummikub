@@ -25,7 +25,8 @@
     "maxSize": 18,
     "positiveSteps": (1.5, 2, 3, 4, 6, 8),
     "negativeSteps": (0.75, 0.5, 0.25, 0.125),
-    "customSizes": ("s-l", "s-xl", "s-2xl", "m-xl", "l-2xl", "l-3xl", "l-4xl", "xl-3xl", "xl-4xl", "3xl-4xl"),
+    // "xs-2xs" is reversed (larger step first) — grows as the viewport shrinks, unlike every other pair here
+    "customSizes": ("s-l", "s-xl", "s-2xl", "m-xl", "l-2xl", "l-3xl", "l-4xl", "xl-3xl", "xl-4xl", "3xl-4xl", "xs-2xs"),
     "prefix": "space-",
     "relativeTo": "container",
   ));
@@ -37,6 +38,34 @@
     --gutter-y: var(--space-s-m);
     --gutter-x: var(--space-s-m);
     --max-width: calc(var(--grid-width-2xl) * var(--type-ratio));
+
+    // Font weights
+    --font-weight-base: 400;
+    --font-weight-medium: 425; // Non-standard weight is intentional - Ronzino is a variable font
+    --font-weight-bold: 550;
+
+    /* * Letter Spacing
+    * Driven by the physical density of typeface weights
+    * Quadratic Mass Formula: S(W) = Base_Spacing * (Target_Weight / Base_Weight)^2
+    *
+    * Lightning CSS will ship compiled em values in production.
+    */
+    --font-weight-base: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+
+    /* Single source of truth */
+    --letter-spacing-base: 0.007em;
+
+    /* Compiled to ~0.011em */
+    --letter-spacing-medium: calc(
+        var(--letter-spacing-base) * pow(var(--font-weight-medium) / var(--font-weight-base), 2)
+    );
+
+    /* Compiled to ~0.021em */
+    --letter-spacing-bold: calc(
+        var(--letter-spacing-base) * pow(var(--font-weight-bold) / var(--font-weight-base), 2)
+    );
   }
 
 }
