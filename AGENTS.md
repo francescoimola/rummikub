@@ -2,13 +2,21 @@
 
 **Stack:** Eleventy 3 · Nunjucks templates · SCSS (compiled via `@11tyrocks/eleventy-plugin-sass-lightningcss` → LightningCSS) · pnpm · Deploys to Netlify (or Cloudflare Pages — TBD).
 
-**Branch:** `eleventy-rebuild` — active development. `main` holds the old Astro site (do not touch).
+**Branch:** `development` — active development (`eleventy-rebuild` has been merged in). `main` still holds the old Astro site — do not touch until cutover (see Known gaps below).
 
 ## Reference docs
 
-- **Phase 2 handoff:** [phase2-handoff.md](phase2-handoff.md) — full context on what's built and what's next
-- **Voice & tone:** [voice-guide.md](voice-guide.md)
+- **Voice & tone:** [voice-guide.md](docs/voice-guide.md)
 - **Testing:** [testing-guide.md](testing-guide.md) — run `pnpm test` before committing
+
+## Known gaps
+
+The Eleventy rebuild's code migration is mostly done, but a few things are still open:
+
+- Blog listing/post templates and collection not yet built (`src/_includes/_post-base.njk`, teaser/excerpt logic)
+- `src/robots.txt` not yet populated
+- `src/_redirects` is a stub — needs the real 301 redirect map from the old site
+- Production cutover not yet done — `main` still runs the old Astro site on Cloudflare Pages; see [docs/cutover-runbook.md](docs/cutover-runbook.md)
 
 ## Commands
 
