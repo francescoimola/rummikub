@@ -183,7 +183,7 @@ Four SCSS partials + one vendored CSS file, imported in `src/css/index.scss`:
       <main id="main-content">{{ content | safe }}</main>
     </div>
   </div>
-  <script src="/assets/app-core.js" defer></script>
+  <script src="/assets/scripts/app-core.js" defer></script>
 </body>
 </html>
 ```

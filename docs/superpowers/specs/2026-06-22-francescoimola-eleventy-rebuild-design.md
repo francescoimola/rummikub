@@ -90,7 +90,7 @@ squarely in Eleventy's sweet spot, so this is a low-likelihood risk with a cheap
   project build command (`astro build` → `npx @11ty/eleventy`) and output dir
   (`dist` → Eleventy output). One project, reconfigured once. Rollback = revert the build
   config + git.
-- **Local toolchain caveat:** `main` (Astro, pnpm) and the branch (Eleventy, npm) have
+- **Local toolchain caveat:** `main` (Astro, pnpm) and the branch (Eleventy, pnpm) have
   different toolchains, so switching branches locally requires reinstalling dependencies.
   In practice the owner lives on the branch until cutover, so this rarely bites.
 - Sound plumbing may be reused from either source: from the old 11ty project (Eleventy
@@ -148,7 +148,7 @@ components than rummikub:
 ### Automated verification (the type-safety replacement)
 Dropping TypeScript removes a safety net; CI restores one so AI-assisted changes fail
 loudly instead of shipping silently.
-- **GitHub Action on every push:** `npm ci && npx @11ty/eleventy` — a broken build fails
+- **GitHub Action on every push:** `pnpm install --frozen-lockfile && pnpm run build` — a broken build fails
   CI before it reaches production.
 - **Broken link/image checker** (lychee or linkinator) run against the built output —
   catches the most common content-site breakage.
