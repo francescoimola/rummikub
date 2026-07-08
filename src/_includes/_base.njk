@@ -8,12 +8,12 @@
       <div class="desktop-only">{%- include "_footer.njk" -%}</div>
     </aside>
     <div class="content">
-      <main {% if page.url == "/" %}class="flow-row has-gap-s-m" data-max-width="false"{% else %}class="flow has-gap-2xl-3xl"{% endif %}>{{ content | safe }}</main>
+      <main {% if page.url == "/" %}class="flow-row has-gap-s-m" full-width{% else %}class="flow has-gap-2xl-3xl"{% endif %}>{{ content | safe }}</main>
       <div class="mobile-only">{%- include "_footer.njk" -%}</div>
     </div>
   </div>
-  <script src="/assets/lenis.min.js"></script>
-  <script src="/assets/lenis.js" defer></script>
-  <script type="module" src="/assets/app-core.js"></script>
+  <script src="/assets/scripts/lenis.min.js"></script>
+  <script src="/assets/scripts/lenis.js" defer></script>
+  <script type="module" src="/assets/scripts/app-core.js"></script>
 </body>
 </html>

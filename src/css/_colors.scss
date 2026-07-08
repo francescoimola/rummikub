@@ -112,6 +112,7 @@
     --color-warning: var(--warning-500);
     --color-error: var(--error-500);
     --color-info: var(--info-500);
+    --input-border-color: var(--neutral-500-alpha);
 
     // Semantic tokens
     --content-light: color-mix(in oklch, var(--brand-50) 30%, white);

@@ -43,7 +43,7 @@ pnpm clean            # rm -rf public
 
 ## Project videos
 
-Embed lazy, autoplay-in-view videos with the `projectVideo` shortcode (defined in `eleventy.config.js`). Nothing downloads until an `IntersectionObserver` in `src/assets/app-core.js` sees the video near the viewport (`preload="none"` + `data-src`); it then autoplays muted and pauses when scrolled away. `prefers-reduced-motion` and slow connections (`navigator.connection`) get the play button instead of autoplay. Styling: `.project-video*` in `index.scss`.
+Embed lazy, autoplay-in-view videos with the `projectVideo` shortcode (defined in `eleventy.config.js`). Nothing downloads until an `IntersectionObserver` in `src/assets/scripts/app-core.js` sees the video near the viewport (`preload="none"` + `data-src`); it then autoplays muted and pauses when scrolled away. `prefers-reduced-motion` and slow connections (`navigator.connection`) get the play button instead of autoplay. Styling: `.project-video*` in `index.scss`.
 
 ```njk
 {% projectVideo "/assets/portfolio/x.webm", "Alt text" %}                                  {# webm-only (Safari 16+) #}

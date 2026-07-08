@@ -344,7 +344,7 @@ Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
 - Create: `.github/workflows/build.yml`
 
 **Interfaces:**
-- Consumes: `npm run build` from Task 1.
+- Consumes: `pnpm run build` from Task 1.
 - Produces: a required status check that fails on a broken build or broken internal link.
 
 - [ ] **Step 1: Write the workflow**
