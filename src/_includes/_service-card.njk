@@ -1,0 +1,25 @@
+{% macro serviceCard(title, url, description, type = "default") %}
+{% if type == "accordion" %}
+<details class="card service">
+    <summary><h3>{{ title }}</h3></summary>
+    <p>{{ description }}</p>
+    <a data-icon="email" href="{{ url }}">Enquire</a>
+</details>
+{% else %}
+<div class="card flow service has-gap-xs">
+    {% if type != "adhoc" %}
+    <a href="{{ url }}">
+        <h3>{{ title }}</h3>
+    </a>
+    {% else %}
+    <h3>{{ title }}</h3>
+    {% endif %}
+    <p>{{ description }}</p>
+    {% if type == "adhoc" %}
+    <a data-icon="email" href="{{ url }}">Enquire</a>
+    {% else %}
+    <a data-icon="arrow-right" href="{{ url }}">Learn more</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endmacro %}

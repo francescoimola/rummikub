@@ -3,7 +3,7 @@
     {%- for crumb in crumbs %}
     {%- if not loop.first %}
     <li{% if loop.last %} aria-current="page"{% endif %}>{% if not loop.last %}<a href="{{ crumb.url }}" class="subtitle">{{ crumb.title }}</a>{% else %}{{ crumb.title }}{% endif %}</li>
-    {%- if not loop.last %}<li>{% icon "chevron-right", 'class="icon icon--xs"' %}</li>{% endif %}
+    {%- if not loop.last %}<li><span class="fluent--chevron-right-16-regular"></span></li>{% endif %}
     {%- endif %}
     {%- endfor %}
 </ul>

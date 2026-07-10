@@ -17,9 +17,10 @@
     --brand-hue: 119.4;   // 50-step hue = base; rotate the whole scale here
     --brand-chroma: 1;     // single chroma multiplier for the entire scale
 
-    // Brand scale (Figma) — hue = base + per-step offset, chroma = orig × knob
+    // Brand scale — hue = base + per-step offset, chroma = orig × knob
     --brand-50: light-dark(oklch(0.983 calc(0.049 * var(--brand-chroma)) var(--brand-hue)), oklch(0.143 calc(0.041 * var(--brand-chroma)) calc(var(--brand-hue) + 14.6)));
     --brand-100: light-dark(oklch(0.958 calc(0.061 * var(--brand-chroma)) calc(var(--brand-hue) + 0.3)), oklch(0.332 calc(0.088 * var(--brand-chroma)) calc(var(--brand-hue) + 9.7)));
+    --brand-150: light-dark(oklch(0.943 calc(0.073 * var(--brand-chroma)) calc(var(--brand-hue) - 0.2)), oklch(0.399 calc(0.101 * var(--brand-chroma)) calc(var(--brand-hue) + 6.7)));
     --brand-200: light-dark(oklch(0.928 calc(0.085 * var(--brand-chroma)) calc(var(--brand-hue) - 0.7)), oklch(0.465 calc(0.114 * var(--brand-chroma)) calc(var(--brand-hue) + 3.7)));
     --brand-300: light-dark(oklch(0.875 calc(0.131 * var(--brand-chroma)) calc(var(--brand-hue) - 2.2)), oklch(0.555 calc(0.132 * var(--brand-chroma)) calc(var(--brand-hue) + 0.9)));
     --brand-400: light-dark(oklch(0.819 calc(0.188 * var(--brand-chroma)) calc(var(--brand-hue) - 2.6)), oklch(0.627 calc(0.147 * var(--brand-chroma)) calc(var(--brand-hue) - 0.4)));
@@ -30,7 +31,7 @@
     --brand-900: light-dark(oklch(0.420 calc(0.116 * var(--brand-chroma)) calc(var(--brand-hue) + 12.3)), oklch(0.886 calc(0.112 * var(--brand-chroma)) calc(var(--brand-hue) - 1.6)));
     --brand-950: light-dark(oklch(0.262 calc(0.089 * var(--brand-chroma)) calc(var(--brand-hue) + 23.1)), oklch(0.928 calc(0.085 * var(--brand-chroma)) calc(var(--brand-hue) - 0.7)));
 
-    // Neutral scale (Figma)
+    // Neutral scale
     --neutral-50: light-dark(oklch(0.987 0.006 123.1), oklch(0.118 0.030 125.9));
     --neutral-100: light-dark(oklch(0.969 0.006 123.0), oklch(0.351 0.034 123.8));
     --neutral-200: light-dark(oklch(0.940 0.007 122.9), oklch(0.470 0.021 123.2));
@@ -55,7 +56,7 @@
     --neutral-900-alpha: light-dark(oklch(0.351 0.034 121.6 / 0.83), oklch(0.945 0.007 125.2 / 0.83));
     --neutral-950-alpha: light-dark(oklch(0.351 0.034 121.6 / 0.95), oklch(0.945 0.007 125.2 / 0.95));
 
-    // Success scale (Figma)
+    // Success scale
     --success-50: light-dark(oklch(0.986 0.018 165.8), oklch(0.132 0.045 142.5));
     --success-100: light-dark(oklch(0.967 0.031 166.1), oklch(0.357 0.098 150.1));
     --success-200: light-dark(oklch(0.936 0.047 167.2), oklch(0.459 0.112 155.7));
@@ -68,7 +69,7 @@
     --success-900: light-dark(oklch(0.435 0.096 161.8), oklch(0.894 0.029 160.3));
     --success-950: light-dark(oklch(0.351 0.078 161.1), oklch(0.945 0.016 160.2));
 
-    // Warning scale (Figma)
+    // Warning scale
     --warning-50: light-dark(oklch(0.984 0.016 83.3), oklch(0.126 0.052 29.2));
     --warning-100: light-dark(oklch(0.966 0.030 78.5), oklch(0.335 0.088 50.0));
     --warning-200: light-dark(oklch(0.937 0.047 78.1), oklch(0.445 0.100 64.6));
@@ -81,7 +82,7 @@
     --warning-900: light-dark(oklch(0.427 0.091 73.8), oklch(0.894 0.027 64.7));
     --warning-950: light-dark(oklch(0.345 0.073 72.7), oklch(0.945 0.015 62.5));
 
-    // Error scale (Figma)
+    // Error scale
     --error-50: light-dark(oklch(0.983 0.008 24.6), oklch(0.126 0.052 29.2));
     --error-100: light-dark(oklch(0.963 0.018 24.2), oklch(0.322 0.104 22.5));
     --error-200: light-dark(oklch(0.936 0.032 23.3), oklch(0.421 0.108 20.0));
@@ -94,7 +95,7 @@
     --error-900: light-dark(oklch(0.415 0.077 22.5), oklch(0.894 0.025 23.1));
     --error-950: light-dark(oklch(0.340 0.062 23.7), oklch(0.945 0.014 22.2));
 
-    // Info scale (Figma)
+    // Info scale
     --info-50: light-dark(oklch(0.985 0.015 205.5), oklch(0.131 0.037 250.4));
     --info-100: light-dark(oklch(0.966 0.027 213.9), oklch(0.357 0.068 224.9));
     --info-200: light-dark(oklch(0.936 0.041 213.5), oklch(0.461 0.083 217.7));
@@ -107,24 +108,27 @@
     --info-900: light-dark(oklch(0.436 0.077 213.7), oklch(0.894 0.024 220.9));
     --info-950: light-dark(oklch(0.352 0.062 214.4), oklch(0.945 0.013 222.9));
 
-    // Cleacss semantic overrides — link cleacss utility classes and form states to our scales
-    --color-success: var(--success-500);
-    --color-warning: var(--warning-500);
-    --color-error: var(--error-500);
-    --color-info: var(--info-500);
-    --input-border-color: var(--neutral-500-alpha);
-
     // Semantic tokens
     --content-light: color-mix(in oklch, var(--brand-50) 30%, white);
     --content-dark: var(--brand-100);
   }
 
-  // Re-tint hooks must target :root — --brand-* tokens bind var(--brand-hue) at declaration,
-  // so descendant overrides won't recompute. Cascades to --color-accent and derived tokens.
+  // Re-tint hooks must target :root so --brand-* rebinds var(--brand-hue); cascades to derived tokens (CSS rule 9)
   :root[data-brand="pink"] {
     --brand-hue: 360; // green ≈119° → pink ≈350°
   }
   :root[data-brand="orange"] {
     --brand-hue: 55; // green ≈119° → orange ≈55°
+  }
+}
+
+// Unlayered to override cleacss's own unlayered :root defaults — see index.scss @include order (CSS rule 8)
+@mixin cleacss-overrides {
+  :root {
+    --color-success: var(--success-500);
+    --color-warning: var(--warning-500);
+    --color-error: var(--error-500);
+    --color-info: var(--info-500);
+    --input-border-color: var(--neutral-500-alpha);
   }
 }

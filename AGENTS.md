@@ -38,8 +38,8 @@ pnpm clean            # rm -rf public
 | `src/_data/site.json` | Global site data (`url`, `name`, `description`, `image`) |
 | `src/css/index.scss` | SCSS entry point + all styles (theme, content modes, interactive, typography, layout) |
 | `src/css/_fonts.scss` | Ronzino `@font-face` declarations (`@layer fonts`) |
-| `src/css/_colors.scss` | Figma-generated colour scales (brand, neutral, success, warning, error, info) with light-dark() for dark mode (`@layer colors`). Brand scale is parametric (`--brand-hue`/`--brand-chroma`) |
-| `src/css/_scale.scss` | Utopia fluid type + space scale tokens (`@layer type`) |
+| `src/css/_colors.scss` | Figma-generated colour scales (brand, neutral, success, warning, error, info) with light-dark() for dark mode (`@layer colors`). Brand scale is parametric (`--brand-hue`/`--brand-chroma`). Also exposes the unlayered `cleacss-overrides` mixin (see CSS rule 8) |
+| `src/css/_scale.scss` | Utopia fluid type tokens (`@layer type`) + the unlayered `space-tokens` mixin holding the `--space-*` scale (see CSS rule 3) |
 | `src/css/_view-transitions.scss` | View transition names and animations (`@layer view-transitions`) |
 | `src/css/vendor/cleacss.css` | Vendored cleacss v3.2.0 — do NOT npm-install |
 | `src/assets/fonts/` | Ronzino woff2 files (passthrough copied to `public/assets/fonts/`) |
@@ -70,6 +70,8 @@ Embed lazy, autoplay-in-view videos with the `projectVideo` shortcode (defined i
 
 3. **`@layer` names in use:** `reset` (cleacss — do not write to it), `fonts`, `colors`, `type`, `view-transitions`. Layers are for variable/token declarations only, except `view-transitions` which also contains `view-transition-name` assignments and keyframes. All other styles go unlayered in `index.scss`.
 
+   **Exception — tokens that collide with cleacss must be unlayered.** cleacss ships its *own* unlayered `--space-*` scale and `--color-{success,warning,error,info}`/`--input-border-color` at `:root`. Per the cascade-layers spec, **unlayered always beats layered regardless of source order or specificity**, so a colliding token placed inside `@layer type`/`@layer colors` silently loses to cleacss's default. Our overriding tokens therefore live in unlayered mixins — `scale.space-tokens` (the whole `--space-*` scale) and `colors.cleacss-overrides` — that `index.scss` `@include`s **after** `@import "vendor/cleacss.css"` (unlayered + later source order = wins). Only genuinely new token names or type-scale (`--step-*`) are collision-free and can stay layered. When adding a token, check whether cleacss already defines that exact name; if so, add it to the relevant unlayered mixin, not a `@layer`.
+
 4. **Colour mode** — cleacss uses `light-dark()` natively. Set `[data-theme="dark"]` on `<html>` to force dark mode manually. OS preference works automatically.
 
 5. **OKLCH colours** — native oklch renders P3-wide automatically. No `@supports (color: color(display-p3))` block needed.
@@ -78,7 +80,7 @@ Embed lazy, autoplay-in-view videos with the `projectVideo` shortcode (defined i
 
 7. **Colour scales** — All colour scales (`--brand-*`, `--neutral-*`, `--success-*`, `--warning-*`, `--error-*`, `--info-*`) use Figma-generated oklch values with `light-dark()` for dark mode. Scales use 50–950 step numbering. The brand scale's tokens are `--brand-{step}` (formerly `--green-*`) — named for their role, since the hue is re-tintable (see rule 9). Neutral has both solid (`--neutral-{step}`) and alpha (`--neutral-{step}-alpha`) variants. Alpha variants use the darkest neutral step as base (950 in light, 50 in dark) with consistent alpha values across modes.
 
-8. **Cleacss semantic overrides** — `--color-success`, `--color-warning`, `--color-error`, and `--color-info` are defined in `_colors.scss` to override cleacss's hardcoded defaults. These link cleacss utility classes (`.has-text-success`, `.has-background-error`, etc.) and form validation states to our Figma scales (500 step).
+8. **Cleacss semantic overrides** — `--color-success`, `--color-warning`, `--color-error`, `--color-info`, and `--input-border-color` are defined in `_colors.scss`'s unlayered `cleacss-overrides` mixin (see rule 3 for why unlayered) to override cleacss's hardcoded defaults. These link cleacss utility classes (`.has-text-success`, `.has-background-error`, etc.) and form validation states to our Figma scales (500 step).
 
 9. **Brand re-tint knobs** — The brand scale (`--brand-{step}`) is parametric: every step's hue is `calc(var(--brand-hue) + <per-step offset>)` and chroma is `calc(<orig> * var(--brand-chroma))`. Both are registered via `@property` (`<number>`, so they animate). Defaults (`--brand-hue: 119.4`, `--brand-chroma: 1`) reproduce the original Figma scale exactly. Per-step hue offsets preserve each mode's hue-twist relative to base 119.4°. Re-tint the whole scale (and everything derived from it — `--color-accent`, hover, surfaces, content tokens) by changing `--brand-hue`/`--brand-chroma`: via the `:root[data-brand="…"]` hook in `_colors.scss` (currently `pink` → hue 350), via `brand: <name>` page frontmatter (rendered as `data-brand` on **`<html>`** in `_base.njk`), or from JS with `document.documentElement.style.setProperty('--brand-hue', 350)`. **The hook must target `:root`/`<html>`** — the `--brand-*` tokens are declared on `:root`, so their `var(--brand-hue)` is substituted there; overriding the hue on a descendant (e.g. `.layout`) only inherits the already-computed values and won't re-tint. Lower `--brand-chroma` (e.g. `0.85`) if a rotated hue looks over-saturated or clips gamut.
 
@@ -91,12 +93,14 @@ Embed lazy, autoplay-in-view videos with the `projectVideo` shortcode (defined i
 5. **`rem` for sizing, `dvh`/`dvw` over `vh`/`vw`.** No raw `px` values for layout.
 6. **External links:** always `target="_blank" rel="noopener noreferrer"`.
 7. **`browserslist` pin:** `pnpm-workspace.yaml` pins `browserslist@4.24.0`. Required for Node 22+. Do not remove.
+8. **SCC and CSS Comments are single-line `//`, never wrapped paragraphs.** One comment = one line. Do NOT wrap prose across several consecutive `//` lines, and do not use `/* … */` block comments in SCSS. If a note would exceed ~25 words, don't pad it into a multi-line block — cut it down, and move any property-specific detail onto the line directly above (or trailing, after the `;`) that property. Keep the *why*, drop the essay.
 
 ## Common gotchas
 
 | Issue | Fix |
 |---|---|
 | Sass error: `@use` after `@import` | Move all `@use` statements above `@import "vendor/cleacss"` in `index.scss` |
+| A `--space-*` / `--color-{success,warning,error,info}` / `--input-border-color` value doesn't match `_scale.scss`/`_colors.scss` | cleacss defines that token unlayered; a layered override loses. Put it in the `space-tokens` / `cleacss-overrides` unlayered mixin `@include`d after the cleacss import (CSS rule 3) |
 | cleacss not applying dark mode | Check `[data-theme]` attribute on `<html>`; or verify LightningCSS is processing the output |
 | Text colour not changing with the palette | Text uses `--neutral-*` tokens which are intentionally near-neutral — only `--color-accent` changes with the palette |
 | Font not loading | Check `src/assets/fonts/` has the woff2 file; passthrough copy requires the file to exist at build time |

@@ -1,0 +1,17 @@
+{% macro ctaCard(
+    heading,
+    body,
+    callLabel = "Book free intro call",
+    emailLabel = "Or email me",
+    callUrl = "https://cal.com/francescoimola/intro",
+    emailHref = "mailto:francesco@imola.dev"
+) %}
+<section class="card featured flow has-gap-xs" >
+    <h2>{{ heading }}</h2>
+    <p>{{ body }}</p>
+    <div class="flow has-gap-xs has-pt-s">
+        <a data-icon="phone" href="{{ callUrl }}" target="_blank" rel="noopener noreferrer">{{ callLabel }}</a>
+        <a data-icon="arrow-right" href="{{ emailHref }}">{{ emailLabel }}</a>
+    </div>
+</section>
+{% endmacro %}

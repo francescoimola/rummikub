@@ -3,6 +3,10 @@
 @use 'scale';
 @import "vendor/cleacss.css";
 
+// After the cleacss import so these unlayered tokens override cleacss's own unlayered :root defaults (CSS rule 3)
+@include scale.space-tokens;
+@include colors.cleacss-overrides;
+
 // Lenis smooth scroll — minimal required styles
 html.lenis,
 html.lenis body { height: auto; }
@@ -27,10 +31,9 @@ html.lenis body { height: auto; }
 $bp-mobile: 49rem;
 $bp-tablet: 64rem;
 
-// reversed "xs-2xs" token that cleacss doesn't ship with
-.flow.has-gap-xs-2xs,
-.flow-row.has-gap-xs-2xs {
-    --flow-gap: var(--space-xs-2xs);
+.flow.has-gap-3xs,
+.flow-row.has-gap-3xs {
+    --flow-gap: var(--space-3xs) // smallest gap
 }
 
 // Reveal animation — shared collapsed/open states for .expandable and <details>
@@ -86,7 +89,6 @@ $bp-tablet: 64rem;
     --icon-align-xs: -0.15em;
     --icon-align-s: -0.175em;
     --icon-align-m: -0.20em;
-    --icon-align-l: -0.225em;
 
     @media (prefers-reduced-motion: no-preference) { 
         // Values are disabled for users who prefer reduced motion
@@ -101,15 +103,16 @@ $bp-tablet: 64rem;
 // ---- Theming ----
 .sidebar {
     --color-accent: var(--neutral-950-alpha);
+    background: light-dark(var(--brand-150), var(--neutral-200-alpha));
 
     footer {
-        --color-accent: light-dark(var(--brand-800), var(--brand-900));
-        --accent-hover: light-dark(var(--brand-700), var(--brand-950));
+        --color-accent: var(--brand-900);
+        --accent-hover: var(--brand-950);
     }
 }
 
-[data-content="contrast"]>.content {
-    background-color: light-dark(var(--content-light), transparent);
+[data-content="contrast"]>.content, body:has([data-content="contrast"]) {
+    background-color: light-dark(var(--content-light), var(--brand-50));
 }
 
 // ---- Interactive ----
@@ -162,11 +165,16 @@ h6,
     letter-spacing: var(--letter-spacing-medium);
 }
 
-[data-headings="highlight-h2"]>h2:first-child { // Puts targeted headings in a highlighted box
+.pretty p {
+    text-wrap-style: pretty;
+}
+
+[hlight-section-h]>h2:first-child { // Puts targeted headings in a highlighted box
     background-color: var(--accent-surface);
     inline-size: fit-content;
     padding-block: var(--space-3xs-2xs);
     padding-inline: var(--space-xs);
+    border-radius: var(--border-radius-s);
 }
 
 :where(small, figcaption, blockquote, time) {
@@ -178,7 +186,7 @@ h6,
 }
 
 figcaption {
-    margin-top: var(--space-xs);
+    margin-top: var(--space-2xs);
     text-align: end;
 }
 
@@ -188,9 +196,11 @@ blockquote+figcaption {
     color: var(--neutral-950-alpha);
 }
 
-:where(img) {
+:where(img, picture, video, canvas, svg) {
     background-color: var(--neutral-100-alpha);
     object-fit: cover;
+    margin-inline: auto;
+    border-radius: var(--border-radius);
 }
 
 img.ratio-1-1 {
@@ -209,6 +219,7 @@ a,
 button {
     color: var(--color-accent);
     text-decoration-color: color-mix(in oklch, var(--color-accent) 75%, transparent);
+    transition: color var(--animation-duration) var(--animation-ease);
 
     @media (hover: hover) {
         &:hover {
@@ -242,32 +253,19 @@ nav a[aria-current="page"] {
 
 // ---- Icons ----
 
-.icon {
-    display: inline-block;
-    color: var(--color-link);
-    stroke: inherit;
-    fill: none;
-    vertical-align: middle;
-
-    &--lg {
-        inline-size: var(--step-4);
-    }
-
-    &--base {
-        inline-size: var(--step-3);
-    }
-
-    &--sm {
-        inline-size: var(--step-1);
-    }
-
-    &--xs {
-        inline-size: var(--step-0);
-    }
-
-    &--center {
-        margin-inline: auto;
-    }
+.fluent--chevron-right-16-regular {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='black' d='M5.646 3.146a.5.5 0 0 0 0 .708L9.793 8l-4.147 4.146a.5.5 0 0 0 .708.708l4.5-4.5a.5.5 0 0 0 0-.708l-4.5-4.5a.5.5 0 0 0-.708 0'/%3E%3C/svg%3E");
+  background-color: currentColor;
+  -webkit-mask-image: var(--svg);
+  mask-image: var(--svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  vertical-align: var(--icon-align-s);
 }
 
 [data-icon]::after,
@@ -282,6 +280,20 @@ a[href^="tel:"]::after,
     background-color: currentColor;
     mask: var(--icon) center / contain no-repeat;
     -webkit-mask: var(--icon) center / contain no-repeat;
+    transition: margin-inline-start var(--animation-duration) var(--animation-ease);
+}
+
+// hover/focus lives on the link, not the pseudo-element — &:hover here would compile to ::after:hover (matches only the icon box)
+@media (hover: hover) {
+    :is([data-icon], a[href^="mailto:"], a[href*="cal.com"], a[href^="tel:"]):hover::after,
+    [data-icon-before]:hover::before {
+        margin-inline-start: var(--space-xs);
+    }
+}
+
+:is([data-icon], a[href^="mailto:"], a[href*="cal.com"], a[href^="tel:"]):focus-visible::after,
+[data-icon-before]:focus-visible::before {
+    margin-inline-start: var(--space-xs);
 }
 
 :is([data-icon-before="email"], a[data-icon-before][href^="mailto:"])::before {
@@ -300,7 +312,7 @@ a[data-icon="arrow-ext"]::after {
     --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik01IDEyaDE0Ij48L3BhdGg+CiAgPHBhdGggZD0ibTEyIDUgNyA3LTcgNyI+PC9wYXRoPgo8L3N2Zz4=);
     margin-inline-start: var(--space-3xs);
     vertical-align: var(--icon-align-m);
-    transition: rotate var(--dur-medium) var(--ease);
+    transition: rotate var(--dur-medium) var(--ease), margin-inline-start var(--animation-duration) var(--animation-ease);
 }
 
 [aria-expanded="true"][data-icon="arrow-right"]::after {
@@ -311,6 +323,7 @@ a[data-icon="arrow-ext"]::after {
     --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9ImN1cnJlbnRDb2xvciIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0xNC4yNSAxOEgzTDIuOTk3IDYuNjhsOC41NzYgNS45MzdhLjc1Ljc1IDAgMCAwIC44NTQgMEwyMSA2LjY4MlYxMy41aDEuNVY2QTEuNTAyIDEuNTAyIDAgMCAwIDIxIDQuNUgzQTEuNTAyIDEuNTAyIDAgMCAwIDEuNSA2djEyQTEuNTAyIDEuNTAyIDAgMCAwIDMgMTkuNWgxMS4yNVYxOFptNS4wOTktMTJMMTIgMTEuMDg4IDQuNjUxIDZoMTQuNjk4WiI+PC9wYXRoPgogIDxwYXRoIGQ9Ik0xOS41IDIxYTMgMyAwIDEgMCAwLTYgMyAzIDAgMCAwIDAgNloiPjwvcGF0aD4KPC9zdmc+);
     margin-inline-start: var(--space-3xs);
     vertical-align: var(--icon-align-s);
+    transition: margin-inline-start var(--animation-duration) var(--animation-ease);
 }
 
 // suppress ::after on links that use data-icon-before — icon is before the text instead
@@ -378,11 +391,11 @@ button {
     }
 }
 
-.subtitle {
+.subtitle, .dimmed {
     color: var(--neutral-900-alpha);
 }
 
-h1:has(.subtitle) .subtitle {
+h1>:is(.stubtitle, .dimmed) {
    color: var(--neutral-800-alpha); 
 }
 
@@ -439,6 +452,18 @@ nav {
     }
 }
 
+// ---- Lists ----
+
+ol:not(.text ol) li {
+    list-style-position: inside; // keeps the marker inline with the text instead of hanging in the outside margin
+
+    &::marker {
+        content: "[" counter(list-item) "]" "\2002"; // en space — plain ASCII spaces can get collapsed in generated content
+        color: var(--neutral-900-alpha); // matches .dimmed
+    }
+}
+
+// ---- Layout ----
 .layout {
     display: grid;
     grid-template-columns: max-content 1fr;
@@ -452,15 +477,17 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin-inline-start: var(--gutter-y);
+    margin-block: var(--gutter-y);
     padding-block: var(--gutter-y);
     padding-inline: var(--gutter-x);
     position: sticky;
-    top: 0;
-    block-size: 100dvh;
+    top: var(--gutter-y);
+    block-size: calc(100dvh - calc(var(--gutter-y) * 2));
     overflow-y: auto;
     white-space: nowrap;
     z-index: 1;
-    background: var(--brand-50);
+    border-radius: var(--border-radius);
 }
 
 .content {
@@ -469,32 +496,41 @@ nav {
     padding-inline: var(--gutter-y);
     padding-block-start: var(--gutter-y);
     padding-block-end: var(--space-l);
-}
 
-.mobile-only>footer {
-    border-block-start: var(--input-border-width) solid var(--input-border-color);
-    margin-block-end: var(--space-xl);
-    inline-size: 100%;
+    --gutter-y-sticky: var(--gutter-y); // Freeze the gutter to an absolute length here, so descendants main can stick flush to it
 }
 
 :where(main) {
     flex: 1;
     container-type: inline-size;
+    margin-block-end: var(--space-2xl-3xl);
 
     &>* {
         max-inline-size: 40rem;
         inline-size: 100%;
         margin-inline: auto;
     }
-
-    &:has(.expandable.is-open) {
-        padding-block-end: var(--space-2xl-3xl);
-    }
 }
 
 [full-width] {
     max-inline-size: unset;
     margin-inline: unset;
+}
+
+// Scroll-driven breakout: opted-in media enters full-column-width and settles to the 40rem measure as its center reaches the viewport center
+@media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+        @keyframes breakout {
+            from { max-inline-size: 100%; }
+            to   { max-inline-size: 40rem; }
+        }
+
+        main > [breakout] {
+            animation: breakout ease-out both;
+            animation-timeline: view();
+            animation-range: cover 0% cover 50%; // first peek from bottom → centered in viewport
+        }
+    }
 }
 
 .expandable {
@@ -585,6 +621,7 @@ a[data-icon-before] {
     padding: var(--space-s-m);
     display: flex;
     flex-direction: column;
+    border-radius: var(--border-radius-s);
 
     @media (forced-colors: active) {
         border: 1px solid CanvasText;
@@ -603,6 +640,10 @@ a[data-icon-before] {
 
     &.featured {
         background: var(--accent-surface);
+    }
+
+    &:has(blockquote) {
+        box-shadow: inset var(--space-3xs) 0 var(--accent-surface);
     }
 
     &>:is(img, picture, figure) {
@@ -677,18 +718,70 @@ a.card {
 
 .stick {
     position: sticky;
+
+    &-pos-top {
+        align-self: start;
+        top: var(--gutter-y-sticky); // frozen length, not raw --gutter-y (which re-resolves cqi against the narrower `main`)
+    }
 }
 
 .has-counter {
     counter-reset: standard;
 }
 
-.has-counter>.service>h3::before {
-    counter-increment: standard;
-    content: counter(standard, decimal-leading-zero);
-    margin-inline-end: var(--space-xs);
-    color: var(--neutral-800-alpha);
-    font-weight: var(--font-weight-base);
+// Row bottom rule matching <hr> — used on pricing/list rows where <hr> can't sit between <li>
+.has-row-divider {
+    border-block-end: var(--input-border-width) solid var(--input-border-color);
+}
+
+.has-nowrap {
+    white-space: nowrap;
+}
+
+.service {
+    summary h3 {
+        display: inline-block; // keep cleacss's floated +/− marker on the title's line
+    }
+
+    &::details-content {
+        min-block-size: 0; // .card is flex, so details-content is a flex item; auto min floors its height and kills the 0→auto reveal
+    }
+
+    h3::before {
+        counter-increment: standard;
+        content: counter(standard, decimal-leading-zero);
+        display: inline-block; // breaks propagation of the h3's hover underline onto the counter
+        margin-inline-end: var(--space-xs);
+        color: var(--neutral-800-alpha);
+        font-weight: var(--font-weight-base);
+    }
+
+    a>h3:hover {
+        text-decoration: underline;
+    }
+    
+    &>a:has(h3) {
+        text-decoration: none;
+    }
+
+    // Mirror the title link's hover/focus onto the "Learn more" link (no nested :has — invalid)
+    &:has(>a:focus-visible>h3)>a[data-icon] {
+        --color-accent: var(--accent-hover);
+
+        &::after {
+            margin-inline-start: var(--space-xs);
+        }
+    }
+
+    @media (hover: hover) {
+        &:has(>a:hover>h3)>a[data-icon] {
+            --color-accent: var(--accent-hover);
+
+            &::after {
+                margin-inline-start: var(--space-xs);
+            }
+        }
+    }
 }
 
 // ---- Data list ----
@@ -786,12 +879,14 @@ a.card {
         }
     }
 
-    .content, footer {
+    .content {
         padding-inline: var(--gutter-x);
     }
 
-    .content {
-        padding-block-end: revert;
+    footer {
+        border-block-start: var(--input-border-width) solid var(--input-border-color);
+        padding-block: var(--space-m);
+        inline-size: 100%;
     }
 
     .sidebar {
@@ -824,6 +919,10 @@ a.card {
             max-inline-size: unset;
             margin-inline: unset;
         }
+    }
+
+    .stick {
+        position: revert;
     }
 
 }
