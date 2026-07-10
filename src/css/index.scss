@@ -452,17 +452,6 @@ nav {
     }
 }
 
-// ---- Lists ----
-
-ol:not(.text ol) li {
-    list-style-position: inside; // keeps the marker inline with the text instead of hanging in the outside margin
-
-    &::marker {
-        content: "[" counter(list-item) "]" "\2002"; // en space — plain ASCII spaces can get collapsed in generated content
-        color: var(--neutral-900-alpha); // matches .dimmed
-    }
-}
-
 // ---- Layout ----
 .layout {
     display: grid;
