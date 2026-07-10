@@ -31,7 +31,7 @@ module.exports = function (eleventyConfig, eleventyImage, filenameFormat) {
     var fsSrc = src.startsWith("/") ? "src" + src : path.resolve("src", src);
 
     var metadata = await eleventyImage(fsSrc, {
-      widths: [400, 800, 1200],
+      widths: [400, 800, 1080, 1200, 1440, 2560, "auto"],
       formats: ["webp", "gif"],
       sharpOptions: { animated: true, limitInputPixels: false },
       outputDir: "./public/assets/images",

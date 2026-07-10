@@ -6,35 +6,28 @@ eleventyNavigation:
   key: Studio Services
   parent: Home
 ---
-<section class="flow has-gap-s">
-    <h1>Services</h1>
-    <p>Francesco Imola designs websites, writes copy, and makes marketing <s>simple</s> on a human scale. With this studio, I liberate people from restrictive marketing practices, and together we chart effective but less exhausting ways forward.</p>
-    <p>In a world overflowing with content and distractions, I focus on doing less, better.</p>
+{% from "_service-card.njk" import serviceCard %}
+{% from "_cta-card.njk" import ctaCard %}
+<section class="flow has-gap-s pretty">
+    <h1>Studio Services</h1>
+    <p>Francesco Imola designs websites, writes copy, and makes marketing <s>simple</s> on a human scale. I help you break free from constricting marketing practices, and together we'll chart less exhausting ways forward.</p>
+    <p>In a world overflowing with distractions, I focus on doing less, better.</p>
 </section>
-<section class="flow has-gap-s has-counter" data-headings="highlight-h2">
+<section class="flow has-gap-s has-counter pretty" hlight-section-h>
     <h2 class="has-mb-xs-s">Where I can help</h2>
-    <div class="card service flow has-gap-xs">
-        <h3>Graphic & Web Design</h3>
-        <p>I design great things from messy briefs and make it look easy. Website-wise, I’m bilingual in Figma, Webflow, Framer, HTML and CSS.</p>
-        <a data-icon="arrow-right" href="/services/graphic-web-design/">Learn more</a>
-    </div>
-    <div class="card service flow has-gap-xs">
-        <h3>Website Consultations</h3>
-        <p>Sense something isn't working, but don't know what exactly? A website consultation gives you what your therapist never could.</p>
-        <a data-icon="arrow-right" href="/services/websites/">Learn more</a>
-    </div>
-    <div class="card service flow has-gap-xs">
-        <h3>Copy and content writing</h3>
-        <p>As long as you're willing for me to taint your name with odd lexicon and inaccurate sentence structure, I'm in</p>
-        <span>Ad hoc&nbsp;<span style="display: inline-block; transform: scale(0.75); vertical-align: middle;">&bull;</span>&nbsp;<a data-icon="email" href="/services/websites/">Enquire</a>
-        </span>
-    </div>
+    {{ serviceCard("Web & Graphic Design", "/services/graphic-web-design/", "I make building great websites from messy briefs look too easy. Proceed with caution: this service involves slicing through the nonsense and giving your people the clarity they've been missing.") }}
+    {{ serviceCard("Website Consultations", "/services/website-consultations/", "Sense something isn't working, but don't know what exactly? A website consultation gives you what your therapist never could.") }}
 </section>
-<figure>
-    <img src="/assets/portfolio/outreach-card-oaf.png" alt="business card-adjacent print for Open Art Folke" width="1200" height="auto">
+<section class="flow has-gap-s pretty" hlight-section-h>
+    <h2 class="has-mb-xs-s">Ad hoc</h2>
+    {{ serviceCard("Copy and content writing", "mailto:hi@francescoimola.com", "Have a bunch of ideas you've been meaning to publish? Want your entire website rewritten? I can take half formed drafts and turn them into fully fleshed, SEO friendly content that sings to the hearts of your people.", type = "accordion") }}
+    {{ serviceCard("Email guidance", "/services/graphic-web-design/", "Get 1:1 help via email and see things from a new perspective. Let's work on your strategy, website, newsletter, or branding. Guidance is tailored to you, and informed by my 8+ years in marketing and the creative industries." , type = "accordion") }}
+</section>
+<figure breakout>
+    <img src="/assets/portfolio/outreach-card-oaf.png" alt="business card-adjacent print for Open Art Folke" width="1080" height="auto">
     <figcaption>Graphic design for Open Art Folke</figcaption>
 </figure>
-<section class="flow has-gap-s" data-headings="highlight-h2">
+<section class="flow has-gap-s" hlight-section-h>
     <h2 class="has-mb-xs-s">Happy humans</h2>
     <div class="flow has-gap-xs">
         <figure class="card outline flow has-gap-s">
@@ -73,22 +66,19 @@ eleventyNavigation:
         </figure>
     </div>
 </section>
-<figure>
-    <img src="/assets/portfolio/the_loft_offerings_section.png" alt="business card-adjacent print for Open Art Folke" width="1200" height="auto">
+<figure breakout>
+    <img src="/assets/portfolio/the_loft_offerings_section.png" alt="business card-adjacent print for Open Art Folke" width="1080" height="auto">
     <figcaption>Website design for The Loft</figcaption>
 </figure>
-<section class="flow has-gap-s" data-headings="highlight-h2">
-    <h2 class="has-mb-xs-s">Who I can help</h2>
-    <p>
-        <span class="has-text-bold">Social enterprises</span> who need quality work to strengthen their reputation and keep their community better informed.</p>
-    <p>
-        <span class="has-text-bold">Small businesses</span> who’ve grown past the point where operating on sloppy marketing and graphic design is acceptable.</p>
-    <p>
-        <span class="has-text-bold">Makers and freelancers</span> who’ve wasted enough time DIYing their way through problems.</p>
+<section class="flow has-gap-l pretty" hlight-section-h>
+    <h2>Who I help</h2>
+    <p>Social enterprises<span class="dimmed"> → You need quality work to strengthen your reputation and keep your community better informed.</span></p>
+    <p>Small businesses<span class="dimmed"> → You have grown past the point where operating on sloppy marketing and graphic design is still acceptable.</span></p>
+    <p>Makers and freelancers<span class="dimmed"> → You have wasted enough time DIYing your way through problems.</span></p>
 </section>
-<section class="card featured flow has-gap-xs"  data-headings="minimal">
-    <h2>I can help</h2>
-    <p>Book a free intro call to chat about your project and how I can help.</p>
-    <a data-icon="phone" href="https://cal.com/francescoimola/intro">Book free intro call</a>
-    <a data-icon="arrow-right" href="mailto:francesco@imola.dev">Copy email instead</a>
-</section>
+{{ ctaCard(
+    "Book a free intro call",
+    "You can tell me about your project and I'll tell you about how I work. In just 20 mins, you'll know if I'm able to help and roughly how much it'll cost.",
+    callLabel = "Schedule free intro call",
+    emailLabel = "Copy email instead"
+) }}
