@@ -140,7 +140,7 @@ body {
     text-underline-offset: calc(var(--space-3xs) / var(--type-ratio));
     background-color: var(--brand-50);
     text-wrap: avoid-orphans;
-    letter-spacing: var(--letter-spacing-base);
+    letter-spacing: var(--letter-spacing-m);
 }
 
 :where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
@@ -150,7 +150,30 @@ body {
     text-wrap: balance;
     color: var(--neutral-950-alpha);
     max-inline-size: var(--max-width-size-6);
-    letter-spacing: var(--letter-spacing-bold);
+    letter-spacing: var(--letter-spacing-xl);
+}
+
+h1.stretch {
+  width: 100%;
+  letter-spacing: var(--letter-spacing-s);
+
+  svg {
+    background-color: transparent;
+    width: 100%;
+    height: auto;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  text {
+    fill: currentColor;
+    dominant-baseline: mathematical;
+    alignment-baseline: auto;
+  }
+
+  &+section {
+    margin-block-start: calc(var(--space-m-l) * -1);
+  }
 }
 
 h3,
@@ -162,7 +185,7 @@ h6,
 .h5,
 .h6 {
     font-weight: var(--font-weight-medium);
-    letter-spacing: var(--letter-spacing-medium);
+    letter-spacing: var(--letter-spacing-l);
 }
 
 .pretty p {
@@ -249,6 +272,11 @@ nav a[aria-current="page"] {
     &:focus-visible {
         color: var(--neutral-800-alpha);
     }
+}
+
+:is(.text ol, .text ul) {
+    margin-inline-start: 0;
+    padding-inline-start: var(--space-s);    
 }
 
 // ---- Icons ----
@@ -861,7 +889,10 @@ a.card {
 
     main {
         border-block-start: revert;
-        padding-block-start: var(--space-xs);
+        
+        &:not(:has(>.stretch)) {
+            padding-block-start: var(--space-xs);
+        }
 
         &:has([data-hero-media="true"]) {
             padding-block-start: var(--space-4xs-3xs);
@@ -882,6 +913,7 @@ a.card {
         position: revert;
         block-size: auto;
         row-gap: var(--space-l-2xl);
+        margin-inline: var(--gutter-y);
     }
 
     .desktop-only {

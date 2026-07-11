@@ -8,8 +8,13 @@ eleventyNavigation:
 ---
 {% from "_service-card.njk" import serviceCard %}
 {% from "_cta-card.njk" import ctaCard %}
+<h1 class="stretch" full-width>
+    {# viewBox reserves the box height (no CLS) and paints stretched text before/without JS; JS refines it to the exact glyph fit. #}
+    <svg preserveAspectRatio="none" viewBox="0 0 1000 90" role="img" aria-label="Studio Services" style="margin-block: -1.5%;">
+        <text lengthAdjust="spacingAndGlyphs" aria-hidden="true">Studio Services</text>
+    </svg>
+</h1>
 <section class="flow has-gap-s pretty">
-    <h1>Studio Services</h1>
     <p>Francesco Imola designs websites, writes copy, and makes marketing <s>simple</s> on a human scale. I help you break free from constricting marketing practices, and together we'll chart less exhausting ways forward.</p>
     <p>In a world overflowing with distractions, I focus on doing less, better.</p>
 </section>
