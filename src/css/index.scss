@@ -517,7 +517,7 @@ nav {
         main > [breakout] {
             animation: breakout ease-out both;
             animation-timeline: view();
-            animation-range: cover 0% cover 50%; // first peek from bottom → centered in viewport
+            animation-range: cover 0% cover 50%; // first peek from bottom → centred in viewport
         }
     }
 }
