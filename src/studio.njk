@@ -1,34 +1,29 @@
 ---
 layout: _base.njk
-title: Studio Services
-contentMode: contrast
+title: Design Studio
 eleventyNavigation:
-  key: Studio Services
+  key: Design Studio
   parent: Home
 ---
 {% from "_service-card.njk" import serviceCard %}
 {% from "_cta-card.njk" import ctaCard %}
-<h1 class="stretch" full-width>
-    {# viewBox reserves the box height (no CLS) and paints stretched text before/without JS; JS refines it to the exact glyph fit. #}
-    <svg preserveAspectRatio="none" viewBox="0 0 1000 90" role="img" aria-label="Studio Services" style="margin-block: -1.5%;">
-        <text lengthAdjust="spacingAndGlyphs" aria-hidden="true">Studio Services</text>
-    </svg>
-</h1>
-<section class="flow has-gap-s pretty">
-    <p>Francesco Imola designs websites, writes copy, and makes marketing <s>simple</s> on a human scale. I help you break free from constricting marketing practices, and together we'll chart less exhausting ways forward.</p>
-    <p>In a world overflowing with distractions, I focus on doing less, better.</p>
+
+<section class="flow has-gap-m pretty">
+    <h1>Marketing made <s>simple</s> on a human scale<br><span class="dimmed">Francesco Imola designs websites and writes what goes in them</span></h1>
+    <img src="/assets/images/francesco_imola_marketing_and_design_studio.png" alt="" width="1080" height="auto" style="background-color: var(--body-bg)">
+    <p>Together we will literally and metaphorically break free from suffocating marketing practices, and chart a simpler, less exhausting way forward.</p>
 </section>
 <section class="flow has-gap-s has-counter pretty" hlight-section-h>
     <h2 class="has-mb-xs-s">Where I can help</h2>
-    {{ serviceCard("Web & Graphic Design", "/services/graphic-web-design/", "I make building great websites from messy briefs look too easy. Proceed with caution: this service involves slicing through the nonsense and giving your people the clarity they've been missing.") }}
-    {{ serviceCard("Website Consultations", "/services/website-consultations/", "Sense something isn't working, but don't know what exactly? A website consultation gives you what your therapist never could.") }}
+    {{ serviceCard("Web & Graphic Design", "/studio/graphic-web-design/", "Proceed with caution: this service involves slicing through the nonsense and giving your people what they've been missing.") }}
+    {{ serviceCard("Website Consultations", "/studio/website-consultations/", "Sense something isn't working, but don't know what exactly? A website consultation gives you what your therapist never could.") }}
 </section>
 <section class="flow has-gap-s pretty" hlight-section-h>
     <h2 class="has-mb-xs-s">Ad hoc</h2>
     {{ serviceCard("Copy and content writing", "mailto:hi@francescoimola.com", "Have a bunch of ideas you've been meaning to publish? Want your entire website rewritten? I can take half formed drafts and turn them into fully fleshed, SEO friendly content that sings to the hearts of your people.", type = "accordion") }}
-    {{ serviceCard("Email guidance", "/services/graphic-web-design/", "Get 1:1 help via email and see things from a new perspective. Let's work on your strategy, website, newsletter, or branding. Guidance is tailored to you, and informed by my 8+ years in marketing and the creative industries." , type = "accordion") }}
+    {{ serviceCard("Email guidance", "/studio/graphic-web-design/", "Get 1:1 help via email and see things from a new perspective. Let's work on your strategy, website, newsletter, or branding. Guidance is tailored to you, and informed by my 8+ years in marketing and the creative industries." , type = "accordion") }}
 </section>
-<figure breakout>
+<figure view-animation="breakout">
     <img src="/assets/portfolio/outreach-card-oaf.png" alt="business card-adjacent print for Open Art Folke" width="1080" height="auto">
     <figcaption>Graphic design for Open Art Folke</figcaption>
 </figure>
@@ -61,7 +56,7 @@ eleventyNavigation:
             </blockquote>
             <figcaption>
                 <a href="https://www.sarahyuklan.com/" target="_blank" rel="noopener noreferrer">Sarah Brown</a><br>Holistic Coach
-            </figcaption>
+                </figcaption>
         </figure>
         <figure class="card outline flow has-gap-s">
             <blockquote>
@@ -71,7 +66,7 @@ eleventyNavigation:
         </figure>
     </div>
 </section>
-<figure breakout>
+<figure view-animation="breakout">
     <img src="/assets/portfolio/the_loft_offerings_section.png" alt="business card-adjacent print for Open Art Folke" width="1080" height="auto">
     <figcaption>Website design for The Loft</figcaption>
 </figure>
@@ -82,8 +77,8 @@ eleventyNavigation:
     <p>Makers and freelancers<span class="dimmed"> → You have wasted enough time DIYing your way through problems.</span></p>
 </section>
 {{ ctaCard(
-    "Book a free intro call",
-    "You can tell me about your project and I'll tell you about how I work. In just 20 mins, you'll know if I'm able to help and roughly how much it'll cost.",
-    callLabel = "Schedule free intro call",
-    emailLabel = "Copy email instead"
-) }}
+        "Book a free intro call",
+        "You can tell me about your project and I'll tell you about how I work. In just 20 mins, you'll know if I'm able to help and roughly how much it'll cost.",
+        callLabel = "Schedule free intro call",
+        emailLabel = "Copy email instead"
+    ) }}

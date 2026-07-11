@@ -2,13 +2,15 @@
 {% if type == "accordion" %}
 <details class="card service">
     <summary><h3>{{ title }}</h3></summary>
-    <p>{{ description }}</p>
-    <a data-icon="email" href="{{ url }}">Enquire</a>
+    <div class="flow has-gap-s has-py-xs">
+        <p>{{ description }}</p>
+        <a data-icon="email" href="{{ url }}">Enquire</a>
+    </div>
 </details>
 {% else %}
 <div class="card flow service has-gap-xs">
     {% if type != "adhoc" %}
-    <a href="{{ url }}">
+    <a href="{{ url }}" class="has-pb-2xl">
         <h3>{{ title }}</h3>
     </a>
     {% else %}

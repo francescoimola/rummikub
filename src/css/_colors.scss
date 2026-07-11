@@ -111,6 +111,7 @@
     // Semantic tokens
     --content-light: color-mix(in oklch, var(--brand-50) 30%, white);
     --content-dark: var(--brand-100);
+    --body-bg: var(--brand-50);
   }
 
   // Re-tint hooks must target :root so --brand-* rebinds var(--brand-hue); cascades to derived tokens (CSS rule 9)

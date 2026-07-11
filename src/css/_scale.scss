@@ -7,6 +7,12 @@
   initial-value: 0px;
 }
 
+@property --gutter-y-double {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0dvh;
+}
+
 // Unlayered to override cleacss's own unlayered --space-* scale at :root — see index.scss @include order (CSS rule 3)
 @mixin space-tokens {
   :root {
@@ -18,10 +24,17 @@
       "maxSize": 18,
       "positiveSteps": (1.5, 2, 3, 4, 6, 8),
       "negativeSteps": (0.75, 0.5, 0.25, 0.125),
-      "customSizes": ("s-l", "s-xl", "s-2xl", "m-xl", "l-2xl", "l-3xl", "l-4xl", "xl-3xl", "xl-4xl", "3xl-4xl"),
+      "customSizes": ("s-l", "s-xl", "s-2xl", "m-xl", "l-2xl", "l-3xl", "l-4xl", "xl-3xl", "xl-4xl", "2xl-4xl", "3xl-4xl"),
       "prefix": "space-",
       "relativeTo": "container",
     ));
+  }
+}
+
+// Unlayered to override cleacss's own unlayered :root defaults (CSS rule 3) — mirrors colors.cleacss-overrides
+@mixin cleacss-overrides {
+  :root {
+    --font-weight-bold: 550;
   }
 }
 
@@ -51,13 +64,12 @@
 
     --max-width: calc(var(--grid-width-2xl) * var(--type-ratio));
 
-    // Font weights
+    // Font weights (--font-weight-bold lives in the unlayered cleacss-overrides mixin below — cleacss collision)
     --font-weight-base: 400;
     --font-weight-medium: 425; // Non-standard weight is intentional - Ronzino is a variable font
-    --font-weight-bold: 550;
 
     // Letter spacing
-    --letter-spacing-s: -0.03rem;
+    --letter-spacing-s: -0.04rem;
     --letter-spacing-m: 0.007rem; 
     --letter-spacing-l: 0.011em;
     --letter-spacing-xl: 0.021em;
