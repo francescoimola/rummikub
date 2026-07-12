@@ -1,6 +1,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="color-scheme" content="light dark">
+  <script>
+    // Apply stored palette/theme before first paint (no flash). Reconciled by look-toggles.js.
+    (function () {
+      try {
+        var b = localStorage.getItem("brand");
+        if (b) document.documentElement.setAttribute("data-brand", b);
+        var t = localStorage.getItem("theme");
+        if (t) document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
   {%- include "_meta.njk" -%}
   {%- include "_schema.njk" -%}
 
