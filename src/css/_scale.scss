@@ -7,12 +7,6 @@
   initial-value: 0px;
 }
 
-@property --gutter-y-double {
-  syntax: "<length>";
-  inherits: true;
-  initial-value: 0dvh;
-}
-
 // Unlayered to override cleacss's own unlayered --space-* scale at :root — see index.scss @include order (CSS rule 3)
 @mixin space-tokens {
   :root {
