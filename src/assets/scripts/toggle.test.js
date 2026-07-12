@@ -92,30 +92,15 @@ describe("toggle.js", () => {
     expect(btn.textContent).toBe("Read more");
   });
 
-  it("scrolls target into view when expanding", async () => {
+  it("does not scroll when expanding or collapsing", async () => {
     setupDOM({ btn1Expanded: "false" });
     await import("./toggle.js");
     const btn = document.querySelector('[aria-controls="target1"]');
 
     btn.click();
-
-    expect(scrollIntoViewSpy).toHaveBeenCalledWith({
-      behavior: "smooth",
-      block: "start",
-    });
-  });
-
-  it("scrolls button into view when collapsing", async () => {
-    setupDOM({ btn2Expanded: "true" });
-    await import("./toggle.js");
-    const btn = document.querySelector('[aria-controls="target2"]');
-
     btn.click();
 
-    expect(scrollIntoViewSpy).toHaveBeenCalledWith({
-      behavior: "smooth",
-      block: "nearest",
-    });
+    expect(scrollIntoViewSpy).not.toHaveBeenCalled();
   });
 
   it("only attaches handlers to elements with aria-controls", async () => {
