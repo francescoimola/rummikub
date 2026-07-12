@@ -1,18 +1,23 @@
 {# _header.njk #}
 <nav>
     <a href="/" class="desktop-only">Francesco Imola</a>
-    <div class="mobile-only flow" style="justify-content: space-between;">
-        <a href="/">Francesco Imola</a>
-        <div class="flow has-gap-2xs has-mb-3xs has-items-end">
-            {%- include "_look-toggles.njk" -%}
+    <details class="nav-menu">
+        <summary class="nav-menu__bar">
+            <span class="mobile-only">Francesco Imola</span>
+            <span class="nav-menu__label mobile-only">Menu <i class="nav-menu__icon" aria-hidden="true"></i></span>
+        </summary>
+        <div class="nav-menu__panel">
+            <ul class="flow has-gap-2xs">
+                <li><a href="/"{{ ' aria-current="page"' | safe if page.url == '/' }}>Home</a></li>
+                <li><a href="/studio/"{{ ' aria-current="page"' | safe if page.url == '/studio/' }}>Design Studio</a></li>
+                <li><a href="/work/"{{ ' aria-current="page"' | safe if page.url == '/work/' }}>Selected Work</a></li>
+                <li><a href="/writing/"{{ ' aria-current="page"' | safe if page.url == '/writing/' }}>Writing</a></li>
+                <li><a href="/art/"{{ ' aria-current="page"' | safe if page.url == '/art/' }}>Artmaking</a></li>
+                <li><a href="/contact/"{{ ' aria-current="page"' | safe if page.url == '/contact/' }}>Contact</a></li>
+            </ul>
+            <div class="nav-menu__toggles mobile-only flow has-gap-xs">
+                {%- include "_look-toggles.njk" -%}
             </div>
-    </div>
-    <ul class="flow has-gap-2xs">
-        <li><a href="/"{{ ' aria-current="page"' | safe if page.url == '/' }}>Home</a></li>
-        <li><a href="/studio/"{{ ' aria-current="page"' | safe if page.url == '/studio/' }}>Design Studio</a></li>
-        <li><a href="/work/"{{ ' aria-current="page"' | safe if page.url == '/work/' }}>Selected Work</a></li>
-        <li><a href="/writing/"{{ ' aria-current="page"' | safe if page.url == '/writing/' }}>Writing</a></li>
-        <li><a href="/art/"{{ ' aria-current="page"' | safe if page.url == '/art/' }}>Artmaking</a></li>
-        <li><a href="/contact/"{{ ' aria-current="page"' | safe if page.url == '/contact/' }}>Contact</a></li>
-    </ul>
+        </div>
+    </details>
 </nav>

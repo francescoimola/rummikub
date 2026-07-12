@@ -8,9 +8,9 @@
 @include scale.cleacss-overrides;
 @include colors.cleacss-overrides;
 
-// Overrides cleacss's unlayered html font-size (16px, @layer reset)
 html {
-  font-size: 15px;
+    font-size: 15px; // overrides cleacss's unlayered 16px (@layer reset)
+    overscroll-behavior: auto none;
 }
 
 // Lenis smooth scroll — minimal required styles
@@ -44,11 +44,6 @@ html.lenis body {
 // Breakpoints - Sass vars because custom properties can't be used in media conditions
 $bp-mobile: 49rem;
 $bp-tablet: 64rem;
-
-.flow.has-gap-3xs,
-.flow-row.has-gap-3xs {
-    --flow-gap: var(--space-3xs) // smallest gap
-}
 
 // Reveal animation — shared collapsed/open states for .expandable and <details>
 @mixin reveal-collapsed($content-visibility: false) {
@@ -99,7 +94,6 @@ $bp-tablet: 64rem;
     --dur-medium: 0s;
 
     // Icon optical alignment — eyeballed vertical-align corrections
-    --icon-align-xs: -0.15em;
     --icon-align-s: -0.175em;
     --icon-align-m: -0.20em;
 
@@ -118,7 +112,8 @@ $bp-tablet: 64rem;
 // ---- Theming ----
 .sidebar {
     --color-accent: var(--neutral-950-alpha);
-    background: light-dark(var(--brand-150), var(--neutral-200-alpha));
+    // dark: bake --neutral-200-alpha (7%) over --body-bg so it's opaque — else scrolled mobile content shows through
+    background: light-dark(var(--brand-150), color-mix(in oklch, oklch(0.945 0.007 125.2) 7%, var(--body-bg)));
 
     footer {
         --color-accent: var(--brand-900);
@@ -151,10 +146,6 @@ h1>:is(.dimmed) {
 }
 
 // ---- Typography ----
-
-html {
-    overscroll-behavior: auto none;
-}
 
 body {
     font-size: var(--step-0);
@@ -269,7 +260,7 @@ img {
 a, button {
     color: var(--color-accent);
     text-decoration-color: color-mix(in oklch, var(--color-accent) 75%, transparent);
-    transition: color var(--animation-duration) var(--animation-ease);
+    transition: color var(--dur-fast) var(--ease);
 
     @media (hover: hover) {
         &:hover {
@@ -335,7 +326,7 @@ a[href^="tel:"]::after,
     background-color: currentColor;
     mask: var(--icon) center / contain no-repeat;
     -webkit-mask: var(--icon) center / contain no-repeat;
-    transition: margin-inline-start var(--animation-duration) var(--animation-ease);
+    transition: margin-inline-start var(--dur-fast) var(--ease);
 }
 
 // hover/focus lives on the link, not the pseudo-element — &:hover here would compile to ::after:hover (matches only the icon box)
@@ -362,7 +353,7 @@ a[href^="tel:"]::after,
     --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik01IDEyaDE0Ij48L3BhdGg+CiAgPHBhdGggZD0ibTEyIDUgNyA3LTcgNyI+PC9wYXRoPgo8L3N2Zz4=);
     margin-inline-start: var(--space-3xs);
     vertical-align: var(--icon-align-m);
-    transition: rotate var(--dur-medium) var(--ease), margin-inline-start var(--animation-duration) var(--animation-ease);
+    transition: rotate var(--dur-medium) var(--ease), margin-inline-start var(--dur-fast) var(--ease);
 }
 
 [aria-expanded="true"][data-icon="arrow-right"]::after {
@@ -373,7 +364,7 @@ a[href^="tel:"]::after,
     --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9ImN1cnJlbnRDb2xvciIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0xNC4yNSAxOEgzTDIuOTk3IDYuNjhsOC41NzYgNS45MzdhLjc1Ljc1IDAgMCAwIC44NTQgMEwyMSA2LjY4MlYxMy41aDEuNVY2QTEuNTAyIDEuNTAyIDAgMCAwIDIxIDQuNUgzQTEuNTAyIDEuNTAyIDAgMCAwIDEuNSA2djEyQTEuNTAyIDEuNTAyIDAgMCAwIDMgMTkuNWgxMS4yNVYxOFptNS4wOTktMTJMMTIgMTEuMDg4IDQuNjUxIDZoMTQuNjk4WiI+PC9wYXRoPgogIDxwYXRoIGQ9Ik0xOS41IDIxYTMgMyAwIDEgMCAwLTYgMyAzIDAgMCAwIDAgNloiPjwvcGF0aD4KPC9zdmc+);
     margin-inline-start: var(--space-3xs);
     vertical-align: var(--icon-align-s);
-    transition: margin-inline-start var(--animation-duration) var(--animation-ease);
+    transition: margin-inline-start var(--dur-fast) var(--ease);
 }
 
 // suppress ::after on links that use data-icon-before — icon is before the text instead
@@ -408,69 +399,123 @@ button {
     color: var(--color-accent);
     position: relative;
 
-    &::before {
-        content: "";
-        position: absolute;
-        inset: calc(-1 * var(--tap-extend));
-    }
-
     &:disabled {
         opacity: var(--opacity-disabled);
         cursor: not-allowed;
     }
 }
 
+// Shared invisible hit-area extends tap targets past their box — was duplicated on button/summary/footer a
+:is(button, summary, footer a)::before {
+    content: "";
+    position: absolute;
+    inset: calc(-1 * var(--tap-extend));
+}
 
-// ---- Layout ----
+
+// ---- Nav ----
 
 nav {
-
-    --nav-indent: 0.7em;
-    // drives bullet inset and hover shift — keep them equal
+    --nav-indent: 0.7em; // drives bullet inset and hover shift — keep them equal
     display: grid;
     column-gap: var(--space-l-4xl);
     grid-template-columns: 1fr 1fr;
+}
 
-    &>a {
-        block-size: fit-content;
+nav>a {
+    block-size: fit-content;
+}
+
+nav li {
+    list-style: none;
+    position: relative;
+    transition: color var(--dur-fast) var(--ease);
+}
+
+nav li a {
+    display: block;
+}
+
+nav li::before {
+    content: "\2022";
+    position: absolute;
+    inset-inline-start: calc(-1 * var(--nav-indent));
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-fast) var(--ease);
+}
+
+// active/focused rows: accent colour + reveal the bullet
+nav li:is(:has(a[aria-current="page"]), :focus-within) {
+    color: var(--accent-hover);
+}
+
+nav li:is(:has(a[aria-current="page"]), :focus-within)::before {
+    opacity: 1;
+}
+
+@media (hover: hover) {
+    nav li:hover {
+        color: var(--accent-hover);
     }
 
-    li {
-        list-style: none;
+    nav li:hover::before {
+        opacity: 1;
+    }
+}
+
+// ---- Mobile disclosure menu ----
+// <details> reuses the global ::details-content reveal (index.scss:592); only mobile bar + icon are new
+.nav-menu {
+
+    &__bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+
+        &::after {
+            content: none; // kill cleacss's floated summary "+"/"−" marker; we draw our own icon
+        }
+    }
+
+    &__label {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2xs);
+    }
+
+    // CSS-drawn plus: two currentColor bars that rotate 45° into an × when open
+    &__icon {
+        display: inline-block;
+        inline-size: 0.7em;
+        block-size: 0.7em;
         position: relative;
-        transition: color var(--dur-fast) var(--ease);
+        transition: transform var(--dur-medium) var(--ease);
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            inset-block-start: 50%;
+            inset-inline-start: 50%;
+            translate: -50% -50%;
+            background: currentColor;
+        }
 
         &::before {
-            content: "\2022";
-            position: absolute;
-            inset-inline-start: calc(-1 * var(--nav-indent));
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity var(--dur-fast) var(--ease);
+            inline-size: 100%;
+            block-size: 0.1em; // horizontal bar
         }
 
-        a {
-            display: block;
+        &::after {
+            inline-size: 0.1em; // vertical bar
+            block-size: 100%;
         }
+    }
 
-        &:has(a[aria-current="page"]),
-        &:focus-within {
-            color: var(--accent-hover);
-
-            &::before {
-                opacity: 1;
-            }
-        }
-
-        @media (hover: hover) {
-            &:hover {
-                color: var(--accent-hover);
-
-                &::before {
-                    opacity: 1;
-                }
-            }
-        }
+    &[open] &__icon {
+        transform: rotate(45deg);
     }
 }
 
@@ -508,17 +553,12 @@ nav {
     padding-block: var(--gutter-y);
 
     --gutter-y-sticky: var(--gutter-y); // Freeze the gutter to an absolute length here, so descendants main can stick flush to it
-    --gutter-y-double: calc(var(--gutter-y) * 2);
 }
 
 :where(main) {
     flex: 1;
     container-type: inline-size;
     margin-block-end: var(--space-2xl-3xl);
-
-    &:has(> .featured:last-child) {
-        margin-block-end: unset;
-    }
 }
 
 main>*{
@@ -546,16 +586,6 @@ main>*{
                 }
             }
 
-            @keyframes settle {
-                from {
-                    max-inline-size: 100%;
-                }
-
-                to {
-                    max-inline-size: var(--inline-size);
-                }
-            }
-
             [view-animation="breakout"] {
                 box-sizing: border-box;
                 width: calc(100vw - (var(--gutter-x) *2));
@@ -571,7 +601,7 @@ main>*{
                 width: calc(100vw - (var(--gutter-x) *2));
                 margin-left: 50%;
                 transform: translate(-50%);
-                animation: settle ease-out both;
+                animation: breakout ease-out both; // shares breakout's keyframes (identical bleed-in); differs only in timeline/range
                 animation-timeline: scroll(root block);
                 animation-range: cover 0 cover 2%; // full-bleed on load → 40rem after one viewport of scroll
             }
@@ -622,12 +652,6 @@ summary {
         opacity: var(--opacity-active);
     }
 
-    &::before {
-        content: "";
-        position: absolute;
-        inset: calc(-1 * var(--tap-extend));
-    }
-
     &+* {
         padding-block-start: var(--space-xs-s);
     }
@@ -640,13 +664,7 @@ hr {
 }
 
 footer a {
-    position: relative;
-
-    &::before {
-        content: "";
-        position: absolute;
-        inset: calc(-1 * var(--tap-extend));
-    }
+    position: relative; // containing block for the shared tap-target ::before
 }
 
 a[data-icon-before] {
@@ -667,14 +685,11 @@ a[data-icon-before] {
     display: flex;
     flex-direction: column;
     border-radius: var(--border-radius-s);
+    padding: var(--space-s-m);
 
     @media (forced-colors: active) {
         border: 1px solid CanvasText;
         background: Canvas;
-    }
-
-    &:not(:has([data-layer])) {
-        padding: var(--space-s-m);
     }
 
     &.outline {
@@ -740,28 +755,26 @@ a.card {
         translate: 0 -1px;
     }
 
-    &:focus-visible {
-        outline: 2px solid var(--color-accent);
-        outline-offset: 2px;
-    }
+    // focus ring comes from the global :focus-visible rule — no override needed here
 
     &:active {
         border-color: var(--neutral-600-alpha);
         translate: 0;
     }
+}
 
-    @media (forced-colors: active) {
-        &:hover {
-            border-color: LinkText;
-        }
+// Flattened out of a.card so state selectors stay ≤2 levels deep
+@media (forced-colors: active) {
+    a.card:hover {
+        border-color: LinkText;
+    }
 
-        &:active {
-            border-color: ActiveText;
-        }
+    a.card:active {
+        border-color: ActiveText;
+    }
 
-        &:focus-visible {
-            outline: 2px solid LinkText;
-        }
+    a.card:focus-visible {
+        outline: 2px solid LinkText;
     }
 }
 
@@ -798,6 +811,11 @@ a.card {
 
 .has-nowrap {
     white-space: nowrap;
+}
+
+.flow.has-gap-3xs,
+.flow-row.has-gap-3xs {
+    --flow-gap: var(--space-3xs); // smallest gap
 }
 
 .service {
@@ -844,29 +862,29 @@ a.service {
     display: flex;
     gap: var(--space-3xs-2xs); // paired token — eases down on mobile
     --tap-extend: calc(var(--space-3xs) / 2); // keep adjacent swatch tap targets from overlapping
+}
 
-    button {
-        inline-size: var(--space-m); // 24px — not --space-s (renders ~15px), keeps the tap-target floor
-        block-size: var(--space-m);
-        border: var(--input-border-width) solid var(--input-border-color);
-        border-radius: var(--border-radius-s);
-        // each swatch previews that brand's sidebar tint — mirrors --brand-150's formula at a fixed hue (keep in sync with _colors.scss)
-        background: light-dark(oklch(0.943 calc(0.073 * var(--brand-chroma)) calc(var(--picker-hue) - 0.2)),
-                oklch(0.399 calc(0.101 * var(--brand-chroma)) calc(var(--picker-hue) + 6.7)));
+.brand-picker button {
+    inline-size: var(--space-m); // 24px — not --space-s (renders ~15px), keeps the tap-target floor
+    block-size: var(--space-m);
+    border: var(--input-border-width) solid var(--input-border-color);
+    border-radius: var(--border-radius-s);
+    // each swatch previews that brand's sidebar tint — mirrors --brand-150's formula at a fixed hue (keep in sync with _colors.scss)
+    background: light-dark(oklch(0.943 calc(0.073 * var(--brand-chroma)) calc(var(--picker-hue) - 0.2)),
+            oklch(0.399 calc(0.101 * var(--brand-chroma)) calc(var(--picker-hue) + 6.7)));
+}
 
-        &[data-brand-choice="green"] { --picker-hue: var(--brand-hue-green); }
-        &[data-brand-choice="pink"] { --picker-hue: var(--brand-hue-pink); }
-        &[data-brand-choice="orange"] { --picker-hue: var(--brand-hue-orange); }
+.brand-picker button[data-brand-choice="green"] { --picker-hue: var(--brand-hue-green); }
+.brand-picker button[data-brand-choice="pink"] { --picker-hue: var(--brand-hue-pink); }
+.brand-picker button[data-brand-choice="orange"] { --picker-hue: var(--brand-hue-orange); }
 
-        &[aria-pressed="true"] {
-            border-color: var(--neutral-950-alpha);
-            box-shadow: inset 0 0 0 var(--input-border-width) var(--neutral-500-alpha); // doubled ring — a 1px colour shift alone fails non-text contrast
-        }
+.brand-picker button[aria-pressed="true"] {
+    border-color: var(--neutral-950-alpha);
+    box-shadow: inset 0 0 0 var(--input-border-width) var(--neutral-500-alpha); // doubled ring — a 1px colour shift alone fails non-text contrast
+}
 
-        @media (forced-colors: active) {
-            &[aria-pressed="true"] { border-width: calc(var(--input-border-width) * 3); } // bg stripped in forced colors — border weight is the only signal
-        }
-    }
+@media (forced-colors: active) {
+    .brand-picker button[aria-pressed="true"] { border-width: calc(var(--input-border-width) * 3); } // bg stripped in forced colors — border weight is the only signal
 }
 
 .theme-switch {
@@ -876,30 +894,30 @@ a.service {
     border: var(--input-border-width) solid var(--input-border-color);
     border-radius: var(--border-radius-s);
     --tap-extend: calc(var(--space-3xs) / 2);
+}
 
-    button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex: 1;
-        padding: var(--space-3xs-2xs);
-        border-radius: var(--border-radius-s);
+.theme-switch button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: var(--space-3xs-2xs);
+    border-radius: var(--border-radius-s);
+}
 
-        svg {
-            inline-size: var(--space-s-m); 
-            block-size: 100%;
-            background: none; // opt out of the global img/svg placeholder background
-        }
+.theme-switch button svg {
+    inline-size: var(--space-s-m);
+    block-size: 100%;
+    background: none; // opt out of the global img/svg placeholder background
+}
 
-        &[aria-pressed="true"] {
-            background: var(--neutral-950-alpha); // "ink" fill
-            color: var(--neutral-50); // icon inverts to light
-        }
+.theme-switch button[aria-pressed="true"] {
+    background: var(--neutral-950-alpha); // "ink" fill
+    color: var(--neutral-50); // icon inverts to light
+}
 
-        @media (forced-colors: active) {
-            &[aria-pressed="true"] { border: var(--input-border-width) solid CanvasText; }
-        }
-    }
+@media (forced-colors: active) {
+    .theme-switch button[aria-pressed="true"] { border: var(--input-border-width) solid CanvasText; }
 }
 
 // ---- Data list ----
@@ -989,18 +1007,29 @@ a.service {
     nav {
         border-block-start: revert;
         padding-block-start: revert;
+        grid-template-columns: 1fr; // single column so the disclosure bar spans full width
+    }
+
+    // Open panel: links in the right column, look-toggles pinned bottom-left (Figma open frame)
+    .nav-menu__panel {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "toggles links";
+        column-gap: var(--space-m-l);
+        padding-block-start: var(--space-l-xl);
+    }
+
+    .nav-menu__panel > ul {
+        grid-area: links;
+    }
+
+    .nav-menu__toggles {
+        grid-area: toggles;
+        align-self: end;
     }
 
     main {
         border-block-start: revert;
-
-        &:not(:has(>.stretch)) {
-            padding-block-start: var(--space-xs);
-        }
-
-        &:has([data-hero="true"]) {
-            padding-block-start: var(--space-3xs);
-        }
     }
 
     .content {
@@ -1040,7 +1069,6 @@ a.service {
     }
 
     :has(>.theme-switch, >.brand-picker) {
-        justify-content: flex-start;
         align-items: flex-start;
     }
 }
@@ -1066,6 +1094,17 @@ a.service {
         display: none;
     }
 
+    // No disclosure on desktop: hide the bar, force the link list permanently open
+    .nav-menu__bar {
+        display: none;
+    }
+
+    .nav-menu::details-content {
+        content-visibility: visible;
+        block-size: auto;
+        opacity: 1;
+    }
+
     // Desktop: look toggles become vertical columns, pushed to the sidebar's right edge beside the footer
     .brand-picker {
         flex-direction: column;
@@ -1075,5 +1114,9 @@ a.service {
         flex-direction: column;
         margin-inline-start: auto; // shove the whole cluster (switch + swatches) to the right, footer stays left
         block-size: 100%; // match the 3-swatch column height (same tokens as .brand-picker)
+    }
+
+    main:has(> .featured:last-child) {
+        margin-block-end: unset;
     }
 }
