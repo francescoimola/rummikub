@@ -465,7 +465,7 @@ nav li:is(:has(a[aria-current="page"]), :focus-within)::before {
 }
 
 // ---- Mobile disclosure menu ----
-// <details> reuses the global ::details-content reveal (index.scss:592); only mobile bar + icon are new
+// <details> reuses the global ::details-content reveal; only mobile bar + icon are new
 .nav-menu {
 
     &__bar {
@@ -573,38 +573,36 @@ main>*{
 }
 
 // Scroll-driven and animated breakout
-@media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
-        @media (width > #{$bp-tablet}) {
-            @keyframes breakout {
-                from {
-                    max-inline-size: 100%;
-                }
-
-                to {
-                    max-inline-size: var(--inline-size);
-                }
+@supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) and (width > #{$bp-tablet}) {
+        @keyframes breakout {
+            from {
+                max-inline-size: 100%;
             }
 
-            [view-animation="breakout"] {
-                box-sizing: border-box;
-                width: calc(100vw - (var(--gutter-x) *2));
-                margin-left: 50%;
-                transform: translate(-50%);
-                animation: breakout ease-out both;
-                animation-timeline: view();
-                animation-range: cover 0% cover 50%; // first peek from bottom → centred in viewport
+            to {
+                max-inline-size: var(--inline-size);
             }
+        }
 
-            [view-animation="settle"] {
-                box-sizing: border-box;
-                width: calc(100vw - (var(--gutter-x) *2));
-                margin-left: 50%;
-                transform: translate(-50%);
-                animation: breakout ease-out both; // shares breakout's keyframes (identical bleed-in); differs only in timeline/range
-                animation-timeline: scroll(root block);
-                animation-range: cover 0 cover 2%; // full-bleed on load → 40rem after one viewport of scroll
-            }
+        [view-animation="breakout"] {
+            box-sizing: border-box;
+            width: calc(100vw - (var(--gutter-x) *2));
+            margin-left: 50%;
+            transform: translate(-50%);
+            animation: breakout ease-out both;
+            animation-timeline: view();
+            animation-range: cover 0% cover 50%; // first peek from bottom → centred in viewport
+        }
+
+        [view-animation="settle"] {
+            box-sizing: border-box;
+            width: calc(100vw - (var(--gutter-x) *2));
+            margin-left: 50%;
+            transform: translate(-50%);
+            animation: breakout ease-out both; // shares breakout's keyframes (identical bleed-in); differs only in timeline/range
+            animation-timeline: scroll(root block);
+            animation-range: cover 0 cover 2%; // full-bleed on load → 40rem after one viewport of scroll
         }
     }
 }
@@ -884,7 +882,9 @@ a.service {
 }
 
 @media (forced-colors: active) {
-    .brand-picker button[aria-pressed="true"] { border-width: calc(var(--input-border-width) * 3); } // bg stripped in forced colors — border weight is the only signal
+    .brand-picker button[aria-pressed="true"] { 
+        border-width: calc(var(--input-border-width) * 3); 
+    } // bg stripped in forced colors — border weight is the only signal
 }
 
 .theme-switch {
@@ -1016,7 +1016,8 @@ a.service {
         grid-template-columns: 1fr 1fr;
         grid-template-areas: "toggles links";
         column-gap: var(--space-m-l);
-        padding-block-start: var(--space-l-xl);
+        padding-block-start: var(--space-2xl-3xl);
+        padding-block-end: var(--space-s);
     }
 
     .nav-menu__panel > ul {
@@ -1049,7 +1050,7 @@ a.service {
         block-size: auto;
         max-block-size: calc(100dvh - calc(var(--gutter-y) * 2)); // engages overflow-y:auto on short/landscape phones where the card exceeds the viewport
         row-gap: var(--space-l-2xl);
-        margin-inline: var(--gutter-y);
+        margin-inline: calc(var(--gutter-y)/2);
         margin-block-end: 0;
     }
 
