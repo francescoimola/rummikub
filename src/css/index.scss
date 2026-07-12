@@ -131,6 +131,14 @@ body:has([data-content="contrast"]) {
     background-color: light-dark(var(--content-light), var(--body-bg));
 }
 
+:is(.dimmed) {
+    color: var(--neutral-900-alpha);
+}
+
+h1>:is(.dimmed) {
+    color: var(--neutral-800-alpha);
+}
+
 // ---- Interactive ----
 
 ::selection {
@@ -412,13 +420,6 @@ button {
     }
 }
 
-:is(.dimmed) {
-    color: var(--neutral-900-alpha);
-}
-
-h1>:is(.dimmed) {
-    color: var(--neutral-800-alpha);
-}
 
 // ---- Layout ----
 
@@ -496,7 +497,7 @@ nav {
     block-size: calc(100dvh - calc(var(--gutter-y) * 2));
     overflow-y: auto;
     white-space: nowrap;
-    z-index: 1;
+    z-index: 2; // above .project-video-play (z-index:1) so a video scrolling behind the sticky mobile card can't paint over it
     border-radius: var(--border-radius);
 }
 
@@ -817,30 +818,86 @@ a.card {
         font-weight: var(--font-weight-base);
     }
 
-    a>h3:hover {
-        text-decoration: underline;
-    }
+}
 
-    &>a:has(h3) {
-        text-decoration: none;
-    }
-
-    // Mirror the title link's hover/focus onto the "Learn more" link (no nested :has — invalid)
-    &:has(>a:focus-visible>h3)>a[data-icon] {
-        --color-accent: var(--accent-hover);
-
-        &::after {
+a.service {
+    @media (hover: hover) {
+        &:hover [data-icon]::after {
             margin-inline-start: var(--space-xs);
         }
     }
 
-    @media (hover: hover) {
-        &:has(>a:hover>h3)>a[data-icon] {
-            --color-accent: var(--accent-hover);
+    &:focus-visible [data-icon]::after {
+        margin-inline-start: var(--space-xs);
+    }
 
-            &::after {
-                margin-inline-start: var(--space-xs);
-            }
+    [data-icon] {
+        color: var(--color-accent);
+        text-decoration: underline;
+        text-decoration-color: color-mix(in oklch, var(--color-accent) 75%, transparent);
+    }
+}
+
+// ---- Look toggles (brand picker + theme switch) ----
+
+.brand-picker {
+    display: flex;
+    gap: var(--space-3xs-2xs); // paired token — eases down on mobile
+    --tap-extend: calc(var(--space-3xs) / 2); // keep adjacent swatch tap targets from overlapping
+
+    button {
+        inline-size: var(--space-m); // 24px — not --space-s (renders ~15px), keeps the tap-target floor
+        block-size: var(--space-m);
+        border: var(--input-border-width) solid var(--input-border-color);
+        border-radius: var(--border-radius-s);
+        // each swatch previews that brand's sidebar tint — mirrors --brand-150's formula at a fixed hue (keep in sync with _colors.scss)
+        background: light-dark(oklch(0.943 calc(0.073 * var(--brand-chroma)) calc(var(--picker-hue) - 0.2)),
+                oklch(0.399 calc(0.101 * var(--brand-chroma)) calc(var(--picker-hue) + 6.7)));
+
+        &[data-brand-choice="green"] { --picker-hue: var(--brand-hue-green); }
+        &[data-brand-choice="pink"] { --picker-hue: var(--brand-hue-pink); }
+        &[data-brand-choice="orange"] { --picker-hue: var(--brand-hue-orange); }
+
+        &[aria-pressed="true"] {
+            border-color: var(--neutral-950-alpha);
+            box-shadow: inset 0 0 0 var(--input-border-width) var(--neutral-500-alpha); // doubled ring — a 1px colour shift alone fails non-text contrast
+        }
+
+        @media (forced-colors: active) {
+            &[aria-pressed="true"] { border-width: calc(var(--input-border-width) * 3); } // bg stripped in forced colors — border weight is the only signal
+        }
+    }
+}
+
+.theme-switch {
+    display: flex;
+    gap: var(--space-3xs-2xs); // paired tokens — ease down on mobile
+    padding: calc(var(--space-3xs)/var(--type-ratio));
+    border: var(--input-border-width) solid var(--input-border-color);
+    border-radius: var(--border-radius-s);
+    --tap-extend: calc(var(--space-3xs) / 2);
+
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        padding: var(--space-3xs-2xs);
+        border-radius: var(--border-radius-s);
+
+        svg {
+            inline-size: var(--space-s-m); 
+            block-size: 100%;
+            background: none; // opt out of the global img/svg placeholder background
+        }
+
+        &[aria-pressed="true"] {
+            background: var(--neutral-950-alpha); // "ink" fill
+            color: var(--neutral-50); // icon inverts to light
+        }
+
+        @media (forced-colors: active) {
+            &[aria-pressed="true"] { border: var(--input-border-width) solid CanvasText; }
         }
     }
 }
@@ -921,8 +978,12 @@ a.card {
 @media (width < #{$bp-mobile}) {
 
     .layout {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr;
+        display: flex; // a grid item can't stick (its row is its containing block); flex-column gives the sidebar scroll room
+        flex-direction: column;
+    }
+
+    .content {
+        flex: 1; // fill remaining height; preserves the min-block-size:100dvh page fill
     }
 
     nav {
@@ -954,8 +1015,10 @@ a.card {
     }
 
     .sidebar {
-        position: revert;
+        position: sticky;
+        top: var(--gutter-y);
         block-size: auto;
+        max-block-size: calc(100dvh - calc(var(--gutter-y) * 2)); // engages overflow-y:auto on short/landscape phones where the card exceeds the viewport
         row-gap: var(--space-l-2xl);
         margin-inline: var(--gutter-y);
         margin-block-end: 0;
@@ -974,6 +1037,11 @@ a.card {
             flex-direction: column;
             gap: var(--space-3xs);
         }
+    }
+
+    :has(>.theme-switch, >.brand-picker) {
+        justify-content: flex-start;
+        align-items: flex-start;
     }
 }
 
@@ -996,5 +1064,16 @@ a.card {
 @media (width >=#{$bp-mobile}) {
     .mobile-only {
         display: none;
+    }
+
+    // Desktop: look toggles become vertical columns, pushed to the sidebar's right edge beside the footer
+    .brand-picker {
+        flex-direction: column;
+    }
+
+    .theme-switch {
+        flex-direction: column;
+        margin-inline-start: auto; // shove the whole cluster (switch + swatches) to the right, footer stays left
+        block-size: 100%; // match the 3-swatch column height (same tokens as .brand-picker)
     }
 }

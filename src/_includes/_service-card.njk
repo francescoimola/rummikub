@@ -8,11 +8,9 @@
     </div>
 </details>
 {% else %}
-<div class="card flow service has-gap-xs">
+<a href="{{ url }}" class="card flow service has-gap-xs">
     {% if type != "adhoc" %}
-    <a href="{{ url }}" class="has-pb-2xl">
-        <h3>{{ title }}</h3>
-    </a>
+    <h3 class="has-pb-2xl">{{ title }}</h3>
     {% else %}
     <h3>{{ title }}</h3>
     {% endif %}
@@ -20,8 +18,8 @@
     {% if type == "adhoc" %}
     <a data-icon="email" href="{{ url }}">Enquire</a>
     {% else %}
-    <a data-icon="arrow-right" href="{{ url }}">Learn more</a>
+    <span data-icon="arrow-right">Learn more</span>
     {% endif %}
-</div>
+</a>
 {% endif %}
 {% endmacro %}

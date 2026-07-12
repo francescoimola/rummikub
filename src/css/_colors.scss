@@ -17,6 +17,11 @@
     --brand-hue: 119.4;   // 50-step hue = base; rotate the whole scale here
     --brand-chroma: 1;     // single chroma multiplier for the entire scale
 
+    // Preset hues — shared by the data-brand hooks below and the .brand-picker swatches
+    --brand-hue-green: 119.4;
+    --brand-hue-pink: 360;
+    --brand-hue-orange: 55;
+
     // Brand scale — hue = base + per-step offset, chroma = orig × knob
     --brand-50: light-dark(oklch(0.983 calc(0.049 * var(--brand-chroma)) var(--brand-hue)), oklch(0.143 calc(0.041 * var(--brand-chroma)) calc(var(--brand-hue) + 14.6)));
     --brand-100: light-dark(oklch(0.958 calc(0.061 * var(--brand-chroma)) calc(var(--brand-hue) + 0.3)), oklch(0.332 calc(0.088 * var(--brand-chroma)) calc(var(--brand-hue) + 9.7)));
@@ -116,10 +121,10 @@
 
   // Re-tint hooks must target :root so --brand-* rebinds var(--brand-hue); cascades to derived tokens (CSS rule 9)
   :root[data-brand="pink"] {
-    --brand-hue: 360; // green ≈119° → pink ≈350°
+    --brand-hue: var(--brand-hue-pink); // green ≈119° → pink
   }
   :root[data-brand="orange"] {
-    --brand-hue: 55; // green ≈119° → orange ≈55°
+    --brand-hue: var(--brand-hue-orange); // green ≈119° → orange
   }
 }
 

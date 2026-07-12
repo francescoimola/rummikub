@@ -1,0 +1,11 @@
+{# _look-toggles.njk — light/dark switch + brand swatches (siblings, no wrapper) #}
+{%- set activeBrand = brand or "green" -%}
+<div class="theme-switch" role="group" aria-label="Theme">
+    <button type="button" data-theme-choice="light" aria-pressed="true" aria-label="Light">{% icon "sun" %}</button>
+    <button type="button" data-theme-choice="dark" aria-pressed="false" aria-label="Dark">{% icon "moon" %}</button>
+</div>
+<div class="brand-picker" role="group" aria-label="Page colour">
+    <button type="button" data-brand-choice="green" aria-pressed="{{ "true" if activeBrand == "green" else "false" }}" aria-label="Green"></button>
+    <button type="button" data-brand-choice="pink" aria-pressed="{{ "true" if activeBrand == "pink" else "false" }}" aria-label="Pink"></button>
+    <button type="button" data-brand-choice="orange" aria-pressed="{{ "true" if activeBrand == "orange" else "false" }}" aria-label="Orange"></button>
+</div>

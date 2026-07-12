@@ -5,7 +5,10 @@
   <div class="layout"{% if contentMode == "contrast" %} data-content="contrast"{% endif %}>
     <aside class="sidebar">
       {%- include "_header.njk" -%}
-      <div class="desktop-only">{%- include "_footer.njk" -%}</div>
+      <div class="desktop-only flow-row has-gap-2xs has-items-end">
+        {%- include "_footer.njk" -%}
+        {%- include "_look-toggles.njk" -%}
+      </div>
     </aside>
     <div class="content">
       <main {% if isFullWidth %}class="flow-row has-gap-s-m" full-width{% else %}class="flow has-gap-2xl-3xl"{% endif %}>{{ content | safe }}</main>
