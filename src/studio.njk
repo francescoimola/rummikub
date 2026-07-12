@@ -1,17 +1,22 @@
 ---
 layout: _base.njk
 title: Design Studio
+contentMode: contrast
 eleventyNavigation:
   key: Design Studio
   parent: Home
 ---
 {% from "_service-card.njk" import serviceCard %}
 {% from "_cta-card.njk" import ctaCard %}
-
+<div view-animation="settle" style="margin-bottom: calc(-1 * var(--space-xl))">
+    {% projectVideo "/assets/video/work_showreel.mp4",
+        "screenshots of selected projects and work in slideshow",
+        webm = "/assets/video/work_showreel.webm" %}
+</div>
 <section class="flow has-gap-m pretty">
     <h1>Marketing made <s>simple</s> on a human scale<br><span class="dimmed">Francesco Imola designs websites and writes what goes in them</span></h1>
-    <img src="/assets/images/francesco_imola_marketing_and_design_studio.png" alt="" width="1080" height="auto" style="background-color: var(--body-bg)">
     <p>Together we will literally and metaphorically break free from suffocating marketing practices, and chart a simpler, less exhausting way forward.</p>
+    <p>↓</p>
 </section>
 <section class="flow has-gap-s has-counter pretty" hlight-section-h>
     <h2 class="has-mb-xs-s">Where I can help</h2>

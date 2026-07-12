@@ -8,6 +8,11 @@
 @include scale.cleacss-overrides;
 @include colors.cleacss-overrides;
 
+// Overrides cleacss's unlayered html font-size (16px, @layer reset)
+html {
+  font-size: 15px;
+}
+
 // Lenis smooth scroll — minimal required styles
 html.lenis,
 html.lenis body {
