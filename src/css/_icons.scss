@@ -1,0 +1,93 @@
+// Icon glyph system — data-URI mask icons for links (mailto/tel/cal.com) and [data-icon] hooks
+
+// ---- Icons ----
+
+.fluent--chevron-right-16-regular {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='black' d='M5.646 3.146a.5.5 0 0 0 0 .708L9.793 8l-4.147 4.146a.5.5 0 0 0 .708.708l4.5-4.5a.5.5 0 0 0 0-.708l-4.5-4.5a.5.5 0 0 0-.708 0'/%3E%3C/svg%3E");
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    vertical-align: var(--icon-align-s);
+}
+
+[data-icon]::after,
+a[href^="mailto:"]::after,
+a[href*="cal.com"]::after,
+a[href^="tel:"]::after,
+[data-icon-before]::before {
+    content: "";
+    display: inline-block;
+    inline-size: 1em;
+    block-size: 1em;
+    background-color: currentColor;
+    mask: var(--icon) center / contain no-repeat;
+    -webkit-mask: var(--icon) center / contain no-repeat;
+    transition: margin-inline-start var(--dur-fast) var(--ease);
+}
+
+// hover/focus lives on the link, not the pseudo-element — &:hover here would compile to ::after:hover (matches only the icon box)
+@media (hover: hover) {
+
+    :is([data-icon], a[href^="mailto:"], a[href*="cal.com"], a[href^="tel:"]):hover::after,
+    [data-icon-before]:hover::before {
+        margin-inline-start: var(--space-xs);
+    }
+}
+
+:is([data-icon], a[href^="mailto:"], a[href*="cal.com"], a[href^="tel:"]):focus-visible::after,
+[data-icon-before]:focus-visible::before {
+    margin-inline-start: var(--space-xs);
+}
+
+:is(a[data-icon-before][href^="mailto:"])::before {
+    --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9ImN1cnJlbnRDb2xvciIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0xNC4yNSAxOEgzTDIuOTk3IDYuNjhsOC41NzYgNS45MzdhLjc1Ljc1IDAgMCAwIC44NTQgMEwyMSA2LjY4MlYxMy41aDEuNVY2QTEuNTAyIDEuNTAyIDAgMCAwIDIxIDQuNUgzQTEuNTAyIDEuNTAyIDAgMCAwIDEuNSA2djEyQTEuNTAyIDEuNTAyIDAgMCAwIDMgMTkuNWgxMS4yNVYxOFptNS4wOTktMTJMMTIgMTEuMDg4IDQuNjUxIDZoMTQuNjk4WiI+PC9wYXRoPgogIDxwYXRoIGQ9Ik0xOS41IDIxYTMgMyAwIDEgMCAwLTYgMyAzIDAgMCAwIDAgNloiPjwvcGF0aD4KPC9zdmc+);
+    margin-inline-end: var(--space-3xs);
+    vertical-align: var(--icon-align-s);
+}
+
+[data-icon="arrow-right"]::after {
+    --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik01IDEyaDE0Ij48L3BhdGg+CiAgPHBhdGggZD0ibTEyIDUgNyA3LTcgNyI+PC9wYXRoPgo8L3N2Zz4=);
+    margin-inline-start: var(--space-3xs);
+    vertical-align: var(--icon-align-m);
+    transition: rotate var(--dur-medium) var(--ease), margin-inline-start var(--dur-fast) var(--ease);
+}
+
+[aria-expanded="true"][data-icon="arrow-right"]::after {
+    rotate: 90deg;
+}
+
+:is([data-icon="email"], a[href^="mailto:"])::after {
+    --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9ImN1cnJlbnRDb2xvciIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0xNC4yNSAxOEgzTDIuOTk3IDYuNjhsOC41NzYgNS45MzdhLjc1Ljc1IDAgMCAwIC44NTQgMEwyMSA2LjY4MlYxMy41aDEuNVY2QTEuNTAyIDEuNTAyIDAgMCAwIDIxIDQuNUgzQTEuNTAyIDEuNTAyIDAgMCAwIDEuNSA2djEyQTEuNTAyIDEuNTAyIDAgMCAwIDMgMTkuNWgxMS4yNVYxOFptNS4wOTktMTJMMTIgMTEuMDg4IDQuNjUxIDZoMTQuNjk4WiI+PC9wYXRoPgogIDxwYXRoIGQ9Ik0xOS41IDIxYTMgMyAwIDEgMCAwLTYgMyAzIDAgMCAwIDAgNloiPjwvcGF0aD4KPC9zdmc+);
+    margin-inline-start: var(--space-3xs);
+    vertical-align: var(--icon-align-s);
+    transition: margin-inline-start var(--dur-fast) var(--ease);
+}
+
+// suppress ::after on links that use data-icon-before — icon is before the text instead
+a[data-icon-before][href^="mailto:"]::after,
+a[data-icon-before][href^="tel:"]::after,
+a[data-icon-before][href*="cal.com"]::after {
+    display: none;
+}
+
+:is([data-icon="phone"], [href*="cal.com"])::after,
+:is(a[data-icon-before][href^="tel:"], a[data-icon-before][href*="cal.com"])::before {
+    --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9ImN1cnJlbnRDb2xvciIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0xOS41IDIxLjc1aC0uMTI3QzQuNjM1IDIwLjkwMiAyLjU0MyA4LjQ2NyAyLjI1IDQuNjcyQTIuMjUgMi4yNSAwIDAgMSA0LjMyIDIuMjVoNC4xMzNhMS41IDEuNSAwIDAgMSAxLjM5NS45NDVMMTAuOTg4IDZhMS41IDEuNSAwIDAgMS0uMzMgMS42Mkw5LjA2IDkuMjMyYTcuMDI3IDcuMDI3IDAgMCAwIDUuNjg1IDUuN2wxLjYyOC0xLjYxMkExLjQ5OSAxLjQ5OSAwIDAgMSAxOCAxMy4wMTJsMi44MjggMS4xMzNhMS41IDEuNSAwIDAgMSAuOTIyIDEuMzk1djMuOTZhMi4yNSAyLjI1IDAgMCAxLTIuMjUgMi4yNVptLTE1LTE4YS43NS43NSAwIDAgMC0uNzUuNzV2LjA2QzQuMDk1IDkgNi4zMDggMTkuNSAxOS40NTUgMjAuMjVhLjc0OS43NDkgMCAwIDAgLjc5NS0uNzA1VjE1LjU0bC0yLjgyNy0xLjEzMi0yLjE1MyAyLjEzNy0uMzYtLjA0NUM4LjM4NSAxNS42ODIgNy41IDkuMTU4IDcuNSA5LjA5bC0uMDQ1LS4zNiAyLjEzLTIuMTUzTDguNDYgMy43NUg0LjVaIj48L3BhdGg+Cjwvc3ZnPg==);
+}
+
+:is([data-icon="phone"], a[href^="tel:"], [href*="cal.com"])::after {
+    margin-inline-start: var(--space-3xs);
+    vertical-align: var(--icon-align-m);
+}
+
+:is(a[data-icon-before][href^="tel:"], a[data-icon-before][href*="cal.com"])::before {
+    margin-inline-end: var(--space-3xs);
+    vertical-align: var(--icon-align-m);
+}

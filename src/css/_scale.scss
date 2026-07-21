@@ -1,5 +1,9 @@
 @use '../../node_modules/utopia-core-scss/src/utopia' as utopia;
 
+// Breakpoints — Sass vars because custom properties can't be used in media conditions. Shared by index.scss + _components.scss
+$bp-mobile: 49rem;
+$bp-tablet: 64rem;
+
 // Freezes the cqi --gutter-y to an absolute <length> on `.content` so descendants main can stick flush to it
 @property --gutter-y-sticky {
   syntax: "<length>";

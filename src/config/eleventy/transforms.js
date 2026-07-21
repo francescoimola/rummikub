@@ -1,6 +1,6 @@
 module.exports = function (eleventyConfig) {
   eleventyConfig.addTransform("ignoreRemoteImages", function (content, outputPath) {
-    if (outputPath?.endsWith(".html")) {
+    if (typeof outputPath === "string" && outputPath.endsWith(".html")) {
       content = content.replace(
         /<img\s+([^>]*?)src=["'](https?:\/\/[^"']+)["']([^>]*?)>/gi,
         function (match, before, url, after) {
@@ -15,7 +15,7 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addTransform("lazyImages", function (content, outputPath) {
-    if (outputPath?.endsWith(".html")) {
+    if (typeof outputPath === "string" && outputPath.endsWith(".html")) {
       content = content.replace(/<img(?![^>]*\bloading=)([^>]*)>/gi, '<img loading="lazy"$1>');
       content = content.replace(/<img(?![^>]*\bdecoding=)([^>]*)>/gi, '<img decoding="async"$1>');
     }

@@ -1,0 +1,374 @@
+@use 'scale';
+
+// ---- Cards ----
+
+.card {
+    background: var(--card-bg);
+    overflow: clip;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--border-radius-s);
+    padding: var(--space-s-m);
+
+    @media (forced-colors: active) {
+        border: 1px solid CanvasText;
+        background: Canvas;
+    }
+
+    &.outline {
+        background: transparent;
+        border: 1px solid var(--neutral-400-alpha);
+        border-radius: var(--border-radius-s);
+    }
+
+    &.featured {
+        background: var(--accent-surface);
+    }
+
+    &:has(blockquote) {
+        box-shadow: inset var(--space-3xs) 0 var(--accent-surface);
+    }
+
+    &>:is(img, picture, figure) {
+        display: block;
+        inline-size: calc(100% + 2 * var(--space-s-m));
+        margin-inline: calc(-1 * var(--space-s-m));
+    }
+
+    &>:is(img, picture, figure):first-child {
+        margin-block-start: calc(-1 * var(--space-s-m));
+    }
+
+    &>:is(img, picture, figure):last-child {
+        margin-block-end: calc(-1 * var(--space-s-m));
+    }
+
+    // Media followed by more content (e.g. a heading) shouldn't round into it — flatten the bottom corners
+    &>:is(img, picture, figure):first-child:not(:last-child) {
+        border-end-start-radius: 0;
+        border-end-end-radius: 0;
+
+        :where(img, video) {
+            border-end-start-radius: 0;
+            border-end-end-radius: 0;
+        }
+    }
+
+    // Media preceded by other content shouldn't round into it either — flatten the top corners
+    &>:is(img, picture, figure):last-child:not(:first-child) {
+        border-start-start-radius: 0;
+        border-start-end-radius: 0;
+
+        :where(img, video) {
+            border-start-start-radius: 0;
+            border-start-end-radius: 0;
+        }
+    }
+}
+
+.card.giant {
+    max-inline-size: unset;
+    border-radius: var(--border-radius);
+    padding-block: var(--space-xl-4xl);
+
+    >* {
+        max-inline-size: var(--inline-size);
+        inline-size: 100%;
+        margin-inline: auto;
+        margin-block: auto;
+    }
+
+    &:not(:last-child) {
+        max-inline-size:75ch;
+    }
+}
+
+a.card {
+    text-decoration: none;
+    color: var(--neutral-950-alpha);
+    cursor: pointer;
+    transition:
+        border-color var(--dur-fast) var(--ease),
+        translate var(--dur-fast) var(--ease);
+
+    &:visited {
+        color: var(--neutral-950-alpha);
+    }
+
+    &:hover {
+        border-color: var(--neutral-500-alpha);
+        translate: 0 -1px;
+    }
+
+    // focus ring comes from the global :focus-visible rule — no override needed here
+
+    &:active {
+        border-color: var(--neutral-600-alpha);
+        translate: 0;
+    }
+}
+
+// Flattened out of a.card so state selectors stay ≤2 levels deep
+@media (forced-colors: active) {
+    a.card:hover {
+        border-color: LinkText;
+    }
+
+    a.card:active {
+        border-color: ActiveText;
+    }
+
+    a.card:focus-visible {
+        outline: 2px solid LinkText;
+    }
+}
+
+.layout-card {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+@container (min-width: 64rem) {
+    .layout-card {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+// ---- Look toggles (brand picker + theme switch) ----
+
+.brand-picker {
+    display: flex;
+    gap: var(--space-3xs-2xs); // paired token — eases down on mobile
+    --tap-extend: calc(var(--space-3xs) / 2); // keep adjacent swatch tap targets from overlapping
+}
+
+.brand-picker button {
+    inline-size: var(--space-m); 
+    aspect-ratio: 1;
+    border: var(--input-border-width) solid var(--input-border-color);
+    border-radius: var(--border-radius-s);
+    // each swatch previews that brand's sidebar tint — mirrors --brand-150's formula at a fixed hue (keep in sync with _colors.scss)
+    background: light-dark(oklch(0.943 calc(0.073 * var(--brand-chroma)) calc(var(--picker-hue) - 0.2)),
+            oklch(0.399 calc(0.101 * var(--brand-chroma)) calc(var(--picker-hue) + 6.7)));
+}
+
+.brand-picker button[data-brand-choice="green"] { --picker-hue: var(--brand-hue-green); }
+.brand-picker button[data-brand-choice="pink"] { --picker-hue: var(--brand-hue-pink); }
+.brand-picker button[data-brand-choice="orange"] { --picker-hue: var(--brand-hue-orange); }
+
+.brand-picker button[aria-pressed="true"] {
+    border-color: var(--neutral-950-alpha);
+    box-shadow: inset 0 0 0 var(--input-border-width) var(--neutral-500-alpha); // doubled ring — a 1px colour shift alone fails non-text contrast
+}
+
+@media (forced-colors: active) {
+    .brand-picker button[aria-pressed="true"] { 
+        border-width: calc(var(--input-border-width) * 3); 
+    } // bg stripped in forced colors — border weight is the only signal
+}
+
+.theme-switch {
+    display: flex;
+    gap: var(--space-3xs-2xs); // paired tokens — ease down on mobile
+    padding: calc(var(--space-3xs)/var(--type-ratio));
+    border: var(--input-border-width) solid var(--input-border-color);
+    border-radius: var(--border-radius-s);
+    --tap-extend: calc(var(--space-3xs) / 2);
+}
+
+.theme-switch button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: var(--space-3xs-2xs);
+    border-radius: var(--border-radius-s);
+}
+
+.theme-switch button svg {
+    inline-size: var(--space-s-m);
+    block-size: 100%;
+    background: none; // opt out of the global img/svg placeholder background
+}
+
+.theme-switch button[aria-pressed="true"] {
+    background: var(--neutral-950-alpha); // "ink" fill
+    color: var(--neutral-50); // icon inverts to light
+}
+
+@media (forced-colors: active) {
+    .theme-switch button[aria-pressed="true"] { border: var(--input-border-width) solid CanvasText; }
+}
+
+// Responsive: align toggles to the container start on mobile; stack into columns beside the footer on desktop
+@media (width < #{scale.$bp-mobile}) {
+    :has(>.theme-switch, >.brand-picker) {
+        align-items: flex-start;
+    }
+}
+
+@media (width >= #{scale.$bp-mobile}) {
+    .brand-picker {
+        flex-direction: column;
+    }
+
+    .theme-switch {
+        flex-direction: column;
+        margin-inline-start: auto; // shove the whole cluster (switch + swatches) to the right, footer stays left
+        block-size: 100%; // match the 3-swatch column height (same tokens as .brand-picker)
+    }
+}
+
+// ---- Illustrations ----
+
+header svg {
+            background: transparent;
+            padding-inline: var(--space-2xl-3xl);
+            padding-block: var(--space-3xl);
+            max-inline-size: calc(6* var(--space-2xl));
+            color : var(--brand-900);
+            animation: rotation 16s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+// ---- Data list ----
+
+.data-list {
+    display: grid;
+    inline-size: 100%;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-xs);
+    overflow-wrap: anywhere;
+    text-align: start;
+    margin: 0;
+}
+
+.data-list__item {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: span 2;
+    gap: inherit;
+    align-items: baseline;
+}
+
+:is(.data-list__label, .data-list__value) {
+    &::before {
+        content: '\200d';
+    }
+}
+
+.data-list__label {
+    display: flex;
+    color: var(--neutral-800-alpha);
+    min-inline-size: 10rem;
+}
+
+.data-list__value {
+    display: flex;
+    margin: 0;
+    min-inline-size: 0;
+}
+
+// Responsive: collapse the label/value grid into stacked rows on mobile
+@media (width < #{scale.$bp-mobile}) {
+    .data-list {
+        display: flex;
+        flex-direction: column;
+
+        &__item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3xs);
+        }
+    }
+}
+
+// Video styling — neutral placeholder visible while video deferred/loading (see projectVideo shortcode + app-core.js)
+.project-video-wrapper {
+    position: relative;
+    width: 100%;
+    background-color: var(--neutral-100);
+}
+
+.project-video-el {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.project-video-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-fast) var(--ease);
+    z-index: 1;
+}
+
+.project-video-play[data-visible] {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+// ---- Project item (Selected Work listing) ----
+
+.project-item {
+    display: grid;
+    gap: var(--space-s);
+    align-items: stretch;
+}
+
+.project-item__img {
+    inline-size: 100%;
+    block-size: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.project-item h2 {
+    font-size: var(--step-0);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.5;
+}
+
+.project-item__body {
+    flex-wrap: wrap; // title/services + CTA sit side by side while there's room, wrap to their own line once space runs out
+    align-items: flex-start;
+
+    // .flow sets width: 100%, which would force this group to fill the row and push the CTA onto its own line every time
+    > .flow {
+        width: auto;
+    }
+}
+
+// Desktop: image left / text right
+@media (width >= #{scale.$bp-mobile}) {
+    .project-item {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .project-item__media,
+    .project-item__img {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .project-item__body {
+        grid-column: 2;
+        grid-row: 1;
+    }
+}

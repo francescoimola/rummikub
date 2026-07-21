@@ -3,11 +3,11 @@
     <a href="/" class="desktop-only">Francesco Imola</a>
     <details class="nav-menu">
         <summary class="nav-menu__bar">
-            <span class="mobile-only">Francesco Imola</span>
+            <span class="mobile-only" aria-hidden="true">Francesco Imola</span>
             <span class="nav-menu__label mobile-only">Menu <i class="nav-menu__icon" aria-hidden="true"></i></span>
         </summary>
         <div class="nav-menu__panel">
-            <ul class="flow has-gap-2xs">
+            <ul class="flow">
                 <li><a href="/"{{ ' aria-current="page"' | safe if page.url == '/' }}>Home</a></li>
                 <li><a href="/studio/"{{ ' aria-current="page"' | safe if page.url == '/studio/' }}>Design Studio</a></li>
                 <li><a href="/work/"{{ ' aria-current="page"' | safe if page.url == '/work/' }}>Selected Work</a></li>
