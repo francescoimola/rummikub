@@ -11,7 +11,7 @@
       </div>
     </aside>
     <div class="content">
-      <main {% if isFullWidth %}class="flow-row has-gap-s-m" full-width{% else %}class="flow has-gap-2xl-3xl"{% endif %}>{{ content | safe }}</main>
+      <main {% if isFullWidth %}class="flow-row has-gap-s-m" full-width{% else %}class="flow has-gap-3xl"{% endif %}>{{ content | safe }}</main>
       <div class="mobile-only">{%- include "_footer.njk" -%}</div>
     </div>
   </div>

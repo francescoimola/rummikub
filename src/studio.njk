@@ -8,18 +8,15 @@ eleventyNavigation:
 ---
 {% from "_service-card.njk" import serviceCard %}
 {% from "_cta-card.njk" import ctaCard %}
-<div view-animation="settle" style="margin-bottom: calc(-1 * var(--space-xl))">
+<div view-animation="settle" style="margin-bottom: calc(-1 * var(--space-l))" class="card">
     {% projectVideo "/assets/video/work_showreel.mp4",
         "screenshots of selected projects and work in slideshow",
         webm = "/assets/video/work_showreel.webm" %}
+        <h1 class="has-mt-s-m">Pretty good marketing, on a human scale<br><span class="dimmed">Francesco Imola writes and designs websites + marketing assets</span></h1>
 </div>
-<section class="flow has-gap-m pretty">
-    <h1>Marketing made <s>simple</s> on a human scale<br><span class="dimmed">Francesco Imola thinks, writes and designs websites and marketing assets.</span></h1>
-    <p>Together we will literally and metaphorically break free from suffocating marketing practices, and chart a simpler, less exhausting way forward.</p>
-    <p>↓</p>
-</section>
 <section class="flow has-gap-s has-counter pretty" hlight-section-h>
     <h2 class="has-mb-xs-s">Where I can help</h2>
+    <p class="has-mb-s">Together we will literally and metaphorically break free from suffocating marketing practices, and chart a simpler, less exhausting way forward.</p>
     {{ serviceCard("Web & Graphic Design", "/studio/graphic-web-design/", "Proceed with caution: this service involves slicing through the nonsense and giving your people what they've been missing.") }}
     {{ serviceCard("Website Consultations", "/studio/website-consultations/", "Sense something isn't working, but don't know what exactly? A website consultation gives you what your therapist never could.") }}
 </section>
@@ -77,10 +74,14 @@ eleventyNavigation:
 </figure>
 <section class="flow has-gap-l pretty" hlight-section-h>
     <h2>People I tend to help</h2>
-    <p>Social enterprises<span class="dimmed"> → You need quality work to strengthen your reputation and keep your community better informed.</span></p>
-    <p>Small businesses<span class="dimmed"> → You have grown past the point where operating on sloppy marketing and graphic design is still acceptable.</span></p>
-    <p>Makers and freelancers<span class="dimmed"> → You have wasted enough time DIYing your way through problems.</span></p>
-</section>
+    <ul class="flow has-gap-xs pretty">
+            <li class="card">
+                <strong>Social enterprises</strong><span class="dimmed"><br>→ The quality of your marketing is undermining your reputation among donors and the community your serve.</span>
+            </li>
+            <li class="card"><strong>Small businesses</strong><span class="dimmed"><br>→ You have grown past the point where operating on sloppy (let alone AI-generated) copywriting and design is still acceptable.</span></li>
+            <li class="card"><strong>Makers and freelancers</strong><span class="dimmed"><br>→ You have DIYed your way through problems alright so far, but you got sucked in too deep. You need a hand to pull you out.</span></li>
+        </ul>
+ </section>
 {{ ctaCard(
         "Book a free intro call",
         "You can tell me about your project and I'll tell you about how I work. In just 20 mins, you'll know if I'm able to help and roughly how much it'll cost.",

@@ -1,0 +1,16 @@
+{% macro projectItem(title, services, image, alt, url="") %}
+<article class="project-item">
+  {% if url %}<a class="project-item__media" href="{{ url }}">{% endif %}
+    <img class="project-item__img" src="{{ image }}" alt="{{ alt }}">
+  {% if url %}</a>{% endif %}
+  <div class="project-item__body flow-row has-justify-between has-gap-s">
+    <div class="flow has-gap-3xs">
+      <h2>{{ title }}</h2>
+      <p class="project-item__services">{{ services }}</p>
+    </div>
+    {% if url %}
+    <small><a class="project-item__cta" href="{{ url }}">Read case study</a></small>
+    {% endif %}
+  </div>
+</article>
+{% endmacro %}

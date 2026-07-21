@@ -1,0 +1,17 @@
+---
+layout: _base.njk
+contentMode: contrast
+title: Selected Work
+isFullWidth: true
+eleventyNavigation:
+  key: Home
+---
+{% from "_project-item.njk" import projectItem %}
+<div full-width class="flow has-gap-xl-2xl">
+  <h1 class="sr-only">Selected Work</h1>
+  <div full-width class="flow has-gap-m">
+    {% for project in collections.work %}
+      {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "") }}
+    {% endfor %}
+  </div>
+</div>
