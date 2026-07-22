@@ -4,6 +4,7 @@ services: Web Design, Copywriting, UX Consulting
 image: /assets/portfolio/the_collective_homepage.png
 alt: The Collective homepage
 endDate: 2025-12
+featured: true
 permalink: /work/the-collective/
 layout: _base.njk
 templateEngineOverride: njk,md

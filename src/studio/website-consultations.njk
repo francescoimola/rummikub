@@ -7,10 +7,13 @@ eleventyNavigation:
   parent: Design Studio
 ---
 {% from "_cta-card.njk" import ctaCard %}
-{% include "_breadcrumb.njk" %}
-<h1>Like doctor's check-up, but for your website<br><span class="dimmed">Book a website consultation and get sound expert advice</span></h1>
+<header class="card flow has-justify-between has-gap-s has-items-center has-text-center" view-animation="settle">
+    {% icon "websitevisit" %}
+    <h1>Like doctor's check-up, but for your website<br>
+    <span class="dimmed">Book a website consultation and get sound expert advice</span></h1>
+</header>
 <section class="flow has-gap-xs pretty" hlight-section-h>
-    <h2 class="has-mb-s">What you get</h2>
+    <h2 class="has-mb-xs">What you get</h2>
     <p>This is the fastest way to make sense of what's holding you back and talk about some practical solutions. Each session includes:</p>
     <div class="text">
         <ul class="flow has-gap-xs has-mt-s">
@@ -21,7 +24,7 @@ eleventyNavigation:
     </div>
 </section>
 <section class="flow has-gap-m" hlight-section-h>
-    <h2 >Sound familiar?</h2>
+    <h2 >Sounds familiar?</h2>
         <ul class="flow has-gap-xs pretty">
             <li class="card">You sense sales are leaking somewhere but can't prove it.</li>
             <li class="card">In searches, you rank below smaller or less established competitors.</li>
@@ -30,7 +33,7 @@ eleventyNavigation:
 </section>
 
 <section class="flow has-gap-s pretty" hlight-section-h>
-    <h2 class="has-mb-s">Pricing</h2>
+    <h2 class="has-mb-2xs">Pricing</h2>
         <p>How much would it cost to know where your website is falling short? Or to get guidance that saves you months of trial and error? The insights may hard to price, but the consultation isn't.</p>
         <p><strong>£225</strong></p>
         <p>Gets you a targeted website review followed by a 1-hour consultation, and ending with recommended next steps you can act on immediately.</p>
@@ -38,8 +41,8 @@ eleventyNavigation:
 </section>
 
 <section class="flow has-gap-xs pretty text" hlight-section-h>
-    <h2 class="has-mb-s">Things we can cover</h2>
-        <ol class="flow has-gap-xs has-mt-s">
+    <h2 class="has-mb-xs">Things we can cover</h2>
+        <ol class="flow has-gap-m has-mt-s">
             <li><strong>Words & Design</strong><br><span class="dimmed">Pointers on how to improve your website design and copywriting, or how to better align these elements with your brand.</span></li>
             <li><strong>UX & Infrastructure</strong><br><span class="dimmed">Navigation problems, SEO basics, poorly sized media, and other snags that affect conversions, accessibility and site speed.</span></li>
             <li><strong>Missed opportunities</strong><br><span class="dimmed">Ways to highlight services or products, leverage testimonials, and whatever pertains to your particular case.</span></li>
@@ -47,9 +50,9 @@ eleventyNavigation:
         </ol>
 </section>
 
-<section class="flow has-gap-l" hlight-section-h>
-    <h2>Is this for me?</h2>
-                <div class="flow has-gap-xs text">
+<section class="flow has-gap-xs" hlight-section-h>
+    <h2 class="has-mb-xs">Is this for me?</h2>
+                <div class="card flow has-gap-xs text">
                     <h3>Absolutely yes if</h3>
                     <ul class="flow has-gap-xs pretty">
                         <li >You have big plans for your website or marketing, but can't start because you’re overwhelmed.</li>
@@ -57,7 +60,7 @@ eleventyNavigation:
                         <li >You're tired of generic tips, and need advice tailored to your situation.</li>
                     </ul>
                 </div>
-                <div class="flow has-gap-xs text">
+                <div class="card flow has-gap-xs text">
                     <h3>Probably not if</h3>
                     <ul class="flow has-gap-xs pretty">
                         <li >You have big plans for your website or marketing, but can't start because you’re overwhelmed.</li>
@@ -73,7 +76,7 @@ eleventyNavigation:
 ) }}
 
 <section class="flow has-gap-s pretty" hlight-section-h>
-    <h2 class="has-mb-xs-s">Consultation FAQs</h2>
+    <h2 class="has-mb-xs">Consultation FAQs</h2>
     <details>
         <summary>Will it be a long process?</summary>
         <p>No, this is a pretty straightforward website health check for busy people who want answers quickly. There is no admin beside the actual meeting. I just need 5 minutes of your time to complete a short questionnaire which I'll send to you immediately after booking.</p>
