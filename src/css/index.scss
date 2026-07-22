@@ -493,7 +493,13 @@ main>*{
             }
         }
 
-        [view-animation="breakout"] {
+        // Case-study media (video figures + markdown images) get breakout/settle automatically — no per-element attribute needed.
+        // Media further down the page needs "breakout" (view() — a per-element scroll-into-view timeline, so each
+        // instance triggers independently). The media block right after the title is already on screen at load, so it
+        // needs "settle" instead (scroll(root block) — a page-load-linked timeline); view() would already be past its
+        // "peek in" range by first paint for something that never scrolled into view, and would show no motion at all.
+        [view-animation="breakout"],
+        .case-study > :is(figure, p:has(> :is(img, picture))):not(.case-study__intro + *) {
             box-sizing: border-box;
             width: calc(100vw - (var(--gutter-x) *2));
             margin-left: 50%;
@@ -503,7 +509,8 @@ main>*{
             animation-range: cover 0% cover 50%; // first peek from bottom → centred in viewport
         }
 
-        [view-animation="settle"] {
+        [view-animation="settle"],
+        .case-study__intro + :is(figure, p:has(> :is(img, picture))) {
             box-sizing: border-box;
             width: calc(100vw - (var(--gutter-x) *2));
             margin-left: 50%;
@@ -765,6 +772,6 @@ a.service {
     }
 
     .nav-menu__panel > ul {
-        --flow-gap: var(--space-3xs)
+        --flow-gap: var(--space-2xs)
     }
 }

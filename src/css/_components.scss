@@ -25,10 +25,6 @@
         background: var(--accent-surface);
     }
 
-    &:has(blockquote) {
-        box-shadow: inset var(--space-3xs) 0 var(--accent-surface);
-    }
-
     &>:is(img, picture, figure) {
         display: block;
         inline-size: calc(100% + 2 * var(--space-s-m));
@@ -79,7 +75,7 @@
     }
 
     &:not(:last-child) {
-        max-inline-size:75ch;
+        max-inline-size: 75ch;
     }
 }
 
@@ -134,6 +130,18 @@ a.card {
     }
 }
 
+// ---- Blockquotes -----
+
+.case-study > blockquote, .card:has(blockquote) {
+        box-shadow: inset var(--space-3xs) 0 var(--accent-surface);
+}
+
+
+.case-study > blockquote {
+    @extend .card;
+    @extend .outline;
+}
+
 // ---- Look toggles (brand picker + theme switch) ----
 
 .brand-picker {
@@ -143,7 +151,7 @@ a.card {
 }
 
 .brand-picker button {
-    inline-size: var(--space-m); 
+    inline-size: var(--space-m);
     aspect-ratio: 1;
     border: var(--input-border-width) solid var(--input-border-color);
     border-radius: var(--border-radius-s);
@@ -152,9 +160,17 @@ a.card {
             oklch(0.399 calc(0.101 * var(--brand-chroma)) calc(var(--picker-hue) + 6.7)));
 }
 
-.brand-picker button[data-brand-choice="green"] { --picker-hue: var(--brand-hue-green); }
-.brand-picker button[data-brand-choice="pink"] { --picker-hue: var(--brand-hue-pink); }
-.brand-picker button[data-brand-choice="orange"] { --picker-hue: var(--brand-hue-orange); }
+.brand-picker button[data-brand-choice="green"] {
+    --picker-hue: var(--brand-hue-green);
+}
+
+.brand-picker button[data-brand-choice="pink"] {
+    --picker-hue: var(--brand-hue-pink);
+}
+
+.brand-picker button[data-brand-choice="orange"] {
+    --picker-hue: var(--brand-hue-orange);
+}
 
 .brand-picker button[aria-pressed="true"] {
     border-color: var(--neutral-950-alpha);
@@ -162,9 +178,11 @@ a.card {
 }
 
 @media (forced-colors: active) {
-    .brand-picker button[aria-pressed="true"] { 
-        border-width: calc(var(--input-border-width) * 3); 
-    } // bg stripped in forced colors — border weight is the only signal
+    .brand-picker button[aria-pressed="true"] {
+        border-width: calc(var(--input-border-width) * 3);
+    }
+
+    // bg stripped in forced colors — border weight is the only signal
 }
 
 .theme-switch {
@@ -197,7 +215,9 @@ a.card {
 }
 
 @media (forced-colors: active) {
-    .theme-switch button[aria-pressed="true"] { border: var(--input-border-width) solid CanvasText; }
+    .theme-switch button[aria-pressed="true"] {
+        border: var(--input-border-width) solid CanvasText;
+    }
 }
 
 // Responsive: align toggles to the container start on mobile; stack into columns beside the footer on desktop
@@ -207,7 +227,7 @@ a.card {
     }
 }
 
-@media (width >= #{scale.$bp-mobile}) {
+@media (width >=#{scale.$bp-mobile}) {
     .brand-picker {
         flex-direction: column;
     }
@@ -221,22 +241,12 @@ a.card {
 
 // ---- Illustrations ----
 
-header svg {
-            background: transparent;
-            padding-inline: var(--space-2xl-3xl);
-            padding-block: var(--space-3xl);
-            max-inline-size: calc(6* var(--space-2xl));
-            color : var(--brand-900);
-            animation: rotation 16s infinite linear;
-}
-
-@keyframes rotation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
+header svg, main svg {
+    background: transparent;
+    padding-inline: var(--space-2xl-3xl);
+    padding-block: var(--space-3xl);
+    max-inline-size: calc(7* var(--space-2xl));
+    color: var(--brand-900);
 }
 
 // ---- Data list ----
@@ -350,13 +360,13 @@ header svg {
     align-items: flex-start;
 
     // .flow sets width: 100%, which would force this group to fill the row and push the CTA onto its own line every time
-    > .flow {
+    >.flow {
         width: auto;
     }
 }
 
 // Desktop: image left / text right
-@media (width >= #{scale.$bp-mobile}) {
+@media (width >=#{scale.$bp-mobile}) {
     .project-item {
         grid-template-columns: 1fr 1fr;
     }
@@ -371,4 +381,29 @@ header svg {
         grid-column: 2;
         grid-row: 1;
     }
+}
+
+// ---- Case study page ----
+.case-study {
+    >*+* {
+        margin-block-start: var(--space-s-m);
+    }
+
+    // Base rhythm — paragraph→paragraph gap (tight)
+
+    > :is(h2, h3) {
+        margin-block-start: var(--space-l-xl);
+    }
+
+    // Extra room above section headings
+
+    // Media (videos = <figure>, markdown images = <p><picture>) get extra room above AND below
+    >figure,
+    >p:has(> :is(img, picture)) {
+        margin-block: var(--space-xl-2xl);
+    }
+}
+
+.case-study__intro {
+    margin-block-end: var(--space-2xl-3xl);
 }

@@ -4,6 +4,7 @@ services: UX/UI Design, Copywriting, Brand Messaging
 image: /assets/portfolio/the_loft_offerings_section.png
 alt: The Loft offerings section
 endDate: 2026-05
+featured: true
 permalink: /work/the-loft/
 layout: _base.njk
 templateEngineOverride: njk,md
@@ -21,6 +22,8 @@ Messaging-wise, the site was failing at addressing visitors' pain points and off
 
 This gap was most evident as a conversion barrier at the narrowest part of their funnel. Put simply, even if visitors found their way to the 'correct' part of the site, they would be dropped straight into the booking process before they knew what they were booking.
 
+{% projectVideo "/assets/portfolio/theloft-hire.mp4", "Hire page walkthrough", caption="Studio hire page" %}
+
 ## Approach
 
 I developed a [StoryBrand](https://www.impactplus.com/learn/what-is-the-storybrand-framework) redesign that flipped the job of the website from transactional to nurturing, with the visitor as the hero of their story (a hero with a problem) and the brand as the guide that offers them a clear path to follow.
@@ -34,8 +37,6 @@ Following a similar approach, the rest of the pages walk the user from "I have q
 However, that narrative arc only works if the copy itself is confident. Unfortunately, the original copy seemed to highlight the challenges and limitations of the venue, and barely touched on its unique value propositions. The rewrite fixes that, and wherever weaknesses have silver linings, I framed them as such.
 
 For instance, location-wise, The Loft is on the top floor of an old department store, right in the heart of Folkestone high street. Admittedly, this means there are no lifts, and guests really need to read the access instructions to find the venue. In return, its location enables them to host movement classes and events with considerably louder music than most independent studios in town.
-
-{% projectVideo "/assets/portfolio/theloft-hire.mp4", "Hire page walkthrough", caption="Studio hire page" %}
 
 {% projectVideo "/assets/portfolio/theloft-ritual-mobile.mp4", "Ritual mobile experience", caption="Ritual page on mobile" %}
 
@@ -51,15 +52,11 @@ This entire redesign, of course, only holds up if the client trusts what I've bu
 
 ![Colour system with brand colors](</assets/portfolio/theloft-palette.png> "Refreshed colour system that builds on their existing use of yellow and earthy tones")
 
-![New logo, colour palette, and branding across applications like tote bags and tiles](</assets/portfolio/theloft-logo-application.png> "New visual identity and colour palette, across backgrounds and applications")
-
 In just a month, I handed them a new website and a freshened-up visual identity. The site is no longer a burden, something "to sort out at some point", and is finally doing what it's meant to do: reassure people that The Loft is exactly where they want to be and make it easy for them to book.
 
 Here's what Cairo, co-founder of The Loft, had to say:
-> I have never worked with someone so deeply reliable, who has gone above and beyond my expectations. The sheer detail, diligence and attention Fran has to his work is worth its weight in gold, tenfold!
->
-> Fran managed to take a multipurpose, three tiered studio that was scattered across 14+ pages and amalgamate them smoothly, coherently and simply into just 4. [...] The creativity, design, the story, everything from start to finish has been so incredible [...] Fran’s communication [...] has always been warm, agreeable and forthcoming.
->
+> I have never worked with someone so deeply reliable, who has gone above and beyond my expectations. The sheer detail, diligence and attention Fran has to his work is worth its weight in gold, tenfold!\
+> \
+> Fran managed to take a multipurpose, three tiered studio that was scattered across 14+ pages and amalgamate them smoothly, coherently and simply into just 4. [...] The creativity, design, the story, everything from start to finish has been so incredible [...] Fran’s communication [...] has always been warm, agreeable and forthcoming.\
+> \
 > Do you know how good it feels to have someone you can deeply trust? [...] Fran turned the weight on my shoulders into air.
->
-> CANNOT RECOMMEND HIGHLY ENOUGH!
