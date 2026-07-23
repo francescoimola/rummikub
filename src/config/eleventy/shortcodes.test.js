@@ -1,9 +1,10 @@
 import { describe, it, expect, vi } from "vitest";
-import shortcodes, {
+import shortcodes from "./shortcodes.js";
+import {
   renderSources,
   renderAttr,
   renderFigcaption,
-} from "./shortcodes.js";
+} from "./render-helpers.js";
 
 function createMockEleventyConfig() {
   const registered = {};

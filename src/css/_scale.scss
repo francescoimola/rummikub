@@ -11,31 +11,7 @@ $bp-tablet: 64rem;
   initial-value: 0px;
 }
 
-// Unlayered to override cleacss's own unlayered --space-* scale at :root — see index.scss @include order (CSS rule 3)
-@mixin space-tokens {
-  :root {
-    // @link https://utopia.fyi/space/calculator?c=360,16,1.2,1920,18,1.25,5,2,&s=0.75|0.5|0.25|0.125,1.5|2|3|4|6,s-l|m-xl|l-2xl|s-2xl&g=s,l,xl,12
-    @include utopia.generateSpaceScale((
-      "minWidth": 360,
-      "maxWidth": 1920,
-      "minSize": 16,
-      "maxSize": 18,
-      "positiveSteps": (1.5, 2, 3, 4, 6, 8),
-      "negativeSteps": (0.75, 0.5, 0.25, 0.125),
-      "customSizes": ("s-l", "s-xl", "s-2xl", "m-xl", "l-2xl", "l-3xl", "l-4xl", "xl-3xl", "xl-4xl", "2xl-4xl", "3xl-4xl"),
-      "prefix": "space-",
-      "relativeTo": "container",
-    ));
-  }
-}
-
-// Unlayered to override cleacss's own unlayered :root defaults (CSS rule 3) — mirrors colors.cleacss-overrides
-@mixin cleacss-overrides {
-  :root {
-    --font-weight-bold: 550;
-  }
-}
-
+// --space-* scale and --font-weight-bold moved to _cleacss-overrides.scss (both collide with cleacss). CSS rule 3
 @layer type {
 
   :root {
