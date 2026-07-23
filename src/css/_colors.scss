@@ -127,13 +127,4 @@
   }
 }
 
-// Unlayered to override cleacss's own unlayered :root defaults — see index.scss @include order (CSS rule 8)
-@mixin cleacss-overrides {
-  :root {
-    --color-success: var(--success-500);
-    --color-warning: var(--warning-500);
-    --color-error: var(--error-500);
-    --color-info: var(--info-500);
-    --input-border-color: var(--neutral-500-alpha);
-  }
-}
+// Semantic colour + --input-border-color overrides moved to _cleacss-overrides.scss (cleacss collision). CSS rule 8

@@ -1,0 +1,31 @@
+@use '../../node_modules/utopia-core-scss/src/utopia' as utopia;
+
+// Every token here collides with a cleacss unlayered :root/:host default; unlayered always beats layered,
+// so a @layer override silently loses. These must stay unlayered. index.scss @includes `overrides` once,
+// after @import "vendor/cleacss.css" (later source order + unlayered = wins). See AGENTS.md CSS rule 3.
+@mixin overrides {
+  :root {
+    // --space-* scale (Utopia, cqi/container-relative) — overrides cleacss's own unlayered --space-* scale
+    // @link https://utopia.fyi/space/calculator?c=360,16,1.2,1920,18,1.25,5,2,&s=0.75|0.5|0.25|0.125,1.5|2|3|4|6,s-l|m-xl|l-2xl|s-2xl&g=s,l,xl,12
+    @include utopia.generateSpaceScale((
+      "minWidth": 360,
+      "maxWidth": 1920,
+      "minSize": 16,
+      "maxSize": 18,
+      "positiveSteps": (1.5, 2, 3, 4, 6, 8),
+      "negativeSteps": (0.75, 0.5, 0.25, 0.125),
+      "customSizes": ("s-l", "s-xl", "s-2xl", "m-xl", "l-2xl", "l-3xl", "l-4xl", "xl-3xl", "xl-4xl", "2xl-4xl", "3xl-4xl"),
+      "prefix": "space-",
+      "relativeTo": "container",
+    ));
+
+    --font-weight-bold: 550; // vs cleacss's 700 — Ronzino is a variable font
+
+    // Semantic colours — link cleacss utility classes + form validation states to our Figma scales (500 step)
+    --color-success: var(--success-500);
+    --color-warning: var(--warning-500);
+    --color-error: var(--error-500);
+    --color-info: var(--info-500);
+    --input-border-color: var(--neutral-500-alpha);
+  }
+}

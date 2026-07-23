@@ -1,24 +1,6 @@
 var path = require("path");
 var fs = require("fs");
-
-function renderSources(webm, fallback) {
-  if (!webm) return "";
-  return '<source data-src="' + webm + '" type="video/webm"><source data-src="' + fallback + '" type="video/mp4">';
-}
-
-function renderAttr(name, value) {
-  if (!value) return "";
-  return ' ' + name + '="' + value + '"';
-}
-
-function renderFigcaption(caption) {
-  if (!caption) return "";
-  return '\n  <figcaption class="has-text-grey">' + caption + "</figcaption>";
-}
-
-module.exports.renderSources = renderSources;
-module.exports.renderAttr = renderAttr;
-module.exports.renderFigcaption = renderFigcaption;
+var { renderSources, renderAttr, renderFigcaption } = require("./render-helpers");
 
 module.exports = function (eleventyConfig, eleventyImage, filenameFormat) {
   eleventyConfig.addShortcode("remoteImg", function (src, width, height, alt, attrs) {

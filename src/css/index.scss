@@ -3,12 +3,11 @@
 @use 'scale';
 @use 'icons';
 @use 'components';
+@use 'cleacss-overrides';
 @import "vendor/cleacss.css";
 
 // After the cleacss import so these unlayered tokens override cleacss's own unlayered :root defaults (CSS rule 3)
-@include scale.space-tokens;
-@include scale.cleacss-overrides;
-@include colors.cleacss-overrides;
+@include cleacss-overrides.overrides;
 
 html {
     font-size: 15px; // overrides cleacss's unlayered 16px (@layer reset)
