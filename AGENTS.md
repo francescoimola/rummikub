@@ -58,6 +58,7 @@ Embed lazy, autoplay-in-view videos with the `projectVideo` shortcode (defined i
 {% projectVideo "/assets/portfolio/x.webm", "Alt text" %}                                  {# webm-only (Safari 16+) #}
 {% projectVideo "/assets/portfolio/x.mp4", "Alt", webm="/assets/portfolio/x.webm",
                 poster="/assets/portfolio/x.jpg", caption="Optional caption" %}             {# webm + mp4 fallback #}
+{% projectVideo "/assets/portfolio/x.mp4", "Alt", class="site-recording" %}                {# extra class on .project-video-wrapper #}
 ```
 
 - **Formats:** WebM (small) with an MP4 fallback is the safe default — WebM-only drops pre-16 Safari/iOS. Single-format `src` may be `.webm` or `.mp4` (no `type` attr; browser sniffs).

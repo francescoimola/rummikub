@@ -46,11 +46,11 @@ Simplicity, or rather effortlessness, is the steady hand guiding the user. This 
 
 That's why it starts with four categories of use case (workspaces, cultural spaces, mixed-use, and residential spaces), each leading to a page of curated products and projects. Further down, the 'Your journey with us' section finally visualises the entire process, from the first chat to the final installation.
 
-![Screnshots of three homepage sections from the final design phase](/assets/portfolio/tca_phase1_hpoverview.png "Overview of selected Homepage sections")
+![Screenshots of three homepage sections from the final design phase](/assets/portfolio/tca_phase1_hpoverview.png "Overview of selected Homepage sections")
 
 ![Screenshot of Mega menu design from the final design phase](/assets/portfolio/tca_megamenu.png "Menu design")
 
-![Screenshots of a card component in dark mode from the final design phasecleaner](/assets/portfolio/tca_intro.png "Card component")
+![Screenshots of a card component in dark mode from the final design phase](/assets/portfolio/tca_intro.png "Card component")
 
 ![Screenshots of a products range component from the final design phase](/assets/portfolio/tca_productrange.png "Section of the homepage showcasing the brand's product range")
 

@@ -1,15 +1,19 @@
 ---
 title: Open Art Folke
 services: Branding, Marketing Strategy, Web Design
+contentMode: contrast
 image: /assets/portfolio/OAF_Homepage.png
 alt: Open Art Folke homepage
 endDate: 2026-05
 featured: true
 permalink: /work/open-art-folke/
 layout: _base.njk
+templateEngineOverride: njk,md
 ---
 
-Every year, the artists, designers, and makers of Folkestone join forces to host a town-wide celebration, where they showcase their work, open the doors to their studios, and reimagine streets, cafés, parks, and other unusual spaces. 
+{% projectVideo "/assets/video/open_art_folke.mp4", "Open Art Folke homepage, with an animated title", class="site-recording" %}
+
+Every year, the artists, designers, and makers of Folkestone join forces to host a town-wide celebration where they showcase their work, open the doors to their studios, and reimagine streets, cafés, parks, and other unusual spaces. 
 
 Dubbed Open Art Folke, the initiative is Folkestone's first artist-led, grassroots art festival—established by a dedicated working group, of which I've been a core member since 2026.
 
@@ -18,3 +22,11 @@ So far I have advised the committee on all things marketing and branding, I’ve
 Over the rest of the upcoming festival cycle, I’ll be designing their printed programme as well as surprising (and hopefully delighting!) the public with the rest of our campaign, online and off.
 
 To learn more about Open Art Folke, visit [openartfolke.com](https://openartfolke.com)
+
+{% projectVideo "/assets/video/oaf_logo_slides.mp4", "the Open Art Folke logo against different backgrounds" %}
+
+![Open Art Folke flyer on the hood of a car](/assets/portfolio/flyer_mockup_car.png)
+
+![business card that spells out 'here is an idea" on one side and details on the other](/assets/portfolio/outreach-card-oaf.png)
+
+{% projectVideo "/assets/video/open_art_folke_about_page.mp4", "About page on the Open Art Folke website", class="site-recording" %}

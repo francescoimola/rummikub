@@ -1,5 +1,11 @@
 @use 'scale';
 
+:root {
+    /* 1. Define the crop amounts to select video elements */
+  --crop-top: 0.5px;   
+  --crop-right: 3px; 
+}
+
 // ---- Cards ----
 
 .card {
@@ -305,7 +311,25 @@ header svg, main svg {
 .project-video-wrapper {
     position: relative;
     width: 100%;
+    height: auto;
     background-color: var(--neutral-100);
+    overflow: hidden;
+    border-radius: var(--border-radius);
+}
+
+
+/* Crop the video by a small amount to hide "dead" exported pixels */
+.project-video-wrapper:is(.site-recording) {
+    aspect-ratio: 16 / 9; // absolute-positioned video below no longer sizes the wrapper — fix its height explicitly
+}
+
+.project-video-wrapper:is(.site-recording) video {
+    position: absolute;
+  left: 0;
+  top: calc(-1 * var(--crop-top)); 
+  width: calc(100% + var(--crop-right)); 
+  height: calc(100% + var(--crop-top)); 
+  object-fit: cover;
 }
 
 .project-video-el {
@@ -397,10 +421,25 @@ header svg, main svg {
 
     // Extra room above section headings
 
-    // Media (videos = <figure>, markdown images = <p><picture>) get extra room above AND below
+    // Media (videos = <figure>, markdown images = <p><picture>) get extra room above
     >figure,
     >p:has(> :is(img, picture)) {
-        margin-block: var(--space-xl-2xl);
+        margin-block-start: var(--space-xl-2xl);
+    }
+
+    // Trailing space belongs to the gap-owning element below, except at the very end
+    >:is(figure, p:has(> :is(img, picture))):last-child {
+        margin-block-end: var(--space-xl-2xl);
+    }
+
+    // Anything non-media directly after media — restore the full gap on its top edge
+    >:is(figure, p:has(> :is(img, picture))) + :not(:is(figure, p:has(> :is(img, picture)))) {
+        margin-block-start: var(--space-xl-2xl);
+    }
+
+    // Media directly followed by another media item — tighten the shared gap
+    >:is(figure, p:has(> :is(img, picture))) + :is(figure, p:has(> :is(img, picture))) {
+        margin-block-start: var(--space-s-m);
     }
 }
 
