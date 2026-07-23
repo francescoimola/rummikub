@@ -150,6 +150,26 @@ describe("shortcodes.js — projectVideo shortcode", () => {
 
     expect(result).toContain('aria-label=""');
   });
+
+  it("adds extra class to the wrapper when provided", () => {
+    const config = createMockEleventyConfig();
+    shortcodes(config, vi.fn(), vi.fn());
+    const projectVideo = config.getShortcode("projectVideo");
+
+    const result = projectVideo("video.mp4", "Alt", { class: "site-recording" });
+
+    expect(result).toContain('class="project-video-wrapper site-recording"');
+  });
+
+  it("omits extra wrapper class when not provided", () => {
+    const config = createMockEleventyConfig();
+    shortcodes(config, vi.fn(), vi.fn());
+    const projectVideo = config.getShortcode("projectVideo");
+
+    const result = projectVideo("video.mp4", "Alt");
+
+    expect(result).toContain('class="project-video-wrapper"');
+  });
 });
 
 describe("shortcodes.js — remoteImg shortcode", () => {

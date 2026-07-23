@@ -36,6 +36,7 @@ module.exports = function (eleventyConfig, eleventyImage, filenameFormat) {
     var poster = options.poster;
     var webm = options.webm;
     var caption = options.caption;
+    var wrapperClass = options.class ? " " + options.class : "";
 
     var posterAttr = renderAttr("poster", poster);
     var sources = renderSources(webm, src);
@@ -44,7 +45,7 @@ module.exports = function (eleventyConfig, eleventyImage, filenameFormat) {
 
     return (
       '<figure class="project-video">\n' +
-      '  <div class="project-video-wrapper">\n' +
+      '  <div class="project-video-wrapper' + wrapperClass + '">\n' +
       '    <video class="project-video-el" muted loop playsinline preload="none"' + dataSrc + posterAttr + ' aria-label="' + alt + '">' + sources + '</video>\n' +
       '    <button class="project-video-play" type="button" aria-label="Play video">\n' +
       '      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">\n' +
