@@ -172,6 +172,76 @@ describe("shortcodes.js — projectVideo shortcode", () => {
   });
 });
 
+describe("shortcodes.js — figureImg shortcode", () => {
+  it("renders img wrapped in a figure", () => {
+    const config = createMockEleventyConfig();
+    shortcodes(config, vi.fn(), vi.fn());
+    const figureImg = config.getShortcode("figureImg");
+
+    const result = figureImg("/assets/photo.jpg", "Alt text");
+
+    expect(result).toContain("<figure>");
+    expect(result).toContain('src="/assets/photo.jpg"');
+    expect(result).toContain('alt="Alt text"');
+    expect(result).toContain("</figure>");
+  });
+
+  it("renders figcaption when caption is provided", () => {
+    const config = createMockEleventyConfig();
+    shortcodes(config, vi.fn(), vi.fn());
+    const figureImg = config.getShortcode("figureImg");
+
+    const result = figureImg("/assets/photo.jpg", "Alt text", {
+      caption: "A caption",
+    });
+
+    expect(result).toContain("<figcaption");
+    expect(result).toContain("A caption");
+  });
+
+  it("does not render figcaption when no caption", () => {
+    const config = createMockEleventyConfig();
+    shortcodes(config, vi.fn(), vi.fn());
+    const figureImg = config.getShortcode("figureImg");
+
+    const result = figureImg("/assets/photo.jpg", "Alt text");
+
+    expect(result).not.toContain("<figcaption");
+  });
+
+  it("uses empty alt when not provided", () => {
+    const config = createMockEleventyConfig();
+    shortcodes(config, vi.fn(), vi.fn());
+    const figureImg = config.getShortcode("figureImg");
+
+    const result = figureImg("/assets/photo.jpg");
+
+    expect(result).toContain('alt=""');
+  });
+
+  it("adds a class to the figure when provided", () => {
+    const config = createMockEleventyConfig();
+    shortcodes(config, vi.fn(), vi.fn());
+    const figureImg = config.getShortcode("figureImg");
+
+    const result = figureImg("/assets/photo.jpg", "Alt text", {
+      class: "no-bkg",
+    });
+
+    expect(result).toContain('<figure class="no-bkg">');
+  });
+
+  it("does not add a class attribute when not provided", () => {
+    const config = createMockEleventyConfig();
+    shortcodes(config, vi.fn(), vi.fn());
+    const figureImg = config.getShortcode("figureImg");
+
+    const result = figureImg("/assets/photo.jpg", "Alt text");
+
+    expect(result).toContain("<figure>");
+  });
+});
+
 describe("shortcodes.js — remoteImg shortcode", () => {
   it("renders img with all attributes", () => {
     const config = createMockEleventyConfig();

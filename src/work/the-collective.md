@@ -1,6 +1,7 @@
 ---
 title: The Collective
 services: Web Design, Copywriting, UX Consulting
+contentMode: contrast
 image: /assets/portfolio/the_collective_homepage.png
 alt: The Collective homepage
 endDate: 2025-12
@@ -10,11 +11,11 @@ layout: _base.njk
 templateEngineOverride: njk,md
 ---
 
-{% projectVideo "/assets/portfolio/tca_animated.mp4", "Showcase of The Collective's website homepage", caption="Homepage, top-half overview" %}
+{% projectVideo "/assets/portfolio/tca_animated.mp4", "Showcase of The Collective's website homepage" %}
 
 The Collective designs, manufactures, and installs bespoke acoustic solutions for commercial and residential interiors. The majority of their clients are specifiers (architects, interior designers, and contractors) who need less marketing fluff and more technical data and reference images.
 
-Their previous website read like a boring product catalogue, but not one that was easy to navigate either. To work as a specifier's tool, we needed to fix that, and so the plan became: surface the right products, hide all potential distractions, and make the company's end-to-end service immediately obvious.
+Their previous website read like a dull product catalogue, and one of those that on top of lacking character isn't easy to navigate either. To work as a specifier's tool, this needed to be fixed. And so the plan became: surface the right products, hide all potential distractions, and make the company's end-to-end service immediately obvious.
 
 ## Discovery
 
@@ -22,17 +23,17 @@ After multiple working sessions with the team, a central tension cropped up. The
 
 Meanwhile, I also learned that their current site was burying their strongest differentiator—that they guide clients from first consultation to final install and don't stop at the design stage—deep down layers of outdated design and jargon.
 
-![Two screenshots of the old website](/assets/portfolio/tca_oldsite.png "The Collective's previous website")
+{% figureImg "/assets/portfolio/tca_oldsite.png", "Two screenshots of the old website", caption="The Collective's previous website" %}
 
 ## Phase one
 
 I was initially commissioned to maintain the existing site structure, navigation, and CMS intact. Constraints in mind, I redesigned every page to be less cluttered and to better align with how the team actually speaks to clients face-to-face. 
 
-Although copywriting was never formally part of the brief, my design process always starts with words. So as well as working on the UI, I also wrote headlines and page-level copy. For example, the line 'Better acoustics shouldn't cost the earth', used on the sustainability page, came from sitting with the company's own corporate reporting, finding interesting angles, and translating a key metrics into statements a visitor could get right away.
+Although copywriting was never formally part of the brief, my design process always starts with words. So as well as working on the UI, I also wrote headlines and page-level copy.
 
-![Screenshots of the Homepage and Products pages from the first design phase](/assets/portfolio/tca_phase1_homepage-products.png "Redesign of the Homepage and Products pages from the first design phase (details)")
+{% figureImg "/assets/portfolio/tca_phase1_homepage-products.png", "Screenshots of the Homepage and Products pages from the first design phase", caption="First phase redesign of the Homepage and Products pages" %}
 
-![Screenshots of the Sustainability page from the first design phase](/assets/portfolio/tca_phase1_sustainability.png "Redesign of the Sustainability page from the first design phase (Detail)")
+{% figureImg "/assets/portfolio/tca_phase1_sustainability.png", "Screenshots of the Sustainability page from the first design phase", caption="First phase redesign of the Sustainability page" %}
 
 ## Phase two
 
@@ -42,23 +43,21 @@ I chose a primary direction and built a system flexible enough to hold elements 
 
 Simplicity, or rather effortlessness, is the steady hand guiding the user. This explains the generous use of white space, the single typeface, and the three-column grid. As hard-to-shake as it was, the corporate weight was accommodated through modularity and through a darker, more austere card component that could be used to shift tone without shifting direction.
 
-'Where have I landed?' and 'Where am I going next?' were arguably the hardest questions to address. When it came to CTAs, the concept I delivered reframed the website around a question the old one never asked: _what kind of space are you designing?_
+'Where have I landed?' and 'Where am I going next?' were arguably the hardest questions to answer. As a result, I suggested switching the main calls to action to address a central question—something the old website never asked—"What kind of space are you designing?". In response, the website early on presents you with four categories of use case (workspaces, cultural spaces, mixed-use, and residential spaces), each leading to a page with products and case studies relating to that category. A little further down, the 'Your journey with us' section puts the whole process into perspective, from the first chat to the final installation.
 
-That's why it starts with four categories of use case (workspaces, cultural spaces, mixed-use, and residential spaces), each leading to a page of curated products and projects. Further down, the 'Your journey with us' section finally visualises the entire process, from the first chat to the final installation.
+{% figureImg "/assets/portfolio/tca_megamenu.png", "Screenshot of Mega menu design from the final design phase", caption="Menu design" %}
 
-![Screenshots of three homepage sections from the final design phase](/assets/portfolio/tca_phase1_hpoverview.png "Overview of selected Homepage sections")
+{% figureImg "/assets/portfolio/tca_intro.png", "Screenshots of a card component in dark mode from the final design phase", caption="Card component" %}
 
-![Screenshot of Mega menu design from the final design phase](/assets/portfolio/tca_megamenu.png "Menu design")
+{% figureImg "/assets/portfolio/tca_productrange.png", "Screenshots of a products range component from the final design phase", caption="Section showcasing the brand's product range" %}
 
-![Screenshots of a card component in dark mode from the final design phase](/assets/portfolio/tca_intro.png "Card component")
+{% figureImg "/assets/portfolio/tca_process.png", "Section explaining the customer's journey with the business", caption="Visualising the intended customer journey, step by step" %}
 
-![Screenshots of a products range component from the final design phase](/assets/portfolio/tca_productrange.png "Section of the homepage showcasing the brand's product range")
-
-![Presentation slides](/assets/portfolio/tca_abravenewhome.png "Slides covering key ideas and decisions behind the design concepts")
+{% figureImg "/assets/portfolio/tca_abravenewhome.png", "Presentation slides", caption="Slides covering key ideas and decisions behind the design concepts", class="no-bkg" %}
 
 ## Deliverables
 
-- Identity and UX consultation
+- Identity and UX consultations
 - Competitive analysis
 - Two design phases with static Figma prototypes
 - Page-level copywriting

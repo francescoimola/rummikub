@@ -6,9 +6,10 @@ alt: Blueberry instagram post with text 'Toss aside the rule book'
 endDate: 2023-12
 permalink: /work/blueberry/
 layout: _base.njk
+templateEngineOverride: njk,md
 ---
 
-![Selection of social media posts designed for Blueberry](/assets/portfolio/blueberry_socialmedia.png "Social media posts designed for our Instagram audience")
+{% figureImg "/assets/portfolio/blueberry_socialmedia.png", "Selection of social media posts designed for Blueberry", caption="Social media posts designed for our Instagram audience" %}
 
 Four months into what was essentially a team assistant role, I was asked to coordinate Blueberry's marketing and communications. I don't think that says anything extraordinary about me, but it does say a lot about how much needed doing and that someone with guts and focus had to own it. 
 
@@ -34,7 +35,7 @@ As well as the administrative work noted above, getting to this place involved c
 
 My role also extended to email marketing, where I oversaw everything from managing our lists, designing email templates, reporting, strategy and editing content. Soon enough, the efforts paid off and we doubled our email open rates in the space of two years.
 
-![Email subject line and snippets from Blueberry newsletters](/assets/portfolio/blueberry_emailmarketing.png "Editions of our client newsletter")
+{% figureImg "/assets/portfolio/blueberry_emailmarketing.png", "Email subject line and snippets from Blueberry newsletters", caption="Editions of our client newsletter" %}
 
 Design-wise, I aimed for lean, typography-driven work that let the assets do the heavy lifting. When great images weren't available, I made sure the copy was good enough to carry the weight. I also wrote branding guidelines to keep future content consistent, and designed several post templates for social media. 
 
@@ -42,8 +43,8 @@ When an external design studio was hired to develop a new design language and we
 
 Before I left, I spent significant time with the colleagues picking up parts of my role, walking them through the systems, templates, and processes I'd built, so that none of it would depend on me being there, which felt important.
 
-![Three blog posts on the Blueberry website](/assets/portfolio/blueberry_blogposts.png "Blog posts covering freelance guidance and HQ news")
+{% figureImg "/assets/portfolio/blueberry_blogposts.png", "Three blog posts on the Blueberry website", caption="Blog posts covering freelance guidance and HQ news" %}
 
-![Event poster for a game night for Blueberry talent](/assets/portfolio/blueberry_gamenightposter.png "Event poster for a game night for Blueberry talent")
+{% figureImg "/assets/portfolio/blueberry_gamenightposter.png", "Event poster for a game night for Blueberry talent", caption="Event poster for a game night for Blueberry talent" %}
 
-![Group photo of team and talents at a party](/assets/portfolio/blueberry_party.jpg "Anniversary party I co-organised for our team and talents")
+{% figureImg "/assets/portfolio/blueberry_party.jpg", "Group photo of team and talents at a party", caption="Anniversary party I co-organised for our team and talents" %}

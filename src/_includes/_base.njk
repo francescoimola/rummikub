@@ -12,7 +12,7 @@
     </aside>
     <div class="content">
       {% if tags and "work" in tags %}
-      <main class="case-study">
+      <main class="case-study text">
         <div class="flow has-gap-3xs case-study__intro">
           <h1>{{ title }}</h1>
           {% if services %}<p class="dimmed">{{ services }}</p>{% endif %}
@@ -24,7 +24,9 @@
       {% else %}
       <main class="flow has-gap-3xl">{{ content | safe }}</main>
       {% endif %}
-      <div class="mobile-only">{%- include "_footer.njk" -%}</div>
+      <div class="mobile-only">
+        {%- include "_footer.njk" -%}
+      </div>
     </div>
   </div>
   <script src="/assets/scripts/lenis.min.js"></script>
