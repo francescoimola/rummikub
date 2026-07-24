@@ -204,6 +204,10 @@ h1.stretch {
     text-wrap-style: pretty;
 }
 
+.balance p, .balance small {
+    text-wrap-style: balance;
+}
+
 [hlight-section-h]>h2:first-child {
     // Puts targeted headings in a highlighted box
     background-color: var(--accent-surface);
@@ -524,7 +528,7 @@ main>*{
             transform: translate(-50%);
             animation: breakout ease-out both; // shares breakout's keyframes (identical bleed-in); differs only in timeline/range
             animation-timeline: scroll(root block);
-            animation-range: cover 0 cover 2%; // full-bleed on load → 40rem after one viewport of scroll
+            animation-range: 0 50vh; // full-bleed on load → 40rem after one viewport of scroll; length-based so it's page-height independent
         }
     }
 }
