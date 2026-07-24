@@ -12,5 +12,5 @@
 <meta property="og:site_name" content="{{ site.name }}" />
 <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
 <meta property="og:description" content="{{ teaser | default(description) | default(site.description) }}" />
-<meta property="og:type" content="website" />
+<meta property="og:type" content="{% if tags and 'writing' in tags %}article{% else %}website{% endif %}" />
 <meta property="og:image" content="{{ image | default('https://res.cloudinary.com/dax6x2pto/image/upload/c_lfill,w_1200,f_auto,q_auto/Open_Graph_Image_rfqysu.png') }}" />

@@ -447,3 +447,43 @@ header svg, main svg {
 .case-study__intro {
     margin-block-end: var(--space-2xl-3xl);
 }
+
+// ---- Writing (index + per-type listings) ----
+
+// Whole-card link, kept compact so the next section peeks above the fold
+.writing-item {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color var(--dur-fast) ease;
+}
+
+.writing-item:hover,
+.writing-item:focus-visible {
+    background-color: var(--accent-surface);
+}
+
+.writing-item h3 {
+    font-size: var(--step-0);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.4;
+}
+
+.writing-item p {
+    margin: 0;
+}
+
+.writing-item__source,
+.writing-item__note {
+    font-size: var(--step--1);
+}
+
+// Notes carry the most personal writing — a quieter register signals tone without hiding it
+.writing-section--quiet .writing-item {
+    opacity: 0.9;
+}
+
+.writing-section--quiet .writing-item:hover,
+.writing-section--quiet .writing-item:focus-visible {
+    opacity: 1;
+}

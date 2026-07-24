@@ -1,0 +1,27 @@
+---
+permalink: /rss.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ site.name }} — Writing</title>
+    <link>{{ site.url }}/writing/</link>
+    <atom:link href="{{ site.url }}/rss.xml" rel="self" type="application/rss+xml" />
+    <description>{{ site.description }}</description>
+    <language>en-gb</language>
+    {%- for item in collections.writing %}
+    {%- set itemUrl = item.data.external or (site.url + item.url) %}
+    <item>
+      <title>{{ item.data.title }}</title>
+      <link>{{ itemUrl }}</link>
+      <guid isPermaLink="false">{{ itemUrl }}</guid>
+      <pubDate>{{ item.date | dateToRfc822 }}</pubDate>
+      <description>{{ item.data.teaser }}</description>
+      {%- if item.data.type and writingTypes[item.data.type] %}
+      <category>{{ writingTypes[item.data.type].label }}</category>
+      {%- endif %}
+    </item>
+    {%- endfor %}
+  </channel>
+</rss>

@@ -1,6 +1,6 @@
 {%- set isHomepage = page.url == '/' -%}
-{%- set isBlogPost = layout == '_post-base.njk' -%}
-{%- set isBlogListing = '/blog' in page.url and not isBlogPost -%}
+{%- set isWritingPost = tags and 'writing' in tags -%}
+{%- set isWritingListing = page.url == '/writing/' -%}
 
 {%- if isHomepage -%}
 <script type="application/ld+json">
@@ -40,14 +40,14 @@
 </script>
 {%- endif -%}
 
-{%- if isBlogPost and date -%}
+{%- if isWritingPost and date -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BlogPosting",
+  "@type": "Article",
   "headline": "{{ title }}",
   "description": "{{ teaser }}",
-  "image": "{{ image }}",
+  "image": "{{ site.url }}{{ image }}",
   "datePublished": "{{ date | dateToRfc3339 }}",
   "dateModified": "{{ date | dateToRfc3339 }}",
   "author": {
@@ -68,22 +68,21 @@
   },
   "url": "{{ site.url }}{{ page.url }}",
   "inLanguage": "en-GB"
-  {%- if categories %},
-  "keywords": "{{ categories | join(', ') }}",
-  "articleSection": "{{ categories[0] }}"
+  {%- if type and writingTypes[type] %},
+  "articleSection": "{{ writingTypes[type].label }}"
   {%- endif %}
 }
 </script>
 {%- endif -%}
 
-{%- if isBlogListing -%}
+{%- if isWritingListing -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Blog",
-  "name": "{{ site.name }} — Blog",
+  "name": "{{ site.name }} — Writing",
   "description": "{{ site.description }}",
-  "url": "{{ site.url }}/blog/",
+  "url": "{{ site.url }}/writing/",
   "publisher": {
     "@type": "Person",
     "@id": "{{ site.url }}/#person",
@@ -95,7 +94,7 @@
 </script>
 {%- endif -%}
 
-{%- if not isHomepage and not (isBlogPost and date) and not isBlogListing -%}
+{%- if not isHomepage and not (isWritingPost and date) and not isWritingListing -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

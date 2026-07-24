@@ -1,2 +1,10 @@
 # 301 redirect map — populated during the SEO/URL task (Phase 4)
 # OLD_PATH  NEW_PATH  301
+
+# Blog → Writing (old Astro site used /blog; the rebuild uses /writing)
+/blog                                    /writing/                                    301
+/blog/how-to-write-a-website-brief       /writing/how-to-write-a-website-brief/       301
+/blog/flyer-design-tips                  /writing/flyer-design-tips/                  301
+/blog/should-i-care-about-website-speed  /writing/should-i-care-about-website-speed/  301
+/blog/the-hard-part-isnt-the-no          /writing/the-hard-part-isnt-the-no/          301
+/blog/welcome-emails-why-bother          /writing/welcome-emails-why-bother/          301

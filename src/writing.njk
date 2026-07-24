@@ -1,0 +1,31 @@
+---
+layout: _base.njk
+title: Writing
+description: Guides, essays and notes on design, copywriting and running a business.
+eleventyNavigation:
+  key: Writing
+  parent: Home
+---
+{% from "_writing-item.njk" import writingItem %}
+
+  <header class="card flow has-gap-s has-items-center has-text-center" view-animation="settle">
+    {% icon "meditating" %}
+    <h1>Writing<br>
+    <span class="dimmed">Part portfolio, part thinking aloud. Guides for people who run websites, plus the odd essay and note.</span></h1>
+  </header>
+
+  {% for typeSlug in collections.writingTypes %}
+  {% set t = writingTypes[typeSlug] %}
+  <section class="flow has-gap-s writing-section{% if typeSlug == 'notes' %} writing-section--quiet{% endif %}">
+    <div class="flow has-gap-3xs">
+      <h2>{{ t.label }}</h2>
+      <p class="dimmed">{{ t.blurb }}</p>
+    </div>
+    <div class="flow has-gap-xs">
+      {% for item in collections.writing | byType(typeSlug) | limit(3) %}
+        {{ writingItem(item) }}
+      {% endfor %}
+    </div>
+    <small><a href="/writing/{{ typeSlug }}/">See all {{ t.label | lower }} →</a></small>
+  </section>
+  {% endfor %}

@@ -13,9 +13,9 @@
 
 The Eleventy rebuild's code migration is mostly done, but a few things are still open:
 
-- Blog listing/post templates and collection not yet built (`src/_includes/_post-base.njk`, teaser/excerpt logic)
+- Writing section has clearly-marked placeholder entries (`src/writing/example-*.md`) so every type/section renders — replace or delete before cutover (they also appear in `/rss.xml`)
 - `src/robots.txt` not yet populated
-- `src/_redirects` is a stub — needs the real 301 redirect map from the old site
+- `src/_redirects` holds only the blog→writing 301s — the rest of the old site's redirect map is still needed
 - Production cutover not yet done — `main` still runs the old Astro site on Cloudflare Pages; see [docs/cutover-runbook.md](docs/cutover-runbook.md)
 
 ## Commands
@@ -45,7 +45,9 @@ pnpm clean            # rm -rf public
 | `src/assets/fonts/` | Ronzino woff2 files (passthrough copied to `public/assets/fonts/`) |
 | `src/assets/favicon/` | Favicon files (passthrough copied) |
 | `src/work/` | Portfolio case-study pages (`tag: work`). Frontmatter drives collections in `src/config/eleventy/collections.js`: sorted by `endDate` (YYYY-MM) desc; `featured: true` → `workFeatured` (Featured section, **max 3**), otherwise → `workIndex` (Index section) |
+| `src/writing/` | Writing section (`tag: writing`, `/writing/<slug>/`). Each item has one `type` (guides/essays/notes; see `src/_data/writingTypes.json`). `date`-desc `writing` collection; `writingTypes` lists present types in fixed order. On-site posts set `permalink`; external (Substack) items set `external`+`source`+`permalink: false`. Index `src/writing.njk` (sectioned by type, 3 latest each); per-type pages `src/writing-types.njk`; item macro `_writing-item.njk`; RSS `src/feed.njk` → `/rss.xml` |
 | `src/assets/portfolio/` | Project videos (mp4/webm) + posters (passthrough copied to `public/assets/portfolio/`) |
+| `src/assets/writing/` | Writing cover + in-body images (passthrough copied to `public/assets/writing/`) |
 | `scripts/optimize-videos.mjs` | Opt-in ffmpeg optimizer for project videos (`pnpm optimize:video`) |
 | `public/` | Build output — gitignored, do not commit |
 | `eleventy.config.js` | Eleventy configuration |

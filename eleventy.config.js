@@ -55,6 +55,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/css/vendor": "css/vendor" });
   eleventyConfig.addPassthroughCopy("src/assets/scripts");
   eleventyConfig.addPassthroughCopy("src/assets/portfolio");
+  eleventyConfig.addPassthroughCopy("src/assets/writing");
   eleventyConfig.addPassthroughCopy("src/assets/video");
   eleventyConfig.addPassthroughCopy("src/assets/images/*.gif");
   eleventyConfig.addPassthroughCopy("src/robots.txt");

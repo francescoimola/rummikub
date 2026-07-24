@@ -24,95 +24,60 @@ function workPost(title, endDate, featured) {
   return { data: { title, endDate, featured } };
 }
 
-describe("collections.js", () => {
-  it("registers the blogCategories collection", () => {
+function writingItem(title, date, type) {
+  return { date: new Date(date), data: { title, type } };
+}
+
+describe("collections.js — writing collections", () => {
+  function getWritingCollection(name, posts) {
+    const config = createMockEleventyConfig();
+    collections(config);
+    const api = createMockCollectionApi(posts, "writing");
+    return config.getCollection(name)(api);
+  }
+
+  it("registers the writing and writingTypes collections", () => {
     const config = createMockEleventyConfig();
     collections(config);
 
-    expect(config.addCollection).toHaveBeenCalledWith(
-      "blogCategories",
-      expect.any(Function)
-    );
+    expect(config.addCollection).toHaveBeenCalledWith("writing", expect.any(Function));
+    expect(config.addCollection).toHaveBeenCalledWith("writingTypes", expect.any(Function));
   });
 
-  it("extracts unique categories from blog posts", () => {
-    const config = createMockEleventyConfig();
-    collections(config);
-    const blogCategories = config.getCollection("blogCategories");
+  it("sorts writing by date, most recent first", () => {
+    const result = getWritingCollection("writing", [
+      writingItem("Old", "2025-01-01", "guides"),
+      writingItem("New", "2026-06-01", "notes"),
+      writingItem("Mid", "2025-09-01", "essays"),
+    ]);
 
-    const posts = [
-      { data: { categories: ["Design", "Dev"] } },
-      { data: { categories: ["Writing", "Design"] } },
-      { data: { categories: ["Dev"] } },
-    ];
-    const api = createMockCollectionApi(posts);
-
-    const result = blogCategories(api);
-
-    expect(result).toEqual(["Design", "Dev", "Writing"]);
+    expect(result.map((p) => p.data.title)).toEqual(["New", "Mid", "Old"]);
   });
 
-  it("returns sorted categories", () => {
-    const config = createMockEleventyConfig();
-    collections(config);
-    const blogCategories = config.getCollection("blogCategories");
+  it("writingTypes lists only present types in fixed order", () => {
+    const result = getWritingCollection("writingTypes", [
+      writingItem("A", "2026-01-01", "notes"),
+      writingItem("B", "2026-02-01", "guides"),
+    ]);
 
-    const posts = [
-      { data: { categories: ["Zebra", "Apple"] } },
-      { data: { categories: ["Mango"] } },
-    ];
-    const api = createMockCollectionApi(posts);
-
-    const result = blogCategories(api);
-
-    expect(result).toEqual(["Apple", "Mango", "Zebra"]);
+    expect(result).toEqual(["guides", "notes"]);
   });
 
-  it("handles posts without categories", () => {
-    const config = createMockEleventyConfig();
-    collections(config);
-    const blogCategories = config.getCollection("blogCategories");
+  it("writingTypes deduplicates and omits empty types", () => {
+    const result = getWritingCollection("writingTypes", [
+      writingItem("A", "2026-01-01", "guides"),
+      writingItem("B", "2026-02-01", "guides"),
+    ]);
 
-    const posts = [
-      { data: { categories: ["Design"] } },
-      { data: {} },
-      { data: { categories: null } },
-    ];
-    const api = createMockCollectionApi(posts);
-
-    const result = blogCategories(api);
-
-    expect(result).toEqual(["Design"]);
+    expect(result).toEqual(["guides"]);
   });
 
-  it("returns empty array when no posts have categories", () => {
-    const config = createMockEleventyConfig();
-    collections(config);
-    const blogCategories = config.getCollection("blogCategories");
-
-    const posts = [{ data: {} }, { data: {} }];
-    const api = createMockCollectionApi(posts);
-
-    const result = blogCategories(api);
+  it("writingTypes returns empty array when nothing is typed", () => {
+    const result = getWritingCollection("writingTypes", [
+      { date: new Date("2026-01-01"), data: {} },
+    ]);
 
     expect(result).toEqual([]);
-  });
-
-  it("deduplicates categories across posts", () => {
-    const config = createMockEleventyConfig();
-    collections(config);
-    const blogCategories = config.getCollection("blogCategories");
-
-    const posts = [
-      { data: { categories: ["Design"] } },
-      { data: { categories: ["Design"] } },
-      { data: { categories: ["Design"] } },
-    ];
-    const api = createMockCollectionApi(posts);
-
-    const result = blogCategories(api);
-
-    expect(result).toEqual(["Design"]);
   });
 });
 

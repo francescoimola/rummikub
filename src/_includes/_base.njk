@@ -19,6 +19,16 @@
         </div>
         {{ content | safe }}
       </main>
+      {% elif tags and "writing" in tags %}
+      <main class="case-study text">
+        <div class="card writing-hero flow has-gap-s" view-animation="settle">
+          {% if image %}<img src="{{ image }}" alt="{{ alt }}" width="1080" height="auto">{% endif %}
+          <h1 class="has-mt-s-m">{{ title }}<br>
+          <span class="dimmed">{{ date | longDate }}{% if type and writingTypes[type] %} · {{ writingTypes[type].label }}{% endif %}</span></h1>
+          {% if note %}<p class="writing-item__note dimmed">{{ note }}</p>{% endif %}
+        </div>
+        {{ content | safe }}
+      </main>
       {% elif isFullWidth %}
       <main class="flow-row has-gap-s-m" full-width>{{ content | safe }}</main>
       {% else %}

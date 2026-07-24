@@ -1,7 +1,14 @@
 const MAX_FEATURED_WORK = 3;
 
+// Fixed section order on the Writing index and for per-type page generation
+const WRITING_TYPE_ORDER = ["guides", "essays", "notes"];
+
 function sortByEndDateDesc(a, b) {
   return String(b.data.endDate || "").localeCompare(String(a.data.endDate || ""));
+}
+
+function sortByDateDesc(a, b) {
+  return b.date - a.date;
 }
 
 module.exports = function (eleventyConfig) {
@@ -47,16 +54,19 @@ module.exports = function (eleventyConfig) {
       .sort(sortByEndDateDesc);
   });
 
-  eleventyConfig.addCollection("blogCategories", function (collectionApi) {
-    var categories = new Set();
-    var posts = collectionApi.getFilteredByTag("blog");
-    posts.forEach(function (p) {
-      if (p.data.categories) {
-        p.data.categories.forEach(function (c) {
-          categories.add(c);
-        });
-      }
+  eleventyConfig.addCollection("writing", function (collectionApi) {
+    // All writing items (on-site posts + external stubs), newest first
+    return collectionApi.getFilteredByTag("writing").sort(sortByDateDesc);
+  });
+
+  eleventyConfig.addCollection("writingTypes", function (collectionApi) {
+    // Type slugs that actually have items, kept in the fixed section order
+    var present = new Set();
+    collectionApi.getFilteredByTag("writing").forEach(function (p) {
+      if (p.data.type) present.add(p.data.type);
     });
-    return Array.from(categories).sort();
+    return WRITING_TYPE_ORDER.filter(function (t) {
+      return present.has(t);
+    });
   });
 };
