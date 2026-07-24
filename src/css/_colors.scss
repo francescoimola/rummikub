@@ -50,6 +50,7 @@
     --neutral-950: light-dark(oklch(0.351 0.034 121.6), oklch(0.945 0.007 125.2));
 
     // Neutral alpha scale — base swaps via light-dark(), alpha is consistent
+    --neutral-50-alpha: light-dark(oklch(0.351 0.034 121.6 / 0.03), oklch(0.945 0.007 125.2 / 0.03));
     --neutral-100-alpha: light-dark(oklch(0.351 0.034 121.6 / 0.05), oklch(0.945 0.007 125.2 / 0.05));
     --neutral-200-alpha: light-dark(oklch(0.351 0.034 121.6 / 0.07), oklch(0.945 0.007 125.2 / 0.07));
     --neutral-300-alpha: light-dark(oklch(0.351 0.034 121.6 / 0.14), oklch(0.945 0.007 125.2 / 0.14));

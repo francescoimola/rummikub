@@ -4,7 +4,7 @@ services: Branding, Marketing Strategy, Web Design
 contentMode: contrast
 image: /assets/portfolio/OAF_Homepage.png
 alt: Open Art Folke homepage
-endDate: 2026-05
+endDate: 2026-08
 featured: true
 permalink: /work/open-art-folke/
 layout: _base.njk

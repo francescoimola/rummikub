@@ -4,7 +4,7 @@ services: UI/UX Design, Copywriting, SEO, Framer
 contentMode: contrast
 image: /assets/portfolio/makemind_homepage.png
 alt: Make & Mind workshops page
-endDate: 2025-06
+endDate: 2025-07
 permalink: /work/make-and-mind/
 layout: _base.njk
 templateEngineOverride: njk,md

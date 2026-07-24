@@ -49,7 +49,7 @@
         border-end-start-radius: 0;
         border-end-end-radius: 0;
 
-        :where(img, video) {
+        :where(img, video, .project-video-wrapper) {
             border-end-start-radius: 0;
             border-end-end-radius: 0;
         }
@@ -60,10 +60,15 @@
         border-start-start-radius: 0;
         border-start-end-radius: 0;
 
-        :where(img, video) {
+        :where(img, video, .project-video-wrapper) {
             border-start-start-radius: 0;
             border-start-end-radius: 0;
         }
+    }
+
+    // Media inside cards shouldn't carry the global white-fill edge shadow — the card's own edge is enough
+    :is(img, picture, video, canvas) {
+        box-shadow: none;
     }
 }
 
