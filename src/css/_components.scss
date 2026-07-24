@@ -317,11 +317,11 @@ header svg, main svg {
 
 
 /* Crop the video by a small amount to hide "dead" exported pixels */
-.project-video-wrapper:is(.site-recording) {
+.project-video-wrapper.site-recording {
     aspect-ratio: 16 / 9; // absolute-positioned video below no longer sizes the wrapper — fix its height explicitly
 }
 
-.project-video-wrapper:is(.site-recording) video {
+.project-video-wrapper.site-recording video {
     position: absolute;
     inset-block-start: calc(-1 * var(--crop-amount));
     inset-inline-start: calc(-1 * var(--crop-amount));
