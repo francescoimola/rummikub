@@ -1,6 +1,6 @@
 ---
 title: Blueberry
-services: Content Marketing, Internal Comms, Project Management
+services: Content Marketing, Internal Communications
 image: /assets/portfolio/blueberry_socialpost.png
 alt: Blueberry instagram post with text 'Toss aside the rule book'
 endDate: 2023-12
@@ -9,21 +9,19 @@ layout: _base.njk
 templateEngineOverride: njk,md
 ---
 
-{% figureImg "/assets/portfolio/blueberry_socialmedia.png", "Selection of social media posts designed for Blueberry", caption="Social media posts designed for our Instagram audience" %}
+{% figureImg "/assets/portfolio/blueberry_socialmedia.png", "Selection of social media posts designed for Blueberry" %}
 
-Four months into what was essentially a team assistant role, I was asked to coordinate Blueberry's marketing and communications. I don't think that says anything extraordinary about me, but it does say a lot about how much needed doing and that someone with guts and focus had to own it. 
-
-The role covered project management, operations, brand, content, and events. None of it came with a big budget.
+Four months into what was initially a team assistant role, I was tasked to coordinate Blueberry's marketing and communications. The promotion suddently shited my workload from manning the ohoena dn doing a couple more things to to covering all marketing operations, brand, content, and events. None of it came with a big budget.
 
 ## Getting the house in order
 
-The first problem of the marketing department was operational. The company was paying for a stack of tools that either overlapped or just weren't being used properly. It usually happens when no one's had time to step back and ask what's really needed. 
+The first problem of the marketing department was operational. The company was paying for a stack of tools that either overlapped or just weren't being used properly, which usually happens when no one's had time to step back and ask what's really needed. 
 
 A few months into the role, I audited the lot and consolidated where I could. By the end of my second year, yearly marketing costs had dropped by a third while quality and output stayed the same or improved. 
 
-Budget aside, marketing at Blueberry had operated as a standalone and somewhat disconnected thing from the rest of the company—in part because it had always been a one person operation. Not without some resistance, but I was able to move most of its operations into the same CRM/project management tool that everyone else used, which meant the wider team could finally see work in progress, share ideas, and for the first time understand what our department was doing and why. It also meant I had a proper base to run campaigns, manage content, and keep track of everything without it living in someone's inbox.
+Budget aside, marketing at Blueberry had operated as a standalone and somewhat disconnected thing from the rest of the company—in part because it had always been a one person operation. Not without some resistance, but I was able to move most of its operations into the same CRM and project management tool that everyone else used, which meant the wider team could finally see work in progress, share ideas, and for the first time understand what our department was doing and why. It also meant I had a proper base to run campaigns, manage content, and keep track of everything without it living in someone's inbox.
 
-I also worked with the Compliance team to set up processes for GDPR and email list hygiene. It might sound like unsexy work, but it saved the business from a world of pain down the line. 
+I also worked with the Compliance team to set up processes for GDPR and email list hygiene. It's unsexy work I must admit, but it saved the business from a world of pain down the line. 
 
 ## A slow pivot
 
@@ -37,7 +35,7 @@ My role also extended to email marketing, where I oversaw everything from managi
 
 {% figureImg "/assets/portfolio/blueberry_emailmarketing.png", "Email subject line and snippets from Blueberry newsletters", caption="Editions of our client newsletter" %}
 
-Design-wise, I aimed for lean, typography-driven work that let the assets do the heavy lifting. When great images weren't available, I made sure the copy was good enough to carry the weight. I also wrote branding guidelines to keep future content consistent, and designed several post templates for social media. 
+Design-wise, I aimed for lean, typography-driven work that let the talent showreels and the assets provided to us by production companies do the heavy lifting. Where good enough images weren't available, I made sure the copy was strong enough to carry the weight. I also wrote branding guidelines to keep future content consistent, and designed several post templates for social media. 
 
 When an external design studio was hired to develop a new design language and website for us, I coordinated between external designers and the managing director to keep the project on track, and then facilitated the bulk of that design transition across all of Blueberry's outputs.
 
@@ -45,6 +43,6 @@ Before I left, I spent significant time with the colleagues picking up parts of 
 
 {% figureImg "/assets/portfolio/blueberry_blogposts.png", "Three blog posts on the Blueberry website", caption="Blog posts covering freelance guidance and HQ news" %}
 
-{% figureImg "/assets/portfolio/blueberry_gamenightposter.png", "Event poster for a game night for Blueberry talent", caption="Event poster for a game night for Blueberry talent" %}
+{% figureImg "/assets/portfolio/blueberry_gamenightposter.png", "Event poster for a game night for Blueberry talent", caption="Event poster for a game night" %}
 
 {% figureImg "/assets/portfolio/blueberry_party.jpg", "Group photo of team and talents at a party", caption="Anniversary party I co-organised for our team and talents" %}

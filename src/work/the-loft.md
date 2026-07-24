@@ -52,8 +52,8 @@ In spite of the trimming and the limitations of Squarespace as a site builder, t
 {% figureImg "/assets/portfolio/theloft-palette.png", "Colour system with brand colors", caption="Refreshed colour system that builds on their existing use of yellow and earthy tones" %}
 
 Here's what Cairo, co-founder of The Loft, had to say:
-> I have never worked with someone so deeply reliable, who has gone above and beyond my expectations. The sheer detail, diligence and attention Fran has to his work is worth its weight in gold, tenfold!\
+> "I have never worked with someone so deeply reliable, who has gone above and beyond my expectations. The sheer detail, diligence and attention Fran has to his work is worth its weight in gold, tenfold!\
 > \
 > Fran managed to take a multipurpose, three tiered studio that was scattered across 14+ pages and amalgamate them smoothly, coherently and simply into just four. The creativity, design, the story, everything from start to finish has been so incredible Fran’s communication has always been warm, agreeable and forthcoming.\
 > \
-> Do you know how good it feels to have someone you can deeply trust? Fran turned the weight on my shoulders into air.
+> Do you know how good it feels to have someone you can deeply trust? Fran turned the weight on my shoulders into air."

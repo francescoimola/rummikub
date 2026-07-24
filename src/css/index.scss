@@ -240,6 +240,10 @@ blockquote+figcaption {
     background-color: var(--neutral-100-alpha);
 }
 
+:where(img, picture, video, canvas) {
+    border:  calc(var(--input-border-width)/4) solid var(--neutral-50-alpha); // border-like edge so white-fill media stays visible on contrast (white) pages
+}
+
 .no-bkg :is(img, picture, video, canvas, svg) {
     background-color: transparent;
 }
