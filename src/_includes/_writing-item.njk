@@ -1,5 +1,5 @@
 {% macro writingItem(item) %}
-<a class="card writing-item flow has-gap-3xs"
+<a class="card writing-item flow has-gap-s"
    href="{{ item.data.external or item.url }}"
    {% if item.data.external %}target="_blank" rel="noopener noreferrer"{% endif %}>
   {% if item.data.source %}<p class="writing-item__source dimmed">{{ item.data.source }} ↗</p>{% endif %}

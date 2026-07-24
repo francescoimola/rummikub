@@ -1,17 +1,20 @@
 {
   "guides": {
-    "label": "Guides",
-    "blurb": "Practical how-tos for people who run their own websites and marketing.",
+    "short": "Guides",
+    "label": "Francesco's guides",
+    "blurb": "Practical articles on design and marketing for people who run their own businesses",
     "icon": "graphdrawing"
   },
   "essays": {
-    "label": "Essays",
-    "blurb": "Longer thinking on design, freelancing, and doing good work.",
+    "short": "Essays",
+    "label": "Francesco's essays",
+    "blurb": "Candid long-form writing on modern work culture, design, and learning new things",
     "icon": "mailstorm"
   },
   "notes": {
-    "label": "Notes",
-    "blurb": "Shorter, rougher posts. Bits I'm still working out, and the odd personal one.",
+    "short": "Notes",
+    "label": "Francesco's notes",
+    "blurb": "Rough and on-the-spot, sometimes explosive, sometimes half-baked",
     "icon": "stuckin"
   }
 }
