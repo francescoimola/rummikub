@@ -1,0 +1,10 @@
+{% macro writingItem(item) %}
+<a class="card writing-item flow has-gap-3xs"
+   href="{{ item.data.external or item.url }}"
+   {% if item.data.external %}target="_blank" rel="noopener noreferrer"{% endif %}>
+  {% if item.data.source %}<p class="writing-item__source dimmed">{{ item.data.source }} ↗</p>{% endif %}
+  <h3>{{ item.data.title }}</h3>
+  <p class="dimmed">{{ item.data.teaser }}</p>
+  {% if item.data.note %}<p class="writing-item__note dimmed">{{ item.data.note }}</p>{% endif %}
+</a>
+{% endmacro %}

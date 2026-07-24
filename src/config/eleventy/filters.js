@@ -7,6 +7,21 @@ module.exports = function (eleventyConfig) {
     });
   });
 
+  eleventyConfig.addFilter("longDate", function (date) {
+    return new Date(date).toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  });
+
+  eleventyConfig.addFilter("byType", function (items, type) {
+    if (!type) return items;
+    return items.filter(function (p) {
+      return p.data.type === type;
+    });
+  });
+
   eleventyConfig.addFilter("split", function (str, separator) {
     return str.split(separator);
   });

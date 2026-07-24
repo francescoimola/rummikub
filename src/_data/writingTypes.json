@@ -1,0 +1,17 @@
+{
+  "guides": {
+    "label": "Guides",
+    "blurb": "Practical how-tos for people who run their own websites and marketing.",
+    "icon": "graphdrawing"
+  },
+  "essays": {
+    "label": "Essays",
+    "blurb": "Longer thinking on design, freelancing, and doing good work.",
+    "icon": "mailstorm"
+  },
+  "notes": {
+    "label": "Notes",
+    "blurb": "Shorter, rougher posts. Bits I'm still working out, and the odd personal one.",
+    "icon": "stuckin"
+  }
+}

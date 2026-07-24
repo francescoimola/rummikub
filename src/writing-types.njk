@@ -1,0 +1,29 @@
+---
+pagination:
+  data: collections.writingTypes
+  size: 1
+  alias: type
+permalink: "/writing/{{ type }}/"
+layout: _base.njk
+eleventyExcludeFromCollections: true
+eleventyComputed:
+  title: "{{ writingTypes[type].label }}"
+  description: "{{ writingTypes[type].blurb }}"
+---
+{% from "_writing-item.njk" import writingItem %}
+{% set t = writingTypes[type] %}
+<div class="flow has-gap-xl-2xl">
+  <header class="card flow has-gap-s has-items-center has-text-center" view-animation="settle">
+    {% icon t.icon %}
+    <h1>{{ t.label }}<br>
+    <span class="dimmed">{{ t.blurb }}</span></h1>
+  </header>
+
+  <div class="flow has-gap-xs{% if type == 'notes' %} writing-section--quiet{% endif %}">
+    {% for item in collections.writing | byType(type) %}
+      {{ writingItem(item) }}
+    {% endfor %}
+  </div>
+
+  <small><a href="/writing/">← All writing</a></small>
+</div>
