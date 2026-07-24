@@ -30,3 +30,5 @@ To learn more about Open Art Folke, visit [openartfolke.com](https://openartfolk
 ![business card that spells out 'here is an idea" on one side and details on the other](/assets/portfolio/outreach-card-oaf.png)
 
 {% projectVideo "/assets/video/open_art_folke_about_page.mp4", "About page on the Open Art Folke website", class="site-recording" %}
+
+![overview of the Open Art Folke branding guidelines](/assets/portfolio/oaf_guidelines.png)

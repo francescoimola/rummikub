@@ -1,6 +1,7 @@
 ---
 title: Make & Mind
 services: UI/UX Design, Copywriting, SEO, Framer
+contentMode: contrast
 image: /assets/portfolio/makemind_homepage.png
 alt: Make & Mind workshops page
 endDate: 2025-06
@@ -9,45 +10,44 @@ layout: _base.njk
 templateEngineOverride: njk,md
 ---
 
-{% projectVideo "/assets/portfolio/makemind_animated.mp4", "Showcase of the Make & Mind website homepage", caption="Homepage overview" %}
+{% projectVideo "/assets/portfolio/makemind_animated.mp4", "Showcase of the Make & Mind website homepage"%}
 
-The business had a loyal following and glowing reviews, but the website didn't reflect any of that. It felt small in the wrong way: more hobby than business, more 'nice idea' than something you'd pay for or tell your friends about.
+Make & Mind was a pilot project offering art classes infused with nature and mindfulness to people looking to find some calm in their lives. Its founder Vicky came to me with a loyal following and glowing reviews, but their existing website didn't seem to reflect any of that. It felt small in the wrong way, more "yeah, nice idea" than something you'd pay for or tell your friends about.
 
-How do you make a local creative business feel like a million bucks without losing the thing that makes it special? What sets it apart from the dozens of "wine and paint" nights nearby?
+But how do you make a purposely small, creative and intentional business feel like a million bucks without losing the thing that makes it special? How do you set it apart from the dozens of "wine and paint" nights nearby?
 
 ## Finding a sweet spot
 
-The project started with an intensive research phase. I looked at how other workshop businesses around the country present themselves online, from community art groups, to pottery studios, and even wellness or fitness spaces, more broadly. Most of them blend together. They tend to go for cookie-cutter templates, loads of stock imagery, and vague promises about "unleashing your creativity." 
+The project started with an intensive research phase. I looked at how other workshop businesses around the country present themselves online, from community art groups, to pottery studios, and even wellness or fitness spaces, more broadly. Website-wise, most of them blend together, they go for cookie-cutter templates, loads of stock imagery, and vague promises about "unleashing your creativity." 
 
-Make & Mind needed to feel different because it _is_ different. These aren't drop-in painting nights with free prosecco, but structured short courses and events built around wellbeing, being in conversation with nature, and connection. Crafting is the vehicle, not the destination. And the website had to communicate that immediately.
+Make & Mind needed to feel different because it _is_ different. What's on offer aren't drop-in painting nights with free prosecco, but structured short courses and events built around wellbeing, being in conversation with nature, and connection. Crafting is the vehicle rather than the destination, and the website had to communicate that pretty early on.
+
+{% figureImg "/assets/portfolio/makemind_workshop.png", "Workshops page", caption="Page listing all upcoming workshops" %}
 
 ## Designing within constraints
 
-There was very little existing copy to work with, let alone any brand guidelines. So I spent time in conversation with the founder, Vicky, to understand what the workshops involve and how they feel to the people who attend them. From there, and from studying how similar businesses position themselves, the brand voice became clearer and easier to define. Warm and honest but not precious. 
+There was very little existing copy to work with, let alone any brand guidelines. So I spent time in conversation with the founder to understand what her workshops involve and how they're received by those who attend them. From there the brand voice became clearer and easier to define: warm and honest but not precious. 
 
-The design had to solve a practical problem too. There wasn't a library of professional photography to pull from, and the business runs on one person's time and energy. So every decision was shaped by those constraints. I used a dithering technique on the available imagery, reducing photos to a somewhat stylised pixel palette that ties directly into the brand colours. What could have felt like a limitation became a deliberate visual identity. 
+The design had to solve another practical problem. There wasn't a library of professional photography to pull from, and the business runs on one person's time and energy—so every decision was shaped by those constraints. I used a dithering technique on the available imagery, reducing photos to a stylised pixel palette that ties directly into the brand colours. What could have felt like a limitation became a deliberate aesthetic choice. 
 
 Built in Framer, the CMS was kept simple enough for the founder to update on her own. That meant no blog to maintain or complex content structures but a clear system for adding and managing events and courses.
 
-![Footer](/assets/portfolio/makemind_footer.png "Footer")
+{% figureImg "/assets/portfolio/makemind_footer.png", "Footer", caption="Footer" %}
 
-The result is a website and the foundations of a brand identity that strike just the right balance between being deliberate, inspiring and credible. Combined, these elements give Make & Mind the online presence of a brand with ten times the budget and reach, and allow its attendees to finally witness the same level of craftsmanship in person that they see online.
+The result is a website and the foundations of a brand identity that strike just the right balance between being inspiring and credible. Combined, these elements give Make & Mind the online presence of a brand with ten times the budget and reach, and allow its attendees to finally witness the same level of craftsmanship in person that they see online.
 
-![Workshops page](/assets/portfolio/makemind_workshop.png "Page listing all upcoming workshops")
+{% figureImg "/assets/portfolio/makemind_cta.png", "Long call to action inviting the reader to sign up" %}
 
-![Homepage hero section](/assets/portfolio/makemind_homepage.png "Homepage above the fold")
+{% figureImg "/assets/portfolio/makemind_herocopy.png", "Welcoming section on the homepage" %}
 
-![Welcoming section on the homepage](/assets/portfolio/makemind_herocopy.png 'Welcoming "hero" section on the homepage')
+## Deliverables
 
-## Behind the scenes
+- Refreshed brand dentity
+- Strategic consultations
+- Positioning analysis
+- Copywriting
+- Homepage, Index of workshops, and CMS event template
+- Local SEO-specific page
+- Framer CMS setup
+- Ready to ship website
 
-Designed in Figma and built in Framer.
-
-Currently awaiting launch in 2026.
-
-| Pages | Purpose |
-| :--- | :--- |
-| Home | The front door. Sets the tone, introduces the business, and gives visitors a reason to explore further. |
-| Workshops | A browsable collection of all upcoming sessions, powered by a CMS the founder can update herself. |
-| Workshop detail | Individual pages for each workshop with everything someone needs to decide and book. |
-| SEO page | A dedicated page targeting people searching for arts and craft workshops in Manchester. |

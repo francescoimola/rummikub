@@ -2,8 +2,7 @@
 
 :root {
     /* 1. Define the crop amounts to select video elements */
-  --crop-top: 0.5px;   
-  --crop-right: 3px; 
+  --crop-amount: 1px;
 }
 
 // ---- Cards ----
@@ -79,10 +78,6 @@
         margin-inline: auto;
         margin-block: auto;
     }
-
-    &:not(:last-child) {
-        max-inline-size: 75ch;
-    }
 }
 
 a.card {
@@ -153,7 +148,6 @@ a.card {
 .brand-picker {
     display: flex;
     gap: var(--space-3xs-2xs); // paired token — eases down on mobile
-    --tap-extend: calc(var(--space-3xs) / 2); // keep adjacent swatch tap targets from overlapping
 }
 
 .brand-picker button {
@@ -197,7 +191,6 @@ a.card {
     padding: calc(var(--space-3xs)/var(--type-ratio));
     border: var(--input-border-width) solid var(--input-border-color);
     border-radius: var(--border-radius-s);
-    --tap-extend: calc(var(--space-3xs) / 2);
 }
 
 .theme-switch button {
@@ -325,11 +318,14 @@ header svg, main svg {
 
 .project-video-wrapper:is(.site-recording) video {
     position: absolute;
-  left: 0;
-  top: calc(-1 * var(--crop-top)); 
-  width: calc(100% + var(--crop-right)); 
-  height: calc(100% + var(--crop-top)); 
-  object-fit: cover;
+    inset-block-start: calc(-1 * var(--crop-amount));
+    inset-inline-start: calc(-1 * var(--crop-amount));
+    // video is a replaced element — auto width/height won't solve from inset offsets like a normal box would,
+    // so the grown size has to be explicit (doubled, since the offset above only pushes the start edge out)
+    width: calc(100% + 2 * var(--crop-amount));
+    height: calc(100% + 2 * var(--crop-amount));
+    max-width: none; // cleacss resets video to max-width: 100%, which caps the width regardless of the width above
+    object-fit: cover;
 }
 
 .project-video-el {

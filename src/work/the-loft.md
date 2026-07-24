@@ -8,6 +8,7 @@ featured: true
 permalink: /work/the-loft/
 layout: _base.njk
 templateEngineOverride: njk,md
+contentMode: contrast
 ---
 
 {% projectVideo "/assets/portfolio/theloft-homepage.mp4", "Homepage animation showing the navigation flow", caption="Homepage design" %}
@@ -32,7 +33,7 @@ That also meant fixing the navigation. I introduced a more restrained structure:
 
 Take the "Ritual" page (Ritual is their yoga and movement studio slash sub-brand), for instance. This is nine sections long, allowing us to answer every possible question while explaining how Ritual stacks up against local competition: the "why here and not somewhere else?" element that is so important to conversions. The other pages follow a similar same arc, walking the user from "I have questions" at the top to "I'm at peace and I know what to do next" down at the end.
 
-But that arc only works if the copy itself is confident. The original copy highlighted the challenges and limitations of the venue and barely touched on the unique things it has to offer. The rewrite fixes that, and wherever weaknesses have silver linings, I framed them as such. For example, The Loft is on the top floor of an old department store, right in the heart of Folkestone: there are no lifts, and guests really need to read the access instructions to find the venue. In return, that location lets them host classes and events with considerably louder music than most independent studios in town.
+When it comes to how the brand spoke of itself, the original copy seemed to highlight the venue's challenges and limitations and barely touched on the unique things it has to offer. The rewrite fixes that, and wherever weaknesses have silver linings, I framed them as such. For example, The Loft is on the top floor of an old department store, right in the heart of Folkestone: there are no lifts, and guests really need to read the access instructions to find the venue. In return, that location lets them host classes and events with considerably louder music than most independent studios in town.
 
 {% projectVideo "/assets/portfolio/theloft-ritual-mobile.mp4"%}
 
@@ -48,7 +49,7 @@ In spite of the trimming and the limitations of Squarespace as a site builder, t
 
 {% projectVideo "/assets/portfolio/theloft-logo-images.mp4", "Logo over a series of images" %}
 
-![Colour system with brand colors](</assets/portfolio/theloft-palette.png> "Refreshed colour system that builds on their existing use of yellow and earthy tones")
+{% figureImg "/assets/portfolio/theloft-palette.png", "Colour system with brand colors", caption="Refreshed colour system that builds on their existing use of yellow and earthy tones" %}
 
 Here's what Cairo, co-founder of The Loft, had to say:
 > I have never worked with someone so deeply reliable, who has gone above and beyond my expectations. The sheer detail, diligence and attention Fran has to his work is worth its weight in gold, tenfold!\

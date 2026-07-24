@@ -73,7 +73,7 @@ html.lenis body {
     --font-family: 'Ronzino', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji';
     --line-height: 1.5;
 
-    --tap-extend: var(--space-xs); // Extend tap targets by this much
+    --tap-extend: var(--space-3xs); // Extend tap targets by this much
 
     // Opacity
     --opacity-active: 0.8;
@@ -233,11 +233,15 @@ blockquote+figcaption {
 }
 
 :where(img, picture, video, canvas, svg) {
-    background-color: var(--neutral-100-alpha);
     object-fit: cover;
     margin-inline: auto;
     border-radius: var(--border-radius);
     width: 100%;
+    background-color: var(--neutral-100-alpha);
+}
+
+.no-bkg :is(img, picture, video, canvas, svg) {
+    background-color: transparent;
 }
 
 img {
@@ -289,7 +293,7 @@ nav a[aria-current="page"] {
     }
 }
 
-:is(.text ol, .text ul) {
+:where(.text ol, .text ul) {
     margin-inline-start: 0;
     padding-inline-start: var(--space-s);
 }

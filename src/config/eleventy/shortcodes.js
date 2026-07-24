@@ -58,6 +58,19 @@ module.exports = function (eleventyConfig, eleventyImage, filenameFormat) {
     );
   });
 
+  eleventyConfig.addShortcode("figureImg", function (src, alt, options) {
+    alt = alt || "";
+    options = options || {};
+    var figcaption = renderFigcaption(options.caption);
+    var figureClass = options.class ? ' class="' + options.class + '"' : "";
+
+    return (
+      '<figure' + figureClass + '>\n' +
+      '  <img src="' + src + '" alt="' + alt + '">' + figcaption + '\n' +
+      '</figure>'
+    );
+  });
+
   eleventyConfig.addShortcode("icon", function (name, attrs) {
     attrs = attrs || "";
     var svg = fs.readFileSync(path.resolve("src/assets/icons", name + ".svg"), "utf8");
