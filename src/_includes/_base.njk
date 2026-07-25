@@ -21,10 +21,12 @@
       </main>
       {% elif tags and "writing" in tags %}
       <main class="case-study text">
-        <div class="card writing-hero flow has-gap-s" view-animation="settle">
+        <div class="card writing-hero" view-animation="settle">
           {% if image %}<img src="{{ image }}" alt="{{ alt }}" width="1080" height="auto">{% endif %}
-          <h1 class="has-mt-s-m">{{ title }}<br>
-          <span class="dimmed">{{ date | longDate }}{% if type and writingTypes[type] %} · {{ writingTypes[type].label }}{% endif %}</span></h1>
+          <div class="flow has-gap-2xs has-mt-s-m">
+            <h1>{{ title }}</h1>
+            <p class="dimmed">{{ date | longDate }}{% if type and writingTypes[type] %} · {{ writingTypes[type].short }}{% endif %}</p>
+          </div>
           {% if note %}<p class="writing-item__note dimmed">{{ note }}</p>{% endif %}
         </div>
         {{ content | safe }}

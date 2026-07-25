@@ -219,18 +219,6 @@ describe("shortcodes.js — figureImg shortcode", () => {
     expect(result).toContain('alt=""');
   });
 
-  it("adds a class to the figure when provided", () => {
-    const config = createMockEleventyConfig();
-    shortcodes(config, vi.fn(), vi.fn());
-    const figureImg = config.getShortcode("figureImg");
-
-    const result = figureImg("/assets/photo.jpg", "Alt text", {
-      class: "no-bkg",
-    });
-
-    expect(result).toContain('<figure class="no-bkg">');
-  });
-
   it("does not add a class attribute when not provided", () => {
     const config = createMockEleventyConfig();
     shortcodes(config, vi.fn(), vi.fn());

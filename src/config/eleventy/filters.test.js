@@ -41,6 +41,49 @@ describe("filters.js", () => {
       "urlencode",
       expect.any(Function)
     );
+    expect(config.addFilter).toHaveBeenCalledWith(
+      "writingThumbColor",
+      expect.any(Function)
+    );
+  });
+
+  describe("writingThumbColor", () => {
+    function getFilter() {
+      const config = createMockEleventyConfig();
+      filters(config);
+      return config.getFilter("writingThumbColor");
+    }
+
+    it("returns a translucent oklch() from the brand hue pool", () => {
+      const color = getFilter()({ fileSlug: "example-not-bad" });
+      const match = color.match(
+        /^oklch\((\d+\.?\d*) (\d+\.?\d*) (\d+\.?\d*) \/ (\d+\.?\d*)\)$/
+      );
+
+      expect(match).not.toBeNull();
+      const [, l, c, h, a] = match.map(Number);
+      expect([119.4, 55, 305]).toContain(h);
+      expect(l).toBeGreaterThanOrEqual(0.6);
+      expect(l).toBeLessThanOrEqual(0.82);
+      expect(c).toBeGreaterThanOrEqual(0.09);
+      expect(c).toBeLessThanOrEqual(0.16);
+      expect(a).toBeGreaterThan(0); // never opaque
+      expect(a).toBeLessThan(1);
+    });
+
+    it("is deterministic per slug across calls", () => {
+      const filter = getFilter();
+      expect(filter({ fileSlug: "example-odd-wonderful" })).toBe(
+        filter({ fileSlug: "example-odd-wonderful" })
+      );
+    });
+
+    it("falls back through url then title when fileSlug is absent", () => {
+      const filter = getFilter();
+      expect(filter({ url: "/writing/x/" })).toMatch(/^oklch\(/);
+      expect(filter({ data: { title: "Untitled" } })).toMatch(/^oklch\(/);
+      expect(filter({})).toMatch(/^oklch\(/);
+    });
   });
 
   describe("readableDate", () => {

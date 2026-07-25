@@ -1,7 +1,7 @@
 ---
 title: "How to write a cracking website brief (8 step guide)"
 date: 2025-12-01
-teaser: "Get better quotes and timelines. Discover the eight essentials every brief needs, including the one most people skip."
+teaser: "Get better quotes and timelines. Discover the eight essentials every brief needs, including the one skipped by most."
 image: /assets/writing/How_to_write_a_website_brief_oktkpe.png
 alt: "How to write a cracking website brief (8 step guide)"
 type: guides
