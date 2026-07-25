@@ -36,7 +36,7 @@ $bp-tablet: 64rem;
     --gutter-y: var(--space-s-m);
     --gutter-x: var(--space-s-m);
 
-    --max-width: calc(var(--grid-width-2xl) * var(--type-ratio));
+    --max-inline-size: calc(var(--grid-width-2xl) * var(--type-ratio));
 
     // Font weights (--font-weight-bold lives in the unlayered cleacss-overrides mixin below — cleacss collision)
     --font-weight-base: 400;

@@ -162,6 +162,12 @@ body {
     color: var(--neutral-950-alpha);
     max-inline-size: var(--max-width-size-6);
     letter-spacing: var(--letter-spacing-xl);
+    text-wrap: balance;
+
+    &.trim-above {
+        text-box-trim: trim-start;
+        text-box-edge: text text;
+    }
 }
 
 h3,
@@ -177,12 +183,12 @@ h6,
 }
 
 h1.stretch {
-    width: 100%;
+    inline-size: 100%;
     letter-spacing: var(--letter-spacing-s);
 
     svg {
         background-color: transparent;
-        width: 100%;
+        inline-size: 100%;
         height: auto;
         display: inline-block;
         vertical-align: top;
@@ -205,7 +211,7 @@ h1.stretch {
 }
 
 .balance p, .balance small {
-    text-wrap-style: balance;
+    text-wrap: balance;
 }
 
 [hlight-section-h]>h2:first-child {
@@ -240,16 +246,11 @@ blockquote+figcaption {
     object-fit: cover;
     margin-inline: auto;
     border-radius: var(--border-radius);
-    width: 100%;
-    background-color: var(--neutral-100-alpha);
+    inline-size: 100%;
 }
 
 :where(img, picture, video, canvas) {
     border:  calc(var(--input-border-width)/4) solid var(--neutral-50-alpha); // border-like edge so white-fill media stays visible on contrast (white) pages
-}
-
-.no-bkg :is(img, picture, video, canvas, svg) {
-    background-color: transparent;
 }
 
 img {
@@ -487,7 +488,7 @@ main>*{
 [full-width] {
     max-inline-size: unset;
     margin-inline: unset;
-    width: 100%;
+    inline-size: 100%;
     align-items: stretch;
 }
 
@@ -512,7 +513,7 @@ main>*{
         [view-animation="breakout"],
         .case-study > :is(figure, p:has(> :is(img, picture))):not(.case-study__intro + *) {
             box-sizing: border-box;
-            width: calc(100vw - (var(--gutter-x) *2));
+            inline-size: calc(100vw - (var(--gutter-x) *2));
             margin-left: 50%;
             transform: translate(-50%);
             animation: breakout ease-out both;
@@ -523,7 +524,7 @@ main>*{
         [view-animation="settle"],
         .case-study__intro + :is(figure, p:has(> :is(img, picture))) {
             box-sizing: border-box;
-            width: calc(100vw - (var(--gutter-x) *2));
+            inline-size: calc(100vw - (var(--gutter-x) *2));
             margin-left: 50%;
             transform: translate(-50%);
             animation: breakout ease-out both; // shares breakout's keyframes (identical bleed-in); differs only in timeline/range

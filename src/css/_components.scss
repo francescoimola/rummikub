@@ -2,113 +2,98 @@
 
 :root {
     /* 1. Define the crop amounts to select video elements */
-  --crop-amount: 1px;
+    --crop-amount: 1px;
 }
 
 // ---- Cards ----
 
 .card {
+    --pad: var(--space-s-m); // single source for padding + the media bleed math below — keep them in sync
     background: var(--card-bg);
     overflow: clip;
     display: flex;
     flex-direction: column;
     border-radius: var(--border-radius-s);
-    padding: var(--space-s-m);
+    padding: var(--pad);
+    inline-size: 100%;
 
     @media (forced-colors: active) {
         border: 1px solid CanvasText;
         background: Canvas;
     }
 
+    &:is(a) {
+        text-decoration: none;
+        transition: translate var(--dur-fast) var(--ease),
+            background-color var(--dur-fast) var(--ease);
+
+        &:hover {
+            translate: 0 -1px;
+        }
+
+        &:active {
+            translate: 0;
+        }
+    }
+
+    &.flow-row {
+        flex-direction: row;
+    }
+
     &.outline {
         background: transparent;
         border: 1px solid var(--neutral-400-alpha);
-        border-radius: var(--border-radius-s);
     }
 
     &.featured {
         background: var(--accent-surface);
     }
 
-    &>:is(img, picture, figure) {
-        display: block;
-        inline-size: calc(100% + 2 * var(--space-s-m));
-        margin-inline: calc(-1 * var(--space-s-m));
-    }
+    &:has(>.writing-item__thumb) {
+        padding-block: 0;
+        padding-inline-start: 0;
+        gap: 0;
 
-    &>:is(img, picture, figure):first-child {
-        margin-block-start: calc(-1 * var(--space-s-m));
-    }
-
-    &>:is(img, picture, figure):last-child {
-        margin-block-end: calc(-1 * var(--space-s-m));
-    }
-
-    // Media followed by more content (e.g. a heading) shouldn't round into it — flatten the bottom corners
-    &>:is(img, picture, figure):first-child:not(:last-child) {
-        border-end-start-radius: 0;
-        border-end-end-radius: 0;
-
-        :where(img, video, .project-video-wrapper) {
-            border-end-start-radius: 0;
-            border-end-end-radius: 0;
+        .writing-item__body {
+            padding: var(--pad);
         }
     }
 
-    // Media preceded by other content shouldn't round into it either — flatten the top corners
-    &>:is(img, picture, figure):last-child:not(:first-child) {
-        border-start-start-radius: 0;
-        border-start-end-radius: 0;
-
-        :where(img, video, .project-video-wrapper) {
-            border-start-start-radius: 0;
-            border-start-end-radius: 0;
-        }
-    }
-
-    // Media inside cards shouldn't carry the global white-fill edge shadow — the card's own edge is enough
-    :is(img, picture, video, canvas) {
+    & :is(img, picture, figure, video, canvas) {
+        border: none;
+        border-radius: 0;
         box-shadow: none;
     }
-}
 
-.card.giant {
-    max-inline-size: unset;
-    border-radius: var(--border-radius);
-    padding-block: var(--space-xl-4xl);
+    &>:is(img, picture, figure, video, canvas) {
+        display: block;
+        inline-size: calc(100% + 2 * var(--pad));
+        max-inline-size: none; // cleacss resets media to max-width:100%, which would clamp the bleed back to content width
+        margin-inline: calc(-1 * var(--pad));
 
-    >* {
-        max-inline-size: var(--inline-size);
-        inline-size: 100%;
-        margin-inline: auto;
-        margin-block: auto;
+        &:first-child {
+            margin-block-start: calc(-1 * var(--pad));
+        }
+
+        &:last-child {
+            margin-block-end: calc(-1 * var(--pad));
+        }
+    }
+
+    &.giant {
+        max-inline-size: unset;
+        border-radius: var(--border-radius);
+        padding-block: var(--space-xl-4xl);
+
+        >* {
+            max-inline-size: var(--inline-size);
+            inline-size: 100%;
+            margin-inline: auto;
+            margin-block: auto;
+        }
     }
 }
 
-a.card {
-    text-decoration: none;
-    color: var(--neutral-950-alpha);
-    cursor: pointer;
-    transition:
-        border-color var(--dur-fast) var(--ease),
-        translate var(--dur-fast) var(--ease);
-
-    &:visited {
-        color: var(--neutral-950-alpha);
-    }
-
-    &:hover {
-        border-color: var(--neutral-500-alpha);
-        translate: 0 -1px;
-    }
-
-    // focus ring comes from the global :focus-visible rule — no override needed here
-
-    &:active {
-        border-color: var(--neutral-600-alpha);
-        translate: 0;
-    }
-}
 
 // Flattened out of a.card so state selectors stay ≤2 levels deep
 @media (forced-colors: active) {
@@ -125,25 +110,26 @@ a.card {
     }
 }
 
-.layout-card {
+.grid-responsive-cols {
     display: grid;
     grid-template-columns: 1fr;
 }
 
 @container (min-width: 64rem) {
-    .layout-card {
+    .grid-responsive-cols {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 // ---- Blockquotes -----
 
-.case-study > blockquote, .card:has(blockquote) {
-        box-shadow: inset var(--space-3xs) 0 var(--accent-surface);
+.case-study>blockquote,
+.card:has(blockquote) {
+    box-shadow: inset var(--space-3xs) 0 var(--accent-surface);
 }
 
 
-.case-study > blockquote {
+.case-study>blockquote {
     @extend .card;
     @extend .outline;
 }
@@ -245,7 +231,8 @@ a.card {
 
 // ---- Illustrations ----
 
-header svg, main svg {
+header svg,
+main svg {
     background: transparent;
     padding-inline: var(--space-2xl-3xl);
     padding-block: var(--space-3xl);
@@ -308,7 +295,7 @@ header svg, main svg {
 // Video styling — neutral placeholder visible while video deferred/loading (see projectVideo shortcode + app-core.js)
 .project-video-wrapper {
     position: relative;
-    width: 100%;
+    inline-size: 100%;
     height: auto;
     background-color: var(--neutral-100);
     overflow: hidden;
@@ -327,14 +314,14 @@ header svg, main svg {
     inset-inline-start: calc(-1 * var(--crop-amount));
     // video is a replaced element — auto width/height won't solve from inset offsets like a normal box would,
     // so the grown size has to be explicit (doubled, since the offset above only pushes the start edge out)
-    width: calc(100% + 2 * var(--crop-amount));
+    inline-size: calc(100% + 2 * var(--crop-amount));
     height: calc(100% + 2 * var(--crop-amount));
-    max-width: none; // cleacss resets video to max-width: 100%, which caps the width regardless of the width above
+    max-inline-size: none; // cleacss resets video to max-inline-size: 100%, which caps the width regardless of the width above
     object-fit: cover;
 }
 
 .project-video-el {
-    width: 100%;
+    inline-size: 100%;
     height: auto;
     display: block;
 }
@@ -364,7 +351,9 @@ header svg, main svg {
 .project-item {
     display: grid;
     gap: var(--space-s);
+    grid-template-columns: 1fr 1fr;
     align-items: stretch;
+    justify-content: start;
 }
 
 .project-item__img {
@@ -384,9 +373,9 @@ header svg, main svg {
     flex-wrap: wrap; // title/services + CTA sit side by side while there's room, wrap to their own line once space runs out
     align-items: flex-start;
 
-    // .flow sets width: 100%, which would force this group to fill the row and push the CTA onto its own line every time
+    // .flow sets inline-size: 100%, which would force this group to fill the row and push the CTA onto its own line every time
     >.flow {
-        width: auto;
+        inline-size: auto;
     }
 }
 
@@ -434,12 +423,12 @@ header svg, main svg {
     }
 
     // Anything non-media directly after media — restore the full gap on its top edge
-    >:is(figure, p:has(> :is(img, picture))) + :not(:is(figure, p:has(> :is(img, picture)))) {
+    >:is(figure, p:has(> :is(img, picture)))+ :not(:is(figure, p:has(> :is(img, picture)))) {
         margin-block-start: var(--space-xl-2xl);
     }
 
     // Media directly followed by another media item — tighten the shared gap
-    >:is(figure, p:has(> :is(img, picture))) + :is(figure, p:has(> :is(img, picture))) {
+    >:is(figure, p:has(> :is(img, picture)))+ :is(figure, p:has(> :is(img, picture))) {
         margin-block-start: var(--space-s-m);
     }
 }
@@ -450,11 +439,23 @@ header svg, main svg {
 
 // ---- Writing (index + per-type listings) ----
 
-// Whole-card link, kept compact so the next section peeks above the fold
-.writing-item {
-    text-decoration: none;
-    color: inherit;
-    transition: background-color var(--dur-fast) ease;
+// Small 1:1 lead-in: cover image when present, else a build-picked translucent brand tint
+.writing-item__thumb {
+    flex-shrink: 0;
+    inline-size: var(--space-4xl);
+    aspect-ratio: 1 / 1;
+    background: var(--thumb-fill, var(--neutral-100-alpha));
+}
+
+// Fill the square with the (transform-wrapped) cover image, cropped square
+.writing-item__thumb :is(picture, img) {
+    inline-size: 100%;
+    block-size: 100%;
+}
+
+.writing-item__body {
+    flex: 1;
+    min-inline-size: 0;
 }
 
 .writing-item:hover,
@@ -475,6 +476,15 @@ header svg, main svg {
 .writing-item__source,
 .writing-item__note {
     font-size: var(--step--1);
+}
+
+// Opening image never taller than 3:2 — wider covers keep their ratio, taller ones crop (object-fit:cover inherited)
+.writing-hero > picture {
+    container-type: inline-size; // make cqw below track the full-bleed image width
+}
+
+.writing-hero > picture > img {
+    max-block-size: 50cqw; // 2/3 of width caps the box at 3:2; shorter-than-cap ratios pass through untouched
 }
 
 // Notes carry the most personal writing — a quieter register signals tone without hiding it
