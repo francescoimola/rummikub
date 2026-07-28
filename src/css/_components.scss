@@ -49,23 +49,11 @@
         background: var(--accent-surface);
     }
 
-    &:has(>.writing-item__thumb) {
-        padding-block: 0;
-        padding-inline-start: 0;
-        gap: 0;
-
-        .writing-item__body {
-            padding: var(--pad);
-        }
-    }
-
-    & :is(img, picture, figure, video, canvas) {
+    // Full-bleed media only — reset radius/border since they're clipped square to the card corners; inset media keep the base radius
+    &>:is(img, picture, figure, video, canvas) {
         border: none;
         border-radius: 0;
         box-shadow: none;
-    }
-
-    &>:is(img, picture, figure, video, canvas) {
         display: block;
         inline-size: calc(100% + 2 * var(--pad));
         max-inline-size: none; // cleacss resets media to max-width:100%, which would clamp the bleed back to content width
@@ -442,15 +430,24 @@ main svg {
 // Small 1:1 lead-in: cover image when present, else a build-picked translucent brand tint
 .writing-item__thumb {
     flex-shrink: 0;
-    inline-size: var(--space-4xl);
+    inline-size: var(--space-2xl);
+    block-size: var(--space-2xl);
     aspect-ratio: 1 / 1;
-    background: var(--thumb-fill, var(--neutral-100-alpha));
-}
 
-// Fill the square with the (transform-wrapped) cover image, cropped square
-.writing-item__thumb :is(picture, img) {
-    inline-size: 100%;
-    block-size: 100%;
+    // Fill the square with the (transform-wrapped) cover image, cropped square
+    :is(picture, img) {
+        display: block; // picture defaults to inline, so block-size is ignored — force it to fill the square box
+        inline-size: 100%;
+        block-size: 100%;
+        object-fit: cover; // crop non-square covers to the square instead of letting them keep their ratio
+        border-radius: var(--border-radius-s);
+        border: none; // drop the base media edge — no border around thumbnail images or the solid-colour placeholder
+    }
+
+    &:not(:has(picture, img)) {
+        background: var(--thumb-fill, var(--neutral-100-alpha));
+        border-radius: var(--border-radius-s);
+    }
 }
 
 .writing-item__body {
@@ -463,21 +460,6 @@ main svg {
     background-color: var(--accent-surface);
 }
 
-.writing-item h3 {
-    font-size: var(--step-0);
-    font-weight: var(--font-weight-medium);
-    line-height: 1.4;
-}
-
-.writing-item p {
-    margin: 0;
-}
-
-.writing-item__source,
-.writing-item__note {
-    font-size: var(--step--1);
-}
-
 // Opening image never taller than 3:2 — wider covers keep their ratio, taller ones crop (object-fit:cover inherited)
 .writing-hero > picture {
     container-type: inline-size; // make cqw below track the full-bleed image width
@@ -485,14 +467,4 @@ main svg {
 
 .writing-hero > picture > img {
     max-block-size: 50cqw; // 2/3 of width caps the box at 3:2; shorter-than-cap ratios pass through untouched
-}
-
-// Notes carry the most personal writing — a quieter register signals tone without hiding it
-.writing-section--quiet .writing-item {
-    opacity: 0.9;
-}
-
-.writing-section--quiet .writing-item:hover,
-.writing-section--quiet .writing-item:focus-visible {
-    opacity: 1;
 }

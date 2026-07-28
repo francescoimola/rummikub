@@ -20,14 +20,14 @@ eleventyComputed:
   <header class="card flow has-gap-s has-items-center has-text-center" view-animation="settle">
     {% icon t.icon %}
     <div class="flow has-gap-xs has-items-center has-text-center balance">
-      {% include "_breadcrumb.njk" %}
+      
       <h1>{{ t.label }}</h1>
       <hr>
       <small class="dimmed">{{ t.blurb }}</small>
     </div>
   </header>
-
   <div class="flow has-gap-xs{% if typeSlug == 'notes' %} writing-section--quiet{% endif %}">
+    <div class="has-mb-s">{% include "_breadcrumb.njk" %}</div>
     {% for item in collections.writing | byType(typeSlug) %}
       {{ writingItem(item) }}
     {% endfor %}

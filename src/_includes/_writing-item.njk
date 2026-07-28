@@ -1,5 +1,5 @@
 {% macro writingItem(item) %}
-<a class="card writing-item flow-row has-gap-s-l"
+<a class="card writing-item flow-row has-gap-s-m"
    href="{{ item.data.external or item.url }}"
    {% if item.data.external %}target="_blank" rel="noopener noreferrer"{% endif %}>
   {% if item.data.image %}
@@ -7,12 +7,14 @@
   {% else %}
   <span class="writing-item__thumb" style="--thumb-fill: {{ item | writingThumbColor }}" aria-hidden="true"></span>
   {% endif %}
-  <div class="writing-item__body flow has-gap-2xs">
-    {% if item.data.source %}<p class="writing-item__source dimmed">{{ item.data.source }} ↗</p>{% endif %}
-    <div class="flow has-gap-l">
-      <h3 class="trim-above">{{ item.data.title }}</h3>
-      <small class="dimmed">{{ item.data.teaser }}</small>
-    </div>
+  <div class="writing-item__body flow has-gap-3xs">
+    <h3 class="has-mb-3xs">{{ item.data.title }}</h3>
+    {% if item.data.source %}
+      <small>{{ item.data.source }} ↗</small>
+    {% endif %}
+    {% if item.date %}
+      <time datetime="{{ item.date | isoMonth }}"><small>{{ item.date | monthYear }}</small></time>
+    {% endif %}
   </div>
 </a>
 {% endmacro %}

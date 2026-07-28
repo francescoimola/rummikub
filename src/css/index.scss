@@ -153,6 +153,7 @@ body {
     background-color: var(--body-bg);
     text-wrap: avoid-orphans;
     letter-spacing: var(--letter-spacing-m);
+    hyphens: none;
 }
 
 :where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
@@ -163,11 +164,6 @@ body {
     max-inline-size: var(--max-width-size-6);
     letter-spacing: var(--letter-spacing-xl);
     text-wrap: balance;
-
-    &.trim-above {
-        text-box-trim: trim-start;
-        text-box-edge: text text;
-    }
 }
 
 h3,
@@ -214,7 +210,7 @@ h1.stretch {
     text-wrap: balance;
 }
 
-[hlight-section-h]>h2:first-child {
+[highlight-header]>h2:first-child {
     // Puts targeted headings in a highlighted box
     background-color: var(--accent-surface);
     inline-size: fit-content;
@@ -227,8 +223,9 @@ h1.stretch {
     color: var(--neutral-900-alpha);
 }
 
-:is(.small, .small>*) {
+.small, .small>* {
     font-size: var(--step--1);
+    letter-spacing: var(--letter-spacing-xl);
 }
 
 figcaption {
@@ -257,6 +254,11 @@ img {
     &.ratio-1-1 {
         aspect-ratio: 1 / 1;
     }
+}
+
+time {
+    display: inline;
+    line-height: 100%;
 }
 
 :where(a) {
