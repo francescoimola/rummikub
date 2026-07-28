@@ -2,19 +2,19 @@
   "guides": {
     "short": "Guides",
     "label": "Francesco's guides",
-    "blurb": "Practical articles on design and marketing for people who run their own businesses",
+    "blurb": "Practical articles on design and trust-based marketing for people who run their own businesses.",
     "icon": "graphdrawing"
   },
   "essays": {
     "short": "Essays",
     "label": "Francesco's essays",
-    "blurb": "Candid long-form writing on modern work culture, design, and learning new things",
+    "blurb": "Frank and sometimes imperfect essays on the themes of modern work, culture, design, and learning new things.",
     "icon": "mailstorm"
   },
   "notes": {
     "short": "Notes",
     "label": "Francesco's notes",
-    "blurb": "Fleeting thoughts and fertile ground for new ideas",
+    "blurb": "Fleeting, unshakeable thoughts, however right or wrong. A fertile ground for new ideas.",
     "icon": "stuckin"
   }
 }

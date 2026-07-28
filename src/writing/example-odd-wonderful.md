@@ -7,6 +7,7 @@ source: Odd & Wonderful
 type: notes
 note: "This is a placeholder entry, not real writing yet."
 permalink: false
+eleventyExcludeFromCollections: true
 ---
 
 <!-- Placeholder external item. permalink:false means this renders no page; it only surfaces in the Writing index/notes list, linking out to Substack. Replace before launch. -->
