@@ -36,6 +36,18 @@ module.exports = function (eleventyConfig) {
     });
   });
 
+  eleventyConfig.addFilter("monthYear", function (date) {
+    return new Date(date).toLocaleDateString("en-GB", {
+      month: "long",
+      year: "numeric",
+    });
+  });
+
+  eleventyConfig.addFilter("isoMonth", function (date) {
+    return new Date(date).toISOString().slice(0, 7);
+  });
+
+
   eleventyConfig.addFilter("byType", function (items, type) {
     if (!type) return items;
     return items.filter(function (p) {

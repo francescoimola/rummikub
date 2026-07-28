@@ -19,12 +19,12 @@ eleventyNavigation:
   {% for typeSlug in collections.writingTypes %}
   {% set t = writingTypes[typeSlug] %}
   <section class="flow has-gap-m writing-section{% if typeSlug == 'notes' %} writing-section--quiet{% endif %}">
-    <div class="grid-responsive-cols balance" hlight-section-h>
+    <div class="flow has-gap-2xs balance">
       <h2>{{ t.short}}</h2>
-      <small class="dimmed">{{ t.blurb }}</small>
+      <p class="dimmed">{{ t.blurb }}</p>
     </div>
     <div class="flow has-gap-xs">
-      {% for item in collections.writing | byType(typeSlug) | limit(3) %}
+      {% for item in collections.writing | byType(typeSlug) | limit(2) %}
         {{ writingItem(item) }}
       {% endfor %}
     </div>
