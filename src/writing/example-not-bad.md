@@ -6,6 +6,7 @@ external: https://notbad.substack.com
 source: Not Bad
 type: essays
 permalink: false
+eleventyExcludeFromCollections: true
 ---
 
 <!-- Placeholder external item. permalink:false means this renders no page; it only surfaces in the Writing index/essays list, linking out to Substack. Replace before launch. -->

@@ -6,7 +6,8 @@ image: /assets/writing/nope.png
 alt: "Placeholder image"
 type: notes
 note: "This is a placeholder entry, not real writing yet."
-permalink: /writing/example-note/
+permalink: false
+eleventyExcludeFromCollections: true
 ---
 
 This is a placeholder Notes entry so the Notes section and `/writing/notes/` render while there's no real content yet. Replace or delete it before launch.

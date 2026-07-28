@@ -662,6 +662,8 @@ a[data-icon-before] {
 }
 
 a.service {
+    color: var(--color-base); // whole card is a link; keep title + body copy neutral, only the CTA below is accent-tinted
+
     @media (hover: hover) {
         &:hover [data-icon]::after {
             margin-inline-start: var(--space-xs);
