@@ -8,6 +8,8 @@ type: essays
 permalink: /writing/the-hard-part-isnt-the-no/
 ---
 
+{% figureImg "/assets/writing/nope.png", "The hard part isn't the no" %}
+
 I sat across from my friend, at the pub by the fountain. Her notebook was open, pen in mid-air, waiting for my input on the ideas we’d just discussed. My own notebook still closed. I stirred what was left of the breakfast tea, watching the stains on the teapot and wondering how many people had drunk from it before. She was talking about launching a newsletter for the community project we’d been running for the last ten or so months. When I glanced up, she had stopped writing. I think she could tell something had shifted.
 
 “But, like” she said, her voice trembling and betraying her initial excitement, “do you still want to be in?”

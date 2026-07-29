@@ -11,23 +11,12 @@
       </div>
     </aside>
     <div class="content">
-      {% if tags and "work" in tags %}
-      <main class="case-study text">
+      {% if tags and ("work" in tags or "writing" in tags) %}
+      <main class="case-study text{% if "writing" in tags %} writing-post{% endif %}">
         <div class="flow has-gap-3xs case-study__intro">
           <h1>{{ title }}</h1>
-          {% if services %}<p class="dimmed">{{ services }}</p>{% endif %}
-        </div>
-        {{ content | safe }}
-      </main>
-      {% elif tags and "writing" in tags %}
-      <main class="case-study text">
-        <div class="card writing-hero" view-animation="settle">
-          {% if image %}<img src="{{ image }}" alt="{{ alt }}" width="1080" height="auto">{% endif %}
-          <div class="flow has-gap-2xs has-mt-s-m">
-            <h1>{{ title }}</h1>
-            <p class="dimmed">{{ date | longDate }}{% if type and writingTypes[type] %} · {{ writingTypes[type].short }}{% endif %}</p>
-          </div>
-          {% if note %}<p class="writing-item__note dimmed">{{ note }}</p>{% endif %}
+          {% if services %}<p class="dimmed">{{ services }}</p>
+          {% elif "writing" in tags and date %}<p class="dimmed"><time datetime="{{ date | isoMonth }}">{{ date | longDate }}</time>{% if type and writingTypes[type] %} · {{ writingTypes[type].short }}{% endif %}</p>{% endif %}
         </div>
         {{ content | safe }}
       </main>

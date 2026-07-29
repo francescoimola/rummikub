@@ -8,6 +8,8 @@ type: guides
 permalink: /writing/flyer-design-tips/
 ---
 
+{% figureImg "/assets/writing/flyer_article_cover.png", "3 things a designer would tweak on your flyer, and how to fix them yourself" %}
+
 Walk into any café in your neighbourhood and take a look at the leaflet stand. You'll see twenty A5 flyers, most of them crammed with text and identical in style (thank you, Mother Canva). The one you actually take home won't be the loudest, it'll be the one where it's clear someone has put thought into.
 
 Here are the three things that tell a good flyer apart.
@@ -22,14 +24,14 @@ This is the key thing to understand: the heaviest element on your page is where 
 
 That element attracts attention AND guides the eye toward everything else on the page. In fact, each element (text block, image, shape, etc.) is like a magnet. Its edges create invisible lines that pull other elements toward them. When things align to those lines, a layout feels less scattered and more intentional, even if you can't immediately explain why.
 
-![Hermès racecourse poster with grid overlay showing how elements align to invisible lines](/assets/writing/hermes.png)
-![Bienal São Paulo poster with grid overlay showing structural alignment](/assets/writing/bienalsp.png)
+{% figureImg "/assets/writing/hermes.png", "Hermès racecourse poster with grid overlay showing how elements align to invisible lines" %}
+{% figureImg "/assets/writing/bienalsp.png", "Bienal São Paulo poster with grid overlay showing structural alignment" %}
 
 To show what I mean, I overlaid grids on the above two real posters (not flyers, but the same lesson applies). Look at how the title, event details, and logos all sit along the same invisible lines. Neither layout is complicated, but both are clearly considered.
 
 Here's a before and after I mocked up that hopefully makes the point even clearer:
 
-![The Proprietors' Club flyer — before and after redesign showing the impact of structure](/assets/writing/before_after_1.png)
+{% figureImg "/assets/writing/before_after_1.png", "The Proprietors' Club flyer — before and after redesign showing the impact of structure" %}
 
 On the left, every piece of information is centred, set in all caps, and fighting for attention at the same visual weight. It's a list, not a design. On the right, the same bar has a clear headline, the details are grouped into columns, and a single image sets the mood. The content is almost identical, but the structure changed, and with it, the entire impression of the brand.
 
@@ -43,13 +45,13 @@ Like in all print design, empty space on a flyer is never wasted space because i
 
 Margins are one of the most underrated types of white space. They're the safe area where key information should sit, and they protect your content from running off the page. We all know how important it is to the reading experience to have margins in a book, right? Why should a flyer be any different?
 
-![A book with its margins highlighted](/assets/writing/book_margins.png)
+{% figureImg "/assets/writing/book_margins.png", "A book with its margins highlighted" %}
 
 Two designs could have the same amount of white space, but one could look messy and the other could look clean and intentional. The key is how that space is organised.
 
 Look at these two flyers:
 
-![AndMoss festival flyer — before and after redesign showing the impact of intentional white space](/assets/writing/before_after_2.png)
+{% figureImg "/assets/writing/before_after_2.png", "AndMoss festival flyer — before and after redesign showing the impact of intentional white space" %}
 
 The one on the left has white space, but it's trapped between elements that have no clear relationship to each other. The one on the right, while not perfect, uses that same space with more purpose. The cascading headline undeniably grabs attention, leading the eye to the body copy—which has also more room to breathe—and the practical details, even if small, are stacked cleanly on the right where they're easy to spot. Almost the same information but completely different energy.
 
@@ -73,8 +75,8 @@ You can think of bleed as an outer margin or safe zone that exists to give the p
 
 If your design stops exactly where the paper ends, you'll get uneven white strips after trimming. On the other hand, if you place your content too close to the edges, then scale it to fill the bleed area, you might cut off important parts of your artwork like in the example below.
 
-![Rousseau painting before bleed — the signature sits right at the page edge](/assets/writing/bleed_before.png "Before: Artwork overshoots the edge of the trim mark—which would be appropriate, if only the signature wasn't so close to the bottom corner")
-![The same painting after printing — the signature has been cut off](/assets/writing/bleed_after.png "After: the trimming cut into the artist signature")
+{% figureImg "/assets/writing/bleed_before.png", "Rousseau painting before bleed — the signature sits right at the page edge", caption="Before: Artwork overshoots the edge of the trim mark—which would be appropriate, if only the signature wasn't so close to the bottom corner" %}
+{% figureImg "/assets/writing/bleed_after.png", "The same painting after printing — the signature has been cut off", caption="After: the trimming cut into the artist signature" %}
 
 I won't walk you through the steps to add bleed on your platform of choice as there are plenty of guides out there (I'll link Canva's guide below). The important thing is understanding *why* bleed exists, so you remember to check for it before you send 300 copies to print.
 
