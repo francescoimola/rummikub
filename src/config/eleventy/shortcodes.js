@@ -36,10 +36,16 @@ module.exports = function (eleventyConfig) {
     options = options || {};
     var figcaption = renderFigcaption(options.caption);
     var figureClass = options.class ? ' class="' + options.class + '"' : "";
+    var img = '<img src="' + src + '" alt="' + alt + '">';
+
+    // href wraps the image in an outbound link — keeps it a <figure>, so the case-study spacing rules still match
+    if (options.href) {
+      img = '<a href="' + options.href + '" target="_blank" rel="noopener noreferrer">' + img + '</a>';
+    }
 
     return (
       '<figure' + figureClass + '>\n' +
-      '  <img src="' + src + '" alt="' + alt + '">' + figcaption + '\n' +
+      '  ' + img + figcaption + '\n' +
       '</figure>'
     );
   });

@@ -206,6 +206,29 @@ describe("shortcodes.js — figureImg shortcode", () => {
     expect(result).not.toContain("<figcaption");
   });
 
+  it("wraps the img in an external link when href is provided", () => {
+    const config = createMockEleventyConfig();
+    shortcodes(config);
+    const figureImg = config.getShortcode("figureImg");
+
+    const result = figureImg("/assets/photo.jpg", "Alt text", {
+      href: "https://example.com",
+    });
+
+    expect(result).toContain('<a href="https://example.com" target="_blank" rel="noopener noreferrer">');
+    expect(result).toContain('<img src="/assets/photo.jpg" alt="Alt text"></a>');
+  });
+
+  it("does not render a link when no href", () => {
+    const config = createMockEleventyConfig();
+    shortcodes(config);
+    const figureImg = config.getShortcode("figureImg");
+
+    const result = figureImg("/assets/photo.jpg", "Alt text");
+
+    expect(result).not.toContain("<a href");
+  });
+
   it("uses empty alt when not provided", () => {
     const config = createMockEleventyConfig();
     shortcodes(config);

@@ -8,6 +8,8 @@ type: guides
 permalink: /writing/welcome-emails-why-bother/
 ---
 
+{% figureImg "/assets/writing/Write_a_welcome_email_f3lztn.png", "Welcome emails: why bother? (and how to write them)" %}
+
 If you're only going to do one thing to improve your email marketing today, make it this: **send every new subscriber a proper welcome email**.
 
 Why care?
@@ -32,31 +34,31 @@ You don't need to include much, but you do need these things:
 
 Try something that actually tells people what's inside. _Here's what to expect_ or _What you'll love about [brand/product name]_ work better already. Test it without any emoji first and only add one if it makes sense.
 
-![Example of a good subject line](/assets/writing/subjectline.png)
+{% figureImg "/assets/writing/subjectline.png", "Example of a good subject line" %}
 
 ### 2. Remind them who you are
 
 They might be reading this immediately after signing up. Or three weeks later. Refresh their memory.
 
-![Example of a reminder section in a welcome email](/assets/writing/emailreminder.png)
+{% figureImg "/assets/writing/emailreminder.png", "Example of a reminder section in a welcome email" %}
 
 ### 3. What are they going to get from you?
 
 If this is a newsletter, how often will you email? What kind of stuff will you send? When's the next one? Answer these before they have to wonder.
 
-![Example of setting expectations in a welcome email](/assets/writing/useful-offer.png)
+{% figureImg "/assets/writing/useful-offer.png", "Example of setting expectations in a welcome email" %}
 
 ### 4. Give them something useful right now
 
 Don't make people wait for value. Share your best resource, a discount code if that's your strategy, or simply a link to something good that you've already released (e.g. your newest product or upcoming event).
 
-![Example of providing immediate value in a welcome email](/assets/writing/what-they-are-getting.png)
+{% figureImg "/assets/writing/what-they-are-getting.png", "Example of providing immediate value in a welcome email" %}
 
 ### 5. Offer an easy way out
 
 Make it simple to unsubscribe. It keeps your list healthy and stops people resenting you.
 
-![Example of an unsubscribe option in a welcome email](/assets/writing/way-out.png)
+{% figureImg "/assets/writing/way-out.png", "Example of an unsubscribe option in a welcome email" %}
 
 ## Want replies? Do this
 
@@ -142,4 +144,4 @@ Your welcome email sets expectations for everything that comes after, so it's wo
 
 For examples of great welcome emails, check out [this collection on Really Good Emails](https://reallygoodemails.com/categories/welcome).
 
-[![Screenshot of Really Good Emails welcome email collection](/assets/writing/reallygoodemails.png)](https://reallygoodemails.com/categories/welcome)
+{% figureImg "/assets/writing/reallygoodemails.png", "Screenshot of Really Good Emails welcome email collection", href="https://reallygoodemails.com/categories/welcome" %}

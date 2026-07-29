@@ -8,6 +8,8 @@ type: guides
 permalink: /writing/how-to-write-a-website-brief/
 ---
 
+{% figureImg "/assets/writing/How_to_write_a_website_brief_oktkpe.png", "How to write a cracking website brief (8 step guide)" %}
+
 A clear brief gets you better quotes, faster timelines, and a designer or agency partner who understands your problem before they start solving it. And if you're shopping around, it lets you compare proposals on equal footing.
 
 A vague brief gets you three rounds of "that's not quite what I meant", multiplied by however many people you sent it to.

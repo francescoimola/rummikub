@@ -399,10 +399,10 @@ main svg {
 }
 
 // Opening image never taller than 3:2 — wider covers keep their ratio, taller ones crop (object-fit:cover inherited)
-.writing-hero > picture {
-    container-type: inline-size; // make cqw below track the full-bleed image width
+.writing-post .case-study__intro + figure {
+    container-type: inline-size; // track the bled figure width; main's container is too narrow once it breaks out
 }
 
-.writing-hero > picture > img {
+.writing-post .case-study__intro + figure img {
     max-block-size: 50cqw; // 2/3 of width caps the box at 3:2; shorter-than-cap ratios pass through untouched
 }
