@@ -7,11 +7,8 @@ eleventyNavigation:
   parent: Design Studio
 ---
 {% from "_cta-card.njk" import ctaCard %}
-<header class="card flow has-justify-between has-gap-s has-items-center has-text-center" view-animation="settle">
-    {% icon "deskgarden" %}
-    <h1>Unapologetically simple websites<br>
-    <span class="dimmed">For small businesses and social enterprises</span></h1>
-</header>
+{% from "_page-header.njk" import pageHeader %}
+{{ pageHeader("deskgarden", "Unapologetically simple websites", "For small businesses and social enterprises") }}
 <section class="flow has-gap-s" highlight-header>
     <h2 class="has-mb-xs">What you get</h2>
     <p>Give your people what they need, at last: a website that says it like it is.</p>
@@ -78,7 +75,7 @@ eleventyNavigation:
             </li>
         </ul>
         <div class="flow has-gap-3xs">
-            <small class="dimmed">All prices are starting points. You'll get an exact quote before we start.</small>
+            <small>All prices are starting points. You'll get an exact quote before we start.</small>
         </div>
     </div>
 </section>
