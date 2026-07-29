@@ -7,11 +7,8 @@ eleventyNavigation:
   parent: Design Studio
 ---
 {% from "_cta-card.njk" import ctaCard %}
-<header class="card flow has-justify-between has-gap-s has-items-center has-text-center" view-animation="settle">
-    {% icon "websitevisit" %}
-    <h1>Like doctor's check-up, but for your website<br>
-    <span class="dimmed">Book a website consultation and get sound expert advice</span></h1>
-</header>
+{% from "_page-header.njk" import pageHeader %}
+{{ pageHeader("websitevisit", "Like doctor's check-up, but for your website", "Book a website consultation and get sound expert advice") }}
 <section class="flow has-gap-xs pretty" highlight-header>
     <h2 class="has-mb-xs">What you get</h2>
     <p>This is the fastest way to make sense of what's holding you back and talk about some practical solutions. Each session includes:</p>
@@ -37,7 +34,7 @@ eleventyNavigation:
         <p>How much would it cost to know where your website is falling short? Or to get guidance that saves you months of trial and error? The insights may hard to price, but the consultation isn't.</p>
         <p><strong>£225</strong></p>
         <p>Gets you a targeted website review followed by a 1-hour consultation, and ending with recommended next steps you can act on immediately.</p>
-    <a href="https://cal.com/francescoimola/website-consultation" rel="noopener noreferrer" target="_blank">Book a consultation</a>
+    <a href="https://cal.com/francescoimola/consultation" rel="noopener noreferrer" target="_blank">Book a consultation</a>
 </section>
 
 <section class="flow has-gap-xs pretty text" highlight-header>
