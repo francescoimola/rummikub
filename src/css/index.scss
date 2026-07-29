@@ -4,6 +4,7 @@
 @use 'icons';
 @use 'components';
 @use 'cleacss-overrides';
+@use 'responsive';
 @import "vendor/cleacss.css";
 
 // After the cleacss import so these unlayered tokens override cleacss's own unlayered :root defaults (CSS rule 3)
@@ -219,11 +220,11 @@ h1.stretch {
     border-radius: var(--border-radius-s);
 }
 
-:where(small, figcaption, blockquote, time) {
+:where(small, figcaption, blockquote, time, .project-item__cta) {
     color: var(--neutral-900-alpha);
 }
 
-.small, .small>* {
+.small, .small>*, .project-item__cta {
     font-size: var(--step--1);
     letter-spacing: var(--letter-spacing-xl);
 }
@@ -641,6 +642,12 @@ a[data-icon-before] {
     --flow-gap: var(--space-3xs); // smallest gap
 }
 
+// xl on mobile, m on desktop — reverses the usual mobile-shrinks-down direction; see mobile override below
+.flow.has-gap-2xl-m,
+.flow-row.has-gap-2xl-m {
+    --flow-gap: var(--space-m);
+}
+
 .service {
     summary h3 {
         display: inline-block; // keep cleacss's floated +/− marker on the title's line
@@ -681,113 +688,6 @@ a.service {
     }
 }
 
-// ---- Responsive ----
-
-@media (width < #{scale.$bp-mobile}) {
-
-    .layout {
-        display: flex; // a grid item can't stick (its row is its containing block); flex-column gives the sidebar scroll room
-        flex-direction: column;
-    }
-
-    .content {
-        flex: 1; // fill remaining height; preserves the min-block-size:100dvh page fill
-    }
-
-    nav {
-        border-block-start: revert;
-        padding-block-start: revert;
-        grid-template-columns: 1fr; // single column so the disclosure bar spans full width
-    }
-
-    // Open panel: links in the right column, look-toggles pinned bottom-left (Figma open frame)
-    .nav-menu__panel {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas: "toggles links";
-        column-gap: var(--space-m-l);
-        padding-block-start: var(--space-2xl-3xl);
-        padding-block-end: var(--space-s);
-    }
-
-    .nav-menu__panel > ul {
-        grid-area: links;
-        --flow-gap: var(--space-xs);
-    }
-
-    .nav-menu__toggles {
-        grid-area: toggles;
-        align-self: end;
-    }
-
-    main {
-        border-block-start: revert;
-    }
-
-    .content {
-        padding-inline: var(--gutter-x);
-    }
-
-    footer {
-        border-block-start: var(--input-border-width) solid var(--input-border-color);
-        padding-block-start: var(--space-m);
-        padding-block-end: var(--space-l);
-        inline-size: 100%;
-    }
-
-    .sidebar {
-        position: sticky;
-        top: var(--gutter-y);
-        block-size: auto;
-        max-block-size: calc(100dvh - calc(var(--gutter-y) * 2)); // engages overflow-y:auto on short/landscape phones where the card exceeds the viewport
-        row-gap: var(--space-l-2xl);
-        margin-inline: var(--gutter-y);
-        margin-block-end: 0;
-    }
-
-    .desktop-only {
-        display: none;
-    }
-}
-
-@media (width < #{scale.$bp-tablet}) {
-    main {
-        flex-direction: column;
-
-        &>* {
-            max-inline-size: unset;
-            margin-inline: unset;
-        }
-    }
-
-    .stick {
-        position: revert;
-    }
-
-}
-
-@media (width >=#{scale.$bp-mobile}) {
-    .mobile-only {
-        display: none;
-        visibility: hidden;
-    }
-
-    // No disclosure on desktop: hide the bar, force the link list permanently open
-    .nav-menu__bar {
-        display: none;
-    }
-
-    .nav-menu::details-content {
-        content-visibility: visible;
-        block-size: auto;
-        opacity: 1;
-    }
-
-    main:has(> .featured:last-child) {
-        margin-block-end: unset;
-    }
-
-    .nav-menu__panel > ul {
-        --flow-gap: var(--space-2xs)
-    }
-}
+// All breakpoint rules live in _responsive.scss. Included last so they land after everything above —
+// media queries add no specificity, so equal-specificity conflicts resolve on source order.
+@include responsive.all;

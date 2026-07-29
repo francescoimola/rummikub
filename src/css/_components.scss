@@ -1,5 +1,3 @@
-@use 'scale';
-
 :root {
     /* 1. Define the crop amounts to select video elements */
     --crop-amount: 1px;
@@ -100,13 +98,7 @@
 
 .grid-responsive-cols {
     display: grid;
-    grid-template-columns: 1fr;
-}
-
-@container (min-width: 64rem) {
-    .grid-responsive-cols {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    grid-template-columns: 1fr; // two columns from $bp-tablet — see _responsive.scss
 }
 
 // ---- Blockquotes -----
@@ -198,25 +190,6 @@
     }
 }
 
-// Responsive: align toggles to the container start on mobile; stack into columns beside the footer on desktop
-@media (width < #{scale.$bp-mobile}) {
-    :has(>.theme-switch, >.brand-picker) {
-        align-items: flex-start;
-    }
-}
-
-@media (width >=#{scale.$bp-mobile}) {
-    .brand-picker {
-        flex-direction: column;
-    }
-
-    .theme-switch {
-        flex-direction: column;
-        margin-inline-start: auto; // shove the whole cluster (switch + swatches) to the right, footer stays left
-        block-size: 100%; // match the 3-swatch column height (same tokens as .brand-picker)
-    }
-}
-
 // ---- Illustrations ----
 
 header svg,
@@ -264,20 +237,6 @@ main svg {
     display: flex;
     margin: 0;
     min-inline-size: 0;
-}
-
-// Responsive: collapse the label/value grid into stacked rows on mobile
-@media (width < #{scale.$bp-mobile}) {
-    .data-list {
-        display: flex;
-        flex-direction: column;
-
-        &__item {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-3xs);
-        }
-    }
 }
 
 // Video styling — neutral placeholder visible while video deferred/loading (see projectVideo shortcode + app-core.js)
@@ -339,7 +298,7 @@ main svg {
 .project-item {
     display: grid;
     gap: var(--space-s);
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     align-items: stretch;
     justify-content: start;
 }
@@ -358,31 +317,10 @@ main svg {
 }
 
 .project-item__body {
-    flex-wrap: wrap; // title/services + CTA sit side by side while there's room, wrap to their own line once space runs out
+    display: flex;
+    flex-direction: column;
     align-items: flex-start;
-
-    // .flow sets inline-size: 100%, which would force this group to fill the row and push the CTA onto its own line every time
-    >.flow {
-        inline-size: auto;
-    }
-}
-
-// Desktop: image left / text right
-@media (width >=#{scale.$bp-mobile}) {
-    .project-item {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .project-item__media,
-    .project-item__img {
-        grid-column: 1;
-        grid-row: 1;
-    }
-
-    .project-item__body {
-        grid-column: 2;
-        grid-row: 1;
-    }
+    gap: var(--space-3xs); // single-step on purpose — the gap snaps at the breakpoint rather than easing
 }
 
 // ---- Case study page ----
