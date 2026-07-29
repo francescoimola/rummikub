@@ -2,34 +2,7 @@ var path = require("path");
 var fs = require("fs");
 var { renderSources, renderAttr, renderFigcaption } = require("./render-helpers");
 
-module.exports = function (eleventyConfig, eleventyImage, filenameFormat) {
-  eleventyConfig.addShortcode("remoteImg", function (src, width, height, alt, attrs) {
-    attrs = attrs || "";
-    return '<img src="' + src + '" width="' + width + '" height="' + height + '" alt="' + alt + '" ' + attrs + ' eleventy:ignore>';
-  });
-
-  eleventyConfig.addShortcode("animatedImg", async function (src, alt, options) {
-    options = options || {};
-    var fsSrc = src.startsWith("/") ? "src" + src : path.resolve("src", src);
-
-    var metadata = await eleventyImage(fsSrc, {
-      widths: [400, 800, 1080, 1200, 1440, 2560, "auto"],
-      formats: ["webp", "gif"],
-      sharpOptions: { animated: true, limitInputPixels: false },
-      outputDir: "./public/assets/images",
-      urlPath: "/assets/images/",
-      filenameFormat: filenameFormat,
-    });
-
-    return eleventyImage.generateHTML(metadata, {
-      alt: alt,
-      sizes: options.sizes || "(max-width: 49rem) 100vw, 60ch",
-      loading: "lazy",
-      decoding: "async",
-      "eleventy:ignore": "",
-    });
-  });
-
+module.exports = function (eleventyConfig) {
   eleventyConfig.addShortcode("projectVideo", function (src, alt, options) {
     alt = alt || "";
     options = options || {};

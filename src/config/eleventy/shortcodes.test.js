@@ -67,10 +67,7 @@ describe("shortcodes.js — pure helpers", () => {
 describe("shortcodes.js — projectVideo shortcode", () => {
   it("registers projectVideo shortcode", () => {
     const config = createMockEleventyConfig();
-    const mockImage = vi.fn();
-    const filenameFormat = vi.fn();
-
-    shortcodes(config, mockImage, filenameFormat);
+    shortcodes(config);
 
     expect(config.addShortcode).toHaveBeenCalledWith(
       "projectVideo",
@@ -80,7 +77,7 @@ describe("shortcodes.js — projectVideo shortcode", () => {
 
   it("renders video with data-src when no webm provided", () => {
     const config = createMockEleventyConfig();
-    shortcodes(config, vi.fn(), vi.fn());
+    shortcodes(config);
     const projectVideo = config.getShortcode("projectVideo");
 
     const result = projectVideo("video.mp4", "Alt text");
@@ -93,7 +90,7 @@ describe("shortcodes.js — projectVideo shortcode", () => {
 
   it("renders source elements when webm is provided", () => {
     const config = createMockEleventyConfig();
-    shortcodes(config, vi.fn(), vi.fn());
+    shortcodes(config);
     const projectVideo = config.getShortcode("projectVideo");
 
     const result = projectVideo("video.mp4", "Alt", {
@@ -108,7 +105,7 @@ describe("shortcodes.js — projectVideo shortcode", () => {
 
   it("renders poster attribute when provided", () => {
     const config = createMockEleventyConfig();
-    shortcodes(config, vi.fn(), vi.fn());
+    shortcodes(config);
     const projectVideo = config.getShortcode("projectVideo");
 
     const result = projectVideo("video.mp4", "Alt", {
@@ -120,7 +117,7 @@ describe("shortcodes.js — projectVideo shortcode", () => {
 
   it("renders figcaption when caption is provided", () => {
     const config = createMockEleventyConfig();
-    shortcodes(config, vi.fn(), vi.fn());
+    shortcodes(config);
     const projectVideo = config.getShortcode("projectVideo");
 
     const result = projectVideo("video.mp4", "Alt", {
@@ -133,7 +130,7 @@ describe("shortcodes.js — projectVideo shortcode", () => {
 
   it("does not render figcaption when no caption", () => {
     const config = createMockEleventyConfig();
-    shortcodes(config, vi.fn(), vi.fn());
+    shortcodes(config);
     const projectVideo = config.getShortcode("projectVideo");
 
     const result = projectVideo("video.mp4", "Alt");
@@ -143,7 +140,7 @@ describe("shortcodes.js — projectVideo shortcode", () => {
 
   it("uses empty alt when not provided", () => {
     const config = createMockEleventyConfig();
-    shortcodes(config, vi.fn(), vi.fn());
+    shortcodes(config);
     const projectVideo = config.getShortcode("projectVideo");
 
     const result = projectVideo("video.mp4");
@@ -153,7 +150,7 @@ describe("shortcodes.js — projectVideo shortcode", () => {
 
   it("adds extra class to the wrapper when provided", () => {
     const config = createMockEleventyConfig();
-    shortcodes(config, vi.fn(), vi.fn());
+    shortcodes(config);
     const projectVideo = config.getShortcode("projectVideo");
 
     const result = projectVideo("video.mp4", "Alt", { class: "site-recording" });
@@ -163,7 +160,7 @@ describe("shortcodes.js — projectVideo shortcode", () => {
 
   it("omits extra wrapper class when not provided", () => {
     const config = createMockEleventyConfig();
-    shortcodes(config, vi.fn(), vi.fn());
+    shortcodes(config);
     const projectVideo = config.getShortcode("projectVideo");
 
     const result = projectVideo("video.mp4", "Alt");
@@ -175,7 +172,7 @@ describe("shortcodes.js — projectVideo shortcode", () => {
 describe("shortcodes.js — figureImg shortcode", () => {
   it("renders img wrapped in a figure", () => {
     const config = createMockEleventyConfig();
-    shortcodes(config, vi.fn(), vi.fn());
+    shortcodes(config);
     const figureImg = config.getShortcode("figureImg");
 
     const result = figureImg("/assets/photo.jpg", "Alt text");
@@ -188,7 +185,7 @@ describe("shortcodes.js — figureImg shortcode", () => {
 
   it("renders figcaption when caption is provided", () => {
     const config = createMockEleventyConfig();
-    shortcodes(config, vi.fn(), vi.fn());
+    shortcodes(config);
     const figureImg = config.getShortcode("figureImg");
 
     const result = figureImg("/assets/photo.jpg", "Alt text", {
@@ -201,7 +198,7 @@ describe("shortcodes.js — figureImg shortcode", () => {
 
   it("does not render figcaption when no caption", () => {
     const config = createMockEleventyConfig();
-    shortcodes(config, vi.fn(), vi.fn());
+    shortcodes(config);
     const figureImg = config.getShortcode("figureImg");
 
     const result = figureImg("/assets/photo.jpg", "Alt text");
@@ -211,7 +208,7 @@ describe("shortcodes.js — figureImg shortcode", () => {
 
   it("uses empty alt when not provided", () => {
     const config = createMockEleventyConfig();
-    shortcodes(config, vi.fn(), vi.fn());
+    shortcodes(config);
     const figureImg = config.getShortcode("figureImg");
 
     const result = figureImg("/assets/photo.jpg");
@@ -221,7 +218,7 @@ describe("shortcodes.js — figureImg shortcode", () => {
 
   it("does not add a class attribute when not provided", () => {
     const config = createMockEleventyConfig();
-    shortcodes(config, vi.fn(), vi.fn());
+    shortcodes(config);
     const figureImg = config.getShortcode("figureImg");
 
     const result = figureImg("/assets/photo.jpg", "Alt text");
@@ -230,18 +227,36 @@ describe("shortcodes.js — figureImg shortcode", () => {
   });
 });
 
-describe("shortcodes.js — remoteImg shortcode", () => {
-  it("renders img with all attributes", () => {
+describe("shortcodes.js — icon shortcode", () => {
+  function getIcon() {
     const config = createMockEleventyConfig();
-    shortcodes(config, vi.fn(), vi.fn());
-    const remoteImg = config.getShortcode("remoteImg");
+    shortcodes(config);
+    return config.getShortcode("icon");
+  }
 
-    const result = remoteImg("https://example.com/img.jpg", 800, 600, "Photo");
+  it("inlines the named SVG from src/assets/icons", () => {
+    const result = getIcon()("moon");
 
-    expect(result).toContain('src="https://example.com/img.jpg"');
-    expect(result).toContain('width="800"');
-    expect(result).toContain('height="600"');
-    expect(result).toContain('alt="Photo"');
-    expect(result).toContain("eleventy:ignore");
+    expect(result).toContain("<svg");
+    expect(result).toContain("</svg>");
+  });
+
+  it("marks the SVG decorative for assistive tech", () => {
+    const result = getIcon()("moon");
+
+    expect(result).toContain('aria-hidden="true"');
+    expect(result).toContain('focusable="false"');
+  });
+
+  it("merges extra attributes into the opening tag", () => {
+    const result = getIcon()("moon", 'class="icon-lg"');
+
+    expect(result).toContain('class="icon-lg"');
+    // extras land on the <svg>, not somewhere in the path data
+    expect(result.indexOf('class="icon-lg"')).toBeLessThan(result.indexOf(">"));
+  });
+
+  it("throws for an icon that does not exist", () => {
+    expect(() => getIcon()("no-such-icon")).toThrow();
   });
 });

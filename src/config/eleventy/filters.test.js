@@ -18,27 +18,23 @@ describe("filters.js", () => {
     filters(config);
 
     expect(config.addFilter).toHaveBeenCalledWith(
-      "readableDate",
+      "longDate",
       expect.any(Function)
     );
     expect(config.addFilter).toHaveBeenCalledWith(
-      "split",
+      "monthYear",
+      expect.any(Function)
+    );
+    expect(config.addFilter).toHaveBeenCalledWith(
+      "isoMonth",
+      expect.any(Function)
+    );
+    expect(config.addFilter).toHaveBeenCalledWith(
+      "byType",
       expect.any(Function)
     );
     expect(config.addFilter).toHaveBeenCalledWith(
       "limit",
-      expect.any(Function)
-    );
-    expect(config.addFilter).toHaveBeenCalledWith(
-      "filterByCategory",
-      expect.any(Function)
-    );
-    expect(config.addFilter).toHaveBeenCalledWith(
-      "slugify",
-      expect.any(Function)
-    );
-    expect(config.addFilter).toHaveBeenCalledWith(
-      "urlencode",
       expect.any(Function)
     );
     expect(config.addFilter).toHaveBeenCalledWith(
@@ -86,43 +82,72 @@ describe("filters.js", () => {
     });
   });
 
-  describe("readableDate", () => {
-    it("formats a date string to readable format", () => {
-      const config = createMockEleventyConfig();
-      filters(config);
-      const readableDate = config.getFilter("readableDate");
+  function getFilter(name) {
+    const config = createMockEleventyConfig();
+    filters(config);
+    return config.getFilter(name);
+  }
 
-      const result = readableDate("2024-01-15");
-
-      expect(result).toMatch(/Jan 15, 2024/);
+  // Date cases use midday UTC so a local timezone offset can never roll the date over.
+  describe("longDate", () => {
+    it("formats a date string as en-GB day month year", () => {
+      expect(getFilter("longDate")("2024-01-15T12:00:00Z")).toBe(
+        "15 January 2024"
+      );
     });
 
     it("handles Date objects", () => {
-      const config = createMockEleventyConfig();
-      filters(config);
-      const readableDate = config.getFilter("readableDate");
-
-      const result = readableDate(new Date("2024-12-25"));
-
-      expect(result).toMatch(/Dec 25, 2024/);
+      expect(getFilter("longDate")(new Date("2024-12-25T12:00:00Z"))).toBe(
+        "25 December 2024"
+      );
     });
   });
 
-  describe("split", () => {
-    it("splits a string by separator", () => {
-      const config = createMockEleventyConfig();
-      filters(config);
-      const split = config.getFilter("split");
-
-      expect(split("a,b,c", ",")).toEqual(["a", "b", "c"]);
+  describe("monthYear", () => {
+    it("formats to month and year only", () => {
+      expect(getFilter("monthYear")("2024-06-09T12:00:00Z")).toBe("June 2024");
     });
 
-    it("splits by space", () => {
-      const config = createMockEleventyConfig();
-      filters(config);
-      const split = config.getFilter("split");
+    it("handles Date objects", () => {
+      expect(getFilter("monthYear")(new Date("2023-11-02T12:00:00Z"))).toBe(
+        "November 2023"
+      );
+    });
+  });
 
-      expect(split("hello world", " ")).toEqual(["hello", "world"]);
+  describe("isoMonth", () => {
+    it("truncates an ISO date to YYYY-MM", () => {
+      expect(getFilter("isoMonth")("2024-03-15T12:00:00Z")).toBe("2024-03");
+    });
+
+    it("zero-pads single-digit months", () => {
+      expect(getFilter("isoMonth")(new Date("2024-09-01T12:00:00Z"))).toBe(
+        "2024-09"
+      );
+    });
+  });
+
+  describe("byType", () => {
+    const items = [
+      { data: { type: "guides" } },
+      { data: { type: "essays" } },
+      { data: { type: "guides" } },
+    ];
+
+    it("keeps only items matching the requested type", () => {
+      const result = getFilter("byType")(items, "guides");
+
+      expect(result).toHaveLength(2);
+      expect(result.every((i) => i.data.type === "guides")).toBe(true);
+    });
+
+    it("returns every item when no type is given", () => {
+      expect(getFilter("byType")(items, undefined)).toBe(items);
+      expect(getFilter("byType")(items, "")).toBe(items);
+    });
+
+    it("returns an empty array for an unknown type", () => {
+      expect(getFilter("byType")(items, "notes")).toEqual([]);
     });
   });
 
@@ -149,106 +174,6 @@ describe("filters.js", () => {
       const limit = config.getFilter("limit");
 
       expect(limit([1, 2, 3], 0)).toEqual([]);
-    });
-  });
-
-  describe("filterByCategory", () => {
-    it("filters posts by category", () => {
-      const config = createMockEleventyConfig();
-      filters(config);
-      const filterByCategory = config.getFilter("filterByCategory");
-
-      const posts = [
-        { data: { categories: ["Design", "Dev"] } },
-        { data: { categories: ["Writing"] } },
-        { data: { categories: ["design"] } },
-      ];
-
-      const result = filterByCategory(posts, "Design");
-
-      expect(result).toHaveLength(2);
-    });
-
-    it("returns all posts when no category specified", () => {
-      const config = createMockEleventyConfig();
-      filters(config);
-      const filterByCategory = config.getFilter("filterByCategory");
-
-      const posts = [
-        { data: { categories: ["Design"] } },
-        { data: { categories: ["Writing"] } },
-      ];
-
-      expect(filterByCategory(posts, null)).toEqual(posts);
-    });
-
-    it("excludes posts without categories", () => {
-      const config = createMockEleventyConfig();
-      filters(config);
-      const filterByCategory = config.getFilter("filterByCategory");
-
-      const posts = [
-        { data: { categories: ["Design"] } },
-        { data: {} },
-      ];
-
-      const result = filterByCategory(posts, "Design");
-
-      expect(result).toHaveLength(1);
-    });
-  });
-
-  describe("slugify", () => {
-    it("converts string to lowercase slug", () => {
-      const config = createMockEleventyConfig();
-      filters(config);
-      const slugify = config.getFilter("slugify");
-
-      expect(slugify("Hello World")).toBe("hello-world");
-    });
-
-    it("removes special characters", () => {
-      const config = createMockEleventyConfig();
-      filters(config);
-      const slugify = config.getFilter("slugify");
-
-      expect(slugify("Hello! @World#")).toBe("hello-world");
-    });
-
-    it("trims leading and trailing hyphens", () => {
-      const config = createMockEleventyConfig();
-      filters(config);
-      const slugify = config.getFilter("slugify");
-
-      expect(slugify("--hello--")).toBe("hello");
-    });
-  });
-
-  describe("urlencode", () => {
-    it("encodes a string", () => {
-      const config = createMockEleventyConfig();
-      filters(config);
-      const urlencode = config.getFilter("urlencode");
-
-      expect(urlencode("hello world")).toBe("hello%20world");
-    });
-
-    it("returns empty string for falsy input", () => {
-      const config = createMockEleventyConfig();
-      filters(config);
-      const urlencode = config.getFilter("urlencode");
-
-      expect(urlencode("")).toBe("");
-      expect(urlencode(null)).toBe("");
-      expect(urlencode(undefined)).toBe("");
-    });
-
-    it("encodes special characters", () => {
-      const config = createMockEleventyConfig();
-      filters(config);
-      const urlencode = config.getFilter("urlencode");
-
-      expect(urlencode("a&b=c")).toBe("a%26b%3Dc");
     });
   });
 });

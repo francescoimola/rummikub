@@ -7,7 +7,6 @@ const eleventySass = require("@11tyrocks/eleventy-plugin-sass-lightningcss");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
-const eleventyImage = require("@11ty/eleventy-img");
 
 const setupMarkdown = require("./src/config/eleventy/markdown");
 const setupTransforms = require("./src/config/eleventy/transforms");
@@ -48,7 +47,7 @@ module.exports = function (eleventyConfig) {
   setupTransforms(eleventyConfig);
   setupCollections(eleventyConfig);
   setupFilters(eleventyConfig);
-  setupShortcodes(eleventyConfig, eleventyImage, filenameFormat);
+  setupShortcodes(eleventyConfig);
 
   eleventyConfig.addPassthroughCopy("src/assets/favicon");
   eleventyConfig.addPassthroughCopy("src/assets/fonts");

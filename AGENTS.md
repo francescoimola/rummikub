@@ -36,7 +36,9 @@ pnpm clean            # rm -rf public
 | `src/` | All source files |
 | `src/_includes/` | Nunjucks partials (`_base.njk`, `_head.njk`, `_header.njk`, `_footer.njk`, `_meta.njk`, `_schema.njk`) |
 | `src/_data/site.json` | Global site data (`url`, `name`, `description`, `image`) |
-| `src/css/index.scss` | SCSS entry point + all styles (theme, content modes, interactive, typography, layout) |
+| `src/css/index.scss` | SCSS entry point (`@use`s every partial) + global styles: theme, content modes, interactive, typography, layout. Component-scoped rules live in `_components.scss`, not here |
+| `src/css/_components.scss` | Unlayered component styles: cards, blockquotes, look toggles, illustrations, data list, project item, case study, writing listings |
+| `src/css/_icons.scss` | Icon glyph system — data-URI mask icons for links (mailto/tel/cal.com) and `[data-icon]` hooks |
 | `src/css/_fonts.scss` | Ronzino `@font-face` declarations (`@layer fonts`) |
 | `src/css/_colors.scss` | Figma-generated colour scales (brand, neutral, success, warning, error, info) with light-dark() for dark mode (`@layer colors`). Brand scale is parametric (`--brand-hue`/`--brand-chroma`) |
 | `src/css/_scale.scss` | Utopia fluid type tokens (`@layer type`), the `$bp-*` breakpoint Sass vars, and the `--gutter-y-sticky` `@property` |
