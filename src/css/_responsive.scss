@@ -69,11 +69,6 @@
             display: none;
         }
 
-        .flow.has-gap-2xl-m,
-        .flow-row.has-gap-2xl-m {
-            --flow-gap: var(--space-2xl);
-        }
-
         // Align the look toggles to the container start rather than centring them
         :has(>.theme-switch, >.brand-picker) {
             align-items: flex-start;
@@ -107,6 +102,11 @@
 
         .stick {
             position: revert;
+        }
+
+        .flow.has-gap-2xl-m,
+        .flow-row.has-gap-2xl-m {
+            --flow-gap: var(--space-2xl);
         }
     }
 
@@ -158,6 +158,15 @@
             flex-direction: column;
             margin-inline-start: auto; // shove the whole cluster (switch + swatches) to the right, footer stays left
             block-size: 100%; // match the 3-swatch column height (same tokens as .brand-picker)
+        }
+    }
+
+    // ---- >= tablet (targets everything above tablet) ----
+
+    @media (width >= #{scale.$bp-tablet}) {
+        .tablet-only {
+            display: none;
+            visibility: hidden;
         }
 
         // Image left / text right — the item's own fold, independent of the body's
