@@ -1,3 +1,6 @@
+// fallow-ignore-file security-sink
+// Paths are build-time only: ROOT comes from import.meta.url, the rest from walking that fixed dir.
+
 /**
  * Lossless recompression of src/assets/ images.
  *   PNG: max-effort DEFLATE (pixel-identical).
