@@ -1,0 +1,211 @@
+@use 'scale';
+
+// Every viewport + container breakpoint rule, one block per condition.
+// Block order is load-bearing: max-width ascending, then min-width ascending.
+@mixin all {
+
+    // ---- < mobile ----
+
+    @media (width < #{scale.$bp-mobile}) {
+
+        .layout {
+            display: flex; // a grid item can't stick (its row is its containing block); flex-column gives the sidebar scroll room
+            flex-direction: column;
+        }
+
+        .content {
+            flex: 1; // fill remaining height; preserves the min-block-size:100dvh page fill
+            padding-inline: var(--gutter-x);
+        }
+
+        nav {
+            border-block-start: revert;
+            padding-block-start: revert;
+            grid-template-columns: 1fr; 
+        }
+
+        // Open panel: links in the right column, look-toggles pinned bottom-left
+        .nav-menu__panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-areas: "toggles links";
+            column-gap: var(--space-m-l);
+            padding-block-start: var(--space-2xl-3xl);
+            padding-block-end: var(--space-s);
+        }
+
+        .nav-menu__panel > ul {
+            grid-area: links;
+            --flow-gap: var(--space-xs);
+        }
+
+        .nav-menu__toggles {
+            grid-area: toggles;
+            align-self: end;
+        }
+
+        main {
+            border-block-start: revert;
+        }
+
+        footer {
+            border-block-start: var(--input-border-width) solid var(--input-border-color);
+            padding-block-start: var(--space-m);
+            padding-block-end: var(--space-l);
+            inline-size: 100%;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: var(--gutter-y);
+            block-size: auto;
+            max-block-size: calc(100dvh - calc(var(--gutter-y) * 2)); // engages overflow-y:auto on short/landscape phones where the card exceeds the viewport
+            row-gap: var(--space-l-2xl);
+            margin-inline: var(--gutter-y);
+            margin-block-end: 0;
+        }
+
+        .desktop-only {
+            display: none;
+        }
+
+        .flow.has-gap-2xl-m,
+        .flow-row.has-gap-2xl-m {
+            --flow-gap: var(--space-2xl);
+        }
+
+        // Align the look toggles to the container start rather than centring them
+        :has(>.theme-switch, >.brand-picker) {
+            align-items: flex-start;
+        }
+
+        // Collapse the label/value grid into stacked rows
+        .data-list {
+            display: flex;
+            flex-direction: column;
+
+            &__item {
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-3xs);
+            }
+        }
+    }
+
+    // ---- < tablet ----
+
+    @media (width < #{scale.$bp-tablet}) {
+
+        main {
+            flex-direction: column;
+
+            &>* {
+                max-inline-size: unset;
+                margin-inline: unset;
+            }
+        }
+
+        .stick {
+            position: revert;
+        }
+    }
+
+    // ---- < small-desktop ----
+
+    @media (width < #{scale.$bp-small-desktop}) {
+
+        // CTA drops its small-text treatment as soon as the body stacks
+        .project-item__cta {
+            font-size: revert;
+            letter-spacing: revert;
+        }
+    }
+
+    // ---- >= mobile (targets everything above mobile) ----
+
+    @media (width >= #{scale.$bp-mobile}) {
+
+        .mobile-only {
+            display: none;
+            visibility: hidden;
+        }
+
+        // No disclosure on desktop: hide the bar, force the link list permanently open
+        .nav-menu__bar {
+            display: none;
+        }
+
+        .nav-menu::details-content {
+            content-visibility: visible;
+            block-size: auto;
+            opacity: 1;
+        }
+
+        main:has(> .featured:last-child) {
+            margin-block-end: unset;
+        }
+
+        .nav-menu__panel > ul {
+            --flow-gap: var(--space-2xs);
+        }
+
+        // Look toggles stack into columns beside the footer
+        .brand-picker {
+            flex-direction: column;
+        }
+
+        .theme-switch {
+            flex-direction: column;
+            margin-inline-start: auto; // shove the whole cluster (switch + swatches) to the right, footer stays left
+            block-size: 100%; // match the 3-swatch column height (same tokens as .brand-picker)
+        }
+
+        // Image left / text right — the item's own fold, independent of the body's
+        .project-item {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .project-item__media,
+        .project-item__img {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .project-item__body {
+            grid-column: 2;
+            grid-row: 1;
+        }
+    }
+
+    // ---- >= small-desktop (targets everything above small-desktop) ----
+
+    @media (width >= #{scale.$bp-small-desktop}) {
+
+        // Wide enough for title + CTA to share a row, with the CTA pushed to the far edge
+        .project-item__body {
+            flex-direction: row;
+            justify-content: space-between;
+            gap: var(--space-xl); // single-step on purpose — see the column gap on the base rule
+        }
+
+        // .flow sets inline-size: 100%, which would eat the row and strand the CTA against it
+        .project-item__body>.flow {
+            inline-size: auto;
+        }
+
+        // Keep the CTA on one line — the title wraps instead when the row gets tight
+        .project-item__cta {
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+    }
+
+    // ---- Container queries ----
+
+    @container (min-width: #{scale.$bp-tablet}) {
+
+        .grid-responsive-cols {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
