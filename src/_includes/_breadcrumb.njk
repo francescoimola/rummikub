@@ -1,5 +1,5 @@
 {%- set crumbs = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true }) %}
-<ul class="desktop-only small dimmed flow-row has-gap-2xs">
+<ul class="small flow-row has-gap-2xs">
     {%- for crumb in crumbs %}
     {%- if not loop.first %}
     <li{% if loop.last %} aria-current="page"{% endif %}>{% if not loop.last %}<a href="{{ crumb.url }}" class="dimmed">{{ crumb.title | capitalize }}</a>{% else %}{{ crumb.title | capitalize }}{% endif %}</li>

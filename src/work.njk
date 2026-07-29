@@ -10,13 +10,17 @@ eleventyNavigation:
 <div full-width class="flow has-gap-xl-2xl">
   <h1 class="sr-only">Selected Work</h1>
     <h2>Featured</h2>
-  <div full-width class="flow has-gap-m">
+  <div full-width class="flow has-gap-2xl-m">
     {% for project in collections.workFeatured %}
       {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "") }}
     {% endfor %}
   </div>
-  <h2 class="has-mt-2xl">Index</h2>
-  <div full-width class="flow has-gap-m">
+
+  <div class="has-mt-2xl">
+    <hr class="tablet-only has-mb-xs">
+    <h2>Index</h2>
+  </div>
+  <div full-width class="flow has-gap-2xl-m">
     {% for project in collections.workIndex %}
       {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "") }}
     {% endfor %}
