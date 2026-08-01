@@ -16,7 +16,6 @@ Vitest discovers anything matching `*.test.js` automatically.
 
 ### Browser-side code (`src/assets/scripts/`)
 
-- **toggle.test.js** — clicks a button, checks `aria-expanded` flips, content expands, button text changes. Uses `vi.resetModules()` because the IIFE runs once on import — each test needs a fresh module and DOM.
 - **mailto-copy.test.js** — clicks a `mailto:` link, checks email copies to clipboard, "Email copied!" appears then reverts after 2s. Uses `vi.useFakeTimers()` to fast-forward.
 - **video-controller.test.js** — tests lazy-loading via `IntersectionObserver`, play/pause, reduced-motion handling. Mocks `IntersectionObserver` and `navigator.connection`.
 

@@ -51,6 +51,7 @@ pnpm clean            # rm -rf public
 | `src/writing/` | Writing section (`tag: writing`, `/writing/<slug>/`). Each item has one `type` (guides/essays/notes; see `src/_data/writingTypes.json`). `date`-desc `writing` collection; `writingTypes` lists present types in fixed order. On-site posts set `permalink`; external (Substack) items set `external`+`source`+`permalink: false`. Index `src/writing.njk` (sectioned by type, 3 latest each); per-type pages `src/writing-types.njk`; item macro `_writing-item.njk`; RSS `src/feed.njk` → `/rss.xml` (teasers only, never post bodies). Posts render the shared case-study shell and keep `contentMode: contrast` — see Long-form pages |
 | `src/assets/portfolio/` | Project videos (mp4/webm) + posters (passthrough copied to `public/assets/portfolio/`) |
 | `src/assets/writing/` | Writing cover + in-body images (passthrough copied to `public/assets/writing/`) |
+| `src/about.njk` | About page (`/about/`) — bio, Philosophy, FAQ (`<details>`), Recognition (`.data-list`); moved off the home page's old expandable "Read more" section. Linked from header + footer nav |
 | `scripts/optimize-videos.mjs` | Opt-in ffmpeg optimizer for project videos (`pnpm optimize:video`) |
 | `public/` | Build output — gitignored, do not commit |
 | `eleventy.config.js` | Eleventy configuration |
