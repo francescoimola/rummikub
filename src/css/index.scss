@@ -675,5 +675,15 @@ a.service {
     }
 }
 
+dialog {
+    --dialog-background: var(--brand-50);
+    --dialog-border: var(--input-border-color);
+    --dialog-shadow: var(--neutral-100);
+    --dialog-padding: var(--space-m-l);
+    --dialog-max-width: max(33dvw, 40rem);
+    --dialog-max-height: 85dvh;
+    --dialog-backdrop: lab(0% 0 0 / .85);
+}
+
 // Included last so breakpoint rules land after everything above — media queries add no specificity, only source order does
 @include responsive.all;
