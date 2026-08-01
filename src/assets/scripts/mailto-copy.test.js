@@ -1,5 +1,18 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
+const ONE_LINK = '<a href="mailto:test@example.com">Contact</a>';
+const TWO_LINKS = `
+  <a href="mailto:test@example.com">Contact</a>
+  <a href="mailto:other@example.com">Other</a>
+`;
+
+// The module is a side-effectful IIFE, so the DOM must exist before the import
+async function mount(html = ONE_LINK) {
+  document.body.innerHTML = html;
+  await import("./mailto-copy.js");
+  return document.querySelectorAll('a[href^="mailto:"]');
+}
+
 describe("mailto-copy.js", () => {
   let writeTextSpy;
 
@@ -21,9 +34,7 @@ describe("mailto-copy.js", () => {
   });
 
   it("prevents default on click", async () => {
-    document.body.innerHTML = '<a href="mailto:test@example.com">Contact</a>';
-    await import("./mailto-copy.js");
-    const link = document.querySelector('a[href="mailto:test@example.com"]');
+    const [link] = await mount();
     const event = new Event("click", { bubbles: true, cancelable: true });
     const preventDefaultSpy = vi.spyOn(event, "preventDefault");
 
@@ -33,9 +44,7 @@ describe("mailto-copy.js", () => {
   });
 
   it("copies email address to clipboard", async () => {
-    document.body.innerHTML = '<a href="mailto:test@example.com">Contact</a>';
-    await import("./mailto-copy.js");
-    const link = document.querySelector('a[href="mailto:test@example.com"]');
+    const [link] = await mount();
 
     link.click();
 
@@ -43,9 +52,7 @@ describe("mailto-copy.js", () => {
   });
 
   it("shows 'Email copied!' text after clicking", async () => {
-    document.body.innerHTML = '<a href="mailto:test@example.com">Contact</a>';
-    await import("./mailto-copy.js");
-    const link = document.querySelector('a[href="mailto:test@example.com"]');
+    const [link] = await mount();
 
     link.click();
     await vi.waitFor(() => {
@@ -54,9 +61,7 @@ describe("mailto-copy.js", () => {
   });
 
   it("restores original text after 2 seconds", async () => {
-    document.body.innerHTML = '<a href="mailto:test@example.com">Contact</a>';
-    await import("./mailto-copy.js");
-    const link = document.querySelector('a[href="mailto:test@example.com"]');
+    const [link] = await mount();
 
     link.click();
     await vi.waitFor(() => {
@@ -69,13 +74,7 @@ describe("mailto-copy.js", () => {
   });
 
   it("handles multiple links independently", async () => {
-    document.body.innerHTML = `
-      <a href="mailto:test@example.com">Contact</a>
-      <a href="mailto:other@example.com">Other</a>
-    `;
-    await import("./mailto-copy.js");
-    const link1 = document.querySelector('a[href="mailto:test@example.com"]');
-    const link2 = document.querySelector('a[href="mailto:other@example.com"]');
+    const [link1, link2] = await mount(TWO_LINKS);
 
     link1.click();
     await vi.waitFor(() => {

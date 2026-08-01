@@ -1,0 +1,46 @@
+---
+layout: _base.njk
+title: Contact
+isFullWidth: true
+eleventyNavigation:
+  key: Home
+---
+
+<div class="flow has-gap-xs">
+    <header class="flow has-gap-xs has-mb-s balance">
+        <h1>Contact</h1>
+        <p style="max-inline-size: var(--inline-size)">Ready to talk shop or want to discuss an idea? Get in touch and I’ll reply within a day.</p>
+    </header>
+    <div class="card flow has-gap-3xs">
+        <h2>Send me a good 'ol email</h2>
+        <a href="mailto:francesco@imola.dev">Copy email</a>
+    </div>
+    <div class="card flow has-gap-3xs">
+        <h2>Put a face to the name</h2>
+        <a href="https://cal.com/francescoimola" rel="noopener noreferrer" target="_blank">Talk to me face to face</a>
+    </div>
+    <div class="card flow has-gap-3xs">
+        <h2>Not sure what to say?</h2>
+        <button type="button" data-dialog-open="email-template">Copy this template email</button>
+
+        <dialog id="email-template" aria-labelledby="email-template-title">
+            <div class="flow has-gap-xl">
+                <h2 id="email-template-title" class="sr-only">Template enquiry email</h2>
+                <div class="flow has-gap-s" data-dialog-content>
+                    <p>Hi, I’m <strong>Carla</strong> and I'm a <strong>Marketing Director</strong> at <strong>Company</strong>. I found you through <strong>place, person, or thing</strong>, and love the work you did on <strong>your favourite project</strong>.</p>
+                    <p>I'd love to hire you to help us with <strong>project</strong> so we can <strong>business goal</strong>. Our timeline looks like <strong>dates</strong> and we'd like to keep the price about <strong>$3k (with room up to $8k if we can make a solid business case for it)</strong>.</p>
+                    <p>Full disclosure: I'm talking with a few other agencies like <strong>these folks</strong>.</p>
+                    <p>Let's set up a time to talk shop. How does <strong>day and time</strong> sound?</p>
+                    <p>Thanks</p>
+                </div>
+                <div class="flow has-gap-xs">
+                    <button type="button" data-dialog-copy data-icon-before="copy">Copy to clipboard</button>
+                    <button type="button" data-dialog-close data-icon-before="close">Close</button>
+                </div>
+            </div>
+        </dialog>
+    </div>
+</div>
+<div style="justify-self: flex-start;">
+    {% icon "mailstorm" %}
+</div>

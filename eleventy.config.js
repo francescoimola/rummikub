@@ -32,7 +32,7 @@ module.exports = function (eleventyConfig) {
     formats: ["webp", "jpeg"],
     outputDir: "./public/assets/images",
     urlPath: "/assets/images/",
-    widths: [400, 800, 1080, 1200, 1440, 2560, "auto"],
+    widths: [400, 600, 800, 1080, 1200, 1440, 2560, "auto"],
     defaultAttributes: {
       loading: "lazy",
       decoding: "async",
@@ -55,6 +55,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/scripts");
   eleventyConfig.addPassthroughCopy("src/assets/portfolio");
   eleventyConfig.addPassthroughCopy("src/assets/writing");
+  eleventyConfig.addPassthroughCopy("src/assets/art");
   eleventyConfig.addPassthroughCopy("src/assets/video");
   eleventyConfig.addPassthroughCopy("src/assets/images/*.gif");
   eleventyConfig.addPassthroughCopy("src/robots.txt");

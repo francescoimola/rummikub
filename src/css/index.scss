@@ -74,7 +74,7 @@ html.lenis body {
     --font-family: 'Ronzino', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji';
     --line-height: 1.5;
 
-    --tap-extend: var(--space-3xs); // Extend tap targets by this much
+    --tap-extend: var(--space-3xs);
 
     // Opacity
     --opacity-active: 0.8;
@@ -212,7 +212,6 @@ h1.stretch {
 }
 
 [highlight-header]>h2:first-child {
-    // Puts targeted headings in a highlighted box
     background-color: var(--accent-surface);
     inline-size: fit-content;
     padding-block: var(--space-3xs-2xs);
@@ -326,7 +325,7 @@ button {
     }
 }
 
-// Shared invisible hit-area extends tap targets past their box — was duplicated on button/summary/footer a
+// Shared invisible hit-area extends tap targets past their box — avoids duplicating the rule across button, summary, and footer a
 :is(button, summary, footer a)::before {
     content: "";
     position: absolute;
@@ -497,7 +496,7 @@ main>*{
 
 // Scroll-driven and animated breakout
 @supports (animation-timeline: view()) {
-    @media (prefers-reduced-motion: no-preference) and (width > #{scale.$bp-tablet}) {
+    @media (prefers-reduced-motion: no-preference) and (width > #{scale.$bp-xl}) {
         @keyframes breakout {
             from {
                 max-inline-size: 100%;
@@ -508,11 +507,7 @@ main>*{
             }
         }
 
-        // Case-study media (video figures + markdown images) get breakout/settle automatically — no per-element attribute needed.
-        // Media further down the page needs "breakout" (view() — a per-element scroll-into-view timeline, so each
-        // instance triggers independently). The media block right after the title is already on screen at load, so it
-        // needs "settle" instead (scroll(root block) — a page-load-linked timeline); view() would already be past its
-        // "peek in" range by first paint for something that never scrolled into view, and would show no motion at all.
+        // Case-study media gets breakout/settle automatically; breakout uses view() to retrigger per element, settle uses scroll() since view() would already be mid-range at first paint
         [view-animation="breakout"],
         .case-study > :is(figure, p:has(> :is(img, picture))):not(.case-study__intro + *) {
             box-sizing: border-box;
@@ -590,7 +585,8 @@ footer a {
     position: relative; // containing block for the shared tap-target ::before
 }
 
-a[data-icon-before] {
+// the icon claims ::before, which the shared tap-target rule above also uses — reset it back into flow
+:is(a, button)[data-icon-before] {
     display: inline-flex;
     align-items: center;
 
@@ -630,7 +626,7 @@ a[data-icon-before] {
 
 .flow.has-gap-3xs,
 .flow-row.has-gap-3xs {
-    --flow-gap: var(--space-3xs); // smallest gap
+    --flow-gap: var(--space-3xs);
 }
 
 // xl on mobile, m on desktop — reverses the usual mobile-shrinks-down direction; see mobile override below
@@ -679,6 +675,5 @@ a.service {
     }
 }
 
-// All breakpoint rules live in _responsive.scss. Included last so they land after everything above —
-// media queries add no specificity, so equal-specificity conflicts resolve on source order.
+// Included last so breakpoint rules land after everything above — media queries add no specificity, only source order does
 @include responsive.all;
