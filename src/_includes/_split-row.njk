@@ -1,0 +1,22 @@
+{% macro splitRow(item) %}
+<article class="split-row">
+  <div class="flow has-gap-2xs balance">
+    <h2>{{ item.title }}</h2>
+    <p>{{ item.description }}</p>
+    <p class="dimmed">{{ item.year }}</p>
+    {% if item.link %}
+    <a href="{{ item.link }}" target="_blank" rel="noopener noreferrer" data-icon="arrow-right">{{ item.linkLabel | default("Visit") }}</a>
+    {% endif %}
+  </div>
+  {% if item.images %}
+  {# masonry is a CSS multi-column packer — 2-up base, 1-up fold lives in _responsive.scss #}
+  <ul class="masonry">
+    {% for img in item.images %}
+    <li class="card has-justify-start">
+      <img src="{{ img.src }}" alt="{{ img.alt }}" sizes="(min-width: 64rem) 28vw, (min-width: 32rem) 45vw, 90vw">
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</article>
+{% endmacro %}

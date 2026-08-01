@@ -1,5 +1,4 @@
 :root {
-    /* 1. Define the crop amounts to select video elements */
     --crop-amount: 1px;
 }
 
@@ -96,9 +95,36 @@
     }
 }
 
-.grid-responsive-cols {
+// ---- Column grids ----
+
+// Single-column stacks that fold to two columns at their own container width (CSS rule 10)
+// .split-row is its own grid, not cleacss's .grid-reset — that reserves a margin track full-bleed can't use
+.grid-responsive-cols,
+.split-row {
     display: grid;
-    grid-template-columns: 1fr; // two columns from $bp-tablet — see _responsive.scss
+    grid-template-columns: 1fr;
+}
+
+.split-row {
+    gap: var(--space-s-xl);
+}
+
+.grid-cols-2-fixed {
+    grid-template-columns: 1fr 1fr;
+}
+
+// ---- Masonry ----
+
+// Multi-column packs short cards under a tall neighbour instead of leaving a gap; 2-up fold in _responsive.scss (CSS rule 10)
+.masonry {
+    columns: 1;
+    column-gap: var(--space-xs);
+}
+
+.masonry > .card {
+    break-inside: avoid;
+    margin-block-end: var(--space-xs);
+    background-color: transparent;
 }
 
 // ---- Blockquotes -----
@@ -180,8 +206,8 @@
 }
 
 .theme-switch button[aria-pressed="true"] {
-    background: var(--neutral-950-alpha); // "ink" fill
-    color: var(--neutral-50); // icon inverts to light
+    background: var(--neutral-950-alpha);
+    color: var(--neutral-50);
 }
 
 @media (forced-colors: active) {
@@ -250,7 +276,7 @@ main svg {
 }
 
 
-/* Crop the video by a small amount to hide "dead" exported pixels */
+// Crop the video by a small amount to hide "dead" exported pixels
 .project-video-wrapper.site-recording {
     aspect-ratio: 16 / 9; // absolute-positioned video below no longer sizes the wrapper — fix its height explicitly
 }
@@ -259,8 +285,7 @@ main svg {
     position: absolute;
     inset-block-start: calc(-1 * var(--crop-amount));
     inset-inline-start: calc(-1 * var(--crop-amount));
-    // video is a replaced element — auto width/height won't solve from inset offsets like a normal box would,
-    // so the grown size has to be explicit (doubled, since the offset above only pushes the start edge out)
+    // replaced element: auto width/height won't grow from the inset offset, so the doubled size is explicit
     inline-size: calc(100% + 2 * var(--crop-amount));
     height: calc(100% + 2 * var(--crop-amount));
     max-inline-size: none; // cleacss resets video to max-inline-size: 100%, which caps the width regardless of the width above
@@ -372,12 +397,11 @@ main svg {
     block-size: var(--space-2xl);
     aspect-ratio: 1 / 1;
 
-    // Fill the square with the (transform-wrapped) cover image, cropped square
     :is(picture, img) {
         display: block; // picture defaults to inline, so block-size is ignored — force it to fill the square box
         inline-size: 100%;
         block-size: 100%;
-        object-fit: cover; // crop non-square covers to the square instead of letting them keep their ratio
+        object-fit: cover;
         border-radius: var(--border-radius-s);
         border: none; // drop the base media edge — no border around thumbnail images or the solid-colour placeholder
     }
@@ -405,4 +429,16 @@ main svg {
 
 .writing-post .case-study__intro + figure img {
     max-block-size: 50cqw; // 2/3 of width caps the box at 3:2; shorter-than-cap ratios pass through untouched
+}
+
+// ---- About page ----
+
+.profile-picture_inner {
+    display: grid;
+    visibility: visible;
+}
+
+.profile-picture_outer {
+    display: none;
+    visibility: hidden;
 }

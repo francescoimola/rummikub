@@ -51,6 +51,8 @@ pnpm clean            # rm -rf public
 | `src/writing/` | Writing section (`tag: writing`, `/writing/<slug>/`). Each item has one `type` (guides/essays/notes; see `src/_data/writingTypes.json`). `date`-desc `writing` collection; `writingTypes` lists present types in fixed order. On-site posts set `permalink`; external (Substack) items set `external`+`source`+`permalink: false`. Index `src/writing.njk` (sectioned by type, 3 latest each); per-type pages `src/writing-types.njk`; item macro `_writing-item.njk`; RSS `src/feed.njk` → `/rss.xml` (teasers only, never post bodies). Posts render the shared case-study shell and keep `contentMode: contrast` — see Long-form pages |
 | `src/assets/portfolio/` | Project videos (mp4/webm) + posters (passthrough copied to `public/assets/portfolio/`) |
 | `src/assets/writing/` | Writing cover + in-body images (passthrough copied to `public/assets/writing/`) |
+| `src/art.njk` | Artmaking index (`/art/`, full width). Content lives in `src/_data/artProjects.json` — no per-project files; the `splitRow` macro (`_split-row.njk`) renders one row per entry — see Artmaking page |
+| `src/assets/art/` | Artmaking images, all 800px-wide sources (passthrough copied to `public/assets/art/`) |
 | `src/about.njk` | About page (`/about/`) — bio, Philosophy, FAQ (`<details>`), Recognition (`.data-list`); moved off the home page's old expandable "Read more" section. Linked from header + footer nav |
 | `scripts/optimize-videos.mjs` | Opt-in ffmpeg optimizer for project videos (`pnpm optimize:video`) |
 | `public/` | Build output — gitignored, do not commit |
@@ -70,6 +72,16 @@ Media rhythm (`.case-study` in `_components.scss`) and the scroll animations (`i
 {% figureImg "/assets/writing/x.png", "Alt", href="https://…" %}   {# wraps img in a target=_blank link #}
 {% figureImg "/assets/writing/x.png", "Alt", class="extra" %}      {# extra class on the <figure> #}
 ```
+
+## Artmaking page
+
+Each project is a `.split-row` `<article>`: text in a `.flow` div, images in a `.masonry` `<ul>` of `.card` `<li>`s. Both classes are generic and reusable — neither is art-specific, and both are defined in `_components.scss` with their folds in `_responsive.scss`.
+
+- **`.split-row`** — `1fr` stacked, `1fr 2fr` from a `@container` at `$bp-mobile`. Shares its base declaration with `.grid-responsive-cols` (which folds to equal columns at `$bp-tablet`); both are container-driven, so they respond to the space they actually get, not the viewport. Deliberately *not* cleacss's `.grid-reset`: that reserves a side-margin track per edge, so full-bleed there needs `--grid-margin-max: 0` **and** a negative-margin/width bleed to cancel the leftover `column-gap`.
+- **`.masonry`** — CSS multi-column (`columns: 2`, `1` below `$bp-small`), so short images pack under each other beside a tall neighbour. Not a grid: grid rows force equal heights, which is what left the gaps. `break-inside: avoid` on the cards stops an image splitting across a column.
+- **The image is a direct child of `.card`.** That is what triggers `.card`'s full-bleed rule, so images sit flush with no padding. Wrapping it in anything re-introduces the card padding.
+
+The masonry fold is `$bp-small` (32rem) — cleacss's own `:s` variant folds at 30rem, which is why it isn't used. Add new projects to `src/_data/artProjects.json`; `link`, `linkLabel` and `images` are all optional.
 
 ## Project videos
 

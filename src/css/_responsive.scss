@@ -6,7 +6,7 @@
 
     // ---- < mobile ----
 
-    @media (width < #{scale.$bp-mobile}) {
+    @media (width < #{scale.$bp-m}) {
 
         .layout {
             display: flex; // a grid item can't stick (its row is its containing block); flex-column gives the sidebar scroll room
@@ -89,7 +89,7 @@
 
     // ---- < tablet ----
 
-    @media (width < #{scale.$bp-tablet}) {
+    @media (width < #{scale.$bp-xl}) {
 
         main {
             flex-direction: column;
@@ -110,20 +110,9 @@
         }
     }
 
-    // ---- < small-desktop ----
-
-    @media (width < #{scale.$bp-small-desktop}) {
-
-        // CTA drops its small-text treatment as soon as the body stacks
-        .project-item__cta {
-            font-size: revert;
-            letter-spacing: revert;
-        }
-    }
-
     // ---- >= mobile (targets everything above mobile) ----
 
-    @media (width >= #{scale.$bp-mobile}) {
+    @media (width >= #{scale.$bp-m}) {
 
         .mobile-only {
             display: none;
@@ -163,11 +152,39 @@
 
     // ---- >= tablet (targets everything above tablet) ----
 
-    @media (width >= #{scale.$bp-tablet}) {
+    @media (width >= #{scale.$bp-xl}) {
         .tablet-only {
             display: none;
             visibility: hidden;
         }
+
+        .profile-picture_inner {
+            display: none;
+            visibility: hidden;
+        }
+
+        .profile-picture_outer {
+            display: grid;
+            visibility: visible;
+        }
+    }
+
+    // ---- Container queries ----
+    // Components fold against main's inline-size (viewport minus sidebar/gutters), not the viewport
+
+    @container (min-width: #{scale.$bp-s}) {
+
+        .grid-responsive-cols {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .masonry {
+            columns: 2;
+        }
+        
+    }
+
+    @container (min-width: #{scale.$bp-l}) {
 
         // Image left / text right — the item's own fold, independent of the body's
         .project-item {
@@ -186,9 +203,20 @@
         }
     }
 
-    // ---- >= small-desktop (targets everything above small-desktop) ----
+    @container (min-width: #{scale.$bp-xl}) {
 
-    @media (width >= #{scale.$bp-small-desktop}) {
+        .split-row {
+            grid-template-columns: 1fr 2fr;
+        }
+    }
+
+    @container (min-width: #{scale.$bp-2xl}) {
+
+         // CTA drops its small-text treatment as soon as the body stacks
+        .project-item__cta {
+            font-size: revert;
+            letter-spacing: revert;
+        }
 
         // Wide enough for title + CTA to share a row, with the CTA pushed to the far edge
         .project-item__body {
@@ -206,15 +234,6 @@
         .project-item__cta {
             white-space: nowrap;
             flex-shrink: 0;
-        }
-    }
-
-    // ---- Container queries ----
-
-    @container (min-width: #{scale.$bp-tablet}) {
-
-        .grid-responsive-cols {
-            grid-template-columns: repeat(2, 1fr);
         }
     }
 }

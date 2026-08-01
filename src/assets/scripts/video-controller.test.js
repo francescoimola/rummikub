@@ -41,27 +41,31 @@ function createMediaQuery(matches = false) {
   };
 }
 
-function createMockVideo(overrides = {}) {
+// Build a wrapper, construct the controller against it, and hand back every handle a test needs
+function mount({ reduced = false, slow = false, ...wrapperOpts } = {}) {
+  const wrapper = createWrapper(wrapperOpts);
+  const reducedMotion = createMediaQuery(reduced);
+  const ctrl = new VideoController(wrapper, reducedMotion, slow);
+  return {
+    ctrl,
+    wrapper,
+    reducedMotion,
+    video: wrapper.querySelector(".project-video-el"),
+    btn: wrapper.querySelector(".project-video-play"),
+  };
+}
+
+// jsdom leaves play()/pause() unimplemented and `paused` read-only, so swap in a controllable stand-in
+function createMockVideo(paused = true) {
   const el = document.createElement("video");
-  el.className = "project-video-el";
-  let paused = true;
-  Object.defineProperty(el, "paused", {
-    get() {
-      return paused;
-    },
-    set(v) {
-      paused = v;
-    },
-    configurable: true,
-  });
-  el.play = vi.fn().mockImplementation(() => {
-    paused = false;
+  Object.defineProperty(el, "paused", { value: paused, writable: true, configurable: true });
+  el.play = vi.fn(() => {
+    el.paused = false;
     return Promise.resolve();
   });
-  el.pause = vi.fn().mockImplementation(() => {
-    paused = true;
+  el.pause = vi.fn(() => {
+    el.paused = true;
   });
-  Object.assign(el, overrides);
   return el;
 }
 
@@ -90,13 +94,7 @@ afterEach(() => {
 
 describe("VideoController", () => {
   it("does nothing if wrapper has no video element", () => {
-    const wrapper = document.createElement("div");
-    const btn = document.createElement("button");
-    btn.className = "project-video-play";
-    wrapper.appendChild(btn);
-
-    const reducedMotion = createMediaQuery();
-    const ctrl = new VideoController(wrapper, reducedMotion, false);
+    const { ctrl } = mount({ hasVideo: false });
 
     expect(ctrl.video).toBeNull();
     expect(ctrl.btn).toBeInstanceOf(HTMLButtonElement);
@@ -104,13 +102,7 @@ describe("VideoController", () => {
   });
 
   it("does nothing if wrapper has no button element", () => {
-    const wrapper = document.createElement("div");
-    const video = document.createElement("video");
-    video.className = "project-video-el";
-    wrapper.appendChild(video);
-
-    const reducedMotion = createMediaQuery();
-    const ctrl = new VideoController(wrapper, reducedMotion, false);
+    const { ctrl } = mount({ hasBtn: false });
 
     expect(ctrl.video).toBeInstanceOf(HTMLVideoElement);
     expect(ctrl.btn).toBeNull();
@@ -121,8 +113,7 @@ describe("VideoController", () => {
     const wrapper = createWrapper();
     wrapper.querySelector(".project-video-el").dataset.init = "1";
 
-    const reducedMotion = createMediaQuery();
-    const ctrl = new VideoController(wrapper, reducedMotion, false);
+    const ctrl = new VideoController(wrapper, createMediaQuery(), false);
 
     expect(ctrl.video).toBeDefined();
     expect(ctrl.btn).toBeDefined();
@@ -131,66 +122,40 @@ describe("VideoController", () => {
   });
 
   it("shows button when reduced motion matches", () => {
-    const wrapper = createWrapper();
-    const reducedMotion = createMediaQuery(true);
+    const { btn } = mount({ reduced: true });
 
-    new VideoController(wrapper, reducedMotion, false);
-
-    expect(
-      wrapper.querySelector(".project-video-play").hasAttribute("data-visible")
-    ).toBe(true);
+    expect(btn.hasAttribute("data-visible")).toBe(true);
   });
 
   it("shows button when slow connection", () => {
-    const wrapper = createWrapper();
-    const reducedMotion = createMediaQuery(false);
+    const { btn } = mount({ slow: true });
 
-    new VideoController(wrapper, reducedMotion, true);
-
-    expect(
-      wrapper.querySelector(".project-video-play").hasAttribute("data-visible")
-    ).toBe(true);
+    expect(btn.hasAttribute("data-visible")).toBe(true);
   });
 
   it("does not show button when motion allowed and fast connection", () => {
-    const wrapper = createWrapper();
-    const reducedMotion = createMediaQuery(false);
+    const { btn } = mount();
 
-    new VideoController(wrapper, reducedMotion, false);
-
-    expect(
-      wrapper.querySelector(".project-video-play").hasAttribute("data-visible")
-    ).toBe(false);
+    expect(btn.hasAttribute("data-visible")).toBe(false);
   });
 
   it("sets data-init on the video element", () => {
-    const wrapper = createWrapper();
-    const reducedMotion = createMediaQuery(false);
+    const { video } = mount();
 
-    new VideoController(wrapper, reducedMotion, false);
-
-    expect(wrapper.querySelector(".project-video-el").dataset.init).toBe("1");
+    expect(video.dataset.init).toBe("1");
   });
 
   it("observes the video element with IntersectionObserver", () => {
-    const wrapper = createWrapper();
-    const reducedMotion = createMediaQuery(false);
-
-    new VideoController(wrapper, reducedMotion, false);
+    const { video } = mount();
 
     expect(globalThis.IntersectionObserver).toHaveBeenCalled();
     const instance = globalThis.IntersectionObserver.mock.results[0].value;
-    expect(instance.observe).toHaveBeenCalledWith(
-      wrapper.querySelector(".project-video-el")
-    );
+    expect(instance.observe).toHaveBeenCalledWith(video);
   });
 
   describe("ensureLoaded", () => {
     it("copies data-src from source elements to src", () => {
-      const wrapper = createWrapper({ hasSource: true });
-      const reducedMotion = createMediaQuery(false);
-      const ctrl = new VideoController(wrapper, reducedMotion, false);
-      const video = wrapper.querySelector(".project-video-el");
+      const { ctrl, video } = mount({ hasSource: true });
       const source = video.querySelector("source");
 
       ctrl.ensureLoaded();
@@ -200,10 +165,7 @@ describe("VideoController", () => {
     });
 
     it("copies data-src directly on video when no source elements", () => {
-      const wrapper = createWrapper({ dataSrc: true });
-      const reducedMotion = createMediaQuery(false);
-      const ctrl = new VideoController(wrapper, reducedMotion, false);
-      const video = wrapper.querySelector(".project-video-el");
+      const { ctrl, video } = mount({ dataSrc: true });
 
       ctrl.ensureLoaded();
 
@@ -212,27 +174,21 @@ describe("VideoController", () => {
     });
 
     it("does not reload if already loaded", () => {
-      const wrapper = createWrapper({ dataSrc: true });
-      const reducedMotion = createMediaQuery(false);
-      const ctrl = new VideoController(wrapper, reducedMotion, false);
+      const { ctrl, video } = mount({ dataSrc: true });
 
       ctrl.ensureLoaded();
       expect(ctrl.loaded).toBe(true);
-      const firstSrc = wrapper.querySelector(".project-video-el").src;
+      const firstSrc = video.src;
 
       ctrl.ensureLoaded();
-      const secondSrc = wrapper.querySelector(".project-video-el").src;
 
-      expect(firstSrc).toBe(secondSrc);
+      expect(video.src).toBe(firstSrc);
     });
   });
 
   describe("tryPlay", () => {
     it("calls ensureLoaded then video.play()", () => {
-      const wrapper = createWrapper({ dataSrc: true });
-      const reducedMotion = createMediaQuery(false);
-      const ctrl = new VideoController(wrapper, reducedMotion, false);
-      const video = wrapper.querySelector(".project-video-el");
+      const { ctrl, video } = mount({ dataSrc: true });
       video.play = vi.fn().mockResolvedValue(undefined);
 
       ctrl.tryPlay();
@@ -242,11 +198,7 @@ describe("VideoController", () => {
     });
 
     it("hides button when play resolves", async () => {
-      const wrapper = createWrapper();
-      const btn = wrapper.querySelector(".project-video-play");
-      const reducedMotion = createMediaQuery(false);
-      const ctrl = new VideoController(wrapper, reducedMotion, false);
-      const video = wrapper.querySelector(".project-video-el");
+      const { ctrl, video, btn } = mount();
       video.play = vi.fn().mockResolvedValue(undefined);
 
       ctrl.tryPlay();
@@ -256,11 +208,7 @@ describe("VideoController", () => {
     });
 
     it("shows button when play rejects", async () => {
-      const wrapper = createWrapper();
-      const btn = wrapper.querySelector(".project-video-play");
-      const reducedMotion = createMediaQuery(false);
-      const ctrl = new VideoController(wrapper, reducedMotion, false);
-      const video = wrapper.querySelector(".project-video-el");
+      const { ctrl, video, btn } = mount();
       video.play = vi.fn().mockRejectedValue(new Error("play failed"));
 
       ctrl.tryPlay();
@@ -272,11 +220,8 @@ describe("VideoController", () => {
 
   describe("handleLeaveView", () => {
     it("pauses video and shows button when reduced motion matches", () => {
-      const wrapper = createWrapper();
-      const btn = wrapper.querySelector(".project-video-play");
-      const reducedMotion = createMediaQuery(true);
-      const ctrl = new VideoController(wrapper, reducedMotion, false);
-      const video = createMockVideo({ paused: false });
+      const { ctrl, wrapper, btn } = mount({ reduced: true });
+      const video = createMockVideo(false);
       wrapper.appendChild(video);
       ctrl.video = video;
 
@@ -287,10 +232,8 @@ describe("VideoController", () => {
     });
 
     it("does nothing if video is already paused", () => {
-      const wrapper = createWrapper();
-      const reducedMotion = createMediaQuery(true);
-      const ctrl = new VideoController(wrapper, reducedMotion, false);
-      const video = createMockVideo({ paused: true });
+      const { ctrl, wrapper } = mount({ reduced: true });
+      const video = createMockVideo(true);
       wrapper.appendChild(video);
       ctrl.video = video;
 
@@ -302,10 +245,7 @@ describe("VideoController", () => {
 
   describe("handleEnterView", () => {
     it("calls tryPlay when motion allowed and fast connection", () => {
-      const wrapper = createWrapper({ dataSrc: true });
-      const reducedMotion = createMediaQuery(false);
-      const ctrl = new VideoController(wrapper, reducedMotion, false);
-      const video = wrapper.querySelector(".project-video-el");
+      const { ctrl, video } = mount({ dataSrc: true });
       video.play = vi.fn().mockResolvedValue(undefined);
 
       ctrl.handleEnterView();
@@ -314,10 +254,7 @@ describe("VideoController", () => {
     });
 
     it("does not call tryPlay when reduced motion matches", () => {
-      const wrapper = createWrapper();
-      const reducedMotion = createMediaQuery(true);
-      const ctrl = new VideoController(wrapper, reducedMotion, false);
-      const video = wrapper.querySelector(".project-video-el");
+      const { ctrl, video } = mount({ reduced: true });
       video.play = vi.fn();
 
       ctrl.handleEnterView();
@@ -326,10 +263,7 @@ describe("VideoController", () => {
     });
 
     it("does not call tryPlay on slow connection", () => {
-      const wrapper = createWrapper();
-      const reducedMotion = createMediaQuery(false);
-      const ctrl = new VideoController(wrapper, reducedMotion, true);
-      const video = wrapper.querySelector(".project-video-el");
+      const { ctrl, video } = mount({ slow: true });
       video.play = vi.fn();
 
       ctrl.handleEnterView();
@@ -340,6 +274,13 @@ describe("VideoController", () => {
 });
 
 describe("initProjectVideos", () => {
+  const WRAPPER_MARKUP = `
+    <div class="project-video-wrapper">
+      <video class="project-video-el"></video>
+      <button class="project-video-play"></button>
+    </div>
+  `;
+
   it("does nothing if no wrappers exist", () => {
     document.body.innerHTML = "<div>no wrappers here</div>";
     const spy = vi.spyOn(document, "querySelectorAll");
@@ -351,16 +292,7 @@ describe("initProjectVideos", () => {
   });
 
   it("creates a VideoController for each wrapper", () => {
-    document.body.innerHTML = `
-      <div class="project-video-wrapper">
-        <video class="project-video-el"></video>
-        <button class="project-video-play"></button>
-      </div>
-      <div class="project-video-wrapper">
-        <video class="project-video-el"></video>
-        <button class="project-video-play"></button>
-      </div>
-    `;
+    document.body.innerHTML = WRAPPER_MARKUP + WRAPPER_MARKUP;
 
     initProjectVideos();
 
@@ -377,12 +309,7 @@ describe("initProjectVideos", () => {
       writable: true,
     });
 
-    document.body.innerHTML = `
-      <div class="project-video-wrapper">
-        <video class="project-video-el"></video>
-        <button class="project-video-play"></button>
-      </div>
-    `;
+    document.body.innerHTML = WRAPPER_MARKUP;
 
     initProjectVideos();
 

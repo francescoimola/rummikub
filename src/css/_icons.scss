@@ -29,20 +29,25 @@ a[href^="tel:"]::after,
     background-color: currentColor;
     mask: var(--icon) center / contain no-repeat;
     -webkit-mask: var(--icon) center / contain no-repeat;
+}
+
+// only trailing icons animate — a leading icon's margin sits before the text, so nudging it shifts the whole label
+[data-icon]::after,
+a[href^="mailto:"]::after,
+a[href*="cal.com"]::after,
+a[href^="tel:"]::after {
     transition: margin-inline-start var(--dur-fast) var(--ease);
 }
 
 // hover/focus lives on the link, not the pseudo-element — &:hover here would compile to ::after:hover (matches only the icon box)
 @media (hover: hover) {
 
-    :is([data-icon], a[href^="mailto:"], a[href*="cal.com"], a[href^="tel:"]):hover::after,
-    [data-icon-before]:hover::before {
+    :is([data-icon], a[href^="mailto:"], a[href*="cal.com"], a[href^="tel:"]):hover::after {
         margin-inline-start: var(--space-xs);
     }
 }
 
-:is([data-icon], a[href^="mailto:"], a[href*="cal.com"], a[href^="tel:"]):focus-visible::after,
-[data-icon-before]:focus-visible::before {
+:is([data-icon], a[href^="mailto:"], a[href*="cal.com"], a[href^="tel:"]):focus-visible::after {
     margin-inline-start: var(--space-xs);
 }
 
@@ -50,6 +55,20 @@ a[href^="tel:"]::after,
     --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9ImN1cnJlbnRDb2xvciIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0xNC4yNSAxOEgzTDIuOTk3IDYuNjhsOC41NzYgNS45MzdhLjc1Ljc1IDAgMCAwIC44NTQgMEwyMSA2LjY4MlYxMy41aDEuNVY2QTEuNTAyIDEuNTAyIDAgMCAwIDIxIDQuNUgzQTEuNTAyIDEuNTAyIDAgMCAwIDEuNSA2djEyQTEuNTAyIDEuNTAyIDAgMCAwIDMgMTkuNWgxMS4yNVYxOFptNS4wOTktMTJMMTIgMTEuMDg4IDQuNjUxIDZoMTQuNjk4WiI+PC9wYXRoPgogIDxwYXRoIGQ9Ik0xOS41IDIxYTMgMyAwIDEgMCAwLTYgMyAzIDAgMCAwIDAgNloiPjwvcGF0aD4KPC9zdmc+);
     margin-inline-end: var(--space-3xs);
     vertical-align: var(--icon-align-s);
+}
+
+// no vertical-align — both consumers are inline-flex, so align-items centres the glyph
+[data-icon-before="copy"]::before,
+[data-icon-before="close"]::before {
+    margin-inline-end: var(--space-3xs);
+}
+
+[data-icon-before="copy"]::before {
+    --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9ImN1cnJlbnRDb2xvciIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0yMSA3LjVWMjFINy41VjcuNUgyMVpNMjEgNkg3LjVBMS41IDEuNSAwIDAgMCA2IDcuNVYyMWExLjUgMS41IDAgMCAwIDEuNSAxLjVIMjFhMS41IDEuNSAwIDAgMCAxLjUtMS41VjcuNUExLjUgMS41IDAgMCAwIDIxIDZaIj48L3BhdGg+CiAgPHBhdGggZD0iTTMgMTMuNUgxLjVWM0ExLjUgMS41IDAgMCAxIDMgMS41aDEwLjVWM0gzdjEwLjVaIj48L3BhdGg+Cjwvc3ZnPgo=);
+}
+
+[data-icon-before="close"]::before {
+    --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9ImN1cnJlbnRDb2xvciIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0xMiAxLjVDNi4xNSAxLjUgMS41IDYuMTUgMS41IDEyUzYuMTUgMjIuNSAxMiAyMi41IDIyLjUgMTcuODUgMjIuNSAxMiAxNy44NSAxLjUgMTIgMS41Wk0xMiAyMWMtNC45NSAwLTktNC4wNS05LTlzNC4wNS05IDktOSA5IDQuMDUgOSA5LTQuMDUgOS05IDlaIj48L3BhdGg+CiAgPHBhdGggZD0iTTE2LjA1IDE3LjI1IDEyIDEzLjJsLTQuMDUgNC4wNS0xLjItMS4yTDEwLjggMTIgNi43NSA3Ljk1bDEuMi0xLjJMMTIgMTAuOGw0LjA1LTQuMDUgMS4yIDEuMkwxMy4yIDEybDQuMDUgNC4wNS0xLjIgMS4yWiI+PC9wYXRoPgo8L3N2Zz4K);
 }
 
 [data-icon="arrow-right"]::after {
