@@ -537,15 +537,6 @@ main>*{
     }
 }
 
-.expandable {
-    @include reveal-collapsed;
-    scroll-margin-top: var(--space-m-l);
-
-    &.is-open {
-        @include reveal-open;
-    }
-}
-
 details {
     border: none;
     padding: 0;

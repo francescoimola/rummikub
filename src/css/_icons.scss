@@ -59,10 +59,6 @@ a[href^="tel:"]::after,
     transition: rotate var(--dur-medium) var(--ease), margin-inline-start var(--dur-fast) var(--ease);
 }
 
-[aria-expanded="true"][data-icon="arrow-right"]::after {
-    rotate: 90deg;
-}
-
 :is([data-icon="email"], a[href^="mailto:"])::after {
     --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9ImN1cnJlbnRDb2xvciIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0xNC4yNSAxOEgzTDIuOTk3IDYuNjhsOC41NzYgNS45MzdhLjc1Ljc1IDAgMCAwIC44NTQgMEwyMSA2LjY4MlYxMy41aDEuNVY2QTEuNTAyIDEuNTAyIDAgMCAwIDIxIDQuNUgzQTEuNTAyIDEuNTAyIDAgMCAwIDEuNSA2djEyQTEuNTAyIDEuNTAyIDAgMCAwIDMgMTkuNWgxMS4yNVYxOFptNS4wOTktMTJMMTIgMTEuMDg4IDQuNjUxIDZoMTQuNjk4WiI+PC9wYXRoPgogIDxwYXRoIGQ9Ik0xOS41IDIxYTMgMyAwIDEgMCAwLTYgMyAzIDAgMCAwIDAgNloiPjwvcGF0aD4KPC9zdmc+);
     margin-inline-start: var(--space-3xs);
