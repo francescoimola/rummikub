@@ -264,7 +264,7 @@ time {
 :where(a) {
     text-decoration: underline;
 
-    nav:has(&) & {
+    nav:has(&) &, sup:has(&) & {
         text-decoration: none;
     }
 }

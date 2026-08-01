@@ -3,6 +3,7 @@
 
 # Playground → Artmaking (the old Astro site used /playground)
 /playground                              /art/                                        301
+/playground/on-inner-desires             /writing/on-inner-desires/                   301
 
 # Blog → Writing (old Astro site used /blog; the rebuild uses /writing)
 /blog                                    /writing/                                    301
