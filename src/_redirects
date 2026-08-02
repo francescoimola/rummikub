@@ -12,3 +12,21 @@
 /blog/should-i-care-about-website-speed  /writing/should-i-care-about-website-speed/  301
 /blog/the-hard-part-isnt-the-no          /writing/the-hard-part-isnt-the-no/          301
 /blog/welcome-emails-why-bother          /writing/welcome-emails-why-bother/          301
+
+# Old service pages → Design Studio
+/websites                                /studio/design/                              301
+/consultations                           /studio/consultations/                       301
+
+# Work projects renamed in the rebuild
+/work/open-art                           /work/open-art-folke/                        301
+
+# Old case-study pages that are listing-only in the rebuild → work index
+/work/folkestone-bookshop                /work/                                       301
+/work/folks-directory                    /work/                                       301
+/work/greenwichgalleries                 /work/                                       301
+/work/not-bad                            /work/                                       301
+/work/sarah-holistic-coach               /work/                                       301
+/work/tedx                               /work/                                       301
+
+# Old Astro sitemap location → new sitemap
+/sitemap-index.xml                       /sitemap.xml                                 301
