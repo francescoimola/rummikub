@@ -47,7 +47,7 @@
     }
 
     // Full-bleed media only — reset radius/border since they're clipped square to the card corners; inset media keep the base radius
-    &>:is(img, picture, figure, video, canvas) {
+    :is(img, picture, figure, video, .project-video-wrapper) {
         border: none;
         border-radius: 0;
         box-shadow: none;
@@ -225,6 +225,67 @@ main svg {
     padding-block: var(--space-3xl);
     max-inline-size: calc(7* var(--space-2xl));
     color: var(--brand-900);
+}
+
+// ---- Duotone ----
+
+// Remaps a greyscale image onto two brand steps via blend modes — re-tints with --brand-hue, flips with light-dark()
+.duotone {
+    --duotone-highlight: light-dark(var(--brand-100), var(--brand-950));
+    --duotone-shadow: light-dark(var(--brand-950), var(--brand-50));
+    position: relative;
+    isolation: isolate; // stops the blend reaching the page background
+    border-radius: var(--border-radius);
+    overflow: clip;
+}
+
+.duotone img,
+.duotone video {
+    filter: var(--duotone-filter, grayscale(1) contrast(1.1)); // descendant, not direct child: eleventy-img wraps <img> in <picture>
+}
+
+.duotone :is(img, video, picture, canvas) {
+    display: block;
+    width: 100%;
+    border: transparent;
+}
+
+.duotone::before,
+.duotone::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+// Order is load-bearing: ::before blends against the media, ::after blends against that result
+// z-index is required: the filter above promotes the media to its own stacking context, which would otherwise paint over ::before and kill the multiply
+.duotone::before {
+    background: var(--duotone-highlight);
+    mix-blend-mode: multiply; // pulls whites down to the pale brand step
+    z-index: 1;
+}
+
+.duotone::after {
+    background: var(--duotone-shadow);
+    mix-blend-mode: screen; // lifts blacks up to the dark brand step
+    z-index: 2;
+}
+
+.project-video-wrapper.duotone {
+    --duotone-highlight: light-dark(var(--brand-50), var(--brand-950));
+
+    .project-video-play {
+        z-index: 3; // rides above both blend layers so the button stays untinted
+    }
+}
+
+// Opt-out for media that already reads as brand-green — green is the default palette, so it's the absent data-brand
+// Transparent blend layers composite to a no-op, so the media shows through untouched
+:root:is(:not([data-brand]), [data-brand="green"]) .duotone-unless-green {
+    --duotone-filter: none;
+    --duotone-highlight: transparent;
+    --duotone-shadow: transparent;
 }
 
 // ---- Data list ----

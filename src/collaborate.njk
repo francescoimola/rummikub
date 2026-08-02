@@ -1,0 +1,79 @@
+---
+layout: _base.njk
+title: Collaborate
+contentMode: contrast
+eleventyNavigation:
+  key: Collaborate
+  parent: Home
+---
+{% from "_project-item.njk" import projectItem %}
+{% from "_cta-card.njk" import ctaCard %}
+<header class="flow has-gap-xs pretty">
+    <h1>Available for hire<br>
+        <span class="dimmed">Web and content designer based in Kent</span></h1>
+    <div class="grid-cols-2-fixed flow has-gap-2xs has-mt-2xs has-mb-xs" style="display: grid;">
+        <div class="duotone">
+            <img src="./assets/images/francesco-bw.png" alt="Francesco Imola" width="1920" height="2468">
+        </div>
+        <div class="duotone">
+            <img src="./assets/images/francesco-presentation.png" alt="Francesco Imola" width="2560" height="2560" class="ratio-1-1">
+        </div>
+    </div>
+    <div class="flow has-gap-s">
+        <p>Some people hire me to make things look good, which is sensible, because first impressions are good for business. But what I’m most proud of is absorbing as much as I can about each client's world and working closely with them to facilitate major transitions.</p>
+        <p>My bread and butter are UX, copy, brand messaging, and marketing operations. In other words, I'm the person to call when it's time to turn chaos back into harmony—as cliche as that sounds.</p>
+        <p>I'm open to white-label or overflow briefs from agencies, and I'll consider an in-house role if the fit is right.</p>
+    </div>
+    <div class="flow has-gap-s">
+        <p>Want to ask me a question? <a href="mailto:francesco@imola.dev">Copy my email</a>
+        </p>
+    </header>
+    <section class="flow has-gap-s pretty" highlight-header>
+        <h2 class="has-mb-xs">What I do</h2>
+        <ul class="flow has-gap-xs pretty">
+            <li class="card">
+                <strong>Website design &amp; development</strong>
+                <span class="dimmed"><br>→ I make building great sites from messy briefs look easy. Bilingual in Figma, Webflow, Framer, HTML and CSS.</span></li>
+            <li class="card">
+                <strong>Copywriting &amp; content research</strong>
+                <span class="dimmed"><br>→ As long as you're willing for me to taint your name with odd lexicon and inaccurate sentence structure, I'm in.</span></li>
+            <li class="card">
+                <strong>Email marketing</strong>
+                <span class="dimmed"><br>→ Big big fan of welcome emails, automations, and hyper-personalised campaigns. Quality &gt; quantity.</span></li>
+            <li class="card">
+                <strong>Graphic design</strong>
+                <span class="dimmed"><br>→ Top of the range rectangles and circles, sure, but really be prepared to have long chats about the meaning of life.</span></li>
+        </ul>
+    </section>
+    <div highlight-header>
+        <h2 class="has-mb-xs">Is he any good?</h2>
+    </div>
+    {# Direct child of <main> so breakout has a wide containing block to animate down from #}
+    <a href="/work/" class="card flow link-card flow has-gap-l" view-animation="breakout"
+        style="margin-top: calc(var(--space-s) - var(--space-3xl))">
+        {% projectVideo "/assets/video/work_showreel.mp4",
+        "screenshots of selected projects and work in slideshow",
+        webm = "/assets/video/work_showreel.webm" %}
+        <h3 data-icon="arrow-right" class="has-mt-2xs">See what I've done</h3>
+    </a>
+    <section class="flow has-gap-l pretty" highlight-header>
+        <h2>Can we rely on him?</h2>
+        <p>I enjoy working with talented people who care deeply about what they do, and I stick around when things get messy. Found yourself in uncharted waters? We'll cross them together. Is your design team under pressure? I can be the release valve. Is your marketing department struggling to agree on what needs doing? I may not have all the answers, but I'll support them as they search for them.</p>
+        <figure class="card outline flow has-gap-s">
+            <blockquote>
+                <p>I have never worked with someone so deeply reliable, who has gone above and beyond my expectations. The sheer detail, diligence and attention Fran has to his work is worth its weight in gold, tenfold! [...] He's turned the weight on my shoulders into air.</p>
+            </blockquote>
+            <figcaption>Cairo Woodward<br>Co-founder, <a href="https://www.theloftstudio.uk" target="_blank" rel="noopener noreferrer">The Loft</a>
+            </figcaption>
+        </figure>
+    </section>
+    <section class="flow has-gap-s pretty" highlight-header>
+        <h2 class="has-mb-xs">What does he have that others don't?</h2>
+        <p>While many of the people you could hire are capable of coming up with spectacular visual concepts, I predict they'll strike dumb when asked to reveal their thought process, or explain how they intend to guide a user from point A to point B.</p>
+        <p>That's roughly where I come in. Drawing on my skills in graphic design, UX, UI and content writing, as well as 8 years of experience in inbound marketing, I take an annoyingly thorough approach to my work, I'm not scared of revisions and feedback, and I bend over backwards (for which we have to thank my yoga teacher!) to deliver beautiful AND meaningful results to the highest standard, 99% of the time.</p>
+        <p>If that's the sort of person you're looking for, guess what, it's right here.</p>
+    </section>
+    {{ ctaCard(
+    "What's the catch?",
+    "There is none. Say hello, and maybe we'll grab a coffee if you're nearby."
+) }}

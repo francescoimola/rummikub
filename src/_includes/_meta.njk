@@ -6,11 +6,27 @@
 {%- endif -%}
 
 <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
-<link rel="alternate" hreflang="en" href="{{ site.url }}{{ page.url }}" />
+<link rel="alternate" type="application/rss+xml" title="{{ site.name }} — Writing" href="/rss.xml" />
 
-<meta property="og:title" content="{{ title }}" />
+{%- set metaTitle = (site.name + " | " + title) if page.url == '/' else (title + " | " + site.name) %}
+{%- set metaDescription = teaser | default(description) | default(site.description) %}
+{%- set ogImage = image | default('https://res.cloudinary.com/dax6x2pto/image/upload/c_lfill,w_1200,f_auto,q_auto/Open_Graph_Image_rfqysu.png') %}
+{%- if '://' not in ogImage %}{% set ogImage = site.url + ogImage %}{% endif %}
+
+<meta property="og:title" content="{{ metaTitle }}" />
 <meta property="og:site_name" content="{{ site.name }}" />
 <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
-<meta property="og:description" content="{{ teaser | default(description) | default(site.description) }}" />
+<meta property="og:description" content="{{ metaDescription }}" />
 <meta property="og:type" content="{% if tags and 'writing' in tags %}article{% else %}website{% endif %}" />
-<meta property="og:image" content="{{ image | default('https://res.cloudinary.com/dax6x2pto/image/upload/c_lfill,w_1200,f_auto,q_auto/Open_Graph_Image_rfqysu.png') }}" />
+<meta property="og:image" content="{{ ogImage }}" />
+{%- if alt %}
+<meta property="og:image:alt" content="{{ alt }}" />
+{%- endif %}
+{%- if tags and 'writing' in tags and date %}
+<meta property="article:published_time" content="{{ date | dateToRfc3339 }}" />
+{%- endif %}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ metaTitle }}" />
+<meta name="twitter:description" content="{{ metaDescription }}" />
+<meta name="twitter:image" content="{{ ogImage }}" />

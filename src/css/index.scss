@@ -655,7 +655,7 @@ footer a {
 
 }
 
-a.service {
+a.service, a.link-card {
     color: var(--color-base); // whole card is a link; keep title + body copy neutral, only the CTA below is accent-tinted
 
     @media (hover: hover) {

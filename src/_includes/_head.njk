@@ -15,7 +15,7 @@
   {%- include "_meta.njk" -%}
   {%- include "_schema.njk" -%}
 
-  <title>{% if page.url == '/' %}{{ site.name }}{% else %}{{ title }} | {{ site.name }}{% endif %}</title>
+  <title>{% if page.url == '/' %}{{ site.name }} | {{ title }}{% else %}{{ title }} | {{ site.name }}{% endif %}</title>
 
   <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Ronzino-Regular.woff2" crossorigin="anonymous">
   <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Ronzino-Medium.woff2" crossorigin="anonymous">
@@ -24,6 +24,8 @@
   <link rel="preload" as="style" href="/css/index.css">
   <link rel="stylesheet" href="/css/index.css">
 
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
