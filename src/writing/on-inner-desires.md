@@ -1,7 +1,7 @@
 ---
 title: "On Inner Desires and Art-making in times of confinement"
 date: 2020-07-01
-teaser: "Exhibition essay that accompanied 'Feed Your Demons and Meet the Ally', where I reflect on how the time gifted us by the pandemic forced us to look for answers where none seem to exist."
+teaser: "Exhibition essay for 'Feed Your Demons and Meet the Ally', on how the time the pandemic gifted us forced us to look for answers where none seem to exist."
 image: /assets/art/feed-your-demons-and-meet-the-ally-2.png
 alt: "Exhibition essay"
 type: essays

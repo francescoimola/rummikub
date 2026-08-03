@@ -1,5 +1,7 @@
 ---
 title: The Collective
+metaTitle: "The Collective | Case study | Francesco Imola"
+description: A website rebuild for a bespoke acoustics manufacturer, made for architects and specifiers. How three competing stakeholder visions became one coherent design.
 services: Web Design, Copywriting, UX Consulting
 contentMode: contrast
 image: /assets/portfolio/the_collective_homepage.png

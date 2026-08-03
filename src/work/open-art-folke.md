@@ -1,5 +1,7 @@
 ---
 title: Open Art Folke
+metaTitle: "Open Art Folke | Case study | Francesco Imola"
+description: Branding, website and marketing strategy for Folkestone's first artist-led grassroots art festival. How you explain a town-wide celebration to newcomers.
 services: Branding, Marketing Strategy, Web Design
 contentMode: contrast
 image: /assets/portfolio/OAF_Homepage.png

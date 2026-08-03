@@ -1,5 +1,6 @@
 ---
 title: "3 things a designer would tweak on your flyer, and how to fix them yourself"
+metaTitle: "3 things a designer would tweak on your flyer"
 date: 2026-03-11
 teaser: "A guide in miniature for non-designers to the three basic details that separate a forgettable flyer from one worth following up on."
 image: /assets/writing/flyer_article_cover.png

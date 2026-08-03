@@ -1,5 +1,7 @@
 ---
 title: Make & Mind
+metaTitle: "Make & Mind | Case study | Francesco Imola"
+description: Web design, copy and SEO for an art and mindfulness workshop pilot. Working with no photography, no brand guidelines and one person's time as the budget.
 services: UI/UX Design, Copywriting, SEO, Framer
 contentMode: contrast
 image: /assets/portfolio/makemind_homepage.png

@@ -1,5 +1,7 @@
 ---
 title: The Loft
+metaTitle: "The Loft | Case study | Francesco Imola"
+description: A StoryBrand redesign for a multipurpose venue in Folkestone. Fixing vague messaging and a booking funnel that asked people to commit before understanding.
 services: UX/UI Design, Copywriting, Brand Messaging
 image: /assets/portfolio/the_loft_offerings_section.png
 alt: The Loft offerings section
