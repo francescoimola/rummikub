@@ -48,6 +48,7 @@ SITE_AUDIT.md
 site-fixes.xlsx
 web-design-process.excalidraw
 *.code-workspace
-
-# SDD scratch
 .superpowers/
+.docs/accessibility-audit.md
+.docs/cutover-runbook.md
+.docs/voice-guide.md

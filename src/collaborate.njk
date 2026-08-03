@@ -16,7 +16,7 @@ eleventyNavigation:
         <div class="duotone">
             <img src="./assets/images/francesco-bw.png" alt="Francesco Imola" width="1920" height="2468">
         </div>
-        <div class="duotone">
+        <div class="duotone" style="align-self: flex-end;">
             <img src="./assets/images/francesco-presentation.png" alt="Francesco Imola" width="2560" height="2560" class="ratio-1-1">
         </div>
     </div>
@@ -50,12 +50,12 @@ eleventyNavigation:
         <h2 class="has-mb-xs">Is he any good?</h2>
     </div>
     {# Direct child of <main> so breakout has a wide containing block to animate down from #}
-    <a href="/work/" class="card flow link-card flow has-gap-l" view-animation="breakout"
+    <a href="/work/" class="card flow link-card flow has-gap-s" view-animation="breakout"
         style="margin-top: calc(var(--space-s) - var(--space-3xl))">
         {% projectVideo "/assets/video/work_showreel.mp4",
         "screenshots of selected projects and work in slideshow",
         webm = "/assets/video/work_showreel.webm" %}
-        <h3 data-icon="arrow-right" class="has-mt-2xs">See what I've done</h3>
+        <h3 data-icon="arrow-right" class="has-mt-3xs">See what I've done</h3>
     </a>
     <section class="flow has-gap-l pretty" highlight-header>
         <h2>Can we rely on him?</h2>

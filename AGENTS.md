@@ -1,6 +1,6 @@
 # Rummikub — Francesco Imola's portfolio
 
-**Stack:** Eleventy 3 · Nunjucks templates · SCSS (compiled via `@11tyrocks/eleventy-plugin-sass-lightningcss` → LightningCSS) · pnpm · Deploys to Netlify (or Cloudflare Pages — TBD).
+**Stack:** Eleventy 3 · Nunjucks templates · SCSS (compiled via `@11tyrocks/eleventy-plugin-sass-lightningcss` → LightningCSS) · pnpm · Deploys via Cloudflare Pages (git-connected, `main` = production).
 
 **Branch:** `development` — active development (`eleventy-rebuild` has been merged in). `main` still holds the old Astro site — do not touch until cutover (see Known gaps below).
 
@@ -17,6 +17,7 @@ The Eleventy rebuild's code migration is mostly done, but a few things are still
 - `src/robots.txt` not yet populated
 - `src/_redirects` holds only the blog→writing 301s — the rest of the old site's redirect map is still needed
 - Production cutover not yet done — `main` still runs the old Astro site on Cloudflare Pages; see [docs/cutover-runbook.md](docs/cutover-runbook.md)
+- Cloudflare's build config is currently a bridged command serving both `main` (Astro) and `development` (Eleventy) previews from one shared setting — simplify it as part of cutover; runbook has the exact before/after
 
 ## Commands
 
@@ -159,3 +160,7 @@ Embed lazy, autoplay-in-view videos with the `projectVideo` shortcode (defined i
 | Build throws `Too many featured work projects` | More than 3 `src/work/` posts have `featured: true`; the `workFeatured` collection caps at 3. Drop `featured: true` on the extras |
 | Body image has no spacing, no caption, or two images stack flush | Markdown `![]()` — adjacent ones share one `<p>` and the `.case-study` selectors miss them. Use `figureImg` (see Long-form pages) |
 | Opening image doesn't bleed, or every image animates the same | `.case-study__intro` is missing or isn't the first child; the `settle`/`breakout` split keys off it |
+
+## License
+
+[GPL-3.0](LICENSE.md) — see [LICENSE.md](LICENSE.md) for full text.

@@ -73,7 +73,7 @@ a[href^="tel:"]::after {
 
 [data-icon="arrow-right"]::after {
     --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik01IDEyaDE0Ij48L3BhdGg+CiAgPHBhdGggZD0ibTEyIDUgNyA3LTcgNyI+PC9wYXRoPgo8L3N2Zz4=);
-    margin-inline-start: var(--space-3xs);
+    margin-inline-start: var(--space-2xs);
     vertical-align: var(--icon-align-m);
     transition: rotate var(--dur-medium) var(--ease), margin-inline-start var(--dur-fast) var(--ease);
 }
