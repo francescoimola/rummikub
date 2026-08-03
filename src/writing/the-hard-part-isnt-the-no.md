@@ -1,5 +1,6 @@
 ---
 title: "The hard part isn't the no"
+metaTitle: "The hard part isn't the no | Francesco Imola"
 date: 2026-03-26
 teaser: "There's no shortage of advice on how to say no. But how do you decide? How do you weigh your Nos against your Yesses? This is the story of how I did it."
 image: /assets/writing/nope.png

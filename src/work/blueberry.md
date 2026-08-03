@@ -1,5 +1,7 @@
 ---
 title: Blueberry
+metaTitle: "Blueberry | Case study | Francesco Imola"
+description: "Two years running marketing for a talent agency: costs cut by a third, email open rates doubled, and a department finally joined up with the business."
 services: Content Marketing, Internal Communications
 image: /assets/portfolio/blueberry_socialpost.png
 alt: Blueberry instagram post with text 'Toss aside the rule book'

@@ -8,7 +8,8 @@ permalink: "/writing/{{ typeSlug }}/"
 layout: _base.njk
 eleventyComputed:
   title: "{{ writingTypes[typeSlug].label }}"
-  description: "{{ writingTypes[typeSlug].blurb }}"
+  metaTitle: "{{ writingTypes[typeSlug].metaTitle }}"
+  description: "{{ writingTypes[typeSlug].metaDescription }}"
   eleventyNavigation:
     key: "{{ typeSlug }}" 
     parent: Writing

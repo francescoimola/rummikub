@@ -1,5 +1,7 @@
 ---
 title: Mega Seating Plan
+metaTitle: "Mega Seating Plan | Case study | Francesco Imola"
+description: SEO research and blog writing for an EdTech tool built for teachers. Over half the posts ranked in Google's top ten, and every draft was approved first time.
 services: SEO Research, Content Writing
 image: /assets/portfolio/megaseatingplan.png
 alt: Blog post for Mega Seating Plan ranking 4th on Google search results

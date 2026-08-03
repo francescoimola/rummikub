@@ -15,7 +15,9 @@
   {%- include "_meta.njk" -%}
   {%- include "_schema.njk" -%}
 
-  <title>{% if page.url == '/' %}{{ site.name }} | {{ title }}{% else %}{{ title }} | {{ site.name }}{% endif %}</title>
+  {# Used verbatim, nothing appended — add "| Francesco Imola" in frontmatter where you want it. #}
+  {# metaTitle wins where the h1 (title) needs to stay short, e.g. case studies. #}
+  <title>{{ metaTitle | default(title) }}</title>
 
   <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Ronzino-Regular.woff2" crossorigin="anonymous">
   <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Ronzino-Medium.woff2" crossorigin="anonymous">
