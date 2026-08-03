@@ -9,6 +9,7 @@ const MARKUP = `
     </div>
     <button type="button" data-dialog-copy>Copy to clipboard</button>
     <button type="button" data-dialog-close>Close</button>
+    <p role="status" data-dialog-status></p>
   </dialog>
 `;
 
@@ -22,6 +23,7 @@ async function setup(markup = MARKUP) {
     dialog: document.querySelector("dialog"),
     copyBtn: document.querySelector("[data-dialog-copy]"),
     closeBtn: document.querySelector("[data-dialog-close]"),
+    status: document.querySelector("[data-dialog-status]"),
   };
 }
 
@@ -127,26 +129,32 @@ describe("dialog-copy.js", () => {
     expect(dialog.open).toBe(true);
   });
 
-  it("confirms on the copy button then restores its label", async () => {
-    const { copyBtn } = await setup();
+  it("announces success in the status region without renaming the button", async () => {
+    const { copyBtn, status } = await setup();
 
     copyBtn.click();
-
-    expect(copyBtn.textContent).toBe("Copied!");
-    vi.advanceTimersByTime(2000);
+    await vi.waitFor(() => {
+      expect(status.textContent).toBe("Copied to clipboard");
+    });
     expect(copyBtn.textContent).toBe("Copy to clipboard");
+
+    vi.advanceTimersByTime(2000);
+    expect(status.textContent).toBe("");
   });
 
-  it("restores the label even when the write is rejected", async () => {
+  it("announces a failure message when the write is rejected", async () => {
     writeSpy.mockRejectedValue(new Error("denied"));
-    const { copyBtn } = await setup();
+    const { copyBtn, status } = await setup();
 
     copyBtn.click();
-    copyBtn.click();
 
-    expect(copyBtn.textContent).toBe("Copied!");
-    vi.advanceTimersByTime(2000);
+    await vi.waitFor(() => {
+      expect(status.textContent).toBe("Copy failed");
+    });
     expect(copyBtn.textContent).toBe("Copy to clipboard");
+
+    vi.advanceTimersByTime(2000);
+    expect(status.textContent).toBe("");
   });
 
   it("closes without copying when the close button is used", async () => {
