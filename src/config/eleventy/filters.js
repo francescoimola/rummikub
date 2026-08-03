@@ -40,6 +40,16 @@ module.exports = function (eleventyConfig) {
   });
 
 
+  // Sitemap <lastmod>: trust only `updated:`, or a writing post's date — Eleventy's file-date fallback resets on every CI clone
+  eleventyConfig.addFilter("sitemapLastmod", function (item) {
+    const data = (item && item.data) || {};
+    const tags = [].concat(data.tags || []);
+    const value = data.updated || (tags.includes("writing") ? data.date : null);
+    if (!value) return "";
+    const date = new Date(value);
+    return isNaN(date.valueOf()) ? "" : date.toISOString().replace(/\.\d{3}Z$/, "Z");
+  });
+
   eleventyConfig.addFilter("byType", function (items, type) {
     if (!type) return items;
     return items.filter(function (p) {

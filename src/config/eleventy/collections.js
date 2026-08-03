@@ -11,6 +11,11 @@ function sortByDateDesc(a, b) {
   return b.date - a.date;
 }
 
+// `hidden: true` keeps a live page out of listings and RSS but still in collections.all, so the sitemap finds it
+function isVisible(p) {
+  return p.data.hidden !== true;
+}
+
 module.exports = function (eleventyConfig) {
   eleventyConfig.addCollection("work", function (collectionApi) {
     // Order by project end date (YYYY-MM string), most recent first
@@ -56,15 +61,21 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addCollection("writing", function (collectionApi) {
     // All writing items (on-site posts + external stubs), newest first
-    return collectionApi.getFilteredByTag("writing").sort(sortByDateDesc);
+    return collectionApi
+      .getFilteredByTag("writing")
+      .filter(isVisible)
+      .sort(sortByDateDesc);
   });
 
   eleventyConfig.addCollection("writingTypes", function (collectionApi) {
     // Type slugs that actually have items, kept in the fixed section order
     var present = new Set();
-    collectionApi.getFilteredByTag("writing").forEach(function (p) {
-      if (p.data.type) present.add(p.data.type);
-    });
+    collectionApi
+      .getFilteredByTag("writing")
+      .filter(isVisible)
+      .forEach(function (p) {
+        if (p.data.type) present.add(p.data.type);
+      });
     return WRITING_TYPE_ORDER.filter(function (t) {
       return present.has(t);
     });

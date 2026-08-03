@@ -6,7 +6,7 @@ image: /assets/art/feed-your-demons-and-meet-the-ally-2.png
 alt: "Exhibition essay"
 type: essays
 permalink: /writing/on-inner-desires/
-eleventyExcludeFromCollections: true
+hidden: true
 ---
 
 {% figureImg "/assets/art/feed-your-demons-and-meet-the-ally-2.png", "Exhibition essay" %}

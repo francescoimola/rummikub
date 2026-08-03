@@ -64,6 +64,12 @@ pnpm clean            # rm -rf public
 
 `title` doubles as the on-page `<h1>` for work/writing items (`_base.njk`) and via `pageHeader` elsewhere. Where the h1 must stay short (`The Loft`) or the SEO title differ, set **`metaTitle`** — it overrides `<title>`, `og:title`, `twitter:title` and schema `name`, and leaves the h1 alone. `writingTypes.json` carries `metaTitle`/`metaDescription` per type for the same reason (`blurb`/`label` stay on-page). Writing posts use `teaser` as their description; it also renders in listings.
 
+## Sitemap
+
+`src/sitemap.njk` → `/sitemap.xml`, built from `collections.all` (URL-sorted, trailing-slash pages only). Two opt-outs: `noindex: true` drops the page from the sitemap **and** emits the robots meta; `hidden: true` keeps a live page out of the writing listings and RSS but leaves it in the sitemap (`on-inner-desires`, linked from `/art/`). Never use `eleventyExcludeFromCollections` on a page that renders — it silently orphans it from the sitemap.
+
+`<lastmod>` is emitted only when it's provably accurate: set **`updated: YYYY-MM-DD`** in frontmatter when you materially revise a page; writing posts fall back to `date`. Everything else omits the tag on purpose — Eleventy's default `page.date` is the file's creation time, which a fresh CI clone resets, so every deploy would stamp every URL with the build date and Google would stop trusting the whole file.
+
 ## Long-form pages (work + writing)
 
 Case studies and writing posts share **one** branch in `_base.njk` → `<main class="case-study text">`, writing adding `writing-post`. It renders a `.case-study__intro` (h1 + one dimmed line: `services` on work, `<time>` + type on writing) and nothing else — the opening image is authored as the first `figureImg` **in the body**, not by the template. `image:`/`alt:` frontmatter is listing-thumbnail and OG duty only; a post without one just leads with the intro then text.
