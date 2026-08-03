@@ -105,10 +105,13 @@
 
 // Single-column stacks that fold to two columns at their own container width (CSS rule 10)
 // .split-row is its own grid, not cleacss's .grid-reset — that reserves a margin track full-bleed can't use
+// align-items: stretch overrides cleacss's .flow (align-items: flex-start, @layer reset) so row items stay equal-height — needed whenever .flow is combined in for its gap token (CSS rule 3)
 .grid-responsive-cols,
+.grid-cols-2-fixed,
 .split-row {
     display: grid;
     grid-template-columns: 1fr;
+    align-items: stretch;
 }
 
 .split-row {
