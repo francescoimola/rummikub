@@ -2,22 +2,16 @@
 
 **Stack:** Eleventy 3 · Nunjucks templates · SCSS (compiled via `@11tyrocks/eleventy-plugin-sass-lightningcss` → LightningCSS) · pnpm · Deploys via Cloudflare Pages (git-connected, `main` = production).
 
-**Branch:** `development` — active development (`eleventy-rebuild` has been merged in). `main` still holds the old Astro site — do not touch until cutover (see Known gaps below).
+**Branch:** `development` — active development. Merging to `main` deploys francescoimola.com via Cloudflare Pages.
 
 ## Reference docs
 
-- **Voice & tone:** [voice-guide.md](docs/voice-guide.md)
+- **Voice & tone:** `.docs/voice-guide.md` (local-only, gitignored)
 - **Testing:** [testing-guide.md](testing-guide.md) — run `pnpm test` before committing
 
 ## Known gaps
 
-The Eleventy rebuild's code migration is mostly done, but a few things are still open:
-
-- Writing section has clearly-marked placeholder entries (`src/writing/example-*.md`) so every type/section renders — replace or delete before cutover (they also appear in `/rss.xml`)
-- `src/robots.txt` not yet populated
-- `src/_redirects` holds only the blog→writing 301s — the rest of the old site's redirect map is still needed
-- Production cutover not yet done — `main` still runs the old Astro site on Cloudflare Pages; see [docs/cutover-runbook.md](docs/cutover-runbook.md)
-- Cloudflare's build config is currently a bridged command serving both `main` (Astro) and `development` (Eleventy) previews from one shared setting — simplify it as part of cutover; runbook has the exact before/after
+- Cloudflare's build config may still be the bridged Astro/Eleventy command (`npm run build && if [ -d public ]; …` → `dist`) — post-cutover it should be plain `npm run build` → `public`; see `.docs/cutover-runbook.md` (local-only, gitignored)
 
 ## Commands
 
