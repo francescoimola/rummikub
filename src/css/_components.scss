@@ -373,25 +373,29 @@ main svg {
 
 .project-video-play {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    inset-block-end: var(--space-2xs-xs);
+    inset-inline-end: var(--space-2xs-xs);
     border: none;
     background: none;
     cursor: pointer;
     padding: 0;
-    opacity: var(--opacity-disabled); // dimmed while playing, but always visible and reachable
-    transition: opacity var(--dur-fast) var(--ease);
+    opacity: 0; // hidden unless the controller flags it (reduced motion, slow connection, or a failed play)
+    visibility: hidden; // keeps the hidden button out of the focus order and accessibility tree
+    pointer-events: none;
+    transition: opacity var(--dur-fast) var(--ease), visibility 0s var(--dur-fast);
     z-index: 1;
 
-    &:hover,
-    &:focus-visible {
-        opacity: 1;
+    svg {
+        inline-size: 2rem; // cleacss's svg { max-width: 100%; height: auto } otherwise stretches the icon
+        block-size: 2rem;
     }
 }
 
 .project-video-play[data-visible] {
     opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity var(--dur-fast) var(--ease), visibility 0s;
 }
 
 // ---- Project item (Selected Work listing) ----
