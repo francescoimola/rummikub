@@ -47,7 +47,8 @@
     }
 
     // Full-bleed media only — reset radius/border since they're clipped square to the card corners; inset media keep the base radius
-    :is(img, picture, figure, video, .project-video-wrapper) {
+    // Direct children only: a descendant selector also catches wrapped media like .writing-item__thumb img and outranks its own sizing
+    >:is(img, picture, figure, video) {
         border: none;
         border-radius: 0;
         box-shadow: none;
@@ -63,6 +64,11 @@
         &:last-child {
             margin-block-end: calc(-1 * var(--pad));
         }
+    }
+
+    // projectVideo nests its wrapper inside the figure — the figure above owns the bleed, this just squares off the wrapper's own radius
+    >figure .project-video-wrapper {
+        border-radius: 0;
     }
 
     &.giant {
