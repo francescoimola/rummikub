@@ -13,7 +13,7 @@
     "test:watch": "vitest"
   },
   "browserslist": "last 2 Chrome versions, last 3 Edge versions, last 2 Firefox versions, last 3 Safari versions",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "dependencies": {
     "@11tyrocks/eleventy-plugin-sass-lightningcss": "^1.2.0",
     "lenis": "^1.3.25",

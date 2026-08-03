@@ -1,14 +1,10 @@
 # francescoimola.com
 
-![fallow: A (90)](badge.svg)
+![fallow: A (90)](badge.svg) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE.md)
 
-Delightful things with pixels and words made by Francesco Imola from a seaside town in Kent.
+I make delightful things with pixels and words. This is my half-portfolio, half-marketing site, built with Eleventy LightningCSS, and Cloudflare Pages as a host.
 
-## What this is
-
-This is my portfolio site, built from scratch with Eleventy.
-
-## Tech stack
+## Stack
 
 | | |
 |---|---|
@@ -27,11 +23,12 @@ You'll need Node 22+ and pnpm.
 pnpm install
 pnpm start        # dev server with live reload
 pnpm build        # production build → public/
+pnpm test         # run the test suite (vitest)
 ```
 
-That's it.
+As far as the basics, that's it.
 
-## Project structure
+## Structure
 
 ```
 src/
@@ -57,4 +54,4 @@ CI runs on GitHub Actions: build + link check on every push to `development` and
 
 ## License
 
-ISC
+[GPL-3.0](LICENSE.md) — see [LICENSE.md](LICENSE.md) for full text.
