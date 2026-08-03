@@ -24,6 +24,10 @@ class VideoController {
     this.btn.removeAttribute("data-visible");
   }
 
+  updateLabel() {
+    this.btn.setAttribute("aria-label", this.video.paused ? "Play video" : "Pause video");
+  }
+
   ensureLoaded() {
     if (this.loaded) return;
     this.loaded = true;
@@ -42,7 +46,13 @@ class VideoController {
     this.ensureLoaded();
     var p = this.video.play();
     if (p && p.then) {
-      p.then(() => this.hideBtn()).catch(() => this.showBtn());
+      p.then(() => {
+        this.hideBtn();
+        this.updateLabel();
+      }).catch(() => {
+        this.showBtn();
+        this.updateLabel();
+      });
     }
   }
 
@@ -55,6 +65,7 @@ class VideoController {
   handleLeaveView() {
     if (!this.video.paused) {
       this.video.pause();
+      this.updateLabel();
       if (this.reducedMotion.matches) this.showBtn();
     }
   }
@@ -77,6 +88,7 @@ class VideoController {
       else {
         this.video.pause();
         this.showBtn();
+        this.updateLabel();
       }
     });
 
@@ -84,6 +96,7 @@ class VideoController {
       if (this.reducedMotion.matches) {
         this.video.pause();
         this.showBtn();
+        this.updateLabel();
       } else if (this.inView) {
         this.tryPlay();
       }

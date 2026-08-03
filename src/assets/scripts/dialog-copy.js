@@ -24,7 +24,7 @@ document.querySelectorAll("[data-dialog-open]").forEach(function (trigger) {
   var dialog = document.getElementById(trigger.getAttribute("data-dialog-open"));
   if (!dialog) return;
 
-  var label;
+  var status = dialog.querySelector("[data-dialog-status]");
   var timer;
 
   trigger.addEventListener("click", function () {
@@ -38,12 +38,19 @@ document.querySelectorAll("[data-dialog-open]").forEach(function (trigger) {
     var content = dialog.querySelector("[data-dialog-content]");
     if (!btn || !content) return;
 
-    copy(content).catch(function () {}); // a denied write must not break the label swap
-    if (label === undefined) label = btn.textContent;
-    btn.textContent = "Copied!";
-    clearTimeout(timer);
-    timer = setTimeout(function () {
-      btn.textContent = label;
-    }, RESET_DELAY);
+    copy(content)
+      .then(function () {
+        if (status) status.textContent = "Copied to clipboard";
+      })
+      .catch(function () {
+        if (status) status.textContent = "Copy failed";
+      });
+
+    if (status) {
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        status.textContent = "";
+      }, RESET_DELAY);
+    }
   });
 });

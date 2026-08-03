@@ -46,13 +46,16 @@
         background: var(--accent-surface);
     }
 
+    :is(img, picture, figure, video) {
+        display: block;
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+    }
+
     // Full-bleed media only — reset radius/border since they're clipped square to the card corners; inset media keep the base radius
     // Direct children only: a descendant selector also catches wrapped media like .writing-item__thumb img and outranks its own sizing
     >:is(img, picture, figure, video) {
-        border: none;
-        border-radius: 0;
-        box-shadow: none;
-        display: block;
         inline-size: calc(100% + 2 * var(--pad));
         max-inline-size: none; // cleacss resets media to max-width:100%, which would clamp the bleed back to content width
         margin-inline: calc(-1 * var(--pad));
@@ -377,15 +380,18 @@ main svg {
     background: none;
     cursor: pointer;
     padding: 0;
-    opacity: 0;
-    pointer-events: none;
+    opacity: var(--opacity-disabled); // dimmed while playing, but always visible and reachable
     transition: opacity var(--dur-fast) var(--ease);
     z-index: 1;
+
+    &:hover,
+    &:focus-visible {
+        opacity: 1;
+    }
 }
 
 .project-video-play[data-visible] {
     opacity: 1;
-    pointer-events: auto;
 }
 
 // ---- Project item (Selected Work listing) ----

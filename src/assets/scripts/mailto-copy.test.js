@@ -1,16 +1,28 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
-const ONE_LINK = '<a href="mailto:test@example.com">Contact</a>';
-const TWO_LINKS = `
-  <a href="mailto:test@example.com">Contact</a>
-  <a href="mailto:other@example.com">Other</a>
+const ONE_CONTROL = `
+  <a href="mailto:test@example.com">test@example.com</a>
+  <button type="button" data-copy-email="test@example.com">Copy email</button>
+  <p role="status" data-copy-status></p>
+`;
+const TWO_CONTROLS = `
+  <div>
+    <a href="mailto:test@example.com">test@example.com</a>
+    <button type="button" data-copy-email="test@example.com">Copy email</button>
+    <p role="status" data-copy-status></p>
+  </div>
+  <div>
+    <a href="mailto:other@example.com">other@example.com</a>
+    <button type="button" data-copy-email="other@example.com">Copy email</button>
+    <p role="status" data-copy-status></p>
+  </div>
 `;
 
 // The module is a side-effectful IIFE, so the DOM must exist before the import
-async function mount(html = ONE_LINK) {
+async function mount(html = ONE_CONTROL) {
   document.body.innerHTML = html;
   await import("./mailto-copy.js");
-  return document.querySelectorAll('a[href^="mailto:"]');
+  return document.querySelectorAll("[data-copy-email]");
 }
 
 describe("mailto-copy.js", () => {
@@ -24,65 +36,65 @@ describe("mailto-copy.js", () => {
       configurable: true,
       writable: true,
     });
-    vi.useFakeTimers();
   });
 
   afterEach(() => {
     document.body.innerHTML = "";
-    vi.useRealTimers();
     vi.restoreAllMocks();
   });
 
-  it("prevents default on click", async () => {
-    const [link] = await mount();
+  it("does not prevent the mailto link's default navigation", async () => {
+    document.body.innerHTML = ONE_CONTROL;
+    const mailtoLink = document.querySelector('a[href^="mailto:"]');
     const event = new Event("click", { bubbles: true, cancelable: true });
     const preventDefaultSpy = vi.spyOn(event, "preventDefault");
+    await import("./mailto-copy.js");
 
-    link.dispatchEvent(event);
+    mailtoLink.dispatchEvent(event);
 
-    expect(preventDefaultSpy).toHaveBeenCalled();
+    expect(preventDefaultSpy).not.toHaveBeenCalled();
   });
 
   it("copies email address to clipboard", async () => {
-    const [link] = await mount();
+    const [btn] = await mount();
 
-    link.click();
+    btn.click();
 
     expect(writeTextSpy).toHaveBeenCalledWith("test@example.com");
   });
 
-  it("shows 'Email copied!' text after clicking", async () => {
-    const [link] = await mount();
+  it("announces success in the status region without changing the button label", async () => {
+    const [btn] = await mount();
+    const status = document.querySelector("[data-copy-status]");
 
-    link.click();
+    btn.click();
     await vi.waitFor(() => {
-      expect(link.textContent).toBe("Email copied!");
+      expect(status.textContent).toBe("Email address copied to clipboard");
+    });
+    expect(btn.textContent).toBe("Copy email");
+  });
+
+  it("announces a failure message when the clipboard write rejects", async () => {
+    writeTextSpy.mockRejectedValue(new Error("denied"));
+    const [btn] = await mount();
+    const status = document.querySelector("[data-copy-status]");
+
+    btn.click();
+
+    await vi.waitFor(() => {
+      expect(status.textContent).toBe("Copy failed — the address is test@example.com");
     });
   });
 
-  it("restores original text after 2 seconds", async () => {
-    const [link] = await mount();
+  it("handles multiple controls independently", async () => {
+    const [btn1] = await mount(TWO_CONTROLS);
+    const [status1, status2] = document.querySelectorAll("[data-copy-status]");
 
-    link.click();
+    btn1.click();
     await vi.waitFor(() => {
-      expect(link.textContent).toBe("Email copied!");
+      expect(status1.textContent).toBe("Email address copied to clipboard");
     });
-
-    vi.advanceTimersByTime(2000);
-
-    expect(link.textContent).toBe("Contact");
-  });
-
-  it("handles multiple links independently", async () => {
-    const [link1, link2] = await mount(TWO_LINKS);
-
-    link1.click();
-    await vi.waitFor(() => {
-      expect(link1.textContent).toBe("Email copied!");
-    });
-    expect(link2.textContent).toBe("Other");
-
-    vi.advanceTimersByTime(2000);
-    expect(link1.textContent).toBe("Contact");
+    expect(status2.textContent).toBe("");
+    expect(writeTextSpy).toHaveBeenCalledWith("test@example.com");
   });
 });
