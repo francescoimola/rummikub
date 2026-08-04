@@ -1,6 +1,0 @@
-{
-  "tags": "writing",
-  "layout": "_base.njk",
-  "templateEngineOverride": "njk,md",
-  "contentMode": "contrast"
-}
