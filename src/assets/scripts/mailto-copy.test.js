@@ -2,18 +2,18 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
 const ONE_CONTROL = `
   <a href="mailto:test@example.com">test@example.com</a>
-  <button type="button" data-copy-email="test@example.com">Copy email</button>
+  <button type="button" data-copy-email="test@example.com">Copy email address</button>
   <p role="status" data-copy-status></p>
 `;
 const TWO_CONTROLS = `
   <div>
     <a href="mailto:test@example.com">test@example.com</a>
-    <button type="button" data-copy-email="test@example.com">Copy email</button>
+    <button type="button" data-copy-email="test@example.com">Copy email address</button>
     <p role="status" data-copy-status></p>
   </div>
   <div>
     <a href="mailto:other@example.com">other@example.com</a>
-    <button type="button" data-copy-email="other@example.com">Copy email</button>
+    <button type="button" data-copy-email="other@example.com">Copy email address</button>
     <p role="status" data-copy-status></p>
   </div>
 `;
@@ -25,11 +25,18 @@ async function mount(html = ONE_CONTROL) {
   return document.querySelectorAll("[data-copy-email]");
 }
 
+// Fake timers don't fake microtasks, so the clipboard promise still needs draining by hand
+async function flushClipboard() {
+  await Promise.resolve();
+  await Promise.resolve();
+}
+
 describe("mailto-copy.js", () => {
   let writeTextSpy;
 
   beforeEach(() => {
     vi.resetModules();
+    vi.useFakeTimers();
     writeTextSpy = vi.fn().mockResolvedValue(undefined);
     Object.defineProperty(navigator, "clipboard", {
       value: { writeText: writeTextSpy },
@@ -40,6 +47,7 @@ describe("mailto-copy.js", () => {
 
   afterEach(() => {
     document.body.innerHTML = "";
+    vi.useRealTimers();
     vi.restoreAllMocks();
   });
 
@@ -63,15 +71,54 @@ describe("mailto-copy.js", () => {
     expect(writeTextSpy).toHaveBeenCalledWith("test@example.com");
   });
 
-  it("announces success in the status region without changing the button label", async () => {
+  it("swaps the button label to a confirmation and announces it", async () => {
     const [btn] = await mount();
     const status = document.querySelector("[data-copy-status]");
 
     btn.click();
-    await vi.waitFor(() => {
-      expect(status.textContent).toBe("Email address copied to clipboard");
-    });
-    expect(btn.textContent).toBe("Copy email");
+    await flushClipboard();
+
+    expect(btn.textContent).toBe("Email copied!");
+    expect(status.textContent).toBe("Email copied!");
+  });
+
+  it("restores the original label after 2s", async () => {
+    const [btn] = await mount();
+    const status = document.querySelector("[data-copy-status]");
+
+    btn.click();
+    await flushClipboard();
+    vi.advanceTimersByTime(2000);
+
+    expect(btn.textContent).toBe("Copy email address");
+    expect(status.textContent).toBe("");
+  });
+
+  it("keeps the confirmation visible until the delay elapses", async () => {
+    const [btn] = await mount();
+
+    btn.click();
+    await flushClipboard();
+    vi.advanceTimersByTime(1999);
+
+    expect(btn.textContent).toBe("Email copied!");
+  });
+
+  it("restarts the timer on a repeat click so the label still reverts", async () => {
+    const [btn] = await mount();
+
+    btn.click();
+    await flushClipboard();
+    vi.advanceTimersByTime(1500);
+    btn.click();
+    await flushClipboard();
+    vi.advanceTimersByTime(1500);
+
+    expect(btn.textContent).toBe("Email copied!");
+
+    vi.advanceTimersByTime(500);
+
+    expect(btn.textContent).toBe("Copy email address");
   });
 
   it("announces a failure message when the clipboard write rejects", async () => {
@@ -80,21 +127,22 @@ describe("mailto-copy.js", () => {
     const status = document.querySelector("[data-copy-status]");
 
     btn.click();
+    await flushClipboard();
 
-    await vi.waitFor(() => {
-      expect(status.textContent).toBe("Copy failed — the address is test@example.com");
-    });
+    expect(btn.textContent).toBe("Copy failed");
+    expect(status.textContent).toBe("Copy failed — the address is test@example.com");
   });
 
   it("handles multiple controls independently", async () => {
-    const [btn1] = await mount(TWO_CONTROLS);
+    const [btn1, btn2] = await mount(TWO_CONTROLS);
     const [status1, status2] = document.querySelectorAll("[data-copy-status]");
 
     btn1.click();
-    await vi.waitFor(() => {
-      expect(status1.textContent).toBe("Email address copied to clipboard");
-    });
+    await flushClipboard();
+
+    expect(status1.textContent).toBe("Email copied!");
     expect(status2.textContent).toBe("");
+    expect(btn2.textContent).toBe("Copy email address");
     expect(writeTextSpy).toHaveBeenCalledWith("test@example.com");
   });
 });

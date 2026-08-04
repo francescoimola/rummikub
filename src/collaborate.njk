@@ -26,7 +26,8 @@ eleventyNavigation:
         <p>I'm open to white-label or overflow briefs from agencies, and I'll consider an in-house role if the fit is right.</p>
     </div>
     <div class="flow has-gap-s">
-        <p>Want to ask me a question? <a href="mailto:hi@francescoimola.com">Copy my email</a>
+        {# status is a span, not a p — the button sits inline and a p can't nest inside a p #}
+        <p>Want to ask me a question? <button type="button" data-copy-email="hi@francescoimola.com" data-icon="copy">Copy email address</button><span role="status" class="sr-only" data-copy-status></span>
         </p>
     </header>
     <section class="flow has-gap-s pretty" highlight-header>

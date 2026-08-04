@@ -2,16 +2,17 @@
     heading,
     body,
     callLabel = "Book free intro call",
-    emailLabel = "Or email me",
+    emailLabel = "Copy email address",
     callUrl = "https://cal.com/francescoimola/intro",
-    emailHref = "mailto:hi@francescoimola.com"
+    emailAddress = "hi@francescoimola.com"
 ) %}
 <section view-animation="breakout" class="card giant featured flow has-gap-xs" >
     <h2>{{ heading }}</h2>
     <p>{{ body }}</p>
     <div class="flow has-gap-xs has-pt-2xs">
         <a data-icon="phone" href="{{ callUrl }}" target="_blank" rel="noopener noreferrer">{{ callLabel }}</a>
-        <a data-icon="arrow-right" href="{{ emailHref }}">{{ emailLabel }}</a>
+        <button type="button" data-copy-email="{{ emailAddress }}" data-icon="copy">{{ emailLabel }}</button>
+        <p role="status" class="sr-only" data-copy-status></p>
     </div>
 </section>
 {% endmacro %}
