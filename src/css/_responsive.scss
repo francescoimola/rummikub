@@ -172,6 +172,14 @@
     // ---- Container queries ----
     // Components fold against main's inline-size (viewport minus sidebar/gutters), not the viewport
 
+    @container (width < #{scale.$bp-l}) {
+        // CTA renders at paragraph size while the item is stacked to one column
+        .project-item__cta {
+            font-size: revert;
+            letter-spacing: revert;
+        }
+    }
+
     @container (min-width: #{scale.$bp-s}) {
 
         .grid-responsive-cols {
@@ -211,12 +219,6 @@
     }
 
     @container (min-width: #{scale.$bp-2xl}) {
-
-         // CTA drops its small-text treatment as soon as the body stacks
-        .project-item__cta {
-            font-size: revert;
-            letter-spacing: revert;
-        }
 
         // Wide enough for title + CTA to share a row, with the CTA pushed to the far edge
         .project-item__body {
