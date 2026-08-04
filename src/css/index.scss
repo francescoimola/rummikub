@@ -1,3 +1,4 @@
+@use 'layers';
 @use 'fonts';
 @use 'colors';
 @use 'scale';
@@ -5,7 +6,8 @@
 @use 'components';
 @use 'cleacss-overrides';
 @use 'responsive';
-@import "vendor/cleacss.css";
+
+@import "vendor/cleacss";
 
 // After the cleacss import so these unlayered tokens override cleacss's own unlayered :root defaults (CSS rule 3)
 @include cleacss-overrides.overrides;

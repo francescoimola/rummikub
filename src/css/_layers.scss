@@ -1,0 +1,3 @@
+// Pins layer priority independently of source order — cleacss must stay below our tokens
+// Must be the first @use in index.scss: Sass emits module CSS in @use order, and layer priority is set by first appearance
+@layer reset, layout, elements, is, has, fonts, colors, type;
