@@ -85,6 +85,10 @@
 
     &.featured {
         background: var(--accent-surface);
+        // light: brand-800 on --accent-surface is 4.35:1 (fails AA) — darken accent to brand-900; dark already passes (7.35)
+        // mirror the .sidebar footer pattern: scope the accent tokens, keep dark mode unchanged
+        --color-accent: light-dark(var(--brand-900), var(--brand-800));
+        --accent-hover: light-dark(var(--brand-950), var(--brand-900));
     }
 
     :is(img, picture, figure, video) {
