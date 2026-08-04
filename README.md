@@ -42,12 +42,12 @@ public/           Build output (gitignored)
 
 ## Highlights
 
-- **Brand tint**: You can swap the entire colour palette by changing `--brand-hue` and `--brand-chroma`. Try `data-brand="pink"` on `<html>`.
-- **Light/dark mode** is automatic via `light-dark()`, plus there's a manual toggle with `data-theme`.
-- **Lazy video**: IntersectionObserver loads project videos only when they scroll into view and `prefers-reduced-motion` and slow connections are respected, within what's feasible.
-- **Content modes**: by setting `contentMode: contrast` in frontmatter, you can make pages either white or give them a slightly tint them the brand colour.
-- **Fluid type**: Utopia generates a scale from 16px to 24px with a Perfect Fourth ratio.
-- **Running on 100% renewable energy infrastructure**: While the repo stays in Github, the project gets deployed by Cloudflare Pages, which is certified green by The Green Web Foundation.
+- Brand tint: I can swap the entire colour palette by changing --brand-hue and --brand-chroma. 
+- Light/dark mode is automatic via light-dark(), plus there's a manual toggle with data-theme.
+- Lazy video: IntersectionObserver loads project videos only when they scroll into view and prefers-reduced-motion and slow connections are respected, within what's feasible.
+- Content modes: by setting "contentMode: contrast" in frontmatter, I can make pages either white or slightly tint them with the brand colour.
+- Fluid type using Utopia, which generates a scale from 16px to 24px with a Perfect Fourth ratio.
+- Running on 100% renewable energy infrastructure. Cloudflare Pages is certified green by The Green Web Foundation.
 
 ## License
 
