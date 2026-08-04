@@ -627,15 +627,6 @@ footer a {
     counter-reset: standard;
 }
 
-// Row bottom rule matching <hr> — used on pricing/list rows where <hr> can't sit between <li>
-.has-row-divider {
-    border-block-end: var(--input-border-width) solid var(--input-border-color);
-}
-
-.has-nowrap {
-    white-space: nowrap;
-}
-
 .flow.has-gap-3xs,
 .flow-row.has-gap-3xs {
     --flow-gap: var(--space-3xs);
