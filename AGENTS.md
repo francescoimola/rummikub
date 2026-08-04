@@ -155,6 +155,10 @@ Embed lazy, autoplay-in-view videos with the `projectVideo` shortcode (defined i
 | Body image has no spacing, no caption, or two images stack flush | Markdown `![]()` — adjacent ones share one `<p>` and the `.case-study` selectors miss them. Use `figureImg` (see Long-form pages) |
 | Opening image doesn't bleed, or every image animates the same | `.case-study__intro` is missing or isn't the first child; the `settle`/`breakout` split keys off it |
 
+## Browser automation blocklist
+
+**Agents may not install or use puppeteer, playwright, or any browser-automation libraries without explicit user consent.** This includes MCP servers (Chrome DevTools MCP, Firecrawl, etc.) unless the user explicitly requests them for a specific task. Motivation: prevent accidental browser-session automation and ensure transparency around external system interaction.
+
 ## License
 
 [GPL-3.0](LICENSE.md) — see [LICENSE.md](LICENSE.md) for full text.
