@@ -24,6 +24,17 @@ pnpm clean            # rm -rf public
 
 **Never run `pnpm dev` / `npm run dev`** — the dev script is `pnpm start`. Do not spin up a dev server unless the user explicitly asks.
 
+## Pages CMS
+
+Content and media are editable via Pages CMS, configured in `.pages.yml` at the repo root (per-branch). Uploads land in `src/assets/` and are written as `/assets/...` URLs.
+
+- **Collections** `work` (`src/work`, sorted by `endDate` desc, `featured` boolean) and `writing` (`src/writing`, sorted by `date` desc, `type` select) edit each `.md`'s frontmatter and body.
+- **`artProjects`** is a single top-level-array file (`src/_data/artProjects.json`): `list: true` with fields directly under the entry, nested `images` as an `object` list.
+- **Raw editors** for `_headers`, `_redirects`, `robots.txt` — `format: code`, no structured fields.
+- **`body` fields are `type: text`, never `rich-text`** — posts mix markdown with Nunjucks shortcodes (`figureImg`, `projectVideo`) that a rich-text round-trip would corrupt.
+- `settings.content.merge: true` preserves keys in `artProjects.json` that aren't in the schema.
+- **Optimize-videos action:** the media page's button dispatches `.github/workflows/pages-cms-optimize-videos.yml`, which installs ffmpeg, runs `pnpm optimize:video`, and commits the mp4/webm/jpg back to the branch. Raw `.src.*` files are picked up automatically; existing outputs are skipped (pass `--force` to redo).
+
 ## Project structure
 
 | Path | Purpose |
