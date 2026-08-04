@@ -33,6 +33,47 @@
         }
     }
 
+    &.link-card {
+        color: var(--neutral-950-alpha); // whole card is a link; keep title + body copy neutral, only the CTA below is accent-tinted
+
+        @media (hover: hover) {
+            &:hover [data-icon]::after {
+                margin-inline-start: var(--space-xs);
+            }
+        }
+
+        &:focus-visible [data-icon]::after {
+            margin-inline-start: var(--space-xs);
+        }
+
+        [data-icon] {
+            color: var(--color-accent);
+            text-decoration: underline;
+            text-decoration-color: color-mix(in oklch, var(--color-accent) 75%, transparent);
+        }
+    }
+
+    // Accordion cards: <details> as a flex card needs both fixes to open smoothly
+    &:is(details) {
+        summary h3 {
+            display: inline-block; // keep cleacss's floated +/− marker on the title's line
+        }
+
+        &::details-content {
+            min-block-size: 0; // .card is flex, so details-content is a flex item; auto min floors its height and kills the 0→auto reveal
+        }
+    }
+
+    // Numbered card lists — the .has-counter parent owns the counter-reset
+    .has-counter>& h3::before {
+        counter-increment: standard;
+        content: counter(standard, decimal-leading-zero);
+        display: inline-block; // breaks propagation of the h3's hover underline onto the counter
+        margin-inline-end: var(--space-xs);
+        color: var(--neutral-800-alpha);
+        font-weight: var(--font-weight-base);
+    }
+
     &.flow-row {
         flex-direction: row;
     }
@@ -133,7 +174,7 @@
     column-gap: var(--space-xs);
 }
 
-.masonry > .card {
+.masonry>.card {
     break-inside: avoid;
     margin-block-end: var(--space-xs);
     background-color: transparent;
@@ -503,11 +544,11 @@ main svg {
 }
 
 // Opening image never taller than 3:2 — wider covers keep their ratio, taller ones crop (object-fit:cover inherited)
-.writing-post .case-study__intro + figure {
+.writing-post .case-study__intro+figure {
     container-type: inline-size; // track the bled figure width; main's container is too narrow once it breaks out
 }
 
-.writing-post .case-study__intro + figure img {
+.writing-post .case-study__intro+figure img {
     max-block-size: 50cqw; // 2/3 of width caps the box at 3:2; shorter-than-cap ratios pass through untouched
 }
 

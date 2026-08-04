@@ -9,12 +9,15 @@ eleventyNavigation:
 ---
 {% from "_service-card.njk" import serviceCard %}
 {% from "_cta-card.njk" import ctaCard %}
-<div view-animation="settle" style="margin-bottom: calc(-1 * var(--space-l))" class="card flow has-gap-s">
+<div view-animation="settle" class="card flow has-gap-xl" style="padding-bottom: var(--space-xl);">
     {% projectVideo "/assets/video/work_showreel.mp4",
         "screenshots of selected projects and work in slideshow",
         webm = "/assets/video/work_showreel.webm",
         poster = "/assets/video/work_showreel.jpg" %}
-        <h1 class="has-mt-2xs">Pretty good marketing, on a human scale<br><span class="dimmed">Francesco Imola writes and designs websites + marketing assets</span></h1>
+        <div class="flow has-gap-3xs has-items-center has-text-center balance">
+            <h1>Pretty good marketing, on a human scale</h1>
+            <p style="max-inline-size: calc(4*var(--space-4xl));">Francesco Imola writes and designs websites + marketing assets</p>
+        </div>
 </div>
 <section class="flow has-gap-s has-counter pretty" highlight-header>
     <h2 class="has-mb-xs">Where I can help</h2>

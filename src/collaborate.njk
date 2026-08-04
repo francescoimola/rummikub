@@ -47,18 +47,16 @@ eleventyNavigation:
                 <span class="dimmed"><br>→ Top of the range rectangles and circles, sure, but really be prepared to have long chats about the meaning of life.</span></li>
         </ul>
     </section>
-    <div highlight-header>
+    <section class="flow has-gap-s" highlight-header>
         <h2 class="has-mb-xs">Is he any good?</h2>
-    </div>
-    {# Direct child of <main> so breakout has a wide containing block to animate down from #}
-    <a href="/work/" class="card flow link-card flow has-gap-s" view-animation="breakout"
-        style="margin-top: calc(var(--space-s) - var(--space-3xl))">
-        {% projectVideo "/assets/video/work_showreel.mp4",
-        "screenshots of selected projects and work in slideshow",
-        webm = "/assets/video/work_showreel.webm",
-        poster = "/assets/video/work_showreel.jpg" %}
-        <h3 data-icon="arrow-right" class="has-mt-3xs">See what I've done</h3>
-    </a>
+        <a href="/work/" class="card link-card flow has-gap-m" view-animation="breakout" style="padding-block-end: var(--space-m);">
+            {% projectVideo "/assets/video/work_showreel.mp4",
+            "screenshots of selected projects and work in slideshow",
+            webm = "/assets/video/work_showreel.webm",
+            poster = "/assets/video/work_showreel.jpg" %}
+            <h3 data-icon="arrow-right" class="has-mt-3xs">See what I've done</h3>
+        </a>
+    </section>
     <section class="flow has-gap-l pretty" highlight-header>
         <h2>Can we rely on him?</h2>
         <p>I enjoy working with talented people who care deeply about what they do, and I stick around when things get messy. Found yourself in uncharted waters? We'll cross them together. Is your design team under pressure? I can be the release valve. Is your marketing department struggling to agree on what needs doing? I may not have all the answers, but I'll support them as they search for them.</p>
