@@ -16,7 +16,7 @@ Vitest discovers anything matching `*.test.js` automatically.
 
 ### Browser-side code (`src/assets/scripts/`)
 
-- **mailto-copy.test.js** — clicks a `mailto:` link, checks email copies to clipboard, "Email copied!" appears then reverts after 2s. Uses `vi.useFakeTimers()` to fast-forward.
+- **mailto-copy.test.js** — clicks a `[data-copy-email]` button, checks the address copies to clipboard, the label swaps to "Email copied!" and reverts after 2s. Uses `vi.useFakeTimers()` to fast-forward.
 - **video-controller.test.js** — tests lazy-loading via `IntersectionObserver`, play/pause, reduced-motion handling. Mocks `IntersectionObserver` and `navigator.connection`.
 
 ### Eleventy config (`src/config/eleventy/`)

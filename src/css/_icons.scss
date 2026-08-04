@@ -71,6 +71,13 @@ a[href^="tel:"]::after {
     --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9ImN1cnJlbnRDb2xvciIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0xMiAxLjVDNi4xNSAxLjUgMS41IDYuMTUgMS41IDEyUzYuMTUgMjIuNSAxMiAyMi41IDIyLjUgMTcuODUgMjIuNSAxMiAxNy44NSAxLjUgMTIgMS41Wk0xMiAyMWMtNC45NSAwLTktNC4wNS05LTlzNC4wNS05IDktOSA5IDQuMDUgOSA5LTQuMDUgOS05IDlaIj48L3BhdGg+CiAgPHBhdGggZD0iTTE2LjA1IDE3LjI1IDEyIDEzLjJsLTQuMDUgNC4wNS0xLjItMS4yTDEwLjggMTIgNi43NSA3Ljk1bDEuMi0xLjJMMTIgMTAuOGw0LjA1LTQuMDUgMS4yIDEuMkwxMy4yIDEybDQuMDUgNC4wNS0xLjIgMS4yWiI+PC9wYXRoPgo8L3N2Zz4K);
 }
 
+[data-icon="copy"]::after {
+    --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9ImN1cnJlbnRDb2xvciIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0yMSA3LjVWMjFINy41VjcuNUgyMVpNMjEgNkg3LjVBMS41IDEuNSAwIDAgMCA2IDcuNVYyMWExLjUgMS41IDAgMCAwIDEuNSAxLjVIMjFhMS41IDEuNSAwIDAgMCAxLjUtMS41VjcuNUExLjUgMS41IDAgMCAwIDIxIDZaIj48L3BhdGg+CiAgPHBhdGggZD0iTTMgMTMuNUgxLjVWM0ExLjUgMS41IDAgMCAxIDMgMS41aDEwLjVWM0gzdjEwLjVaIj48L3BhdGg+Cjwvc3ZnPgo=);
+    margin-inline-start: var(--space-2xs);
+    vertical-align: var(--icon-align-s);
+    transition: margin-inline-start var(--dur-fast) var(--ease);
+}
+
 [data-icon="arrow-right"]::after {
     --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik01IDEyaDE0Ij48L3BhdGg+CiAgPHBhdGggZD0ibTEyIDUgNyA3LTcgNyI+PC9wYXRoPgo8L3N2Zz4=);
     margin-inline-start: var(--space-2xs);
@@ -80,7 +87,7 @@ a[href^="tel:"]::after {
 
 :is([data-icon="email"], a[href^="mailto:"])::after {
     --icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9ImN1cnJlbnRDb2xvciIgdmlld0JveD0iMCAwIDI0IDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0xNC4yNSAxOEgzTDIuOTk3IDYuNjhsOC41NzYgNS45MzdhLjc1Ljc1IDAgMCAwIC44NTQgMEwyMSA2LjY4MlYxMy41aDEuNVY2QTEuNTAyIDEuNTAyIDAgMCAwIDIxIDQuNUgzQTEuNTAyIDEuNTAyIDAgMCAwIDEuNSA2djEyQTEuNTAyIDEuNTAyIDAgMCAwIDMgMTkuNWgxMS4yNVYxOFptNS4wOTktMTJMMTIgMTEuMDg4IDQuNjUxIDZoMTQuNjk4WiI+PC9wYXRoPgogIDxwYXRoIGQ9Ik0xOS41IDIxYTMgMyAwIDEgMCAwLTYgMyAzIDAgMCAwIDAgNloiPjwvcGF0aD4KPC9zdmc+);
-    margin-inline-start: var(--space-3xs);
+    margin-inline-start: var(--space-2xs);
     vertical-align: var(--icon-align-s);
     transition: margin-inline-start var(--dur-fast) var(--ease);
 }
@@ -98,7 +105,7 @@ a[data-icon-before][href*="cal.com"]::after {
 }
 
 :is([data-icon="phone"], a[href^="tel:"], [href*="cal.com"])::after {
-    margin-inline-start: var(--space-3xs);
+    margin-inline-start: var(--space-2xs);
     vertical-align: var(--icon-align-m);
 }
 
