@@ -433,6 +433,23 @@ main svg {
     svg {
         inline-size: 2rem; // cleacss's svg { max-width: 100%; height: auto } otherwise stretches the icon
         block-size: 2rem;
+        padding: 0; // the Illustrations rule (main svg) otherwise pads this to ~123x181 and collapses the icon viewport to 0
+        max-inline-size: none;
+    }
+
+    .project-video-icon-pause {
+        display: none;
+    }
+}
+
+// Glyph tracks playback so a visible control never shows "play" over a running video
+.project-video-play[data-playing] {
+    .project-video-icon-play {
+        display: none;
+    }
+
+    .project-video-icon-pause {
+        display: block;
     }
 }
 

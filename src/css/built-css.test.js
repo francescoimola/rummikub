@@ -25,4 +25,14 @@ describe('built stylesheet', () => {
   it('no longer emits the unused vendor copy', () => {
     expect(existsSync('public/css/vendor/cleacss.css')).toBe(false);
   });
+
+  // `main svg` (Illustrations) pads every SVG in <main>. On a UI icon that padding exceeds the
+  // declared size, so the border-box inflates and the icon viewport collapses to 0 — visible as a
+  // clickable-but-invisible control. Any icon inside <main> must cancel the padding explicitly.
+  it('cancels the Illustrations padding on the video control icon', () => {
+    const rule = css().match(/\.project-video-play svg\{([^}]*)\}/);
+    expect(rule).not.toBeNull();
+    expect(rule[1]).toMatch(/padding:\s*0/);
+    expect(rule[1]).toMatch(/max-inline-size:\s*none/);
+  });
 });

@@ -42,10 +42,10 @@ function createMediaQuery(matches = false) {
 }
 
 // Build a wrapper, construct the controller against it, and hand back every handle a test needs
-function mount({ reduced = false, slow = false, ...wrapperOpts } = {}) {
+function mount({ reduced = false, dataSaver = false, ...wrapperOpts } = {}) {
   const wrapper = createWrapper(wrapperOpts);
   const reducedMotion = createMediaQuery(reduced);
-  const ctrl = new VideoController(wrapper, reducedMotion, slow);
+  const ctrl = new VideoController(wrapper, reducedMotion, dataSaver);
   return {
     ctrl,
     wrapper,
@@ -127,13 +127,13 @@ describe("VideoController", () => {
     expect(btn.hasAttribute("data-visible")).toBe(true);
   });
 
-  it("shows button when slow connection", () => {
-    const { btn } = mount({ slow: true });
+  it("shows button when data saver is on", () => {
+    const { btn } = mount({ dataSaver: true });
 
     expect(btn.hasAttribute("data-visible")).toBe(true);
   });
 
-  it("does not show button when motion allowed and fast connection", () => {
+  it("does not show button when motion allowed and data saver off", () => {
     const { btn } = mount();
 
     expect(btn.hasAttribute("data-visible")).toBe(false);
@@ -216,6 +216,61 @@ describe("VideoController", () => {
         expect(btn.hasAttribute("data-visible")).toBe(true);
       });
     });
+
+    // Data saver no longer blocks playback, so the control has to stay put as the way to stop it
+    it("keeps button visible after play resolves when data saver is on", async () => {
+      const { ctrl, video, btn } = mount({ dataSaver: true });
+      video.play = vi.fn().mockResolvedValue(undefined);
+
+      ctrl.tryPlay();
+      await vi.waitFor(() => {
+        expect(video.play).toHaveBeenCalled();
+      });
+      expect(btn.hasAttribute("data-visible")).toBe(true);
+    });
+
+    // The pinned control must read as "pause" while playing — data-visible alone would leave a play triangle on a running video
+    it("pins the control and shows the pause glyph while playing under data saver", async () => {
+      const { ctrl, wrapper, btn } = mount({ dataSaver: true });
+      const video = createMockVideo(true);
+      wrapper.appendChild(video);
+      ctrl.video = video;
+
+      ctrl.tryPlay();
+
+      await vi.waitFor(() => {
+        expect(btn.hasAttribute("data-playing")).toBe(true);
+      });
+      expect(btn.hasAttribute("data-visible")).toBe(true);
+      expect(btn.getAttribute("aria-label")).toBe("Pause video");
+    });
+  });
+
+  describe("updateLabel", () => {
+    it("marks the button as playing and labels it Pause", () => {
+      const { ctrl, wrapper, btn } = mount();
+      const video = createMockVideo(false);
+      wrapper.appendChild(video);
+      ctrl.video = video;
+
+      ctrl.updateLabel();
+
+      expect(btn.getAttribute("aria-label")).toBe("Pause video");
+      expect(btn.hasAttribute("data-playing")).toBe(true);
+    });
+
+    it("clears the playing state and labels it Play when paused", () => {
+      const { ctrl, wrapper, btn } = mount();
+      const video = createMockVideo(true);
+      wrapper.appendChild(video);
+      ctrl.video = video;
+      btn.setAttribute("data-playing", "");
+
+      ctrl.updateLabel();
+
+      expect(btn.getAttribute("aria-label")).toBe("Play video");
+      expect(btn.hasAttribute("data-playing")).toBe(false);
+    });
   });
 
   describe("handleLeaveView", () => {
@@ -244,7 +299,7 @@ describe("VideoController", () => {
   });
 
   describe("handleEnterView", () => {
-    it("calls tryPlay when motion allowed and fast connection", () => {
+    it("calls tryPlay when motion allowed", () => {
       const { ctrl, video } = mount({ dataSrc: true });
       video.play = vi.fn().mockResolvedValue(undefined);
 
@@ -262,13 +317,13 @@ describe("VideoController", () => {
       expect(video.play).not.toHaveBeenCalled();
     });
 
-    it("does not call tryPlay on slow connection", () => {
-      const { ctrl, video } = mount({ slow: true });
-      video.play = vi.fn();
+    it("still calls tryPlay when data saver is on", () => {
+      const { ctrl, video } = mount({ dataSaver: true, dataSrc: true });
+      video.play = vi.fn().mockResolvedValue(undefined);
 
       ctrl.handleEnterView();
 
-      expect(video.play).not.toHaveBeenCalled();
+      expect(video.play).toHaveBeenCalled();
     });
   });
 });
@@ -301,7 +356,7 @@ describe("initProjectVideos", () => {
     expect(videos[1].dataset.init).toBe("1");
   });
 
-  it("detects slow connection via navigator.connection", () => {
+  it("detects data saver via navigator.connection", () => {
     const original = navigator.connection;
     Object.defineProperty(navigator, "connection", {
       value: { effectiveType: "slow-2g", saveData: false },
