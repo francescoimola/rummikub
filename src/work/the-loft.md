@@ -37,7 +37,7 @@ Take the "Ritual" page (Ritual is their yoga and movement studio slash sub-brand
 
 When it comes to how the brand spoke of itself, the original copy seemed to highlight the venue's challenges and limitations and barely touched on the unique things it has to offer. The rewrite fixes that, and wherever weaknesses have silver linings, I framed them as such. For example, The Loft is on the top floor of an old department store, right in the heart of Folkestone: there are no lifts, and guests really need to read the access instructions to find the venue. In return, that location lets them host classes and events with considerably louder music than most independent studios in town.
 
-{% projectVideo "/assets/portfolio/theloft-ritual-mobile.mp4"%}
+{% projectVideo "/assets/portfolio/theloft-ritual-mobile.mp4",  "Mobile walkthrough of the Ritual page" %}
 
 {% projectVideo "/assets/portfolio/theloft-events.mp4", "Events page walkthrough"%}
 

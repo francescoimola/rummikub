@@ -1,0 +1,53 @@
+---
+layout: _base.njk
+title: Accessibility statement | Francesco Imola
+description: What I aim for, what work there is still to be done, and how to tell me if something's getting in your way.
+permalink: /about/accessibility/
+updated: 2026-08-04
+eleventyNavigation:
+  key: Accessibility
+  parent: Home
+---
+<header class="flow has-gap-xs pretty">
+    <h1>How accessible is this website?</h1>
+    <p style="max-inline-size: var(--inline-size)">I have taken steps to make this website as accessible as possible, and while I've tested it thoroughly, I can't guarantee it's fully accessible to everyone yet.</p>
+    <p>The international guideline most accessibility law points at is WCAG 2.2 AA, and that is what I'm aiming for (and what I aim to achieve on client work as well). This site does not fully meet it yet, because testing against these guidelines is a work in progress as of writing.</p>
+    <p>This page goes over what was already done and what gaps remain.</p>
+</header>
+
+<section class="flow has-gap-s pretty text">
+    <h2>What has been checked</h2>
+    <ul class="flow has-gap-2xs">
+        <li>Every page opens with a "skip to content" link, so you don't have to tab your way past all the navigation links on every visit to access the main content.</li>
+        <li>Every image has a description.</li>
+        <li>Headings run in order on all pages, with no levels skipped.</li>
+        <li>Text and links meet contrast requirements in both light and dark mode, across all three colour options.</li>
+        <li>If your system is set to reduce motion, videos don't play on their own and the smooth scrolling switches itself off.</li>
+        <li>Videos are always muted.</li>
+        <li>The "Copy email address" buttons tell screen readers when they've worked.</li>
+    </ul>
+</section>
+
+<section class="flow has-gap-s pretty text">
+    <h2>What I haven't done yet</h2>
+    <ul class="flow has-gap-2xs">
+        <li>I haven't tested this site with a screen reader, so I can't yet promise that every part of it works without a mouse.</li>
+        <li>Some of my image and video descriptions name the asset rather than describing what it shows. I'm working through them as I come across them.</li>
+        <li>Booking a 1-1 call with me takes place through cal.com, which is someone else's software. I haven't checked how well it works for everyone and I can't make any promises about its accessibility.</li>
+    </ul>
+</section>
+
+<section class="flow has-gap-s">
+    <h2>If something gets in your way</h2>
+    <p>Please tell me and I'll do what I can to fix it. Send me an email at the address below. Same goes if you need anything on this site in a different format, ask and I'll sort it out.</p>
+    <div class="card flow has-gap-3xs">
+        <p><span class="sr-only">hi@francescoimola.com</span><span aria-hidden="true">hi at francescoimola dot com</span></p>
+        <button type="button" data-copy-email="hi@francescoimola.com" data-icon="copy">Copy email address</button>
+        <p role="status" class="sr-only" data-copy-status></p>
+    </div>
+</section>
+
+<section class="flow has-gap-s">
+    <h2>Last updated</h2>
+    <p>4 August 2026</p>
+</section>
