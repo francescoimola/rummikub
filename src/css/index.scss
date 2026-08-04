@@ -634,10 +634,6 @@ footer a {
     white-space: nowrap;
 }
 
-.has-justify-between {
-    justify-content: space-between; // cleacss ships center/end/start/stretch but not between
-}
-
 .flow.has-gap-3xs,
 .flow-row.has-gap-3xs {
     --flow-gap: var(--space-3xs);
