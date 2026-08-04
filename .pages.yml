@@ -90,6 +90,7 @@ content:
       - name: external
         label: External link URL
         type: string
+        pattern: ^https?://
       - name: source
         label: Source label (e.g. Substack)
         type: string
