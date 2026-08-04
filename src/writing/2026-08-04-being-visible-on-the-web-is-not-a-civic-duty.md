@@ -8,4 +8,5 @@ alt: sunlight shines on ripe pears hanging from a branch
 external: https://open.substack.com/pub/notbadnotbad/p/being-visible-on-the-web-is-not-a
 source: Not Bad (Substack)
 hidden: false
+type: essays
 ---
