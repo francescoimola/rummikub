@@ -98,9 +98,10 @@ content:
         label: Type
         type: select
         options:
-          - { value: guides, label: Guides }
-          - { value: essays, label: Essays }
-          - { value: notes, label: Notes }
+          values:
+            - { value: guides, label: Guides }
+            - { value: essays, label: Essays }
+            - { value: notes, label: Notes }
       - name: hidden
         label: Hide from listings and RSS
         type: boolean
