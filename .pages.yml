@@ -60,7 +60,7 @@ content:
     label: Writing
     type: collection
     path: src/writing
-    exclude: [writing.json]
+    exclude: [writing.11tydata.js]
     view:
       fields: [title, date, type]
       primary: title
@@ -86,6 +86,12 @@ content:
           path: src/assets/writing
       - name: alt
         label: Alt text
+        type: string
+      - name: external
+        label: External link URL
+        type: string
+      - name: source
+        label: Source label (e.g. Substack)
         type: string
       - name: type
         label: Type
