@@ -12,7 +12,7 @@ templateEngineOverride: njk,md
 contentMode: contrast
 ---
 
-{% figureImg "/assets/portfolio/megaseatingplan.png" %}
+{% figureImg "/assets/portfolio/megaseatingplan.png", "Google search results showing Mega Seating Plan ranking in the top 10 for 'classroom layout ideas'" %}
 
 Mega Seating Plan is a SaaS tool that helps teachers easily create and maintain classroom seating plans across multiple classes and years. It's the kind of admin that earns no praise but that needs doing, and that almost every teacher wishes was easier. The product is aimed squarely at school leaders and teachers, which meant the content needed to speak their language and address their struggles.
 

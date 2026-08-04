@@ -3,12 +3,17 @@
 var menu = document.querySelector(".nav-menu");
 
 if (menu) {
+  var summary = menu.querySelector(".nav-menu__bar");
+
   var close = function () {
     menu.open = false;
   };
 
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && menu.open) close();
+    if (e.key === "Escape" && menu.open) {
+      close();
+      if (summary) summary.focus(); // Esc must not strand focus in the collapsed panel
+    }
   });
 
   document.addEventListener("pointerdown", function (e) {

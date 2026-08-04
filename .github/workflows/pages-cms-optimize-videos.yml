@@ -1,0 +1,49 @@
+name: Optimize portfolio videos
+
+on:
+  workflow_dispatch:
+    inputs:
+      payload:
+        description: Pages CMS payload as JSON
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extract branch ref
+        id: ref
+        run: echo "ref=$(echo '${{ github.event.inputs.payload }}' | jq -r '.repository.ref')" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.ref.outputs.ref }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Enable pnpm
+        run: corepack enable
+
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Optimize videos
+        run: pnpm optimize:video
+
+      - name: Commit optimized files
+        run: |
+          git config user.name "Pages CMS"
+          git config user.email "cms@pagescms.org"
+          git add src/assets/portfolio
+          if git diff --cached --quiet; then
+            echo "No changes — nothing to commit."
+          else
+            git commit -m "Optimize portfolio videos (via Pages CMS)"
+            git push
+          fi

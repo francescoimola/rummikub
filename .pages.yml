@@ -1,0 +1,173 @@
+media:
+  input: src/assets
+  output: /assets
+  rename: safe
+  actions:
+    - name: optimize-videos
+      label: Optimize portfolio videos
+      workflow: pages-cms-optimize-videos.yml
+      ref: current
+
+content:
+  - name: work
+    label: Work
+    type: collection
+    path: src/work
+    exclude: [work.json]
+    view:
+      fields: [title, endDate, featured]
+      primary: title
+      sort: [endDate, title]
+      default:
+        sort: endDate
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: metaTitle
+        label: Meta title
+        type: string
+      - name: description
+        label: Description
+        type: text
+      - name: services
+        label: Services
+        type: string
+      - name: image
+        label: Thumbnail image
+        type: image
+        options:
+          path: src/assets/portfolio
+      - name: alt
+        label: Alt text
+        type: string
+      - name: endDate
+        label: End date (YYYY-MM)
+        type: date
+      - name: featured
+        label: Featured
+        type: boolean
+      - name: permalink
+        label: Permalink
+        type: string
+      - name: body
+        label: Body
+        type: text
+
+  - name: writing
+    label: Writing
+    type: collection
+    path: src/writing
+    exclude: [writing.11tydata.js]
+    view:
+      fields: [title, date, type]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Date
+        type: date
+      - name: teaser
+        label: Teaser / description
+        type: text
+      - name: image
+        label: Cover image
+        type: image
+        options:
+          path: src/assets/writing
+      - name: alt
+        label: Alt text
+        type: string
+      - name: external
+        label: External link URL
+        type: string
+        pattern: ^$|^https?://
+      - name: source
+        label: Source label (e.g. Substack)
+        type: string
+      - name: type
+        label: Type
+        type: select
+        options:
+          values:
+            - { value: guides, label: Guides }
+            - { value: essays, label: Essays }
+            - { value: notes, label: Notes }
+      - name: hidden
+        label: Hide from listings and RSS
+        type: boolean
+      - name: permalink
+        label: Permalink
+        type: string
+      - name: body
+        label: Body
+        type: text
+
+  - name: artProjects
+    label: Art projects
+    type: file
+    path: src/_data/artProjects.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: year
+        label: Year
+        type: string
+      - name: description
+        label: Description
+        type: text
+      - name: link
+        label: Link
+        type: string
+      - name: linkLabel
+        label: Link label
+        type: string
+      - name: images
+        label: Images
+        type: object
+        list:
+          collapsible: true
+        fields:
+          - name: src
+            label: Source
+            type: image
+            options:
+              path: src/assets/art
+          - name: alt
+            label: Alt text
+            type: string
+
+  - name: headers
+    label: HTTP headers
+    type: file
+    path: src/_headers
+    format: code
+
+  - name: redirects
+    label: Redirects
+    type: file
+    path: src/_redirects
+    format: code
+
+  - name: robots
+    label: robots.txt
+    type: file
+    path: src/robots.txt
+    format: code
+
+settings:
+  content:
+    merge: true

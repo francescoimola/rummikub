@@ -18,6 +18,7 @@ Vitest discovers anything matching `*.test.js` automatically.
 
 - **mailto-copy.test.js** — clicks a `[data-copy-email]` button, checks the address copies to clipboard, the label swaps to "Email copied!" and reverts after 2s. Uses `vi.useFakeTimers()` to fast-forward.
 - **video-controller.test.js** — tests lazy-loading via `IntersectionObserver`, play/pause, reduced-motion handling. Mocks `IntersectionObserver` and `navigator.connection`.
+- **nav-menu.test.js** — the mobile `<details>` menu's three close paths (Escape, pointerdown outside, link click), and that only Escape returns focus to the menu bar.
 
 ### Eleventy config (`src/config/eleventy/`)
 
