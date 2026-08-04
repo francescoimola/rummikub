@@ -23,7 +23,7 @@ So far I have advised the committee on all things marketing and branding, I’ve
 
 Over the rest of the upcoming festival cycle, I’ll be designing their printed programme as well as surprising (and hopefully delighting!) the public with the rest of our campaign, online and off.
 
-To learn more about Open Art Folke, visit [openartfolke.com](https://openartfolke.com)
+To learn more about Open Art Folke, visit <a href="https://openartfolke.com" target="_blank" rel="noopener noreferrer" aria-label="Visit the Open Art Folke website">openartfolke.com</a>
 
 {% projectVideo "/assets/video/oaf_logo_slides.mp4", "the Open Art Folke logo against different backgrounds" %}
 
