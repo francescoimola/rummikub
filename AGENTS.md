@@ -24,6 +24,17 @@ pnpm clean            # rm -rf public
 
 **Never run `pnpm dev` / `npm run dev`** — the dev script is `pnpm start`. Do not spin up a dev server unless the user explicitly asks.
 
+## Pages CMS
+
+Content and media are editable via Pages CMS, configured in `.pages.yml` at the repo root (per-branch). Uploads land in `src/assets/` and are written as `/assets/...` URLs.
+
+- **Collections** `work` (`src/work`, sorted by `endDate` desc, `featured` boolean) and `writing` (`src/writing`, sorted by `date` desc, `type` select) edit each `.md`'s frontmatter and body. Add a `writing` entry with `external`+`source` set (leave `permalink`+`body` blank) for a link-only Substack item. `writing.11tydata.js` (excluded from CMS) holds dir metadata + computed permalink.
+- **`artProjects`** is a single top-level-array file (`src/_data/artProjects.json`): `list: true` with fields directly under the entry, nested `images` as an `object` list.
+- **Raw editors** for `_headers`, `_redirects`, `robots.txt` — `format: code`, no structured fields.
+- **`body` fields are `type: text`, never `rich-text`** — posts mix markdown with Nunjucks shortcodes (`figureImg`, `projectVideo`) that a rich-text round-trip would corrupt.
+- `settings.content.merge: true` preserves keys in `artProjects.json` that aren't in the schema.
+- **Optimize-videos action:** the media page's button dispatches `.github/workflows/pages-cms-optimize-videos.yml`, which installs ffmpeg, runs `pnpm optimize:video`, and commits the mp4/webm/jpg back to the branch. Raw `.src.*` files are picked up automatically; existing outputs are skipped (pass `--force` to redo).
+
 ## Project structure
 
 | Path | Purpose |
@@ -44,7 +55,7 @@ pnpm clean            # rm -rf public
 | `src/assets/fonts/` | Ronzino woff2 files (passthrough copied to `public/assets/fonts/`) |
 | `src/assets/favicon/` | Favicon files (passthrough copied) |
 | `src/work/` | Portfolio case-study pages (`tag: work`). Frontmatter drives collections in `src/config/eleventy/collections.js`: sorted by `endDate` (YYYY-MM) desc; `featured: true` → `workFeatured` (Featured section, **max 3**), otherwise → `workIndex` (Index section) |
-| `src/writing/` | Writing section (`tag: writing`, `/writing/<slug>/`). Each item has one `type` (guides/essays/notes; see `src/_data/writingTypes.json`). `date`-desc `writing` collection; `writingTypes` lists present types in fixed order. On-site posts set `permalink`; external (Substack) items set `external`+`source`+`permalink: false`. Index `src/writing.njk` (sectioned by type, 2 latest each); per-type pages `src/writing-types.njk`; item macro `_writing-item.njk`; RSS `src/feed.njk` → `/rss.xml` (teasers only, never post bodies). Posts render the shared case-study shell and keep `contentMode: contrast` — see Long-form pages |
+| `src/writing/` | Writing section (`tag: writing`, `/writing/<slug>/`). Each item has one `type` (guides/essays/notes; see `src/_data/writingTypes.json`). `date`-desc `writing` collection; `writingTypes` lists present types in fixed order. On-site posts set `permalink`; external (Substack) items set `external`+`source` (leave `permalink` blank — the `eleventyComputed` in `writing.11tydata.js` suppresses the page). Index `src/writing.njk` (sectioned by type, 2 latest each); per-type pages `src/writing-types.njk`; item macro `_writing-item.njk`; RSS `src/feed.njk` → `/rss.xml` (teasers only, never post bodies). Posts render the shared case-study shell and keep `contentMode: contrast` — see Long-form pages |
 | `src/assets/portfolio/` | Project videos (mp4/webm) + posters (passthrough copied to `public/assets/portfolio/`) |
 | `src/assets/writing/` | Writing cover + in-body images (passthrough copied to `public/assets/writing/`) |
 | `src/art.njk` | Artmaking index (`/art/`, full width). Content lives in `src/_data/artProjects.json` — no per-project files; the `splitRow` macro (`_split-row.njk`) renders one row per entry — see Artmaking page |
