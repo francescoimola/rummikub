@@ -50,5 +50,6 @@ web-design-process.excalidraw
 *.code-workspace
 .superpowers/
 .docs/accessibility-audit.md
+.docs/accessibility-strategy.md
 .docs/cutover-runbook.md
 .docs/voice-guide.md

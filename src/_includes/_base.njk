@@ -4,13 +4,13 @@
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
   <div class="layout"{% if contentMode == "contrast" %} data-content="contrast"{% endif %}>
-    <aside class="sidebar">
+    <div class="sidebar">
       {%- include "_header.njk" -%}
       <div class="desktop-only flow-row has-gap-2xs has-mt-xl has-items-end">
         {%- include "_footer.njk" -%}
         {%- include "_look-toggles.njk" -%}
       </div>
-    </aside>
+    </div>
     <div class="content">
       {% if tags and ("work" in tags or "writing" in tags) %}
       <main id="main-content" class="case-study text{% if "writing" in tags %} writing-post{% endif %}">
