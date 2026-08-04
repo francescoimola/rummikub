@@ -2,7 +2,7 @@
 
 ![fallow: A (90)](badge.svg) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE.md)
 
-I make delightful things with pixels and words. This is my half-portfolio, half-marketing site, built with Eleventy LightningCSS, and Cloudflare Pages as a host.
+I make delightful things with pixels and words. This is my half-portfolio, half-marketing site, built with Eleventy, cleacss, LightningCSS, and Cloudflare Pages as a host.
 
 ## Stack
 
@@ -42,15 +42,12 @@ public/           Build output (gitignored)
 
 ## Highlights
 
-- **Brand re-tinting** — swap the entire colour palette by changing `--brand-hue` and `--brand-chroma`. Try `data-brand="pink"` on `<html>`.
-- **Light/dark mode** — automatic via `light-dark()`, plus manual toggle with `data-theme`.
-- **Lazy video** — IntersectionObserver loads project videos only when they scroll into view. Respects `prefers-reduced-motion` and slow connections.
-- **Content modes** — set `contentMode: contrast` in frontmatter for white-background content pages.
-- **Fluid type** — Utopia generates a scale from 16px to 24px with a Perfect Fourth ratio.
-
-## Deployment
-
-CI runs on GitHub Actions: build + link check on every push to `development` and on PRs. Deploys to Netlify (Cloudflare Pages cutover planned — see `docs/cutover-runbook.md`).
+- **Brand tint**: You can swap the entire colour palette by changing `--brand-hue` and `--brand-chroma`. Try `data-brand="pink"` on `<html>`.
+- **Light/dark mode** is automatic via `light-dark()`, plus there's a manual toggle with `data-theme`.
+- **Lazy video**: IntersectionObserver loads project videos only when they scroll into view and `prefers-reduced-motion` and slow connections are respected, within what's feasible.
+- **Content modes**: by setting `contentMode: contrast` in frontmatter, you can make pages either white or give them a slightly tint them the brand colour.
+- **Fluid type**: Utopia generates a scale from 16px to 24px with a Perfect Fourth ratio.
+- **Running on 100% renewable energy infrastructure**: While the repo stays in Github, the project gets deployed by Cloudflare Pages, which is certified green by The Green Web Foundation.
 
 ## License
 
