@@ -23,7 +23,8 @@ module.exports = function (eleventyConfig) {
       '    <button class="project-video-play" type="button" aria-label="Play video">\n' +
       '      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">\n' +
       '        <circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.45)"/>\n' +
-      '        <path d="M19 15l14 9-14 9V15z" fill="white"/>\n' +
+      '        <path class="project-video-icon-play" d="M19 15l14 9-14 9V15z" fill="white"/>\n' +
+      '        <path class="project-video-icon-pause" d="M18 15h5v18h-5zM25 15h5v18h-5z" fill="white"/>\n' +
       '      </svg>\n' +
       '    </button>\n' +
       '  </div>' + figcaption + '\n' +

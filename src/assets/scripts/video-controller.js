@@ -1,5 +1,5 @@
 class VideoController {
-  constructor(wrapper, reducedMotion, slowConnection) {
+  constructor(wrapper, reducedMotion, dataSaver) {
     this.video = wrapper.querySelector(".project-video-el");
     this.btn = wrapper.querySelector(".project-video-play");
     if (!this.video || !this.btn) return;
@@ -9,9 +9,10 @@ class VideoController {
     this.inView = false;
     this.loaded = false;
     this.reducedMotion = reducedMotion;
-    this.slowConnection = slowConnection;
+    this.dataSaver = dataSaver;
 
-    if (this.reducedMotion.matches || this.slowConnection) this.showBtn();
+    // Data saver keeps the control on screen rather than blocking playback — these clips are a few hundred KB
+    if (this.reducedMotion.matches || this.dataSaver) this.showBtn();
     this.setupObserver();
     this.setupListeners();
   }
@@ -21,11 +22,15 @@ class VideoController {
   }
 
   hideBtn() {
+    if (this.dataSaver) return; // stays put as the pause affordance
     this.btn.removeAttribute("data-visible");
   }
 
   updateLabel() {
-    this.btn.setAttribute("aria-label", this.video.paused ? "Play video" : "Pause video");
+    var paused = this.video.paused;
+    this.btn.setAttribute("aria-label", paused ? "Play video" : "Pause video");
+    if (paused) this.btn.removeAttribute("data-playing");
+    else this.btn.setAttribute("data-playing", "");
   }
 
   ensureLoaded() {
@@ -57,7 +62,7 @@ class VideoController {
   }
 
   handleEnterView() {
-    if (!this.reducedMotion.matches && !this.slowConnection) {
+    if (!this.reducedMotion.matches) {
       this.tryPlay();
     }
   }
@@ -110,14 +115,14 @@ function initProjectVideos() {
 
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   var conn = navigator.connection;
-  var slowConnection =
+  var dataSaver =
     !!conn &&
     (conn.saveData === true ||
       conn.effectiveType === "slow-2g" ||
       conn.effectiveType === "2g");
 
   wrappers.forEach(function (wrapper) {
-    new VideoController(wrapper, reducedMotion, slowConnection);
+    new VideoController(wrapper, reducedMotion, dataSaver);
   });
 }
 
