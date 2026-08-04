@@ -524,6 +524,16 @@ main svg {
     >:is(figure, p:has(> :is(img, picture)))+ :is(figure, p:has(> :is(img, picture))) {
         margin-block-start: var(--space-s-m);
     }
+
+    // Bullet/numbered list items get a touch of breathing room from each other
+    li+li {
+        margin-block-start: var(--space-2xs);
+    }
+
+    // Better rag on body copy and list items — orphan avoidance, more even line lengths
+    :is(p, li) {
+        text-wrap-style: pretty;
+    }
 }
 
 .case-study__intro {
