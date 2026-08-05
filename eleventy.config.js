@@ -32,7 +32,14 @@ module.exports = function (eleventyConfig) {
     formats: ["webp", "jpeg"],
     outputDir: "./public/assets/images",
     urlPath: "/assets/images/",
-    widths: [400, 600, 800, 1080, 1200, 1440, 2560, "auto"],
+    // 1920 is an explicit rung so 1920px sources keep a native-width variant; "auto" would also emit
+    // 3024w–3767w files nothing requests, plus 2561w duplicates of the 2560 rung.
+    widths: [400, 600, 800, 1080, 1200, 1440, 1920, 2560],
+    // sharp's defaults (webp q80/effort 4, baseline jpeg q80) leave ~25% on the table on the grainy
+    // photo and halftone sources here. q75 at effort 6 is indistinguishable at 1:1 — checked on crops.
+    sharpWebpOptions: { quality: 75, effort: 6 },
+    // mozjpeg is ~15% smaller at identical quality; the jpeg is only the no-webp fallback anyway.
+    sharpJpegOptions: { quality: 78, mozjpeg: true, progressive: true },
     defaultAttributes: {
       loading: "lazy",
       decoding: "async",

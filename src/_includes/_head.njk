@@ -23,6 +23,11 @@
   <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Ronzino-Medium.woff2" crossorigin="anonymous">
   <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Ronzino-Bold.woff2" crossorigin="anonymous">
 
+  {# A video poster is discovered late and fetched at low priority — preload it where it's the LCP element. #}
+  {%- if preloadImage %}
+  <link rel="preload" as="image" fetchpriority="high" href="{{ preloadImage }}">
+  {%- endif %}
+
   <link rel="preload" as="style" href="/css/index.css">
   <link rel="stylesheet" href="/css/index.css">
 
