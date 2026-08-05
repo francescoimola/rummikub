@@ -24,7 +24,7 @@ Across the site, you'll see links to other platforms (e.g. Substack) and to cal.
 
 ## Credits 
 
-- Uses [Ronzino](https://www.collletttivo.it/typefaces/ronzino) by Collettivo (designed by Luigi Gorlero and Nunzio Mazzaferro)
+- Uses [Ronzino](https://www.collletttivo.it/typefaces/ronzino) by Colletttivo (designed by Luigi Gorlero and Nunzio Mazzaferro)
 - Relies on [Utopia](https://utopia.fyi/), a fluid design system by James Gilyead and Trys Mudford.
 - Would have taken a lot longer to build without [cleacss](https://cleacss.dev), a mighty but lightweight CSS framework by Justus Kraft that handles resets and styling foundations.
 
