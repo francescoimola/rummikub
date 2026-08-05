@@ -13,7 +13,7 @@ eleventyNavigation:
   {% for typeSlug in collections.writingTypes %}
   {% set t = writingTypes[typeSlug] %}
   <section class="flow has-gap-m writing-section{% if typeSlug == 'notes' %} writing-section--quiet{% endif %}">
-    <div class="flow has-gap-2xs balance">
+    <div class="flow has-gap-2xs pretty">
       <h2>{{ t.short}}</h2>
       <p class="dimmed">{{ t.blurb }}</p>
     </div>
