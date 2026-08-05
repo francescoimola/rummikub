@@ -302,6 +302,7 @@ describe("VideoController", () => {
     it("calls tryPlay when motion allowed", () => {
       const { ctrl, video } = mount({ dataSrc: true });
       video.play = vi.fn().mockResolvedValue(undefined);
+      ctrl.inView = true;
 
       ctrl.handleEnterView();
 
@@ -320,10 +321,53 @@ describe("VideoController", () => {
     it("still calls tryPlay when data saver is on", () => {
       const { ctrl, video } = mount({ dataSaver: true, dataSrc: true });
       video.play = vi.fn().mockResolvedValue(undefined);
+      ctrl.inView = true;
 
       ctrl.handleEnterView();
 
       expect(video.play).toHaveBeenCalled();
+    });
+
+    it("waits for page load before playing, so the poster keeps the bandwidth", () => {
+      Object.defineProperty(document, "readyState", {
+        value: "loading",
+        configurable: true,
+      });
+      const { ctrl, video } = mount({ dataSrc: true });
+      video.play = vi.fn().mockResolvedValue(undefined);
+      ctrl.inView = true;
+
+      ctrl.handleEnterView();
+      expect(video.play).not.toHaveBeenCalled();
+
+      window.dispatchEvent(new Event("load"));
+      expect(video.play).toHaveBeenCalled();
+
+      Object.defineProperty(document, "readyState", {
+        value: "complete",
+        configurable: true,
+      });
+    });
+
+    it("does not play if the video scrolled out of view before load fired", () => {
+      Object.defineProperty(document, "readyState", {
+        value: "loading",
+        configurable: true,
+      });
+      const { ctrl, video } = mount({ dataSrc: true });
+      video.play = vi.fn().mockResolvedValue(undefined);
+      ctrl.inView = true;
+
+      ctrl.handleEnterView();
+      ctrl.inView = false; // user scrolled past while the page was still loading
+
+      window.dispatchEvent(new Event("load"));
+      expect(video.play).not.toHaveBeenCalled();
+
+      Object.defineProperty(document, "readyState", {
+        value: "complete",
+        configurable: true,
+      });
     });
   });
 });

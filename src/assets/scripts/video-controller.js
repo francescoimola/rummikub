@@ -1,3 +1,9 @@
+// Runs fn once the page has finished loading, or straight away if it already has
+function afterPageLoad(fn) {
+  if (document.readyState === "complete") fn();
+  else window.addEventListener("load", fn, { once: true });
+}
+
 class VideoController {
   constructor(wrapper, reducedMotion, dataSaver) {
     this.video = wrapper.querySelector(".project-video-el");
@@ -62,9 +68,11 @@ class VideoController {
   }
 
   handleEnterView() {
-    if (!this.reducedMotion.matches) {
-      this.tryPlay();
-    }
+    if (this.reducedMotion.matches) return;
+    // Deferred: fetching the video during first paint starves the poster, which is the LCP element above the fold
+    afterPageLoad(() => {
+      if (this.inView && !this.reducedMotion.matches) this.tryPlay();
+    });
   }
 
   handleLeaveView() {
