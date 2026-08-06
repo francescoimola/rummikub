@@ -120,6 +120,44 @@ describe("markdown.js", () => {
     });
   });
 
+  describe("link renderer rule", () => {
+    it("adds target and rel to external links", () => {
+      const config = createMockEleventyConfig();
+      markdown(config);
+
+      const mdLib = config.setLibrary.mock.calls[0][1];
+
+      const result = mdLib.render("[Framer site](https://makeandmindworkshops.framer.website)");
+
+      expect(result).toContain('target="_blank"');
+      expect(result).toContain('rel="noopener noreferrer"');
+    });
+
+    it("does not add target/rel to internal links", () => {
+      const config = createMockEleventyConfig();
+      markdown(config);
+
+      const mdLib = config.setLibrary.mock.calls[0][1];
+
+      const result = mdLib.render("[About](/about/)");
+
+      expect(result).not.toContain("target=");
+      expect(result).not.toContain("rel=");
+    });
+
+    it("does not add target/rel to links on the site's own domain", () => {
+      const config = createMockEleventyConfig();
+      markdown(config);
+
+      const mdLib = config.setLibrary.mock.calls[0][1];
+
+      const result = mdLib.render("[Writing](https://francescoimola.com/writing/)");
+
+      expect(result).not.toContain("target=");
+      expect(result).not.toContain("rel=");
+    });
+  });
+
   describe("markdown rendering", () => {
     it("renders markdown with image", () => {
       const config = createMockEleventyConfig();

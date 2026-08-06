@@ -5,13 +5,14 @@ description: "Two years running marketing for a talent agency: costs cut by a th
 services: Content Marketing, Internal Communications
 image: /assets/portfolio/blueberry_socialpost.png
 alt: Blueberry instagram post with text 'Toss aside the rule book'
+contentMode: contrast
 endDate: 2023-12
 permalink: /work/blueberry/
 layout: _base.njk
 templateEngineOverride: njk,md
 ---
 
-{% figureImg "/assets/portfolio/blueberry_socialmedia.png", "Selection of social media posts designed for Blueberry" %}
+{% figureImg "/assets/portfolio/blueberry_party.jpg", "Group photo of team and talents at a party", caption="Anniversary party I co-organised for our team and talents" %}
 
 Four months into what was initially a team assistant role, I was tasked to coordinate Blueberry's marketing and communications. The promotion suddently shited my workload from manning the ohoena dn doing a couple more things to to covering all marketing operations, brand, content, and events. None of it came with a big budget.
 
@@ -35,7 +36,7 @@ As well as the administrative work noted above, getting to this place involved c
 
 My role also extended to email marketing, where I oversaw everything from managing our lists, designing email templates, reporting, strategy and editing content. Soon enough, the efforts paid off and we doubled our email open rates in the space of two years.
 
-{% figureImg "/assets/portfolio/blueberry_emailmarketing.png", "Email subject line and snippets from Blueberry newsletters", caption="Editions of our client newsletter" %}
+{% figureImg "/assets/portfolio/blueberry_emailmarketing.png", "Email subject line and snippets from Blueberry newsletters", caption="Editions of our client newsletter", imgClass="has-background-accent-light" %}
 
 Design-wise, I aimed for lean, typography-driven work that let the talent showreels and the assets provided to us by production companies do the heavy lifting. Where good enough images weren't available, I made sure the copy was strong enough to carry the weight. I also wrote branding guidelines to keep future content consistent, and designed several post templates for social media. 
 
@@ -43,8 +44,8 @@ When an external design studio was hired to develop a new design language and we
 
 Before I left, I spent significant time with the colleagues picking up parts of my role, walking them through the systems, templates, and processes I'd built, so that none of it would depend on me being there, which felt important.
 
-{% figureImg "/assets/portfolio/blueberry_blogposts.png", "Three blog posts on the Blueberry website", caption="Blog posts covering freelance guidance and HQ news" %}
+{% figureImg "/assets/portfolio/blueberry_blogposts.png", "Three blog posts on the Blueberry website", caption="Blog posts covering freelance guidance and HQ news", imgClass="has-background-accent-light" %}
 
 {% figureImg "/assets/portfolio/blueberry_gamenightposter.png", "Event poster for a game night for Blueberry talent", caption="Event poster for a game night" %}
 
-{% figureImg "/assets/portfolio/blueberry_party.jpg", "Group photo of team and talents at a party", caption="Anniversary party I co-organised for our team and talents" %}
+{% figureImg "/assets/portfolio/blueberry_socialmedia.png", "Selection of social media posts designed for Blueberry", imgClass="has-background-accent-light" %}

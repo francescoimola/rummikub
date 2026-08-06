@@ -49,6 +49,8 @@ What he took ownership of was a new visual identity with a versatile redesign of
 
 In spite of the trimming and the limitations of Squarespace as a site builder, the full scope of the offer remains, only now we're telling a far more compelling story and guiding users to book or enquire directly without forcing their hand. The site stopped being something "to sort out at some point" and it now does the one job it was always meant to do: reassure people that The Loft is exactly where they want to be... and then get out of their way.
 
+Visit [theloftstudio.uk](https://www.theloftstudio.uk/) to see the site in action.
+
 {% projectVideo "/assets/portfolio/theloft-logo-images.mp4", "Logo over a series of images" %}
 
 {% figureImg "/assets/portfolio/theloft-palette.png", "Colour system with brand colors", caption="Refreshed colour system that builds on their existing use of yellow and earthy tones" %}

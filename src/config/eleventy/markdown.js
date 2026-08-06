@@ -26,5 +26,28 @@ module.exports = function (eleventyConfig) {
     return defaultImageRender(tokens, idx, options, env, self);
   };
 
+  var defaultLinkOpenRender = md.renderer.rules.link_open || function (tokens, idx, options, env, self) {
+    return self.renderToken(tokens, idx, options);
+  };
+
+  md.renderer.rules.link_open = function (tokens, idx, options, env, self) {
+    var token = tokens[idx];
+    var hrefIndex = token.attrIndex("href");
+
+    if (hrefIndex >= 0) {
+      var href = token.attrs[hrefIndex][1];
+      var isExternal =
+        (href.startsWith("http://") || href.startsWith("https://")) &&
+        !href.startsWith("https://francescoimola.com");
+
+      if (isExternal) {
+        token.attrPush(["target", "_blank"]);
+        token.attrPush(["rel", "noopener noreferrer"]);
+      }
+    }
+
+    return defaultLinkOpenRender(tokens, idx, options, env, self);
+  };
+
   eleventyConfig.setLibrary("md", md);
 };

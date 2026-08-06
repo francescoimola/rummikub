@@ -42,9 +42,11 @@ The result is a website and the foundations of a brand identity that strike just
 
 {% figureImg "/assets/portfolio/makemind_herocopy.png", "Welcoming section on the homepage" %}
 
+Although this project never saw the light of day, you can [see the final result in action here](https://makeandmindworkshops.framer.website).
+
 ## Deliverables
 
-- Refreshed brand dentity
+- Refreshed brand identity
 - Strategic consultations
 - Positioning analysis
 - Copywriting
