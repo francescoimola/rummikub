@@ -25,7 +25,7 @@ After multiple working sessions with the team, a central tension cropped up. The
 
 Meanwhile, I also learned that their current site was burying their strongest differentiator—that they guide clients from first consultation to final install and don't stop at the design stage—deep down layers of outdated design and jargon.
 
-{% figureImg "/assets/portfolio/tca_oldsite.png", "Two screenshots of the old website", caption="The Collective's previous website" %}
+{% figureImg "/assets/portfolio/tca_oldsite.png", "Two screenshots of the old website", caption="The Collective's previous website", imgClass="has-background-accent-light" %}
 
 ## Phase one
 
@@ -33,9 +33,9 @@ I was initially commissioned to maintain the existing site structure, navigation
 
 Although copywriting was never formally part of the brief, my design process always starts with words. So as well as working on the UI, I also wrote headlines and page-level copy.
 
-{% figureImg "/assets/portfolio/tca_phase1_homepage-products.png", "Screenshots of the Homepage and Products pages from the first design phase", caption="First phase redesign of the Homepage and Products pages" %}
+{% figureImg "/assets/portfolio/tca_phase1_homepage-products.png", "Screenshots of the Homepage and Products pages from the first design phase", caption="First phase redesign of the Homepage and Products pages", imgClass="has-background-accent-light" %}
 
-{% figureImg "/assets/portfolio/tca_phase1_sustainability.png", "Screenshots of the Sustainability page from the first design phase", caption="First phase redesign of the Sustainability page" %}
+{% figureImg "/assets/portfolio/tca_phase1_sustainability.png", "Screenshots of the Sustainability page from the first design phase", caption="First phase redesign of the Sustainability page", imgClass="has-background-accent-light" %}
 
 ## Phase two
 

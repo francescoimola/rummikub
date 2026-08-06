@@ -248,6 +248,19 @@ describe("shortcodes.js — figureImg shortcode", () => {
 
     expect(result).toContain("<figure>");
   });
+
+  it("adds imgClass to the img, not the figure", () => {
+    const config = createMockEleventyConfig();
+    shortcodes(config);
+    const figureImg = config.getShortcode("figureImg");
+
+    const result = figureImg("/assets/photo.jpg", "Alt text", {
+      imgClass: "extra",
+    });
+
+    expect(result).toContain("<figure>");
+    expect(result).toContain('<img src="/assets/photo.jpg" alt="Alt text" class="extra">');
+  });
 });
 
 describe("shortcodes.js — icon shortcode", () => {
