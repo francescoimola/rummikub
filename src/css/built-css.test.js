@@ -29,6 +29,15 @@ describe('built stylesheet', () => {
   // `main svg` (Illustrations) pads every SVG in <main>. On a UI icon that padding exceeds the
   // declared size, so the border-box inflates and the icon viewport collapses to 0 — visible as a
   // clickable-but-invisible control. Any icon inside <main> must cancel the padding explicitly.
+  // .masonry is a grid item of .split-row, so it stretches to the row height. A multicol with a
+  // definite block-size fills column 1 to that height instead of balancing — every image ends up in
+  // the left column whenever the text beside it is the taller of the two.
+  it('keeps the masonry from being stretched by its grid row', () => {
+    const rule = css().match(/\.masonry\{([^}]*)\}/);
+    expect(rule).not.toBeNull();
+    expect(rule[1]).toMatch(/align-self:\s*start/);
+  });
+
   it('cancels the Illustrations padding on the video control icon', () => {
     const rule = css().match(/\.project-video-play svg\{([^}]*)\}/);
     expect(rule).not.toBeNull();

@@ -176,6 +176,7 @@
 .masonry {
     columns: 1;
     column-gap: var(--space-xs);
+    align-self: start; // .split-row's stretch hands the multicol a definite height, and it then fills column 1 to that height instead of balancing
 }
 
 .masonry>.card {

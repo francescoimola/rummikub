@@ -97,11 +97,12 @@ Media rhythm (`.case-study` in `_components.scss`) and the scroll animations (`i
 
 Each project is a `.split-row` `<article>`: text in a `.flow` div, images in a `.masonry` `<ul>` of `.card` `<li>`s. Both classes are generic and reusable — neither is art-specific, and both are defined in `_components.scss` with their folds in `_responsive.scss`.
 
-- **`.split-row`** — `1fr` stacked, `1fr 2fr` from a `@container` at `$bp-mobile`. Shares its base declaration with `.grid-responsive-cols` (which folds to equal columns at `$bp-tablet`); both are container-driven, so they respond to the space they actually get, not the viewport. Deliberately *not* cleacss's `.grid-reset`: that reserves a side-margin track per edge, so full-bleed there needs `--grid-margin-max: 0` **and** a negative-margin/width bleed to cancel the leftover `column-gap`.
-- **`.masonry`** — CSS multi-column (`columns: 2`, `1` below `$bp-small`), so short images pack under each other beside a tall neighbour. Not a grid: grid rows force equal heights, which is what left the gaps. `break-inside: avoid` on the cards stops an image splitting across a column.
+- **`.split-row`** — `1fr` stacked, `1fr 2fr` from a `@container` at `$bp-xl`. Shares its base declaration with `.grid-responsive-cols` (which folds to equal columns at `$bp-s`); both are container-driven, so they respond to the space they actually get, not the viewport. Deliberately *not* cleacss's `.grid-reset`: that reserves a side-margin track per edge, so full-bleed there needs `--grid-margin-max: 0` **and** a negative-margin/width bleed to cancel the leftover `column-gap`.
+- **`.masonry`** — CSS multi-column (`columns: 2`, `1` below `$bp-s`), so short images pack under each other beside a tall neighbour. Not a grid: grid rows force equal heights, which is what left the gaps. `break-inside: avoid` on the cards stops an image splitting across a column.
+- **`.masonry` must keep `align-self: start`.** As a `.split-row` grid item it would otherwise stretch to the row height, and a multicol with a *definite* height fills column 1 to that height instead of balancing — every image piles into the left column whenever the text beside it is taller. Asserted in `built-css.test.js`.
 - **The image is a direct child of `.card`.** That is what triggers `.card`'s full-bleed rule, so images sit flush with no padding. Wrapping it in anything re-introduces the card padding.
 
-The masonry fold is `$bp-small` (32rem) — cleacss's own `:s` variant folds at 30rem, which is why it isn't used. Add new projects to `src/_data/artProjects.json`; `link`, `linkLabel` and `images` are all optional.
+The masonry fold is a `@container` query against `main` (not the viewport), so it fires while the masonry itself is only ~2/3 that wide. Add new projects to `src/_data/artProjects.json`; `link`, `linkLabel` and `images` are all optional.
 
 ## Project videos
 
