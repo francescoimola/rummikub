@@ -27,10 +27,18 @@ To learn more about Open Art Folke, visit <a href="https://openartfolke.com" tar
 
 {% projectVideo "/assets/video/oaf_logo_slides.mp4", "the Open Art Folke logo against different backgrounds" %}
 
-![Open Art Folke flyer on the hood of a car](/assets/portfolio/flyer_mockup_car.png)
+![section on the Open Art Folke website that invites you to sign up for the newsletter](/assets/portfolio/oaf_signupform.png)
 
 ![business card that spells out 'here is an idea" on one side and details on the other](/assets/portfolio/outreach-card-oaf.png)
 
+
+![flyer for Open Art, digital left, print right](/assets/portfolio/oaf_flyer.png)
+
+
 {% projectVideo "/assets/video/open_art_folke_about_page.mp4", "About page on the Open Art Folke website", class="site-recording" %}
 
+!["About" page, above the fold](/assets/portfolio/oaf_about.png)
+
 ![overview of the Open Art Folke branding guidelines](/assets/portfolio/oaf_guidelines.png)
+
+!["Sponsor" page, above the fold](/assets/portfolio/oaf_sponsor.png)

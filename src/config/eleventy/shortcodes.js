@@ -37,7 +37,8 @@ module.exports = function (eleventyConfig) {
     options = options || {};
     var figcaption = renderFigcaption(options.caption);
     var figureClass = options.class ? ' class="' + options.class + '"' : "";
-    var img = '<img src="' + src + '" alt="' + alt + '">';
+    var imgClass = options.imgClass ? ' class="' + options.imgClass + '"' : "";
+    var img = '<img src="' + src + '" alt="' + alt + '"' + imgClass + ">";
 
     // href wraps the image in an outbound link — keeps it a <figure>, so the case-study spacing rules still match
     if (options.href) {
