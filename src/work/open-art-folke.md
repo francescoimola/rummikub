@@ -42,8 +42,8 @@ To learn more about Open Art Folke, visit <a href="https://openartfolke.com" tar
 
 {% projectVideo "/assets/video/open_art_folke_about_page.mp4", "About page on the Open Art Folke website", class="site-recording" %}
 
-!["About" page, above the fold](/assets/portfolio/oaf_about.png)
-
 ![section on the Open Art Folke website that invites you to sign up for the newsletter](/assets/portfolio/oaf_signupform.png)
+
+!["About" page, above the fold](/assets/portfolio/oaf_about.png)
 
 !["Sponsor" page, above the fold](/assets/portfolio/oaf_sponsor.png)
