@@ -40,6 +40,10 @@ module.exports = function (eleventyConfig) {
     sharpWebpOptions: { quality: 75, effort: 6 },
     // mozjpeg is ~15% smaller at identical quality; the jpeg is only the no-webp fallback anyway.
     sharpJpegOptions: { quality: 78, mozjpeg: true, progressive: true },
+    // Without this sharp reads frame 1 only, so animated gifs silently ship as a still. Self-limiting
+    // to gifs: the plugin's default formatFiltering only treats gif/webp sources as animated, and
+    // then drops the non-animatable jpeg from `formats` for those alone. Other sources are untouched.
+    sharpOptions: { animated: true },
     defaultAttributes: {
       loading: "lazy",
       decoding: "async",
