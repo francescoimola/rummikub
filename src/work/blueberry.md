@@ -36,6 +36,8 @@ As well as the administrative work noted above, getting to this place involved c
 
 My role also extended to email marketing, where I oversaw everything from managing our lists, designing email templates, reporting, strategy and editing content. Soon enough, the efforts paid off and we doubled our email open rates in the space of two years.
 
+{% figureImg "/assets/portfolio/blueberry_trade_mag_ad.png", "Minimalist advert for a trade magazine featuring shows edited by Blueberry talent", caption="Trade magazine ad" %}
+
 {% figureImg "/assets/portfolio/blueberry_emailmarketing.png", "Email subject line and snippets from Blueberry newsletters", caption="Editions of our client newsletter", imgClass="has-background-accent-light" %}
 
 Design-wise, I aimed for lean, typography-driven work that let the talent showreels and the assets provided to us by production companies do the heavy lifting. Where good enough images weren't available, I made sure the copy was strong enough to carry the weight. I also wrote branding guidelines to keep future content consistent, and designed several post templates for social media. 
@@ -47,5 +49,6 @@ Before I left, I spent significant time with the colleagues picking up parts of 
 {% figureImg "/assets/portfolio/blueberry_blogposts.png", "Three blog posts on the Blueberry website", caption="Blog posts covering freelance guidance and HQ news", imgClass="has-background-accent-light" %}
 
 {% figureImg "/assets/portfolio/blueberry_gamenightposter.png", "Event poster for a game night for Blueberry talent", caption="Event poster for a game night" %}
+{% figureImg "/assets/portfolio/blueberry_roundup_edition.png", "Mockup of an email newsletter on a phone", caption="Edition of the Blueberry Roundup, which I designed and curated" %}
 
 {% figureImg "/assets/portfolio/blueberry_socialmedia.png", "Selection of social media posts designed for Blueberry", imgClass="has-background-accent-light" %}
