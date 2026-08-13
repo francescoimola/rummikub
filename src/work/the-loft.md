@@ -51,9 +51,11 @@ In spite of the trimming and the limitations of Squarespace as a site builder, t
 
 Visit [theloftstudio.uk](https://www.theloftstudio.uk/) to see the site in action.
 
-{% projectVideo "/assets/portfolio/theloft-logo-images.mp4", "Logo over a series of images" %}
+{% projectVideo "/assets/portfolio/theloft-logo-images.mp4", "Logo over a series of images", caption="Gave The Loft's old logo a much-needed facelift" %}
 
 {% figureImg "/assets/portfolio/theloft-palette.png", "Colour system with brand colors", caption="Refreshed colour system that builds on their existing use of yellow and earthy tones" %}
+
+{% figureImg "/assets/portfolio/theloft-wireframes.png", "Figma screen with an overview of desktop wireframes for The Loft's website", caption="Wireframes getting developed on Figma" %}
 
 Here's what Cairo, co-founder of The Loft, had to say:
 > "I have never worked with someone so deeply reliable, who has gone above and beyond my expectations. The sheer detail, diligence and attention Fran has to his work is worth its weight in gold, tenfold!\
