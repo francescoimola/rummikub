@@ -30,8 +30,6 @@ Over the rest of the upcoming festival cycle, I’ll be designing their printed 
 
 ![flyer for Open Art, digital left, print right](/assets/portfolio/oaf_flyer.png)
 
-![overview of the Open Art Folke branding guidelines](/assets/portfolio/oaf_guidelines.png)
-
 ## A website as the backbone
 
 Among all the ways in which Open Art Folke shares their story with the world, their website was what that I felt had the most room for improvement. The redesign that I gave it focuses on three things: highlighting the great imagery that was collected over the years, giving sponsors a dedicated space, and dressing Open Art in the most timeless and bold design possible so that their efforts can be recognised, now and in the future, from a mile away. 
@@ -42,8 +40,14 @@ To learn more about Open Art Folke, visit <a href="https://openartfolke.com" tar
 
 {% projectVideo "/assets/video/open_art_folke_about_page.mp4", "About page on the Open Art Folke website", class="site-recording" %}
 
+![desktop wireframes for Open Art Folke website on Figma](/assets/portfolio/oaf_website_figma.png)
+
 ![section on the Open Art Folke website that invites you to sign up for the newsletter](/assets/portfolio/oaf_signupform.png)
+
+![overview of the Open Art Folke branding guidelines](/assets/portfolio/oaf_guidelines.png)
 
 !["About" page, above the fold](/assets/portfolio/oaf_about.png)
 
 !["Sponsor" page, above the fold](/assets/portfolio/oaf_sponsor.png)
+
+![Figma page where I explore several directions for the new Open Art Folke logo](/assets/portfolio/oaf_logo_exploration.png)
