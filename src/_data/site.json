@@ -2,5 +2,6 @@
   "url": "https://francescoimola.com",
   "name": "Francesco Imola",
   "description": "Delightful things with pixels and words made by Francesco Imola from a seaside town in Kent.",
-  "image": "https://francescoimola.com/assets/favicon/android-chrome-512x512.png"
+  "image": "https://francescoimola.com/assets/open_graph_image.png",
+  "personImage": "https://francescoimola.com/assets/images/francesco-studio-shot-2560w.jpeg"
 }

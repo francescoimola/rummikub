@@ -12,7 +12,7 @@
       "@id": "{{ site.url }}/#person",
       "name": "{{ site.name }}",
       "url": "{{ site.url }}",
-      "image": "{{ site.image }}",
+      "image": "{{ site.personImage }}",
       "description": "{{ site.description }}",
       "jobTitle": "Web Designer & Developer"
     },
@@ -41,13 +41,16 @@
 {%- endif -%}
 
 {%- if isWritingPost and date -%}
+{# Posts without an image: frontmatter fall back to the site default, else this emits a bare domain. #}
+{%- set articleImage = image | default(site.image) -%}
+{%- if '://' not in articleImage %}{% set articleImage = site.url + articleImage %}{% endif -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "{{ title }}",
   "description": "{{ teaser }}",
-  "image": "{{ site.url }}{{ image }}",
+  "image": "{{ articleImage }}",
   "datePublished": "{{ date | dateToRfc3339 }}",
   "dateModified": "{{ date | dateToRfc3339 }}",
   "author": {

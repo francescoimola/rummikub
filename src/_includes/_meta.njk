@@ -11,7 +11,7 @@
 {# Optional metaTitle frontmatter overrides title for search/social only; the on-page h1 keeps title. #}
 {%- set socialTitle = metaTitle | default(title) %}
 {%- set metaDescription = teaser | default(description) | default(site.description) %}
-{%- set ogImage = image | default('https://res.cloudinary.com/dax6x2pto/image/upload/c_lfill,w_1200,f_auto,q_auto/Open_Graph_Image_rfqysu.png') %}
+{%- set ogImage = image | default(site.image) %}
 {%- if '://' not in ogImage %}{% set ogImage = site.url + ogImage %}{% endif %}
 
 <meta property="og:title" content="{{ socialTitle }}" />
