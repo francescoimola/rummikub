@@ -1,5 +1,6 @@
 ---
 title: Film & TV Department, University of Greenwich
+metaTitle: "Film & TV at Greenwich | Case study | Francesco Imola"
 services: Community Engagement, Graphic & Learning Design, Copywriting
 image: /assets/portfolio/ftv_peter_operates_camera.png
 alt: Camera operator using a gymbal to film in a studio
