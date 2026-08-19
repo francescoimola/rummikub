@@ -141,9 +141,16 @@ describe("filters.js", () => {
       expect(result.every((i) => i.data.type === "guides")).toBe(true);
     });
 
+    it("keeps every type in a list", () => {
+      const result = getFilter("byType")(items, ["essays", "guides"]);
+
+      expect(result).toEqual(items);
+    });
+
     it("returns every item when no type is given", () => {
       expect(getFilter("byType")(items, undefined)).toBe(items);
       expect(getFilter("byType")(items, "")).toBe(items);
+      expect(getFilter("byType")(items, [])).toBe(items);
     });
 
     it("returns an empty array for an unknown type", () => {
