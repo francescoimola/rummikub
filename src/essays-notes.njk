@@ -1,0 +1,29 @@
+---
+permalink: /essays-notes.xml
+eleventyExcludeFromCollections: true
+---
+{#- Same feed as /rss.xml minus the guides, for syndication on aggregators that take one URL. -#}
+{#- Deliberately a standalone copy of feed.njk: two obvious files beat one clever one. -#}
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ site.name }} — Essays &amp; Notes</title>
+    <link>{{ site.url }}/writing/</link>
+    <atom:link href="{{ site.url }}/essays-notes.xml" rel="self" type="application/rss+xml" />
+    <description>Essays and notes on modern work, culture, design and learning new things. No how-to guides.</description>
+    <language>en-gb</language>
+    {%- for item in collections.writing | byType(["essays", "notes"]) %}
+    {%- set itemUrl = item.data.external or (site.url + item.url) %}
+    <item>
+      <title>{{ item.data.title }}</title>
+      <link>{{ itemUrl }}</link>
+      <guid isPermaLink="false">{{ itemUrl }}</guid>
+      <pubDate>{{ item.date | dateToRfc822 }}</pubDate>
+      <description>{{ item.data.teaser }}</description>
+      {%- if item.data.type and writingTypes[item.data.type] %}
+      <category>{{ writingTypes[item.data.type].label }}</category>
+      {%- endif %}
+    </item>
+    {%- endfor %}
+  </channel>
+</rss>

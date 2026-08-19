@@ -50,10 +50,12 @@ module.exports = function (eleventyConfig) {
     return isNaN(date.valueOf()) ? "" : date.toISOString().replace(/\.\d{3}Z$/, "Z");
   });
 
+  // Takes one slug ("essays") or a list (["essays", "notes"]); anything empty means "keep everything"
   eleventyConfig.addFilter("byType", function (items, type) {
-    if (!type) return items;
+    var wanted = [].concat(type || []);
+    if (!wanted.length) return items;
     return items.filter(function (p) {
-      return p.data.type === type;
+      return wanted.indexOf(p.data.type) !== -1;
     });
   });
 

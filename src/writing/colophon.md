@@ -5,6 +5,7 @@ permalink: /about/colophon/
 date: 2026-08-04
 updated: 2026-08-05
 type: notes
+teaser: "How and why I built this site."
 ---
 I built this website myself. The current iteration is the third, or the seventh. I stopped counting, to be honest. Its design and features have changed a lot over the years, and whilst looking after it has kept me busy many an evening, it has also given me countless challenges from which to learn. I am immensely grateful to have a website as "mine" as this, and despite having probably spent way too much time tending to it, I regret very little about the whole experience.
 
