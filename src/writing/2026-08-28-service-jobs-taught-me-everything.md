@@ -3,31 +3,12 @@ title: Service jobs taught me everything
 date: 2025-07-01
 teaser: Four lessons I've learned from working in hospitality and retail
 hidden: false
+image: /assets/writing/5bcd32f5-cd37-4df5-9dce-0197dd7a98f71920x1280.png
+alt: person drying dishes in a restaurant kitchen
+type: essays
+permalink: https://notbadnotbad.substack.com/p/minimum-wage-jobs-taught-me-everything
 ---
-
-image: /assets/writing/How_to_write_a_website_brief_oktkpe.png
-alt: "How to write a cracking website brief (8 step guide)"
-type: guides
-permalink: /writing/how-to-write-a-website-brief/
----
-
-[
-
-![Francesco Imola's avatar](https://substackcdn.com/image/fetch/$s_!MnTH!,w_36,h_36,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feede0a7d-b0f5-4c93-a6ef-7f7c7442f5ce_1122x1118.jpeg)
-
-](https://substack.com/@francescoimola)
-
-[Francesco Imola](https://substack.com/@francescoimola)
-
-Jul 01, 2025
-
-1
-
-1
-
-1
-
-Share
+_This essay is an edited version of a [piece I originally shared on Not Bad in July 2025](https://notbadnotbad.substack.com/p/minimum-wage-jobs-taught-me-everything)_
 
 As someone fast approaching the big 3-0, I am starting to feel nostalgic seeing the decade that many consider “the best of your life” come to an end.
 
