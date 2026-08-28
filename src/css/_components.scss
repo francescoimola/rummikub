@@ -172,16 +172,21 @@
 
 // ---- Masonry ----
 
-// Multi-column packs short cards under a tall neighbour instead of leaving a gap; 2-up fold in _responsive.scss (CSS rule 10)
+// Row-aligned grid; 2-up fold in _responsive.scss (CSS rule 10). Deliberately not multicol — WebKit's balancer piles a tall outlier into one column and stubs the other
 .masonry {
-    columns: 1;
-    column-gap: var(--space-xs);
-    align-self: start; // .split-row's stretch hands the multicol a definite height, and it then fills column 1 to that height instead of balancing
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+    align-items: start; // cards keep their natural height instead of stretching to the row
+    align-self: start; // .split-row's stretch would give the grid a definite height, and align-content defaults to stretch, spreading the rows apart
+
+    // Safari 26.4+ — real masonry, closing the fallback's whitespace under shorter cards
+    @supports (display: grid-lanes) {
+        display: grid-lanes;
+    }
 }
 
 .masonry>.card {
-    break-inside: avoid;
-    margin-block-end: var(--space-xs);
     background-color: transparent;
 }
 

@@ -187,7 +187,7 @@
         }
 
         .masonry {
-            columns: 2;
+            grid-template-columns: 1fr 1fr; // also defines the lanes under display: grid-lanes
         }
         
     }
