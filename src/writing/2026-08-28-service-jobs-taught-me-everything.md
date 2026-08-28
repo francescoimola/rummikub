@@ -1,6 +1,6 @@
 ---
 title: Service jobs taught me everything
-date: 2025-07-01
+date: 2026-08-29
 teaser: Four lessons I've learned from working in hospitality and retail
 hidden: false
 image: /assets/writing/5bcd32f5-cd37-4df5-9dce-0197dd7a98f71920x1280.png
