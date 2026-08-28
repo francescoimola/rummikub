@@ -38,20 +38,28 @@ describe("filters.js", () => {
       expect.any(Function)
     );
     expect(config.addFilter).toHaveBeenCalledWith(
-      "writingThumbColor",
+      "writingThumbColors",
       expect.any(Function)
     );
   });
 
-  describe("writingThumbColor", () => {
+  describe("writingThumbColors", () => {
     function getFilter() {
       const config = createMockEleventyConfig();
       filters(config);
-      return config.getFilter("writingThumbColor");
+      return config.getFilter("writingThumbColors");
     }
 
-    it("returns a translucent oklch() from the brand hue pool", () => {
-      const color = getFilter()({ fileSlug: "example-not-bad" });
+    function hueOf(color) {
+      const match = color.match(
+        /^oklch\((\d+\.?\d*) (\d+\.?\d*) (\d+\.?\d*) \/ (\d+\.?\d*)\)$/
+      );
+      expect(match).not.toBeNull();
+      return Number(match[3]);
+    }
+
+    it("returns one translucent oklch() per item, from the brand hue pool", () => {
+      const [color] = getFilter()([{ fileSlug: "example-not-bad" }]);
       const match = color.match(
         /^oklch\((\d+\.?\d*) (\d+\.?\d*) (\d+\.?\d*) \/ (\d+\.?\d*)\)$/
       );
@@ -69,16 +77,39 @@ describe("filters.js", () => {
 
     it("is deterministic per slug across calls", () => {
       const filter = getFilter();
-      expect(filter({ fileSlug: "example-odd-wonderful" })).toBe(
-        filter({ fileSlug: "example-odd-wonderful" })
-      );
+      const item = { fileSlug: "example-odd-wonderful" };
+      expect(filter([item])).toEqual(filter([item]));
     });
 
     it("falls back through url then title when fileSlug is absent", () => {
-      const filter = getFilter();
-      expect(filter({ url: "/writing/x/" })).toMatch(/^oklch\(/);
-      expect(filter({ data: { title: "Untitled" } })).toMatch(/^oklch\(/);
-      expect(filter({})).toMatch(/^oklch\(/);
+      const [byUrl, byTitle, empty] = getFilter()([
+        { url: "/writing/x/" },
+        { data: { title: "Untitled" } },
+        {},
+      ]);
+      expect(byUrl).toMatch(/^oklch\(/);
+      expect(byTitle).toMatch(/^oklch\(/);
+      expect(empty).toMatch(/^oklch\(/);
+    });
+
+    it("returns null for items with a cover image, spending no rotation slot", () => {
+      const colors = getFilter()([
+        { fileSlug: "a" },
+        { fileSlug: "b", data: { image: "/assets/writing/b.png" } },
+        { fileSlug: "c" },
+      ]);
+      expect(colors[1]).toBeNull();
+    });
+
+    it("never repeats the hue of the immediately preceding swatch", () => {
+      const items = Array.from({ length: 12 }, (_, i) => ({
+        fileSlug: `writing-item-${i}`,
+      }));
+      const hues = getFilter()(items).map(hueOf);
+
+      for (let i = 1; i < hues.length; i++) {
+        expect(hues[i]).not.toBe(hues[i - 1]);
+      }
     });
   });
 

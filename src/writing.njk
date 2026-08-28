@@ -18,8 +18,10 @@ eleventyNavigation:
       <p class="dimmed">{{ t.blurb }}</p>
     </div>
     <div class="flow has-gap-xs">
-      {% for item in collections.writing | byType(typeSlug) | limit(2) %}
-        {{ writingItem(item) }}
+      {% set items = collections.writing | byType(typeSlug) | limit(3) %}
+      {% set thumbColors = items | writingThumbColors %}
+      {% for item in items %}
+        {{ writingItem(item, thumbColors[loop.index0]) }}
       {% endfor %}
     </div>
    <a href="/writing/{{ typeSlug }}/" data-icon="arrow-right">See all {{ t.short | capitalize }}</a>

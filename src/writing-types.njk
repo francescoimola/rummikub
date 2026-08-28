@@ -21,8 +21,10 @@ eleventyComputed:
   {{ pageHeader(t.icon, t.label, t.blurb) }}
   <div class="flow has-gap-xs{% if typeSlug == 'notes' %} writing-section--quiet{% endif %}">
     <div class="has-mb-s">{% include "_breadcrumb.njk" %}</div>
-    {% for item in collections.writing | byType(typeSlug) %}
-      {{ writingItem(item) }}
+    {% set items = collections.writing | byType(typeSlug) %}
+    {% set thumbColors = items | writingThumbColors %}
+    {% for item in items %}
+      {{ writingItem(item, thumbColors[loop.index0]) }}
     {% endfor %}
   </div>
 
