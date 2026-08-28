@@ -1,11 +1,11 @@
-{% macro writingItem(item) %}
+{% macro writingItem(item, thumbColor) %}
 <a class="card writing-item flow-row has-gap-s-m"
    href="{{ item.data.external or item.url }}"
    {% if item.data.external %}target="_blank" rel="noopener noreferrer"{% endif %}>
   {% if item.data.image %}
   <span class="writing-item__thumb"><img src="{{ item.data.image }}" alt="{{ item.data.alt }}" loading="lazy" decoding="async" sizes="5rem"></span>
   {% else %}
-  <span class="writing-item__thumb" style="--thumb-fill: {{ item | writingThumbColor }}" aria-hidden="true"></span>
+  <span class="writing-item__thumb" style="--thumb-fill: {{ thumbColor }}" aria-hidden="true"></span>
   {% endif %}
   <div class="writing-item__body flow has-gap-3xs">
     <h3 class="has-mb-3xs">{{ item.data.title }}</h3>
