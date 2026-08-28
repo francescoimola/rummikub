@@ -10,6 +10,9 @@
   "ignorePatterns": [
     "src/css/vendor/cleacss.css"
   ],
+  "dynamicallyLoaded": [
+    "src/**/*.11tydata.js"
+  ],
   "ignoreDependencies": [
     "markdown-it",
     "markdown-it-attrs",

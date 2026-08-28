@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// fallow-ignore-file coverage-gaps
+// Opt-in local tooling, run by hand and never shipped to a browser.
 /**
  * Opt-in project-video optimizer. Mirrors the old Astro site's external ffmpeg
  * workflow but codifies it. Dependency-light on purpose: spawns the system

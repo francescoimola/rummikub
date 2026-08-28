@@ -14,6 +14,7 @@ class VideoController {
 
     this.inView = false;
     this.loaded = false;
+    this.pendingLoadPlay = false;
     this.reducedMotion = reducedMotion;
     this.dataSaver = dataSaver;
 
@@ -69,8 +70,11 @@ class VideoController {
 
   handleEnterView() {
     if (this.reducedMotion.matches) return;
+    if (this.pendingLoadPlay) return; // scrolling in and out pre-load would queue one load listener per entry
+    this.pendingLoadPlay = true;
     // Deferred: fetching the video during first paint starves the poster, which is the LCP element above the fold
     afterPageLoad(() => {
+      this.pendingLoadPlay = false;
       if (this.inView && !this.reducedMotion.matches) this.tryPlay();
     });
   }

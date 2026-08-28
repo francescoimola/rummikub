@@ -88,6 +88,12 @@ beforeEach(() => {
 afterEach(() => {
   globalThis.IntersectionObserver = originalIntersectionObserver;
   window.matchMedia = originalMatchMedia;
+  // Restored here, not in the test body: a pre-load test that fails mid-way would otherwise
+  // leak readyState "loading" into every test after it.
+  Object.defineProperty(document, "readyState", {
+    value: "complete",
+    configurable: true,
+  });
   document.body.innerHTML = "";
   vi.restoreAllMocks();
 });
@@ -343,10 +349,6 @@ describe("VideoController", () => {
       window.dispatchEvent(new Event("load"));
       expect(video.play).toHaveBeenCalled();
 
-      Object.defineProperty(document, "readyState", {
-        value: "complete",
-        configurable: true,
-      });
     });
 
     it("does not play if the video scrolled out of view before load fired", () => {
@@ -364,10 +366,44 @@ describe("VideoController", () => {
       window.dispatchEvent(new Event("load"));
       expect(video.play).not.toHaveBeenCalled();
 
+    });
+
+    it("queues one deferred play however many times it re-enters view before load", () => {
       Object.defineProperty(document, "readyState", {
-        value: "complete",
+        value: "loading",
         configurable: true,
       });
+      const { ctrl, video } = mount({ dataSrc: true });
+      video.play = vi.fn().mockResolvedValue(undefined);
+
+      // Scrolling in and out repeatedly while the page is still loading
+      ctrl.inView = true;
+      ctrl.handleEnterView();
+      ctrl.inView = false;
+      ctrl.handleLeaveView();
+      ctrl.inView = true;
+      ctrl.handleEnterView();
+      ctrl.inView = false;
+      ctrl.handleLeaveView();
+      ctrl.inView = true;
+      ctrl.handleEnterView();
+
+      window.dispatchEvent(new Event("load"));
+
+      expect(video.play).toHaveBeenCalledTimes(1);
+
+    });
+
+    it("defers again on the next enter-view once the page has loaded", () => {
+      const { ctrl, video } = mount({ dataSrc: true });
+      video.play = vi.fn().mockResolvedValue(undefined);
+      ctrl.inView = true;
+
+      ctrl.handleEnterView();
+      ctrl.handleEnterView();
+
+      // readyState is already "complete", so each call runs straight through rather than latching
+      expect(video.play).toHaveBeenCalledTimes(2);
     });
   });
 });
