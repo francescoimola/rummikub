@@ -155,6 +155,7 @@ Embed lazy, autoplay-in-view videos with the `projectVideo` shortcode (defined i
 7. **`browserslist` pin:** `pnpm-workspace.yaml` pins `browserslist@4.24.0`. Required for Node 22+. Do not remove.
 8. **SCC and CSS Comments are single-line `//`, never wrapped paragraphs.** One comment = one line. Do NOT wrap prose across several consecutive `//` lines, and do not use `/* … */` block comments in SCSS. If a note would exceed ~25 words, don't pad it into a multi-line block — cut it down, and move any property-specific detail onto the line directly above (or trailing, after the `;`) that property. Keep the *why*, drop the essay.
 9. **`AGENTS.md` must be 200 lines or less — never more.** When editing this file, keep the total line count at ≤ 200. Trim content so the count holds.
+10. **Extract hand-rolled null-guard chains into named helpers.** Each link of `a && a.b && a.b.c` or `x || y || z` is a cyclomatic branch, and fallow counts `?.`/`??` identically — modernising the syntax does not lower the score, only moving it does. Pull the chain into a named top-level function (see `thumbSeed`/`trustedLastmodValue` in `src/config/eleventy/filters.js`); the caller drops under threshold and the fallback rule becomes testable alone.
 
 ## Common gotchas
 
@@ -167,6 +168,7 @@ Embed lazy, autoplay-in-view videos with the `projectVideo` shortcode (defined i
 | Font not loading | Check `src/assets/fonts/` has the woff2 file; passthrough copy requires the file to exist at build time |
 | Build fails on Node 22+ | Confirm `browserslist@4.24.0` override is in `pnpm-workspace.yaml` |
 | VS Code TypeScript error in `.njk` or `.js` | `tsconfig.json` at root is intentionally minimal — `checkJs: false` |
+| `fallow health` flags a CRAP score on well-tested code | No coverage provider is installed, so fallow scores every function against a flat 40% coverage guess. Read `cyclomatic` before acting — under 20 with real tests behind it, the estimate fired, not the code |
 | Build throws `Too many featured work projects` | More than 3 `src/work/` posts have `featured: true`; the `workFeatured` collection caps at 3. Drop `featured: true` on the extras |
 | Body image has no spacing, no caption, or two images stack flush | Markdown `![]()` — adjacent ones share one `<p>` and the `.case-study` selectors miss them. Use `figureImg` (see Long-form pages) |
 | An inline SVG icon in `<main>` is invisible but still clickable | `header svg, main svg` (Illustrations) pads **every** SVG in `<main>`; padding over the declared size inflates the border-box and collapses the icon viewport to 0. Add `padding: 0; max-inline-size: none` to the icon's own rule |

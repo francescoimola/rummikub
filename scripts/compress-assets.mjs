@@ -1,4 +1,6 @@
 // fallow-ignore-file security-sink
+// fallow-ignore-file coverage-gaps
+// Opt-in local tooling, run by hand and never shipped to a browser.
 // Paths are build-time only: ROOT comes from import.meta.url, the rest from walking that fixed dir.
 
 /**

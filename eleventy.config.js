@@ -1,3 +1,5 @@
+// fallow-ignore-file coverage-gaps
+// Build-time config, never shipped to a browser — the suites assert its output instead.
 const { promisify } = require("util");
 const { readFile } = require("fs");
 const path = require("path");

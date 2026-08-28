@@ -1,3 +1,5 @@
+// fallow-ignore-file coverage-gaps
+// Entry point only: the imports and two calls below are covered by each module's own suite.
 import "./mailto-copy.js";
 import "./dialog-copy.js";
 import "./look-toggles.js";
