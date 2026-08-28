@@ -6,11 +6,8 @@ hidden: false
 image: /assets/writing/5bcd32f5-cd37-4df5-9dce-0197dd7a98f71920x1280.png
 alt: person drying dishes in a restaurant kitchen
 type: essays
-permalink: https://notbadnotbad.substack.com/p/minimum-wage-jobs-taught-me-everything
 ---
 _This essay is an edited version of a [piece I originally shared on Not Bad in July 2025](https://notbadnotbad.substack.com/p/minimum-wage-jobs-taught-me-everything)_
-
-As someone fast approaching the big 3-0, I am starting to feel nostalgic seeing the decade that many consider “the best of your life” come to an end.
 
 Italian singer-songwriter Motta wrote a song a while ago (here on [Spotify](https://open.spotify.com/track/1R6VvUPobIdxPVCQNtPxYd) and [Apple Music](https://music.apple.com/be/song/la-fine-dei-ventanni/1523876426) if you’d rather listen to it later):
 
@@ -22,17 +19,17 @@ The end of your twenties is a bit like being late—he sings.
 _Non devi sbagliare strada/ non farti del male/ e trovare parcheggio_
 Just don't take the wrong road, don't hurt yourself, and find somewhere to park.
 
-I turned thirty earlier this year. Leading up to the birthday, I was both proud of where my twenties took me, exhausted by their chaos, and regretful of the fact that I should have figured out more of life by then. No one's hyped for turning 30 like they are for 20. Twenty marks the start of an adventure, and 30 sort of marks the end of one.
+I turned thirty earlier this year. Leading up to the birthday, I was both proud of where my twenties took me, exhausted by their chaos, and regretful of the fact that I should have figured out more of life by then. No one's hyped for turning 30 like they are for 20. Twenty marks the start of an adventure, and 30 sort of marks the end of one?
 
-Lucky or not, in the last decade I've accumulated enough stories to fill a feature-length documentary, I made a lot of quick decisions and lived through some pretty absurd experiences. Which is perhaps why, around the same time I was sending people's invites to come to the pub with me for a celebratory drink, I was also feeling strangely unsettled. The plane is about to take off, I thought to myself, but I'm anchored down by memories of all that's been. Many of those memories seemed to relate to which about jobs I've taken, how those jobs lead me to do what I do today, and whether or not I'd actually learned something useful from those ten years of work.
+Lucky or not, in the last decade I've accumulated enough stories to fill a feature-length documentary, I made a lot of quick decisions and lived through some pretty absurd experiences. Which is perhaps why, around the same time I was sending people's invites to come to the pub with me for a celebratory drink, I was also feeling strangely unsettled. The plane is about to take off, I thought to myself, but I'm anchored down by memories of all that's been. Many of those memories seemed to relate to the jobs I had, how those jobs influenced the person I am today, and whether or not I'd actually learned useful things from those ten years.
 
 What should I take with me into the next chapter?
 
-One of the things that felt like taking the wrong road, the one Motta sings about, was not giving some roles more of a chance, and flying off to bight new pastures perhaps too often, and too soon. Since I was 18 I've had, let's count, 13 jobs across two countries, four cities, and many offsite locations. Some of those I loved every minute of, others I showed up at work ready to disassociate for the following 8 hours. As you get older you also get wiser, and I can see some things clearly now: where I did very well, where I felt most fulfilled, where I messed up, and where my lack of patience took over. 
-
 The jobs that taught me the most, in retrospective, weren't the reasonably-paid joint head of something roles with too many meetings. They were the minimum wage positions I took on leading up to and after university: I worked in cafés, restaurants, gift shops, fast-food chains, receptions, food trucks and apothecaries. I'd often be face-to-face with customers, running around like crazy, and working side by side with a handful of hand-working folks. 
 
-I hope to one day write about each of them, but for the moment a summary of sorts will have to do. Perhaps, one focused on lessons rather than duties. Shall we? In the spirit of figuring out what has been valuable, here are four lessons I've learned from working minimum-wage jobs in the service industry.
+I hope to one day write about each one, but for the moment a summary of sorts will do. Perhaps, one focused on lessons rather than duties. Shall we? 
+
+In the spirit of figuring out what has been valuable, here are four lessons I've learned from working minimum-wage jobs in the service industry.
 
 ## 1\. Plurality of voices leads to better work
 
@@ -44,19 +41,23 @@ Armed with basic English knowledge and the ability to bread chicken and peel oni
 
 Managing expectations is a much harder skill than we are willing to admit. It's something I learned at work, but I've found that it applies to every relationship. It's better to tell your Chef that you've never baked banana bread before and that you need some help—even thought it might seem embarrassing given how simple banana bread is to make—than to promise that they'll get a tasty cake and then deliver a dense, sunk-in-the-middle disappointment. 
 
-Instead, you promise a comfortable level and you deliver on that comfortable level. This is true even insinuations where you need guidance to get comfortable. When I started approaching expectations with this lens, I started earning more respect, and I could stop feeling so tense all the time. 
+Instead, you promise a comfortable level and you deliver on that comfortable level. This is true even in situations where you need guidance to get comfortable. 
 
-You'll find that when you under promise, there is no need to overdeliver either, despite what some may tell you to do. You only risk maxing out and people will expect even more next time. Had I learned this years ago, I’d have saved myself an awful lot of guilt and embarrassment. Even today, as a chronic exaggerator slash very ambitious collaborator, I have to double check what promise I make all too often.
+When I started approaching expectations with this lens, I started earning more respect, and I could stop feeling so tense all the time. And I think you'll find that, when you under promise, there is no need to overdeliver either—despite what some may tell you. If you attempt to overdeliver, you risk maxing out and people will expect even more next time. 
+
+Had I learned this lesson years ago, I’d have saved myself an awful lot of guilt and embarrassment, and even today, as a chronic exaggerator slash ambitious collaborator, I have to triple check what promises I make, no joke.
 
 ## 3\. CVs aren’t good metrics for success
 
-The things that a person has achieved so far, the people they associated with, and their long-term career goals are the three most important differentiators in modern recruitment. These criteria, whether explicitly stated by the candidate or assumed by whoever’s hiring, are used to discriminate against, ahem, filter candidates. Regardless of their readiness to work, transferable skills, and team-fit people get judged based on their CV and the smell it emanates. 
+The things that a person has achieved so far, the people they associated with, and their long-term career goals are the three most important differentiators in modern recruitment. Such criteria, whether explicitly stated by the candidate or assumed by whoever’s hiring, are used to discriminate against, ahem, "select the best" candidates in more occasions than we'd like to admit. And this happens regardless of one's readiness to work, transferable skills, and team-fit.
 
-What the last ten years have told me, is that what should matter most is how willing you are to put in the work, how effectively you can learn new skills (which doesn't necessarily mean being a quick learner) and how seriously you take the basics (showing up on time, respecting your colleagues, asking for help when you need it). Hardly surprising a lesson, I'm aware. But then again, I did learn it, so... Plus, it's something concrete I actually carry with me into work today and I can notice its impact anytime I'm commissioning work or have to help sort through potential candidates for an open call.
+What jobs in the service industry have taught me is something totally different. What should matter is how willing you are to put in the work, how well you can learn new skills, and how seriously you take the basics (things like showing up on time, respecting your colleagues, or asking for help when you need it). Hardly surprising a lesson, I'm aware. But then again, I did learn it. Besides, it's a concrete caution I carry into work to this day because, having experienced the impact of unfair judgement on my own skin—which is a whole other can of worms—I don't want anyone else to go through that, and I remind myself of this anytime I commission anything or handle open calls.
 
 If it sounds like I'm trying to reduce hiring to simple guidelines for identifying good enough candidates, that's exactly what I'm doing. 
 
-Who benefits from increasingly hostile and stringent hiring requirements? Certainly not the people looking for jobs, those who'd actually be doing the work. Café and restaurant managers know this better than most. They know that if you want your workforce to do a taxing job for a wage that's close to the lowest a business can get away with, you can't realistically expect people to have an impeccable CV, to profess some sort of long-held ambition to work for Joe Schmuck Cupcakes, and to stay there until the end of times.
+After all, who benefits from increasingly hostile and stringent hiring requirements? Certainly not the people looking for jobs, you know, those who'd actually be doing the work! 
+
+Café and restaurant managers know this better than most. They know that if you want your workforce to do a taxing job for a wage that's close to the lowest a business can get away with, you can't realistically expect people to have an impeccable CV, to profess some sort of long-held ambition to work for Joe Schmuck Cupcakes, and to stay there until the end of times. Why should Cindy, Chief Customer Success Officer at WeMakeTonsaMooney, expect that?
 
 ## 4\. The most rewarding work relationships are with line managers who separate criticism from positive feedback
 
@@ -64,8 +65,14 @@ Fuck the feedback sandwich. There I said it. Stop criticising your staff while t
 
 Performance management is set up to rate and rank employees and focus primarily on their weaknesses. But constant criticism makes it nearly impossible for a manager and employee to build a healthy relationship, especially when the criticism is ambiguous.
 
-Sandwiched feedback erodes trust and it does fuck all in terms of enhancing performance, despite people thinking it does. [This was proven by a meta-analysis](https://mrbartonmaths.com/resourcesnew/8.%20Research/Marking%20and%20Feedback/The%20effects%20of%20feedback%20interventions.pdf) of 607 feedback studies involving over 23,000 participants 29 years ago (!), and has been reiterated by employees innumerable times since. 
+Sandwiched feedback erodes trust and does nothing in terms of enhancing performance, despite people thinking it does. [This was proven by a meta-analysis](https://mrbartonmaths.com/resourcesnew/8.%20Research/Marking%20and%20Feedback/The%20effects%20of%20feedback%20interventions.pdf) of 607 feedback studies involving over 23,000 participants almost 30 years ago, and has been reiterated by employees innumerable times since. 
 
-I must admit I don't always react well to feedback. Depending on when and how it's delivered, I can get defensive or anxious. Nonetheless, these feelings are intensified when the criticism I get is mixed with praise in a way that feels insincere. I don't even know if you do this in sincere way, but prove me wrong. 
+I must admit I don't always react well to feedback. Depending on when and how it's delivered, I can get defensive or anxious. Nonetheless, these feelings are intensified when the criticism I get is mixed with praise in a way that feels insincere. I want straightforward feedback so I can address issues directly, and I want genuine praise when I've done a great job—separately. Great managers know how to play to their employees' strengths, and praise is a transformative tool in their leadership arsenal—let's not smear it with criticism.
 
-I want straightforward feedback so I can address issues directly, and I want genuine praise when I've done a great job. Separately. Great managers know how to play to their employees' strengths, and praise is a transformative tool in their leadership arsenal—let's not smear it with criticism.
+<hr>
+
+Whew, I enjoyed writing that! Pulling apart the original piece and synthesising its message without forgetting to capture the turmoil that originally led me to write it. I hope it resonated with you.
+
+But now I'm curious, what has been your experience? Which unsuspecting job taught the most valuable lessons?
+
+To reply, you can [send me a message here](/contact) or [DM me on Substack](https://substack.com/@francescoimola)
