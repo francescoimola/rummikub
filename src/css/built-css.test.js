@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, globSync } from 'node:fs';
 
 const css = () => readFileSync('public/css/index.css', 'utf8');
 
@@ -65,5 +65,24 @@ describe('built stylesheet', () => {
     expect(rule).not.toBeNull();
     expect(rule[1]).toMatch(/padding:\s*0/);
     expect(rule[1]).toMatch(/max-inline-size:\s*none/);
+  });
+
+  // A [data-icon] name with no matching --icon rule leaves the mask unresolved, so the 1em pseudo
+  // paints as a solid currentColor square. The base rule's transparent fallback hides that, which
+  // makes a typo silently iconless — so assert every name used in markup has a glyph behind it.
+  it('has a glyph for every data-icon name used in templates', () => {
+    const markup = globSync('src/**/*.{njk,md}')
+      .map((f) => readFileSync(f, 'utf8'))
+      .join('');
+    const used = new Set(
+      [...markup.matchAll(/data-icon(?:-before)?="([a-z-]+)"/g)].map((m) => m[1]),
+    );
+
+    expect(used.size).toBeGreaterThan(0);
+    for (const name of used) {
+      expect(css(), `no --icon rule for "${name}"`).toMatch(
+        new RegExp(`\\[data-icon(?:-before)?=${name}\\][^{]*\\{[^}]*--icon:`),
+      );
+    }
   });
 });

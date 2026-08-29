@@ -1,7 +1,7 @@
 const MAX_FEATURED_WORK = 3;
 
 // Fixed section order on the Writing index and for per-type page generation
-const WRITING_TYPE_ORDER = ["guides", "essays", "notes"];
+const WRITING_TYPE_ORDER = ["essays", "guides", "notes"];
 
 function sortByEndDateDesc(a, b) {
   return String(b.data.endDate || "").localeCompare(String(a.data.endDate || ""));

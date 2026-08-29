@@ -6,7 +6,7 @@
     <p class="dimmed">{{ item.year }}</p>
     {% if item.link %}
     {# only external links open in a new tab — internal ones (e.g. /writing/…) stay in place #}
-    <a href="{{ item.link }}"{% if "http" in item.link %} target="_blank" rel="noopener noreferrer"{% endif %} data-icon="arrow-right">{{ item.linkLabel | default("Visit " + item.title) }}</a>
+    <a href="{{ item.link }}"{% if "http" in item.link %} target="_blank" rel="noopener noreferrer"{% endif %} data-icon="arrow-ext">{{ item.linkLabel | default("Visit " + item.title) }}</a>
     {% endif %}
   </div>
   {% if item.images %}

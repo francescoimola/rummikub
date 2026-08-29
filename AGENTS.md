@@ -45,7 +45,7 @@ Content and media are editable via Pages CMS, configured in `.pages.yml` at the 
 | `src/css/index.scss` | SCSS entry point (`@use`s every partial) + global styles: theme, content modes, interactive, typography, layout. Component-scoped rules live in `_components.scss`, not here |
 | `src/css/_components.scss` | Unlayered component styles: cards, blockquotes, look toggles, illustrations, data list, project item, case study (shared by work + writing), writing listings. Base (mobile) rules only — breakpoint overrides go in `_responsive.scss` (CSS rule 10) |
 | `src/css/_responsive.scss` | Single `all` mixin holding **every** viewport + container breakpoint rule, one block per condition. `@include`d as the last statement in `index.scss` (see CSS rule 10) |
-| `src/css/_icons.scss` | Icon glyph system — data-URI mask icons for links (mailto/tel/cal.com) and `[data-icon]` hooks |
+| `src/css/_icons.scss` | Icon glyph system — a `$glyphs` map of URL-encoded SVGs, emitted by one `@each` into `[data-icon="x"]::after` / `[data-icon-before="x"]::before`. Icons are opt-in per element; nothing keys off `href`. Add a glyph = one map entry. Per-glyph nudges use `--icon-gap` / `--icon-align`; `built-css.test.js` asserts every name used in markup has a glyph |
 | `src/css/_fonts.scss` | Ronzino `@font-face` declarations (`@layer fonts`) |
 | `src/css/_colors.scss` | Figma-generated colour scales (brand, neutral, success, warning, error, info) with light-dark() for dark mode (`@layer colors`). Brand scale is parametric (`--brand-hue`/`--brand-chroma`) |
 | `src/css/_scale.scss` | Utopia fluid type tokens (`@layer type`), the `$bp-*` breakpoint Sass vars (consumed by `_responsive.scss`), and the `--gutter-y-sticky` `@property` |
