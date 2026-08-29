@@ -6,7 +6,9 @@ type: essays
 hidden: false
 permalink: /writing/disclaimer/
 ---
-I borrowed large chunks of this list from [Jordan Gonen’s Quarter Mile](https://www.quarter--mile.com/Disclaimer), where he managed to elaborate what every writer, especially of biographical and non-fiction tendencies, should remind their audience. Please forgive me, Jordan, and also thank you. 
+Well, this is it.
+
+I borrowed large chunks of this list from [Jordan Gonen’s Quarter Mile](https://www.quarter--mile.com/Disclaimer), where he managed to elaborate what every writer should remind their audience. Please forgive me, Jordan, and also thank you. 
 
 1. If you have read anything I have published, here or elsewhere, and you find yourself looking up to me, don't. Also, I’m most likely below you, so you better look down.
 
