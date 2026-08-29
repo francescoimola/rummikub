@@ -319,6 +319,7 @@ main svg {
     position: absolute;
     inset: 0;
     pointer-events: none;
+    border-radius: var(--border-radius);
 }
 
 // Order is load-bearing: ::before blends against the media, ::after blends against that result
@@ -339,7 +340,7 @@ main svg {
     --duotone-highlight: light-dark(var(--brand-50), var(--brand-950));
 
     .project-video-play {
-        z-index: 3; // rides above both blend layers so the button stays untinted
+        z-index: 3; // rides above both blend layers so the button stays un-tinted
     }
 }
 
