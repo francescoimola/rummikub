@@ -1,12 +1,4 @@
 {
-  "guides": {
-    "short": "Guides",
-    "label": "Francesco's guides",
-    "blurb": "Practical articles on design and trust-based marketing for people who run their own businesses.",
-    "metaTitle": "Guides on design and trust-based marketing | Francesco Imola",
-    "metaDescription": "Practical guides on design, copywriting and trust-based marketing, written for people who run their own businesses and do their own marketing.",
-    "icon": "graphdrawing"
-  },
   "essays": {
     "short": "Essays",
     "label": "Francesco's essays",
@@ -14,6 +6,14 @@
     "metaTitle": "Essays on work, culture and design | Francesco Imola",
     "metaDescription": "Frank and sometimes imperfect essays on modern work, culture, design and the business of learning new things. Written without a thought-leader in sight.",
     "icon": "mailstorm"
+  },
+  "guides": {
+    "short": "Guides",
+    "label": "Francesco's guides",
+    "blurb": "Practical articles on design and trust-based marketing for people who run their own businesses.",
+    "metaTitle": "Guides on design and trust-based marketing | Francesco Imola",
+    "metaDescription": "Practical guides on design, copywriting and trust-based marketing, written for people who run their own businesses and do their own marketing.",
+    "icon": "graphdrawing"
   },
   "notes": {
     "short": "Notes",
