@@ -10,7 +10,7 @@
   <div class="writing-item__body flow has-gap-3xs">
     <h3 class="has-mb-3xs">{{ item.data.title }}</h3>
     {% if item.data.source %}
-      <small>{{ item.data.source }} ↗</small>
+      <small data-icon="arrow-ext">{{ item.data.source }}</small>
     {% endif %}
     {% if item.date %}
       <time datetime="{{ item.date | isoMonth }}"><small>{{ item.date | monthYear }}</small></time>
