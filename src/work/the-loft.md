@@ -1,18 +1,19 @@
 ---
 title: The Loft
-metaTitle: "The Loft | Case study | Francesco Imola"
-description: A StoryBrand redesign for a multipurpose venue in Folkestone. Fixing vague messaging and a booking funnel that asked people to commit before understanding.
+metaTitle: The Loft | Case study | Francesco Imola
+description: StoryBrand redesign for a local cultural venue which led to
+  tripling their overall traffic and armed the brand with the confidence needed
+  to reach an even wider, even more loyal audience across their offerings.
 services: UX/UI Design, Copywriting, Brand Messaging
 image: /assets/portfolio/the_loft_offerings_section.png
 alt: The Loft offerings section
-endDate: 2026-05
+endDate: 2026-08-31
 featured: true
 permalink: /work/the-loft/
 layout: _base.njk
 templateEngineOverride: njk,md
 contentMode: contrast
 ---
-
 {% projectVideo "/assets/portfolio/theloft-homepage.mp4", "Homepage animation showing the navigation flow", caption="Homepage design" %}
 
 The Loft is a multipurpose space in Folkestone with an eclectic audience and a growing range of offerings, including movement classes, a photography studio, and corporate hire, gigs, and workshops. Less than a year from launch, however, it became clear that their Squarespace website, the endpoint of all their paid and organic marketing, wasn't serving its users. So Cairo and Nathan, founders of The Loft, hired me to help.
@@ -46,6 +47,8 @@ When it comes to how the brand spoke of itself, the original copy seemed to high
 {% projectVideo "/assets/portfolio/theloft-events.mp4", "Events page walkthrough"%}
 
 ## Solution
+
+Resolving key user friction points helped triple The Loft's overall YoY traffic and generate an additional 4K page views over a four-month period, laying the baseline foundation for steady and compounding traffic growth.
 
 A redesign only holds up if the client trusts what's been built, can maintain it, and isn't going to break anything. So I consulted closely with Cairo throughout the entire process and made him familiar with the logic behind every change. Before I handed over the keys, I also provided extensive documentation and training videos.
 
