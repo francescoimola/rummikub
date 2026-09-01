@@ -1,5 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { readFileSync } from "node:fs";
+import { requireBuild } from "./config/require-build.js";
+
+requireBuild();
 
 // Asserts the shipped XML, not the filter — the filter can be right while the template wires it wrong.
 const feed = (name) => readFileSync(`public/${name}`, "utf8");

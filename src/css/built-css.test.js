@@ -1,5 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync, globSync } from 'node:fs';
+import { requireBuild } from '../config/require-build.js';
+
+requireBuild();
 
 const css = () => readFileSync('public/css/index.css', 'utf8');
 

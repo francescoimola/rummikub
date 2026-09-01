@@ -1,5 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { readFileSync, existsSync, globSync } from "node:fs";
+import { requireBuild } from "./config/require-build.js";
+
+requireBuild();
 
 // Asserts the shipped .md, not the helpers — the conversion can be right while the writer skips pages.
 const read = (file) => readFileSync(`public/${file}`, "utf8");

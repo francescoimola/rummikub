@@ -7,7 +7,7 @@
 ## Reference docs
 
 - **Voice & tone:** `.docs/voice-guide.md` (local-only, gitignored)
-- **Testing:** [testing-guide.md](testing-guide.md) — run `pnpm test` before committing
+- **Testing:** [testing-guide.md](testing-guide.md) — run `pnpm build && pnpm test` before committing (the built-output tests read `public/`)
 
 ## Known gaps
 
@@ -155,7 +155,8 @@ Embed lazy, autoplay-in-view videos with the `projectVideo` shortcode (defined i
 7. **`browserslist` pin:** `pnpm-workspace.yaml` pins `browserslist@4.24.0`. Required for Node 22+. Do not remove.
 8. **SCC and CSS Comments are single-line `//`, never wrapped paragraphs.** One comment = one line. Do NOT wrap prose across several consecutive `//` lines, and do not use `/* … */` block comments in SCSS. If a note would exceed ~25 words, don't pad it into a multi-line block — cut it down, and move any property-specific detail onto the line directly above (or trailing, after the `;`) that property. Keep the *why*, drop the essay.
 9. **`AGENTS.md` must be 200 lines or less — never more.** When editing this file, keep the total line count at ≤ 200. Trim content so the count holds.
-10. **Extract hand-rolled null-guard chains into named helpers.** Each link of `a && a.b && a.b.c` or `x || y || z` is a cyclomatic branch, and fallow counts `?.`/`??` identically — modernising the syntax does not lower the score, only moving it does. Pull the chain into a named top-level function (see `thumbSeed`/`trustedLastmodValue` in `src/config/eleventy/filters.js`); the caller drops under threshold and the fallback rule becomes testable alone.
+10. **Anti-bloat: the JS surface only shrinks.** Prefer deleting or reusing over adding. **Never add a new JS file, npm dependency, or test file without explicitly asking Francesco first.** Unit tests are only for behaviour that fails invisibly (persistence, generated output, media logic); features whose breakage is obvious by clicking the page get no jsdom test — see testing-guide.md.
+11. **Extract hand-rolled null-guard chains into named helpers.** Each link of `a && a.b && a.b.c` or `x || y || z` is a cyclomatic branch, and fallow counts `?.`/`??` identically — modernising the syntax does not lower the score, only moving it does. Pull the chain into a named top-level function (see `thumbSeed`/`trustedLastmodValue` in `src/config/eleventy/filters.js`); the caller drops under threshold and the fallback rule becomes testable alone.
 
 ## Common gotchas
 

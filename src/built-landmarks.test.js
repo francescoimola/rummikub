@@ -1,5 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { readFileSync, globSync } from "node:fs";
+import { requireBuild } from "./config/require-build.js";
+
+requireBuild();
 
 // Asserts the shipped markup, not the template — the include can be right while _base.njk wires it wrong.
 const pages = () => globSync("public/**/index.html");
