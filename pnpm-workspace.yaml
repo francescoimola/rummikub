@@ -8,6 +8,10 @@ onlyBuiltDependencies:
 overrides:
   browserslist: 4.24.0
   ws: '^8.21.0'
+  # eleventy-img@6.0.4 still pins sharp ^0.33.5; the fix (^0.35.3) only ships in eleventy-img 7,
+  # which is ESM-only and would force converting eleventy.config.js off CommonJS. Force the patched
+  # sharp instead — libvips CVE-2026-33327/33328/35590/35591 (GHSA advisory, issue #78).
+  sharp: '^0.35.3'
   # Upper bound is load-bearing: js-yaml 5 is ESM-only with no default export, and Eleventy 3
   # does `import yaml from "js-yaml"` — an unbounded range lets 5.x in and the build dies at startup.
   js-yaml: '>=4.2.0 <5'
