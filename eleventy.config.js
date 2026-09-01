@@ -15,6 +15,7 @@ const setupTransforms = require("./src/config/eleventy/transforms");
 const setupCollections = require("./src/config/eleventy/collections");
 const setupFilters = require("./src/config/eleventy/filters");
 const setupShortcodes = require("./src/config/eleventy/shortcodes");
+const setupMarkdownTwins = require("./src/config/eleventy/markdown-twins");
 
 function filenameFormat(_id, src, width, format) {
   var ext = path.extname(src);
@@ -61,6 +62,7 @@ module.exports = function (eleventyConfig) {
   setupCollections(eleventyConfig);
   setupFilters(eleventyConfig);
   setupShortcodes(eleventyConfig);
+  setupMarkdownTwins(eleventyConfig);
 
   eleventyConfig.addPassthroughCopy("src/assets/favicon");
   eleventyConfig.addPassthroughCopy("src/assets/fonts");
@@ -74,6 +76,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/robots.txt");
   eleventyConfig.addPassthroughCopy("src/_redirects");
   eleventyConfig.addPassthroughCopy("src/_headers");
+  // Object form: Eleventy skips dot-prefixed source dirs, so author it undotted and rename on copy.
+  eleventyConfig.addPassthroughCopy({ "src/well-known": ".well-known" });
 
   return {
     dir: {

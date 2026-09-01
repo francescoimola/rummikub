@@ -168,6 +168,12 @@ content:
     path: src/robots.txt
     format: code
 
+  - name: webmcp
+    label: WebMCP tool catalog
+    type: file
+    path: src/well-known/webmcp.json
+    format: code
+
 settings:
   content:
     merge: true

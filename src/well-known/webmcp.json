@@ -1,0 +1,23 @@
+{
+  "spec": "webmcp/0.1",
+  "name": "Francesco Imola",
+  "description": "Portfolio of Francesco Imola — web designer, copywriter and artist based in Folkestone, Kent.",
+  "tools": [
+    {
+      "name": "get_page_markdown",
+      "description": "Get the full text of the page currently being viewed on francescoimola.com, as Markdown. Use this to read an article, case study or page without parsing HTML."
+    },
+    {
+      "name": "list_site_pages",
+      "description": "List every page on francescoimola.com — portfolio case studies, writing, and standalone pages — with a short description and a Markdown URL for each."
+    },
+    {
+      "name": "get_contact_details",
+      "description": "Get Francesco Imola's contact details: email address and the link for booking an introductory call."
+    },
+    {
+      "name": "set_appearance",
+      "description": "Change how this page looks: switch between light and dark mode, and pick the accent colour palette. The choice is remembered across visits."
+    }
+  ]
+}

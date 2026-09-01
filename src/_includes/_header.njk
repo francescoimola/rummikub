@@ -1,4 +1,7 @@
 {# _header.njk #}
+{# The page banner. Wraps the nav rather than .sidebar: <header> may not contain the sidebar's <footer>. #}
+{# It is the sidebar's first flex child, in the nav's old place, so the two-child space-between holds. #}
+<header class="site-banner">
 <nav aria-label="Primary">
     <a href="/" class="desktop-only">Francesco Imola</a>
     <details class="nav-menu">
@@ -22,3 +25,4 @@
         </div>
     </details>
 </nav>
+</header>

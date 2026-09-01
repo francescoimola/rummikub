@@ -8,6 +8,8 @@ onlyBuiltDependencies:
 overrides:
   browserslist: 4.24.0
   ws: '^8.21.0'
-  js-yaml: '>=4.2.0'
+  # Upper bound is load-bearing: js-yaml 5 is ESM-only with no default export, and Eleventy 3
+  # does `import yaml from "js-yaml"` — an unbounded range lets 5.x in and the build dies at startup.
+  js-yaml: '>=4.2.0 <5'
   picomatch@<2.3.2: '2.3.2'
   picomatch@>=4.0.0 <4.0.4: '4.0.4'
