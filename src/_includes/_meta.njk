@@ -8,6 +8,10 @@
 <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
 <link rel="alternate" type="application/rss+xml" title="{{ site.name }} — Essays &amp; Notes" href="/essays-notes.xml" />
 <link rel="alternate" type="application/rss+xml" title="{{ site.name }} — Writing" href="/rss.xml" />
+{#- Same guard as the twin writer in markdown-twins.js, so this never points at a file that wasn't built. #}
+{%- if page.url and (page.url | last) == '/' and not noindex %}
+<link rel="alternate" type="text/markdown" title="{{ metaTitle | default(title) }} (Markdown)" href="{{ page.url }}index.md" />
+{%- endif %}
 
 {# Optional metaTitle frontmatter overrides title for search/social only; the on-page h1 keeps title. #}
 {%- set socialTitle = metaTitle | default(title) %}

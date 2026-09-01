@@ -1,0 +1,36 @@
+---
+permalink: /llms.txt
+eleventyExcludeFromCollections: true
+---
+{#- Index for AI clients. Links the .md twin of each page (written by markdown-twins.js), not the HTML. -#}
+{#- Same permalink idiom as feed.njk / sitemap.njk: the extension lives in the permalink string. -#}
+# {{ site.name | safe }}
+
+> {{ site.description | safe }}
+
+Every page on this site is also available as Markdown at its URL + `index.md`.
+
+## Pages
+
+- [Home]({{ site.url }}/index.md)
+- [Selected Work]({{ site.url }}/work/index.md): portfolio case studies.
+- [Writing]({{ site.url }}/writing/index.md): essays, guides and notes.
+- [Artmaking]({{ site.url }}/art/index.md): personal art projects.
+- [About]({{ site.url }}/about/index.md)
+- [Design Studio]({{ site.url }}/studio/index.md): services and how to work together.
+- [Contact]({{ site.url }}/contact/index.md)
+
+{# `| safe` throughout: this is plain text, not markup — autoescaping would ship &amp; and &#39; literally. #}
+## Work
+{% for project in collections.work %}{% if project.url %}
+- [{{ project.data.title | safe }}]({{ site.url }}{{ project.url }}index.md){% if project.data.services %}: {{ project.data.services | safe }}.{% endif %}{% endif %}{% endfor %}
+
+## Writing
+{% for item in collections.writing %}{% if item.data.external %}
+- [{{ item.data.title | safe }}]({{ item.data.external }}){% if item.data.teaser %}: {{ item.data.teaser | safe }}{% endif %} (published on {{ item.data.source | safe }}){% elif item.url %}
+- [{{ item.data.title | safe }}]({{ site.url }}{{ item.url }}index.md){% if item.data.teaser %}: {{ item.data.teaser | safe }}{% endif %}{% endif %}{% endfor %}
+
+## Feeds
+
+- [All writing (RSS)]({{ site.url }}/rss.xml)
+- [Essays and notes only (RSS)]({{ site.url }}/essays-notes.xml)

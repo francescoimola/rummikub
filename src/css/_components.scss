@@ -283,7 +283,7 @@
 
 // ---- Illustrations ----
 
-header svg,
+// Scoped to main on purpose: the banner is a <header> too, and this padding would collapse its icons.
 main svg {
     background: transparent;
     padding-inline: var(--space-2xl-3xl);

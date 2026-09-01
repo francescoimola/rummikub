@@ -4,6 +4,7 @@
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
   <div class="layout"{% if contentMode == "contrast" %} data-content="contrast"{% endif %}>
+    {# Stays a div: the banner is the <header> inside _header.njk, which cannot contain this <footer>. #}
     <div class="sidebar">
       {%- include "_header.njk" -%}
       <div class="desktop-only flow-row has-gap-2xs has-mt-xl has-items-end">

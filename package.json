@@ -28,6 +28,7 @@
     "@11ty/eleventy-plugin-rss": "^2.0.4",
     "jsdom": "^27.2.0",
     "sharp": "^0.33.5",
+    "turndown": "^7.2.4",
     "vitest": "^4.1.9"
   }
 }
