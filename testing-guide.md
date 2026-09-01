@@ -1,46 +1,73 @@
 # Testing Guide
 
-## Why tests exist
+## Map of the JavaScript
 
-JS files toggle buttons, copy emails, control videos, format dates, generate HTML. Tests make sure those things keep working after you change something. Without them, you break something three files away and don't know until a user reports it.
+There are four groups of JS in this repo, ~1,300 lines of code total (excluding tests). If you can read this table, you can find anything.
+
+| Where | What | Module style |
+|---|---|---|
+| `src/assets/scripts/` | Code that runs in the browser: video player, theme/palette toggles, copy-email buttons, nav menu, WebMCP tools | ESM (`import`/`export`) |
+| `src/config/eleventy/` | Build-time code: filters, shortcodes, collections, transforms, markdown twins. Wired up by `eleventy.config.js` | CommonJS (`require`/`module.exports`) — Eleventy config must be |
+| `scripts/` | One-off maintenance CLIs run by hand: `pnpm optimize:video` (also called by the Pages CMS GitHub workflow — don't delete) and `pnpm compress:assets` | ESM |
+| Repo root | `eleventy.config.js` (build config) and `vitest.config.js` (test config) | CJS / ESM respectively |
+
+Two things that look odd but are intentional:
+
+- **Lenis** (smooth scrolling) is an npm dependency. The build copies `node_modules/lenis/dist/lenis.min.js` into `assets/scripts/` (see `eleventy.config.js`), so updating it is just `pnpm up lenis` and a rebuild. The 4-line `src/assets/scripts/lenis.js` starts it.
+- A few files carry `fallow-ignore` comments (`lenis.js`, `app-core.js`, `writing.11tydata.js`, `markdown-twins.js`). These tell the fallow analyzer to skip known gaps — they are deliberate, leave them alone.
 
 ## Running tests
 
 ```bash
-pnpm test          # runs all tests once
+pnpm test                # all tests, once
+pnpm build && pnpm test  # what to run before committing
 ```
 
-Vitest discovers anything matching `*.test.js` automatically.
+Vitest discovers anything matching `*.test.js` automatically. **The four `built-*` tests (plus `site-images.test.js`) read the `public/` folder, so they need `pnpm build` first** — on a fresh checkout they fail with a message telling you exactly that (`src/config/require-build.js`).
 
-## What each test file covers
+## What gets a test — and what doesn't
 
-### Browser-side code (`src/assets/scripts/`)
+A test costs you nothing while the code is untouched. It costs you time in one moment only: when it fails and you have to work out why. That is also the only moment it helps. So:
 
-- **mailto-copy.test.js** — clicks a `[data-copy-email]` button, checks the address copies to clipboard, the label swaps to "Email copied!" and reverts after 2s. Uses `vi.useFakeTimers()` to fast-forward.
-- **video-controller.test.js** — tests lazy-loading via `IntersectionObserver`, play/pause, reduced-motion handling. Mocks `IntersectionObserver` and `navigator.connection`.
-- **nav-menu.test.js** — the mobile `<details>` menu's three close paths (Escape, pointerdown outside, link click), and that only Escape returns focus to the menu bar.
+- **Behaviour that fails invisibly gets a test.** Saved preferences, generated XML/HTML, CSS layer order, lazy-video logic — you would never spot these breaking by looking at the site.
+- **Behaviour that fails visibly does not.** A copy-email button, a dialog, the nav menu — click the live site and you know in ten seconds. Tests for these were deliberately deleted (2026-09); don't re-add them.
+- **Escape hatch:** if a browser-script test fails and you can't fix it in a reasonable time, deleting the test is an acceptable outcome. The built-output tier is the one that must always stay green.
 
-### Eleventy config (`src/config/eleventy/`)
+## The 15 test files
 
-Each file exports a function that registers something with Eleventy. Tests mock the config object, call the function, test the registered callbacks.
+### Built-output tests — the most important tier (need `pnpm build` first)
+
+These check the actual shipped site in `public/`, so they catch mistakes anywhere in the chain — template, config, or data.
+
+- **src/built-css.test.js** — one stylesheet, no runtime `@import`, layer order, icon glyphs, masonry rules
+- **src/built-feeds.test.js** — both RSS feeds carry the right categories; hidden posts stay out
+- **src/built-landmarks.test.js** — every page has correct landmark markup (skip link, banner, main)
+- **src/built-markdown.test.js** — every page ships its `.md` twin, plus `llms.txt`
+
+### Eleventy config tests (`src/config/eleventy/`)
+
+Each config module exports a function that registers things with Eleventy. Tests mock the config object, call the function, and test the registered callbacks. Copy `filters.test.js` to adapt.
 
 - **filters.test.js** — `readableDate`, `split`, `limit`, `filterByCategory`, `slugify`, `urlencode`
-- **collections.test.js** — `blogCategories` extracts and sorts unique categories from blog posts
-- **shortcodes.test.js** — `projectVideo` and `remoteImg` HTML output, plus `renderSources`, `renderAttr`, `renderFigcaption` helpers
-- **transforms.test.js** — `ignoreRemoteImages` adds `eleventy:ignore` to remote imgs; `lazyImages` adds `loading="lazy"` and `decoding="async"`
+- **collections.test.js** — `blogCategories` extraction and sorting
+- **shortcodes.test.js** — `projectVideo` and `remoteImg` output plus render helpers
+- **transforms.test.js** — `ignoreRemoteImages`, `lazyImages`
 - **markdown.test.js** — remote images get `eleventy:ignore` via the markdown renderer
+- **markdown-twins-helpers.test.js** — HTML→markdown twin conversion helpers
+- **site-images.test.js** — absolute image URLs in `site.json` point at real built files (also needs `pnpm build` first)
 
-## Adding tests for new code
+### Browser-script tests (`src/assets/scripts/`)
 
-Add a `.test.js` file next to the source file. Vitest finds it automatically.
+Run in jsdom. These files are IIFE-style with no exports, so the pattern is: set up the DOM, then `await import("./the-file.js")` inside the test, with `vi.resetModules()` in `beforeEach` for a fresh import.
 
-**Browser IIFEs with no exports:** set up the DOM first, then `await import("./your-file.js")` in each test. Call `vi.resetModules()` in `beforeEach` for a fresh import.
-
-**Eleventy config modules:** mock the config object, call the exported function, test the callbacks. Copy `filters.test.js` and adapt it.
+- **video-controller.test.js** — the fiddliest code in the repo: lazy-load via `IntersectionObserver`, play/pause, reduced motion, data-saver. Failure modes are silent — keep this one.
+- **look-toggles.test.js** — theme/palette toggles stay in sync across sidebars and survive storage failures (silent persistence logic)
+- **webmcp.test.js** — WebMCP tool registration; pins tool names to `src/well-known/webmcp.json`
+- **stretch-text.test.js** — SVG viewBox fitting with a stubbed `getBBox`
 
 ## Rules
 
-- Run `pnpm test` before committing.
+- Run `pnpm build && pnpm test` before committing.
 - Test behaviour, not implementation. "When I click, content expands" — not "the handler calls `classList.toggle`".
 - New Eleventy filter/shortcode/transform? Add a test.
-- Browser JS change? Update the test file.
+- New browser feature? Only test it if breakage would be invisible (see above) — and ask Francesco before adding any new JS or test file (AGENTS.md, non-negotiable rules).

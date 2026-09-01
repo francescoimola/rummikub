@@ -1,5 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
+import { requireBuild } from '../require-build.js';
+
+requireBuild();
 
 const site = JSON.parse(readFileSync('src/_data/site.json', 'utf8'));
 const localPath = (url) => 'public' + url.replace(site.url, '');
