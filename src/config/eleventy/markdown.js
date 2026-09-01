@@ -36,9 +36,18 @@ module.exports = function (eleventyConfig) {
 
     if (hrefIndex >= 0) {
       var href = token.attrs[hrefIndex][1];
-      var isExternal =
-        (href.startsWith("http://") || href.startsWith("https://")) &&
-        !href.startsWith("https://francescoimola.com");
+      var isExternal = false;
+
+      try {
+        var parsedUrl = new URL(href);
+        var isHttp = parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:";
+        var isAllowedInternal =
+          parsedUrl.protocol === "https:" && parsedUrl.hostname === "francescoimola.com";
+
+        isExternal = isHttp && !isAllowedInternal;
+      } catch (e) {
+        isExternal = false;
+      }
 
       if (isExternal) {
         token.attrPush(["target", "_blank"]);
