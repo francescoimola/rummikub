@@ -7,7 +7,7 @@ description: StoryBrand redesign for a local cultural venue which led to
 services: UX/UI Design, Copywriting, Brand Messaging
 image: /assets/portfolio/the_loft_offerings_section.png
 alt: The Loft offerings section
-endDate: 2026-08-31
+endDate: 2026-05-01
 featured: true
 permalink: /work/the-loft/
 layout: _base.njk
