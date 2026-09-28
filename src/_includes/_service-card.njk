@@ -1,10 +1,14 @@
-{% macro serviceCard(title, url, description, type = "default") %}
+{% macro serviceCard(title, url, description, type = "default", cta = "Enquire") %}
 {% if type == "accordion" %}
 <details class="card link-card">
     <summary><h3>{{ title }}</h3></summary>
     <div class="flow has-gap-s has-py-xs">
         <p>{{ description }}</p>
-        <a data-icon="email" href="{{ url }}">Enquire</a>
+        {% if url.startsWith("http") %}
+        <a data-icon="arrow-ext" href="{{ url }}" target="_blank" rel="noopener noreferrer">{{ cta }}</a>
+        {% else %}
+        <a data-icon="email" href="{{ url }}">{{ cta }}</a>
+        {% endif %}
     </div>
 </details>
 {% else %}
