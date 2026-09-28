@@ -5,7 +5,7 @@ description: The design studio of Francesco Imola. Web design, graphic design an
 contentMode: contrast
 preloadImage: /assets/video/work_showreel.jpg
 eleventyNavigation:
-  key: Design Studio
+  key: Services
   parent: Home
 ---
 {% from "_service-card.njk" import serviceCard %}
@@ -23,19 +23,19 @@ eleventyNavigation:
 <div class="has-items-center has-text-center" style="margin-block: calc(-1 * var(--space-xl));"><span>↓</span></div>
 <section class="flow has-gap-s has-counter pretty" highlight-header>
     <h2 class="has-mb-xs">Where I can help</h2>
-    <p class="has-mb-s">Together we will literally and metaphorically break free from suffocating marketing practices, and chart a simpler, less exhausting way forward.</p>
-    {{ serviceCard("Web & Graphic Design", "/studio/design/", "Proceed with caution: this service involves slicing through the nonsense and giving your people what they've been missing.") }}
-    {{ serviceCard("Website Consultations", "/studio/consultations/", "Sense something isn't working, but don't know what exactly? A website consultation gives you what your therapist never could.") }}
+    <p class="has-mb-s">Together we'll break free from suffocating marketing practices, and chart a simpler, less exhausting way forward.</p>
+    {{ serviceCard("Web Design", "/studio/design/", "Proceed with caution: this service involves slicing through the nonsense and giving your people the website they've been missing.") }}
+    {{ serviceCard("Website Consultations", "/studio/consultations/", "Sense something isn't working, but don't know what exactly? A website consultation gives you the clear to-do list your therapist never could.") }}
 </section>
 <section class="flow has-gap-s pretty" highlight-header>
-    <h2 class="has-mb-xs">Ad hoc</h2>
-    {{ serviceCard("Copy and content writing", "mailto:hi@francescoimola.com", "Have a bunch of ideas you've been meaning to publish? Want your entire website rewritten? I can take half formed drafts and turn them into fully fleshed, SEO friendly content that sings to the hearts of your people.", type = "accordion") }}
-    {{ serviceCard("Email guidance", "mailto:hi@francescoimola.com", "Get 1:1 help via email and see things from a new perspective. Let's work on your strategy, website, newsletter, or branding. Guidance is tailored to you, and informed by my 8+ years in marketing and the creative industries." , type = "accordion") }}
+    <h2 class="has-mb-xs">Smaller projects</h2>
+    {{ serviceCard("The Groundwork Pilot", "https://tally.so/r/0Q9QkN", "Building a business that does good, but still don't have a website? I'll design and write you a bespoke one-page site in 14 days, or your money back. Starts at £850, or £995 with strategy included.", type = "accordion", cta = "See the offer") }}
+    {{ serviceCard("Graphic Design", "mailto:hi@francescoimola.com", "Got an event coming up, or a pitch to win? I design posters, flyers, programmes, brochures and pitch decks. Past clients include Open Art Folke and the University of Greenwich. Starts at £260 a day.", type = "accordion", cta = "Enquire") }}
+    {{ serviceCard("Copy and Content Writing", "mailto:hi@francescoimola.com", "Have a bunch of ideas you've been meaning to publish? Want your entire website rewritten? I can take half-formed drafts and turn them into fully fleshed-out, SEO-friendly content that sings to the hearts of your people.", type = "accordion", cta = "Enquire") }}
+    {{ serviceCard("Email Guidance", "mailto:hi@francescoimola.com", "Get 1:1 help via email and see things from a new perspective. Let's work on your strategy, website, newsletter, or branding. Guidance is tailored to you, and informed by my 8+ years in marketing and the creative industries." , type = "accordion", cta = "Enquire") }}
 </section>
-<figure view-animation="breakout">
-    {# No width/height/sizes — an explicit width pins eleventy-img to a single srcset candidate; it re-adds the intrinsic dimensions itself #}
-    <img src="/assets/portfolio/outreach-card-oaf.png" alt="business card-adjacent print for Open Art Folke">
-    <figcaption>Graphic design for Open Art Folke</figcaption>
+<figure>
+    {% icon "bathcomputer" %}
 </figure>
 <section class="flow has-gap-s" highlight-header>
     <h2 class="has-mb-xs">Happy humans</h2>
