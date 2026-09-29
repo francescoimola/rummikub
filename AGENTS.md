@@ -9,10 +9,6 @@
 - **Voice & tone:** `.docs/voice-guide.md` (local-only, gitignored)
 - **Testing:** [testing-guide.md](testing-guide.md) — run `pnpm build && pnpm test` before committing (the built-output tests read `public/`)
 
-## Known gaps
-
-- Cloudflare's build config may still be the bridged Astro/Eleventy command (`npm run build && if [ -d public ]; …` → `dist`) — post-cutover it should be plain `npm run build` → `public`; see `.docs/cutover-runbook.md` (local-only, gitignored)
-
 ## Commands
 
 ```bash
