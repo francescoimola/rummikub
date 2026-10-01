@@ -80,6 +80,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/well-known": ".well-known" });
   // Lenis ships from node_modules so `pnpm up lenis` is the whole update; the IIFE build, not the ESM one.
   eleventyConfig.addPassthroughCopy({ "node_modules/lenis/dist/lenis.min.js": "assets/scripts/lenis.min.js" });
+  // The build's trailing sourceMappingURL points here — without it DevTools logs a 404
+  eleventyConfig.addPassthroughCopy({ "node_modules/lenis/dist/lenis.min.js.map": "assets/scripts/lenis.min.js.map" });
 
   return {
     dir: {

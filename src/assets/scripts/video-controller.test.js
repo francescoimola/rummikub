@@ -5,8 +5,8 @@ function createWrapper(opts = {}) {
   const {
     hasVideo = true,
     hasBtn = true,
-    hasSource = false,
     dataSrc = false,
+    dataWebm = false,
   } = opts;
 
   const wrapper = document.createElement("div");
@@ -16,11 +16,7 @@ function createWrapper(opts = {}) {
     const video = document.createElement("video");
     video.className = "project-video-el";
     if (dataSrc) video.dataset.src = "video.mp4";
-    if (hasSource) {
-      const source = document.createElement("source");
-      source.dataset.src = "video.webm";
-      video.appendChild(source);
-    }
+    if (dataWebm) video.dataset.webm = "video.webm";
     wrapper.appendChild(video);
   }
 
@@ -42,10 +38,10 @@ function createMediaQuery(matches = false) {
 }
 
 // Build a wrapper, construct the controller against it, and hand back every handle a test needs
-function mount({ reduced = false, dataSaver = false, ...wrapperOpts } = {}) {
+function mount({ reduced = false, ...wrapperOpts } = {}) {
   const wrapper = createWrapper(wrapperOpts);
   const reducedMotion = createMediaQuery(reduced);
-  const ctrl = new VideoController(wrapper, reducedMotion, dataSaver);
+  const ctrl = new VideoController(wrapper, reducedMotion);
   return {
     ctrl,
     wrapper,
@@ -127,24 +123,6 @@ describe("VideoController", () => {
     expect(globalThis.IntersectionObserver).not.toHaveBeenCalled();
   });
 
-  it("shows button when reduced motion matches", () => {
-    const { btn } = mount({ reduced: true });
-
-    expect(btn.hasAttribute("data-visible")).toBe(true);
-  });
-
-  it("shows button when data saver is on", () => {
-    const { btn } = mount({ dataSaver: true });
-
-    expect(btn.hasAttribute("data-visible")).toBe(true);
-  });
-
-  it("does not show button when motion allowed and data saver off", () => {
-    const { btn } = mount();
-
-    expect(btn.hasAttribute("data-visible")).toBe(false);
-  });
-
   it("sets data-init on the video element", () => {
     const { video } = mount();
 
@@ -160,17 +138,26 @@ describe("VideoController", () => {
   });
 
   describe("ensureLoaded", () => {
-    it("copies data-src from source elements to src", () => {
-      const { ctrl, video } = mount({ hasSource: true });
-      const source = video.querySelector("source");
+    it("loads the webm when the browser can play it", () => {
+      const { ctrl, video } = mount({ dataSrc: true, dataWebm: true });
+      video.canPlayType = vi.fn(() => "maybe");
 
       ctrl.ensureLoaded();
 
-      expect(source.src).toContain("video.webm");
+      expect(video.src).toContain("video.webm");
       expect(ctrl.loaded).toBe(true);
     });
 
-    it("copies data-src directly on video when no source elements", () => {
+    it("falls back to the mp4 when the browser can't play webm", () => {
+      const { ctrl, video } = mount({ dataSrc: true, dataWebm: true });
+      video.canPlayType = vi.fn(() => "");
+
+      ctrl.ensureLoaded();
+
+      expect(video.src).toContain("video.mp4");
+    });
+
+    it("copies data-src directly on video when no webm is given", () => {
       const { ctrl, video } = mount({ dataSrc: true });
 
       ctrl.ensureLoaded();
@@ -203,41 +190,9 @@ describe("VideoController", () => {
       expect(video.play).toHaveBeenCalled();
     });
 
-    it("hides button when play resolves", async () => {
-      const { ctrl, video, btn } = mount();
-      video.play = vi.fn().mockResolvedValue(undefined);
-
-      ctrl.tryPlay();
-      await vi.waitFor(() => {
-        expect(btn.hasAttribute("data-visible")).toBe(false);
-      });
-    });
-
-    it("shows button when play rejects", async () => {
-      const { ctrl, video, btn } = mount();
-      video.play = vi.fn().mockRejectedValue(new Error("play failed"));
-
-      ctrl.tryPlay();
-      await vi.waitFor(() => {
-        expect(btn.hasAttribute("data-visible")).toBe(true);
-      });
-    });
-
-    // Data saver no longer blocks playback, so the control has to stay put as the way to stop it
-    it("keeps button visible after play resolves when data saver is on", async () => {
-      const { ctrl, video, btn } = mount({ dataSaver: true });
-      video.play = vi.fn().mockResolvedValue(undefined);
-
-      ctrl.tryPlay();
-      await vi.waitFor(() => {
-        expect(video.play).toHaveBeenCalled();
-      });
-      expect(btn.hasAttribute("data-visible")).toBe(true);
-    });
-
-    // The pinned control must read as "pause" while playing — data-visible alone would leave a play triangle on a running video
-    it("pins the control and shows the pause glyph while playing under data saver", async () => {
-      const { ctrl, wrapper, btn } = mount({ dataSaver: true });
+    // The control is always on screen, so it must read as "pause" over a running video
+    it("shows the pause glyph once play resolves", async () => {
+      const { ctrl, wrapper, btn } = mount();
       const video = createMockVideo(true);
       wrapper.appendChild(video);
       ctrl.video = video;
@@ -247,8 +202,43 @@ describe("VideoController", () => {
       await vi.waitFor(() => {
         expect(btn.hasAttribute("data-playing")).toBe(true);
       });
-      expect(btn.hasAttribute("data-visible")).toBe(true);
       expect(btn.getAttribute("aria-label")).toBe("Pause video");
+    });
+
+    // iOS Low Power Mode rejects autoplay; the first tap anywhere is a user gesture that lets it through
+    it("retries once on the next tap when play rejects", async () => {
+      const { ctrl, wrapper, btn } = mount();
+      const video = createMockVideo(true);
+      video.play = vi.fn().mockRejectedValueOnce(new Error("NotAllowedError")).mockResolvedValue(undefined);
+      wrapper.appendChild(video);
+      ctrl.video = video;
+      ctrl.inView = true;
+
+      ctrl.tryPlay();
+      await vi.waitFor(() => {
+        expect(ctrl.retryArmed).toBe(true);
+      });
+      expect(btn.getAttribute("aria-label")).toBe("Play video");
+
+      document.dispatchEvent(new Event("pointerup"));
+      document.dispatchEvent(new Event("pointerup"));
+
+      expect(video.play).toHaveBeenCalledTimes(2);
+    });
+
+    it("leaves a tap on the button itself to the click handler", async () => {
+      const { ctrl, video, btn } = mount();
+      video.play = vi.fn().mockRejectedValue(new Error("NotAllowedError"));
+      ctrl.inView = true;
+
+      ctrl.tryPlay();
+      await vi.waitFor(() => {
+        expect(ctrl.retryArmed).toBe(true);
+      });
+
+      btn.dispatchEvent(new Event("pointerup", { bubbles: true }));
+
+      expect(video.play).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -280,8 +270,8 @@ describe("VideoController", () => {
   });
 
   describe("handleLeaveView", () => {
-    it("pauses video and shows button when reduced motion matches", () => {
-      const { ctrl, wrapper, btn } = mount({ reduced: true });
+    it("pauses video and flips the control back to play", () => {
+      const { ctrl, wrapper, btn } = mount();
       const video = createMockVideo(false);
       wrapper.appendChild(video);
       ctrl.video = video;
@@ -289,7 +279,7 @@ describe("VideoController", () => {
       ctrl.handleLeaveView();
 
       expect(video.pause).toHaveBeenCalled();
-      expect(btn.hasAttribute("data-visible")).toBe(true);
+      expect(btn.getAttribute("aria-label")).toBe("Play video");
     });
 
     it("does nothing if video is already paused", () => {
@@ -322,16 +312,6 @@ describe("VideoController", () => {
       ctrl.handleEnterView();
 
       expect(video.play).not.toHaveBeenCalled();
-    });
-
-    it("still calls tryPlay when data saver is on", () => {
-      const { ctrl, video } = mount({ dataSaver: true, dataSrc: true });
-      video.play = vi.fn().mockResolvedValue(undefined);
-      ctrl.inView = true;
-
-      ctrl.handleEnterView();
-
-      expect(video.play).toHaveBeenCalled();
     });
 
     it("waits for page load before playing, so the poster keeps the bandwidth", () => {
@@ -405,6 +385,21 @@ describe("VideoController", () => {
       // readyState is already "complete", so each call runs straight through rather than latching
       expect(video.play).toHaveBeenCalledTimes(2);
     });
+
+    it("leaves a tap on the button itself to the click handler", async () => {
+      const { ctrl, video, btn } = mount();
+      video.play = vi.fn().mockRejectedValue(new Error("NotAllowedError"));
+      ctrl.inView = true;
+
+      ctrl.tryPlay();
+      await vi.waitFor(() => {
+        expect(ctrl.retryArmed).toBe(true);
+      });
+
+      btn.dispatchEvent(new Event("pointerup", { bubbles: true }));
+
+      expect(video.play).toHaveBeenCalledTimes(1);
+    });
   });
 });
 
@@ -434,27 +429,5 @@ describe("initProjectVideos", () => {
     const videos = document.querySelectorAll(".project-video-el");
     expect(videos[0].dataset.init).toBe("1");
     expect(videos[1].dataset.init).toBe("1");
-  });
-
-  it("detects data saver via navigator.connection", () => {
-    const original = navigator.connection;
-    Object.defineProperty(navigator, "connection", {
-      value: { effectiveType: "slow-2g", saveData: false },
-      configurable: true,
-      writable: true,
-    });
-
-    document.body.innerHTML = WRAPPER_MARKUP;
-
-    initProjectVideos();
-
-    const btn = document.querySelector(".project-video-play");
-    expect(btn.hasAttribute("data-visible")).toBe(true);
-
-    Object.defineProperty(navigator, "connection", {
-      value: original,
-      configurable: true,
-      writable: true,
-    });
   });
 });

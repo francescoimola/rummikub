@@ -11,11 +11,6 @@ function escapeAttr(value) {
     .replace(/>/g, "&gt;");
 }
 
-function renderSources(webm, fallback) {
-  if (!webm) return "";
-  return '<source data-src="' + escapeAttr(webm) + '" type="video/webm"><source data-src="' + escapeAttr(fallback) + '" type="video/mp4">';
-}
-
 function renderAttr(name, value) {
   if (!value) return "";
   return ' ' + name + '="' + escapeAttr(value) + '"';
@@ -36,4 +31,4 @@ function renderFigure(body, className, caption) {
   );
 }
 
-module.exports = { escapeAttr, renderSources, renderAttr, renderFigcaption, renderFigure };
+module.exports = { escapeAttr, renderAttr, renderFigcaption, renderFigure };
