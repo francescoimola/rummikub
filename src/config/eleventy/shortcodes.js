@@ -2,7 +2,6 @@ var path = require("path");
 var fs = require("fs");
 var {
   escapeAttr,
-  renderSources,
   renderAttr,
   renderFigure,
 } = require("./render-helpers");
@@ -21,11 +20,11 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addShortcode("projectVideo", function (src, alt, options) {
     options = options || {};
     var wrapperClass = "project-video-wrapper" + (options.class ? " " + options.class : "");
-    var dataSrc = options.webm ? "" : renderAttr("data-src", src);
+    var dataSrc = renderAttr("data-src", src) + renderAttr("data-webm", options.webm);
 
     var body =
       '  <div class="' + escapeAttr(wrapperClass) + '">\n' +
-      '    <video class="project-video-el" muted loop playsinline preload="none"' + dataSrc + renderAttr("poster", options.poster) + ' aria-label="' + escapeAttr(alt || "") + '">' + renderSources(options.webm, src) + '</video>\n' +
+      '    <video class="project-video-el" muted loop playsinline preload="none"' + dataSrc + renderAttr("poster", options.poster) + ' aria-label="' + escapeAttr(alt || "") + '"></video>\n' +
       '    <button class="project-video-play" type="button" aria-label="Play video">\n' +
       '      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">\n' +
       '        <circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.45)"/>\n' +

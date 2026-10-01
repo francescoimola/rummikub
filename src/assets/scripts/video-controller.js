@@ -4,8 +4,15 @@ function afterPageLoad(fn) {
   else window.addEventListener("load", fn, { once: true });
 }
 
+// WebM when the browser can play it, else the mp4 — picked in JS so the markup carries no sourceless <source> for Firefox to warn about
+function pickSrc(video) {
+  var d = video.dataset;
+  if (d.webm && video.canPlayType("video/webm")) return d.webm;
+  return d.src;
+}
+
 class VideoController {
-  constructor(wrapper, reducedMotion, dataSaver) {
+  constructor(wrapper, reducedMotion) {
     this.video = wrapper.querySelector(".project-video-el");
     this.btn = wrapper.querySelector(".project-video-play");
     if (!this.video || !this.btn) return;
@@ -15,22 +22,11 @@ class VideoController {
     this.inView = false;
     this.loaded = false;
     this.pendingLoadPlay = false;
+    this.retryArmed = false;
     this.reducedMotion = reducedMotion;
-    this.dataSaver = dataSaver;
 
-    // Data saver keeps the control on screen rather than blocking playback — these clips are a few hundred KB
-    if (this.reducedMotion.matches || this.dataSaver) this.showBtn();
     this.setupObserver();
     this.setupListeners();
-  }
-
-  showBtn() {
-    this.btn.setAttribute("data-visible", "");
-  }
-
-  hideBtn() {
-    if (this.dataSaver) return; // stays put as the pause affordance
-    this.btn.removeAttribute("data-visible");
   }
 
   updateLabel() {
@@ -43,29 +39,34 @@ class VideoController {
   ensureLoaded() {
     if (this.loaded) return;
     this.loaded = true;
-    var sources = this.video.querySelectorAll("source[data-src]");
-    if (sources.length) {
-      sources.forEach((s) => {
-        s.src = s.dataset.src;
-      });
-      this.video.load();
-    } else if (this.video.dataset.src) {
-      this.video.src = this.video.dataset.src;
-    }
+    var src = pickSrc(this.video);
+    if (src) this.video.src = src;
   }
 
   tryPlay() {
     this.ensureLoaded();
     var p = this.video.play();
     if (p && p.then) {
-      p.then(() => {
-        this.hideBtn();
+      p.then(() => this.updateLabel()).catch(() => {
         this.updateLabel();
-      }).catch(() => {
-        this.showBtn();
-        this.updateLabel();
+        this.armRetry();
       });
     }
+  }
+
+  canAutoplay() {
+    return this.inView && !this.reducedMotion.matches;
+  }
+
+  // iOS Low Power Mode refuses autoplay until a user gesture — the first tap anywhere on the page counts
+  armRetry() {
+    if (this.retryArmed) return;
+    this.retryArmed = true;
+    document.addEventListener("pointerup", (e) => {
+      this.retryArmed = false;
+      if (this.btn.contains(e.target)) return; // the button's own click handler plays it — retrying here too would play then pause
+      if (this.video.paused && this.canAutoplay()) this.tryPlay();
+    }, { once: true });
   }
 
   handleEnterView() {
@@ -75,7 +76,7 @@ class VideoController {
     // Deferred: fetching the video during first paint starves the poster, which is the LCP element above the fold
     afterPageLoad(() => {
       this.pendingLoadPlay = false;
-      if (this.inView && !this.reducedMotion.matches) this.tryPlay();
+      if (this.canAutoplay()) this.tryPlay();
     });
   }
 
@@ -83,7 +84,6 @@ class VideoController {
     if (!this.video.paused) {
       this.video.pause();
       this.updateLabel();
-      if (this.reducedMotion.matches) this.showBtn();
     }
   }
 
@@ -104,7 +104,6 @@ class VideoController {
       if (this.video.paused) this.tryPlay();
       else {
         this.video.pause();
-        this.showBtn();
         this.updateLabel();
       }
     });
@@ -112,7 +111,6 @@ class VideoController {
     this.reducedMotion.addEventListener("change", () => {
       if (this.reducedMotion.matches) {
         this.video.pause();
-        this.showBtn();
         this.updateLabel();
       } else if (this.inView) {
         this.tryPlay();
@@ -126,15 +124,9 @@ function initProjectVideos() {
   if (!wrappers.length) return;
 
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  var conn = navigator.connection;
-  var dataSaver =
-    !!conn &&
-    (conn.saveData === true ||
-      conn.effectiveType === "slow-2g" ||
-      conn.effectiveType === "2g");
 
   wrappers.forEach(function (wrapper) {
-    new VideoController(wrapper, reducedMotion, dataSaver);
+    new VideoController(wrapper, reducedMotion);
   });
 }
 

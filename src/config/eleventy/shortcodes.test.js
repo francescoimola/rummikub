@@ -2,7 +2,6 @@ import { describe, it, expect, vi } from "vitest";
 import shortcodes from "./shortcodes.js";
 import {
   escapeAttr,
-  renderSources,
   renderAttr,
   renderFigcaption,
 } from "./render-helpers.js";
@@ -37,23 +36,6 @@ describe("shortcodes.js — pure helpers", () => {
 
     it("leaves an apostrophe alone — the attributes it feeds are double-quoted", () => {
       expect(escapeAttr("The Loft's logo")).toBe("The Loft's logo");
-    });
-  });
-
-  describe("renderSources", () => {
-    it("returns empty string when webm is falsy", () => {
-      expect(renderSources(null, "fallback.mp4")).toBe("");
-      expect(renderSources("", "fallback.mp4")).toBe("");
-      expect(renderSources(undefined, "fallback.mp4")).toBe("");
-    });
-
-    it("returns source elements for webm and fallback", () => {
-      const result = renderSources("video.webm", "video.mp4");
-
-      expect(result).toContain('data-src="video.webm"');
-      expect(result).toContain('type="video/webm"');
-      expect(result).toContain('data-src="video.mp4"');
-      expect(result).toContain('type="video/mp4"');
     });
   });
 
@@ -116,7 +98,7 @@ describe("shortcodes.js — projectVideo shortcode", () => {
     expect(result).toContain("project-video-play");
   });
 
-  it("renders source elements when webm is provided", () => {
+  it("puts both URLs on the video, with no sourceless <source> elements, when webm is provided", () => {
     const config = createMockEleventyConfig();
     shortcodes(config);
     const projectVideo = config.getShortcode("projectVideo");
@@ -125,10 +107,8 @@ describe("shortcodes.js — projectVideo shortcode", () => {
       webm: "video.webm",
     });
 
-    expect(result).toContain('data-src="video.webm"');
-    expect(result).toContain('data-src="video.mp4"');
-    expect(result).not.toContain('class="project-video-el" data-src=');
-    expect(result).toContain("<source");
+    expect(result).toContain('data-src="video.mp4" data-webm="video.webm"');
+    expect(result).not.toContain("<source");
   });
 
   it("renders poster attribute when provided", () => {
@@ -229,7 +209,7 @@ describe("shortcodes.js — projectVideo shortcode", () => {
 
     const result = projectVideo('a&b.mp4', "Alt", { webm: 'a&b.webm' });
 
-    expect(result).toContain('data-src="a&amp;b.webm"');
+    expect(result).toContain('data-webm="a&amp;b.webm"');
     expect(result).toContain('data-src="a&amp;b.mp4"');
   });
 });

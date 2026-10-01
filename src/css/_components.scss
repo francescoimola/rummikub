@@ -425,6 +425,7 @@ main svg {
     display: block;
 }
 
+// Always visible: autoplay loops, so the pause control must stay reachable
 .project-video-play {
     position: absolute;
     inset-block-end: var(--space-2xs-xs);
@@ -433,10 +434,6 @@ main svg {
     background: none;
     cursor: pointer;
     padding: 0;
-    opacity: 0; // hidden unless the controller flags it (reduced motion, slow connection, or a failed play)
-    visibility: hidden; // keeps the hidden button out of the focus order and accessibility tree
-    pointer-events: none;
-    transition: opacity var(--dur-fast) var(--ease), visibility 0s var(--dur-fast);
     z-index: 1;
 
     svg {
@@ -460,13 +457,6 @@ main svg {
     .project-video-icon-pause {
         display: block;
     }
-}
-
-.project-video-play[data-visible] {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transition: opacity var(--dur-fast) var(--ease), visibility 0s;
 }
 
 // ---- Project item (Selected Work listing) ----

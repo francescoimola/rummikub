@@ -77,7 +77,7 @@ Content and media are editable via Pages CMS, configured in `.pages.yml` at the 
 
 Case studies and writing posts share **one** branch in `_base.njk` → `<main class="case-study text">`, writing adding `writing-post`. It renders a `.case-study__intro` (h1 + one dimmed line: `services` on work, `<time>` + type on writing) and nothing else — the opening image is authored as the first `figureImg` **in the body**, not by the template. `image:`/`alt:` frontmatter is listing-thumbnail and OG duty only; a post without one just leads with the intro then text.
 
-Media rhythm (`.case-study` in `_components.scss`) and the scroll animations (`index.scss`) both key off `.case-study__intro`: the first media after it gets `settle` (bleeds on load, pulls in over 50vh of scroll), later media get `breakout` on scroll-into-view. Removing that div silently kills both.
+Media rhythm (`.case-study` in `_components.scss`) and the scroll animations (`index.scss`) both key off `.case-study__intro`: the first media after it gets `settle` (bleeds on load, pulls in over 50vh of scroll), later media get `breakout` on scroll-into-view. Removing that div silently kills both. Browsers without `animation-timeline` (Firefox) get the same keyframes scrubbed from JS: `app-core.js` dynamically imports `scroll-fallback.js`, which finds targets by the `--scroll-fallback` custom property the CSS sets and writes `--scroll-p` — so target selectors and the breakpoint live only in `index.scss`.
 
 **Always use `figureImg` for body images — never markdown `![]()`.** Markdown compiles to `<p><picture>`, and two images on adjacent lines land in the *same* `<p>`, so they stack with no gap and support no caption. `figureImg` emits a real `<figure>` that the spacing and animation selectors match.
 
@@ -102,7 +102,7 @@ The masonry fold is a `@container` query against `main` (not the viewport), so i
 
 ## Project videos
 
-Embed lazy, autoplay-in-view videos with the `projectVideo` shortcode (defined in `eleventy.config.js`). Nothing downloads until an `IntersectionObserver` in `src/assets/scripts/app-core.js` sees the video near the viewport (`preload="none"` + `data-src`); it then autoplays muted and pauses when scrolled away. `prefers-reduced-motion` gets the play button instead of autoplay. Data-saver signals (`navigator.connection` `saveData`/2g) **do not** block autoplay — the clips are a few hundred KB — they just pin the control open as a pause button; its glyph follows `[data-playing]`. Styling: `.project-video*` in `index.scss`.
+Embed lazy, autoplay-in-view videos with the `projectVideo` shortcode (defined in `eleventy.config.js`). Nothing downloads until an `IntersectionObserver` in `src/assets/scripts/app-core.js` sees the video near the viewport (`preload="none"` + `data-src`); it then autoplays muted and pauses when scrolled away. The play/pause control is **always visible** (autoplay loops, so a pause must stay reachable); its glyph follows `[data-playing]`. `prefers-reduced-motion` gets no autoplay. Power/data-saver settings change nothing in our code — but iOS Low Power Mode rejects `play()`, so a rejected autoplay retries on the visitor's first tap anywhere. Styling: `.project-video*` in `_components.scss`.
 
 ```njk
 {% projectVideo "/assets/portfolio/x.webm", "Alt text" %}                                  {# webm-only (Safari 16+) #}
