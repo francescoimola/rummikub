@@ -2,7 +2,7 @@
 
 ![fallow: A (90)](badge.svg) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE.md)
 
-I make delightful things with pixels and words. This is my half-portfolio, half-marketing site, built with Eleventy, cleacss, LightningCSS, and Cloudflare Pages as a host.
+I make delightful things with pixels and words. This is my island on the web, half-portfolio, half-marketing site. It's built with Eleventy, cleacss, LightningCSS, and Cloudflare Pages as a host.
 
 ## Stack
 
