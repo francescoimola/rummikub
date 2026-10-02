@@ -364,12 +364,6 @@ main svg {
     align-items: baseline;
 }
 
-:is(.data-list__label, .data-list__value) {
-    &::before {
-        content: '\200d';
-    }
-}
-
 .data-list__label {
     display: flex;
     color: var(--neutral-800-alpha);

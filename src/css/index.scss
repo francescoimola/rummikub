@@ -85,7 +85,7 @@ html.lenis body {
     --color-accent: light-dark(var(--brand-800), var(--brand-900));
     --accent-hover: light-dark(var(--brand-900), var(--brand-950));
     --accent-surface: var(--brand-100);
-    --card-bg: var(--neutral-100-alpha);
+    --card-bg: light-dark(var(--neutral-100-alpha), color-mix(in oklch, var(--brand-400) 12%, transparent)); // dark: % solved for ΔE_OK 0.07 vs --body-bg (≈3.5 JND), same for all brands
 
     // Motion
     --ease: ease-in-out;
@@ -111,8 +111,8 @@ html.lenis body {
 // ---- Theming ----
 .sidebar, .card:is(header) {
     --color-accent: var(--neutral-950-alpha);
-    // dark: bake --neutral-200-alpha (7%) over --body-bg so it's opaque — else scrolled mobile content shows through
-    background: light-dark(var(--brand-150), color-mix(in oklch, oklch(0.945 0.007 125.2) 7%, var(--body-bg)));
+    // dark: brand mix baked over --body-bg so it's opaque (else scrolled content shows through); 16% solved for ΔE_OK 0.08, a step above cards
+    background: light-dark(var(--brand-150), color-mix(in oklch, var(--brand-400) 16%, var(--body-bg)));
 }
 
 .sidebar footer {
