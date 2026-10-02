@@ -408,16 +408,15 @@ main svg {
     object-fit: cover;
 }
 
+// Stays stacked past .grid-responsive-cols' 32rem fold; splits at the $bp-profile container query instead (CSS rule 10)
+.grid-responsive-cols:has(> .profile-media) {
+    grid-template-columns: 1fr;
+}
+
 // Homepage portrait with the hello-world screenshot pinned inside its bottom-left corner
 .profile-media {
     position: relative;
-    align-self: start; // flex item would otherwise stretch to the text column's height, dropping the inset below the photo
-}
-
-// Both columns start from a zero basis so they split the row; the text's max-content basis otherwise starves the photo to 0
-.flow-row:has(> .profile-media) > * {
-    flex: 1 1 0;
-    min-inline-size: 0;
+    align-self: start; // grid item would otherwise stretch to the text column's height, dropping the inset below the photo
 }
 
 .profile-media > img {
@@ -429,8 +428,8 @@ main svg {
 .profile-media .profile-media__inset {
     position: absolute;
     inset-inline-start: 0;
-    inset-block-end: calc(var(--space-2xs) * -1);
-    inline-size: 38%;
+    inset-block-end: 0;
+    inline-size: 60%;
     border: none; // the screenshot brings its own window edge, so skip the global media hairline
 }
 
