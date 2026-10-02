@@ -11,13 +11,13 @@
         </summary>
         <div class="nav-menu__panel">
             <ul class="flow">
-                <li><a href="/"{{ ' aria-current="page"' | safe if page.url == '/' }}>Home</a></li>
-                <li><a href="/studio/"{{ ' aria-current="page"' | safe if page.url == '/studio/' }}>Services</a></li>
-                <li><a href="/work/"{{ ' aria-current="page"' | safe if page.url == '/work/' }}>Selected Work</a></li>
-                <li><a href="/writing/"{{ ' aria-current="page"' | safe if page.url == '/writing/' }}>Writing</a></li>
+                <li><a href="/"{{ ' aria-current="page"' | safe if page.url == '/' }}>Start here</a></li>
+                <li><a href="/studio/"{{ ' aria-current="page"' | safe if page.url == '/studio/' }}>Work with me</a></li>
+                <li><a href="/work/"{{ ' aria-current="page"' | safe if page.url == '/work/' }}>Case studies</a></li>
+                <li><a href="/writing/"{{ ' aria-current="page"' | safe if page.url == '/writing/' }}>Ideas &amp; guides</a></li>
                 <li><a href="/art/"{{ ' aria-current="page"' | safe if page.url == '/art/' }}>Artmaking</a></li>
                 <li><a href="/about/"{{ ' aria-current="page"' | safe if page.url == '/about/' }}>About</a></li>
-                <li><a href="/contact/"{{ ' aria-current="page"' | safe if page.url == '/contact/' }}>Contact</a></li>
+                <li><a href="/contact/"{{ ' aria-current="page"' | safe if page.url == '/contact/' }}>Say hello</a></li>
             </ul>
             <div class="nav-menu__toggles mobile-only flow has-gap-xs">
                 {%- include "_look-toggles.njk" -%}
