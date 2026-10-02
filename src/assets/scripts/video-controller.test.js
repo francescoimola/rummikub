@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { VideoController, initProjectVideos } from "./video-controller.js";
+import { VideoController, initProjectVideos, isConstrained } from "./video-controller.js";
 
 function createWrapper(opts = {}) {
   const {
@@ -219,6 +219,7 @@ describe("VideoController", () => {
         expect(ctrl.retryArmed).toBe(true);
       });
       expect(btn.getAttribute("aria-label")).toBe("Play video");
+      expect(btn.hasAttribute("data-blocked")).toBe(true);
 
       document.dispatchEvent(new Event("pointerup"));
       document.dispatchEvent(new Event("pointerup"));
@@ -429,5 +430,25 @@ describe("initProjectVideos", () => {
     const videos = document.querySelectorAll(".project-video-el");
     expect(videos[0].dataset.init).toBe("1");
     expect(videos[1].dataset.init).toBe("1");
+  });
+});
+
+describe("isConstrained", () => {
+  it("is true on 3G or slower", () => {
+    expect(isConstrained({ effectiveType: "3g" }, null)).toBe(true);
+    expect(isConstrained({ effectiveType: "slow-2g" }, null)).toBe(true);
+  });
+
+  it("is false on 4G with no battery info", () => {
+    expect(isConstrained({ effectiveType: "4g" }, null)).toBe(false);
+    expect(isConstrained(undefined, null)).toBe(false);
+  });
+
+  it("is true at 20% or below while unplugged", () => {
+    expect(isConstrained(undefined, { level: 0.2, charging: false })).toBe(true);
+  });
+
+  it("ignores a low battery that is charging", () => {
+    expect(isConstrained(undefined, { level: 0.1, charging: true })).toBe(false);
   });
 });

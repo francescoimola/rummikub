@@ -11,6 +11,34 @@ function pickSrc(video) {
   return d.src;
 }
 
+var SLOW_NETWORKS = ["slow-2g", "2g", "3g"];
+
+// 3G-or-slower (Network Information API) or under 20% and unplugged (Battery API) — both Chromium-only, so others never see the control
+function isConstrained(connection, battery) {
+  if (connection && SLOW_NETWORKS.includes(connection.effectiveType)) return true;
+  return Boolean(battery && !battery.charging && battery.level <= 0.2);
+}
+
+// Flags <html> so CSS shows the play/pause control; reduced motion counts, since without autoplay the button is the only way to play
+function watchConstraints(reducedMotion) {
+  var connection = navigator.connection;
+  var battery = null;
+  var update = function () {
+    var on = reducedMotion.matches || isConstrained(connection, battery);
+    document.documentElement.toggleAttribute("data-video-controls", on);
+  };
+  update();
+  reducedMotion.addEventListener("change", update);
+  if (connection) connection.addEventListener("change", update);
+  if (!navigator.getBattery) return;
+  navigator.getBattery().then(function (b) {
+    battery = b;
+    b.addEventListener("levelchange", update);
+    b.addEventListener("chargingchange", update);
+    update();
+  }).catch(function () {});
+}
+
 class VideoController {
   constructor(wrapper, reducedMotion) {
     this.video = wrapper.querySelector(".project-video-el");
@@ -48,6 +76,7 @@ class VideoController {
     var p = this.video.play();
     if (p && p.then) {
       p.then(() => this.updateLabel()).catch(() => {
+        this.btn.setAttribute("data-blocked", ""); // iOS Low Power Mode is undetectable up front — a refused play() is the only tell
         this.updateLabel();
         this.armRetry();
       });
@@ -124,10 +153,11 @@ function initProjectVideos() {
   if (!wrappers.length) return;
 
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  watchConstraints(reducedMotion);
 
   wrappers.forEach(function (wrapper) {
     new VideoController(wrapper, reducedMotion);
   });
 }
 
-export { VideoController, initProjectVideos };
+export { VideoController, initProjectVideos, isConstrained };
