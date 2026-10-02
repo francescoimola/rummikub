@@ -16,6 +16,11 @@ function readIcon(name) {
   return iconCache.get(name);
 }
 
+// position="62% 18%" crops an object-fit: cover image; pick the value live with the dev-only Alt+click picker.
+function positionAttr(position) {
+  return renderAttr("style", position && "object-position: " + position);
+}
+
 module.exports = function (eleventyConfig) {
   eleventyConfig.addShortcode("projectVideo", function (src, alt, options) {
     options = options || {};
@@ -40,7 +45,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addShortcode("figureImg", function (src, alt, options) {
     options = options || {};
     var img =
-      '<img src="' + escapeAttr(src) + '" alt="' + escapeAttr(alt || "") + '"' + renderAttr("class", options.imgClass) + ">";
+      '<img src="' + escapeAttr(src) + '" alt="' + escapeAttr(alt || "") + '"' + renderAttr("class", options.imgClass) + positionAttr(options.position) + ">";
 
     // href wraps the image in an outbound link — keeps it a <figure>, so the case-study spacing rules still match
     if (options.href) {

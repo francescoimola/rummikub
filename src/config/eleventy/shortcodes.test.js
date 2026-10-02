@@ -251,6 +251,17 @@ describe("shortcodes.js — figureImg shortcode", () => {
     expect(result).not.toContain("<figcaption");
   });
 
+  it("sets object-position on the img when position is provided", () => {
+    const config = createMockEleventyConfig();
+    shortcodes(config);
+    const figureImg = config.getShortcode("figureImg");
+
+    expect(figureImg("/assets/photo.jpg", "Alt", { position: "62% 18%" })).toContain(
+      '<img src="/assets/photo.jpg" alt="Alt" style="object-position: 62% 18%">'
+    );
+    expect(figureImg("/assets/photo.jpg", "Alt")).not.toContain("style=");
+  });
+
   it("wraps the img in an external link when href is provided", () => {
     const config = createMockEleventyConfig();
     shortcodes(config);

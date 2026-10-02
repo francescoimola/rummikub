@@ -87,6 +87,7 @@ Media rhythm (`.case-study` in `_components.scss`) and the scroll animations (`i
 {% figureImg "/assets/writing/x.png", "Alt", href="https://…" %}   {# wraps img in a target=_blank link #}
 {% figureImg "/assets/writing/x.png", "Alt", class="extra" %}      {# extra class on the <figure> #}
 {% figureImg "/assets/writing/x.png", "Alt", imgClass="extra" %}   {# extra class on the <img> itself #}
+{% figureImg "/assets/writing/x.png", "Alt", position="62% 18%" %} {# object-position crop #}
 ```
 
 ## Artmaking page
