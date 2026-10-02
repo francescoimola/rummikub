@@ -41,17 +41,26 @@
         .nav-menu__toggles {
             grid-area: toggles;
             align-self: end;
+            align-items: stretch; // theme switch matches the swatch row's width
+            inline-size: fit-content; // container shrinks to the swatch row, the widest child
         }
 
         main {
             border-block-start: revert;
         }
 
+        // Mobile footer sits in a card, matching .card's surface, radius and padding
         footer {
-            border-block-start: var(--input-border-width) solid var(--input-border-color);
-            padding-block-start: var(--space-m);
-            padding-block-end: var(--space-l);
+            background: var(--card-bg);
+            border-radius: var(--border-radius-s);
+            padding: var(--space-s-m);
+            padding-block: var(--space-m-l);
+            margin-block-start: var(--space-m);
             inline-size: 100%;
+
+            @media (forced-colors: active) {
+                border: 1px solid CanvasText;
+            }
         }
 
         .sidebar {
@@ -66,11 +75,6 @@
 
         .desktop-only {
             display: none;
-        }
-
-        // Align the look toggles to the container start rather than centring them
-        :has(>.theme-switch, >.brand-picker) {
-            align-items: flex-start;
         }
 
         // Collapse the label/value grid into stacked rows
