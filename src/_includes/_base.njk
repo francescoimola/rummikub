@@ -7,9 +7,11 @@
     {# Stays a div: the banner is the <header> inside _header.njk, which cannot contain this <footer>. #}
     <div class="sidebar">
       {%- include "_header.njk" -%}
-      <div class="desktop-only flow-row has-gap-2xs has-mt-xl has-items-end">
+      <div class="desktop-only has-mt-xl">
         {%- include "_footer.njk" -%}
-        {%- include "_look-toggles.njk" -%}
+        <div class="flow-row has-gap-2xs">
+          {%- include "_look-toggles.njk" -%}
+        </div>
       </div>
     </div>
     <div class="content">

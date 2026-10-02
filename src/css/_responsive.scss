@@ -21,7 +21,6 @@
         nav {
             border-block-start: revert;
             padding-block-start: revert;
-            grid-template-columns: 1fr; 
         }
 
         // Open panel: links in the right column, look-toggles pinned bottom-left
@@ -138,15 +137,33 @@
             --flow-gap: var(--space-2xs);
         }
 
+        // One 2×2 grid: name + footer share the left track, nav links + toggles the right; subgrid threads it through header/nav
+        .sidebar {
+            display: grid;
+            grid-template-columns: auto auto;
+            align-content: space-between; // base justify-content: space-between pins the tracks to the edges as it widens
+            column-gap: var(--space-l-4xl); // minimum gap between the two tracks
+            min-inline-size: var(--sidebar-width);
+        }
+
+        .sidebar > *,
+        .site-banner > nav {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: subgrid;
+        }
+
+        .sidebar > .desktop-only {
+            align-items: end; // footer and toggles bottom-align, as the old has-items-end did
+        }
+
         // Look toggles stack into columns beside the footer
         .brand-picker {
             flex-direction: column;
         }
 
         .theme-switch {
-            flex-direction: column;
-            margin-inline-start: auto; // shove the whole cluster (switch + swatches) to the right, footer stays left
-            block-size: 100%; // match the 3-swatch column height (same tokens as .brand-picker)
+            flex-direction: column; // flex-row stretch matches the 3-swatch column height; a % block-size has no definite parent here
         }
     }
 

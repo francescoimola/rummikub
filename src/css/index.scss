@@ -351,9 +351,7 @@ button {
 
 nav {
     --nav-indent: 0.7em; // drives bullet inset and hover shift — keep them equal
-    display: grid;
-    column-gap: var(--space-l-4xl);
-    grid-template-columns: 1fr 1fr;
+    display: grid; // desktop columns come from the .sidebar subgrid in _responsive.scss
 }
 
 nav>a {
@@ -470,7 +468,8 @@ nav li:is(:has(a[aria-current="page"]), :focus-within)::before {
     margin-inline-start: var(--gutter-y);
     margin-block: var(--gutter-y);
     padding-block: var(--gutter-y);
-    padding-inline: var(--gutter-x);
+    padding-inline-start: var(--gutter-x);
+    padding-inline-end: calc(var(--gutter-x) * 2);
     position: sticky;
     top: var(--gutter-y);
     block-size: calc(100dvh - calc(var(--gutter-y) * 2));
