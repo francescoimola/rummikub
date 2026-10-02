@@ -35,5 +35,8 @@
   <script src="/assets/scripts/lenis.min.js"></script>
   <script src="/assets/scripts/lenis.js" defer></script>
   <script type="module" src="/assets/scripts/app-core.js"></script>
+  {%- if eleventy.env.runMode == "serve" %}
+  <script type="module" src="/assets/dev/focal-picker.js"></script>
+  {%- endif %}
 </body>
 </html>
