@@ -292,6 +292,11 @@ main svg {
     color: var(--brand-900);
 }
 
+.page-header svg {
+    padding-inline: calc(var(--space-3xl) * 1.4);
+    padding-block: calc(var(--space-2xl) * 1.4);
+}
+
 // ---- Duotone ----
 
 // Remaps a greyscale image onto two brand steps via blend modes — re-tints with --brand-hue, flips with light-dark()
@@ -593,6 +598,7 @@ main svg {
     display: none;
     visibility: hidden;
 }
+
 // ---- Pricing list ----
 
 // Bottom rule matching <hr>, which can't sit between <li>
