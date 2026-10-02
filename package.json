@@ -5,7 +5,7 @@
   "packageManager": "pnpm@11.5.2",
   "scripts": {
     "start": "eleventy --serve",
-    "build": "eleventy",
+    "build": "rm -rf public && eleventy",
     "clean": "rm -rf public",
     "optimize:video": "node scripts/optimize-videos.mjs",
     "compress:assets": "node scripts/compress-assets.mjs",
