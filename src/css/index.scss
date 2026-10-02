@@ -4,12 +4,11 @@
 @use 'scale';
 @use 'icons';
 @use 'components';
+@use 'vendor/cleacss'; // extensionless plain-CSS @use inlines the file; sits here so its CSS lands where the old @import did
 @use 'cleacss-overrides';
 @use 'responsive';
 
-@import "vendor/cleacss";
-
-// After the cleacss import so these unlayered tokens override cleacss's own unlayered :root defaults (CSS rule 3)
+// After the cleacss @use so these unlayered tokens override cleacss's own unlayered :root defaults (CSS rule 3)
 @include cleacss-overrides.overrides;
 
 html {
