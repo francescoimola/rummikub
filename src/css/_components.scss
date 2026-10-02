@@ -311,7 +311,7 @@ main svg {
 
 .duotone img,
 .duotone video {
-    filter: var(--duotone-filter, grayscale(1) contrast(1.1)); // descendant, not direct child: eleventy-img wraps <img> in <picture>
+    filter: grayscale(1) contrast(1.1); // descendant, not direct child: eleventy-img wraps <img> in <picture>
 }
 
 .duotone :is(img, video, picture, canvas) {
@@ -341,22 +341,6 @@ main svg {
     background: var(--duotone-shadow);
     mix-blend-mode: screen; // lifts blacks up to the dark brand step
     z-index: 2;
-}
-
-.project-video-wrapper.duotone {
-    --duotone-highlight: light-dark(var(--brand-50), var(--brand-950));
-
-    .project-video-play {
-        z-index: 3; // rides above both blend layers so the button stays un-tinted
-    }
-}
-
-// Opt-out for media that already reads as brand-green — green is the default palette, so it's the absent data-brand
-// Transparent blend layers composite to a no-op, so the media shows through untouched
-:root:is(:not([data-brand]), [data-brand="green"]) .duotone-unless-green {
-    --duotone-filter: none;
-    --duotone-highlight: transparent;
-    --duotone-shadow: transparent;
 }
 
 // ---- Data list ----
@@ -424,14 +408,42 @@ main svg {
     object-fit: cover;
 }
 
+// Homepage portrait with the hello-world screenshot pinned inside its bottom-left corner
+.profile-media {
+    position: relative;
+    align-self: start; // flex item would otherwise stretch to the text column's height, dropping the inset below the photo
+}
+
+// Both columns start from a zero basis so they split the row; the text's max-content basis otherwise starves the photo to 0
+.flow-row:has(> .profile-media) > * {
+    flex: 1 1 0;
+    min-inline-size: 0;
+}
+
+.profile-media > img {
+    display: block;
+    inline-size: 100%;
+    block-size: auto; // height follows width, so the photo keeps its ratio
+}
+
+.profile-media .profile-media__inset {
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-end: calc(var(--space-2xs) * -1);
+    inline-size: 38%;
+    border: none; // the screenshot brings its own window edge, so skip the global media hairline
+}
+
 .project-video-el {
     inline-size: 100%;
     height: auto;
     display: block;
 }
 
-// Always visible: autoplay loops, so the pause control must stay reachable
+// Hidden by default; video-controller.js reveals it on ≤3G, low battery, reduced motion or refused autoplay
 .project-video-play {
+    opacity: 0;
+    pointer-events: none;
     position: absolute;
     inset-block-end: var(--space-2xs-xs);
     inset-inline-end: var(--space-2xs-xs);
@@ -451,6 +463,14 @@ main svg {
     .project-video-icon-pause {
         display: none;
     }
+}
+
+// Keyboard focus also reveals it, so the pause stays reachable for everyone who tabs in
+:root[data-video-controls] .project-video-play,
+.project-video-play[data-blocked],
+.project-video-play:focus-visible {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 // Glyph tracks playback so a visible control never shows "play" over a running video
