@@ -27,6 +27,16 @@ document.querySelectorAll("[data-dialog-open]").forEach(function (trigger) {
   var status = dialog.querySelector("[data-dialog-status]");
   var timer;
 
+  // Announce, then clear after RESET_DELAY so a repeat copy re-announces.
+  function announce(text) {
+    if (!status) return;
+    status.textContent = text;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      status.textContent = "";
+    }, RESET_DELAY);
+  }
+
   trigger.addEventListener("click", function () {
     dialog.showModal();
   });
@@ -40,17 +50,10 @@ document.querySelectorAll("[data-dialog-open]").forEach(function (trigger) {
 
     copy(content)
       .then(function () {
-        if (status) status.textContent = "Copied to clipboard";
+        announce("Copied to clipboard");
       })
       .catch(function () {
-        if (status) status.textContent = "Copy failed";
+        announce("Copy failed");
       });
-
-    if (status) {
-      clearTimeout(timer);
-      timer = setTimeout(function () {
-        status.textContent = "";
-      }, RESET_DELAY);
-    }
   });
 });

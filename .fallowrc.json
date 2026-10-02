@@ -5,7 +5,8 @@
     "src/assets/scripts/app-core.js",
     "src/css/index.scss",
     "scripts/optimize-videos.mjs",
-    "scripts/compress-assets.mjs"
+    "scripts/compress-assets.mjs",
+    "src/dev/focal-picker.js"
   ],
   "ignorePatterns": [
     "src/css/vendor/cleacss.css"

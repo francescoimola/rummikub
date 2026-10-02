@@ -91,7 +91,6 @@ module.exports = {
   extractTitle,
   extractDescription,
   isNoindex,
-  decodeEntities,
   yamlString,
   renderFrontmatter,
   collapseBlankLines,

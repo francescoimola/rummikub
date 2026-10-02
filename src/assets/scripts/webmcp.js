@@ -103,4 +103,5 @@ if (hasModelContext()) {
 }
 
 // Exported for webmcp.test.js only — the page itself imports this module for its side effect.
+// fallow-ignore-next-line unused-export
 export { TOOLS, hasModelContext };
