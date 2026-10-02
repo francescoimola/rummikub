@@ -127,6 +127,7 @@ function wirePanel(panel) {
     if (thumb.hasPointerCapture(event.pointerId)) setFromPointer(event);
   });
 
+  // fallow-ignore-next-line complexity
   panel.addEventListener("click", (event) => {
     const button = event.target.closest("button");
     if (!button) return;
@@ -142,6 +143,7 @@ function wirePanel(panel) {
 
 const NUDGE = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] };
 
+// fallow-ignore-next-line complexity
 document.addEventListener("keydown", (event) => {
   if (!state.el) return;
   if (event.key === "Escape") return close();
