@@ -192,6 +192,12 @@
         
     }
 
+    @container (min-width: #{scale.$bp-profile}) {
+        .grid-responsive-cols:has(> .profile-media) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
     @container (min-width: #{scale.$bp-l}) {
 
         // Image left / text right — the item's own fold, independent of the body's
