@@ -4,31 +4,17 @@
 
 I make delightful things with pixels and words. This is my island on the web, half-portfolio, half-marketing site. It's built with Eleventy, cleacss, LightningCSS, and Cloudflare Pages as a host.
 
-## Stack
+## What's the stack?
 
-| | |
-|---|---|
-| **Static site** | [Eleventy 3](https://www.11ty.dev/) |
-| **Templates** | Nunjucks |
-| **CSS** | SCSS → LightningCSS, OKLCH colors, `light-dark()` |
-| **Type & spacing** | [Utopia](https://utopia.fyi/) fluid scale |
-| **Font** | Ronzino (humanist sans-serif, woff2) |
-| **Package manager** | pnpm |
+- **Static site**: [Eleventy 3](https://www.11ty.dev/)
+- **Templates**: Nunjucks
+- **CSS**: SCSS → LightningCSS, OKLCH colors, `light-dark()` 
+- **Type & spacing**: [Utopia](https://utopia.fyi/) fluid scale
+- **Font**: Ronzino (a humanist sans-serif font by Collletttivo)
+- **Package manager**: pnpm
 
-## Getting started
 
-You'll need Node 22+ and pnpm.
-
-```bash
-pnpm install
-pnpm start        # dev server with live reload
-pnpm build        # production build → public/
-pnpm test         # run the test suite (vitest)
-```
-
-As far as the basics, that's it.
-
-## Structure
+## What's the overarching structure?
 
 ```
 src/
@@ -40,7 +26,7 @@ src/
 public/           Build output (gitignored)
 ```
 
-## Highlights
+## Cool things this site can do
 
 - Brand tint: I can swap the entire colour palette by changing --brand-hue and --brand-chroma. 
 - Light/dark mode is automatic via light-dark(), plus there's a manual toggle with data-theme.
