@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { readFileSync, globSync } from "node:fs";
+import { readFileSync, globSync, existsSync } from "node:fs";
 import { requireBuild } from "./config/require-build.js";
 
 requireBuild();
@@ -29,6 +29,15 @@ function enclosingAtRule(needle) {
 describe("built landmarks", () => {
   it("builds pages to assert against", () => {
     expect(pages().length).toBeGreaterThan(10);
+  });
+
+  // The object-position picker is a dev tool: _base.njk links it and the config copies it only under `eleventy --serve`.
+  it("ships no dev-only focal picker", () => {
+    const hint = "public/ holds dev-server output? Stop `pnpm start`, then `pnpm build`";
+    expect(existsSync("public/assets/dev"), hint).toBe(false);
+    for (const file of pages()) {
+      expect(html(file), `focal-picker linked from ${file}. ${hint}`).not.toContain("focal-picker");
+    }
   });
 
   // An AI/agent audit flagged the missing banner: the nav used to sit in a bare <div class="sidebar">.

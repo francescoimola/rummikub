@@ -90,6 +90,8 @@ Media rhythm (`.case-study` in `_components.scss`) and the scroll animations (`i
 {% figureImg "/assets/writing/x.png", "Alt", position="62% 18%" %} {# object-position crop #}
 ```
 
+**Object-position picker (dev only):** under `pnpm start`, Alt/Option+click any img or video (videos need a poster) to drag its focal point live and copy the CSS or `position=` value. Lives in `src/dev/focal-picker.js`, copied and linked only in serve mode; `built-landmarks.test.js` asserts it never ships.
+
 ## Artmaking page
 
 Each project is a `.split-row` `<article>`: text in a `.flow` div, images in a `.masonry` `<ul>` of `.card` `<li>`s. Both classes are generic and reusable — neither is art-specific, and both are defined in `_components.scss` with their folds in `_responsive.scss`.

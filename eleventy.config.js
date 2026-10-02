@@ -82,6 +82,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "node_modules/lenis/dist/lenis.min.js": "assets/scripts/lenis.min.js" });
   // The build's trailing sourceMappingURL points here — without it DevTools logs a 404
   eleventyConfig.addPassthroughCopy({ "node_modules/lenis/dist/lenis.min.js.map": "assets/scripts/lenis.min.js.map" });
+  // Dev-only object-position picker: copied (and linked from _base.njk) under `eleventy --serve` only, so it never ships
+  if (process.env.ELEVENTY_RUN_MODE === "serve") {
+    eleventyConfig.addPassthroughCopy({ "src/dev/focal-picker.js": "assets/dev/focal-picker.js" });
+  }
 
   return {
     dir: {
