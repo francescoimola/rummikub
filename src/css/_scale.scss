@@ -41,6 +41,7 @@ $bp-3xl: 86rem; // small-desktop (viewport)
     // Layout padding (gutter) tokens
     --gutter-y: var(--space-s-m);
     --gutter-x: var(--space-s-m);
+    --sidebar-width: clamp(22rem, 28cqi, 28rem); // desktop floor; content wins if wider. cqi resolves against .layout
 
     --max-inline-size: calc(var(--grid-width-2xl) * var(--type-ratio));
 

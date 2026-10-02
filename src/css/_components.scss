@@ -260,13 +260,14 @@
     align-items: center;
     justify-content: center;
     flex: 1;
-    padding: var(--space-3xs-2xs);
+    padding: var(--space-2xs);
     border-radius: var(--border-radius-s);
 }
 
 .theme-switch button svg {
     inline-size: var(--space-s-m);
     block-size: 100%;
+    max-inline-size: 1rem;
     background: none; // opt out of the global img/svg placeholder background
 }
 
