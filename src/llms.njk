@@ -27,7 +27,7 @@ Every page on this site is also available as Markdown at its URL + `index.md`.
 
 ## Writing
 {% for item in collections.writing %}{% if item.data.external %}
-- [{{ item.data.title | safe }}]({{ item.data.external }}){% if item.data.teaser %}: {{ item.data.teaser | safe }}{% endif %} (published on {{ item.data.source | safe }}){% elif item.url %}
+- [{{ item.data.title | safe }}]({{ item.data.external | safe }}){% if item.data.teaser %}: {{ item.data.teaser | safe }}{% endif %} (published on {{ item.data.source | safe }}){% elif item.url %}
 - [{{ item.data.title | safe }}]({{ site.url }}{{ item.url }}index.md){% if item.data.teaser %}: {{ item.data.teaser | safe }}{% endif %}{% endif %}{% endfor %}
 
 ## Feeds
