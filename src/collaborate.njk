@@ -25,10 +25,8 @@ eleventyNavigation:
         <p>My bread and butter are UX, copy, brand messaging, and marketing operations. In other words, I'm the person to call when it's time to turn chaos back into harmony—as cliche as that sounds.</p>
         <p>I'm open to white-label or overflow briefs from agencies, and I'll consider an in-house role if the fit is right.</p>
     </div>
-    <div class="flow has-gap-s">
-        {# status is a span, not a p — the button sits inline and a p can't nest inside a p #}
-        <p>Want to ask me a question? <button type="button" data-copy-email="hi@francescoimola.com" data-icon="copy">Copy email address</button><span role="status" class="sr-only" data-copy-status></span>
-        </p>
+    {# status is a span, not a p — the button sits inline and a p can't nest inside a p #}
+    <p class="has-mt-xs"><button type="button" data-copy-email="hi@francescoimola.com" data-icon="copy">Copy email address</button><span role="status" class="sr-only" data-copy-status></span></p>
     </header>
     <section class="flow has-gap-s pretty" highlight-header>
         <h2 class="has-mb-xs">What I do</h2>
