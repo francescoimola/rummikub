@@ -10,10 +10,10 @@ eleventyNavigation:
 ---
 {% from "_split-row.njk" import splitRow %}
 <div full-width class="flow has-gap-3xl-4xl">
-  <header class="flow has-gap-xs balance">
+  <header class="flow has-gap-xs">
     <h1>Artmaking</h1>
-    <p style="max-inline-size: var(--inline-size)">I make things out of words (poems and essays) and pixels (photography, code and net art). I also dabble in the art of getting people together to share ideas. This is a selection of my work from the last 11 years.</p>
-    <p style="max-inline-size: var(--inline-size)">Most of it starts with noticing something that's been hiding in plain sight. An everyday place, a passing thought, someone who doesn't often get heard. Sometimes I reframe it. Sometimes I document it just as it is, to understand it better myself and to share it with more people. A photo of a seafront is only a photo of a seafront, until it reminds someone what they love about where they live. The things I'm drawn to have usually been standing there all along. I just want us to look at them for a moment, and talk about them.</p>
+    <p style="max-inline-size: var(--inline-size)">I make things out of words (poems and essays) and pixels (photography, code and net art). I also dabble in the art of getting people together to share ideas. Below is a selection of my work from the last 11 years.</p>
+    <p style="max-inline-size: var(--inline-size)">The act of noticing and surfacing what's been hiding in plain sight—be it an everyday place, a mundane object, someone who doesn't get heard, or the infrastructure around us—is the thread that connects it all.</p> 
   </header>
   {% for item in artProjects %}
     {{ splitRow(item) }}
