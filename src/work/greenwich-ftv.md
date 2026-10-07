@@ -5,7 +5,7 @@ services: Community Engagement, Graphic & Learning Design, Copywriting
 image: /assets/portfolio/ftv_peter_operates_camera.png
 alt: Camera operator using a gymbal to film in a studio
 endDate: 2021-03
-description: "Rebuilt the Greenwich Film & TV programmes a strong online during COVID, strengthened their reputation, and helped keep students connected through multiple lockdowns."
+description: "Rebuilt the Greenwich Film & TV programmes' online presence during COVID and helped keep students connected through multiple lockdowns."
 contentMode: contrast
 permalink: /work/greenwich-ftv/
 layout: _base.njk
@@ -24,7 +24,7 @@ As the screens became our classrooms, I poured all my energy into learning how t
 
 To our surprise, our social media following grew month on month without a single dip. How much genuine engagement and trust our efforts generated was hard to quantify, but I can say with 100% certainty that we encouraged all students to progress onto the next year or graduate, helping to prevent student dropout. 
 
-Outwardly, our PR efforts were instrumental in putting the Film & TV programmes on the map, and the overwhelmingly positive reception from educators pointed to the Greenwich FTV brand climbing as a leader in film education.
+Outwardly, our PR work helped raise the programmes' profile, and educators responded warmly.
 
 {% figureImg "/assets/portfolio/ftv_article_gabriela.png", "Article on the University of Greenwich website about an MSc student winning an award for her film", caption="Article about Gabriela's award-winning commercial" %}
 {% figureImg "/assets/portfolio/ftv_alumni-showcase.png", "Screening room slash website where alumni films can be watched", caption="Online screening room showing alumni films" %}

@@ -19,7 +19,7 @@ Every year, the artists, designers, and makers of Folkestone join forces to host
 
 Dubbed Open Art Folke, the initiative is Folkestone's first artist-led, grassroots art festival—established by a dedicated working group, of which I've been a core member since 2026.
 
-So far I have advised the committee on all things marketing and branding, I’ve refreshed the organisation’s visual identity, redesigned their website from the ground up, and helped shape the 2026 festival edition. The biggest challenge it's been articulating what Open Art Folke is all about to unfamiliar audiences, including potential sponsors. 
+So far I've led on brand identity: I refreshed the organisation's visual identity, redesigned their website from the ground up, and helped shape the 2026 festival edition. The biggest challenge has been articulating what Open Art Folke is all about to unfamiliar audiences, including potential sponsors. 
 
 Over the rest of the upcoming festival cycle, I’ll be designing their printed programme as well as surprising (and hopefully delighting!) the public with the rest of our campaign, online and off.
 
@@ -32,9 +32,9 @@ Over the rest of the upcoming festival cycle, I’ll be designing their printed 
 
 ## A website as the backbone
 
-Among all the ways in which Open Art Folke shares their story with the world, their website was what that I felt had the most room for improvement. The redesign that I gave it focuses on three things: highlighting the great imagery that was collected over the years, giving sponsors a dedicated space, and dressing Open Art in the most timeless and bold design possible so that their efforts can be recognised, now and in the future, from a mile away. 
+Among all the ways in which Open Art Folke shares their story with the world, their website was what I felt had the most room for improvement. The redesign that I gave it focuses on three things: highlighting the great imagery that was collected over the years, giving sponsors a dedicated space, and dressing Open Art in the most timeless and bold design possible so that their efforts can be recognised, now and in the future, from a mile away. 
 
-I built it using a combination of handwritten HTML and CSS, a little help from AI where PHP and JavaScript were unavoidable, along with a ~~maniacal~~ healthy amount of attention to the tinyest details. Its content rests on the shoulders of the fabulous [Kirby CMS](https://getkirby.com/)—whose team was incredibly kind and funded our licence—and [Fortrabbit](https://www.fortrabbit.com)'s fuss-free hosting infrastructure.
+I built it using a combination of handwritten HTML and CSS, a little help from AI where PHP and JavaScript were unavoidable, along with a ~~maniacal~~ healthy amount of attention to the tiniest details. Its content rests on the shoulders of the fabulous [Kirby CMS](https://getkirby.com/)—whose team was incredibly kind and funded our licence—and [Fortrabbit](https://www.fortrabbit.com)'s fuss-free hosting infrastructure.
 
 To learn more about Open Art Folke, visit <a href="https://openartfolke.com" target="_blank" rel="noopener noreferrer" aria-label="Visit the Open Art Folke website">openartfolke.com</a>
 

@@ -1,9 +1,7 @@
 ---
 title: The Loft
 metaTitle: The Loft | Case study | Francesco Imola
-description: StoryBrand redesign for a local cultural venue which led to
-  tripling their overall traffic and armed the brand with the confidence needed
-  to reach an even wider, even more loyal audience across their offerings.
+description: "A StoryBrand redesign for a Folkestone venue: fourteen pages cut to four, and a site that helped triple year-on-year traffic."
 services: UX/UI Design, Copywriting, Brand Messaging
 image: /assets/portfolio/the_loft_offerings_section.png
 alt: The Loft offerings section
@@ -36,7 +34,7 @@ I developed a [StoryBrand](https://www.impactplus.com/learn/what-is-the-storybra
 
 This change of direction, of course, also meant fixing the navigation: I introduced a more restrained structure where, from the homepage, you're presented with three possible paths—Ritual (their movement studio), Events, and Hire. And everything else got folded inside the structure of each page. 
 
-Take the "Ritual" page, for instance (Ritual is their yoga and movement studio slash sub-brand). This is nine sections long, allowing us to answer every possible question while explaining how Ritual stacks up against local competition: the "why here and not somewhere else?" element that is so important to conversions. The other pages follow a similar same arc, walking the user from "I have questions" at the top to "I'm at peace and I know what to do next" down at the end.
+Take the "Ritual" page, for instance (Ritual is their yoga and movement studio slash sub-brand). This is nine sections long, allowing us to answer every possible question while explaining how Ritual stacks up against local competition: the "why here and not somewhere else?" element that is so important to conversions. The other pages follow a similar arc, walking the user from "I have questions" at the top to "I'm at peace and I know what to do next" down at the end.
 
 When it comes to how the brand spoke of itself, the original copy seemed to highlight the venue's challenges and limitations and barely touched on the unique things it has to offer. The rewrite fixes that, and wherever weaknesses have silver linings, I framed them as such. For example, The Loft is on the top floor of an old department store, right in the heart of Folkestone: there are no lifts, and guests really need to read the access instructions to find the venue. In return, that location lets them host classes and events with considerably louder music than most independent studios in town.
 

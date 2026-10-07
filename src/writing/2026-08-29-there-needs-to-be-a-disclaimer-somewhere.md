@@ -20,7 +20,7 @@ I borrowed large chunks of this list from [Jordan Gonen’s Quarter Mile](https:
 
 5. I try my best to be self-aware in my writing, but I think it’s impossible to be completely self-aware unless you’re on some really good drugs or have ascended into non-duality. My life and my opinions are representative of my human experience, and therefore, like all creatures, I am heavily biased.
 
-6. You do not have to agree with me. Ten people can read the same thing and all have unique reactions to it, and yours is equally valid. There’s a good chance you aren’t even having the reaction I thought you would have! So if you find yourself disagreeing, you can tell me about it if—it if you think it will lead to a conversation worth the time—or you can look to the next thing and move on. After all, I don’t know you and you don’t know me.
+6. You do not have to agree with me. Ten people can read the same thing and all have unique reactions to it, and yours is equally valid. There’s a good chance you aren’t even having the reaction I thought you would have! So if you find yourself disagreeing, you can tell me about it if you think it will lead to a conversation worth the time—or you can look to the next thing and move on. After all, I don’t know you and you don’t know me.
 
 7. Anyone with internet access can publish their thoughts on some god-forsaken social media platform or on [a pretentious minimalist website](https://francescoimola.com/writing/). The fallacy is that most people don’t, so it can seem like the words I, and people like me write, are inherently special. Or more special than, say, a Reddit post or your friend’s retelling of their summer holidays. They could be more special, but most often are not.
 
