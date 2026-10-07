@@ -9,7 +9,7 @@ alt: Astronaut Jean-Francois Clervoy, mission specialist representing the
   European Space Agency (ESA), uses a general purpose computer on Discovery's
   mid deck.
 external: https://notbadnotbad.substack.com/p/i-hope-someday-i-get-to-visit-your?r=123caf&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true
-source: Substack
+source: Not Bad (Substack)
 type: essays
 hidden: false
 ---
