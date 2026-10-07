@@ -167,7 +167,7 @@ body {
     margin: 0;
     text-underline-offset: calc(var(--space-3xs) / var(--type-ratio));
     background-color: var(--body-bg);
-    text-wrap: avoid-orphans;
+    text-wrap: pretty; // inherited site-wide to avoid orphans; Firefox ignores it and wraps normally
     letter-spacing: var(--letter-spacing-m);
     hyphens: none;
 }
@@ -221,10 +221,6 @@ h1.stretch {
     &+section {
         margin-block-start: calc(var(--space-m-l) * -1);
     }
-}
-
-.pretty p {
-    text-wrap-style: pretty;
 }
 
 .balance p, .balance small {
