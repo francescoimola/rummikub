@@ -127,7 +127,7 @@
         padding-block: var(--space-xl-4xl);
 
         >* {
-            max-inline-size: var(--inline-size);
+            max-inline-size: calc(var(--inline-size) - 2 * var(--pad)); // settled content width, so text holds still while the card breaks out around it
             inline-size: 100%;
             margin-inline: auto;
             margin-block: auto;
