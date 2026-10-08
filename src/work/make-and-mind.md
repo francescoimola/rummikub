@@ -16,7 +16,7 @@ templateEngineOverride: njk,md
 
 Make & Mind was a pilot project offering art classes infused with nature and mindfulness to people looking to find some calm in their lives. Its founder Vicky came to me with a loyal following and glowing reviews, but their existing website didn't seem to reflect any of that. It felt small in the wrong way, more "yeah, nice idea" than something you'd pay for or tell your friends about.
 
-But how do you make a purposely small, creative and intentional business feel like a million bucks without losing the thing that makes it special? How do you set it apart from the dozens of "wine and paint" nights nearby?
+But how do you make a purposely small, creative and intentional business [feel like a million bucks](/studio/design/) without losing the thing that makes it special? How do you set it apart from the dozens of "wine and paint" nights nearby?
 
 ## Finding a sweet spot
 
