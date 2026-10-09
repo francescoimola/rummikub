@@ -31,9 +31,14 @@ function collect() {
 
 function update() {
   queued = false;
-  targets.forEach(function (t) {
-    var p = t.kind === "settle" ? settleProgress() : breakoutProgress(t.el);
-    t.el.style.setProperty("--scroll-p", clampProgress(p));
+  // Measure every target before writing any, so the frame lays out once instead of once per target
+  var progress = targets.map(function (t) {
+    return clampProgress(t.kind === "settle" ? settleProgress() : breakoutProgress(t.el));
+  });
+  targets.forEach(function (t, i) {
+    if (progress[i] === t.p) return; // clamped off-screen targets would restyle for nothing
+    t.p = progress[i];
+    t.el.style.setProperty("--scroll-p", t.p);
   });
 }
 

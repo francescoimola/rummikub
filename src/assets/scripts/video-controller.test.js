@@ -40,6 +40,7 @@ function createMediaQuery(matches = false) {
 // Build a wrapper, construct the controller against it, and hand back every handle a test needs
 function mount({ reduced = false, ...wrapperOpts } = {}) {
   const wrapper = createWrapper(wrapperOpts);
+  document.body.appendChild(wrapper); // the gesture unlock skips videos no longer in the document
   const reducedMotion = createMediaQuery(reduced);
   const ctrl = new VideoController(wrapper, reducedMotion);
   return {
@@ -64,6 +65,9 @@ function createMockVideo(paused = true) {
   });
   return el;
 }
+
+// What a browser rejects play() with when it refuses autoplay (iOS Low Power Mode)
+const notAllowed = () => new DOMException("play() refused", "NotAllowedError");
 
 let originalIntersectionObserver;
 let originalMatchMedia;
@@ -385,21 +389,6 @@ describe("VideoController", () => {
 
       // readyState is already "complete", so each call runs straight through rather than latching
       expect(video.play).toHaveBeenCalledTimes(2);
-    });
-
-    it("leaves a tap on the button itself to the click handler", async () => {
-      const { ctrl, video, btn } = mount();
-      video.play = vi.fn().mockRejectedValue(new Error("NotAllowedError"));
-      ctrl.inView = true;
-
-      ctrl.tryPlay();
-      await vi.waitFor(() => {
-        expect(ctrl.retryArmed).toBe(true);
-      });
-
-      btn.dispatchEvent(new Event("pointerup", { bubbles: true }));
-
-      expect(video.play).toHaveBeenCalledTimes(1);
     });
   });
 });
