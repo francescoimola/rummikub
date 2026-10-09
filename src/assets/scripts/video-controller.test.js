@@ -213,32 +213,71 @@ describe("VideoController", () => {
     it("retries once on the next tap when play rejects", async () => {
       const { ctrl, wrapper, btn } = mount();
       const video = createMockVideo(true);
-      video.play = vi.fn().mockRejectedValueOnce(new Error("NotAllowedError")).mockResolvedValue(undefined);
+      video.play = vi.fn().mockRejectedValueOnce(notAllowed()).mockResolvedValue(undefined);
       wrapper.appendChild(video);
       ctrl.video = video;
       ctrl.inView = true;
 
       ctrl.tryPlay();
       await vi.waitFor(() => {
-        expect(ctrl.retryArmed).toBe(true);
+        expect(btn.hasAttribute("data-blocked")).toBe(true);
       });
       expect(btn.getAttribute("aria-label")).toBe("Play video");
-      expect(btn.hasAttribute("data-blocked")).toBe(true);
 
+      // One tap fires both events; a scroll that started as a touch fires only touchend
       document.dispatchEvent(new Event("pointerup"));
-      document.dispatchEvent(new Event("pointerup"));
+      document.dispatchEvent(new Event("touchend"));
 
       expect(video.play).toHaveBeenCalledTimes(2);
     });
 
+    // WebKit lifts the restriction per video, so the one tap must reach videos further down the page too
+    it("primes off-screen videos on the same tap, then pauses them", async () => {
+      const blocked = mount();
+      const blockedVideo = createMockVideo(true);
+      blockedVideo.play = vi.fn().mockRejectedValueOnce(notAllowed()).mockResolvedValue(undefined);
+      blocked.wrapper.appendChild(blockedVideo);
+      blocked.ctrl.video = blockedVideo;
+      blocked.ctrl.inView = true;
+
+      const below = mount();
+      const belowVideo = createMockVideo(true);
+      below.wrapper.appendChild(belowVideo);
+      below.ctrl.video = belowVideo;
+
+      blocked.ctrl.tryPlay();
+      await vi.waitFor(() => {
+        expect(blocked.btn.hasAttribute("data-blocked")).toBe(true);
+      });
+
+      document.dispatchEvent(new Event("pointerup"));
+
+      expect(belowVideo.play).toHaveBeenCalledTimes(1);
+      await vi.waitFor(() => {
+        expect(belowVideo.pause).toHaveBeenCalled();
+      });
+      expect(below.ctrl.unlocked).toBe(true);
+    });
+
+    // A pause() landing before play() resolves rejects it with AbortError — that is a scroll-away, not a refusal
+    it("does not treat an interrupted play as blocked", async () => {
+      const { ctrl, video, btn } = mount();
+      video.play = vi.fn().mockRejectedValue(new DOMException("interrupted", "AbortError"));
+
+      ctrl.tryPlay();
+      await new Promise((r) => setTimeout(r, 0));
+
+      expect(btn.hasAttribute("data-blocked")).toBe(false);
+    });
+
     it("leaves a tap on the button itself to the click handler", async () => {
       const { ctrl, video, btn } = mount();
-      video.play = vi.fn().mockRejectedValue(new Error("NotAllowedError"));
+      video.play = vi.fn().mockRejectedValue(notAllowed());
       ctrl.inView = true;
 
       ctrl.tryPlay();
       await vi.waitFor(() => {
-        expect(ctrl.retryArmed).toBe(true);
+        expect(btn.hasAttribute("data-blocked")).toBe(true);
       });
 
       btn.dispatchEvent(new Event("pointerup", { bubbles: true }));
