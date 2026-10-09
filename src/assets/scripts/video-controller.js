@@ -39,6 +39,26 @@ function watchConstraints(reducedMotion) {
   }).catch(function () {});
 }
 
+var controllers = [];
+var unlockArmed = false;
+
+// iOS Low Power Mode refuses autoplay until a gesture, then lifts it per video — so the first tap after a refusal plays every video once
+function armUnlock() {
+  if (unlockArmed) return;
+  unlockArmed = true;
+  var gesture = new AbortController();
+  var unlockAll = function (e) {
+    gesture.abort(); // a tap fires both events; whichever lands first wins
+    unlockArmed = false;
+    controllers.forEach(function (c) {
+      if (c.video.isConnected) c.unlock(e.target);
+    });
+  };
+  // touchend too: a touch that turns into a scroll ends in pointercancel, never pointerup
+  document.addEventListener("pointerup", unlockAll, { signal: gesture.signal });
+  document.addEventListener("touchend", unlockAll, { signal: gesture.signal, passive: true });
+}
+
 class VideoController {
   constructor(wrapper, reducedMotion) {
     this.video = wrapper.querySelector(".project-video-el");
@@ -46,11 +66,12 @@ class VideoController {
     if (!this.video || !this.btn) return;
     if (this.video.dataset.init) return;
     this.video.dataset.init = "1";
+    controllers.push(this);
 
     this.inView = false;
     this.loaded = false;
     this.pendingLoadPlay = false;
-    this.retryArmed = false;
+    this.unlocked = false;
     this.reducedMotion = reducedMotion;
 
     this.setupObserver();
@@ -75,27 +96,39 @@ class VideoController {
     this.ensureLoaded();
     var p = this.video.play();
     if (p && p.then) {
-      p.then(() => this.updateLabel()).catch(() => {
+      p.then(() => {
+        this.unlocked = true;
+        this.updateLabel();
+      }).catch((err) => {
+        if (err.name !== "NotAllowedError") return; // AbortError is a pause() interrupting play — scrolled away, not refused
         this.btn.setAttribute("data-blocked", ""); // iOS Low Power Mode is undetectable up front — a refused play() is the only tell
         this.updateLabel();
-        this.armRetry();
+        armUnlock();
       });
     }
   }
 
-  canAutoplay() {
-    return this.inView && !this.reducedMotion.matches;
+  // Plays then pauses an off-screen video inside the gesture, so WebKit lifts its restriction before it scrolls into view
+  prime() {
+    this.ensureLoaded();
+    var p = this.video.play();
+    if (!p || !p.then) return;
+    p.then(() => {
+      this.unlocked = true;
+      if (!this.canAutoplay()) this.video.pause();
+      this.updateLabel();
+    }).catch(() => {});
   }
 
-  // iOS Low Power Mode refuses autoplay until a user gesture — the first tap anywhere on the page counts
-  armRetry() {
-    if (this.retryArmed) return;
-    this.retryArmed = true;
-    document.addEventListener("pointerup", (e) => {
-      this.retryArmed = false;
-      if (this.btn.contains(e.target)) return; // the button's own click handler plays it — retrying here too would play then pause
-      if (this.video.paused && this.canAutoplay()) this.tryPlay();
-    }, { once: true });
+  // Skips its own button: that tap's click handler already toggles playback
+  unlock(target) {
+    if (this.unlocked || this.btn.contains(target)) return;
+    if (this.canAutoplay()) this.tryPlay();
+    else if (!this.reducedMotion.matches) this.prime();
+  }
+
+  canAutoplay() {
+    return this.inView && !this.reducedMotion.matches;
   }
 
   handleEnterView() {

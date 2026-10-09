@@ -467,6 +467,19 @@ main svg {
     pointer-events: auto;
 }
 
+// Refused autoplay (iOS Low Power Mode): centred and doubled so the poster reads as "tap to play"; back to the corner once playing
+.project-video-play[data-blocked]:not([data-playing]) {
+    inset: 0;
+    margin: auto;
+    inline-size: fit-content;
+    block-size: fit-content;
+
+    svg {
+        inline-size: 4rem;
+        block-size: 4rem;
+    }
+}
+
 // Glyph tracks playback so a visible control never shows "play" over a running video
 .project-video-play[data-playing] {
     .project-video-icon-play {
