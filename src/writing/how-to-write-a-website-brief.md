@@ -1,20 +1,19 @@
 ---
-title: "How to write a cracking website brief (8 step guide)"
+title: How to write a cracking website brief (8 step guide)
 date: 2025-12-01
-teaser: "Get better quotes and timelines. Discover the eight essentials every website brief needs, including the one that most people skip."
+teaser: Get better quotes and timelines; discover the eight essentials things
+  every website brief needs to cover, including the element skipped by most.
 image: /assets/writing/How_to_write_a_website_brief_oktkpe.png
-alt: "How to write a cracking website brief (8 step guide)"
+alt: How to write a cracking website brief (8 step guide)
 type: guides
 permalink: /writing/how-to-write-a-website-brief/
+hidden: false
 ---
-
 {% figureImg "/assets/writing/How_to_write_a_website_brief_oktkpe.png", "How to write a cracking website brief (8 step guide)" %}
 
-A clear brief gets you better quotes, faster timelines, and [a designer or agency partner](/studio/design/) who understands your problem before they start solving it. And if you're shopping around, it lets you compare proposals on equal footing.
+A clear brief gets you better quotes, faster timelines, and [a designer or agency partner](/studio/design/) who actually understands your problem. If you're shopping around, a solid brief also lets you compare proposals on equal footing, while a vague one confuses everyone—you risks going round in circles, multiplied exponentially by however many people you sent it to.
 
-A vague brief gets you three rounds of "that's not quite what I meant", multiplied by however many people you sent it to.
-
-Here's how to write one that works.
+Here's how to approach it.
 
 ## What a brief actually is (and isn't)
 
