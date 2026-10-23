@@ -19,7 +19,7 @@ Here's how to approach it.
 
 A brief is a document that tells a designer what you want, why you want it, and what you can spend. It covers where your business is headed, who you're trying to reach, what you like the look of, and the deadlines you need to hit.
 
-It's not a secret to be whispered. It's not a contract. And it's not even the final word on anything. But it is the starting point for a productive conversation, the kind where both sides actually know what they're getting into.
+It's not a secret to be whispered. It's not a contract. And it's not even the final word on anything. But it is the starting point for a productive conversation, where both sides know what they're getting into.
 
 ## The difference between a brief and a proposal
 
@@ -45,7 +45,7 @@ Be honest about whether this site needs to generate revenue directly, build cred
 
 ### 3. What the website actually needs to do
 
-Skip "look sleek" and "feel modern." They're vibes. While you need to focus on goals.
+Skip "look sleek" and "feel modern", they're vibes. You need to focus on goals.
 
 Try instead:
 
@@ -61,9 +61,9 @@ If you can't measure it or point to it, it's not specific enough.
 Cover the practical stuff:
 
 - Is there a platform you need to use or are already locked into? Wordpress, Wix, Webflow, or any of the other 100 ones?
-- Are there any pages of your current site that must be replicated as closely as possible, and therefore require less page-specific design? (e.g. Terms of Business, Privacy Policy, and so on.)
 - Do you need specific integrations (payment gateway, CRM, email marketing)?
 - Who hosts your current site, and are you happy with them?
+- Beyond the traditional pages, are there any compliance-related pages that need to be set up? (e.g. Terms of Business, Privacy Policy, and so on.)
 - If a content migration will be necessary, can you or a colleague assist?
 - Are there accessibility or privacy requirements you need to meet?
 
@@ -81,14 +81,14 @@ If it feels like I'm asking you to do a lot of work here, bear in mind that spec
 
 ### 6. How you'll measure success
 
-Your new site goes live. Visitors arrive. Someone might even compliment the look of it. But is it actually solving the problem you detailed earlier in this brief?
+Your new site goes live. Visitors arrive. Someone might even compliment the looks of it. But how is it solving the problem you came to the designer with, the one you detailed earlier in this brief? I order to feel confident that what you're paying for is supporting your goals, it's key to define upfront how you'll measure success. 
 
-That's why it's key to define upfront how you'll measure success. Try this:
+Try this:
 
 - Success means newsletter signups increased by X%
 - Enquiry form submissions doubled
 - Time spent answering phone queries dropped
-- You rank on page one for [target keyword] after [time period] from launch
+- We want to >40% attendance to our classes from two weeks after launch.
 
 These don't have to be perfect predictions, but having them helps focus the work and lets the designer or agency reading the brief quickly determine if they can help or if the project is beyond their expertise.
 
@@ -112,9 +112,9 @@ Nobody with an ounce of respect for their craft is trying to squeeze every last 
 
 ---
 
-Get these eight key pieces of info right and you're ahead of most.
+Get these eight key pieces right and you're ahead of most.
 
-## What if you don't know what you need?
+## But wait, what if you don't know what you need?
 
 Feeling unclear at the start is more common than you'd think. If you're sitting there thinking "something's off, I just can't articulate what", consider [booking a paid consultation](/studio/consultations/) before writing the brief. Look for someone who works across both marketing and design, ideally someone who's diagnosed these problems before.
 
@@ -132,7 +132,9 @@ Some clients want weekly video updates. Others prefer near-silence until milesto
 
 ### Too many decision-makers will sink you
 
-Nothing derails a project like conflicting feedback from five people with opinions. I would urge you to aim for no more than three people with final approval (getting this wrong adds weeks!). Mention in the brief who they are, how long you're expecting approvals to take, and (optionally) how to reach each stakeholder. And don't forget to clarify who should the designer contact if they have any questions about the brief itself.
+Nothing derails a project like feedback from multiple people with conflicting opinions, which is why I would urge you to aim for no more than three people with final approval. Getting this wrong adds weeks! 
+
+Mention in the brief who they are, how long you're expecting approvals to take, and how to reach each stakeholder. And don't forget to clarify who should the designer contact if they have any questions about the brief itself.
 
 ## TLDR
 
