@@ -1,0 +1,678 @@
+{
+  "version": 1,
+  "collections": [
+    {
+      "name": "Utopia",
+      "modes": [
+        {
+          "name": "Min"
+        },
+        {
+          "name": "Max"
+        }
+      ],
+      "variables": [
+        {
+          "name": "type/base",
+          "resolvedType": "FLOAT",
+          "description": "DRIVER: --step-0 at each pole. Utopia config 16 -> 18px over 360 -> 1920 (_scale.scss). Site root is 15px (index.scss), so repo px = config px x 15/16.",
+          "valuesByMode": {
+            "Min": 15,
+            "Max": 16.875
+          },
+          "expressionsByMode": {},
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "type/ratio",
+          "resolvedType": "FLOAT",
+          "description": "DRIVER: modular scale ratio (--type-ratio, _scale.scss).",
+          "valuesByMode": {
+            "Min": 1.333,
+            "Max": 1.333
+          },
+          "expressionsByMode": {},
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/base",
+          "resolvedType": "FLOAT",
+          "description": "DRIVER: --space-s at each pole. Utopia config 16 -> 18px (_cleacss-overrides.scss). Site root is 15px (index.scss), so repo px = config px x 15/16.",
+          "valuesByMode": {
+            "Min": 15,
+            "Max": 16.875
+          },
+          "expressionsByMode": {},
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "layout/content-width",
+          "resolvedType": "FLOAT",
+          "description": "DRIVER: inline width of the split sections + home hero. Min = 360 - 2 x space/s-m Min; Max = --grid-width-l (60rem = 900px at 15px root), standing in for the 982px in the Figma frames.",
+          "valuesByMode": {
+            "Min": 330,
+            "Max": 900
+          },
+          "expressionsByMode": {},
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "layout/inline-size",
+          "resolvedType": "FLOAT",
+          "description": "DRIVER: long-form text column = --inline-size (40rem = 600px at 15px root, index.scss:99). Min matches layout/content-width Min, since the column fills the container on small screens.",
+          "valuesByMode": {
+            "Min": 330,
+            "Max": 600
+          },
+          "expressionsByMode": {},
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "size/hero-illustration",
+          "resolvedType": "FLOAT",
+          "description": "DRIVER (new in redesign): hero illustration height. Max = 220px (desktop as designed); Min = 70% (154px, user choice). Width follows the locked aspect ratio. Port: block-size: var(--size-hero-illustration) as a Utopia clamp.",
+          "valuesByMode": {
+            "Min": 154,
+            "Max": 220
+          },
+          "expressionsByMode": {},
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "letter-spacing/s",
+          "resolvedType": "FLOAT",
+          "description": "--letter-spacing-s: -0.04rem at 15px root.",
+          "valuesByMode": {
+            "Min": -0.6,
+            "Max": -0.6
+          },
+          "expressionsByMode": {},
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "letter-spacing/m",
+          "resolvedType": "FLOAT",
+          "description": "--letter-spacing-m: 0.007rem at 15px root.",
+          "valuesByMode": {
+            "Min": 0.105,
+            "Max": 0.105
+          },
+          "expressionsByMode": {},
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "font-size-7",
+          "resolvedType": "FLOAT",
+          "description": "cleacss --font-size-7: clamp(.85rem, .8rem + .16vw, 1rem) at 15px root. figcaption size (testimonial attributions).",
+          "valuesByMode": {
+            "Min": 12.75,
+            "Max": 15
+          },
+          "expressionsByMode": {},
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "font/body",
+          "resolvedType": "STRING",
+          "description": "--font-family (index.scss).",
+          "valuesByMode": {
+            "Min": "Ronzino",
+            "Max": "Ronzino"
+          },
+          "expressionsByMode": {},
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "font/display",
+          "resolvedType": "STRING",
+          "description": "New in redesign: display face for hero headings.",
+          "valuesByMode": {
+            "Min": "KC Pelletier Sans",
+            "Max": "KC Pelletier Sans"
+          },
+          "expressionsByMode": {},
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "step/-1",
+          "resolvedType": "FLOAT",
+          "description": "--step--1 = base / ratio",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::type%2Fbase}} / {{Utopia::type%2Fratio}}",
+            "Max": "{{Utopia::type%2Fbase}} / {{Utopia::type%2Fratio}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "step/0",
+          "resolvedType": "FLOAT",
+          "description": "--step-0: body, h2/h3, links",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::type%2Fbase}}",
+            "Max": "{{Utopia::type%2Fbase}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "step/1",
+          "resolvedType": "FLOAT",
+          "description": "--step-1 = base x ratio^1. h1 / step-1 headings",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::type%2Fbase}} * POWER({{Utopia::type%2Fratio}}, 1)",
+            "Max": "{{Utopia::type%2Fbase}} * POWER({{Utopia::type%2Fratio}}, 1)"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "step/2",
+          "resolvedType": "FLOAT",
+          "description": "--step-2 = base x ratio^2. --step-2",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::type%2Fbase}} * POWER({{Utopia::type%2Fratio}}, 2)",
+            "Max": "{{Utopia::type%2Fbase}} * POWER({{Utopia::type%2Fratio}}, 2)"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "step/3",
+          "resolvedType": "FLOAT",
+          "description": "--step-3 = base x ratio^3. --step-3 (new, extended scale)",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::type%2Fbase}} * POWER({{Utopia::type%2Fratio}}, 3)",
+            "Max": "{{Utopia::type%2Fbase}} * POWER({{Utopia::type%2Fratio}}, 3)"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "step/4",
+          "resolvedType": "FLOAT",
+          "description": "--step-4 = base x ratio^4. --step-4 (new): section hero headings",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::type%2Fbase}} * POWER({{Utopia::type%2Fratio}}, 4)",
+            "Max": "{{Utopia::type%2Fbase}} * POWER({{Utopia::type%2Fratio}}, 4)"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "step/5",
+          "resolvedType": "FLOAT",
+          "description": "--step-5 = base x ratio^5. --step-5 (new): alt section hero size",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::type%2Fbase}} * POWER({{Utopia::type%2Fratio}}, 5)",
+            "Max": "{{Utopia::type%2Fbase}} * POWER({{Utopia::type%2Fratio}}, 5)"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "type/small",
+          "resolvedType": "FLOAT",
+          "description": "<small> element: font-size smaller = step-0 / 1.2 (dates, sources). No repo token.",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::type%2Fbase}} * 5 / 6",
+            "Max": "{{Utopia::type%2Fbase}} * 5 / 6"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "step/hero",
+          "resolvedType": "FLOAT",
+          "description": "New: home hero size. Widest line ('YOUR BIG IDEAS') is 5.196em, so this makes it span layout/content-width.",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::layout%2Fcontent-width}} * 1000 / 5196",
+            "Max": "{{Utopia::layout%2Fcontent-width}} * 1000 / 5196"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/4xs",
+          "resolvedType": "FLOAT",
+          "description": "--space-4xs = space/base x 0.125, rounded to whole config px like Utopia",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "ROUND({{Utopia::space%2Fbase}} * 16 / 15 / 8, 0) * 15 / 16",
+            "Max": "ROUND({{Utopia::space%2Fbase}} * 16 / 15 / 8, 0) * 15 / 16"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/3xs",
+          "resolvedType": "FLOAT",
+          "description": "--space-3xs = space/base x 0.25, rounded to whole config px like Utopia",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "ROUND({{Utopia::space%2Fbase}} * 16 / 15 / 4, 0) * 15 / 16",
+            "Max": "ROUND({{Utopia::space%2Fbase}} * 16 / 15 / 4, 0) * 15 / 16"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/2xs",
+          "resolvedType": "FLOAT",
+          "description": "--space-2xs = space/base x 0.5, rounded to whole config px like Utopia",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "ROUND({{Utopia::space%2Fbase}} * 16 / 15 / 2, 0) * 15 / 16",
+            "Max": "ROUND({{Utopia::space%2Fbase}} * 16 / 15 / 2, 0) * 15 / 16"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/xs",
+          "resolvedType": "FLOAT",
+          "description": "--space-xs = space/base x 0.75, rounded to whole config px like Utopia",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "ROUND({{Utopia::space%2Fbase}} * 16 / 15 * 3 / 4, 0) * 15 / 16",
+            "Max": "ROUND({{Utopia::space%2Fbase}} * 16 / 15 * 3 / 4, 0) * 15 / 16"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/s",
+          "resolvedType": "FLOAT",
+          "description": "--space-s = space/base x 1, rounded to whole config px like Utopia",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "ROUND({{Utopia::space%2Fbase}} * 16 / 15, 0) * 15 / 16",
+            "Max": "ROUND({{Utopia::space%2Fbase}} * 16 / 15, 0) * 15 / 16"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/m",
+          "resolvedType": "FLOAT",
+          "description": "--space-m = space/base x 1.5, rounded to whole config px like Utopia",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "ROUND({{Utopia::space%2Fbase}} * 16 / 15 * 3 / 2, 0) * 15 / 16",
+            "Max": "ROUND({{Utopia::space%2Fbase}} * 16 / 15 * 3 / 2, 0) * 15 / 16"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/l",
+          "resolvedType": "FLOAT",
+          "description": "--space-l = space/base x 2, rounded to whole config px like Utopia",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "ROUND({{Utopia::space%2Fbase}} * 16 / 15 * 2, 0) * 15 / 16",
+            "Max": "ROUND({{Utopia::space%2Fbase}} * 16 / 15 * 2, 0) * 15 / 16"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/xl",
+          "resolvedType": "FLOAT",
+          "description": "--space-xl = space/base x 3, rounded to whole config px like Utopia",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "ROUND({{Utopia::space%2Fbase}} * 16 / 15 * 3, 0) * 15 / 16",
+            "Max": "ROUND({{Utopia::space%2Fbase}} * 16 / 15 * 3, 0) * 15 / 16"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/2xl",
+          "resolvedType": "FLOAT",
+          "description": "--space-2xl = space/base x 4, rounded to whole config px like Utopia",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "ROUND({{Utopia::space%2Fbase}} * 16 / 15 * 4, 0) * 15 / 16",
+            "Max": "ROUND({{Utopia::space%2Fbase}} * 16 / 15 * 4, 0) * 15 / 16"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/3xl",
+          "resolvedType": "FLOAT",
+          "description": "--space-3xl = space/base x 6, rounded to whole config px like Utopia",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "ROUND({{Utopia::space%2Fbase}} * 16 / 15 * 6, 0) * 15 / 16",
+            "Max": "ROUND({{Utopia::space%2Fbase}} * 16 / 15 * 6, 0) * 15 / 16"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/4xl",
+          "resolvedType": "FLOAT",
+          "description": "--space-4xl = space/base x 8, rounded to whole config px like Utopia",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "ROUND({{Utopia::space%2Fbase}} * 16 / 15 * 8, 0) * 15 / 16",
+            "Max": "ROUND({{Utopia::space%2Fbase}} * 16 / 15 * 8, 0) * 15 / 16"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/4xs-3xs",
+          "resolvedType": "FLOAT",
+          "description": "--space-4xs-3xs: Min = space/4xs, Max = space/3xs",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2F4xs}}",
+            "Max": "{{Utopia::space%2F3xs}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/3xs-2xs",
+          "resolvedType": "FLOAT",
+          "description": "--space-3xs-2xs: Min = space/3xs, Max = space/2xs",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2F3xs}}",
+            "Max": "{{Utopia::space%2F2xs}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/2xs-xs",
+          "resolvedType": "FLOAT",
+          "description": "--space-2xs-xs: Min = space/2xs, Max = space/xs",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2F2xs}}",
+            "Max": "{{Utopia::space%2Fxs}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/xs-s",
+          "resolvedType": "FLOAT",
+          "description": "--space-xs-s: Min = space/xs, Max = space/s",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2Fxs}}",
+            "Max": "{{Utopia::space%2Fs}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/s-m",
+          "resolvedType": "FLOAT",
+          "description": "--space-s-m: Min = space/s, Max = space/m",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2Fs}}",
+            "Max": "{{Utopia::space%2Fm}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/m-l",
+          "resolvedType": "FLOAT",
+          "description": "--space-m-l: Min = space/m, Max = space/l",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2Fm}}",
+            "Max": "{{Utopia::space%2Fl}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/l-xl",
+          "resolvedType": "FLOAT",
+          "description": "--space-l-xl: Min = space/l, Max = space/xl",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2Fl}}",
+            "Max": "{{Utopia::space%2Fxl}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/xl-2xl",
+          "resolvedType": "FLOAT",
+          "description": "--space-xl-2xl: Min = space/xl, Max = space/2xl",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2Fxl}}",
+            "Max": "{{Utopia::space%2F2xl}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/2xl-3xl",
+          "resolvedType": "FLOAT",
+          "description": "--space-2xl-3xl: Min = space/2xl, Max = space/3xl",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2F2xl}}",
+            "Max": "{{Utopia::space%2F3xl}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/3xl-4xl",
+          "resolvedType": "FLOAT",
+          "description": "--space-3xl-4xl: Min = space/3xl, Max = space/4xl",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2F3xl}}",
+            "Max": "{{Utopia::space%2F4xl}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/3xs-xl",
+          "resolvedType": "FLOAT",
+          "description": "--space-3xs-xl: Min = space/3xs, Max = space/xl",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2F3xs}}",
+            "Max": "{{Utopia::space%2Fxl}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/3xs-m",
+          "resolvedType": "FLOAT",
+          "description": "--space-3xs-m: Min = space/3xs, Max = space/m",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2F3xs}}",
+            "Max": "{{Utopia::space%2Fm}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/s-l",
+          "resolvedType": "FLOAT",
+          "description": "--space-s-l: Min = space/s, Max = space/l",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2Fs}}",
+            "Max": "{{Utopia::space%2Fl}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/s-xl",
+          "resolvedType": "FLOAT",
+          "description": "--space-s-xl: Min = space/s, Max = space/xl",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2Fs}}",
+            "Max": "{{Utopia::space%2Fxl}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/s-2xl",
+          "resolvedType": "FLOAT",
+          "description": "--space-s-2xl: Min = space/s, Max = space/2xl",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2Fs}}",
+            "Max": "{{Utopia::space%2F2xl}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/m-xl",
+          "resolvedType": "FLOAT",
+          "description": "--space-m-xl: Min = space/m, Max = space/xl",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2Fm}}",
+            "Max": "{{Utopia::space%2Fxl}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/l-2xl",
+          "resolvedType": "FLOAT",
+          "description": "--space-l-2xl: Min = space/l, Max = space/2xl",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2Fl}}",
+            "Max": "{{Utopia::space%2F2xl}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/l-3xl",
+          "resolvedType": "FLOAT",
+          "description": "--space-l-3xl: Min = space/l, Max = space/3xl",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2Fl}}",
+            "Max": "{{Utopia::space%2F3xl}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/l-4xl",
+          "resolvedType": "FLOAT",
+          "description": "--space-l-4xl: Min = space/l, Max = space/4xl",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2Fl}}",
+            "Max": "{{Utopia::space%2F4xl}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/xl-3xl",
+          "resolvedType": "FLOAT",
+          "description": "--space-xl-3xl: Min = space/xl, Max = space/3xl",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2Fxl}}",
+            "Max": "{{Utopia::space%2F3xl}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/xl-4xl",
+          "resolvedType": "FLOAT",
+          "description": "--space-xl-4xl: Min = space/xl, Max = space/4xl",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2Fxl}}",
+            "Max": "{{Utopia::space%2F4xl}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "space/2xl-4xl",
+          "resolvedType": "FLOAT",
+          "description": "--space-2xl-4xl: Min = space/2xl, Max = space/4xl",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2F2xl}}",
+            "Max": "{{Utopia::space%2F4xl}}"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "line-height/body",
+          "resolvedType": "FLOAT",
+          "description": "--line-height: 1.5 on step/0",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::type%2Fbase}} * 3 / 2",
+            "Max": "{{Utopia::type%2Fbase}} * 3 / 2"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "line-height/step-1",
+          "resolvedType": "FLOAT",
+          "description": "h1 at --step-1: line-height 1.4 (index.scss:200)",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::step%2F1}} * 7 / 5",
+            "Max": "{{Utopia::step%2F1}} * 7 / 5"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "line-height/hero",
+          "resolvedType": "FLOAT",
+          "description": "New: home hero line-height 0.74 (142 / 192.47 in Figma)",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::step%2Fhero}} * 37 / 50",
+            "Max": "{{Utopia::step%2Fhero}} * 37 / 50"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "letter-spacing/l",
+          "resolvedType": "FLOAT",
+          "description": "--letter-spacing-l: 0.011em, resolved on step/0",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::type%2Fbase}} * 11 / 1000",
+            "Max": "{{Utopia::type%2Fbase}} * 11 / 1000"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "letter-spacing/xl",
+          "resolvedType": "FLOAT",
+          "description": "--letter-spacing-xl: 0.021em, resolved on step/0",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::type%2Fbase}} * 21 / 1000",
+            "Max": "{{Utopia::type%2Fbase}} * 21 / 1000"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "letter-spacing/hero",
+          "resolvedType": "FLOAT",
+          "description": "New: home hero tracking -0.03em (-5.64 / 192.47 in Figma)",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::step%2Fhero}} * -3 / 100",
+            "Max": "{{Utopia::step%2Fhero}} * -3 / 100"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "layout/gutter",
+          "resolvedType": "FLOAT",
+          "description": "--gutter-x / --gutter-y = --space-s-m",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::space%2Fs-m}}",
+            "Max": "{{Utopia::space%2Fs-m}}"
+          },
+          "expressionMetadataByMode": {}
+        }
+      ]
+    }
+  ]
+}
