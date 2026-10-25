@@ -1,0 +1,183 @@
+{
+  "fileKey": "UkQphRf7GwINc1c8vORtUm",
+  "page": "2246:754",
+  "original": "2260:2139",
+  "duplicate": "2275:725",
+  "duplicateFrames": {
+    "Homepage - Mobile 390": "2275:726",
+    "Homepage - Tablet 834": "2275:855",
+    "Homepage 1512": "2275:985",
+    "About 1512": "2275:1387",
+    "Work with me 1512": "2275:1811",
+    "Ideas & Guides 1512": "2275:2252",
+    "Artmaking 1512": "2275:2676"
+  },
+  "collections": {
+    "Color": {
+      "id": "VariableCollectionId:2276:645",
+      "modes": {
+        "Light": "2276:0",
+        "Dark": "2276:1"
+      },
+      "count": 90
+    },
+    "Radius": {
+      "id": "VariableCollectionId:2276:736",
+      "mode": "2276:2",
+      "count": 3
+    },
+    "Utopia": {
+      "owner": "Variables Plus",
+      "modes": {
+        "Min": "2271:2",
+        "Max": "2271:3"
+      },
+      "count": 58,
+      "id": "VariableCollectionId:2271:2222",
+      "idsBeforeReimport": {
+        "type/base": "VariableID:2271:2223",
+        "step/0": "VariableID:2271:2232",
+        "space/s-m": "VariableID:2271:2254",
+        "layout/gutter": "VariableID:2271:2278"
+      }
+    },
+    "Border": {
+      "id": "VariableCollectionId:2286:645",
+      "vars": {
+        "input-border-width": "VariableID:2286:646",
+        "media-edge": "VariableID:2286:647"
+      }
+    }
+  },
+  "completedSteps": [
+    "duplicate",
+    "color-collection",
+    "radius-collection",
+    "text-styles-ronzino-partial",
+    "utopia-scopes",
+    "bind-colors",
+    "bind-radius",
+    "bind-spacing",
+    "apply-text-styles",
+    "bind-content-width",
+    "replay-explorations-edit",
+    "bind-no-leftovers",
+    "border-collection",
+    "fluid-sizes",
+    "mobile-tablet-hero",
+    "final-audit-zero",
+    "components",
+    "art-list-complete",
+    "index-projects",
+    "explorations-carousel",
+    "inner-pages-tablet-mobile",
+    "vp-test-deleted",
+    "hero-revert",
+    "hero-illustration-fluid",
+    "repo-pages-desktop"
+  ],
+  "textStyles": {
+    "site/body": "S:070381969b3679dbaaee42e6cdbdc0081ca15391,",
+    "site/heading": "S:49b4951e2f33296d5d5b405468878e92e9b67122,",
+    "site/heading-sm": "S:5cf874539559d352678003564c92bdd010dbd9c8,",
+    "site/headline": "S:3587adf7b2948eeb92cee2b03412d40f53c850f7,",
+    "site/small-step": "S:01bbb2542ae167df39c077df3986ae0edb7640e7,",
+    "site/small": "S:44e1685093f7fb6a707aebb84d4b28e7a9bb2e57,",
+    "site/figcaption": "S:e88e3785b17e5023184abb44ec7ae3d9bdfc3c6a,",
+    "site/link": "S:175cd3868e1ebde2c31479565d2a0371812069bd,"
+  },
+  "frameModes": {
+    "Homepage - Mobile": "Utopia Min / Color Light",
+    "Homepage - Tablet": "Utopia Min / Color Light",
+    "1512 frames": "Utopia Max / Color Light"
+  },
+  "replacedBlocks": {
+    "2275:772": "2283:771",
+    "2275:902": "2283:777",
+    "2275:1052": "2283:783"
+  },
+  "mobileTabletHero": {
+    "Homepage - Mobile": {
+      "hero": "2288:769",
+      "heading": "2288:772"
+    },
+    "Homepage - Tablet": {
+      "hero": "2288:773",
+      "heading": "2288:776"
+    }
+  },
+  "components": {
+    "board": "2291:769",
+    "Header": "2291:838",
+    "Nav link": "2291:779",
+    "Footer": "2293:2112",
+    "Contact card": "2293:1269",
+    "Project item": "2292:1007",
+    "Writing item": "2292:1415",
+    "Service card": "2292:1547",
+    "Icon/Copy": "2293:1221",
+    "Icon/Phone": "2293:1224",
+    "Icon/External": "2293:1228",
+    "Carousel": "2299:3910"
+  },
+  "artSections": {
+    "Poem for a Timepiece": "2296:3389",
+    "How to Feel More at Home": "2296:3404",
+    "Everything You See Is In The Past": "2296:3421",
+    "Feed Your Demons and Meet the Ally": "2296:3444",
+    "Three Years": "2296:3461",
+    "New Alumni '19": "2296:3478",
+    "Exhibition Title Bot": "2296:3496",
+    "In The Aisles": "2296:3511",
+    "Concert Photographer at Getintothis": "2296:3527",
+    "Musician": "2296:3547"
+  },
+  "carouselInstances": [
+    "2299:3934",
+    "2299:3950",
+    "2299:3966"
+  ],
+  "responsiveFrames": {
+    "About - Tablet": "2304:4157",
+    "About - Mobile": "2304:4931",
+    "Work with me - Tablet": "2305:4166",
+    "Work with me - Mobile": "2305:4933",
+    "Ideas & Guides - Tablet": "2305:5691",
+    "Ideas & Guides - Mobile": "2305:6472",
+    "Artmaking - Tablet": "2305:7253",
+    "Artmaking - Mobile": "2305:8100"
+  },
+  "heroHeadings": {
+    "restoredKC": [
+      "2312:6258",
+      "2312:6265",
+      "2312:6266",
+      "2312:6267",
+      "2312:6268",
+      "2312:6269",
+      "2312:6270",
+      "2312:6271",
+      "2312:6272",
+      "2312:6273",
+      "2312:6274",
+      "2312:6275",
+      "2312:6276"
+    ],
+    "outlined": [
+      "2312:6261",
+      "2312:6264"
+    ]
+  },
+  "newPages": {
+    "Case study - The Loft": "2319:6594",
+    "Case study - Mega Seating Plan": "2318:6258",
+    "Writing post - Flyer tips": "2320:7267",
+    "Writing post - The hard part": "2319:7109",
+    "Writing type - Essays": "2321:7608",
+    "Writing type - Guides": "2321:8106",
+    "Writing type - Notes": "2321:8580",
+    "Collaborate": "2322:8718",
+    "Accessibility statement": "2322:9237",
+    "404": "2322:9726"
+  }
+}
