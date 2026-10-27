@@ -40,7 +40,7 @@ Content and media are editable via Pages CMS, configured in `.pages.yml` at the 
 |---|---|
 | `src/` | All source files |
 | `src/_includes/` | Nunjucks partials (`_base.njk`, `_head.njk`, `_header.njk`, `_footer.njk` + `_contact-card.njk`, `_meta.njk`, `_schema.njk`) |
-| `src/_data/site.json` | Global site data (`url`, `name`, `description`, `image`) |
+| `src/_data/site.json` | Global site data (`url`, `name`, `description`, `image`) plus contact details (`email`, `bookingUrl`, `consultationUrl`, `social`) |
 | `src/css/index.scss` | SCSS entry point (`@use`s every partial) + global styles: theme, content modes, interactive, typography, layout. Component-scoped rules live in `_components.scss`, not here |
 | `src/css/_components.scss` | Unlayered component styles: cards, blockquotes, look toggles, illustrations, data list, project item, case study (shared by work + writing), writing listings. Base (mobile) rules only — breakpoint overrides go in `_responsive.scss` (CSS rule 10) |
 | `src/css/_responsive.scss` | Single `all` mixin holding **every** viewport + container breakpoint rule, one block per condition. `@include`d as the last statement in `index.scss` (see CSS rule 10) |
