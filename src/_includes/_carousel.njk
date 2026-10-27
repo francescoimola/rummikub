@@ -1,10 +1,18 @@
 {# Explorations carousel (G14): a scroll-snap strip, no JS. Prev/next are ::scroll-button() where supported; #}
-{# elsewhere the track still swipes, scrolls and takes the keyboard (tabindex). Slides crop to 3:2 (G45). #}
+{# elsewhere each slide carries its own Previous/Next anchors to its neighbours (shown only without ::scroll-button), #}
+{# and the track still swipes, scrolls and takes the keyboard (tabindex). Slides crop to 3:2 (G45). #}
 {% macro carousel(slides, label) %}
+{%- set idBase = label | slugify %}
 <section class="carousel" aria-roledescription="carousel" aria-label="{{ label }}">
     <ul class="carousel__track" tabindex="0" role="list">
         {%- for slide in slides %}
-        <li aria-roledescription="slide" aria-label="{{ loop.index }} of {{ loop.length }}"><img src="{{ slide.src }}" alt="{{ slide.alt }}" loading="lazy"></li>
+        <li id="{{ idBase }}-{{ loop.index }}" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ loop.length }}">
+            <img src="{{ slide.src }}" alt="{{ slide.alt }}" loading="lazy">
+            <p class="carousel__links">
+                {%- if not loop.first %}<a href="#{{ idBase }}-{{ loop.index - 1 }}" class="carousel__prev" aria-label="Previous image" data-icon-before="arrow-left">Previous</a>{% endif %}
+                {%- if not loop.last %}<a href="#{{ idBase }}-{{ loop.index + 1 }}" class="carousel__next" aria-label="Next image" data-icon="arrow-right">Next</a>{% endif %}
+            </p>
+        </li>
         {%- endfor %}
     </ul>
 </section>
