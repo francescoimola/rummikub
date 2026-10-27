@@ -1,6 +1,6 @@
 # Ordered list
 
-**Layer:** Composite · **Status:** planned · **Figma:** (pattern) examples `2349:17050` (Web design), `2350:17422` (Consultations), `2350:17760` (Web design, tablet), `2350:18549` (mobile) · **Code:** `<ol class="flow">` inside `section.text`
+**Layer:** Composite · **Status:** code · **Figma:** (pattern) examples `2349:17050` (Web design), `2350:17422` (Consultations), `2350:17760` (Web design, tablet), `2350:18549` (mobile) · **Code:** `<ol class="flow">` inside `section.text`
 
 ## Purpose
 
@@ -56,6 +56,7 @@ None.
 - Already in the repo (`design.njk`, `consultations.njk`). The browser `::marker` stays (G35). Figma's marker ↔ text gap `space/xs` is a snapshot, since a marker cannot take a `gap`.
 - One row gap, `has-gap-s`, on both pages (G35). Change Consultations from `has-gap-m`, and the Figma Consultations list to `space/s`.
 - Bulleted lists use native bullets in Figma and the repo; no change.
+- **Ported (#36):** both lists are `ol.flow.has-gap-s` in a `div.text`, the content column of a Section.
 
 ## Open questions
 
