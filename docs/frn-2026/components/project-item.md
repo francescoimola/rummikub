@@ -1,6 +1,6 @@
 # Project item
 
-**Layer:** Composite · **Status:** figma · **Figma:** `2292:1007` · **Code:** `src/_includes/_project-item.njk`, `.project-item`
+**Layer:** Composite · **Status:** code · **Figma:** `2292:1007` · **Code:** `src/_includes/_project-item.njk`, `.project-item`
 
 ## Purpose
 
@@ -78,6 +78,7 @@ Values from [`_tokens.md`](_tokens.md).
 - The existing `$bp-l` container fold already matches Split / Stacked. Keep it.
 - Delete the `$bp-2xl` block for `.project-item` from `_responsive.scss` (G20).
 - The CTA gets no arrow (G19): "Read case study" already says it opens a page (README, arrow rule).
+- **Ported (#33):** `.project-item__img` is `aspect-ratio: var(--ratio-3-2)` + cover. The `$bp-2xl` block and its `$bp-2xl` var are gone, so the body stacks at every width. The CTA dropped out of the `.small` and dimmed-colour rules: it is a normal-size accent link. Used on the homepage (Featured, Index).
 
 ## Open questions
 

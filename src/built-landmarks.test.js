@@ -70,6 +70,11 @@ describe("built landmarks", () => {
     for (const file of caseStudies) expect(currentLabel(file), file).toBeUndefined();
   });
 
+  // /work/ redirects to /#case-studies, so the Featured heading must keep that id.
+  it("gives the homepage the #case-studies anchor", () => {
+    expect((html("public/index.html").match(/id="case-studies"/g) || []).length).toBe(1);
+  });
+
   it("keeps a single main landmark with the skip-link target", () => {
     for (const file of pages()) {
       expect((html(file).match(/<main\b/g) || []).length, file).toBe(1);

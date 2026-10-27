@@ -72,7 +72,7 @@ Values from [`_tokens.md`](_tokens.md).
 - Controls previously bound a remote library; they now use local `space/xs` and `Icon/Arrow-right` (F19, F40).
 - Slide images use [Image](image.md) with `ratio` 3:2 (G45).
 - **Ported (#30):** `_carousel.njk` exports `carousel(slides, label)`; `.carousel*` lives in `_components.scss`. The track (`ul`, `tabindex="0"`) is the 3:2 viewport and scroll-snap container; slides crop with `object-fit: cover` in CSS rather than `ratio=`, since they are plain `<img>` from data. `::scroll-button(right|left)` use a text `→` (Previous rotated 180°) so the arrow follows `currentColor` on the `content-light` fill, named "Next image" / "Previous image", hidden when `:disabled`. Reduced motion sets `scroll-behavior: auto`.
-- `explorations.json` starts with the six Figma placeholders, pointing at their existing repo files; new CMS uploads land in `src/assets/explorations` (the image transform reads them from there, so no passthrough is needed). Rendered at the end of the current homepage until the Homepage ticket.
+- `explorations.json` starts with the six Figma placeholders, pointing at their existing repo files; new CMS uploads land in `src/assets/explorations` (the image transform reads them from there, so no passthrough is needed). Rendered on the homepage between Featured and Index (#33).
 
 ## Open questions
 

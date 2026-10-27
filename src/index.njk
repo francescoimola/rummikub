@@ -2,31 +2,44 @@
 layout: _base.njk
 title: Web Designer, Copywriter & Artist in Kent | Francesco Imola
 description: "Unapologetically simple websites, words, and branding advice for businesses and creatives. Based in Folkestone, Kent, and currently open to work."
-isFullWidth: true
 eleventyNavigation:
 key: Home
 ---
 {% from "_carousel.njk" import carousel %}
+{% from "_project-item.njk" import projectItem %}
+{# Line breaks and the two indented lines are the design; each span is one line of the KC hero #}
+<header class="home-hero">
+  <h1><span>big-idea</span> <span class="home-hero__indent">person?</span> <span>let’s get</span> <span>your big ideas</span> <span class="home-hero__indent">across</span></h1>
+</header>
 
-  <div class="grid-responsive-cols flow has-gap-m" full-width style="block-size: fit-content;">
-    <div class="profile-media">
-      <img src="./assets/images/francesco.png" alt="Francesco Imola">
-      <img class="profile-media__inset" src="/assets/images/hello-world.png"
-        alt="Text editor window reading: Welcome to my website. My name is Francesco. I'm a web designer, creative marketer, digital experience consultant, facilitator, artist, solution-seeker, observer, participant, civilian, brother, and a friend.">
-    </div>
-    <section class="flow has-gap-s" style="justify-content: space-between;">
-      <h1 class="headline">I help mission-driven brands rethink their fundamentals instead of chasing novelties.</h1>
-      <div class="flow has-gap-s">
-        <p>I'm Francesco Imola, a designer, marketer, and artist based in Folkestone, Kent. My bread and butter are websites, <span style="text-wrap: nowrap;">UX/UI</span>, copywriting, brand messaging, and graphic design.</p>
-          <p>In other words, if
-          people don't get what you do, I rewrite it; if they can't work out how to buy, I redesign it; and if they can't
-          tell you from the place down the road, I find what makes you different and say it loud.</p>
-          <p>The same instinct shapes my work as an artist, where I notice what's been hiding in plain sight and bring it to light.</p>
-        <div class="flow has-gap-xs has-mt-s">
-          <a href="/work/" data-icon="arrow-right">See what I've done</a>
-          <a href="/about/" data-icon="arrow-right">More about me</a>
-        </div>
-      </div>
-    </section>
+<section class="section" aria-label="Introduction">
+  <div class="flow has-gap-s">
+    <p class="home-intro__statement">I'm Francesco Imola, a designer, marketer, and artist based in Folkestone, Kent.</p>
+    <img class="home-intro__photo" src="/assets/images/francesco.png" alt="Francesco Imola, smiling in front of a flowering hedge">
   </div>
+  <div class="flow has-gap-s">
+    <p>I help brands with big missions stop chasing novelties and start rethinking their fundamentals. My bread and butter are websites, UX, UI, copywriting, brand messaging, and graphic design.</p>
+    <p>In other words, if people don't get what you do, I rewrite it; if they can't work out how to buy, I redesign it; and if they can't tell you from the guys next door, I find what makes you different and say it loud.</p>
+    <p>When I’m not resuscitating brands from the brink of death, I make art and work with up and coming artists.</p>
+    <a href="/about/" data-icon="arrow-right">More about me</a>
+  </div>
+</section>
+
+<section class="home-block flow has-gap-s-m" aria-labelledby="case-studies">
+  <h2 id="case-studies">Featured</h2>
+  {% for project in collections.workFeatured %}
+    {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "") }}
+  {% endfor %}
+</section>
+
+<section class="home-block flow has-gap-s-m" aria-labelledby="explorations">
+  <h2 id="explorations">Explorations</h2>
   {{ carousel(explorations, "Explorations") }}
+</section>
+
+<section class="home-block flow has-gap-s-m" aria-labelledby="index">
+  <h2 id="index">Index</h2>
+  {% for project in collections.workIndex %}
+    {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "") }}
+  {% endfor %}
+</section>
