@@ -323,6 +323,39 @@ content:
             type: string
             list: true
 
+  - name: siteContact
+    label: Contact details and social links
+    type: file
+    path: src/_data/site.json
+    format: json
+    fields:
+      - name: email
+        label: Email address
+        type: string
+        required: true
+      - name: bookingUrl
+        label: Intro call booking link
+        type: string
+        required: true
+      - name: consultationUrl
+        label: Consultation booking link
+        type: string
+        required: true
+      - name: social
+        label: Social links
+        type: object
+        list:
+          collapsible: true
+        fields:
+          - name: label
+            label: Label
+            type: string
+            required: true
+          - name: url
+            label: URL
+            type: string
+            required: true
+
   - name: headers
     label: HTTP headers
     type: file

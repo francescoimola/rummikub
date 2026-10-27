@@ -8,12 +8,12 @@
             <h2 id="contact-title">Contact</h2>
             <p>Ready to talk shop or want to discuss an idea? Get in touch and I’ll reply within a day.</p>
         </div>
-        {% call contactCard("Send me a good 'ol email", '<span class="sr-only">hi@francescoimola.com</span><span aria-hidden="true">hi at francescoimola dot com</span>') %}
-        <button type="button" data-copy-email="hi@francescoimola.com" data-icon="copy">Copy email address</button>
+        {% call contactCard("Send me a good 'ol email", '<span class="sr-only">' + site.email + '</span><span aria-hidden="true">' + (site.email | replace("@", " at ") | replace(".", " dot ")) + '</span>') %}
+        <button type="button" data-copy-email="{{ site.email }}" data-icon="copy">Copy email address</button>
         <p role="status" class="sr-only" data-copy-status></p>
         {% endcall %}
         {% call contactCard("Put a face to the name") %}
-        <a href="https://cal.com/francescoimola/intro" data-icon="phone" rel="noopener noreferrer" target="_blank">Talk to me face to face</a>
+        <a href="{{ site.bookingUrl }}" data-icon="phone" rel="noopener noreferrer" target="_blank">Talk to me face to face</a>
         {% endcall %}
         {% call contactCard("Not sure what to say?") %}
         <button type="button" data-dialog-open="contact-template" data-icon="email">Copy this template email</button>
@@ -37,9 +37,9 @@
         {% endcall %}
         {% call contactCard("Feeling social?") %}
         <ul class="flow has-gap-2xs">
-            <li><a href="https://sublime.app/fran" target="_blank" rel="noopener noreferrer" data-icon="arrow-ext">Sublime</a></li>
-            <li><a href="https://substack.com/@francescoimola" target="_blank" rel="noopener noreferrer" data-icon="arrow-ext">Substack</a></li>
-            <li><a href="https://www.linkedin.com/in/francesco-imola/" target="_blank" rel="noopener noreferrer" data-icon="arrow-ext">Linkedin</a></li>
+            {% for link in site.social %}
+            <li><a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" data-icon="arrow-ext">{{ link.label }}</a></li>
+            {% endfor %}
         </ul>
         {% endcall %}
     </section>
