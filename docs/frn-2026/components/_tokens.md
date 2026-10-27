@@ -75,6 +75,8 @@ Pairs run from the first step's Min to the second step's Max:
 | `size/hero-illustration` | `--size-hero-illustration` (`block-size`) | 154 → 220 |
 | `size/illustration-wide` | `--size-illustration-wide` (`inline-size`) | 345 → 449.28 |
 
+Both size tokens are rendered px at the 15px root: `fluid-rendered()` in `_scale.scss` rescales them for Utopia's 16px rem.
+
 ## Ratios
 
 `--ratio-3-2`, `--ratio-2-1`, `--ratio-1-1`, `--ratio-4-3`, `--ratio-16-9`, `--ratio-2-3`, `--ratio-3-4`, `--ratio-9-16`: values like `3 / 2`, for `aspect-ratio` (G11, [image.md](image.md)).
