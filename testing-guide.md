@@ -41,7 +41,7 @@ These check the actual shipped site in `public/`, so they catch mistakes anywher
 
 - **src/built-css.test.js** — one stylesheet, no runtime `@import`, layer order, icon glyphs, KC font
 - **src/built-feeds.test.js** — both RSS feeds carry the right categories; hidden posts stay out
-- **src/built-landmarks.test.js** — every page has correct landmark markup (skip link, banner, main)
+- **src/built-landmarks.test.js** — every page has correct landmark markup (skip link, banner, main), and titles/descriptions meet the length targets and are unique (`META_EXCEPTIONS` lists the six older pages that miss them; fix one, then delete it from the list)
 - **src/built-markdown.test.js** — every page ships its `.md` twin, plus `llms.txt`
 
 ### Eleventy config tests (`src/config/eleventy/`)
@@ -70,6 +70,18 @@ Run in jsdom. These files are IIFE-style with no exports, so the pattern is: set
 - Test behaviour, not implementation. "When I click, content expands" — not "the handler calls `classList.toggle`".
 - New Eleventy filter/shortcode/transform? Add a test.
 - New browser feature? Only test it if breakage would be invisible (see above) — and ask Francesco before adding any new JS or test file (AGENTS.md, non-negotiable rules).
+
+## Builds and worktrees
+
+- `pnpm build` runs `rm -rf public`, and the built-output tests read `public/`. Two builds in one checkout clobber each other; a failed `ELIFECYCLE` build that passes on a quiet re-run was this.
+- Every worktree has its own `public/` and builds cold in 4–10 minutes (images re-optimize because they live in `public/`). Build and test inside your worktree; avoid the main checkout while another agent works there.
+- `pnpm test` reads the current checkout's `public/`. After `pnpm start`, run `pnpm build` again before testing: dev output links the focal picker and fails `built-landmarks`.
+- `vitest.config.js` excludes `.claude/**`, so a checkout runs only its own 14 suites, not sibling worktrees' copies.
+- In a worktree, run git as separate plain commands; merge and push from the main checkout.
+
+## Bugs only a browser shows
+
+Agents can't drive a browser. For Firefox-only or timing bugs, hand Francesco a console snippet that logs state per frame and ask for the output pasted back; ready-made probes and how to hand results back are in [docs/devtools-probes.md](docs/devtools-probes.md).
 
 ## Known Firefox console warnings
 
