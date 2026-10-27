@@ -1,3 +1,8 @@
+@use 'icons';
+
+// The carousel chip is --content-light in both themes, so its arrow is a fixed dark neutral (= --neutral-950-alpha in light mode)
+$carousel-arrow: oklch(0.351 0.034 121.6);
+
 :root {
     --crop-amount: 1px;
 }
@@ -385,12 +390,12 @@
     }
 
     &::scroll-button(right) {
-        content: "→" / "Next image";
+        content: icons.glyph-url("arrow-right", $carousel-arrow) / "Next image";
         inset-inline-end: var(--carousel-inset);
     }
 
     &::scroll-button(left) {
-        content: "→" / "Previous image";
+        content: icons.glyph-url("arrow-right", $carousel-arrow) / "Previous image";
         inset-inline-end: calc(var(--carousel-inset) + var(--carousel-button) + var(--space-2xs));
         rotate: 180deg;
     }
