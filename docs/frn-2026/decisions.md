@@ -476,7 +476,7 @@ Settles the open questions in `components/README.md`. Numbered G1… so they don
 |---|---|---|
 | G1 | Nav label | "Ideas" in header, breadcrumb and any footer link. The `/writing/` heading and `<title>` stay |
 | G2 | Wide Look toggles | Pinned to the right edge, as drawn |
-| G3 | Nav hover bullet | Superseded by G49: no bullet; underline instead |
+| G3 | Nav hover bullet | Superseded by G50: no bullet; underline instead |
 | G4 | Footer nav | Dropped: the footer is Contact cards + colophon only |
 | G5 | Badges | Design Declares → `https://designdeclares.com/`; Creatives for Climate → `https://www.creativesforclimate.co/about` |
 | G6 | Contact card prompt | Re-asked (the repo's "Up for a chat?" footer sits in Explorations, which is out of scope) |
@@ -555,8 +555,8 @@ Re-asked in round 2: G6, G19, G21, G24, G36, G37.
 | G46 | Page header heading width | On tablet, `layout/content-width` (330 in Min) is too narrow. The cap becomes the wider of `layout/inline-size` (600) and `layout/content-width`, with no breakpoint. Neither the API nor the UI can bind a text layer's `maxWidth`, so Figma gets a `Layout=Tablet` variant (set `2405:19762`, variant `2405:19759`): the heading is wrapped in an "Introduction cap" frame capped at `layout/inline-size`. All six tablet instances (Work with me, Ideas, Artmaking, 404, Web design, Consultations) use it. Code has no variant, only the `max()` cap. The user also restored the Web design illustration |
 | G47 | Carousel ends | No wrap-around. First slide shows only Next, last slide only Previous, the slides between show both |
 | G48 | Badge frames | Renamed "Creatives for Climate" (`2293:1553`, `2293:1825`) |
-| G49 | Nav marker | Hover and focus underline the link; the current page is underlined and takes `--brand-900`. No bullet, no slide-in (#42). Supersedes G3 |
-| G50 | Work with me closing CTA | The featured CTA card "See what other brands left with" is removed, as in Figma (#43). Work with me ends on its own contact CTA |
 | G49 | Long-form intro | Case studies and writing posts: the intro (h1 + dimmed line) is centred, and it has as much space above it (`space/2xl-3xl` padding-top) as below it (margin-bottom, same token). Before, the title sat close under the header and far above the image. Code: `.case-study__intro` in `_components.scss`. **Figma (applied):** the local `Intro` frame in the 15 long-form frames (desktop 1512, tablet, mobile; Loft `2319:6594` and the rest) has `paddingTop` and `paddingBottom` bound to `space/2xl-3xl` (101.25 desktop, 60 tablet/mobile), and its text centred. `Main Content` top padding is set to 0, because the intro now supplies the top space. The first `Figure` (or `Paragraph` on Accessibility) after the intro has padding-top 0, because Figma has no margin collapse. Figma ships these as instance and frame overrides, not component changes. Intro is a plain frame, so there is no Code Connect map. Tablet and mobile frames were checked by numbers only, not by screenshot |
+| G50 | Nav marker | Hover and focus underline the link; the current page is underlined and takes `--brand-900`. No bullet, no slide-in (#42). Supersedes G3 |
+| G51 | Work with me closing CTA | The featured CTA card "See what other brands left with" is removed, as in Figma (#43). Work with me ends on its own contact CTA |
 
 - User re-imported `variables-plus-import.json` (62 variables).
