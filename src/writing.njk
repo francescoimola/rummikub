@@ -1,5 +1,6 @@
 ---
 layout: _base.njk
+contentMode: contrast
 title: Drawing my own conclusions | Blog | Francesco Imola
 description: Guides, essays and notes on design, copywriting and running a small business. Practical where it helps, honest where it doesn't. Have a read.
 eleventyNavigation:
@@ -9,7 +10,7 @@ eleventyNavigation:
 ---
 {% from "_writing-item.njk" import writingItem %}
 {% from "_page-header.njk" import pageHeader %}
-  {{ pageHeader("meditating", "Drawing my own conclusions") }}
+  {{ pageHeader("meditating", "Ideas and guides") }}
 
   {% for typeSlug in collections.writingTypes %}
   {% set t = writingTypes[typeSlug] %}

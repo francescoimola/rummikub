@@ -518,7 +518,7 @@ Re-asked in round 2: G6, G19, G21, G24, G36, G37.
 | G6 | Footer headings | The footer's "Contact" title is the `h2`; each Contact card prompt is an `h3`, styled `site/heading` as now |
 | G19 | Project item arrow | No arrow. **Arrow rule:** an arrow marks a link that leaves the page only when the label doesn't already say so. "Read case study" implies a new page, so no arrow; "More about me" could be an in-page action, so it gets →. Applies site-wide |
 | G21 | Writing item thumb | Fluid: the thumb scales with its container. The narrower thumb on tablet/mobile is intentional, so the text doesn't wrap onto too many lines. Code approach: round 3 |
-| G24 | Split row text | Two columns as drawn (title + year left, description right), folding to one column on a `@container` query against its parent |
+| G24 | Split row text | Two columns as drawn (title left, description right), folding to one column on a `@container` query against its parent. The year sits under the description, dimmed, at every size (Figma, corrected in review #45) |
 | G36 | Media pair | Change the existing two-column class so it stacks on narrow containers. About and Collaborate change with it |
 | G40 | Media pair authoring | New paired shortcode `{% mediaPair %}` in `shortcodes.js` (approved by the user) |
 | G37 | Masonry | Dropped, `display: grid-lanes` included. A plain two-column grid, children top-aligned (`align-items: start`), every image at its **natural** ratio (no preset ratio) |
