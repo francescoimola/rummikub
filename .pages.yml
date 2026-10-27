@@ -150,6 +150,24 @@ content:
             label: Alt text
             type: string
 
+  - name: explorations
+    label: Explorations (homepage carousel)
+    type: file
+    path: src/_data/explorations.json
+    format: json
+    list: true
+    fields:
+      - name: src
+        label: Image
+        type: image
+        required: true
+        options:
+          path: src/assets/explorations
+      - name: alt
+        label: Alt text
+        type: string
+        required: true
+
   - name: headers
     label: HTTP headers
     type: file

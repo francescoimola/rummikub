@@ -6,7 +6,7 @@ isFullWidth: true
 eleventyNavigation:
 key: Home
 ---
-
+{% from "_carousel.njk" import carousel %}
 
   <div class="grid-responsive-cols flow has-gap-m" full-width style="block-size: fit-content;">
     <div class="profile-media">
@@ -29,3 +29,4 @@ key: Home
       </div>
     </section>
   </div>
+  {{ carousel(explorations, "Explorations") }}

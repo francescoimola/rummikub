@@ -306,6 +306,80 @@
     }
 }
 
+// ---- Carousel ----
+// The track is the 3:2 viewport and the scroll container; ::scroll-button() boxes are its siblings, placed against .carousel
+.carousel {
+    --carousel-inset: var(--space-3xs-m);
+    --carousel-button: calc(var(--step-0) + 2 * var(--space-xs)); // arrow + padding, square
+    position: relative;
+    inline-size: 100%;
+    max-inline-size: var(--grid-width-l);
+    margin-inline: auto;
+}
+
+.carousel__track {
+    display: flex;
+    aspect-ratio: 3 / 2;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    border-radius: var(--border-radius-s);
+
+    @media (prefers-reduced-motion: reduce) {
+        scroll-behavior: auto;
+    }
+
+    >li {
+        flex: 0 0 100%;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+    }
+
+    // G45: the one place media crops regardless of its natural ratio, so CMS uploads of any shape line up
+    :is(picture, img) {
+        display: block;
+        inline-size: 100%;
+        block-size: 100%;
+        object-fit: cover;
+    }
+
+    // Arrow is a text glyph so it follows currentColor on the content-light fill; Previous is the same arrow turned round
+    &::scroll-button(*) {
+        position: absolute;
+        inset-block-end: var(--carousel-inset);
+        inline-size: var(--carousel-button);
+        block-size: var(--carousel-button);
+        border: 0;
+        border-radius: var(--border-radius-s);
+        background: var(--content-light);
+        color: var(--neutral-950-alpha);
+        font-size: var(--step-0);
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    &::scroll-button(right) {
+        content: "→" / "Next image";
+        inset-inline-end: var(--carousel-inset);
+    }
+
+    &::scroll-button(left) {
+        content: "→" / "Previous image";
+        inset-inline-end: calc(var(--carousel-inset) + var(--carousel-button) + var(--space-2xs));
+        rotate: 180deg;
+    }
+
+    // No wrap-around (G47): an end-of-track button is disabled, so it goes
+    &::scroll-button(*):disabled {
+        display: none;
+    }
+}
+
 // ---- Site footer ----
 // One footer on every page; band fill shared with .site-banner in index.scss. Narrow stack here, Wide in _responsive.scss
 .site-footer {
