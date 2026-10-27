@@ -345,7 +345,6 @@ $carousel-arrow: oklch(0.351 0.034 121.6);
 
 .carousel__track {
     display: flex;
-    aspect-ratio: var(--ratio-3-2);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -364,13 +363,14 @@ $carousel-arrow: oklch(0.351 0.034 121.6);
         flex: 0 0 100%;
         scroll-snap-align: start;
         scroll-snap-stop: always;
+        scroll-margin-block-start: var(--space-xl); // a Previous/Next anchor jump leaves room above the slide
     }
 
     // G45: the one place media crops regardless of its natural ratio, so CMS uploads of any shape line up
     :is(picture, img) {
         display: block;
         inline-size: 100%;
-        block-size: 100%;
+        aspect-ratio: var(--ratio-3-2);
         object-fit: cover;
     }
 
@@ -402,6 +402,26 @@ $carousel-arrow: oklch(0.351 0.034 121.6);
 
     // No wrap-around (G47): an end-of-track button is disabled, so it goes
     &::scroll-button(*):disabled {
+        display: none;
+    }
+}
+
+// Fallback controls under each slide for browsers without ::scroll-button (G47: the first slide has no Previous, the last no Next)
+.carousel__links {
+    display: flex;
+    justify-content: space-between;
+    padding-block-start: var(--space-2xs);
+    margin: 0;
+
+    a {
+        text-decoration: none;
+    }
+
+    .carousel__next {
+        margin-inline-start: auto;
+    }
+
+    @supports selector(::scroll-button(*)) {
         display: none;
     }
 }
