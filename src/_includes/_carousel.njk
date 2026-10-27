@@ -9,8 +9,8 @@
         <li id="{{ idBase }}-{{ loop.index }}" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ loop.length }}">
             <img src="{{ slide.src }}" alt="{{ slide.alt }}" loading="lazy">
             <p class="carousel__links">
-                {%- if not loop.first %}<a href="#{{ idBase }}-{{ loop.index - 1 }}" class="carousel__prev" aria-label="Previous image" data-icon-before="arrow-left">Previous</a>{% endif %}
-                {%- if not loop.last %}<a href="#{{ idBase }}-{{ loop.index + 1 }}" class="carousel__next" aria-label="Next image" data-icon="arrow-right">Next</a>{% endif %}
+                {%- if not loop.first %}<a href="#{{ idBase }}-{{ loop.index - 1 }}" class="carousel__prev" aria-label="Previous image">Previous</a>{% endif %}
+                {%- if not loop.last %}<a href="#{{ idBase }}-{{ loop.index + 1 }}" class="carousel__next" aria-label="Next image">Next</a>{% endif %}
             </p>
         </li>
         {%- endfor %}
