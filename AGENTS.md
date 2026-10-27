@@ -98,14 +98,12 @@ Media rhythm (`.case-study` in `_components.scss`) and the scroll animations (`i
 
 ## Artmaking page
 
-Each project is a `.split-row` `<article>`: text in a `.flow` div, images in a `.masonry` `<ul>` of `.card` `<li>`s. Both classes are generic and reusable — neither is art-specific, and both are defined in `_components.scss` with their folds in `_responsive.scss`.
+Each project is a `.split-row` `<article>`: a `.split-row__text` block (title + year | description + link, 2-up from a `@container` at `$bp-s`) at content width, then a `ul.grid-cols-2.split-row__images` of `.card` `<li>`s spanning the full-width page (Q25, G24). Folds live in `_responsive.scss`.
 
-- **`.split-row`** — `1fr` stacked, `1fr 2fr` from a `@container` at `$bp-xl`. Shares its base declaration with `.grid-responsive-cols` (which folds to equal columns at `$bp-s`); both are container-driven, so they respond to the space they actually get, not the viewport. Deliberately *not* cleacss's `.grid-reset`: that reserves a side-margin track per edge, so full-bleed there needs `--grid-margin-max: 0` **and** a negative-margin/width bleed to cancel the leftover `column-gap`.
-- **`.masonry`** — two-column grid (`1fr` below `$bp-s`) with `align-items: start`, upgraded to `display: grid-lanes` under `@supports` for Safari 26.4+, which packs short images under a tall neighbour. **Never restore `columns`:** WebKit's multicol balancer overshoots on `break-inside: avoid` cards, so any set with one tall outlier (a lone portrait among landscapes) collapses to one long column plus a stub. Chromium hides this — verify in Safari. Asserted in `built-css.test.js`.
-- **`.masonry` must keep `align-self: start`.** As a `.split-row` grid item it would otherwise stretch to the row height, and `align-content` defaults to stretch — the rows then spread apart to fill it instead of packing to the top. Asserted in `built-css.test.js`.
+- **Plain grid, no masonry (G37).** Images keep their natural ratio; `align-items: start` stops them stretching, and `align-self: start` stops `.split-row` stretching the grid (its rows would spread apart). `artProjects.json` has no `ratio` field (G43).
 - **The image is a direct child of `.card`.** That is what triggers `.card`'s full-bleed rule, so images sit flush with no padding. Wrapping it in anything re-introduces the card padding.
 
-The masonry fold is a `@container` query against `main` (not the viewport), so it fires while the masonry itself is only ~2/3 that wide. Add new projects to `src/_data/artProjects.json`; `link`, `linkLabel` and `images` are all optional.
+Add new projects to `src/_data/artProjects.json`; `year`, `link`, `linkLabel` and `images` are all optional (an empty year renders nothing).
 
 ## Project videos
 

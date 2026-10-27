@@ -171,7 +171,8 @@
 .grid-responsive-cols,
 .grid-cols-2,
 .section,
-.split-row {
+.split-row,
+.split-row__text {
     display: grid;
     grid-template-columns: 1fr;
     align-items: stretch;
@@ -189,6 +190,7 @@
 .section {
     gap: var(--space-s);
     max-inline-size: var(--grid-width-l);
+    margin-inline: auto; // main>* centres it on most pages; full-width pages (Artmaking) nest it one level down
 
     >:is(h1, h2) {
         align-self: start; // the row stretches its items; keep the pill hugging its text
@@ -196,23 +198,24 @@
     }
 }
 
-// ---- Masonry ----
+// ---- Split row (Artmaking) ----
 
-// Row-aligned grid; 2-up fold in _responsive.scss (CSS rule 10). Deliberately not multicol — WebKit's balancer piles a tall outlier into one column and stubs the other
-.masonry {
-    display: grid;
-    grid-template-columns: 1fr;
+// Text above images (Q25): title + year | description + link at content width, 2-up fold in _responsive.scss (G24)
+.split-row__text {
+    gap: var(--space-xs);
+    inline-size: 100%;
+    max-inline-size: var(--grid-width-l);
+    margin-inline: auto;
+}
+
+// Plain 2-up grid at natural ratios, no masonry (G37); the img stays a direct child of .card for the full-bleed rule
+.split-row__images {
     gap: var(--space-xs);
     align-items: start; // cards keep their natural height instead of stretching to the row
     align-self: start; // .split-row's stretch would give the grid a definite height, and align-content defaults to stretch, spreading the rows apart
-
-    // Safari 26.4+ — real masonry, closing the fallback's whitespace under shorter cards
-    @supports (display: grid-lanes) {
-        display: grid-lanes;
-    }
 }
 
-.masonry>.card {
+.split-row__images>.card {
     background-color: transparent;
 }
 
