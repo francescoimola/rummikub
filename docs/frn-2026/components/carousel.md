@@ -42,7 +42,7 @@ Values from [`_tokens.md`](_tokens.md).
 ## States & interactions
 
 - **Next / Previous:** click moves to the adjacent slide. In Figma this is CHANGE_TO with smart animate (ease-in-out, 0.45s).
-- In code (G14): CSS only, no JS. The track is a scroll-snap strip and the buttons are `::scroll-button(left)` and `::scroll-button(right)` on the scroll container. Browsers without `::scroll-button()` show no buttons, and the strip still swipes and scrolls. Wrap-around (6 → 1) is not part of the CSS version.
+- In code (G14): CSS only, no JS. The track is a scroll-snap strip and the buttons are `::scroll-button(left)` and `::scroll-button(right)` on the scroll container. Browsers without `::scroll-button()` show no buttons, and the strip still swipes and scrolls. There is no wrap-around (G47). Slide 1 shows only Next, slide 6 shows only Previous, and slides in between show both. `::scroll-button()` is `:disabled` at either end, so hide it there: `::scroll-button(*):disabled { display: none }`.
 - Under reduced motion the slide change is instant (`--dur-medium` is 0s; use `scroll-behavior: auto`).
 - Controls take the global focus ring. Buttons need accessible names ("Previous image", "Next image").
 - No autoplay is designed.

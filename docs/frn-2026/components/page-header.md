@@ -27,7 +27,7 @@ No variants.
 
 ## Layout
 
-None, fluid only. A vertical stack, centred, gap `space/2xl-3xl`. The heading width is capped by `layout/content-width` (900 at Max, 330 at Min).
+None, fluid only. A vertical stack, centred, gap `space/2xl-3xl`. The heading is capped at whichever is wider, `layout/inline-size` (600) or `layout/content-width` (330 → 900) (G46). Tablet frames show the 600 cap, so the heading doesn't wrap onto as many lines as it does on mobile. Code: `max-inline-size: max(var(--inline-size), <content-width>)`. No breakpoint: on phones the parent is narrower than 600, so the heading just fills it.
 
 ## Tokens
 
@@ -38,7 +38,7 @@ None, fluid only. A vertical stack, centred, gap `space/2xl-3xl`. The heading wi
 | Illustration ↔ heading gap | `space/2xl-3xl` | 60 → 101.25 |
 | Illustration height | `size/hero-illustration` | 154 → 220 |
 | Heading size | `step/2-4` | 26.65 → 53.28 |
-| Heading max width | `layout/content-width` | 330 → 900 |
+| Heading max width | `max(layout/inline-size, layout/content-width)` (G46); tablet frames bind `layout/inline-size` | 600 → 900 |
 | Fill | `brand/150` | colour |
 
 Values from [`_tokens.md`](_tokens.md). `step/2-4` is the new section-hero pair (Q20).
