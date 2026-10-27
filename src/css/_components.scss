@@ -363,7 +363,6 @@ $carousel-arrow: oklch(0.351 0.034 121.6);
         flex: 0 0 100%;
         scroll-snap-align: start;
         scroll-snap-stop: always;
-        scroll-margin-block-start: var(--space-xl); // a Previous/Next anchor jump leaves room above the slide
     }
 
     // G45: the one place media crops regardless of its natural ratio, so CMS uploads of any shape line up
@@ -406,22 +405,23 @@ $carousel-arrow: oklch(0.351 0.034 121.6);
     }
 }
 
-// Fallback controls under each slide for browsers without ::scroll-button (G47: the first slide has no Previous, the last no Next)
+// One fixed Previous/Next pair under the strip where ::scroll-button is unsupported; app-core.js reveals and drives it
 .carousel__links {
     display: flex;
-    position: sticky; // pinned to the track's left edge so the text holds still while images slide; the next slide's links push it out
-    inset-inline-start: 0;
-    inline-size: max-content;
     gap: var(--space-s);
     padding-block-start: var(--space-2xs);
     margin: 0;
 
-    a {
-        text-decoration: none;
+    &[hidden] {
+        display: none;
     }
 
-    @supports selector(::scroll-button(*)) {
-        display: none;
+    button {
+        text-decoration: none;
+
+        &[hidden] {
+            visibility: hidden; // G47: no wrap-around, but the other button keeps its place
+        }
     }
 }
 
