@@ -288,8 +288,10 @@
     // bg stripped in forced colors — border weight is the only signal
 }
 
-// Same height as the swatches so the two sit on one line
+// Same height as the swatches so the two sit on one line. content-box because the swatches are
+// <button>s, which `all: unset` leaves content-box — so --space-m excludes their border there too
 .theme-switch {
+    box-sizing: content-box;
     display: flex;
     block-size: var(--space-m);
     border: var(--input-border-width) solid var(--input-border-color);
