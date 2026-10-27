@@ -274,8 +274,10 @@
     // bg stripped in forced colors — border weight is the only signal
 }
 
+// Same height as the swatches so the two sit on one line
 .theme-switch {
     display: flex;
+    block-size: var(--space-m);
     gap: var(--space-3xs-2xs); // paired tokens — ease down on mobile
     padding: calc(var(--space-3xs)/var(--type-ratio));
     border: var(--input-border-width) solid var(--input-border-color);
@@ -286,15 +288,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 1;
-    padding: var(--space-2xs);
+    aspect-ratio: 1;
+    padding: calc(var(--space-3xs)/var(--type-ratio));
     border-radius: var(--border-radius-s);
 }
 
 .theme-switch button svg {
-    inline-size: var(--space-s-m);
+    inline-size: 100%;
     block-size: 100%;
-    max-inline-size: 1rem;
     background: none; // opt out of the global img/svg placeholder background
 }
 
@@ -672,6 +673,8 @@ main svg.illustration-wide {
 .home-hero {
     container-type: inline-size;
     max-inline-size: none; // the band spans main; main>* would cap it at --inline-size
+    inline-size: calc(100% + 2 * var(--gutter-y-sticky));
+    margin: calc(-1 * var(--gutter-y-sticky)) calc(-1 * var(--gutter-y-sticky)) 0; // flush to the banner and the viewport edges
     padding: var(--space-xl-2xl);
 
     h1 {
@@ -723,6 +726,7 @@ main svg.illustration-wide {
 
 // Figma: the photo takes one column of a three-column row
 .home-intro__photo {
+    margin-inline: 0; // the global img rule centres it
     inline-size: calc((100% - 2 * var(--space-2xs)) / 3);
     aspect-ratio: var(--ratio-1-1);
     object-fit: cover;
@@ -735,8 +739,10 @@ main svg.illustration-wide {
 
 // ---- Project item (Selected Work listing) ----
 
+// inline-size: the .flow parent would otherwise shrink each item to its content, so columns drift item to item
 .project-item {
     display: grid;
+    inline-size: 100%;
     gap: var(--space-s);
     grid-template-columns: 1fr;
     align-items: stretch;
