@@ -19,11 +19,8 @@
     {% else %}
     <main id="main-content" class="flow has-gap-3xl">{{ content | safe }}</main>
     {% endif %}
-    {# Stopgap until the Footer ticket (#24): the old footers, with the "Say hello" anchor target. #}
-    <div id="contact">
-      {%- include "_footer.njk" -%}
-    </div>
   </div>
+  {%- include "_footer.njk" %}
   <script src="/assets/scripts/lenis.min.js"></script>
   <script src="/assets/scripts/lenis.js" defer></script>
   <script type="module" src="/assets/scripts/app-core.js"></script>

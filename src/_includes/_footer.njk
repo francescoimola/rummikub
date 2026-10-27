@@ -1,25 +1,56 @@
-{# _footer.njk #}
-<footer class="desktop-only page-margins flow has-gap-2xs">
-        <p>Up for a chat?</p>
-        <button type="button" data-copy-email="hi@francescoimola.com" data-icon-before="copy">Copy email address</button>
+{# _footer.njk — the one site footer: Contact (id="contact", the header's "Say hello" target), the drawing, the colophon. #}
+{# Wide/Narrow is the footer container block in _responsive.scss. #}
+{% from "_contact-card.njk" import contactCard %}
+<footer class="site-footer">
+<div class="site-footer__inner">
+    <section id="contact" class="site-footer__contact flow has-gap-xs" aria-labelledby="contact-title">
+        <div class="flow has-gap-xs has-mb-s balance">
+            <h2 id="contact-title">Contact</h2>
+            <p>Ready to talk shop or want to discuss an idea? Get in touch and I’ll reply within a day.</p>
+        </div>
+        {% call contactCard("Send me a good 'ol email", '<span class="sr-only">hi@francescoimola.com</span><span aria-hidden="true">hi at francescoimola dot com</span>') %}
+        <button type="button" data-copy-email="hi@francescoimola.com" data-icon="copy">Copy email address</button>
         <p role="status" class="sr-only" data-copy-status></p>
-        <a href="https://cal.com/francescoimola/intro" data-icon-before="phone" rel="noopener noreferrer" target="_blank">Book intro call</a>
-</footer>
-
-<footer class="mobile-only page-margins flow-row has-gap-l">
-    <div class="flow has-gap-2xs">
-            <p>Up for a chat?</p>
-            <button type="button" data-copy-email="hi@francescoimola.com" data-icon-before="copy">Copy email address</button>
-            <p role="status" class="sr-only" data-copy-status></p>
-            <a href="https://cal.com/francescoimola/intro" data-icon-before="phone" rel="noopener noreferrer" target="_blank">Book intro call</a>
+        {% endcall %}
+        {% call contactCard("Put a face to the name") %}
+        <a href="https://cal.com/francescoimola/intro" data-icon="phone" rel="noopener noreferrer" target="_blank">Talk to me face to face</a>
+        {% endcall %}
+        {% call contactCard("Not sure what to say?") %}
+        <button type="button" data-dialog-open="contact-template">Copy this template email</button>
+        <dialog id="contact-template" aria-labelledby="contact-template-title">
+            <div class="flow has-gap-xl">
+                <h2 id="contact-template-title" class="sr-only">Template enquiry email</h2>
+                <div class="flow has-gap-s" data-dialog-content>
+                    <p>Hi, I’m <strong>Carla</strong> and I'm a <strong>Marketing Director</strong> at <strong>Company</strong>. I found you through <strong>place, person, or thing</strong>, and love the work you did on <strong>your favourite project</strong>.</p>
+                    <p>I'd love to hire you to help us with <strong>project</strong> so we can <strong>business goal</strong>. Our timeline looks like <strong>dates</strong> and we'd like to keep the price about <strong>£3k (with room up to £8k if we can make a solid business case for it)</strong>.</p>
+                    <p>Full disclosure: I'm talking with a few other agencies like <strong>these folks</strong>.</p>
+                    <p>Let's set up a time to talk shop. How does <strong>day and time</strong> sound?</p>
+                    <p>Thanks</p>
+                </div>
+                <div class="flow has-gap-xs">
+                    <button type="button" data-dialog-copy data-icon-before="copy">Copy to clipboard</button>
+                    <button type="button" data-dialog-close data-icon-before="close">Close</button>
+                    <p role="status" class="sr-only" data-dialog-status></p>
+                </div>
+            </div>
+        </dialog>
+        {% endcall %}
+        {% call contactCard("Feeling social?") %}
+        <ul class="flow has-gap-2xs">
+            <li><a href="https://sublime.app/fran" target="_blank" rel="noopener noreferrer" data-icon="arrow-ext">Sublime</a></li>
+            <li><a href="https://substack.com/@francescoimola" target="_blank" rel="noopener noreferrer" data-icon="arrow-ext">Substack</a></li>
+            <li><a href="https://www.linkedin.com/in/francesco-imola/" target="_blank" rel="noopener noreferrer" data-icon="arrow-ext">Linkedin</a></li>
+        </ul>
+        {% endcall %}
+    </section>
+    <div class="site-footer__art" aria-hidden="true">{% icon "mailstorm" %}</div>
+    <div class="site-footer__colophon flow has-gap-s-m">
+        <p>This site has been designed by hand with love and a healthy dose of anxiety. It runs on servers powered by renewable energy.</p>
+        <ul class="site-footer__badges" role="list">
+            <li><a href="https://designdeclares.com/" target="_blank" rel="noopener noreferrer" aria-label="Design Declares">{% icon "design-declares" %}</a></li>
+            <li><a href="https://www.creativesforclimate.co/about" target="_blank" rel="noopener noreferrer"><img eleventy:ignore src="/assets/images/badges/creatives-for-climate.svg" alt="Creatives for Climate" width="104" height="104" loading="lazy"></a></li>
+        </ul>
+        <p><small>© Francesco Imola, {{ buildYear }}</small></p>
     </div>
-    <nav aria-label="Footer" class="flow has-gap-3xs">
-          <p>Looking around?</p>
-          <a href="/studio/design/">Website design</a>
-          <a href="/studio/">All services</a>
-          <a href="/writing/">Ideas &amp; guides</a>
-          <a href="/art/">Artmaking</a>
-          <a href="/collaborate/">Collaborate</a>
-          <a href="/about/">About</a>
-    </nav>
+</div>
 </footer>

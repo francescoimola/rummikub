@@ -72,6 +72,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/art");
   eleventyConfig.addPassthroughCopy("src/assets/video");
   eleventyConfig.addPassthroughCopy("src/assets/images/*.gif");
+  eleventyConfig.addPassthroughCopy("src/assets/images/badges");
+  eleventyConfig.addGlobalData("buildYear", () => new Date().getFullYear()); // footer ©
   eleventyConfig.addPassthroughCopy("src/assets/open_graph_image.png");
   eleventyConfig.addPassthroughCopy("src/robots.txt");
   eleventyConfig.addPassthroughCopy("src/_redirects");

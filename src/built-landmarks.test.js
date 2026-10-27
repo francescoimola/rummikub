@@ -9,23 +9,6 @@ const pages = () => globSync("public/**/index.html");
 const html = (file) => readFileSync(file, "utf8");
 const css = () => readFileSync("public/css/index.css", "utf8");
 
-// Which at-rule wraps a minified rule: walk back through balanced braces to the block that opens it.
-// Matching the condition with a flat regex can't work — the block holds dozens of rules in between.
-function enclosingAtRule(needle) {
-  const sheet = css();
-  const index = sheet.indexOf(needle);
-  if (index < 0) return null;
-  let depth = 0;
-  for (let i = index; i >= 0; i--) {
-    if (sheet[i] === "}") depth++;
-    else if (sheet[i] === "{") {
-      if (depth === 0) return sheet.slice(sheet.lastIndexOf("@", i), i).trim();
-      depth--;
-    }
-  }
-  return null;
-}
-
 describe("built landmarks", () => {
   it("builds pages to assert against", () => {
     expect(pages().length).toBeGreaterThan(10);
@@ -94,11 +77,13 @@ describe("built landmarks", () => {
     }
   });
 
-  // Both stopgap footers are always in the DOM; only the media queries keep them from both rendering.
-  // If these two folds ever stop being complementary the page ships two contentinfo landmarks.
-  it("hides exactly one of the two footers at every width", () => {
-    expect(enclosingAtRule(".desktop-only{display:none}")).toBe("@media (width<49rem)");
-    expect(enclosingAtRule(".mobile-only{visibility:hidden;display:none}")).toBe("@media (width>=49rem)");
+  // One footer serves every width (a container query folds it), and it holds the header's "Say hello" target.
+  it("gives every page exactly one footer, carrying the #contact anchor", () => {
+    for (const file of [...pages(), "public/404.html"]) {
+      const page = html(file);
+      expect((page.match(/<footer\b/g) || []).length, file).toBe(1);
+      expect((page.match(/id="contact"/g) || []).length, file).toBe(1);
+    }
   });
 
   // The Illustrations rule sets padding over the declared icon size; scoped to a <header> it would

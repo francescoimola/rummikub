@@ -1,6 +1,6 @@
 # Footer
 
-**Layer:** Section · **Status:** figma · **Figma:** `2293:2112` · **Code:** `src/_includes/_footer.njk`
+**Layer:** Section · **Status:** code · **Figma:** `2293:2112` · **Code:** `src/_includes/_footer.njk`
 
 ## Purpose
 
@@ -90,6 +90,11 @@ Static. The links and the copy button inside use the global hover and focus ring
 - The old "Up for a chat?" heading is replaced by the "Contact" `h2` (G6).
 - The footer sits under `main` on the page. The old `.sidebar footer` rule goes with the sidebar.
 - Replace the duplicated desktop and mobile markup with one footer driven by a container query.
+- **Ported (#24):** one `footer.site-footer` after `.layout`, with `section#contact` (the header's "Say hello" target). Narrow is the base stack in `_components.scss`; Wide is `@container footer (width >= $bp-xl)` in `_responsive.scss`, a two-column grid inside `--grid-width-l` with the drawing bleeding right (`overflow-x: clip` on the footer).
+- The drawing is the existing `mailstorm.svg` (same paths as `Illustration/footer`, scaled), inlined with `{% icon %}` and coloured `--brand-900`.
+- Badges: Design Declares is inlined (`design-declares.svg`, `currentColor` so it follows dark mode; the Figma fill is the same near-black); the Creatives for Climate sticker is a full-colour `<img eleventy:ignore>` from `src/assets/images/badges/`.
+- The © year is `buildYear`, a global data value in `eleventy.config.js`.
+- The "Not sure what to say?" card keeps the template-email dialog (id `contact-template`).
 
 ## Open questions
 

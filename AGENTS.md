@@ -38,7 +38,7 @@ Content and media are editable via Pages CMS, configured in `.pages.yml` at the 
 | Path | Purpose |
 |---|---|
 | `src/` | All source files |
-| `src/_includes/` | Nunjucks partials (`_base.njk`, `_head.njk`, `_header.njk`, `_footer.njk`, `_meta.njk`, `_schema.njk`) |
+| `src/_includes/` | Nunjucks partials (`_base.njk`, `_head.njk`, `_header.njk`, `_footer.njk` + `_contact-card.njk`, `_meta.njk`, `_schema.njk`) |
 | `src/_data/site.json` | Global site data (`url`, `name`, `description`, `image`) |
 | `src/css/index.scss` | SCSS entry point (`@use`s every partial) + global styles: theme, content modes, interactive, typography, layout. Component-scoped rules live in `_components.scss`, not here |
 | `src/css/_components.scss` | Unlayered component styles: cards, blockquotes, look toggles, illustrations, data list, project item, case study (shared by work + writing), writing listings. Base (mobile) rules only — breakpoint overrides go in `_responsive.scss` (CSS rule 10) |
@@ -58,7 +58,7 @@ Content and media are editable via Pages CMS, configured in `.pages.yml` at the 
 | `src/assets/writing/` | Writing cover + in-body images (passthrough copied to `public/assets/writing/`) |
 | `src/art.njk` | Artmaking index (`/art/`, full width). Content lives in `src/_data/artProjects.json` — no per-project files; the `splitRow` macro (`_split-row.njk`) renders one row per entry — see Artmaking page |
 | `src/assets/art/` | Artmaking images, all 800px-wide sources (passthrough copied to `public/assets/art/`) |
-| `src/about.njk` | About page (`/about/`) — bio, Philosophy, FAQ (`<details>`), Recognition (`.data-list`); moved off the home page's old expandable "Read more" section. Linked from header + footer nav |
+| `src/about.njk` | About page (`/about/`) — bio, Philosophy, FAQ (`<details>`), Recognition (`.data-list`); moved off the home page's old expandable "Read more" section. Linked from the header nav |
 | `scripts/optimize-videos.mjs` | Opt-in ffmpeg optimizer for project videos (`pnpm optimize:video`) |
 | `public/` | Build output — gitignored, do not commit |
 | `eleventy.config.js` | Eleventy configuration |
