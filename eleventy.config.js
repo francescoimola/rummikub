@@ -65,7 +65,7 @@ module.exports = function (eleventyConfig) {
   setupMarkdownTwins(eleventyConfig);
 
   eleventyConfig.addPassthroughCopy("src/assets/favicon");
-  eleventyConfig.addPassthroughCopy("src/assets/fonts");
+  eleventyConfig.addPassthroughCopy("src/assets/fonts/*.woff2"); // never the gitignored source OTFs
   eleventyConfig.addPassthroughCopy("src/assets/scripts");
   eleventyConfig.addPassthroughCopy("src/assets/portfolio");
   eleventyConfig.addPassthroughCopy("src/assets/writing");

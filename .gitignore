@@ -1,6 +1,9 @@
 # Dependencies
 node_modules/
 
+# Source fonts (only the woff2 ships; the repo is public)
+src/assets/fonts/*.otf
+
 # Build Output
 public/
 .cache/
@@ -52,5 +55,6 @@ web-design-process.excalidraw
 .docs/accessibility-audit.md
 .docs/accessibility-strategy.md
 .docs/cutover-runbook.md
-.docs/voice-guide.mddocs/frn-2026/tools/
+.docs/voice-guide.md
+docs/frn-2026/tools/
 docs/frn-2026/.DS_Store

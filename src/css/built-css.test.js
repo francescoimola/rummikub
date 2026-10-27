@@ -25,6 +25,12 @@ describe('built stylesheet', () => {
     ]);
   });
 
+  it('declares KC Pelletier Sans and ships its woff2', () => {
+    expect(css()).toMatch(/@font-face\{[^}]*font-family:\s*"?KC Pelletier Sans"?[^}]*KCPelletierSans\.woff2/);
+    expect(existsSync('public/assets/fonts/KCPelletierSans.woff2')).toBe(true);
+    expect(existsSync('public/assets/fonts/KCPelletierSans.otf')).toBe(false);
+  });
+
   it('no longer emits the unused vendor copy', () => {
     expect(existsSync('public/css/vendor/cleacss.css')).toBe(false);
   });
