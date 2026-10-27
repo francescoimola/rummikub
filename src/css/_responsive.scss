@@ -1,8 +1,6 @@
 @use 'scale';
 
-// Scroll-driven and animated breakout
 // Hero media settles on case studies and writing posts; later media breaks out on writing posts only (G13)
-// breakout uses view() to retrigger per element; settle uses scroll() since view() would be mid-range at first paint
 $breakout-targets: '[view-animation="breakout"], .writing-post > :is(figure, p:has(> :is(img, picture))):not(.case-study__intro + *)';
 $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:has(> :is(img, picture)))';
 
@@ -40,6 +38,8 @@ $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:
     }
 
     // ---- > tablet, motion allowed (scroll-driven breakout and settle) ----
+
+    // breakout uses view() per element; settle uses scroll() since view() would be mid-range at first paint
 
     @media (prefers-reduced-motion: no-preference) and (width > #{scale.$bp-xl}) {
         @keyframes breakout {
