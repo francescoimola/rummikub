@@ -47,6 +47,18 @@
 
     }
 
+    // ---- >= tablet (targets the wide banner's page column) ----
+
+    // Mirrors the wide banner's grid: padding s | l and a --space-l gap each side of the --grid-width-l column (nav and hero edges match)
+    @media (width >= #{scale.$bp-xl}) {
+
+        .home-hero {
+            padding-inline: var(--space-s) var(--space-l);
+            --step-hero: calc(min(100cqi - 2 * var(--space-l), var(--grid-width-l)) / 5.196);
+        }
+
+    }
+
     // ---- Container queries ----
 
     // Components fold against main's inline-size (viewport minus gutters), not the viewport

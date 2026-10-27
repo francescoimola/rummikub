@@ -694,7 +694,8 @@ main svg.illustration-wide {
 // KC hero band: the band is the container, so --step-hero (100cqi / 5.196) sizes the widest line to the band's content box
 .home-hero {
     container-type: inline-size;
-    padding: var(--space-xl-2xl);
+    padding-block: var(--space-xl-2xl);
+    padding-inline: var(--space-m-l); // the narrow banner's inset, so hero and nav edges match; wide override in _responsive.scss
 
     h1 {
         inline-size: fit-content;
