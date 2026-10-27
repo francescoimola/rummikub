@@ -16,11 +16,13 @@ eleventyComputed:
 ---
 
 {% from "_writing-item.njk" import writingItem %}
-{% from "_page-header.njk" import pageHeader %}
 {% set t = writingTypes[typeSlug] %}
-  {{ pageHeader(t.icon, t.label, t.blurb) }}
+  <header class="flow has-gap-xs balance">
+    <h1>{{ t.label }}</h1>
+    <p class="dimmed">{{ t.blurb }}</p>
+    {% include "_breadcrumb.njk" %}
+  </header>
   <div class="flow has-gap-xs{% if typeSlug == 'notes' %} writing-section--quiet{% endif %}">
-    <div class="has-mb-s">{% include "_breadcrumb.njk" %}</div>
     {% set items = collections.writing | byType(typeSlug) %}
     {% set thumbColors = items | writingThumbColors %}
     {% for item in items %}

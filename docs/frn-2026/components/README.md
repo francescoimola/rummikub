@@ -16,7 +16,7 @@ Status tracks the **redesign**: `planned` (a pattern with no Figma component) â†
 | Component | Doc | Figma | Repo today | Status |
 | --- | --- | --- | --- | --- |
 | Icon/* | [icon.md](icon.md) | `2293:1221` â€¦ | `_icons.scss` `[data-icon]` | figma |
-| Illustration/* | [illustration.md](illustration.md) | `2357:19402` â€¦ | `src/assets/icons/*.svg` | figma |
+| Illustration/* | [illustration.md](illustration.md) | `2357:19402` â€¦ | `src/assets/icons/*.svg` | code |
 | Image | [image.md](image.md) | `2341:9739` | `<img>` / `figureImg` | code |
 | Icon link | [icon-link.md](icon-link.md) | `2352:18813` | `a[data-icon]` | figma |
 | Nav link | [nav-link.md](nav-link.md) | `2291:779` | `<li>` in `_header.njk` | code |
@@ -49,7 +49,7 @@ Status tracks the **redesign**: `planned` (a pattern with no Figma component) â†
 | --- | --- | --- | --- | --- |
 | Header | [header.md](header.md) | `2291:838` | `_header.njk` | code |
 | Footer | [footer.md](footer.md) | `2293:2112` | `_footer.njk` | code |
-| Page header | [page-header.md](page-header.md) | `2405:19762` | `_page-header.njk` | figma |
+| Page header | [page-header.md](page-header.md) | `2405:19762` | `_page-header.njk` | code |
 | CTA card | [cta-card.md](cta-card.md) | `2378:20633` | `_cta-card.njk` | figma |
 | Carousel | [carousel.md](carousel.md) | `2299:3910` | (none) | figma |
 | Section | [section.md](section.md) | (pattern) | `section.section` | code |

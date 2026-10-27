@@ -1,11 +1,10 @@
-{% macro pageHeader(iconName, label, blurb) %}
-<header class="page-header card flow has-gap-s has-items-center has-text-center" view-animation="settle" 
-style=" padding-block-start: 0;
-        padding-block-end: var(--space-l-xl);">
+{# Section hero: an optional illustration over the page's KC Pelletier h1, on the brand band (G16, G17). #}
+{# pageHeader("", label) drops the drawing; label may carry inline markup such as <br>. #}
+{% macro pageHeader(iconName, label) %}
+<header class="page-header" view-animation="settle">
+    {%- if iconName %}
     {% icon iconName %}
-    <div class="flow has-gap-3xs has-items-center has-text-center balance">
-      <h1>{{ label }}</h1>
-      <p style="max-inline-size: calc(4*var(--space-4xl));">{{ blurb }}</p>
-    </div>
-  </header>
+    {%- endif %}
+    <h1>{{ label | safe }}</h1>
+</header>
 {% endmacro %}

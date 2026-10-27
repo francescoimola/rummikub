@@ -9,10 +9,10 @@ eleventyNavigation:
   parent: Home
 ---
 {% from "_split-row.njk" import splitRow %}
+{% from "_page-header.njk" import pageHeader %}
 <div full-width class="flow has-gap-3xl-4xl">
+  {{ pageHeader("", "I make things out of words and pixels, including poems, essays, photos, and designs.<br><br>Occasionally, you’ll find me getting people together to share ideas.") }}
   <header class="flow has-gap-xs">
-    <h1>Artmaking</h1>
-    <p style="max-inline-size: var(--inline-size)">I make things out of words (poems and essays) and pixels (photography, code and net art). I also dabble in the art of getting people together to share ideas. Below is a selection of my work from the last 11 years.</p>
     <p style="max-inline-size: var(--inline-size)">The act of noticing and surfacing what's been hiding in plain sight—be it an everyday place, a mundane object, someone who doesn't get heard, or the infrastructure around us—is the thread that connects it all.</p> 
   </header>
   {% for item in artProjects %}

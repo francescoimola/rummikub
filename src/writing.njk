@@ -9,7 +9,7 @@ eleventyNavigation:
 ---
 {% from "_writing-item.njk" import writingItem %}
 {% from "_page-header.njk" import pageHeader %}
-  {{ pageHeader("meditating", "Drawing my own conclusions", "Yet another blog on the web") }}
+  {{ pageHeader("meditating", "Drawing my own conclusions") }}
 
   {% for typeSlug in collections.writingTypes %}
   {% set t = writingTypes[typeSlug] %}
