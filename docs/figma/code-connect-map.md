@@ -19,7 +19,7 @@ Node IDs are the component set (or the standalone component). Variants live insi
 | Icon/External | `2293:1228` | `src/css/_icons.scss` | `data-icon="arrow-ext"` |
 | Icon/Arrow-right | `2352:18808` | `src/css/_icons.scss` | `data-icon="arrow-right"` |
 | Icon/Chevron-right | `2352:18809` | `src/css/_icons.scss` | `data-icon-before="chevron-right"` |
-| Icon/Plus | `2378:20019` | `src/css/_icons.scss` | `data-icon="plus"` |
+| Icon/Plus | `2378:20019` | `src/css/index.scss` | `.nav-menu__icon` (CSS-drawn, not a glyph) |
 | Contact card | `2293:1269` | `src/_includes/_contact-card.njk` | `contactCard` macro |
 | Footer | `2293:2112` | `src/_includes/_footer.njk` | `footer.site-footer` |
 | Carousel | `2299:3910` | `src/_includes/_carousel.njk` | |
