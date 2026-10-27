@@ -1,6 +1,6 @@
 # Pricing item
 
-**Layer:** Composite · **Status:** figma · **Figma:** `2380:19857` · **Code:** `src/studio/design.njk` `<ul class="pricing-list"><li>`, `.pricing-list` in `_components.scss`
+**Layer:** Composite · **Status:** code · **Figma:** `2380:19857` · **Code:** `src/studio/design.njk` `<ul class="pricing-list"><li>`, `.pricing-list` in `_components.scss`
 
 ## Purpose
 
@@ -66,6 +66,7 @@ None. Only the link in a note is interactive (global link hover and ring).
 - The repo already has this: `.pricing-list>li` (bottom rule) and `.pricing-list>li>p` (`white-space: nowrap` for the price), plus utility classes. Figma matches them. The decision log (Phase 15) called it "new", but it exists in `src/css/_components.scss`.
 - No macro: the `<li>` stays inline in `.pricing-list` (G30).
 - Consultations' `£225` stays a bold paragraph, not a Pricing item (G29).
+- **Ported (#36):** the list sits in a stacked Section (`section--stacked`) on Web design, as in the tablet frame.
 
 ## Open questions
 

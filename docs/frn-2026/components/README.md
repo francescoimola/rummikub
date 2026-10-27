@@ -36,9 +36,9 @@ Status tracks the **redesign**: `planned` (a pattern with no Figma component) â†
 | Writing item | [writing-item.md](writing-item.md) | `2329:9102` | `_writing-item.njk` | code |
 | Service card | [service-card.md](service-card.md) | `2292:1547` | `_service-card.njk` | code |
 | Quote card | [quote-card.md](quote-card.md) | `2380:19851` | `_quote-card.njk` | code |
-| Pricing item | [pricing-item.md](pricing-item.md) | `2380:19857` | (none) | figma |
+| Pricing item | [pricing-item.md](pricing-item.md) | `2380:19857` | `.pricing-list>li` | code |
 | Split row | [split-row.md](split-row.md) | `2357:19451` | `_split-row.njk` | figma |
-| Ordered list | [ordered-list.md](ordered-list.md) | (pattern) | `ol` | planned |
+| Ordered list | [ordered-list.md](ordered-list.md) | (pattern) | `ol` | code |
 | Media pair | [media-pair.md](media-pair.md) | (pattern) | `.grid-cols-2` + `{% mediaPair %}` shortcode (G40) | code |
 | Masonry | [masonry.md](masonry.md) | (pattern) | `.masonry` | dropped |
 | Data list | [data-list.md](data-list.md) | (pattern) | `.data-list` | planned |
