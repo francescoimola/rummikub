@@ -12,6 +12,9 @@ function createMockEleventyConfig() {
     addShortcode: vi.fn((name, fn) => {
       registered[name] = fn;
     }),
+    addPairedShortcode: vi.fn((name, fn) => {
+      registered[name] = fn;
+    }),
     getShortcode: (name) => registered[name],
     _registered: registered,
   };
@@ -358,6 +361,65 @@ describe("shortcodes.js — figureImg shortcode", () => {
     });
 
     expect(result).toContain("<figcaption class=\"has-text-grey\">Tom &amp; Jerry</figcaption>");
+  });
+});
+
+describe("shortcodes.js — ratio=", () => {
+  function get(name) {
+    const config = createMockEleventyConfig();
+    shortcodes(config);
+    return config.getShortcode(name);
+  }
+
+  it("crops an image to the named ratio token", () => {
+    const result = get("figureImg")("/a.jpg", "Alt", { ratio: "3:2" });
+
+    expect(result).toContain('style="aspect-ratio: var(--ratio-3-2); object-fit: cover"');
+  });
+
+  it("combines a ratio with an object-position crop", () => {
+    const result = get("figureImg")("/a.jpg", "Alt", { ratio: "9:16", position: "62% 18%" });
+
+    expect(result).toContain('style="aspect-ratio: var(--ratio-9-16); object-fit: cover; object-position: 62% 18%"');
+  });
+
+  it("leaves the media its natural shape without a ratio", () => {
+    expect(get("figureImg")("/a.jpg", "Alt")).not.toContain("style=");
+    expect(get("projectVideo")("/v.mp4", "Alt")).not.toContain("style=");
+  });
+
+  it("puts the ratio on the video element", () => {
+    const result = get("projectVideo")("/v.mp4", "Alt", { ratio: "16:9" });
+
+    expect(result).toMatch(/<video[^>]*style="aspect-ratio: var\(--ratio-16-9\); object-fit: cover"/);
+  });
+
+  // A typo would silently render an uncropped image, so the build fails instead.
+  it("throws on a ratio with no token", () => {
+    expect(() => get("figureImg")("/a.jpg", "Alt", { ratio: "5:4" })).toThrow(/Unknown ratio "5:4"/);
+    expect(() => get("projectVideo")("/v.mp4", "Alt", { ratio: "3-2" })).toThrow(/Unknown ratio/);
+  });
+});
+
+describe("shortcodes.js — mediaPair shortcode", () => {
+  const mediaPair = () => {
+    const config = createMockEleventyConfig();
+    shortcodes(config);
+    return config.getShortcode("mediaPair");
+  };
+
+  it("wraps its figures in the stacking two-column grid", () => {
+    const result = mediaPair()("<figure>a</figure>\n<figure>b</figure>");
+
+    expect(result).toBe('<div class="grid-cols-2 media-pair">\n<figure>a</figure>\n<figure>b</figure>\n</div>');
+  });
+
+  // markdown-it ends an HTML block at a blank line, which would leave the second figure outside the div
+  it("drops blank lines so markdown keeps the pair as one block", () => {
+    const result = mediaPair()("\n<figure>a</figure>\n\n  \n<figure>b</figure>\n");
+
+    expect(result).not.toMatch(/\n\s*\n/);
+    expect(result).toContain("<figure>a</figure>\n<figure>b</figure>");
   });
 });
 

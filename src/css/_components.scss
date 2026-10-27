@@ -157,7 +157,7 @@
 // .split-row is its own grid, not cleacss's .grid-reset — that reserves a margin track full-bleed can't use
 // align-items: stretch overrides cleacss's .flow (align-items: flex-start, @layer reset) so row items stay equal-height — needed whenever .flow is combined in for its gap token (CSS rule 3)
 .grid-responsive-cols,
-.grid-cols-2-fixed,
+.grid-cols-2,
 .split-row {
     display: grid;
     grid-template-columns: 1fr;
@@ -168,8 +168,8 @@
     gap: var(--space-s-xl);
 }
 
-.grid-cols-2-fixed {
-    grid-template-columns: 1fr 1fr;
+.media-pair {
+    gap: var(--space-s);
 }
 
 // ---- Masonry ----
@@ -575,6 +575,15 @@ main svg {
 }
 
 // ---- Case study page ----
+// Media = a figure, a media pair, or a markdown image (<p><picture>). Case studies hold it at content width (G13); writing posts keep breakout
+.case-study:not(.writing-post) {
+    --settled-size: var(--grid-width-l); // where settle ends
+
+    > :is(figure, .media-pair, p:has(> :is(img, picture))) {
+        max-inline-size: var(--grid-width-l);
+    }
+}
+
 .case-study {
     >*+* {
         margin-block-start: var(--space-s-m);
@@ -590,22 +599,23 @@ main svg {
 
     // Media (videos = <figure>, markdown images = <p><picture>) get extra room above
     >figure,
+    >.media-pair,
     >p:has(> :is(img, picture)) {
         margin-block-start: var(--space-xl-2xl);
     }
 
     // Trailing space belongs to the gap-owning element below, except at the very end
-    >:is(figure, p:has(> :is(img, picture))):last-child {
+    >:is(figure, .media-pair, p:has(> :is(img, picture))):last-child {
         margin-block-end: var(--space-xl-2xl);
     }
 
     // Anything non-media directly after media — restore the full gap on its top edge
-    >:is(figure, p:has(> :is(img, picture)))+ :not(:is(figure, p:has(> :is(img, picture)))) {
+    >:is(figure, .media-pair, p:has(> :is(img, picture)))+ :not(:is(figure, .media-pair, p:has(> :is(img, picture)))) {
         margin-block-start: var(--space-xl-2xl);
     }
 
     // Media directly followed by another media item — tighten the shared gap
-    >:is(figure, p:has(> :is(img, picture)))+ :is(figure, p:has(> :is(img, picture))) {
+    >:is(figure, .media-pair, p:has(> :is(img, picture)))+ :is(figure, .media-pair, p:has(> :is(img, picture))) {
         margin-block-start: var(--space-s-m);
     }
 
@@ -661,15 +671,6 @@ main svg {
 // the source label is inert text inside the card link, so pin its arrow; beats [data-icon]:hover in _icons.scss on source order
 .writing-item [data-icon] {
     --icon-gap: var(--space-4xs);
-}
-
-// Opening image never taller than 3:2 — wider covers keep their ratio, taller ones crop (object-fit:cover inherited)
-.writing-post .case-study__intro+figure {
-    container-type: inline-size; // track the bled figure width; main's container is too narrow once it breaks out
-}
-
-.writing-post .case-study__intro+figure img {
-    max-block-size: 50cqw; // 2/3 of width caps the box at 3:2; shorter-than-cap ratios pass through untouched
 }
 
 // ---- About page ----

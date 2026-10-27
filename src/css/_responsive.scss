@@ -96,7 +96,8 @@
 
     @container (min-width: #{scale.$bp-s}) {
 
-        .grid-responsive-cols {
+        .grid-responsive-cols,
+        .grid-cols-2 {
             grid-template-columns: repeat(2, 1fr);
         }
 

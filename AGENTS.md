@@ -79,7 +79,7 @@ Content and media are editable via Pages CMS, configured in `.pages.yml` at the 
 
 Case studies and writing posts share **one** branch in `_base.njk` → `<main class="case-study text">`, writing adding `writing-post`. It renders a `.case-study__intro` (h1 + one dimmed line: `services` on work, `<time>` + type on writing) and nothing else — the opening image is authored as the first `figureImg` **in the body**, not by the template. `image:`/`alt:` frontmatter is listing-thumbnail and OG duty only; a post without one just leads with the intro then text.
 
-Media rhythm (`.case-study` in `_components.scss`) and the scroll animations (`index.scss`) both key off `.case-study__intro`: the first media after it gets `settle` (bleeds on load, pulls in over 50vh of scroll), later media get `breakout` on scroll-into-view. Removing that div silently kills both. Browsers without `animation-timeline` (Firefox) get the same keyframes scrubbed from JS: `app-core.js` dynamically imports `scroll-fallback.js`, which finds targets by the `--scroll-fallback` custom property the CSS sets and writes `--scroll-p` — so target selectors and the breakpoint live only in `index.scss`.
+Media rhythm (`.case-study` in `_components.scss`) and the scroll animations (`index.scss`) both key off `.case-study__intro`: the first media after it gets `settle` (bleeds on load, pulls in over 50vh of scroll; case studies settle at content width), later media get `breakout` on scroll-into-view **on writing posts only** (G13; opt in elsewhere with `view-animation="breakout"`). Removing that div silently kills both. Browsers without `animation-timeline` (Firefox) get the same keyframes scrubbed from JS: `app-core.js` dynamically imports `scroll-fallback.js`, which finds targets by the `--scroll-fallback` custom property the CSS sets and writes `--scroll-p` — so target selectors and the breakpoint live only in `index.scss`.
 
 **Always use `figureImg` for body images — never markdown `![]()`.** Markdown compiles to `<p><picture>`, and two images on adjacent lines land in the *same* `<p>`, so they stack with no gap and support no caption. `figureImg` emits a real `<figure>` that the spacing and animation selectors match.
 
@@ -90,6 +90,8 @@ Media rhythm (`.case-study` in `_components.scss`) and the scroll animations (`i
 {% figureImg "/assets/writing/x.png", "Alt", class="extra" %}      {# extra class on the <figure> #}
 {% figureImg "/assets/writing/x.png", "Alt", imgClass="extra" %}   {# extra class on the <img> itself #}
 {% figureImg "/assets/writing/x.png", "Alt", position="62% 18%" %} {# object-position crop #}
+{% figureImg "/assets/writing/x.png", "Alt", ratio="3:2" %}        {# crop to --ratio-3-2 (also projectVideo); unknown ratio fails the build #}
+{% mediaPair %}{% figureImg … %}{% figureImg … %}{% endmediaPair %} {# two figures side by side, stacking below $bp-s #}
 ```
 
 **Object-position picker (dev only):** under `pnpm start`, Alt/Option+click any img or video (videos need a poster) to drag its focal point live and copy the CSS or `position=` value. Lives in `src/dev/focal-picker.js`, copied and linked only in serve mode; `built-landmarks.test.js` asserts it never ships.

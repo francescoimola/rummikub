@@ -17,7 +17,7 @@ Status tracks the **redesign**: `planned` (a pattern with no Figma component) â†
 | --- | --- | --- | --- | --- |
 | Icon/* | [icon.md](icon.md) | `2293:1221` â€¦ | `_icons.scss` `[data-icon]` | figma |
 | Illustration/* | [illustration.md](illustration.md) | `2357:19402` â€¦ | `src/assets/icons/*.svg` | figma |
-| Image | [image.md](image.md) | `2341:9739` | `<img>` / `figureImg` | figma |
+| Image | [image.md](image.md) | `2341:9739` | `<img>` / `figureImg` | code |
 | Icon link | [icon-link.md](icon-link.md) | `2352:18813` | `a[data-icon]` | figma |
 | Nav link | [nav-link.md](nav-link.md) | `2291:779` | `<li>` in `_header.njk` | code |
 | Section heading | [section-heading.md](section-heading.md) | `2380:19847` | `h2.highlight-header` | code |
@@ -29,7 +29,7 @@ Status tracks the **redesign**: `planned` (a pattern with no Figma component) â†
 | --- | --- | --- | --- | --- |
 | Look toggles | [look-toggles.md](look-toggles.md) | `2353:19425` | `_look-toggles.njk` | code |
 | Breadcrumb | [breadcrumb.md](breadcrumb.md) | `2353:19355` | `_breadcrumb.njk` | figma |
-| Figure | [figure.md](figure.md) | `2355:19174` | `figureImg` / `projectVideo` | figma |
+| Figure | [figure.md](figure.md) | `2355:19174` | `figureImg` / `projectVideo` | code |
 | FAQ item | [faq-item.md](faq-item.md) | `2353:18925` | `<details>` | figma |
 | Contact card | [contact-card.md](contact-card.md) | `2293:1269` | `_contact-card.njk` | code |
 | Project item | [project-item.md](project-item.md) | `2292:1007` | `_project-item.njk` | figma |
@@ -39,7 +39,7 @@ Status tracks the **redesign**: `planned` (a pattern with no Figma component) â†
 | Pricing item | [pricing-item.md](pricing-item.md) | `2380:19857` | (none) | figma |
 | Split row | [split-row.md](split-row.md) | `2357:19451` | `_split-row.njk` | figma |
 | Ordered list | [ordered-list.md](ordered-list.md) | (pattern) | `ol` | planned |
-| Media pair | [media-pair.md](media-pair.md) | (pattern) | `.grid-cols-2` (renamed, G42) + `{% mediaPair %}` shortcode (G40) | planned |
+| Media pair | [media-pair.md](media-pair.md) | (pattern) | `.grid-cols-2` + `{% mediaPair %}` shortcode (G40) | code |
 | Masonry | [masonry.md](masonry.md) | (pattern) | `.masonry` | dropped |
 | Data list | [data-list.md](data-list.md) | (pattern) | `.data-list` | planned |
 

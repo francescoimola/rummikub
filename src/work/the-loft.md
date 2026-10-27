@@ -24,9 +24,10 @@ Messaging-wise, the site was failing to address visitors' pain points and offer 
 
 The aforementioned gap showed up as a conversion barrier at the narrowest part of the funnel: even if visitors found their way to the 'correct' part of the site, they'd be dropped straight into the booking process before they knew what they were booking.
 
+{% mediaPair %}
 {% figureImg "/assets/portfolio/theloft-sublime.png", "Canvas with early design references scattered throughout", caption="Early brainstorming session covering history and design direction" %}
-
 {% figureImg "/assets/portfolio/theloft-wireframes.png", "Figma screen with an overview of desktop wireframes for The Loft's website", caption="Developing the wireframes on Figma" %}
+{% endmediaPair %}
 
 ## Approach
 
@@ -38,11 +39,12 @@ Take the "Ritual" page, for instance (Ritual is their yoga and movement studio s
 
 When it comes to how the brand spoke of itself, the original copy seemed to highlight the venue's challenges and limitations and barely touched on the unique things it has to offer. The rewrite fixes that, and wherever weaknesses have silver linings, I framed them as such. For example, The Loft is on the top floor of an old department store, right in the heart of Folkestone: there are no lifts, and guests really need to read the access instructions to find the venue. In return, that location lets them host classes and events with considerably louder music than most independent studios in town.
 
+{% mediaPair %}
 {% projectVideo "/assets/portfolio/theloft-hire.mp4", "Hire page walkthrough", caption="Studio hire page" %}
+{% projectVideo "/assets/portfolio/theloft-events.mp4", "Events page walkthrough"%}
+{% endmediaPair %}
 
 {% projectVideo "/assets/portfolio/theloft-ritual-mobile.mp4",  "Mobile walkthrough of the Ritual page" %}
-
-{% projectVideo "/assets/portfolio/theloft-events.mp4", "Events page walkthrough"%}
 
 ## Solution
 

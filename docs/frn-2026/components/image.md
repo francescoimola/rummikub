@@ -1,6 +1,6 @@
 # Image
 
-**Layer:** Primitive · **Status:** figma · **Figma:** `2341:9739` · **Code:** `<img>` via `figureImg`, `aspect-ratio` (opt-in `ratio=`)
+**Layer:** Primitive · **Status:** code · **Figma:** `2341:9739` · **Code:** `<img>` via `figureImg`, `aspect-ratio` (opt-in `ratio=`)
 
 ## Purpose
 
@@ -65,6 +65,7 @@ None. Loading is lazy (README, Cross-cutting behaviour).
 - Add `ratio=` to `figureImg` and `projectVideo` in `src/config/eleventy/shortcodes.js` (the shortcodes live there, not in `eleventy.config.js`).
 - Add the `--ratio-*` tokens. Set `aspect-ratio` + `object-fit: cover` only when `ratio=` is given.
 - The writing-post `max-block-size: 50cqw` rule (`_components.scss` `.writing-post .case-study__intro+figure img`) goes away.
+- **Ported (#25):** `ratio="3:2"` (any of the eight) renders `style="aspect-ratio: var(--ratio-3-2); object-fit: cover"` on the `<img>` or `<video>` (`mediaStyle` in `render-helpers.js`), merged with `position=`. An unknown ratio throws at build time. The 50cqw rule is gone.
 
 ## Open questions
 
