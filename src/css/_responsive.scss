@@ -60,7 +60,14 @@
     @container (min-width: #{scale.$bp-s}) {
 
         .grid-responsive-cols,
-        .grid-cols-2,
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    // Label | content: folds later than the image grids, at iPad mini portrait's container width
+    @container (min-width: #{scale.$bp-split}) {
+
         .section:not(.section--stacked),
         .split-row__text {
             grid-template-columns: repeat(2, 1fr);
