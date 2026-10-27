@@ -358,9 +358,36 @@ main svg {
     color: var(--brand-900);
 }
 
-.page-header svg {
-    padding-inline: calc(var(--space-3xl) * 1.4);
-    padding-block: calc(var(--space-2xl) * 1.4);
+// ---- Page header (section hero) ----
+// Band fill shared with .site-banner in index.scss; settle pulls it in to content width, which also caps the heading
+.page-header {
+    --settled-size: var(--grid-width-l);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2xl-3xl);
+    max-inline-size: none; // the band spans main; main>* would cap it at --inline-size
+    padding: var(--space-2xl-3xl) var(--space-xl-2xl);
+    text-align: center;
+
+    svg {
+        block-size: var(--size-hero-illustration);
+        inline-size: auto;
+        max-inline-size: none; // opt out of the main svg Illustrations rule
+        padding: 0;
+        color: var(--neutral-950-alpha);
+    }
+
+    h1 {
+        max-inline-size: max(var(--inline-size), min(100%, var(--grid-width-l))); // G46: no breakpoint, phones just fill
+        font-family: var(--font-family-display);
+        font-size: var(--step-2-4);
+        font-weight: var(--font-weight-base);
+        line-height: 1;
+        letter-spacing: 0;
+        text-transform: uppercase; // KC is caps-only; keeps the swap fallback in caps too
+        text-wrap: balance;
+    }
 }
 
 // ---- Duotone ----

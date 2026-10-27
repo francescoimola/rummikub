@@ -1,6 +1,6 @@
 # Illustration
 
-**Layer:** Primitive · **Status:** figma · **Figma:** `2357:19402`, `2357:19404`, `2357:19426`, `2357:19428`, `2381:19752` · **Code:** `src/assets/icons/*.svg`, `{% icon "<name>" %}` shortcode
+**Layer:** Primitive · **Status:** code · **Figma:** `2357:19402`, `2357:19404`, `2357:19426`, `2357:19428`, `2381:19752` · **Code:** `src/assets/icons/*.svg`, `{% icon "<name>" %}` shortcode
 
 ## Purpose
 
@@ -65,6 +65,7 @@ Values from [`_tokens.md`](_tokens.md).
 ## Port notes
 
 - Add `runner.svg` and a footer SVG to `src/assets/icons/`. Hero SVGs should export from Figma without a fixed width and height.
+- **Ported (#24, #27):** `runner.svg` added (exported from `2357:19402`, 52 paths, `currentColor`). The footer drawing is the existing `mailstorm.svg`. Hero sizing lives in `.page-header svg`; the padding hack is gone.
 - Existing `{% icon iconName %}` stays. `_page-header.njk` sets the height from `--size-hero-illustration` (new fluid token, 154 → 220).
 - The old footer markup has no illustration. The new one inlines the SVG (not `<img>`, which can't follow the theme) with `currentColor` (G10).
 - Hero illustrations keep `currentColor` too (G10).

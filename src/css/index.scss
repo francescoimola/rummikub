@@ -110,7 +110,7 @@ html.lenis body {
 }
 
 // ---- Theming ----
-.site-banner, .site-footer, .card:is(header) {
+.site-banner, .site-footer, .page-header, .card:is(header) {
     --color-accent: var(--neutral-950-alpha);
     // dark: brand mix baked over --body-bg so it's opaque (else scrolled content shows through); 16% solved for ΔE_OK 0.08, a step above cards
     background: light-dark(var(--brand-150), color-mix(in oklch, var(--brand-400) 16%, var(--body-bg)));

@@ -7,8 +7,9 @@ permalink: /404.html
 noindex: true
 eleventyExcludeFromCollections: true
 ---
+{% from "_page-header.njk" import pageHeader %}
+{{ pageHeader("", "I’m afraid, it’s a case of the 404!") }}
 <section class="flow has-gap-s">
-    <h1>Page not found</h1>
     <p>The page you're looking for doesn't exist, or it's moved somewhere quieter.</p>
     <p>Try the <a href="/">home page</a>, browse my <a href="/writing/">writing</a>, or <a href="/contact/">drop me a line</a> if you reckon something's broken.</p>
 </section>
