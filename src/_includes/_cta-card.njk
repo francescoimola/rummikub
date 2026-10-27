@@ -1,17 +1,25 @@
+{# Closing CTA card: KC Pelletier h2 on every page (G18), then the call + copy-email links. #}
+{# emailFirst swaps the two links in the DOM, so screen order and reading order stay the same (Q18). #}
 {% macro ctaCard(
     heading,
     body,
     callLabel = "Book free intro call",
     emailLabel = "Copy email address",
     callUrl = "https://cal.com/francescoimola/intro",
-    emailAddress = "hi@francescoimola.com"
+    emailAddress = "hi@francescoimola.com",
+    emailFirst = false
 ) %}
-<section view-animation="breakout" class="card giant featured flow has-gap-xs pretty">
+{%- set callLink %}<a data-icon="phone" href="{{ callUrl }}" target="_blank" rel="noopener noreferrer">{{ callLabel }}</a>{% endset -%}
+{%- set emailButton %}<button type="button" data-copy-email="{{ emailAddress }}" data-icon="copy">{{ emailLabel }}</button>{% endset -%}
+<section view-animation="breakout" class="card giant featured cta-card flow has-gap-xs pretty">
     <h2>{{ heading }}</h2>
+    {%- if body %}
     <p>{{ body }}</p>
+    {%- endif %}
     <div class="flow has-gap-xs has-pt-2xs">
-        <a data-icon="phone" href="{{ callUrl }}" target="_blank" rel="noopener noreferrer">{{ callLabel }}</a>
-        <button type="button" data-copy-email="{{ emailAddress }}" data-icon="copy">{{ emailLabel }}</button>
+        {% if emailFirst %}{{ emailButton | safe }}
+        {{ callLink | safe }}{% else %}{{ callLink | safe }}
+        {{ emailButton | safe }}{% endif %}
         <p role="status" class="sr-only" data-copy-status></p>
     </div>
 </section>

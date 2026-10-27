@@ -135,6 +135,18 @@
     }
 }
 
+// CTA card heading: KC Pelletier, wider than the body; .card.cta-card outranks .card.giant>*, which caps every child at --inline-size
+.card.cta-card>h2 {
+    max-inline-size: min(100%, var(--grid-width-l));
+    padding-block-end: var(--space-xs);
+    font-family: var(--font-family-display);
+    font-size: var(--step-2-4);
+    font-weight: var(--font-weight-base);
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase; // KC is caps-only; keeps the swap fallback in caps too
+}
+
 
 // Flattened out of a.card so state selectors stay ≤2 levels deep
 @media (forced-colors: active) {

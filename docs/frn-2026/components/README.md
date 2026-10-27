@@ -50,7 +50,7 @@ Status tracks the **redesign**: `planned` (a pattern with no Figma component) â†
 | Header | [header.md](header.md) | `2291:838` | `_header.njk` | code |
 | Footer | [footer.md](footer.md) | `2293:2112` | `_footer.njk` | code |
 | Page header | [page-header.md](page-header.md) | `2405:19762` | `_page-header.njk` | code |
-| CTA card | [cta-card.md](cta-card.md) | `2378:20633` | `_cta-card.njk` | figma |
+| CTA card | [cta-card.md](cta-card.md) | `2378:20633` | `_cta-card.njk` | code |
 | Carousel | [carousel.md](carousel.md) | `2299:3910` | (none) | figma |
 | Section | [section.md](section.md) | (pattern) | `section.section` | code |
 
