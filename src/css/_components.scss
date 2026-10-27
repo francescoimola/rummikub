@@ -345,7 +345,7 @@ $carousel-arrow: oklch(0.351 0.034 121.6);
 
 .carousel__track {
     display: flex;
-    aspect-ratio: 3 / 2;
+    aspect-ratio: var(--ratio-3-2);
     margin: 0;
     padding: 0;
     list-style: none;
