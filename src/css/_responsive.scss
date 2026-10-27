@@ -4,20 +4,6 @@
 // Block order is load-bearing: max-width ascending, then min-width ascending.
 @mixin all {
 
-    // ---- < mobile ----
-
-    @media (width < #{scale.$bp-m}) {
-
-        nav {
-            border-block-start: revert;
-            padding-block-start: revert;
-        }
-
-        main {
-            border-block-start: revert;
-        }
-    }
-
     // ---- < tablet ----
 
     @media (width < #{scale.$bp-xl}) {
@@ -59,7 +45,6 @@
 
     @container (min-width: #{scale.$bp-s}) {
 
-        .grid-responsive-cols,
         .grid-cols-2,
         .section:not(.section--stacked),
         .split-row__text {
