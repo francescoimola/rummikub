@@ -5,12 +5,14 @@
   <a href="#main-content" class="skip-link">Skip to content</a>
   {%- include "_header.njk" %}
   <div class="layout"{% if contentMode == "contrast" %} data-content="contrast"{% endif %}>
-    {% if tags and ("work" in tags or "writing" in tags) %}
-    <main id="main-content" class="case-study text{% if "writing" in tags %} writing-post{% endif %}">
+    {# longForm: true opts a standalone page (Accessibility) into the long-form shell, without the writing-post animations #}
+    {% if longForm or (tags and ("work" in tags or "writing" in tags)) %}
+    <main id="main-content" class="case-study text{% if tags and "writing" in tags %} writing-post{% endif %}">
       <div class="flow has-gap-3xs case-study__intro">
         <h1>{{ title }}</h1>
         {% if services %}<p class="dimmed">{{ services }}</p>
-        {% elif "writing" in tags and date %}<p class="dimmed"><time datetime="{{ date | isoMonth }}">{{ date | longDate }}</time>{% if type and writingTypes[type] %} · {{ writingTypes[type].short }}{% endif %}</p>{% endif %}
+        {% elif tags and "writing" in tags and date %}<p class="dimmed"><time datetime="{{ date | isoMonth }}">{{ date | longDate }}</time>{% if type and writingTypes[type] %} · {{ writingTypes[type].short }}{% endif %}</p>
+        {% elif longForm and updated %}<p class="dimmed">Last updated <time datetime="{{ updated.toISOString().slice(0, 10) }}">{{ updated | longDate }}</time></p>{% endif %}
       </div>
       {{ content | safe }}
     </main>
