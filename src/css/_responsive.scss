@@ -37,6 +37,18 @@ $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:
 
     }
 
+    // ---- >= tablet (targets the wide banner's page column) ----
+
+    // Mirrors the wide banner's grid: padding s | l and a --space-l gap each side of the --grid-width-l column (nav and hero edges match)
+    @media (width >= #{scale.$bp-xl}) {
+
+        .home-hero {
+            padding-inline: var(--space-s) var(--space-l);
+            --step-hero: calc(min(100cqi - 2 * var(--space-l), var(--grid-width-l)) / var(--hero-line-em));
+        }
+
+    }
+
     // ---- > tablet, motion allowed (scroll-driven breakout and settle) ----
 
     // breakout uses view() per element; settle uses scroll() since view() would be mid-range at first paint
@@ -92,6 +104,7 @@ $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:
                 --scroll-p: 0; // full-bleed at the page top, as with scroll()
             }
         }
+    }
     }
 
     // ---- Container queries ----
