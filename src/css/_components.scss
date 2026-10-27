@@ -587,31 +587,6 @@ main svg {
     object-fit: cover;
 }
 
-// Stays stacked past .grid-responsive-cols' 32rem fold; splits at the $bp-profile container query instead (CSS rule 10)
-.grid-responsive-cols:has(> .profile-media) {
-    grid-template-columns: 1fr;
-}
-
-// Homepage portrait with the hello-world screenshot pinned inside its bottom-left corner
-.profile-media {
-    position: relative;
-    align-self: start; // grid item would otherwise stretch to the text column's height, dropping the inset below the photo
-}
-
-.profile-media > img {
-    display: block;
-    inline-size: 100%;
-    block-size: auto; // height follows width, so the photo keeps its ratio
-}
-
-.profile-media .profile-media__inset {
-    position: absolute;
-    inset-inline-start: 0;
-    inset-block-end: 0;
-    inline-size: 60%;
-    border: none; // the screenshot brings its own window edge, so skip the global media hairline
-}
-
 .project-video-el {
     inline-size: 100%;
     height: auto;
@@ -675,6 +650,53 @@ main svg {
     }
 }
 
+// ---- Homepage ----
+
+// KC hero band: the band is the container, so --step-hero (100cqi / 5.196) sizes the widest line to the band's content box
+.home-hero {
+    container-type: inline-size;
+    max-inline-size: none; // the band spans main; main>* would cap it at --inline-size
+    padding: var(--space-xl-2xl);
+
+    h1 {
+        inline-size: fit-content;
+        margin-inline: auto;
+        font-family: var(--font-family-display);
+        font-size: var(--step-hero);
+        font-weight: var(--font-weight-base);
+        line-height: var(--line-height-hero);
+        letter-spacing: var(--letter-spacing-hero);
+        text-transform: uppercase; // KC is caps-only; keeps the swap fallback in caps too
+        max-inline-size: none;
+    }
+
+    span {
+        display: block;
+        white-space: nowrap;
+    }
+}
+
+.home-hero__indent {
+    padding-inline-start: 2.2em; // Figma's indent for the second and last lines
+}
+
+.home-intro__statement {
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-xl);
+}
+
+// Figma: the photo takes one column of a three-column row
+.home-intro__photo {
+    inline-size: calc((100% - 2 * var(--space-2xs)) / 3);
+    aspect-ratio: var(--ratio-1-1);
+    object-fit: cover;
+    border-radius: var(--border-radius);
+}
+
+.home-block {
+    max-inline-size: var(--grid-width-l);
+}
+
 // ---- Project item (Selected Work listing) ----
 
 .project-item {
@@ -689,6 +711,7 @@ main svg {
     inline-size: 100%;
     block-size: auto;
     display: block;
+    aspect-ratio: var(--ratio-3-2);
     object-fit: cover;
 }
 

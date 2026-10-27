@@ -92,14 +92,6 @@
         }
     }
 
-    @container (width < #{scale.$bp-l}) {
-        // CTA renders at paragraph size while the item is stacked to one column
-        .project-item__cta {
-            font-size: revert;
-            letter-spacing: revert;
-        }
-    }
-
     @container (min-width: #{scale.$bp-s}) {
 
         .grid-responsive-cols,
@@ -112,12 +104,6 @@
             grid-template-columns: 1fr 1fr; // also defines the lanes under display: grid-lanes
         }
         
-    }
-
-    @container (min-width: #{scale.$bp-profile}) {
-        .grid-responsive-cols:has(> .profile-media) {
-            grid-template-columns: repeat(2, 1fr);
-        }
     }
 
     @container (min-width: #{scale.$bp-l}) {
@@ -229,27 +215,6 @@
                 max-inline-size: none;
                 margin-inline-start: 5%;
             }
-        }
-    }
-
-    @container (min-width: #{scale.$bp-2xl}) {
-
-        // Wide enough for title + CTA to share a row, with the CTA pushed to the far edge
-        .project-item__body {
-            flex-direction: row;
-            justify-content: space-between;
-            gap: var(--space-xl); // single-step on purpose — see the column gap on the base rule
-        }
-
-        // .flow sets inline-size: 100%, which would eat the row and strand the CTA against it
-        .project-item__body>.flow {
-            inline-size: auto;
-        }
-
-        // Keep the CTA on one line — the title wraps instead when the row gets tight
-        .project-item__cta {
-            white-space: nowrap;
-            flex-shrink: 0;
         }
     }
 }
