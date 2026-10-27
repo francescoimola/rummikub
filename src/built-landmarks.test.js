@@ -127,3 +127,58 @@ describe("built landmarks", () => {
     expect(css()).not.toMatch(/(^|[,}])header svg/);
   });
 });
+
+// AGENTS.md "Titles & meta descriptions": title 30–60 chars, description 120–160, both unique per page.
+// These pages predate the check. Fix one, then delete it here; a listed page that now passes fails the test.
+const META_EXCEPTIONS = [
+  "public/about/colophon/index.html",
+  "public/work/open-art-folke/index.html",
+  "public/writing/2026-08-28-service-jobs-taught-me-everything/index.html",
+  "public/writing/disclaimer/index.html",
+  "public/writing/i-hope/index.html",
+  "public/writing/ponzi/index.html",
+];
+
+const unescapeEntities = (text) => text.replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
+const headValue = (page, pattern) => {
+  const match = page.match(pattern);
+  return match ? unescapeEntities(match[1]).trim() : "";
+};
+const metaOf = (file) => ({
+  title: headValue(html(file), /<title>(.*?)<\/title>/s),
+  description: headValue(html(file), /<meta name="description" content="(.*?)"/s),
+});
+const metaProblems = ({ title, description }) => {
+  const problems = [];
+  if (title.length < 30 || title.length > 60) problems.push(`title is ${title.length} chars (30–60)`);
+  if (description.length < 120 || description.length > 160) problems.push(`description is ${description.length} chars (120–160)`);
+  return problems;
+};
+
+describe("built meta", () => {
+  const files = () => globSync("public/**/*.html");
+
+  it("keeps titles and descriptions within the length targets", () => {
+    for (const file of files().filter((f) => !META_EXCEPTIONS.includes(f))) {
+      expect(metaProblems(metaOf(file)), file).toEqual([]);
+    }
+  });
+
+  it("lists only pages that still miss the targets", () => {
+    for (const file of META_EXCEPTIONS) {
+      expect(metaProblems(metaOf(file)).length, `${file} passes now: delete it from META_EXCEPTIONS`).toBeGreaterThan(0);
+    }
+  });
+
+  it("gives every page its own title and description", () => {
+    const seen = { title: new Map(), description: new Map() };
+    for (const file of files()) {
+      const meta = metaOf(file);
+      for (const field of ["title", "description"]) {
+        if (!meta[field]) continue;
+        expect(seen[field].get(meta[field]), `${field} of ${file} repeats the one on ${seen[field].get(meta[field])}`).toBeUndefined();
+        seen[field].set(meta[field], file);
+      }
+    }
+  });
+});

@@ -23,12 +23,14 @@ pnpm clean            # rm -rf public
 
 **Never run `pnpm dev` / `npm run dev`** — the dev script is `pnpm start`. Do not spin up a dev server unless the user explicitly asks.
 
+**Worktrees:** `pnpm build` wipes `public/` and a cold build takes 4–10 minutes. Build and test in your own worktree, not in the main checkout while another agent works there; in a worktree run git as separate plain commands. Details in [testing-guide.md](testing-guide.md).
+
 ## Pages CMS
 
 Content and media are editable via Pages CMS, configured in `.pages.yml` at the repo root (per-branch). Uploads land in `src/assets/` and are written as `/assets/...` URLs.
 
 - **Collections** `work` (`src/work`, sorted by `endDate` desc, `featured` boolean) and `writing` (`src/writing`, sorted by `date` desc, `type` select) edit each `.md`'s frontmatter and body. Add a `writing` entry with `external`+`source` set (leave `permalink`+`body` blank) for a link-only Substack item. `writing.11tydata.js` (excluded from CMS) holds dir metadata + computed permalink.
-- **`artProjects`** is a single top-level-array file (`src/_data/artProjects.json`): `list: true` with fields directly under the entry, nested `images` as an `object` list. **`explorations`** (`src/_data/explorations.json`, the homepage carousel) is the same shape: `{ src, alt }` entries, uploads to `src/assets/explorations`. **`faqs`** (`src/_data/faqs.json`) holds `about`/`design`/`consultations` lists of `{ question, answer }`; answers are Markdown, rendered by the `markdown` filter in the `faqList` macro. **`testimonials`** (`src/_data/testimonials.json`) holds `studio`/`collaborate` lists of `{ quote, name, role, linkUrl, linkLabel }` for the `quoteCard` macro. **`collaborate`** (`src/_data/collaborate.json`) holds the Collaborate page's `services` cards and `featured` case-study slugs. **`recognition`** (`src/_data/recognition.json`, top-level array of `{ year, entries: [{ label, items }] }`) feeds About's Recognition list. Contact details (`email`, `bookingUrl`, `consultationUrl`, `social`) live in `site.json`; `ctaCard` is imported `with context` to read them.
+- **Structured data files** (`artProjects`, `explorations`, `faqs`, `testimonials`, `collaborate`, `recognition`, and the contact fields in `site.json`) are edited through their `.pages.yml` entries, which hold the field shapes; read the entry before changing a data file. Gotchas: `faqs` answers are Markdown, rendered by the `markdown` filter in `faqList`; `explorations` uploads go to `src/assets/explorations`; `ctaCard` is imported `with context` so its defaults can read `site.json`.
 - **Raw editors** for `_headers`, `_redirects`, `robots.txt` — `format: code`, no structured fields.
 - **`body` fields are `type: text`, never `rich-text`** — posts mix markdown with Nunjucks shortcodes (`figureImg`, `projectVideo`) that a rich-text round-trip would corrupt.
 - `settings.content.merge: true` preserves keys in `artProjects.json` that aren't in the schema.
@@ -108,17 +110,7 @@ Add new projects to `src/_data/artProjects.json`; `year`, `link`, `linkLabel` an
 
 ## Project videos
 
-Embed lazy, autoplay-in-view videos with the `projectVideo` shortcode (defined in `eleventy.config.js`). Nothing downloads until an `IntersectionObserver` in `src/assets/scripts/app-core.js` sees the video near the viewport (`preload="none"` + `data-src`); it then autoplays muted and pauses when scrolled away. The play/pause control is **hidden** unless `<html>` has `[data-video-controls]` (≤3G connection, battery ≤20% unplugged, or reduced motion — `watchConstraints` in `video-controller.js`; the network/battery APIs are Chromium-only), the button has `[data-blocked]` (autoplay refused), or it has keyboard focus; its glyph follows `[data-playing]`. `prefers-reduced-motion` gets no autoplay. iOS Low Power Mode rejects `play()` (`NotAllowedError`; an `AbortError` is a scroll-away, not a refusal) and lifts the block per video, so a refusal centres the button and the next tap anywhere (`pointerup`/`touchend`) plays every video once, pausing the off-screen ones. Styling: `.project-video*` in `_components.scss`.
-
-```njk
-{% projectVideo "/assets/portfolio/x.webm", "Alt text" %}                                  {# webm-only (Safari 16+) #}
-{% projectVideo "/assets/portfolio/x.mp4", "Alt", webm="/assets/portfolio/x.webm",
-                poster="/assets/portfolio/x.jpg", caption="Optional caption" %}             {# webm + mp4 fallback #}
-{% projectVideo "/assets/portfolio/x.mp4", "Alt", class="site-recording" %}                {# extra class on .project-video-wrapper #}
-```
-
-- **Formats:** WebM (small) with an MP4 fallback is the safe default — WebM-only drops pre-16 Safari/iOS. Single-format `src` may be `.webm` or `.mp4` (no `type` attr; browser sniffs).
-- **Optimize raw uploads:** drop `<name>.src.{mp4,mov,webm}` into `src/assets/portfolio/`, run `pnpm optimize:video` (needs system `ffmpeg` on PATH) → emits `<name>.mp4`, `<name>.webm`, and a `<name>.jpg` poster.
+Embed videos with the `projectVideo` shortcode. Lazy loading, autoplay-in-view, the hidden play/pause control, iOS Low Power Mode handling, formats and `pnpm optimize:video` are in [docs/project-videos.md](docs/project-videos.md); read it before touching `video-controller.js` or `.project-video*`.
 
 ## CSS architecture
 
@@ -151,6 +143,7 @@ Before editing `src/css`, read [docs/css-architecture.md](docs/css-architecture.
 | Body image has no spacing, no caption, or two images stack flush | Markdown `![]()` — adjacent ones share one `<p>` and the `.case-study` selectors miss them. Use `figureImg` (see Long-form pages) |
 | An inline SVG icon in `<main>` is invisible but still clickable | `header svg, main svg` (Illustrations) pads **every** SVG in `<main>`; padding over the declared size inflates the border-box and collapses the icon viewport to 0. Add `padding: 0; max-inline-size: none` to the icon's own rule |
 | Accordions open instantly or leave a gap on close in Firefox only | Firefox runs no transitions on `::details-content` (checked frame by frame: opacity jumped, a delayed `content-visibility` flip left the answer's padding for `--dur-medium`). `index.scss` has a `@supports (-moz-appearance: none)` block: no transition there, a fade-in keyframe on the answer instead. Chrome/Safari keep the height tween |
+| A style change doesn't show under `pnpm start` | The dev server can keep serving old CSS after an edit to an SCSS partial (`_components.scss`, `_icons.scss`). Compare `curl localhost:8080/css/index.css` with the source, and restart `pnpm start` if they differ |
 | Opening image doesn't bleed, or every image animates the same | `.case-study__intro` is missing or isn't the first child; the `settle`/`breakout` split keys off it |
 
 ## Browser automation blocklist
