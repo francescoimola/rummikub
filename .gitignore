@@ -44,7 +44,8 @@ coverage/
 # AI
 .agent/
 .gemini/
-.claude/
+.claude/*
+!.claude/settings.json
 .antigravity/
 .kilo/
 SITE_AUDIT.md

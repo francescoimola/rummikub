@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Mechanical repo rules (AGENTS.md CSS rules 8 + 10, rule 6, data files). Run: pnpm lint
+# Mechanical repo rules (docs/css-architecture.md rules 8 + 10, external-link rel, data files). Run: pnpm lint
 cd "$(dirname "$0")/.." || exit 1
 fail=0
 report() { echo "✗ $1"; echo "$2" | sed 's/^/    /'; fail=1; }
@@ -14,10 +14,10 @@ hits=$(grep -rnE "@media[^{]*\((min-|max-)?width|@container" src/css --include='
 hits=$(grep -rn "/\*" src/css --include='*.scss')
 [ -n "$hits" ] && report "Block comment in SCSS; use one // line (CSS rule 8)" "$hits"
 
-# Rule 6: every target=_blank link carries rel="noopener noreferrer" (same line)
+# External links: every target=_blank carries rel="noopener noreferrer" (same line)
 hits=$(grep -rn 'target="_blank"' src --include='*.njk' --include='*.md' --include='*.html' --include='*.js' \
   | grep -v '\.test\.js:' | grep -v 'noopener noreferrer')
-[ -n "$hits" ] && report 'target="_blank" without rel="noopener noreferrer" (rule 6)' "$hits"
+[ -n "$hits" ] && report 'target="_blank" without rel="noopener noreferrer"' "$hits"
 
 # Data files: valid JSON with no duplicate keys (a duplicate silently drops data on rewrite)
 hits=$(python3 - <<'EOF'
