@@ -150,6 +150,7 @@ Before editing `src/css`, read [docs/css-architecture.md](docs/css-architecture.
 | Build throws `Too many featured work projects` | More than 3 `src/work/` posts have `featured: true`; the `workFeatured` collection caps at 3. Drop `featured: true` on the extras |
 | Body image has no spacing, no caption, or two images stack flush | Markdown `![]()` — adjacent ones share one `<p>` and the `.case-study` selectors miss them. Use `figureImg` (see Long-form pages) |
 | An inline SVG icon in `<main>` is invisible but still clickable | `header svg, main svg` (Illustrations) pads **every** SVG in `<main>`; padding over the declared size inflates the border-box and collapses the icon viewport to 0. Add `padding: 0; max-inline-size: none` to the icon's own rule |
+| Accordions open instantly or leave a gap on close in Firefox only | Firefox runs no transitions on `::details-content` (checked frame by frame: opacity jumped, a delayed `content-visibility` flip left the answer's padding for `--dur-medium`). `index.scss` has a `@supports (-moz-appearance: none)` block: no transition there, a fade-in keyframe on the answer instead. Chrome/Safari keep the height tween |
 | Opening image doesn't bleed, or every image animates the same | `.case-study__intro` is missing or isn't the first child; the `settle`/`breakout` split keys off it |
 
 ## Browser automation blocklist

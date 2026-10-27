@@ -64,6 +64,12 @@ html.lenis body {
     }
 }
 
+@keyframes reveal-in {
+    from {
+        opacity: 0;
+    }
+}
+
 @mixin reveal-open {
     block-size: auto;
     opacity: 1;
@@ -468,25 +474,14 @@ details {
         @include reveal-open;
     }
 
-    // No interpolate-size (Firefox): block-size can't tween to auto, so tween a 0fr to 1fr grid row instead
-    @supports not (interpolate-size: allow-keywords) {
+    // Firefox runs no transitions on ::details-content: close lags (gap lingers), open snaps. Fade the answer in, close at once
+    @supports (-moz-appearance: none) {
         &:not(.nav-menu)::details-content {
-            display: grid;
-            grid-template-rows: 0fr;
-            block-size: auto;
-            transition:
-                grid-template-rows var(--dur-medium) var(--ease),
-                opacity var(--dur-medium) var(--ease),
-                content-visibility var(--dur-medium) allow-discrete;
+            transition: none;
         }
 
-        &:not(.nav-menu)[open]::details-content {
-            grid-template-rows: 1fr;
-        }
-
-        &:not(.nav-menu)>:not(summary) {
-            min-block-size: 0;
-            overflow: clip;
+        &:not(.nav-menu)[open]>:not(summary) {
+            animation: reveal-in var(--dur-medium) var(--ease);
         }
     }
 
