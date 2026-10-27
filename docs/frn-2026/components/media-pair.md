@@ -1,6 +1,6 @@
 # Media pair
 
-**Layer:** Composite · **Status:** planned · **Figma:** (pattern) examples `2300:10144` (The Loft, desktop), `2344:10024` (The Loft, tablet), `2344:10761` (The Loft, mobile), `2327:9733` (writing post) · **Code:** `.grid-cols-2` (renamed from `.grid-cols-2-fixed`, G42) + `{% mediaPair %}`
+**Layer:** Composite · **Status:** code · **Figma:** (pattern) examples `2300:10144` (The Loft, desktop), `2344:10024` (The Loft, tablet), `2344:10761` (The Loft, mobile), `2327:9733` (writing post) · **Code:** `.grid-cols-2` (renamed from `.grid-cols-2-fixed`, G42) + `{% mediaPair %}`
 
 ## Purpose
 
@@ -59,6 +59,7 @@ No `breakout`: a pair sits at content width (G13). A video follows the Videos ru
 - Add the `mediaPair` paired shortcode to `src/config/eleventy/shortcodes.js` (G40, approved).
 - Figma frames named `Frame 2` and `Frame 3` on The Loft are the same pattern; they should be named `Media pair`.
 - The post-media rhythm still keys off `.case-study__intro` (AGENTS.md, Long-form pages).
+- **Ported (#25):** `{% mediaPair %}…{% endmediaPair %}` renders `<div class="grid-cols-2 media-pair">` (gap `--space-s`), stacking below `@container (min-width: $bp-s)`. The `.case-study` rhythm treats `.media-pair` as media. Used on The Loft (two pairs; the Ritual mobile walkthrough now follows the second pair) and the flyer guide (two pairs).
 
 ## Open questions
 

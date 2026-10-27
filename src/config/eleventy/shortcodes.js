@@ -4,6 +4,7 @@ var {
   escapeAttr,
   renderAttr,
   renderFigure,
+  mediaStyle,
 } = require("./render-helpers");
 
 // Icons are read once per build — figureImg-heavy pages call the same glyph repeatedly.
@@ -16,11 +17,6 @@ function readIcon(name) {
   return iconCache.get(name);
 }
 
-// position="62% 18%" crops an object-fit: cover image; pick the value live with the dev-only Alt+click picker.
-function positionAttr(position) {
-  return renderAttr("style", position && "object-position: " + position);
-}
-
 module.exports = function (eleventyConfig) {
   eleventyConfig.addShortcode("projectVideo", function (src, alt, options) {
     options = options || {};
@@ -29,7 +25,7 @@ module.exports = function (eleventyConfig) {
 
     var body =
       '  <div class="' + escapeAttr(wrapperClass) + '">\n' +
-      '    <video class="project-video-el" muted loop playsinline preload="none"' + dataSrc + renderAttr("poster", options.poster) + ' aria-label="' + escapeAttr(alt || "") + '"></video>\n' +
+      '    <video class="project-video-el" muted loop playsinline preload="none"' + dataSrc + renderAttr("poster", options.poster) + mediaStyle(options.ratio) + ' aria-label="' + escapeAttr(alt || "") + '"></video>\n' +
       '    <button class="project-video-play" type="button" aria-label="Play video">\n' +
       '      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">\n' +
       '        <circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.45)"/>\n' +
@@ -45,7 +41,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addShortcode("figureImg", function (src, alt, options) {
     options = options || {};
     var img =
-      '<img src="' + escapeAttr(src) + '" alt="' + escapeAttr(alt || "") + '"' + renderAttr("class", options.imgClass) + positionAttr(options.position) + ">";
+      '<img src="' + escapeAttr(src) + '" alt="' + escapeAttr(alt || "") + '"' + renderAttr("class", options.imgClass) + mediaStyle(options.ratio, options.position) + ">";
 
     // href wraps the image in an outbound link — keeps it a <figure>, so the case-study spacing rules still match
     if (options.href) {
@@ -53,6 +49,12 @@ module.exports = function (eleventyConfig) {
     }
 
     return renderFigure("  " + img, options.class, options.caption);
+  });
+
+  // Two figures side by side at content width (G40); stacks below the .grid-cols-2 container fold.
+  // Blank lines are dropped so markdown keeps the whole pair as one HTML block.
+  eleventyConfig.addPairedShortcode("mediaPair", function (content) {
+    return '<div class="grid-cols-2 media-pair">\n' + content.trim().replace(/\n\s*\n/g, "\n") + "\n</div>";
   });
 
   eleventyConfig.addShortcode("icon", function (name, attrs) {

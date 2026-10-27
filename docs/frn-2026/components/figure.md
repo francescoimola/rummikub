@@ -1,6 +1,6 @@
 # Figure
 
-**Layer:** Composite · **Status:** figma · **Figma:** `2355:19174` · **Code:** `figureImg` / `projectVideo` in `src/config/eleventy/shortcodes.js`, `figure`
+**Layer:** Composite · **Status:** code · **Figma:** `2355:19174` · **Code:** `figureImg` / `projectVideo` in `src/config/eleventy/shortcodes.js`, `figure`
 
 ## Purpose
 
@@ -72,6 +72,7 @@ Values from [`_tokens.md`](_tokens.md). `step/-1` replaces `font-size-7` (G12): 
 - The shortcodes are in `src/config/eleventy/shortcodes.js` and `render-helpers.js`, not `eleventy.config.js`.
 - `breakout` stops on case studies, including where it is used today (G13).
 - Caption CSS moves from `font-size-7` to `--step--1` (G12).
+- **Ported (#25):** `ratio=` on both shortcodes; `figcaption` is `--step--1`; `$breakout-targets` in `index.scss` now match `.writing-post` only, and the `breakout` keyframes end at `--settled-size` (content width on case studies, `--inline-size` otherwise). Case-study figures and media pairs are capped at `--grid-width-l`.
 
 ## Open questions
 

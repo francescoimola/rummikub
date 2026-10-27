@@ -240,6 +240,7 @@ h2.highlight-header {
 }
 
 figcaption {
+    font-size: var(--step--1); // G12; beats cleacss's layered font-size-7
     margin-top: var(--space-2xs);
     text-align: end;
 }
@@ -534,8 +535,8 @@ main>*{
 }
 
 // Scroll-driven and animated breakout
-// Case-study media gets breakout/settle automatically; breakout uses view() to retrigger per element, settle uses scroll() since view() would already be mid-range at first paint
-$breakout-targets: '[view-animation="breakout"], .case-study > :is(figure, p:has(> :is(img, picture))):not(.case-study__intro + *)';
+// Hero media settles on case studies and writing posts; later media breaks out on writing posts only (G13). breakout uses view() to retrigger per element, settle uses scroll() since view() would already be mid-range at first paint
+$breakout-targets: '[view-animation="breakout"], .writing-post > :is(figure, p:has(> :is(img, picture))):not(.case-study__intro + *)';
 $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:has(> :is(img, picture)))';
 
 @media (prefers-reduced-motion: no-preference) and (width > #{scale.$bp-xl}) {
@@ -545,7 +546,7 @@ $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:
         }
 
         to {
-            max-inline-size: var(--inline-size);
+            max-inline-size: var(--settled-size, var(--inline-size));
         }
     }
 

@@ -25,8 +25,10 @@ This is the key thing to understand: the heaviest element on your page is where 
 
 That element attracts attention AND guides the eye toward everything else on the page. In fact, each element (text block, image, shape, etc.) is like a magnet. Its edges create invisible lines that pull other elements toward them. When things align to those lines, a layout feels less scattered and more intentional, even if you can't immediately explain why.
 
+{% mediaPair %}
 {% figureImg "/assets/writing/hermes.png", "Hermès racecourse poster with grid overlay showing how elements align to invisible lines" %}
 {% figureImg "/assets/writing/bienalsp.png", "Bienal São Paulo poster with grid overlay showing structural alignment" %}
+{% endmediaPair %}
 
 To show what I mean, I overlaid grids on the above two real posters (not flyers, but the same lesson applies). Look at how the title, event details, and logos all sit along the same invisible lines. Neither layout is complicated, but both are clearly considered.
 
@@ -76,8 +78,10 @@ You can think of bleed as an outer margin or safe zone that exists to give the p
 
 If your design stops exactly where the paper ends, you'll get uneven white strips after trimming. On the other hand, if you place your content too close to the edges, then scale it to fill the bleed area, you might cut off important parts of your artwork like in the example below.
 
+{% mediaPair %}
 {% figureImg "/assets/writing/bleed_before.png", "Rousseau painting before bleed — the signature sits right at the page edge", caption="Before: Artwork overshoots the edge of the trim mark—which would be appropriate, if only the signature wasn't so close to the bottom corner" %}
 {% figureImg "/assets/writing/bleed_after.png", "The same painting after printing — the signature has been cut off", caption="After: the trimming cut into the artist signature" %}
+{% endmediaPair %}
 
 I won't walk you through the steps to add bleed on your platform of choice as there are plenty of guides out there (I'll link Canva's guide below). The important thing is understanding *why* bleed exists, so you remember to check for it before you send 300 copies to print.
 
