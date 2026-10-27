@@ -16,18 +16,6 @@
         main {
             border-block-start: revert;
         }
-
-        // Collapse the label/value grid into stacked rows
-        .data-list {
-            display: flex;
-            flex-direction: column;
-
-            &__item {
-                display: flex;
-                flex-direction: column;
-                gap: var(--space-3xs);
-            }
-        }
     }
 
     // ---- < tablet ----
@@ -41,10 +29,6 @@
                 max-inline-size: unset;
                 margin-inline: unset;
             }
-        }
-
-        .stick {
-            position: revert;
         }
 
         .flow.has-gap-2xl-m,
@@ -61,25 +45,6 @@
             margin-block-end: unset;
         }
 
-    }
-
-    // ---- >= tablet (targets everything above tablet) ----
-
-    @media (width >= #{scale.$bp-xl}) {
-        .tablet-only {
-            display: none;
-            visibility: hidden;
-        }
-
-        .profile-picture_inner {
-            display: none;
-            visibility: hidden;
-        }
-
-        .profile-picture_outer {
-            display: grid;
-            visibility: visible;
-        }
     }
 
     // ---- Container queries ----
