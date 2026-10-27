@@ -3,8 +3,9 @@
 
 // Breakpoints — Sass vars because custom properties can't be used in media conditions. Shared by index.scss + _components.scss
 // xs–3xl scale, ascending by rem value regardless of whether a var is consumed by a @media or @container query
-$bp-s: 32rem; // small (viewport); also the 2-up fold of sections and image grids (container against main)
+$bp-s: 32rem; // small (viewport); also the 2-up fold of image grids (container against main)
 $bp-m: 49rem; // mobile (viewport)
+$bp-split: 45rem; // label | content fold of sections and split-row text (container against main): main is ~44.8rem at a 744px viewport (iPad mini portrait), so that stays one column
 $bp-l: 49rem; // project-item image/body split (container) — was viewport 64rem
 $bp-xl: 64rem; // tablet (viewport)
 $bp-3xl: 86rem; // small-desktop (viewport)
