@@ -306,19 +306,25 @@ a, button {
     }
 }
 
-nav a[aria-current="page"] {
-    cursor: default;
-    color: var(--brand-900);
-
+// Nav: hover underlines only; the current page also takes the brand colour
+nav li a {
     @media (hover: hover) {
         &:hover {
-            color: var(--neutral-800-alpha);
+            --color-accent: inherit; // cancel the global hover colour shift
+            text-decoration: underline;
         }
     }
 
     &:focus-visible {
-        color: var(--neutral-800-alpha);
+        --color-accent: inherit;
+        text-decoration: underline;
     }
+}
+
+nav a[aria-current="page"] {
+    cursor: default;
+    color: var(--brand-900);
+    text-decoration: underline;
 }
 
 :where(.text ol, .text ul) {
@@ -353,7 +359,6 @@ button {
 // ---- Nav ----
 
 nav {
-    --nav-indent: 0.7em; // drives bullet inset and its slide-in distance
     display: grid;
 }
 
@@ -363,43 +368,10 @@ nav>a {
 
 nav li {
     list-style: none;
-    position: relative;
-    transition: color var(--dur-fast) var(--ease);
 }
 
 nav li a {
     display: block;
-}
-
-nav li::before {
-    content: "\2022";
-    position: absolute;
-    inset-inline-start: calc(-1 * var(--nav-indent));
-    opacity: 0;
-    translate: calc(-0.5 * var(--nav-indent)) 0;
-    pointer-events: none;
-    transition: opacity var(--dur-fast) var(--ease), translate var(--dur-fast) var(--ease); // --dur-fast is 0s under reduced motion
-}
-
-// active/focused rows: accent colour + reveal the bullet
-nav li:is(:has(a[aria-current="page"]), :focus-within) {
-    color: var(--accent-hover);
-}
-
-nav li:is(:has(a[aria-current="page"]), :focus-within)::before {
-    opacity: 1;
-    translate: 0;
-}
-
-@media (hover: hover) {
-    nav li:hover {
-        color: var(--accent-hover);
-    }
-
-    nav li:hover::before {
-        opacity: 1;
-        translate: 0;
-    }
 }
 
 // ---- Site banner ----
@@ -468,7 +440,7 @@ nav li:is(:has(a[aria-current="page"]), :focus-within)::before {
         grid-area: toggles;
         display: flex;
         flex-wrap: wrap;
-        align-items: start;
+        align-items: center;
         align-content: start;
         gap: var(--space-s);
     }
