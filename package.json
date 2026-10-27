@@ -2,7 +2,7 @@
   "name": "francescoimola",
   "version": "1.0.0",
   "description": "francescoimola.com — Eleventy rebuild",
-  "packageManager": "pnpm@11.5.2",
+  "packageManager": "pnpm@12.15.0",
   "scripts": {
     "start": "eleventy --serve",
     "build": "rm -rf public && eleventy",
