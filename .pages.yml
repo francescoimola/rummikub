@@ -272,6 +272,31 @@ content:
             label: Company label (after the role)
             type: string
 
+  - name: collaborate
+    label: Collaborate page
+    type: file
+    path: src/_data/collaborate.json
+    format: json
+    fields:
+      - name: services
+        label: What I do
+        type: object
+        list:
+          collapsible: true
+        fields:
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: description
+            label: Description
+            type: text
+            required: true
+      - name: featured
+        label: Featured work (case study file names without .md, in display order)
+        type: string
+        list: true
+
   - name: headers
     label: HTTP headers
     type: file
