@@ -7,7 +7,8 @@
 ## Reference docs
 
 - **Voice & tone:** `.docs/voice-guide.md` (local-only, gitignored)
-- **Testing:** [testing-guide.md](testing-guide.md) — run `pnpm build && pnpm test` before committing (the built-output tests read `public/`)
+- **Testing:** [testing-guide.md](testing-guide.md) — run `pnpm lint && pnpm build && pnpm test` before committing (the built-output tests read `public/`)
+- **Review:** [CODING_STANDARDS.md](CODING_STANDARDS.md) — judgement rules the reviewer enforces; mechanical ones live in `pnpm lint`
 
 ## Commands
 
@@ -15,6 +16,7 @@
 pnpm install          # Install dependencies
 pnpm start            # Dev server (Eleventy --serve)
 pnpm build            # Production build
+pnpm lint             # Mechanical rules: breakpoints, SCSS comments, external rel, JSON keys
 pnpm clean            # rm -rf public
 ```
 

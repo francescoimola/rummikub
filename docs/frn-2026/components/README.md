@@ -5,6 +5,7 @@ The FRN-2026 component library: designed in Figma, built as Nunjucks partials an
 - **Figma:** file `UkQphRf7GwINc1c8vORtUm`, page `2246:754`, WIP section `2275:725`, **Components** board `2291:769`. The section `2260:2139` is an archive: read it, never edit it.
 - **Frames:** desktop 1512 (Utopia Max), tablet 834 and mobile 390 (Utopia Min). Node IDs are in [`../figma-state.json`](../figma-state.json).
 - **Token values:** [`_tokens.md`](_tokens.md).
+- **Scripting Figma:** read [`../figma-gotchas.md`](../figma-gotchas.md) before any `use_figma` call.
 
 ## Index
 

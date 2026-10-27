@@ -9,6 +9,7 @@
     "clean": "rm -rf public",
     "optimize:video": "node scripts/optimize-videos.mjs",
     "compress:assets": "node scripts/compress-assets.mjs",
+    "lint": "bash scripts/lint.sh",
     "test": "vitest run",
     "test:watch": "vitest"
   },
