@@ -15,3 +15,7 @@ Judgement rules for review. Mechanical rules are checked by `pnpm lint` (`script
 - **Images keep their natural shape** unless `ratio=` is passed (`--ratio-3-2` and the other ratio-named tokens). The Explorations carousel is the one fixed crop (3:2).
 - **Editable content goes through Pages CMS.** Copy or media an editor would change (carousel slides, FAQs, art projects) lives in `src/_data/*.json` or front matter with a matching `.pages.yml` entry, not hard-coded in a template.
 - **Words follow `GLOSSARY.md`** in labels, class names and data keys (Explorations, Case study, Ideas).
+
+## Comments
+
+- **One comment, one line.** SCSS and CSS comments are single-line `//`, never wrapped prose across consecutive lines. A note over ~25 words gets cut down, with property-specific detail on the line above (or trailing) that property. Keep the *why*, drop the essay. (`/* */` blocks are caught by `pnpm lint`.)
