@@ -404,7 +404,7 @@ nav li:is(:has(a[aria-current="page"]), :focus-within)::before {
 }
 
 // Name and <details> share one grid cell: the name overlays the bar's start, so the open panel spans the full width
-.site-banner nav {
+.site-banner__inner {
     align-items: start;
     padding-inline: var(--space-m-l);
 
@@ -450,6 +450,12 @@ nav li:is(:has(a[aria-current="page"]), :focus-within)::before {
         display: flex;
         flex-direction: column;
         gap: var(--space-xs);
+    }
+
+    // Minimal header's one link, in the links slot
+    &__exit {
+        grid-area: links;
+        justify-self: start;
     }
 
     &__toggles {
