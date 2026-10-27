@@ -179,7 +179,7 @@
 
 // ---- Column grids ----
 
-// Single-column stacks that fold to two columns at their own container width — $bp-s for grids, $bp-split for label | content (CSS rule 10)
+// Single-column stacks that fold to two columns at their own container width: $bp-s grids, $bp-split label | content (CSS rule 10)
 // .split-row is its own grid, not cleacss's .grid-reset — that reserves a margin track full-bleed can't use
 // align-items: stretch overrides cleacss's .flow (align-items: flex-start, @layer reset) so row items stay equal-height — needed whenever .flow is combined in for its gap token (CSS rule 3)
 .grid-responsive-cols,
