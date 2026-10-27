@@ -54,7 +54,7 @@
 
         .home-hero {
             padding-inline: var(--space-s) var(--space-l);
-            --step-hero: calc(min(100cqi - 2 * var(--space-l), var(--grid-width-l)) / 5.196);
+            --step-hero: calc(min(100cqi - 2 * var(--space-l), var(--grid-width-l)) / var(--hero-line-em));
         }
 
     }

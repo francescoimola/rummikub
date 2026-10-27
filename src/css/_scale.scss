@@ -45,8 +45,9 @@ $type-config: (
     // Section-hero pair: --step-2 at the min pole to --step-4 at the max (Page header, CTA card)
     --step-2-4: #{fluid(map.get(utopia.calculateTypeStep($type-config, 2), "minSize"), map.get(utopia.calculateTypeStep($type-config, 4), "maxSize"))};
 
-    // Home hero: KC Pelletier's widest line is 5.196em, so the line fills the content width (capped at --grid-width-l)
-    --step-hero: calc(min(100cqi, var(--grid-width-l)) / 5.196);
+    // Home hero: widest line is the indented "person?" (2.2em + 3.241em tracked glyphs - 0.042em bearing), measured from the font
+    --hero-line-em: 5.4;
+    --step-hero: calc(min(100cqi, var(--grid-width-l)) / var(--hero-line-em));
     --line-height-hero: 0.74;
     --letter-spacing-hero: -0.03em;
 
