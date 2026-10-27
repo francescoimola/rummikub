@@ -59,6 +59,7 @@ No `breakout`: a pair sits at content width (G13). A video follows the Videos ru
 - Add the `mediaPair` paired shortcode to `src/config/eleventy/shortcodes.js` (G40, approved).
 - Figma frames named `Frame 2` and `Frame 3` on The Loft are the same pattern; they should be named `Media pair`.
 - The post-media rhythm still keys off `.case-study__intro` (AGENTS.md, Long-form pages).
+- **No breakout in writing posts:** the writing-post breakout selector matches a direct-child `figure`, and a pair wraps its figures in a div, so images in a `mediaPair` do not get the scroll breakout. Intended: a pair stays at content width.
 - **About (#37):** the profile photo is now a single full-width 1:1 image in the bio column, as in Figma, so About no longer uses `.grid-cols-2`.
 - **Ported (#25):** `{% mediaPair %}…{% endmediaPair %}` renders `<div class="grid-cols-2 media-pair">` (gap `--space-s`), stacking below `@container (min-width: $bp-s)`. The `.case-study` rhythm treats `.media-pair` as media. Used on The Loft (two pairs; the Ritual mobile walkthrough now follows the second pair) and the flyer guide (two pairs).
 

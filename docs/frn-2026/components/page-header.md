@@ -45,7 +45,7 @@ Values from [`_tokens.md`](_tokens.md). `step/2-4` is the new section-hero pair 
 
 ## States & interactions
 
-Static. The band enters with `view-animation="settle"` and the first media after it follows the usual rhythm (README, Cross-cutting behaviour). Reduced motion: no animation.
+Static: the band does not animate, and the first media after it follows the usual rhythm (README, Cross-cutting behaviour).
 
 ## Content rules
 
@@ -57,7 +57,7 @@ Static. The band enters with `view-animation="settle"` and the first media after
 ## HTML & accessibility
 
 ```html
-<header class="page-header" view-animation="settle">
+<header class="page-header">
   <svg aria-hidden="true" …>…</svg>
   <h1>Unapologetically simple websites</h1>
 </header>
@@ -73,7 +73,7 @@ Static. The band enters with `view-animation="settle"` and the first media after
 - Add an illustration-optional path: skip the `icon` call when `iconName` is empty (G16). Needed by Artmaking and 404. Figma gets the matching `Show illustration` boolean.
 - Remove the `blurb` param (G17). The pages that pass one today drop it at the port: `writing.njk`, `writing-types.njk`, `studio/design.njk` and `studio/consultations.njk`. Delete the Blurb layer and Show blurb property in Figma.
 - Home uses its own hero, not Page header (`step/hero`).
-- **Ported (#27):** `pageHeader(iconName, label)` in `_page-header.njk` renders `header.page-header[view-animation="settle"]`; `.page-header` in `_components.scss` replaces the card and inline styles. Band fill joins the `.site-banner` theming rule; `--settled-size` is content width so settle ends at 900. The h1 is `--font-family-display` at `--step-2-4`, line-height 1, uppercase, capped at `max(--inline-size, min(100%, --grid-width-l))`. The drawing is `block-size: --size-hero-illustration`, width auto, `neutral/950-alpha`.
+- **Ported (#27):** `pageHeader(iconName, label)` in `_page-header.njk` renders `header.page-header` (no scroll animation; the review fixes dropped `settle`); `.page-header` in `_components.scss` replaces the card and inline styles. Band fill joins the `.site-banner` theming rule; `--settled-size` is content width so settle ends at 900. The h1 is `--font-family-display` at `--step-2-4`, line-height 1, uppercase, capped at `max(--inline-size, min(100%, --grid-width-l))`. The drawing is `block-size: --size-hero-illustration`, width auto, `neutral/950-alpha`.
 - Pages: Work with me (runner, Figma copy), Web design (deskgarden), Consultations (websitevisit), Ideas (meditating; the `/writing/` heading stays), Artmaking and 404 (no drawing, Figma copy; Artmaking's first intro paragraph became the hero). Writing type pages dropped it for a plain `h1` + blurb + breadcrumb, so `writingTypes.json` lost its `icon` keys.
 
 ## Open questions
