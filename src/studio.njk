@@ -8,7 +8,7 @@ eleventyNavigation:
   parent: Home
 ---
 {% from "_service-card.njk" import serviceCard %}
-{% from "_cta-card.njk" import ctaCard %}
+{% from "_cta-card.njk" import ctaCard with context %}
 {% from "_page-header.njk" import pageHeader %}
 {% from "_quote-card.njk" import quoteCard %}
 {{ pageHeader("runner", "break free from suffocating marketing practices, and chart a more freeing way forward. Together.") }}
@@ -23,20 +23,16 @@ eleventyNavigation:
     <h2 class="highlight-header">Smaller projects</h2>
     <div class="flow has-gap-s">
         {{ serviceCard("The Groundwork Pilot", "https://tally.so/r/0Q9QkN", "Building a business that does good, but still don't have a website? I'll design and write you a bespoke website in 14 days, or your money back. Starts at £850.", type = "accordion", cta = "See the offer") }}
-        {{ serviceCard("Graphic Design", "mailto:hi@francescoimola.com", "Got an event coming up, or a pitch to win? I design posters, flyers, programmes, brochures and pitch decks. Past clients include SD Projects, Open Art Folke and University of Greenwich. Starts at £260 a day.", type = "accordion", cta = "Enquire") }}
-        {{ serviceCard("Copy and Content Writing", "mailto:hi@francescoimola.com", "Have a bunch of ideas you've been meaning to publish? Want your entire website rewritten? I can take half-formed drafts, or your whole site, and turn them into fully fleshed-out, SEO-friendly content.", type = "accordion", cta = "Enquire") }}
-        {{ serviceCard("Email Guidance", "mailto:hi@francescoimola.com", "Want to see things from a new perspective? Get 1:1 help via email on your strategy, website, newsletter or branding, drawing on my 8 years in marketing and the creative industries.", type = "accordion", cta = "Enquire") }}
+        {{ serviceCard("Graphic Design", "mailto:" + site.email, "Got an event coming up, or a pitch to win? I design posters, flyers, programmes, brochures and pitch decks. Past clients include SD Projects, Open Art Folke and University of Greenwich. Starts at £260 a day.", type = "accordion", cta = "Enquire") }}
+        {{ serviceCard("Copy and Content Writing", "mailto:" + site.email, "Have a bunch of ideas you've been meaning to publish? Want your entire website rewritten? I can take half-formed drafts, or your whole site, and turn them into fully fleshed-out, SEO-friendly content.", type = "accordion", cta = "Enquire") }}
+        {{ serviceCard("Email Guidance", "mailto:" + site.email, "Want to see things from a new perspective? Get 1:1 help via email on your strategy, website, newsletter or branding, drawing on my 8 years in marketing and the creative industries.", type = "accordion", cta = "Enquire") }}
     </div>
 </section>
 {% icon "bathcomputer", 'class="illustration-wide"' %}
 <section class="section section--stacked">
     <h2 class="highlight-header">Happy humans</h2>
     <div class="grid-cols-2 flow has-gap-xs">
-        {{ quoteCard("“I have never worked with someone so deeply reliable, who has gone above and beyond my expectations. The sheer detail, diligence and attention Fran has to his work is worth its weight in gold, tenfold! [...] He’s turned the weight on my shoulders into air.”", "Cairo Woodward", "Co-founder", { url: "https://www.theloftstudio.uk", label: "The Loft" }) }}
-        {{ quoteCard("“Francesco has the rare talent of being able to embed himself in a niche that he previously knew nothing about, quickly understanding the intricacies and writing with the confidence of an insider.”", "Rob Cowen", "Founder", { url: "https://www.seatingplan.com", label: "Mega Seating Plan" }) }}
-        {{ quoteCard("“Francesco provided excellent tech support and reassurance for a web project. He’s been very easy to work with.”", "Liv Pennington", "Artist & Arts Programmer") }}
-        {{ quoteCard("“Great to work with. Helped me to rework my website copy to align with a new direction I wanted to take. He’s quick and responsive.”", "Sarah Brown", "Holistic Coach", { url: "https://www.sarahyuklan.com/" }) }}
-        {{ quoteCard("“A dream collaborator. Organised and strategic, he asks the right questions, does his research, and presents fantastic options.”", "Carly Anchal", "Marketing & Talent Manager") }}
+        {% for t in testimonials.studio %}{{ quoteCard(t) }}{% endfor %}
     </div>
 </section>
 {% figureImg "/assets/portfolio/the_loft_offerings_section.png", "offerings section of The Loft website, showing class listings", caption="Website design for The Loft", ratio="3:2" %}

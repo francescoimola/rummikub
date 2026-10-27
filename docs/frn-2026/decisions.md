@@ -476,7 +476,7 @@ Settles the open questions in `components/README.md`. Numbered G1… so they don
 |---|---|---|
 | G1 | Nav label | "Ideas" in header, breadcrumb and any footer link. The `/writing/` heading and `<title>` stay |
 | G2 | Wide Look toggles | Pinned to the right edge, as drawn |
-| G3 | Nav hover bullet | Slides in over `--dur-fast` (0s under reduced motion) |
+| G3 | Nav hover bullet | Superseded by G50: no bullet; underline instead |
 | G4 | Footer nav | Dropped: the footer is Contact cards + colophon only |
 | G5 | Badges | Design Declares → `https://designdeclares.com/`; Creatives for Climate → `https://www.creativesforclimate.co/about` |
 | G6 | Contact card prompt | Re-asked (the repo's "Up for a chat?" footer sits in Explorations, which is out of scope) |
@@ -532,7 +532,7 @@ Re-asked in round 2: G6, G19, G21, G24, G36, G37.
 | G41 | Writing item thumb in CSS | One grid: thumb `3fr` \| body `5fr`, thumb a square filling its column. One `@container` rule switches to `1fr 3fr` when the row is narrow; type pages add `.writing-item--compact` (always `1fr 3fr`). Roughly 75 px mobile, 150 px `/writing/` desktop, 210 px type pages |
 | G42 | `.grid-cols-2-fixed` | Renamed `.grid-cols-2` (it stacks now, G36) |
 | G43 | Art image ratios | Figma keeps its Phase 13 crops as an approximation; code shows natural ratio; `artProjects.json` gets **no** `ratio` field |
-| G44 | Arrow rule, applied | Arrows stay on "More about me", "Here's what I can offer you", "How this website is built", "Learn about its accessibility", "See what other brands left with", the Service card Default CTA, and **"To main site"**: it leaves the page in a way that's hard to undo, which also earns an arrow. "See what I've done" exists only in the repo (`index.njk`, `collaborate.njk`), not in the redesign, so it goes with the port |
+| G44 | Arrow rule, applied | Arrows stay on "More about me", "Here's what I can offer you", "How this website is built", "Learn about its accessibility", the Service card Default CTA, and **"To main site"**: it leaves the page in a way that's hard to undo, which also earns an arrow. "See what I've done" exists only in the repo (`index.njk`, `collaborate.njk`), not in the redesign, so it goes with the port |
 | G45 | Carousel crop | Slides crop to 3:2, the one exception to "natural ratio", so CMS uploads of any shape line up |
 
 ### Applied (2026-10-27)
@@ -556,5 +556,7 @@ Re-asked in round 2: G6, G19, G21, G24, G36, G37.
 | G47 | Carousel ends | No wrap-around. First slide shows only Next, last slide only Previous, the slides between show both |
 | G48 | Badge frames | Renamed "Creatives for Climate" (`2293:1553`, `2293:1825`) |
 | G49 | Long-form intro | Case studies and writing posts: the intro (h1 + dimmed line) is centred, and it has as much space above it (`space/2xl-3xl` padding-top) as below it (margin-bottom, same token). Before, the title sat close under the header and far above the image. Code: `.case-study__intro` in `_components.scss`. **Figma (applied):** the local `Intro` frame in the 15 long-form frames (desktop 1512, tablet, mobile; Loft `2319:6594` and the rest) has `paddingTop` and `paddingBottom` bound to `space/2xl-3xl` (101.25 desktop, 60 tablet/mobile), and its text centred. `Main Content` top padding is set to 0, because the intro now supplies the top space. The first `Figure` (or `Paragraph` on Accessibility) after the intro has padding-top 0, because Figma has no margin collapse. Figma ships these as instance and frame overrides, not component changes. Intro is a plain frame, so there is no Code Connect map. Tablet and mobile frames were checked by numbers only, not by screenshot |
+| G50 | Nav marker | Hover and focus underline the link; the current page is underlined and takes `--brand-900`. No bullet, no slide-in (#42). Supersedes G3 |
+| G51 | Work with me closing CTA | The featured CTA card "See what other brands left with" is removed, as in Figma (#43). Work with me ends on its own contact CTA |
 
 - User re-imported `variables-plus-import.json` (62 variables).

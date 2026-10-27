@@ -1,8 +1,9 @@
 @use 'sass:map';
+@use 'sass:math';
 @use '../../node_modules/utopia-core-scss/src/utopia' as utopia;
 
 // Breakpoints — Sass vars because custom properties can't be used in media conditions. Shared by index.scss + _components.scss
-// xs–3xl scale, ascending by rem value regardless of whether a var is consumed by a @media or @container query
+// xs–3xl scale, ascending by rem value ($bp-m and $bp-l are equal), whether read by a @media or a @container query
 $bp-s: 32rem; // small (viewport); also the 2-up fold of image grids (container against main)
 $bp-split: 48rem; // label | content fold (container against main); keeps iPad mini portrait (744-768px viewport) on one column
 $bp-m: 49rem; // mobile (viewport)
@@ -37,6 +38,11 @@ $type-config: (
   @return utopia.calculateClamp(map.merge($type-config, ("minSize": $min, "maxSize": $max)));
 }
 
+// Same clamp for sizes measured in rendered px: Utopia converts at 16px per rem, the root is 15px
+@function fluid-rendered($min, $max) {
+  @return fluid(math.div($min * 16, 15), math.div($max * 16, 15));
+}
+
 @layer type {
 
   :root {
@@ -52,8 +58,8 @@ $type-config: (
     --letter-spacing-hero: -0.03em;
 
     // Illustration sizes: hero is a block-size (width follows the drawing), wide is an inline-size
-    --size-hero-illustration: #{fluid(154, 220)};
-    --size-illustration-wide: #{fluid(345, 449.28)};
+    --size-hero-illustration: #{fluid-rendered(154, 220)};
+    --size-illustration-wide: #{fluid-rendered(345, 449.28)};
 
     // Aspect ratios for media (G11); the name states the ratio
     --ratio-3-2: 3 / 2;

@@ -5,7 +5,7 @@ header: minimal
 title: How accessible is this website?
 metaTitle: Accessibility statement | Francesco Imola
 longForm: true
-description: What I aim for, what work there is still to be done, and how to tell me if something's getting in your way.
+description: What I aim for on this website, what accessibility work is still to be done, and how to tell me if something is getting in your way.
 permalink: /about/accessibility/
 updated: 2026-08-04
 eleventyNavigation:
@@ -42,8 +42,8 @@ eleventyNavigation:
     <h2>If something gets in your way</h2>
     <p>Please tell me and I'll do what I can to fix it. Send me an email at the address below. Same goes if you need anything on this site in a different format, ask and I'll sort it out.</p>
     <div class="card flow has-gap-3xs">
-        <p><span class="sr-only">hi@francescoimola.com</span><span aria-hidden="true">hi at francescoimola dot com</span></p>
-        <button type="button" data-copy-email="hi@francescoimola.com" data-icon="copy">Copy email address</button>
+        <p><span class="sr-only">{{ site.email }}</span><span aria-hidden="true">{{ site.email | replace("@", " at ") | replace(".", " dot ") }}</span></p>
+        <button type="button" data-copy-email="{{ site.email }}" data-icon="copy">Copy email address</button>
         <p role="status" class="sr-only" data-copy-status></p>
     </div>
 </section>

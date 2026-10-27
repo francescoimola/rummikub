@@ -44,7 +44,7 @@ None on the card. The company link inside the attribution uses the global link s
 
 ## Content rules
 
-- Source: inline in the page, passed to the `quoteCard` macro (G28). There is no data file. Work with me has 5 quotes, Collaborate has 1.
+- Source: `src/_data/testimonials.json` (`studio`, `collaborate`; editable in Pages CMS), passed to the `quoteCard` macro (G28). Work with me has 5 quotes, Collaborate has 1.
 - Keep quotes as the client wrote them, with `[...]` for cuts.
 - The company link is optional (Liv Pennington and Carly Anchal have none).
 - Collaborate's repo quote has no curly quotes and no `<p>`; Work with me's has both. Figma uses curly quotes.
@@ -65,9 +65,9 @@ None on the card. The company link inside the attribution uses the global link s
 
 - The accent bar `.card:has(blockquote) { box-shadow: inset var(--space-3xs) 0 var(--accent-surface) }` stays, and is drawn in Figma (G27). Add a left bar to the Quote card in Figma.
 - Repo cards use `border-radius-s`; Figma matches.
-- Add a `quoteCard` macro (e.g. `quoteCard(quote, name, role, link)`) so the markup has one source (G28). The copy stays inline in each page, with no `testimonials.json`.
+- Add a `quoteCard` macro (`quoteCard(t)`, one `testimonials.json` entry) so the markup has one source (G28). The copy lives in `testimonials.json` (moved out of the templates so it is CMS-editable).
 - `.case-study>blockquote` (long-form posts) is a separate rule that `@extend`s `.card` and `.outline`. Leave it.
-- **Ported (#29):** `_quote-card.njk` exports `quoteCard(quote, name, role, link)`. `link` is `{ url, label }`: with a label it renders "role, <company link>"; without one the name links (Sarah Brown). Links carry `data-icon="arrow-ext"` and open in a new tab. Work with me (5) and Collaborate (1) use it; Collaborate's quote now has curly quotes and a `<p>` like the rest. Repo copy kept where Figma differs (Carly Anchal's role, Sarah Brown's link).
+- **Ported (#29):** `_quote-card.njk` exports `quoteCard(t)`, where `t` is a `testimonials.json` entry (`quote`, `name`, `role`, optional `linkUrl`, `linkLabel`): with a label it renders "role, <company link>"; without one the name links (Sarah Brown). Links carry `data-icon="arrow-ext"` and open in a new tab. Work with me (5) and Collaborate (1) use it; Collaborate's quote now has curly quotes and a `<p>` like the rest. Repo copy kept where Figma differs (Carly Anchal's role, Sarah Brown's link).
 
 ## Open questions
 

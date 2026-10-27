@@ -1,0 +1,25 @@
+{
+  "services": [
+    {
+      "title": "Website design & development",
+      "description": "I make building great sites from messy briefs look easy. Bilingual in Figma, Webflow, Framer, HTML and CSS."
+    },
+    {
+      "title": "Copywriting & content research",
+      "description": "As long as you're willing for me to taint your name with odd lexicon and inaccurate sentence structure, I'm in."
+    },
+    {
+      "title": "Graphic design",
+      "description": "Top of the range rectangles and circles, sure, but really be prepared to have long chats about the meaning of life."
+    },
+    {
+      "title": "Comms & Outreach Strategy",
+      "description": "Struggling to get the message across to those that should be listening? Let me support your micro campaigns across strategy and operations."
+    }
+  ],
+  "featured": [
+    "open-art-folke",
+    "the-loft",
+    "the-collective"
+  ]
+}

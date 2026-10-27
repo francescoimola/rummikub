@@ -1,3 +1,8 @@
+@use 'icons';
+
+// The carousel chip is --content-light in both themes, so its arrow is a fixed dark neutral (= --neutral-950-alpha in light mode)
+$carousel-arrow: oklch(0.351 0.034 121.6);
+
 :root {
     --crop-amount: 1px;
 }
@@ -182,7 +187,6 @@
 // Single-column stacks that fold to two columns at their own container width: $bp-s grids, $bp-split label | content (CSS rule 10)
 // .split-row is its own grid, not cleacss's .grid-reset — that reserves a margin track full-bleed can't use
 // align-items: stretch overrides cleacss's .flow (align-items: flex-start, @layer reset) so row items stay equal-height — needed whenever .flow is combined in for its gap token (CSS rule 3)
-.grid-responsive-cols,
 .grid-cols-2,
 .section,
 .split-row,
@@ -343,7 +347,6 @@
 
 .carousel__track {
     display: flex;
-    aspect-ratio: 3 / 2;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -368,7 +371,7 @@
     :is(picture, img) {
         display: block;
         inline-size: 100%;
-        block-size: 100%;
+        aspect-ratio: var(--ratio-3-2);
         object-fit: cover;
     }
 
@@ -388,12 +391,12 @@
     }
 
     &::scroll-button(right) {
-        content: "→" / "Next image";
+        content: icons.glyph-url("arrow-right", $carousel-arrow) / "Next image";
         inset-inline-end: var(--carousel-inset);
     }
 
     &::scroll-button(left) {
-        content: "→" / "Previous image";
+        content: icons.glyph-url("arrow-right", $carousel-arrow) / "Previous image";
         inset-inline-end: calc(var(--carousel-inset) + var(--carousel-button) + var(--space-2xs));
         rotate: 180deg;
     }
@@ -401,6 +404,26 @@
     // No wrap-around (G47): an end-of-track button is disabled, so it goes
     &::scroll-button(*):disabled {
         display: none;
+    }
+}
+
+// One fixed Previous/Next pair under the strip where ::scroll-button is unsupported; app-core.js reveals and drives it
+.carousel__links {
+    display: flex;
+    gap: var(--space-s);
+    padding-block-start: var(--space-2xs);
+    margin: 0;
+
+    &[hidden] {
+        display: none;
+    }
+
+    button {
+        text-decoration: none;
+
+        &[hidden] {
+            visibility: hidden; // G47: no wrap-around, but the other button keeps its place
+        }
     }
 }
 

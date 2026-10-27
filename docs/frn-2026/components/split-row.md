@@ -81,8 +81,8 @@ Only the link: global link style, and the arrow nudge from [Icon link](icon-link
 - Rework `.split-row` so the text sits above the images at desktop widths (Q25, F11). Remove or replace the `$bp-xl` `1fr 2fr` block in `_responsive.scss`.
 - Images keep their natural ratio (G37, G43); `artProjects.json` gets no `ratio` field.
 - Replace `.masonry` with the plain two-column grid ([Masonry](masonry.md)).
-- The year moves beside the title and stays dimmed at body size (G25).
-- **Ported (#38):** `.split-row` is one column: `div.split-row__text` (grid, 2-up from `@container (min-width: $bp-split)`, capped at `--grid-width-l`) then `ul.grid-cols-2.split-row__images`. The `$bp-xl` `1fr 2fr` block is gone. The year is skipped when empty. The Figma instance draws the year under the description; code follows G24 (beside the title).
+- The year sits under the description, dimmed at body size (G24, G25).
+- **Ported (#38):** `.split-row` is one column: `div.split-row__text` (grid, 2-up from `@container (min-width: $bp-split)`, capped at `--grid-width-l`) then `ul.grid-cols-2.split-row__images`. The `$bp-xl` `1fr 2fr` block is gone. The year is skipped when empty. The Figma instance draws the year under the description; code follows G24 (under the description).
 - The page intro is a plain Section labelled "Philosophy", as in the WIP frame.
 
 ## Open questions

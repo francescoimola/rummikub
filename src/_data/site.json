@@ -3,5 +3,22 @@
   "name": "Francesco Imola",
   "description": "Delightful things with pixels and words made by Francesco Imola from a seaside town in Kent.",
   "image": "https://francescoimola.com/assets/open_graph_image.png",
-  "personImage": "https://francescoimola.com/assets/images/francesco-studio-shot-2560w.jpeg"
+  "personImage": "https://francescoimola.com/assets/images/francesco-studio-shot-2560w.jpeg",
+  "email": "hi@francescoimola.com",
+  "bookingUrl": "https://cal.com/francescoimola/intro",
+  "consultationUrl": "https://cal.com/francescoimola/consultation",
+  "social": [
+    {
+      "label": "Sublime",
+      "url": "https://sublime.app/fran"
+    },
+    {
+      "label": "Substack",
+      "url": "https://substack.com/@francescoimola"
+    },
+    {
+      "label": "Linkedin",
+      "url": "https://www.linkedin.com/in/francesco-imola/"
+    }
+  ]
 }

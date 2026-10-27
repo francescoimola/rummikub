@@ -9,7 +9,7 @@ eleventyNavigation:
   parent: Home
 ---
 {% from "_project-item.njk" import projectItem %}
-{% from "_cta-card.njk" import ctaCard %}
+{% from "_cta-card.njk" import ctaCard with context %}
 {% from "_quote-card.njk" import quoteCard %}
 <header class="collab-hero">
     <div class="flow has-gap-s">
@@ -21,30 +21,29 @@ eleventyNavigation:
         <p>I’ve worked with freelancers, solo owners, boutique agencies, small businesses, and institutional departments, across education, nonprofit, B2B, and B2C.</p>
         <p>Feel like I could be the person you’re after?</p>
         {# status is a span, not a p — the button sits inline and a p can't nest inside a p #}
-        <p><button type="button" data-copy-email="hi@francescoimola.com" data-icon="copy">Copy email address</button><span role="status" class="sr-only" data-copy-status></span></p>
+        <p><button type="button" data-copy-email="{{ site.email }}" data-icon="copy">Copy email address</button><span role="status" class="sr-only" data-copy-status></span></p>
         <a href="/about/" data-icon="arrow-right">More about me</a>
     </div>
     <div class="grid-cols-2 collab-hero__photos">
         <div class="duotone">
-            <img src="/assets/images/francesco-bw.png" alt="Francesco Imola" class="ratio-3-4">
+            <img src="/assets/images/francesco-bw.png" alt="Francesco Imola" style="aspect-ratio: var(--ratio-3-4)">
         </div>
         <div class="duotone">
-            <img src="/assets/images/francesco-presentation.png" alt="Francesco Imola presenting" class="ratio-1-1">
+            <img src="/assets/images/francesco-presentation.png" alt="Francesco Imola presenting" style="aspect-ratio: var(--ratio-1-1)">
         </div>
     </div>
 </header>
 <section class="section">
     <h2 class="highlight-header">What I do</h2>
     <ul class="flow has-gap-xs">
-        <li class="card"><strong>Website design &amp; development</strong><span class="dimmed"><br>I make building great sites from messy briefs look easy. Bilingual in Figma, Webflow, Framer, HTML and CSS.</span></li>
-        <li class="card"><strong>Copywriting &amp; content research</strong><span class="dimmed"><br>As long as you're willing for me to taint your name with odd lexicon and inaccurate sentence structure, I'm in.</span></li>
-        <li class="card"><strong>Graphic design</strong><span class="dimmed"><br>Top of the range rectangles and circles, sure, but really be prepared to have long chats about the meaning of life.</span></li>
-        <li class="card"><strong>Comms &amp; Outreach Strategy</strong><span class="dimmed"><br>Struggling to get the message across to those that should be listening? Let me support your micro campaigns across strategy and operations.</span></li>
+        {% for service in collaborate.services %}
+        <li class="card"><strong>{{ service.title }}</strong><span class="dimmed"><br>{{ service.description }}</span></li>
+        {% endfor %}
     </ul>
 </section>
 <section class="home-block flow has-gap-s-m" aria-labelledby="featured-work">
     <h2 id="featured-work">Featured work</h2>
-    {% for slug in ["open-art-folke", "the-loft", "the-collective"] %}
+    {% for slug in collaborate.featured %}
     {% for project in collections.work %}{% if project.fileSlug == slug %}
     {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "") }}
     {% endif %}{% endfor %}
@@ -55,7 +54,7 @@ eleventyNavigation:
     <div class="flow has-gap-s">
         <p>I’ll stick around no matter how messy things get, as long as I'm working with people who care deeply about what they do as much as they care about each other.</p>
         <p>Found yourself in uncharted waters? We'll cross them together. Is your design or marketing team struggling to agree on what needs doing? I may not have all the answers, but I'll support them as they search for them.</p>
-        {{ quoteCard("“Working with Fran on the development and delivery of Open Art Folke has been a great experience. His approach to design is multifaceted and incisive. To work with he is a careful listener, independent and is able to create and deliver work which is incredibly considered and point whilst having a warm and heartfelt simplicity, making things accessible to all.”", "Steven Aaron Williams", "Brand Lead", { url: "https://openartfolke.com", label: "Open Art Folke" }) }}
+        {% for t in testimonials.collaborate %}{{ quoteCard(t) }}{% endfor %}
     </div>
 </section>
 <section class="section">
