@@ -31,7 +31,7 @@ Status tracks the **redesign**: `planned` (a pattern with no Figma component) â†
 | Breadcrumb | [breadcrumb.md](breadcrumb.md) | `2353:19355` | `_breadcrumb.njk` | figma |
 | Figure | [figure.md](figure.md) | `2355:19174` | `figureImg` / `projectVideo` | figma |
 | FAQ item | [faq-item.md](faq-item.md) | `2353:18925` | `<details>` | figma |
-| Contact card | [contact-card.md](contact-card.md) | `2293:1269` | old contact page | figma |
+| Contact card | [contact-card.md](contact-card.md) | `2293:1269` | `_contact-card.njk` | code |
 | Project item | [project-item.md](project-item.md) | `2292:1007` | `_project-item.njk` | figma |
 | Writing item | [writing-item.md](writing-item.md) | `2329:9102` | `_writing-item.njk` | figma |
 | Service card | [service-card.md](service-card.md) | `2292:1547` | `_service-card.njk` | figma |
@@ -48,7 +48,7 @@ Status tracks the **redesign**: `planned` (a pattern with no Figma component) â†
 | Component | Doc | Figma | Repo today | Status |
 | --- | --- | --- | --- | --- |
 | Header | [header.md](header.md) | `2291:838` | `_header.njk` | code |
-| Footer | [footer.md](footer.md) | `2293:2112` | `_footer.njk` | figma |
+| Footer | [footer.md](footer.md) | `2293:2112` | `_footer.njk` | code |
 | Page header | [page-header.md](page-header.md) | `2405:19762` | `_page-header.njk` | figma |
 | CTA card | [cta-card.md](cta-card.md) | `2378:20633` | `_cta-card.njk` | figma |
 | Carousel | [carousel.md](carousel.md) | `2299:3910` | (none) | figma |

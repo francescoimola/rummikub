@@ -17,24 +17,6 @@
             border-block-start: revert;
         }
 
-        // Mobile footer sits in a card, matching .card's surface, radius and padding
-        footer {
-            background: var(--card-bg);
-            border-radius: var(--border-radius-s);
-            padding: var(--space-s-m);
-            padding-block: var(--space-m-l);
-            margin-block-start: var(--space-m);
-            inline-size: 100%;
-
-            @media (forced-colors: active) {
-                border: 1px solid CanvasText;
-            }
-        }
-
-        .desktop-only {
-            display: none;
-        }
-
         // Collapse the label/value grid into stacked rows
         .data-list {
             display: flex;
@@ -74,11 +56,6 @@
     // ---- >= mobile (targets everything above mobile) ----
 
     @media (width >= #{scale.$bp-m}) {
-
-        .mobile-only {
-            display: none;
-            visibility: hidden;
-        }
 
         main:has(> .featured:last-child) {
             margin-block-end: unset;
@@ -220,6 +197,30 @@
             justify-content: end;
             align-items: center;
             gap: var(--space-l);
+        }
+    }
+
+    // Wide footer: Contact left, the drawing right (bleeding past the column), colophon under Contact
+    @container footer (width >= #{scale.$bp-xl}) {
+        .site-footer__inner {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .site-footer__contact,
+        .site-footer__colophon {
+            grid-column: 1;
+        }
+
+        .site-footer__art {
+            grid-column: 2;
+            grid-row: 1;
+            align-self: center;
+
+            svg {
+                inline-size: 206%; // Figma: the 987-wide drawing overflows its 479 column
+                max-inline-size: none;
+                margin-inline-start: 5%;
+            }
         }
     }
 

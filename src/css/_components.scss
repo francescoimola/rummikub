@@ -282,6 +282,59 @@
     }
 }
 
+// ---- Site footer ----
+// One footer on every page; band fill shared with .site-banner in index.scss. Narrow stack here, Wide in _responsive.scss
+.site-footer {
+    container: footer / inline-size;
+    overflow-x: clip; // the Wide drawing bleeds past the column
+    padding-block: var(--space-xl-2xl) var(--space-3xl-4xl);
+    padding-inline: var(--space-m-l);
+    // links on the band: darken the accent for contrast, as .card.featured does
+    --color-accent: light-dark(var(--brand-900), var(--brand-800));
+    --accent-hover: light-dark(var(--brand-950), var(--brand-900));
+}
+
+.site-footer__inner {
+    display: grid;
+    column-gap: var(--space-s-m);
+    row-gap: var(--space-s-m);
+    max-inline-size: var(--grid-width-l);
+    margin-inline: auto;
+}
+
+.site-footer__art {
+    color: var(--brand-900);
+
+    svg {
+        display: block;
+        inline-size: 100%;
+        block-size: auto;
+    }
+}
+
+.site-footer__colophon {
+    margin-block-start: calc(var(--space-3xl-4xl) - var(--space-s-m)); // row gap tops it up to the Figma 3xl-4xl
+}
+
+.site-footer__badges {
+    display: flex;
+    align-items: stretch;
+    gap: var(--space-s-m);
+    padding: 0;
+    list-style: none;
+
+    :is(svg, img) {
+        display: block;
+        block-size: var(--space-3xl);
+        inline-size: auto;
+    }
+}
+
+.contact-card ul {
+    padding: 0;
+    list-style: none;
+}
+
 // ---- Illustrations ----
 
 // Scoped to main on purpose: the banner is a <header> too, and this padding would collapse its icons.
