@@ -27,7 +27,7 @@ pnpm clean            # rm -rf public
 Content and media are editable via Pages CMS, configured in `.pages.yml` at the repo root (per-branch). Uploads land in `src/assets/` and are written as `/assets/...` URLs.
 
 - **Collections** `work` (`src/work`, sorted by `endDate` desc, `featured` boolean) and `writing` (`src/writing`, sorted by `date` desc, `type` select) edit each `.md`'s frontmatter and body. Add a `writing` entry with `external`+`source` set (leave `permalink`+`body` blank) for a link-only Substack item. `writing.11tydata.js` (excluded from CMS) holds dir metadata + computed permalink.
-- **`artProjects`** is a single top-level-array file (`src/_data/artProjects.json`): `list: true` with fields directly under the entry, nested `images` as an `object` list.
+- **`artProjects`** is a single top-level-array file (`src/_data/artProjects.json`): `list: true` with fields directly under the entry, nested `images` as an `object` list. **`explorations`** (`src/_data/explorations.json`, the homepage carousel) is the same shape: `{ src, alt }` entries, uploads to `src/assets/explorations`.
 - **Raw editors** for `_headers`, `_redirects`, `robots.txt` — `format: code`, no structured fields.
 - **`body` fields are `type: text`, never `rich-text`** — posts mix markdown with Nunjucks shortcodes (`figureImg`, `projectVideo`) that a rich-text round-trip would corrupt.
 - `settings.content.merge: true` preserves keys in `artProjects.json` that aren't in the schema.

@@ -1,0 +1,11 @@
+{# Explorations carousel (G14): a scroll-snap strip, no JS. Prev/next are ::scroll-button() where supported; #}
+{# elsewhere the track still swipes, scrolls and takes the keyboard (tabindex). Slides crop to 3:2 (G45). #}
+{% macro carousel(slides, label) %}
+<section class="carousel" aria-roledescription="carousel" aria-label="{{ label }}">
+    <ul class="carousel__track" tabindex="0" role="list">
+        {%- for slide in slides %}
+        <li aria-roledescription="slide" aria-label="{{ loop.index }} of {{ loop.length }}"><img src="{{ slide.src }}" alt="{{ slide.alt }}" loading="lazy"></li>
+        {%- endfor %}
+    </ul>
+</section>
+{% endmacro %}
