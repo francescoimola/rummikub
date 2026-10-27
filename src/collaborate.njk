@@ -9,7 +9,7 @@ eleventyNavigation:
   parent: Home
 ---
 {% from "_project-item.njk" import projectItem %}
-{% from "_cta-card.njk" import ctaCard %}
+{% from "_cta-card.njk" import ctaCard with context %}
 {% from "_quote-card.njk" import quoteCard %}
 <header class="collab-hero">
     <div class="flow has-gap-s">
@@ -21,7 +21,7 @@ eleventyNavigation:
         <p>I’ve worked with freelancers, solo owners, boutique agencies, small businesses, and institutional departments, across education, nonprofit, B2B, and B2C.</p>
         <p>Feel like I could be the person you’re after?</p>
         {# status is a span, not a p — the button sits inline and a p can't nest inside a p #}
-        <p><button type="button" data-copy-email="hi@francescoimola.com" data-icon="copy">Copy email address</button><span role="status" class="sr-only" data-copy-status></span></p>
+        <p><button type="button" data-copy-email="{{ site.email }}" data-icon="copy">Copy email address</button><span role="status" class="sr-only" data-copy-status></span></p>
         <a href="/about/" data-icon="arrow-right">More about me</a>
     </div>
     <div class="grid-cols-2 collab-hero__photos">

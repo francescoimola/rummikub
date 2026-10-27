@@ -5,8 +5,8 @@
     body,
     callLabel = "Book free intro call",
     emailLabel = "Copy email address",
-    callUrl = "https://cal.com/francescoimola/intro",
-    emailAddress = "hi@francescoimola.com",
+    callUrl = site.bookingUrl,
+    emailAddress = site.email,
     emailFirst = false
 ) %}
 {%- set callLink %}<a data-icon="phone" href="{{ callUrl }}" target="_blank" rel="noopener noreferrer">{{ callLabel }}</a>{% endset -%}

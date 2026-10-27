@@ -8,14 +8,14 @@ eleventyNavigation:
   parent: Services
 ---
 {% from "_faq-list.njk" import faqList %}
-{% from "_cta-card.njk" import ctaCard %}
+{% from "_cta-card.njk" import ctaCard with context %}
 {% from "_page-header.njk" import pageHeader %}
 {{ pageHeader("deskgarden", "Give your people what they want, at last: a website that says it like it is.") }}
 <section class="section">
     <h2 class="highlight-header">What you get</h2>
     <div class="flow has-gap-s">
         <p>A design so confident you'll be wishing the whole web was built this way, and unignorable copy that tells your story like it's meant to be told.</p>
-        <a href="https://cal.com/francescoimola/intro" data-icon="phone" rel="noopener noreferrer" target="_blank">Book a free intro</a>
+        <a href="{{ site.bookingUrl }}" data-icon="phone" rel="noopener noreferrer" target="_blank">Book a free intro</a>
     </div>
 </section>
 <section class="section">
