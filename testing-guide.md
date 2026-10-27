@@ -70,3 +70,15 @@ Run in jsdom. These files are IIFE-style with no exports, so the pattern is: set
 - Test behaviour, not implementation. "When I click, content expands" — not "the handler calls `classList.toggle`".
 - New Eleventy filter/shortcode/transform? Add a test.
 - New browser feature? Only test it if breakage would be invisible (see above) — and ask Francesco before adding any new JS or test file (AGENTS.md, non-negotiable rules).
+
+## Known Firefox console warnings
+
+Firefox lists CSS it doesn't support as console warnings. They are progressive enhancement, not bugs, and wrapping the rules in `@supports` doesn't silence them (Firefox still reports declarations inside a failed block). Triaged in #67 with a frame-by-frame log; the page had zero JS errors and no failed requests.
+
+- **Ours, expected:** `::scroll-button()` (carousel arrows, Chromium only), `animation-timeline` / `animation-range` (scroll animations, `scroll-fallback.js` covers Firefox), `interpolate-size`, `text-wrap: pretty` / `text-wrap-style: pretty`.
+- **Vendored cleacss (never edit):** `grid-column-start: 0`, `::-ms-track` / `::-ms-thumb`.
+- **Added by the build's vendor prefixing:** `-moz-column-gap`, `-webkit-text-size-adjust`.
+- **Not ours:** anything from `popup.css`, `screenshot.css` or "Sublime highlighter" is a browser extension.
+- **Font preload notices:** "preloaded with link preload was not used" for Ronzino Regular/Medium/Bold. The tags are correct (`crossorigin`, URLs match the `@font-face` rules) and each font is fetched once; treat it as a Firefox quirk, and keep the preloads because `font-display: optional` needs the fonts early.
+
+A *real* problem is a red error: a JS exception, a 404, or a rule whose property Firefox supports but whose value is wrong.
