@@ -1,0 +1,64 @@
+{
+  "about": [
+    {
+      "question": "How do you think about design?",
+      "answer": "Your car, your phone, your dad's beloved charcoal barbecue that takes ages to heat up but, once it's hot, it really is a joy to cook with. Design is the lens through which we experience the world, and on a good day, my job is to shape those lenses by asking the question: how can I make this thing better, or more helpful?\n\nIf I had to sum up my design manifesto, the synopsis would probably state \"there is no good design without compromise\". Good design is all about choosing the right trade-off for your audience, which may mean choosing to follow a trend, or sticking to the tried and tested, being playful or being dead serious, or bending the process in your favour. Compromise might also mean skipping the steps you deem unnecessary, starting from the answer and working backwards, trusting your gut, or making something for no better reason than to make someone smile.\n\nUltimately, good design is imperceptible—that is, it's harder to spot than bad design. And though it may be impossible to achieve, good design is always worth aiming for."
+    },
+    {
+      "question": "Why trust based marketing?",
+      "answer": "With so many people losing trust in the messages being pushed by mainstream marketing, an approach based on trust is how you get people to choose you, because, well, they trust you. Not because you manipulated them, chased them with an axe or pushed them to their limit.\n\nIt's a vast and wild frontier that many marketers and brands have only begun to explore, and it's very much one of the pillars of my work.\n\nTo borrow the [words of Rob Hardy](https://x.com/ungatedlife/status/1584621315998486528), the main guy [who championed the term](https://forest.quest/non-coercive-marketing-primer/), \"the big secret is that non-coercive marketing isn't actually about marketing at all, but instead about how we relate to ourselves and to others, and healing the wounds of distrust that ripple through generations.\"\n\nMy work in this field incorporates everything I have learnt from working in marketing (mostly content and inbound), internal communications, exhibition design, and graphic design over the last 8 years."
+    },
+    {
+      "question": "Are there any clients you wouldn't take on?",
+      "answer": "I'm not going to work with clients in the fossil fuel sector, or anyone who's directly tied to that industry. I'm not interested in areas like fast fashion, weight loss or gambling either.\n\nWhen it comes to working practices, I steer clear of briefs that call for dark design patterns, manipulative marketing, or anything that makes the user feel worthless in order to win a sale—though luckily these are becoming less common occurrences.\n\nOn the other hand, I get on best with folks who have something meaningful to share or who have spent a long time developing a solid product/service that they want to see succeed. This category includes charities, indie makers and small businesses with a long-standing presence."
+    }
+  ],
+  "design": [
+    {
+      "question": "What platforms do you build on?",
+      "answer": "I'm primarily a no-code developer and I like to work in Framer or Webflow.\n\nHowever, I'm not too precious about what platform is best, and if you’ve already committed to a CMS or website-builder, I can usually adapt as most platforms work on similar principles.\n\nWhen it comes to design, analytics and email marketing, I like to keep an open mind. This lets us bring in other specialised tools to help us stay productive and meet project goals (don't worry, you won't be forced to use anything you haven't agreed to)."
+    },
+    {
+      "question": "How long does a website take to make?",
+      "answer": "Most websites take 4-10 weeks depending on scope; this includes research, design and development. Whatever you have in mind, we can establish a timeline together before we start."
+    },
+    {
+      "question": "What does the process look like?",
+      "answer": "1. We start with a free, short introductory call to talk through your project, see if we're a good fit, and ballpark the cost.\n2. I'll write a brief and a quote based on what we discussed. If you're happy to go ahead, approve it and pay the deposit. I'll get to work right away.\n3. We move from research to writing the content to designing. I'll share drafts at key milestones, so you get to see progress early. Give me your feedback within a week, and I'll revise. One round of revisions per milestone is included.\n4. Once you're satisfied with the final content and design, I build the website on the platform we've chosen and test it thoroughly.\n5. The day has come when I hand you the keys! Unless we've agreed otherwise, you will get access to the website back-end, all the final assets, and there are no more payments to be made from here on out."
+    },
+    {
+      "question": "What happens if I don't like the result?",
+      "answer": "At each milestone, we'll either meet to review progress or I'll send you what I created so far. If there's anything that's not quite there, you can ask me to make any revisions and I'll work with you to get it right.\n\nThe first revision round at each milestone is free. After that, I charge £250 for each additional round.\n\nYou also have a 14-day cooling-off period from the start. It's rare, but people do change their minds, and I won't hold you to it. Whether you cancel within those 14 days or later, you only pay for the time I've already spent on the project."
+    },
+    {
+      "question": "Can you help with SEO and GEO?",
+      "answer": "I always make sure that the websites I build are readable by real people first. By design, this approach helps make sure search engines and AI chatbots find your content valuable as well.\n\nWherever possible, I take care to build sites with valid HTML, the right structure, fast loading times and Lighthouse scores of 95+ (for SEO). I also let you customise the content that each page displays in the search results.\n\nAs part of any website commission, you can upgrade to get a detailed SEO analysis of your competitors' websites. This means looking at over 10 years of data to find tactics and content ideas worth copying, and it includes a plan to help you implement any changes that are needed."
+    }
+  ],
+  "consultations": [
+    {
+      "question": "Will it be a long process?",
+      "answer": "No, this is a pretty straightforward website health check for busy people who want answers quickly. Besides the meeting itself, the only admin is a 5-minute questionnaire I'll send you right after booking."
+    },
+    {
+      "question": "How thorough is the website review?",
+      "answer": "The website review is thorough but not exhaustive. Before the session, I will spend up to 4 hours auditing your website to get a rounded idea of what it is doing well and what needs work. I will focus my review on the area you told me you're struggling with the most (e.g. SEO, UX, UI, or something else)."
+    },
+    {
+      "question": "What makes this different from a free website report?",
+      "answer": "There are always so many best practices to read about, and everyone has soooo many ideas on how you can improve things! Then there are the endless “free” website reports or “health checks” that often overwhelm you with flaws in your site and then offer to fix them for a fee.\n\nA paid consultation with me is different. I have no marketing funnel to shove you in, no SEO packages to upsell, no account manager waiting to \"onboard\" you. And you won’t be left decoding a 17-page audit on your own. The consultation is the whole thing. You'll leave with a concise to-do list, a lot of encouragement, and a clear idea of what to prioritise and what to skip. And if we never speak again, that's a perfectly good outcome."
+    },
+    {
+      "question": "Do you guarantee results?",
+      "answer": "I can't promise results, but I can promise to do my absolute best to help you improve your website based on my experience and the research I'll do. You should be wary of anyone who claims guaranteed results because every situation is different and running a business is not a science."
+    },
+    {
+      "question": "What if I need to cancel?",
+      "answer": "Life happens. You can cancel free of charge up to 3 days before the session. After that, no refunds are available, as I'll have already invested time reviewing your website. You can however reschedule the meeting (as long as you give 24 hours of notice) and I'll be happy to find another time."
+    },
+    {
+      "question": "I can’t afford this, can you offer a discount?",
+      "answer": "Consulting fees can be a lot to take in. If you're struggling financially, I'm happy to chat about payment plans."
+    }
+  ]
+}

@@ -7,6 +7,7 @@ eleventyNavigation:
   key: Website Consultations
   parent: Services
 ---
+{% from "_faq-list.njk" import faqList %}
 {% from "_cta-card.njk" import ctaCard %}
 {% from "_page-header.njk" import pageHeader %}
 {{ pageHeader("websitevisit", "Like a doctor's check-up, but for your website") }}
@@ -79,35 +80,5 @@ eleventyNavigation:
 
 <section class="flow has-gap-s pretty">
     <h2 class="highlight-header has-mb-xs">Consultation FAQs</h2>
-    <details>
-        <summary>Will it be a long process?</summary>
-        <p>No, this is a pretty straightforward website health check for busy people who want answers quickly. Besides the meeting itself, the only admin is a 5-minute questionnaire I'll send you right after booking.</p>
-    </details>
-    <hr>
-    <details>
-        <summary>How thorough is the website review?</summary>
-        <p>The website review is thorough but not exhaustive. Before the session, I will spend up to 4 hours auditing your website to get a rounded idea of what it is doing well and what needs work. I will focus my review on the area you told me you're struggling with the most (e.g. SEO, UX, UI, or something else).</p>
-    </details>
-    <hr>
-     <details>
-        <summary>What makes this different from a free website report?</summary>
-        <p>There are always so many best practices to read about, and everyone has soooo many ideas on how you can improve things! Then there are the endless “free” website reports or “health checks” that often overwhelm you with flaws in your site and then offer to fix them for a fee.</p>
-        <p>A paid consultation with me is different. I have no marketing funnel to shove you in, no SEO packages to upsell, no account manager waiting to "onboard" you. And you won’t be left decoding a 17-page audit on your own. 
-        The consultation is the whole thing. You'll leave with a concise to-do list, a lot of encouragement, and a clear idea of what to prioritise and what to skip. And if we never speak again, that's a perfectly good outcome.</p>
-    </details>
-    <hr>
-    <details>
-        <summary>Do you guarantee results?</summary>
-        <p>I can't promise results, but I can promise to do my absolute best to help you improve your website based on my experience and the research I'll do. You should be wary of anyone who claims guaranteed results because every situation is different and running a business is not a science.</p>
-    </details>
-    <hr>
-     <details>
-        <summary>What if I need to cancel?</summary>
-        <p>Life happens. You can cancel free of charge up to 3 days before the session. After that, no refunds are available, as I'll have already invested time reviewing your website. You can however reschedule the meeting (as long as you give 24 hours of notice) and I'll be happy to find another time.</p>
-    </details>
-    <hr>
-    <details>
-        <summary>I can’t afford this, can you offer a discount?</summary>
-        <p>Consulting fees can be a lot to take in. If you're struggling financially, I'm happy to chat about payment plans.</p>
-    </details>
+    {{ faqList(faqs.consultations) }}
 </section>

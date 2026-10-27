@@ -4,6 +4,7 @@ import markdown from "./markdown.js";
 function createMockEleventyConfig() {
   return {
     setLibrary: vi.fn(),
+    addFilter: vi.fn(),
   };
 }
 
@@ -13,6 +14,16 @@ describe("markdown.js", () => {
     markdown(config);
 
     expect(config.setLibrary).toHaveBeenCalledWith("md", expect.anything());
+  });
+
+  it("registers a markdown filter that renders with the same library", () => {
+    const config = createMockEleventyConfig();
+    markdown(config);
+
+    const [name, filter] = config.addFilter.mock.calls[0];
+    expect(name).toBe("markdown");
+    expect(filter("[x](https://example.com)")).toContain('target="_blank" rel="noopener noreferrer"');
+    expect(filter(undefined)).toBe("");
   });
 
   it("configures markdown-it with html enabled", () => {
