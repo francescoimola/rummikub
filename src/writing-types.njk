@@ -11,7 +11,8 @@ eleventyComputed:
   metaTitle: "{{ writingTypes[typeSlug].metaTitle }}"
   description: "{{ writingTypes[typeSlug].metaDescription }}"
   eleventyNavigation:
-    key: "{{ typeSlug }}" 
+    key: "{{ typeSlug }}"
+    title: "{{ writingTypes[typeSlug].short }}"
     parent: Writing
 ---
 
@@ -22,11 +23,11 @@ eleventyComputed:
     <p class="dimmed">{{ t.blurb }}</p>
     {% include "_breadcrumb.njk" %}
   </header>
-  <div class="flow has-gap-xs{% if typeSlug == 'notes' %} writing-section--quiet{% endif %}">
+  <div class="flow has-gap-xs">
     {% set items = collections.writing | byType(typeSlug) %}
     {% set thumbColors = items | writingThumbColors %}
     {% for item in items %}
-      {{ writingItem(item, thumbColors[loop.index0]) }}
+      {{ writingItem(item, thumbColors[loop.index0], compact = true) }}
     {% endfor %}
   </div>
 

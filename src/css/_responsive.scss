@@ -86,6 +86,12 @@
 
     // Components fold against main's inline-size (viewport minus gutters), not the viewport
 
+    @container (width < #{scale.$bp-s}) {
+        .writing-item {
+            grid-template-columns: 1fr 3fr;
+        }
+    }
+
     @container (width < #{scale.$bp-l}) {
         // CTA renders at paragraph size while the item is stacked to one column
         .project-item__cta {

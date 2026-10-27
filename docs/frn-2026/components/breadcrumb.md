@@ -1,6 +1,6 @@
 # Breadcrumb
 
-**Layer:** Composite · **Status:** figma · **Figma:** `2353:19355` · **Code:** `src/_includes/_breadcrumb.njk`
+**Layer:** Composite · **Status:** code · **Figma:** `2353:19355` · **Code:** `src/_includes/_breadcrumb.njk`
 
 ## Purpose
 
@@ -71,6 +71,7 @@ Values from [`_tokens.md`](_tokens.md).
 - Drop `capitalize` so the labels read as authored (sentence case).
 - The parent label becomes "Ideas" (G1); update the Figma default text to match.
 - Separator stays `data-icon-before="chevron-right"`; `_icons.scss` already zeroes the gap for an empty glyph.
+- **Ported (#32):** `nav[aria-label="Breadcrumb"] > ol`, separator `li` is `aria-hidden`, no `capitalize`. Labels come from `eleventyNavigation.title`: `writing.njk` says "Ideas", type pages use their `short` label ("Essays").
 
 ## Open questions
 
