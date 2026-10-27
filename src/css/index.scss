@@ -445,33 +445,11 @@ nav li a {
         gap: var(--space-s);
     }
 
-    // CSS-drawn plus: two currentColor bars that rotate 45° into an × when open
+    // Plus glyph (data-icon-before="plus") that rotates 45° into an × when open; 1.2em box so the 14/24 stroke spans about 0.7em
     &__icon {
         display: inline-block;
-        inline-size: 0.7em;
-        block-size: 0.7em;
-        position: relative;
+        font-size: 1.2em;
         transition: transform var(--dur-medium) var(--ease);
-
-        &::before,
-        &::after {
-            content: "";
-            position: absolute;
-            inset-block-start: 50%;
-            inset-inline-start: 50%;
-            translate: -50% -50%;
-            background: currentColor;
-        }
-
-        &::before {
-            inline-size: 100%;
-            block-size: 0.1em; // horizontal bar
-        }
-
-        &::after {
-            inline-size: 0.1em; // vertical bar
-            block-size: 100%;
-        }
     }
 
     &[open] &__icon {
