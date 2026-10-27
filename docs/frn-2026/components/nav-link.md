@@ -41,14 +41,14 @@ Values from [`_tokens.md`](_tokens.md).
 
 ## States & interactions
 
-- **Hover:** Figma wires Default → Hover with `ON_HOVER`, change to, smart animate. In code (to build) the marker shows on `a:hover` and on `[aria-current="page"]`, sliding in over `--dur-fast` (G3). Under reduced motion `--dur-fast` is 0s, so it just appears.
+- **Hover:** Figma wires Default → Hover with `ON_HOVER`, change to, smart animate. In code the link underlines on `a:hover` and `:focus-visible`, with no motion (G49, which supersedes the bullet in G3).
 - **Current:** set by the page, see the Header's content rules for which page marks which item.
 - **Focus:** the global `:focus-visible` ring.
 
 ## Content rules
 
 - Labels are fixed in the Header partial. Keep them short, one line.
-- The current marker is not colour-only: it is the bullet plus `aria-current="page"`.
+- The current marker is not colour-only: it is the underline, the `--brand-900` colour and `aria-current="page"`.
 
 ## HTML & accessibility
 
@@ -57,14 +57,14 @@ Values from [`_tokens.md`](_tokens.md).
 ```
 
 - `aria-current="page"` goes on the link of the current page only.
-- The bullet is decorative (`::before`, no text content).
+- The underline is a text decoration, so it adds no content.
 - The link's accessible name is its label.
 
 ## Port notes
 
-- **Ported (#22):** the bullet is `nav li::before`, absolutely placed `--nav-indent` before the label so it never shifts the row. It shows on `[aria-current="page"]`, `:hover` and `:focus-within`, fading and sliding in over `--dur-fast` (0s under reduced motion).
+- **Ported (#22, changed by #42):** no bullet. Hover and focus underline the link; `[aria-current="page"]` is underlined and takes `--brand-900` (`nav li a` and `nav a[aria-current]` in `index.scss`). G49.
 - Labels and the current-page rule live in the `navItem` macro calls in `_header.njk`; "Case studies" is gone and "Ideas & guides" reads "Ideas" (G1).
 
 ## Open questions
 
-None. Settled in Phase 18 (G3).
+None. Settled in Phase 18 (G3) and changed by G49.
