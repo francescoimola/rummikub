@@ -11,7 +11,7 @@
 ) %}
 {%- set callLink %}<a data-icon="phone" href="{{ callUrl }}" target="_blank" rel="noopener noreferrer">{{ callLabel }}</a>{% endset -%}
 {%- set emailButton %}<button type="button" data-copy-email="{{ emailAddress }}" data-icon="copy">{{ emailLabel }}</button>{% endset -%}
-<section view-animation="breakout" class="card giant featured cta-card flow has-gap-xs pretty">
+<section class="card giant featured cta-card flow has-gap-xs pretty">
     <h2>{{ heading }}</h2>
     {%- if body %}
     <p>{{ body }}</p>

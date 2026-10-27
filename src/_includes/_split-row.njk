@@ -2,12 +2,10 @@
 {% macro splitRow(item) %}
 <article class="split-row">
   <div class="split-row__text">
-    <div>
-      <h2>{{ item.title }}</h2>
-      {% if item.year %}<p class="dimmed">{{ item.year }}</p>{% endif %}
-    </div>
+    <h2>{{ item.title }}</h2>
     <div class="flow has-gap-2xs">
       <p>{{ item.description }}</p>
+      {% if item.year %}<p class="dimmed">{{ item.year }}</p>{% endif %}
       {% if item.link %}
       {# only external links open in a new tab — internal ones (e.g. /writing/…) stay in place #}
       <a href="{{ item.link }}"{% if "http" in item.link %} target="_blank" rel="noopener noreferrer"{% endif %} data-icon="arrow-ext">{{ item.linkLabel | default("Visit " + item.title) }}</a>

@@ -163,6 +163,7 @@
             grid-column: 2;
             grid-row: 1;
             align-self: center;
+            margin-block: 0; // the stacked spacing above and below doesn't apply beside Contact
 
             svg {
                 inline-size: 206%; // Figma: the 987-wide drawing overflows its 479 column

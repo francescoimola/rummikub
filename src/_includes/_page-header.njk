@@ -1,7 +1,7 @@
 {# Section hero: an optional illustration over the page's KC Pelletier h1, on the brand band (G16, G17). #}
 {# pageHeader("", label) drops the drawing; label may carry inline markup such as <br>. #}
 {% macro pageHeader(iconName, label) %}
-<header class="page-header" view-animation="settle">
+<header class="page-header">
     {%- if iconName %}
     {% icon iconName %}
     {%- endif %}

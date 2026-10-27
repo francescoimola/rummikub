@@ -135,6 +135,19 @@
     }
 }
 
+// CTA band: bleeds through the layout gutter like the heroes, everything centred
+.card.cta-card {
+    inline-size: calc(100% + 2 * var(--gutter-y-sticky));
+    margin-inline: calc(-1 * var(--gutter-y-sticky));
+    border-radius: 0;
+    align-items: center;
+    text-align: center;
+
+    .flow {
+        align-items: center;
+    }
+}
+
 // CTA card heading: KC Pelletier, wider than the body; .card.cta-card outranks .card.giant>*, which caps every child at --inline-size
 .card.cta-card>h2 {
     max-inline-size: min(100%, var(--grid-width-l));
@@ -144,6 +157,7 @@
     font-weight: var(--font-weight-base);
     line-height: 1;
     letter-spacing: 0;
+    hyphens: none; // cleacss hyphenates h2
     text-transform: uppercase; // KC is caps-only; keeps the swap fallback in caps too
 }
 
@@ -200,7 +214,7 @@
 
 // ---- Split row (Artmaking) ----
 
-// Text above images (Q25): title + year | description + link at content width, 2-up fold in _responsive.scss (G24)
+// Text above images (Q25): title | description, dimmed year, link, at content width, 2-up fold in _responsive.scss (G24)
 .split-row__text {
     gap: var(--space-xs);
     inline-size: 100%;
@@ -278,10 +292,9 @@
 .theme-switch {
     display: flex;
     block-size: var(--space-m);
-    gap: var(--space-3xs-2xs); // paired tokens — ease down on mobile
-    padding: calc(var(--space-3xs)/var(--type-ratio));
     border: var(--input-border-width) solid var(--input-border-color);
     border-radius: var(--border-radius-s);
+    overflow: clip; // the selected fill runs to the border on every side
 }
 
 .theme-switch button {
@@ -289,8 +302,7 @@
     align-items: center;
     justify-content: center;
     aspect-ratio: 1;
-    padding: calc(var(--space-3xs)/var(--type-ratio));
-    border-radius: var(--border-radius-s);
+    padding: calc(var(--space-3xs) / 2);
 }
 
 .theme-switch button svg {
@@ -412,6 +424,7 @@
 
 .site-footer__art {
     color: var(--brand-900);
+    margin-block: calc(var(--space-3xl-4xl) - var(--space-s-m)); // Figma Narrow: 135 above and below the drawing; the grid's row gap already supplies the rest
 
     svg {
         display: block;
@@ -464,14 +477,12 @@ main svg.illustration-wide {
 }
 
 // ---- Page header (section hero) ----
-// Band fill shared with .site-banner in index.scss; settle pulls it in to content width, which also caps the heading
+// Band fill shared with .site-banner in index.scss
 .page-header {
-    --settled-size: var(--grid-width-l);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--space-2xl-3xl);
-    max-inline-size: none; // the band spans main; main>* would cap it at --inline-size
     padding: var(--space-2xl-3xl) var(--space-xl-2xl);
     text-align: center;
 
@@ -490,6 +501,7 @@ main svg.illustration-wide {
         font-weight: var(--font-weight-base);
         line-height: 1;
         letter-spacing: 0;
+        hyphens: none; // cleacss hyphenates h1
         text-transform: uppercase; // KC is caps-only; keeps the swap fallback in caps too
         text-wrap: balance;
     }
@@ -667,14 +679,21 @@ main svg.illustration-wide {
     }
 }
 
+// ---- Hero bands ----
+// Every page's hero bleeds through the layout gutter to the banner and the viewport edges (Figma); main>* would cap it at --inline-size
+.home-hero,
+.page-header,
+.collab-hero {
+    max-inline-size: none;
+    inline-size: calc(100% + 2 * var(--gutter-y-sticky));
+    margin: calc(-1 * var(--gutter-y-sticky)) calc(-1 * var(--gutter-y-sticky)) 0;
+}
+
 // ---- Homepage ----
 
 // KC hero band: the band is the container, so --step-hero (100cqi / 5.196) sizes the widest line to the band's content box
 .home-hero {
     container-type: inline-size;
-    max-inline-size: none; // the band spans main; main>* would cap it at --inline-size
-    inline-size: calc(100% + 2 * var(--gutter-y-sticky));
-    margin: calc(-1 * var(--gutter-y-sticky)) calc(-1 * var(--gutter-y-sticky)) 0; // flush to the banner and the viewport edges
     padding: var(--space-xl-2xl);
 
     h1 {
@@ -685,6 +704,7 @@ main svg.illustration-wide {
         font-weight: var(--font-weight-base);
         line-height: var(--line-height-hero);
         letter-spacing: var(--letter-spacing-hero);
+        hyphens: none; // cleacss hyphenates h1
         text-transform: uppercase; // KC is caps-only; keeps the swap fallback in caps too
         max-inline-size: none;
     }
@@ -710,7 +730,6 @@ main svg.illustration-wide {
     flex-direction: column;
     align-items: center;
     gap: var(--space-2xl-3xl);
-    max-inline-size: none; // the band spans main; main>* would cap it at --inline-size
     padding: var(--space-2xl-3xl) var(--space-xl-2xl);
 
     >* {
