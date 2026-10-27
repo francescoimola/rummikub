@@ -19,7 +19,7 @@ Status tracks the **redesign**: `planned` (a pattern with no Figma component) â†
 | Illustration/* | [illustration.md](illustration.md) | `2357:19402` â€¦ | `src/assets/icons/*.svg` | figma |
 | Image | [image.md](image.md) | `2341:9739` | `<img>` / `figureImg` | figma |
 | Icon link | [icon-link.md](icon-link.md) | `2352:18813` | `a[data-icon]` | figma |
-| Nav link | [nav-link.md](nav-link.md) | `2291:779` | `<li>` in `_header.njk` | figma |
+| Nav link | [nav-link.md](nav-link.md) | `2291:779` | `<li>` in `_header.njk` | code |
 | Section heading | [section-heading.md](section-heading.md) | `2380:19847` | `h2.highlight-header` | code |
 | Card | [card.md](card.md) | `2403:20009` | `.card` | figma |
 

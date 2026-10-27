@@ -110,18 +110,12 @@ html.lenis body {
 }
 
 // ---- Theming ----
-.sidebar, .card:is(header) {
+.site-banner, .card:is(header) {
     --color-accent: var(--neutral-950-alpha);
     // dark: brand mix baked over --body-bg so it's opaque (else scrolled content shows through); 16% solved for ΔE_OK 0.08, a step above cards
     background: light-dark(var(--brand-150), color-mix(in oklch, var(--brand-400) 16%, var(--body-bg)));
 }
 
-.sidebar footer {
-        --color-accent: var(--brand-900);
-        --accent-hover: var(--brand-950);
-}
-
-[data-content="contrast"]>.content,
 body:has([data-content="contrast"]) {
     background-color: light-dark(var(--content-light), var(--body-bg));
 }
@@ -353,8 +347,8 @@ button {
 // ---- Nav ----
 
 nav {
-    --nav-indent: 0.7em; // drives bullet inset and hover shift — keep them equal
-    display: grid; // desktop columns come from the .sidebar subgrid in _responsive.scss
+    --nav-indent: 0.7em; // drives bullet inset and its slide-in distance
+    display: grid;
 }
 
 nav>a {
@@ -376,8 +370,9 @@ nav li::before {
     position: absolute;
     inset-inline-start: calc(-1 * var(--nav-indent));
     opacity: 0;
+    translate: calc(-0.5 * var(--nav-indent)) 0;
     pointer-events: none;
-    transition: opacity var(--dur-fast) var(--ease);
+    transition: opacity var(--dur-fast) var(--ease), translate var(--dur-fast) var(--ease); // --dur-fast is 0s under reduced motion
 }
 
 // active/focused rows: accent colour + reveal the bullet
@@ -387,6 +382,7 @@ nav li:is(:has(a[aria-current="page"]), :focus-within) {
 
 nav li:is(:has(a[aria-current="page"]), :focus-within)::before {
     opacity: 1;
+    translate: 0;
 }
 
 @media (hover: hover) {
@@ -396,17 +392,41 @@ nav li:is(:has(a[aria-current="page"]), :focus-within)::before {
 
     nav li:hover::before {
         opacity: 1;
+        translate: 0;
     }
 }
 
-// ---- Mobile disclosure menu ----
-// <details> reuses the global ::details-content reveal; only mobile bar + icon are new
+// ---- Site banner ----
+// Narrow by default; the Wide row lives in the banner container block in _responsive.scss
+.site-banner {
+    container: banner / inline-size;
+    padding-block: var(--space-s);
+}
+
+// Name and <details> share one grid cell: the name overlays the bar's start, so the open panel spans the full width
+.site-banner nav {
+    align-items: start;
+    padding-inline: var(--space-m-l);
+
+    &>* {
+        grid-area: 1 / 1;
+    }
+}
+
+.site-banner__name {
+    justify-self: start;
+    position: relative;
+    z-index: 1; // above the summary it overlays, so it stays a link
+}
+
+// <details> reuses the global ::details-content reveal; only the bar, icon and panel layout are new
 .nav-menu {
 
     &__bar {
         display: flex;
-        justify-content: space-between;
+        justify-content: end;
         align-items: center;
+        gap: var(--space-2xs);
         cursor: pointer;
 
         &::after {
@@ -414,10 +434,31 @@ nav li:is(:has(a[aria-current="page"]), :focus-within)::before {
         }
     }
 
-    &__label {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--space-2xs);
+    // Open panel: look toggles left, links right
+    &__panel {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "toggles links";
+        column-gap: var(--space-l);
+        padding-block: var(--space-s);
+    }
+
+    &__panel>ul {
+        grid-area: links;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+
+    &__toggles {
+        grid-area: toggles;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: start;
+        align-content: start;
+        gap: var(--space-s);
     }
 
     // CSS-drawn plus: two currentColor bars that rotate 45° into an × when open
@@ -456,37 +497,13 @@ nav li:is(:has(a[aria-current="page"]), :focus-within)::before {
 
 // ---- Layout ----
 .layout {
-    display: grid;
-    grid-template-columns: max-content 1fr;
+    display: flex;
+    flex-direction: column;
     max-inline-size: var(--max-width);
     margin-inline: auto;
     min-block-size: 100dvh;
+    padding: var(--gutter-y);
     container-type: inline-size;
-}
-
-.sidebar {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-inline-start: var(--gutter-y);
-    margin-block: var(--gutter-y);
-    padding-block: var(--gutter-y);
-    padding-inline-start: var(--gutter-x);
-    padding-inline-end: calc(var(--gutter-x) * 2);
-    position: sticky;
-    top: var(--gutter-y);
-    block-size: calc(100dvh - calc(var(--gutter-y) * 2));
-    overflow-y: auto;
-    white-space: nowrap;
-    z-index: 2; // above .project-video-play (z-index:1) so a video scrolling behind the sticky mobile card can't paint over it
-    border-radius: var(--border-radius);
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
-    padding-inline: var(--gutter-y);
-    padding-block: var(--gutter-y);
 
     --gutter-y-sticky: var(--gutter-y); // Freeze the gutter to an absolute length here, so descendants main can stick flush to it
 }

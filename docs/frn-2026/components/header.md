@@ -99,7 +99,8 @@ Values from [`_tokens.md`](_tokens.md).
 
 - `_header.njk` gains a `minimal` branch, e.g. `{% if header == "minimal" %}`.
 - Drop the "Case studies" `<li>`.
-- The desktop sidebar layout (`.sidebar` grid in `_responsive.scss`) is replaced by the top bar.
+- **Full ported (#22):** the sidebar is gone; `_base.njk` renders skip link → banner → `.layout` (main, then the old footers as a stopgap until the Footer ticket). Wide is an `@container banner (width >= $bp-xl)` block in `_responsive.scss`: nav and panel share a `1fr minmax(0, --grid-width-l) 1fr` grid, so the name sits at the column start, links at its end and the toggles in the right track. Narrow is the base: name overlays the `<details>` bar in one grid cell, so the panel spans the full width.
+- "Say hello" links to `#contact` (the footer's id). The Minimal branch is the next ticket, so Header stays `figma` until it lands.
 - Rename the nav label "Ideas & guides" to "Ideas" (G1).
 
 ## Open questions
