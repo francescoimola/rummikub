@@ -1,3 +1,4 @@
+{# Default: the whole card links to a service page; a .has-counter parent numbers its h3. Accordion: CTA glyph follows the link type (G22). #}
 {% macro serviceCard(title, url, description, type = "default", cta = "Enquire") %}
 {% if type == "accordion" %}
 <details class="card link-card">
@@ -13,17 +14,9 @@
 </details>
 {% else %}
 <a href="{{ url }}" class="card flow link-card has-gap-xs balance">
-    {% if type != "adhoc" %}
     <h3 class="has-pb-2xl">{{ title }}</h3>
-    {% else %}
-    <h3>{{ title }}</h3>
-    {% endif %}
     <p>{{ description }}</p>
-    {% if type == "adhoc" %}
-    <span data-icon="email">Enquire</span>
-    {% else %}
     <span data-icon="arrow-right">Learn more</span>
-    {% endif %}
 </a>
 {% endif %}
 {% endmacro %}

@@ -450,6 +450,15 @@ main svg {
     color: var(--brand-900);
 }
 
+// Wide page illustration (Q36): the token is a width, the drawing's ratio sets the height
+main svg.illustration-wide {
+    display: block;
+    inline-size: var(--size-illustration-wide);
+    max-inline-size: 100%;
+    block-size: auto;
+    padding: 0;
+}
+
 // ---- Page header (section hero) ----
 // Band fill shared with .site-banner in index.scss; settle pulls it in to content width, which also caps the heading
 .page-header {

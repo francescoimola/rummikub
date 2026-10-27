@@ -1,6 +1,6 @@
 # Service card
 
-**Layer:** Composite · **Status:** figma · **Figma:** `2292:1547` · **Code:** `src/_includes/_service-card.njk`, `.card.link-card`
+**Layer:** Composite · **Status:** code · **Figma:** `2292:1547` · **Code:** `src/_includes/_service-card.njk`, `.card.link-card`
 
 ## Purpose
 
@@ -82,6 +82,7 @@ Values from [`_tokens.md`](_tokens.md).
 - The Accordion CTA icon is Arrow-right in Figma but `arrow-ext` or `email` in the repo. The repo wins: glyph by link type (G22).
 - Delete the `adhoc` type from `_service-card.njk` and any page that passes it (G23).
 - Summary gap is now a bound minimum, not a fixed 392 (F39).
+- **Ported (#35):** `adhoc` is gone from the macro. On Work with me both sets sit in the Section grid; the Default cards' content `div` carries `.has-counter`, so the numbers run 01, 02.
 
 ## Open questions
 

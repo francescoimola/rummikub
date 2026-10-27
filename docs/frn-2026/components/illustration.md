@@ -66,6 +66,7 @@ Values from [`_tokens.md`](_tokens.md).
 
 - Add `runner.svg` and a footer SVG to `src/assets/icons/`. Hero SVGs should export from Figma without a fixed width and height.
 - **Ported (#24, #27):** `runner.svg` added (exported from `2357:19402`, 52 paths, `currentColor`). The footer drawing is the existing `mailstorm.svg`. Hero sizing lives in `.page-header svg`; the padding hack is gone.
+- **Ported (#35):** node `2275:1904` is the existing `bathcomputer.svg`. Wide illustrations take `{% icon "name", 'class="illustration-wide"' %}`; `main svg.illustration-wide` sets the width from `--size-illustration-wide`, capped at 100%, with no padding.
 - Existing `{% icon iconName %}` stays. `_page-header.njk` sets the height from `--size-hero-illustration` (new fluid token, 154 → 220).
 - The old footer markup has no illustration. The new one inlines the SVG (not `<img>`, which can't follow the theme) with `currentColor` (G10).
 - Hero illustrations keep `currentColor` too (G10).
