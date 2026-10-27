@@ -320,3 +320,148 @@ All built on the duplicate, on a **Components** board (`2291:769`, Utopia Max / 
 - **Known gaps:** Ronzino has no italic, so `*why*` / `*shakes his head*` render upright (asterisks removed). Header current page: Ideas on posts and type pages; none elsewhere.
 - **Pending:** `layout/inline-size` (new driver, 330 / 600, = `--inline-size`) is in `gen_vp.py` and the regenerated import (60 vars). After re-import, the long-form text blocks (still a raw 600) get bound. Audit otherwise: 0 unbound gaps/paddings in the 10 new frames.
 - **Case-study template v2 (user edit on The Loft, 2026-10-25):** media is full-bleed (Fill, `space/l` side padding, `space/xl-2xl` above and below); back-to-back media sit in a 2-col grid (gap `space/s`); text right after media has top padding 0. Applied to Mega Seating Plan (single hero figure). Not yet applied to the two writing posts (same repo shell). Note: The Loft's "Solution" H2 keeps `space/xl-2xl` top after a media grid (double gap), maybe unintended.
+- **User fixed** The Loft's "Solution" H2 (top padding removed), so the double gap is gone.
+- **Template v2 applied to both writing posts** (same `.case-study` shell in the repo): media full-bleed with `space/l` sides and `space/xl-2xl` above/below; text after media at top 0. The flyer guide's two back-to-back image pairs (Hermès + Bienal, bleed before + after) now sit in "Media pair" 2-col grids (gap `space/s`, row = hug).
+- **`layout/inline-size` imported:** all 96 long-form text blocks (intro, paragraphs, headings, lists, quotes, rules) across the 4 pages are bound to it. The long-form pages now have no raw widths.
+- **Port rule:** consecutive media render side by side as a 2-col grid at any width that fits two columns; single media bleed to the page gutter. This replaces the repo's scroll breakout (`breakout`/`settle` keyframes) unless the user wants both.
+
+## Phase 13: Image ratios, capped post media, user page edits (2026-10-25)
+
+- **Five image ratios (user: "top 5 most used").** Survey of every visible image fill in the WIP section and the components board (228 masters, instances excluded), each snapped to its nearest ratio in log space: **3:2** (110), **2:1** (53), **1:1** (21), **4:3** (19), **16:9** (8). Portraits use the same ratios turned upright: 2:3 (9), 3:4 (5), 9:16 (3). That choice is the agent's, so a 2:3 painting isn't cropped square. 51 images changed height (width kept, image fill = cover); all 224 visible ones now have a locked ratio. Excluded: the two hidden footer "STICKER" rectangles. Component thumbs were already exact (Project item 3:2, Writing item 1:1, Carousel 3:2).
+  - Biggest crops: three Exhibition Title Bot art images 2.33 → 2:1 and The Hard Part hero 1.25 → 4:3. The Loft's first media pair now mixes 2:1 + 16:9 (uneven heights).
+  - **Port:** add tokens `--ratio-square: 1`, `--ratio-classic: 4/3`, `--ratio-photo: 3/2`, `--ratio-wide: 16/9`, `--ratio-pano: 2/1` (names TBD) and give every `img`/video poster `aspect-ratio` + `object-fit: cover`. Static and CMS-driven pages alike: `figureImg`/`projectVideo` take a `ratio=` param (defaulting to nearest, computed at build from the source size); `artProjects.json` images get a `ratio` field. The writing-post `max-block-size: 50cqw` hack (`_components.scss:618`) goes away.
+- **Post media capped (user edit on both posts + Mega Seating Plan):** the opening image, and any single image between paragraphs, is capped at `layout/content-width` (Figure FIXED width bound, `space/l` sides, `space/xl-2xl` above/below). The agent applied the same to the flyer guide's remaining full-bleed single (Proprietors' Club). Media pairs stay full-bleed grids. The Loft (case study) keeps full-bleed singles unless the user says otherwise.
+- **Writing type pages:** the user's new `Layout=Expanded` Writing item variant (`2329:9090`, used on Essays/Guides/Notes) had unbound text, so every item showed the default "I hope someday…" title. Fixed: Title/Source/Date text and Source visibility bound to the set's existing properties. All 13 items show their own title, date and source. The section structure (H1, blurb, breadcrumb, items, back link) already matched across the three pages.
+- **Collaborate (user redesign, record for port):** simplified header (no site nav, so visitors aren't pulled away); new hero + a post-hero H2 in the hero face; sections repositioned; some copy changed; the section before the footer is now a large CTA. Copy changes are Figma-only until ported to `src/collaborate*`.
+- **Accessibility statement → writing-post template (user):** rebuilt on the post shell. Intro H1 + dim line "Last updated 4 August 2026" (moved up from the old closing section); 3 paragraphs; H2s with bulleted lists (body style, not links); email card in an inline-size wrapper. Copy is word for word from `src/accessibility.njk`. Old main content kept **hidden** in the frame ("Main Content (old layout, hidden)"), to be deleted on approval. Port: render with `.case-study text` (no `writing-post`).
+- **404 (user edit, record for port):** hero H1 added at the top, copy updated, spacing tweaked.
+- **Image component (user, 2026-10-25):** every content image is now an instance of **`Image`** (`2341:9739`, components board), so the crop is one dropdown. Variant property **Ratio**: 3:2, 2:1, 1:1, 4:3, 16:9 + portraits 2:3, 3:4, 9:16. Structure: hug-height auto-layout root → `Media` rectangle (Fill width, locked ratio, placeholder `neutral/200`). The picture is the `Media` fill override and survives a variant swap. Width comes from the layout, height follows the ratio.
+  - **Swapped:** 144 page images in the WIP section, plus 40 inside components: Project item (both layouts), Writing item (both), and all 36 Carousel slides. Inside components the Image instance is **exposed**, so its Ratio can be changed from the outer instance. Every instance's picture override was carried over (Project item 39/39, Carousel 18/18). Radius/stroke styling (post media: `border-radius` + `media-edge`) is kept as overrides on `Media`.
+  - **Incidents, fixed:** three placements failed on auto-positioned grids after the originals were removed: Passing Notes Zine (Artmaking desktop + tablet) and the Collaborate duotone portrait. The zine was restored from the mobile copy; the portrait was re-uploaded from `src/assets/images/francesco-bw.png` and placed first in its row (repo order). The Writing item thumb lost its grid span; restored (Default: cols 0–2, Expanded: cols 0–1) and both variants set to hug height (Default 174, was a fixed 169).
+  - **Port:** maps to one image partial/shortcode param (`ratio=`) feeding `aspect-ratio` + `object-fit: cover`; see the ratio tokens above.
+
+## Phase 14: User sign-off + tablet/mobile for the new pages (2026-10-25)
+
+- **User decisions:** WIP copy approved. The original section `2260:2139` stays as an **archive**. Portrait ratios kept. The old Accessibility layout was deleted. Case studies follow the posts: The Loft's four single media (opening video, colour-system image, mobile walkthrough, logo video) are now capped at `layout/content-width`. Media pairs stay full-bleed grids.
+- **Tablet 834 + Mobile 390** for all 10 new pages (20 frames, row at y 11995 under each desktop frame, Utopia Min), built with the Phase 10 recipe: Mobile header/footer variants, `space/l` / `space/m` gutters, width-bound blocks set to Fill, mobile stacks ≥ 800 grids/rows in reading order. Long-form media also drop their `space/l` side padding, since the page gutter now does the inset.
+  - **Known gap:** Fill makes the tablet text column 774 px, against `--inline-size` 600 in code. Figma can't express that cap in Min mode, so the code step keeps `max-inline-size: var(--inline-size)`.
+  - **Collaborate:** the simplified header's nav is stretched within the header padding (absolute, STRETCH constraint) on tablet. On mobile it becomes an in-flow wrapping row (`flex-wrap`, gap `space/s`, row gap `space/2xs`), and the toggles drop to a second line. Featured work items use `Layout=Stacked` on mobile, like the homepage.
+  - **Hero text:** the KC Pelletier headings (Collaborate, 404) keep desktop line breaks, for the user to tweak.
+  - **Bindings:** raw grid gaps from the desktop edits are now bound to the grid's own `itemSpacing` token: Collaborate Section → `space/3xs-m`, Theme toggle (incl. the Header component) → `space/3xs`, so 5.09 → 4.69 on desktop. Audit: 0 unbound gaps/paddings in the 20 frames.
+- **Fix (user report, 2026-10-25): stretched toggles and icons in the responsive frames.** Two bugs in the Phase 10/14 responsive script, which built all 28 tablet/mobile frames:
+  1. It unbound **every** width variable, not just `layout/content-width` / `layout/inline-size`. Icons (`step/0`) and colour swatches (`line-height/body`) lost their size token and turned non-square in Min mode. **Fixed:** 58 widths rebound to their desktop variable (52 `step/0`, 6 `line-height/body`); the vector paths of 44 icon frames were rescaled from desktop geometry. Instance icons (Copy, Phone, External) rescale on their own once the width is bound.
+  2. When it filled a text block, it also forced the block's hug-sized ancestors to fill, so link rows, toggle groups and nav lists stretched across the column and the icons went with them. **Fixed:** every stretched non-text row and its contents are restored to their desktop sizing: Collaborate + Accessibility (47 layers), About (12), Artmaking (33). Text blocks still fill on small screens, as intended.
+  - Verified: Collaborate header (tablet + mobile), Copy / Phone / link arrows, About and Artmaking link rows.
+  - **Rule for future responsive passes:** only unbind the two layout widths, and never promote a parent from hug to fill.
+
+## Phase 15: Service pages (2026-10-25)
+
+- **Built** `/studio/design/` ("Service - Web design") and `/studio/consultations/` ("Service - Website consultations"): desktop to the right of 404 at y 1762, tablet + mobile below at y 11995. Copy is word for word from `src/studio/*.njk`.
+- **Shell = Work with me** (header with Work with me current, hero, footer). The hero illustration is swapped for the repo's `deskgarden` / `websitevisit` SVG: flattened, `neutral/950-alpha`, height bound to `size/hero-illustration`, ratio locked. The `pageHeader` blurb sits under the heading in body text, centred.
+  - **Hero heading placeholder:** the KC Pelletier layer still reads Work with me's line, because the agent can't edit that font. The user retypes "Unapologetically simple websites" / "Like a doctor's check-up, but for your website". The same applies to the CTA card heading ("I don't bite" → "Let's talk about your website" / "Learn what’s holding your website back").
+- **Blocks reused:**
+  - Sections: Work with me's highlighted `Heading 2` pill (= `[highlight-header]`) | content column, with grid rows set to hug.
+  - Figures: the Image component; OAF homepage at 16:9 with a link caption, The Collective at 3:2.
+  - CTA: the user's Collaborate card. Call link first, as in `ctaCard`; label "Book a consultation" on Consultations.
+  - FAQs: the About `Details`/rule list (collapsed).
+  - Cards: Collaborate's "What I do" card (now hugging height).
+- **New element (port: `.pricing-list`):** "Pricing item" rows. Title + dimmed description (Fill, gap `space/3xs`) | dimmed price (hug, no wrap), gap `space/m`, bottom padding `space/m`, bottom border `input-border-width` / `input-border-color`. The list gap is `space/m` and the intro → list gap `space/xl`, from the repo's `has-gap-*` classes.
+- **Lists:** ordered lists ("Always included", "Things we can cover") are rows with a number marker, because separate Figma text nodes can't continue numbering. Bulleted lists use native Figma bullets, with a line separator between the bold title and the dimmed line.
+- **Responsive:** built with the corrected recipe: only the layout widths are unbound, and a parent is promoted to fill only if it's wider than the screen itself. Audit: 0 unbound gaps/paddings in all 6 frames, no overflow, no misshapen icons.
+
+## Phase 16: Code-mapped components (2026-10-25)
+
+Eight components that map 1:1 to a repo template, shortcode or glyph system; loose copies on the pages swapped for instances. Audit: 0 unbound gaps/paddings in all eight.
+
+| Component | ID | Repo | Props | Swapped in |
+|---|---|---|---|---|
+| Icon link | `2352:18813` | `[data-icon]` (`_icons.scss`) | Label, Icon (Phone / Copy / External / Arrow-right) | 97 page link rows (22 →, 45 ↗, 15 copy, 15 phone); label style/colour kept as overrides |
+| FAQ item | `2353:18925` | `<details>` | State=Closed/Open, Question, Answer | 42 rows (About + both service pages × 3 sizes), answers word for word from the repo; `<hr>` stays a sibling |
+| Breadcrumb | `2353:19355` | `_breadcrumb.njk` | Parent, Current | 9 (writing type pages × 3) |
+| Look toggles | `2353:19425` | `_look-toggles.njk` | (none) | Header Desktop variant + Collaborate desktop/tablet |
+| Figure | `2355:19174` | `figureImg` / `projectVideo` | Type=Image/Video, Caption, Show caption, Show control; Image exposed | 48 wrappers (posts, case studies, Work with me, service pages); ratio, picture, radius/stroke, padding, width binding kept |
+| CTA card | `2355:19680` | `_cta-card.njk` | Heading, Body; Call link + Email link exposed | 9 (Collaborate + service pages × 3) |
+| Page header | `2357:19433` | `_page-header.njk` | Illustration (swap), Heading, Blurb, Show blurb (off) | none yet, see below |
+| Split row | `2357:19451` | `_split-row.njk` (text half) | Layout=Split/Stacked, Title, Description, Year, Show link; Link exposed | 39 (Artmaking × 3) |
+
+- **New icons:** `Icon/Arrow-right` (`2352:18808`, glyph `arrow-right`) and `Icon/Chevron-right` (`2352:18809`, glyph `chevron-right`, uploaded from `_icons.scss`). The 51 loose ↗ frames (`icon/link`, `icon/list-link`) now use the existing `Icon/External`.
+- **Illustrations:** `Illustration/runner` (new), `meditating`, `deskgarden`, `websitevisit` (`2357:19402/19404/19426/19428`), height bound to `size/hero-illustration`.
+- **KC Pelletier limit:** a KC text can be bound to a TEXT property, but the agent can't set it on an instance ("component uses a font that isn't available"). So:
+  - **CTA card:** its heading defaults to "I don't bite" and is edited in the Figma app.
+  - **Page header** is **not** swapped into any page, because instances would reset the user-tuned hero headings. The user can swap heroes by hand.
+- **Look toggles** follow the Header/original archive width (theme switch 86 px). Collaborate's copy had drifted to 47 px.
+- **CTA order** follows the macro: call link first. This flips Collaborate's original copy-first order.
+- **Split row** covers the text half only: Figma components can't hold a variable number of images, so the masonry stays a frame of Image instances.
+- **Noticed, untouched:** the service-page hero blurbs were gone from all six frames (looks like a user edit), so Page header ships with Show blurb off. The user also simplified the Collaborate mobile header (name + Menu).
+- **Not converted (inside other components):** the Contact card and Footer still hold their own link rows, so their instance overrides stay intact.
+
+## Phase 17: Pre-migration audit (2026-10-26)
+
+Findings register: `docs/frn-2026/audit.md` (IDs F01…, status, owner). Facts come from read-only subagent sweeps of every WIP frame, the components board and the repo. Component docs go in `docs/frn-2026/components/` once the audit is done.
+
+### Round 1 (2026-10-26)
+
+| # | Question | Answer |
+|---|---|---|
+| Q1 | Where Figma component docs link | GitHub blob URL on `development` (repo is public) in the component's documentation link; one-line description with purpose + repo path |
+| Q2 | Where findings live | `docs/frn-2026/audit.md` register; decisions here as Phase 17 |
+| Q3 | When fixes happen | After each round, agent-fixable Figma fixes in the WIP section; KC Pelletier items go on the user's list in `audit.md` |
+| Q4 | Doc status meaning | Tracks the **redesign**: `planned` (pattern, no component) → `figma` → `code` (redesign ported). Old partials don't count. Docs keep OAF's Layer line |
+| Q5 | `GLOSSARY.md` | **Deferred** to the very end of the refactor. Component names stay canonical meanwhile |
+| Q6 | Tablet long-form text 774 vs 600 | **Fix.** `layout/inline-size` = 600 in both modes (repo constant); tablet/mobile text blocks Fill + max width bound to it |
+| Q7 | CTA card link order | **Collaborate keeps email first, deliberately.** Service pages keep call first (macro default). Mechanism: round 2 |
+| Q8 | Contact card / Footer links | Swap loose rows for nested Icon link instances, labels bound to the existing props |
+| Q9 | Split row covers the text half | Keep; the doc describes the whole row; Masonry gets its own pattern doc |
+| Q10 | Art year not dimmed | Already bound to `neutral/900-alpha` (log was stale). Closed |
+| Q11 | Writing item Default 174 vs 169 | Accept 174 (hug). Closed |
+| Q12 | Collaborate minimal header | Becomes a Header variant, after re-reading the latest desktop + tablet edits |
+| Q13 | Page header swap | Agent writes **Figma AI prompts** to swap the heroes to Page header instances, rather than the user swapping by hand |
+| Q14 | Variant property names | Header + Footer `Breakpoint=Desktop/Mobile` → `Layout=Wide/Narrow` (approved rename) |
+
+- Q6 done in the generator: `gen_vp.py` `layout/inline-size` 330/600 → 600/600; `variables-plus-import.json` regenerated (60 vars).
+
+### Round 2 (2026-10-27)
+
+| # | Question | Answer |
+|---|---|---|
+| Q15 | Narrow header open state | Add `State=Closed/Open`. Open is simple, modelled on the main header's open state in Figma: Look toggles left, links right |
+| Q16 | Current-page marker | Accessibility + 404 use the **Minimal** header (no nav, nothing to mark). **"Case studies" leaves every nav**: the index lives on the homepage; any link to it points at the homepage anchor where Featured case studies begin. Posts/type pages → Ideas; services → Work with me |
+| Q17 | Minimal header contents | Site name · "To main site →" link · Look toggles grouped (theme + colour), modelled on the current Collaborate header. Narrow keeps the Menu; Open = toggles left, the one link right |
+| Q18 | CTA order | `Order=Call first/Email first` on CTA card; Collaborate = Email first (audience emails more than it books calls). Code: `ctaCard` gets an `emailFirst` param |
+| Q19 | Contact card → Icon link | Read the 204 instances' values, swap rows to exposed Icon link instances, write the values back, delete the 6 old props. One-Footer trial first |
+| Q20 | Section hero size | New Utopia pair `step/2-4` (26.7→53.3). Section heroes + CTA heading bind to it; home hero binds `step/hero`. Binding by Figma AI (KC text) |
+| Q21 | Hero illustration | Keep `size/hero-illustration` 154→220 as a height; code ports it as `block-size` and drops the padding hack |
+| Q22 | Gutters | Header, Footer, Home hero follow the page gutter (tablet `space/l`, mobile `space/m`); desktop Footer column aligns to the 900 column |
+| Q23 | Footer site note | Default: "This site has been designed by hand with love and a healthy dose of anxiety. It runs on servers powered by renewable energy." Per-page overrides cleared |
+| Q24 | Service pages | Tablet/mobile copy is canonical; desktop brought in line (agent: non-KC; Figma AI: KC heroes + CTA headings) |
+| Q25 | Artmaking row | Figma's text-above-images row is the new design. Code: prefer an intrinsic grid / container queries over a viewport breakpoint |
+| Q26 | Intro → first media | Accept `space/xl-2xl` |
+| Q27 | Home profile photo | Add to tablet + mobile, roughly following the user's latest edits |
+| Q28 | Hero copy | User fixed it in Figma |
+| Q29 | Uncomponentised patterns | Components: Quote card, Pricing item, Section heading (with an easy Highlighted ↔ Plain switch). Pattern docs: Section, Card, Ordered list, Media pair, Masonry, Data list. Work's "Figure" frames → "Quote card" |
+| Q30 | Deletes | Approved: `site/hero-display/*` styles, hidden STICKER images, empty "Placeholder for Italic Text", Collaborate's hidden nav links. Kept: FAQ Open, Figure Video |
+| Q31 | Bulk drift | Approved as listed in the round (F10, F12, F13, F18, F19, F25, F26, F29, F32, F34, F35, F37, F38, F39, F40, F43, F44, F45) |
+
+- Round 2 applied 2026-10-27 (details per finding in `audit.md`). Also: the "To main site" link the user added inside Look toggles showed in every Wide header and overlapped the nav; it is now a `Main-site link` boolean (off by default, on for Collaborate). New Utopia var `step/2-4` (generator + Figma). KC work queued as Figma AI prompts P1–P4 in `figma-ai-prompts.md`.
+
+### Round 3 (2026-10-27)
+
+| # | Question | Answer |
+|---|---|---|
+| Q32 | Case studies in the nav | No "Case studies" nav item anywhere (already absent in Figma). Code: add an anchor on the homepage Featured heading (`/#case-studies`); case study pages mark no nav item |
+| Q33 | "To main site" link | Not part of Look toggles. Header Minimal holds a horizontal `Controls` row: Look toggles + the link, gap `space/l` (same as theme ↔ colour). Neutral link style as designed. Look toggles' boolean deleted |
+| Q34 | Consultations CTA heading | Keep Figma: "Book a website consultation and get sound expert advice" |
+| Q35 | Per-size KC styles | Merge after P1 (prompt P5) |
+| Q37 | Section frames built three ways | Leave the Figma frames as they are. The Section pattern doc defines the one construction (2 columns, heading \| content, stacked when narrow); code has one Section |
+| Q36 | Work illustration width | New driver `size/illustration-wide` 345 → 449.28, bound at all 3 sizes |
+| Q38 | Collaborate testimonial | One testimonial (the sweep's "3" was one per breakpoint); now a Quote card instance ×3 |
+| Q39 | Home mobile photo position | Intentional |
+| Q40 | Carousel icon size | `step/0` |
+
+### Audit closed, component docs written (2026-10-27)
+
+- Figma AI ran P1, P3 and P4; the user did P2 by hand; the agent did P5 (style reassignment needed no font). Three KC styles remain: `site/hero`, `site/homepage/hero`, `site/cta/heading`. Verified: no size, line-height or width changed.
+- User confirmed the audit is done. Every finding in `audit.md` is fixed, closed or left for code.
+- `components/` written: README (index, conventions, cross-cutting rules, open questions), `_template.md`, `_tokens.md` (resolved Min → Max), and 28 docs (22 components, 6 patterns).
+- Every Figma component links to its doc (GitHub `development` blob URL) with a one-line description. Descriptions use curly quotes and no angle brackets, because the plugin API re-escapes them (F45).
+- Open questions from the docs are listed in `components/README.md`, to be settled in a grilling round before the port.

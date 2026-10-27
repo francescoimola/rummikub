@@ -59,9 +59,9 @@
         {
           "name": "layout/inline-size",
           "resolvedType": "FLOAT",
-          "description": "DRIVER: long-form text column = --inline-size (40rem = 600px at 15px root, index.scss:99). Min matches layout/content-width Min, since the column fills the container on small screens.",
+          "description": "DRIVER: long-form text column cap = --inline-size (40rem = 600px at 15px root, index.scss:99), a constant in the repo. Bound as max width on Fill text blocks, so mobile fills and tablet caps at 600.",
           "valuesByMode": {
-            "Min": 330,
+            "Min": 600,
             "Max": 600
           },
           "expressionsByMode": {},
@@ -74,6 +74,17 @@
           "valuesByMode": {
             "Min": 154,
             "Max": 220
+          },
+          "expressionsByMode": {},
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "size/illustration-wide",
+          "resolvedType": "FLOAT",
+          "description": "DRIVER (Phase 17 Q36): width of the wide in-page illustration (Work collaboration drawing). Min 345 = mobile column, Max 449.28 as designed.",
+          "valuesByMode": {
+            "Min": 345,
+            "Max": 449.28
           },
           "expressionsByMode": {},
           "expressionMetadataByMode": {}
@@ -207,6 +218,17 @@
           "expressionsByMode": {
             "Min": "{{Utopia::type%2Fbase}} * POWER({{Utopia::type%2Fratio}}, 5)",
             "Max": "{{Utopia::type%2Fbase}} * POWER({{Utopia::type%2Fratio}}, 5)"
+          },
+          "expressionMetadataByMode": {}
+        },
+        {
+          "name": "step/2-4",
+          "resolvedType": "FLOAT",
+          "description": "New (Phase 17 Q20): section hero + CTA heading size, a Utopia type pair. Min = step/2, Max = step/4. Port: --step-2-4 clamp.",
+          "valuesByMode": {},
+          "expressionsByMode": {
+            "Min": "{{Utopia::step%2F2}}",
+            "Max": "{{Utopia::step%2F4}}"
           },
           "expressionMetadataByMode": {}
         },

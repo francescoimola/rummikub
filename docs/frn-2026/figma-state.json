@@ -32,13 +32,17 @@
         "Min": "2271:2",
         "Max": "2271:3"
       },
-      "count": 58,
+      "count": 62,
+      "added": {"step/2-4": "VariableID:2380:660", "size/illustration-wide": "VariableID:2383:20057"},
       "id": "VariableCollectionId:2271:2222",
       "idsBeforeReimport": {
         "type/base": "VariableID:2271:2223",
         "step/0": "VariableID:2271:2232",
         "space/s-m": "VariableID:2271:2254",
         "layout/gutter": "VariableID:2271:2278"
+      },
+      "added": {
+        "step/2-4": "VariableID:2380:660"
       }
     },
     "Border": {
@@ -74,7 +78,18 @@
     "vp-test-deleted",
     "hero-revert",
     "hero-illustration-fluid",
-    "repo-pages-desktop"
+    "repo-pages-desktop",
+    "image-ratios-5",
+    "post-media-capped",
+    "writing-item-expanded-bound",
+    "a11y-post-template",
+    "image-component",
+    "new-pages-responsive",
+    "wip-approved",
+    "service-pages",
+    "code-mapped-components",
+    "audit-round-1",
+    "audit-round-2"
   ],
   "textStyles": {
     "site/body": "S:070381969b3679dbaaee42e6cdbdc0081ca15391,",
@@ -113,12 +128,34 @@
     "Footer": "2293:2112",
     "Contact card": "2293:1269",
     "Project item": "2292:1007",
-    "Writing item": "2292:1415",
+    "Writing item": "2329:9102",
     "Service card": "2292:1547",
     "Icon/Copy": "2293:1221",
     "Icon/Phone": "2293:1224",
     "Icon/External": "2293:1228",
-    "Carousel": "2299:3910"
+    "Carousel": "2299:3910",
+    "Writing item/Expanded": "2329:9090",
+    "Image": "2341:9739",
+    "Icon link": "2352:18813",
+    "Icon/Arrow-right": "2352:18808",
+    "Icon/Chevron-right": "2352:18809",
+    "FAQ item": "2353:18925",
+    "Breadcrumb": "2353:19355",
+    "Look toggles": "2353:19425",
+    "Figure": "2355:19174",
+    "CTA card": "2378:20633",
+    "Page header": "2357:19433",
+    "Page header instances": "2394:* (6 pages x 3 sizes, instance named Hero)",
+    "Split row": "2357:19451",
+    "Illustration/runner": "2357:19402",
+    "Illustration/meditating": "2357:19404",
+    "Illustration/deskgarden": "2357:19426",
+    "Illustration/websitevisit": "2357:19428",
+    "Section heading": "2380:19847",
+    "Quote card": "2380:19851",
+    "Pricing item": "2380:19857",
+    "Icon/Plus": "2378:20019",
+    "Illustration/footer": "2381:19752"
   },
   "artSections": {
     "Poem for a Timepiece": "2296:3389",
@@ -179,5 +216,83 @@
     "Collaborate": "2322:8718",
     "Accessibility statement": "2322:9237",
     "404": "2322:9726"
+  },
+  "imageRatios": {
+    "landscape": [
+      "3:2",
+      "2:1",
+      "1:1",
+      "4:3",
+      "16:9"
+    ],
+    "portrait": [
+      "2:3",
+      "9:16",
+      "3:4"
+    ],
+    "lockedCount": 224
+  },
+  "newPagesResponsive": {
+    "The Loft": [
+      "2344:10004",
+      "2344:10741"
+    ],
+    "Mega Seating Plan": [
+      "2344:11469",
+      "2344:12162"
+    ],
+    "Flyer post": [
+      "2345:11282",
+      "2345:12050"
+    ],
+    "Hard part": [
+      "2345:12809",
+      "2345:13522"
+    ],
+    "Essays": [
+      "2345:14235",
+      "2345:14964"
+    ],
+    "Guides": [
+      "2345:15693",
+      "2345:16392"
+    ],
+    "Notes": [
+      "2345:17091",
+      "2345:17781"
+    ],
+    "Collaborate": [
+      "2345:18471",
+      "2345:19202"
+    ],
+    "Accessibility": [
+      "2345:19933",
+      "2345:20626"
+    ],
+    "404": [
+      "2345:21319",
+      "2345:21980"
+    ]
+  },
+  "original_status": "archive (user, 2026-10-25)",
+  "servicePages": {
+    "Web design": {
+      "desktop": "2349:16618",
+      "tablet": "2350:17740",
+      "mobile": "2350:18529"
+    },
+    "Website consultations": {
+      "desktop": "2350:16961",
+      "tablet": "2350:19309",
+      "mobile": "2350:20078"
+    }
+  },
+  "headerVariants": {
+    "Full/Wide": "2291:827",
+    "Full/Narrow/Closed": "2291:837",
+    "Full/Narrow/Open": "2378:20306",
+    "Minimal/Wide": "2378:20352",
+    "Minimal/Narrow/Closed": "2378:20378",
+    "Minimal/Narrow/Open": "2378:20385"
   }
 }
