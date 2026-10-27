@@ -547,3 +547,13 @@ Re-asked in round 2: G6, G19, G21, G24, G36, G37.
   - Badges link to Design Declares and Creatives for Climate (G5).
   - New **Card** set `2403:20009` (`Style=Default/Outline/Featured`, padding `space/s-m`, radius `border-radius-s`). The Components board now hugs its content (G34).
   - Project item: no arrow existed, so nothing changed (G19).
+
+### Round 4 (2026-10-27)
+
+| # | Question | Answer |
+|---|---|---|
+| G46 | Page header heading width | On tablet, `layout/content-width` (330 in Min) is too narrow. The cap becomes the wider of `layout/inline-size` (600) and `layout/content-width`, with no breakpoint. In Figma, the 6 tablet instances bind `layout/inline-size` (user to do by hand: the API can't bind `maxWidth` on text). The user also restored the Web design illustration |
+| G47 | Carousel ends | No wrap-around. First slide shows only Next, last slide only Previous, the slides between show both |
+| G48 | Badge frames | Renamed "Creatives for Climate" (`2293:1553`, `2293:1825`) |
+
+- User re-imported `variables-plus-import.json` (62 variables).
