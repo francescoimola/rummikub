@@ -3,7 +3,7 @@
 @use '../../node_modules/utopia-core-scss/src/utopia' as utopia;
 
 // Breakpoints — Sass vars because custom properties can't be used in media conditions. Shared by index.scss + _components.scss
-// xs–3xl scale, ascending by rem value regardless of whether a var is consumed by a @media or @container query
+// xs–3xl scale, ascending by rem value ($bp-m and $bp-l are equal), whether read by a @media or a @container query
 $bp-s: 32rem; // small (viewport); also the 2-up fold of sections and image grids (container against main)
 $bp-m: 49rem; // mobile (viewport)
 $bp-l: 49rem; // project-item image/body split (container) — was viewport 64rem
