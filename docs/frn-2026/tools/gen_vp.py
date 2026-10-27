@@ -28,8 +28,9 @@ driver("type/base", 15, 16.875, f"DRIVER: --step-0 at each pole. Utopia config 1
 driver("type/ratio", 1.333, 1.333, "DRIVER: modular scale ratio (--type-ratio, _scale.scss).")
 driver("space/base", 15, 16.875, f"DRIVER: --space-s at each pole. Utopia config 16 -> 18px (_cleacss-overrides.scss). {ROOT}")
 driver("layout/content-width", 330, 900, "DRIVER: inline width of the split sections + home hero. Min = 360 - 2 x space/s-m Min; Max = --grid-width-l (60rem = 900px at 15px root), standing in for the 982px in the Figma frames.")
-driver("layout/inline-size", 330, 600, "DRIVER: long-form text column = --inline-size (40rem = 600px at 15px root, index.scss:99). Min matches layout/content-width Min, since the column fills the container on small screens.")
+driver("layout/inline-size", 600, 600, "DRIVER: long-form text column cap = --inline-size (40rem = 600px at 15px root, index.scss:99), a constant in the repo. Bound as max width on Fill text blocks, so mobile fills and tablet caps at 600.")
 driver("size/hero-illustration", 154, 220, "DRIVER (new in redesign): hero illustration height. Max = 220px (desktop as designed); Min = 70% (154px, user choice). Width follows the locked aspect ratio. Port: block-size: var(--size-hero-illustration) as a Utopia clamp.")
+driver("size/illustration-wide", 345, 449.28, "DRIVER (Phase 17 Q36): width of the wide in-page illustration (Work collaboration drawing). Min 345 = mobile column, Max 449.28 as designed.")
 driver("letter-spacing/s", -0.6, -0.6, "--letter-spacing-s: -0.04rem at 15px root.")
 driver("letter-spacing/m", 0.105, 0.105, "--letter-spacing-m: 0.007rem at 15px root.")
 driver("font-size-7", 12.75, 15, "cleacss --font-size-7: clamp(.85rem, .8rem + .16vw, 1rem) at 15px root. figcaption size (testimonial attributions).")
@@ -43,6 +44,7 @@ formula("step/0", base, "--step-0: body, h2/h3, links")
 for n in range(1, 6):
     note = {1: "h1 / step-1 headings", 2: "--step-2", 3: "--step-3 (new, extended scale)", 4: "--step-4 (new): section hero headings", 5: "--step-5 (new): alt section hero size"}[n]
     formula(f"step/{n}", f"{base} * POWER({ratio}, {n})", f"--step-{n} = base x ratio^{n}. {note}")
+formula("step/2-4", ref("step/2"), "New (Phase 17 Q20): section hero + CTA heading size, a Utopia type pair. Min = step/2, Max = step/4. Port: --step-2-4 clamp.", emax=ref("step/4"))
 formula("type/small", f"{base} * 5 / 6", "<small> element: font-size smaller = step-0 / 1.2 (dates, sources). No repo token.")
 formula("step/hero", f"{ref('layout/content-width')} * 1000 / 5196",
         "New: home hero size. Widest line ('YOUR BIG IDEAS') is 5.196em, so this makes it span layout/content-width.")

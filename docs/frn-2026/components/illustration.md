@@ -1,0 +1,74 @@
+# Illustration
+
+**Layer:** Primitive · **Status:** figma · **Figma:** `2357:19402`, `2357:19404`, `2357:19426`, `2357:19428`, `2381:19752` · **Code:** `src/assets/icons/*.svg`, `{% icon "<name>" %}` shortcode
+
+## Purpose
+
+The drawings. Four **hero** illustrations sit above the heading in [Page header](page-header.md). One **footer** drawing sits in the [Footer](footer.md). One doc covers all five.
+
+## Anatomy
+
+| Figma | ID | Repo file | Size | Used on |
+| --- | --- | --- | --- | --- |
+| Illustration/runner | `2357:19402` | none (new) | 267 × 220 | Work with me |
+| Illustration/meditating | `2357:19404` | `meditating.svg` | 249.1 × 220 | Ideas & guides |
+| Illustration/deskgarden | `2357:19426` | `deskgarden.svg` | 256.8 × 220 | Web design service (default of Page header) |
+| Illustration/websitevisit | `2357:19428` | `websitevisit.svg` | 192.8 × 220 | Website consultations |
+| Illustration/footer | `2381:19752` | none | 986.9 × 569.4 | Footer, 53 instances |
+
+- Hero drawings are one vector (meditating: a frame of 19 paths) filled `neutral/950-alpha`.
+- Footer is four vectors filled `brand/900`. It was rebuilt on the board from the orphaned page-level "Illustration" main.
+- Repo files not in Figma: `bathcomputer`, `graphdrawing`, `mailstorm`, `rainy`, `stuckin`. Nothing in the redesign uses them.
+
+## Props & variants
+
+None. A hero is chosen through the Illustration swap on Page header. Instances today: runner 3, meditating 3, deskgarden 4, websitevisit 3.
+
+## Layout
+
+None, fluid only.
+
+- **Hero:** height is bound to `size/hero-illustration` and the aspect ratio is locked, so the width follows (Q21). In code this is `block-size` with `inline-size: auto`. The padding hack in `_page-header.njk` goes.
+- **Wide Work illustration:** three `Icon` frames inside `Icon:margin` (nodes `2275:1904` at 449, `2305:4188` and `2305:4955` at 345) are bound to `size/illustration-wide` (Q36). That token is a width. These are the page illustrations that aren't heroes.
+- **Footer:** fills its column. In Wide the instance is 986.9 wide inside a 478.7 frame (it overflows). In Narrow it fills the width in flow.
+
+## Tokens
+
+| Use | Figma variable | Min → Max |
+| --- | --- | --- |
+| Hero height | `size/hero-illustration` | 154 → 220 |
+| Wide illustration width | `size/illustration-wide` | 345 → 449.28 |
+| Hero fill | `neutral/950-alpha` | colour |
+| Footer fill | `brand/900` | colour |
+
+Values from [`_tokens.md`](_tokens.md).
+
+## States & interactions
+
+- Static. Hero inside Page header uses `settle` on scroll (README, Cross-cutting behaviour). Footer: none.
+- Fills use theme tokens, so colour follows light/dark and the page colour.
+
+## Content rules
+
+- Hero pairing is by page: see the table. A new page needs a new drawing or a reused one.
+- The drawing is decorative: empty alt, never conveys information.
+
+## HTML & accessibility
+
+```html
+<svg aria-hidden="true" focusable="false" viewBox="0 0 1104 946">…</svg>
+```
+
+- The `icon` shortcode inlines the SVG file. Keep `fill="currentColor"` so it follows the theme.
+- If used as `<img>`, `alt=""`.
+
+## Port notes
+
+- Add `runner.svg` and a footer SVG to `src/assets/icons/`. Hero SVGs should export from Figma without a fixed width and height.
+- Existing `{% icon iconName %}` stays. `_page-header.njk` sets the height from `--size-hero-illustration` (new fluid token, 154 → 220).
+- The old footer markup has no illustration.
+
+## Open questions
+
+- Should the footer drawing live as an inline SVG (3 KB or more) or as `<img>` with a theme-aware fill? It uses `brand/900`, which `<img>` can't follow.
+- Hero fill is `neutral/950-alpha` in Figma. Repo hero icons use `currentColor`. Confirm the same.
