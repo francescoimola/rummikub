@@ -501,6 +501,7 @@ main svg.illustration-wide {
         font-weight: var(--font-weight-base);
         line-height: 1;
         letter-spacing: 0;
+        translate: -0.04em; // pulls the first letters' ~0.04em left bearing back so the ink, not the box, meets the nav edge
         hyphens: none; // cleacss hyphenates h1
         text-transform: uppercase; // KC is caps-only; keeps the swap fallback in caps too
         text-wrap: balance;
@@ -691,7 +692,7 @@ main svg.illustration-wide {
 
 // ---- Homepage ----
 
-// KC hero band: the band is the container, so --step-hero (100cqi / 5.196) sizes the widest line to the band's content box
+// KC hero band: the band is the container, so --step-hero (100cqi / --hero-line-em) sizes the widest line to the band's content box
 .home-hero {
     container-type: inline-size;
     padding-block: var(--space-xl-2xl);
