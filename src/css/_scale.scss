@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use '../../node_modules/utopia-core-scss/src/utopia' as utopia;
 
 // Breakpoints — Sass vars because custom properties can't be used in media conditions. Shared by index.scss + _components.scss
@@ -18,22 +19,52 @@ $bp-3xl: 86rem; // small-desktop (viewport)
 }
 
 // --space-* scale and --font-weight-bold moved to _cleacss-overrides.scss (both collide with cleacss). CSS rule 3
+// Shared by the type scale, the --step-2-4 pair and the --size-* clamps so all three stay on one fluid range
+$type-config: (
+  "minWidth": 360,
+  "maxWidth": 1920,
+  "minFontSize": 16,
+  "maxFontSize": 18,
+  "minTypeScale": 1.333,
+  "maxTypeScale": 1.333,
+  "positiveSteps": 5,
+  "negativeSteps": 1,
+  "prefix": "step-",
+  "relativeTo": "container"
+);
+
+// One fluid clamp from $min to $max (unitless px) on the type scale's width range
+@function fluid($min, $max) {
+  @return utopia.calculateClamp(map.merge($type-config, ("minSize": $min, "maxSize": $max)));
+}
+
 @layer type {
 
   :root {
-    // @link https://utopia.fyi/type/calculator?c=360,16,1.333,1920,18,1.333,2,1,
-    @include utopia.generateTypeScale((
-      "minWidth": 360,
-      "maxWidth": 1920,
-      "minFontSize": 16,
-      "maxFontSize": 18,
-      "minTypeScale": 1.333,
-      "maxTypeScale": 1.333,
-      "positiveSteps": 2,
-      "negativeSteps": 1,
-      "prefix": "step-",
-      "relativeTo": "container"
-    ));
+    // @link https://utopia.fyi/type/calculator?c=360,16,1.333,1920,18,1.333,5,1,
+    @include utopia.generateTypeScale($type-config);
+
+    // Section-hero pair: --step-2 at the min pole to --step-4 at the max (Page header, CTA card)
+    --step-2-4: #{fluid(map.get(utopia.calculateTypeStep($type-config, 2), "minSize"), map.get(utopia.calculateTypeStep($type-config, 4), "maxSize"))};
+
+    // Home hero: KC Pelletier's widest line is 5.196em, so the line fills the content width (capped at --grid-width-l)
+    --step-hero: calc(min(100cqi, var(--grid-width-l)) / 5.196);
+    --line-height-hero: 0.74;
+    --letter-spacing-hero: -0.03em;
+
+    // Illustration sizes: hero is a block-size (width follows the drawing), wide is an inline-size
+    --size-hero-illustration: #{fluid(154, 220)};
+    --size-illustration-wide: #{fluid(345, 449.28)};
+
+    // Aspect ratios for media (G11); the name states the ratio
+    --ratio-3-2: 3 / 2;
+    --ratio-2-1: 2 / 1;
+    --ratio-1-1: 1 / 1;
+    --ratio-4-3: 4 / 3;
+    --ratio-16-9: 16 / 9;
+    --ratio-2-3: 2 / 3;
+    --ratio-3-4: 3 / 4;
+    --ratio-9-16: 9 / 16;
 
     // Utopia type-scale ratio (matches minTypeScale / maxTypeScale above)
     --type-ratio: 1.333;

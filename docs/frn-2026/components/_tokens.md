@@ -13,14 +13,14 @@ Figma `space/s-m` = CSS `--space-s-m`; `step/2` = `--step-2`; `layout/content-wi
 | `step/1` | `--step-1` | 20 → 22.49 |
 | `step/2` | `--step-2` | 26.65 → 29.99 |
 | `step/3` | `--step-3` | 35.53 → 39.97 |
-| `step/4` | `--step-4 (new, positiveSteps 5)` | 47.36 → 53.28 |
-| `step/5` | `--step-5 (new)` | 63.13 → 71.02 |
-| `step/2-4` | `--step-2-4 (new pair)` | 26.65 → 53.28 |
-| `step/hero` | `--step-hero (new, content width ÷ 5.196)` | 63.51 → 173.21 |
+| `step/4` | `--step-4` | 47.36 → 53.28 |
+| `step/5` | `--step-5` | 63.13 → 71.02 |
+| `step/2-4` | `--step-2-4` (pair: step 2 Min → step 4 Max) | 26.65 → 53.28 |
+| `step/hero` | `--step-hero` (`min(100cqi, --grid-width-l) ÷ 5.196`) | 63.51 → 173.21 |
 | `type/small` | `small` | 12.5 → 14.06 |
 | `line-height/body` | — | 22.5 → 25.31 |
-| `line-height/hero` | — | 47 → 128.18 |
-| `letter-spacing/hero` | — | -1.91 → -5.2 |
+| `line-height/hero` | `--line-height-hero` (0.74, unitless) | 47 → 128.18 |
+| `letter-spacing/hero` | `--letter-spacing-hero` (-0.03em) | -1.91 → -5.2 |
 
 ## Space
 
@@ -72,5 +72,11 @@ Pairs run from the first step's Min to the second step's Max:
 | `layout/content-width` | `--grid-width-l` column | 330 → 900 |
 | `layout/inline-size` | `--inline-size` | 600 → 600 |
 | `layout/gutter` | `--gutter-x` / `--gutter-y` (= `space/s-m`) | 15 → 25.31 |
-| `size/hero-illustration` | new, `block-size` | 154 → 220 |
-| `size/illustration-wide` | new | 345 → 449.28 |
+| `size/hero-illustration` | `--size-hero-illustration` (`block-size`) | 154 → 220 |
+| `size/illustration-wide` | `--size-illustration-wide` (`inline-size`) | 345 → 449.28 |
+
+## Ratios
+
+`--ratio-3-2`, `--ratio-2-1`, `--ratio-1-1`, `--ratio-4-3`, `--ratio-16-9`, `--ratio-2-3`, `--ratio-3-4`, `--ratio-9-16`: values like `3 / 2`, for `aspect-ratio` (G11, [image.md](image.md)).
+
+All of these live in `@layer type` in `_scale.scss`; none collides with a cleacss name.
