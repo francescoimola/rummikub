@@ -9,6 +9,7 @@ Judgement rules for review. Mechanical rules are checked by `pnpm lint` (`script
 - **The live frame beats the doc.** Docs are a snapshot of Figma, which keeps changing. Re-read the frame before porting; where the doc disagrees, the diff fixes the doc. A diff otherwise matches the component doc it links to (markup, classes, tokens, states).
 - **One fix per shared pattern.** A layout bug fixed on one page is fixed in the pattern: find every caller (the hero bleed needed `.home-hero`, `.page-header` and `.collab-hero` alike).
 - **A page contains what its frame draws.** An element the repo has and the frame lacks (an extra CTA, an arrow) is removed, unless a decision keeps it.
+- **A ticket is a starting point; the Ported note is the record.** A component doc's "Ported" note says what shipped and why. Where an older ticket's criteria disagree with it (About's "Let's connect", dropped to match Figma), the Ported note wins and the ticket item is not a deviation.
 - **Typefaces are fixed.** KC Pelletier Sans for the hero and CTA headings, Ronzino for everything else.
 
 ## Content and markup
