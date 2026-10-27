@@ -1,0 +1,45 @@
+[
+  {
+    "year": "2026",
+    "entries": [
+      {
+        "label": "CSS Design Awards",
+        "items": [
+          "Public Award for Best UI, UX & Innovation | francescoimola.com",
+          "Jury Special Kudos | francescoimola.com"
+        ]
+      }
+    ]
+  },
+  {
+    "year": "2023",
+    "entries": [
+      {
+        "label": "Read CV Features",
+        "items": [
+          "Breaking free from the algorithm | Essay",
+          "I fell into a sustainable design rabbit hole | Essay",
+          "Everything you see | Exhibition Catalogue",
+          "How to Feel More at Home | Artwork"
+        ]
+      }
+    ]
+  },
+  {
+    "year": "2021",
+    "entries": [
+      {
+        "label": "Special Special",
+        "items": [
+          "How to Feel More at Home | Artwork"
+        ]
+      },
+      {
+        "label": "Harbor Review",
+        "items": [
+          "'Untitled(2)' | Artwork"
+        ]
+      }
+    ]
+  }
+]

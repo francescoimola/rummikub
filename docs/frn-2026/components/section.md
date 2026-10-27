@@ -28,7 +28,7 @@ How Figma builds it today (do not copy):
 
 - **Wide:** label left, content right, as two columns. The section is `layout/content-width` (900). The content column is about 437 wide on About and Work with me (the second half minus the gap).
 - **Narrow:** label above content, stacked. In Figma this is the mobile frames.
-- **Code:** one grid, `grid-template-columns: 1fr` that becomes `repeat(2, 1fr)` from a `@container` at `$bp-split` (iPad mini portrait stays stacked), in the same family as `.grid-responsive-cols` (stacked → two columns). A container query, not a viewport query (Q25). Add the fold to `_responsive.scss`.
+- **Code:** one grid, `grid-template-columns: 1fr` that becomes `repeat(2, 1fr)` from a `@container` at `$bp-split` (iPad mini portrait stays stacked), in the same family as `.grid-cols-2` (stacked → two columns). A container query, not a viewport query (Q25). Add the fold to `_responsive.scss`.
 - The Consultations tablet frame keeps the label above two cards. Treat as a content choice, not a second construction.
 
 ## Tokens
@@ -66,10 +66,10 @@ None.
 
 ## Port notes
 
-- Today `<section>` is a `.flow` column with the `h2` above its content at every width (`studio.njk`, `design.njk`). Wide is new: add a `.section` class (or reuse `.grid-responsive-cols`) with the label in the first column.
+- Today `<section>` is a `.flow` column with the `h2` above its content at every width (`studio.njk`, `design.njk`). Wide is new: add a `.section` class (or reuse `.grid-cols-2`) with the label in the first column.
 - Remove inline spacing like `has-mb-xs` on the `h2`. The grid gap replaces it.
 - Rebind About's gap to `space/s` in Figma (G31). Move the Ideas type sections onto the Section grid (G33).
-- The `.flow` rule inside a grid needs `align-items: stretch` (see the comment above `.grid-responsive-cols`).
+- The `.flow` rule inside a grid needs `align-items: stretch` (see the comment above `.grid-cols-2`).
 - **Ported (#26):** `.section` shares the column-grid base (`1fr`, `align-items: stretch`) and folds to `repeat(2, 1fr)` in the `@container (min-width: $bp-split)` block. Gap `--space-s`, capped at `--grid-width-l`; the label `h2` is `align-self: start` with no margin, so no `has-mb-*` is needed. Content goes in one `div.flow.has-gap-s`. First adopter: Consultations "What you get"; the other pages move in their own tickets.
 - **Ported (#35):** the Vertical construction is `section.section.section--stacked`: the fold skips it, so the label stays above its content at every width. Work with me's "Happy humans" puts its quote cards in a `grid-cols-2` inside it.
 

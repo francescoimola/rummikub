@@ -42,7 +42,7 @@ Values from [`_tokens.md`](_tokens.md).
 ## States & interactions
 
 - **Next / Previous:** click moves to the adjacent slide. In Figma this is CHANGE_TO with smart animate (ease-in-out, 0.45s).
-- In code (G14): CSS only, no JS. The track is a scroll-snap strip and the buttons are `::scroll-button(left)` and `::scroll-button(right)` on the scroll container. Browsers without `::scroll-button()` show no buttons, and the strip still swipes and scrolls. There is no wrap-around (G47). Slide 1 shows only Next, slide 6 shows only Previous, and slides in between show both. `::scroll-button()` is `:disabled` at either end, so hide it there: `::scroll-button(*):disabled { display: none }`.
+- In code (G14): CSS only where `::scroll-button()` exists, plus a small JS fallback elsewhere. The track is a scroll-snap strip and the buttons are `::scroll-button(left)` and `::scroll-button(right)` on the scroll container. Browsers without `::scroll-button()` get one fixed Previous/Next button pair under the strip instead, and the strip still swipes and scrolls. There is no wrap-around (G47). Slide 1 shows only Next, slide 6 shows only Previous, and slides in between show both. `::scroll-button()` is `:disabled` at either end, so hide it there: `::scroll-button(*):disabled { display: none }`.
 - Under reduced motion the slide change is instant (`--dur-medium` is 0s; use `scroll-behavior: auto`).
 - Controls take the global focus ring. Buttons need accessible names ("Previous image", "Next image").
 - No autoplay is designed.
@@ -62,6 +62,7 @@ Values from [`_tokens.md`](_tokens.md).
 ```
 
 - The track is scrollable by touch, trackpad and keyboard (focusable region), so it still works where `::scroll-button()` is unsupported.
+- Where `::scroll-button()` is unsupported, `p.carousel__links` (two text `<button>`s, no underline or icons) is revealed by `initCarouselButtons()` in `app-core.js`. It sits fixed under the strip, scrolls one slide at a time, and hides Previous on the first slide and Next on the last (G47) while keeping the other in place. Without JS the strip still swipes and scrolls.
 - `::scroll-button()` generates buttons with the accessible names set by `content` alternative text ("Previous image", "Next image"), so the markup above has no `<button>` elements.
 - Previous reuses the arrow glyph rotated 180° with CSS.
 
@@ -71,7 +72,7 @@ Values from [`_tokens.md`](_tokens.md).
 - Add `src/_data/explorations.json` and its `.pages.yml` entry (G15).
 - Controls previously bound a remote library; they now use local `space/xs` and `Icon/Arrow-right` (F19, F40).
 - Slide images use [Image](image.md) with `ratio` 3:2 (G45).
-- **Ported (#30):** `_carousel.njk` exports `carousel(slides, label)`; `.carousel*` lives in `_components.scss`. The track (`ul`, `tabindex="0"`) is the 3:2 viewport and scroll-snap container; slides crop with `object-fit: cover` in CSS rather than `ratio=`, since they are plain `<img>` from data. `::scroll-button(right|left)` use a text `→` (Previous rotated 180°) so the arrow follows `currentColor` on the `content-light` fill, named "Next image" / "Previous image", hidden when `:disabled`. Reduced motion sets `scroll-behavior: auto`.
+- **Ported (#30):** `_carousel.njk` exports `carousel(slides, label)`; `.carousel*` lives in `_components.scss`. The track (`ul`, `tabindex="0"`) is the 3:2 viewport and scroll-snap container; slides crop with `object-fit: cover` in CSS rather than `ratio=`, since they are plain `<img>` from data. `::scroll-button(right|left)` use a text `→` (Previous rotated 180°) so the arrow follows `currentColor` on the `content-light` fill, named "Next image" / "Previous image", hidden when `:disabled`. Reduced motion sets `scroll-behavior: auto`. **Arrow (#57):** the `::scroll-button` content is the `arrow-right` glyph through `glyph-url()` in `_icons.scss` (no typed →); it is a fixed dark neutral because the chip is light in both themes.
 - `explorations.json` starts with the six Figma placeholders, pointing at their existing repo files; new CMS uploads land in `src/assets/explorations` (the image transform reads them from there, so no passthrough is needed). Rendered on the homepage between Featured and Index (#33).
 
 ## Open questions

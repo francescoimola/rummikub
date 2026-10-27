@@ -77,7 +77,7 @@ Only the rows react: see [Icon link](icon-link.md). The card itself is static.
 - No partial exists. Today's `_footer.njk` has one flat "Up for a chat?" block plus a nav. Add `_contact-card.njk` with a `contactCard(prompt, detail, rows)` macro, and render four cards from front matter or `_data`.
 - The copy action stays a `<button>` (G9). Icon colour is `currentColor` (G8).
 - Rows move from `data-icon-before` to trailing `data-icon` (see [Icon link](icon-link.md)).
-- **Ported (#24):** `_contact-card.njk` exports `contactCard(prompt, detail)`; the rows are the `{% call %}` body, so the button, link, dialog or `<ul>` stay plain markup in `_footer.njk`. Classes `card contact-card`.
+- **Ported (#24):** `_contact-card.njk` exports `contactCard(prompt, detail)`; the rows are the `{% call %}` body, so the button, link, dialog or `<ul>` stay plain markup in `_footer.njk`. Classes `card contact-card`. **Icons (#57):** every action row has a trailing icon: `copy` on both copy buttons (the dialog's too), `email` on "Copy this template email".
 
 ## Open questions
 

@@ -18,7 +18,7 @@ The drawings. Four **hero** illustrations sit above the heading in [Page header]
 
 - Hero drawings are one vector (meditating: a frame of 19 paths) filled `neutral/950-alpha`.
 - Footer is four vectors filled `brand/900`. In code it is an inline SVG with `fill="currentColor"`, coloured by the footer CSS (G10). It was rebuilt on the board from the orphaned page-level "Illustration" main.
-- Repo files not in Figma: `bathcomputer`, `graphdrawing`, `mailstorm`, `rainy`, `stuckin`. Nothing in the redesign uses them.
+- Repo files not in Figma: `bathcomputer` (Work with me) and `mailstorm` (the footer). `graphdrawing`, `rainy` and `stuckin` were unused and deleted (#52).
 
 ## Props & variants
 
