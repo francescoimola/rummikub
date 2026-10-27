@@ -43,41 +43,21 @@ eleventyNavigation:
 <section class="section">
     <h2>Recognition</h2>
     <dl class="data-list">
+        {% for group in recognition %}
         <div class="data-list__item">
-            <dt class="data-list__year">2026</dt>
+            <dt class="data-list__year">{{ group.year }}</dt>
             <dd class="data-list__body">
+                {% for entry in group.entries %}
                 <p class="data-list__entry">
-                    <span class="data-list__label">CSS Design Awards</span>
-                    <span>Public Award for Best UI, UX & Innovation | francescoimola.com</span>
-                    <span>Jury Special Kudos | francescoimola.com</span>
+                    <span class="data-list__label">{{ entry.label }}</span>
+                    {% for item in entry.items %}
+                    <span>{{ item }}</span>
+                    {% endfor %}
                 </p>
+                {% endfor %}
             </dd>
         </div>
-        <div class="data-list__item">
-            <dt class="data-list__year">2023</dt>
-            <dd class="data-list__body">
-                <p class="data-list__entry">
-                    <span class="data-list__label">Read CV Features</span>
-                    <span>Breaking free from the algorithm | Essay</span>
-                    <span>I fell into a sustainable design rabbit hole | Essay</span>
-                    <span>Everything you see | Exhibition Catalogue</span>
-                    <span>How to Feel More at Home | Artwork</span>
-                </p>
-            </dd>
-        </div>
-        <div class="data-list__item">
-            <dt class="data-list__year">2021</dt>
-            <dd class="data-list__body">
-                <p class="data-list__entry">
-                    <span class="data-list__label">Special Special</span>
-                    <span>How to Feel More at Home | Artwork</span>
-                </p>
-                <p class="data-list__entry">
-                    <span class="data-list__label">Harbor Review</span>
-                    <span>'Untitled(2)' | Artwork</span>
-                </p>
-            </dd>
-        </div>
+        {% endfor %}
     </dl>
 </section>
 <section class="section">
