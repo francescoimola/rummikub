@@ -62,7 +62,7 @@ Values from [`_tokens.md`](_tokens.md).
 ```
 
 - The track is scrollable by touch, trackpad and keyboard (focusable region), so it still works where `::scroll-button()` is unsupported.
-- Where `::scroll-button()` is unsupported, each slide ends with a `p.carousel__links`: plain `<a href="#<slug>-<n>">` Previous / Next (no underline, drawn arrows) pointing at the neighbouring slides' ids. The first slide has no Previous and the last no Next (G47). `@supports selector(::scroll-button(*))` hides them where the real buttons exist.
+- Where `::scroll-button()` is unsupported, each slide ends with a `p.carousel__links`: plain `<a href="#<slug>-<n>">` Previous / Next (left-aligned, no underline, no icons) pointing at the neighbouring slides' ids. The first slide has no Previous and the last no Next (G47). `@supports selector(::scroll-button(*))` hides them where the real buttons exist.
 - `::scroll-button()` generates buttons with the accessible names set by `content` alternative text ("Previous image", "Next image"), so the markup above has no `<button>` elements.
 - Previous reuses the arrow glyph rotated 180° with CSS.
 
