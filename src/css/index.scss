@@ -64,6 +64,12 @@ html.lenis body {
     }
 }
 
+@keyframes reveal-in {
+    from {
+        opacity: 0;
+    }
+}
+
 @mixin reveal-open {
     block-size: auto;
     opacity: 1;
@@ -466,6 +472,17 @@ details {
 
     &[open]::details-content {
         @include reveal-open;
+    }
+
+    // Firefox runs no transitions on ::details-content: close lags (gap lingers), open snaps. Fade the answer in, close at once
+    @supports (-moz-appearance: none) {
+        &:not(.nav-menu)::details-content {
+            transition: none;
+        }
+
+        &:not(.nav-menu)[open]>:not(summary) {
+            animation: reveal-in var(--dur-medium) var(--ease);
+        }
     }
 
     &>:is(.nav-menu__panel) {
