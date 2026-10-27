@@ -474,7 +474,7 @@ Settles the open questions in `components/README.md`. Numbered G1… so they don
 
 | # | Question | Answer |
 |---|---|---|
-| G1 | Nav label | "Ideas" in header, breadcrumb and any footer link. The `/writing/` heading and `<title>` stay |
+| G1 | Nav label | "Ideas" in header, breadcrumb and any footer link. The `/writing/` page `<title>` is "Ideas & Guides" and its hero reads "Ideas and Guides" (Francesco, #68); only the nav says "Ideas" |
 | G2 | Wide Look toggles | Pinned to the right edge, as drawn |
 | G3 | Nav hover bullet | Superseded by G50: no bullet; underline instead |
 | G4 | Footer nav | Dropped: the footer is Contact cards + colophon only |

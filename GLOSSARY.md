@@ -19,8 +19,8 @@ _Avoid_: Art projects page, gallery
 ## Writing
 
 **Ideas**:
-The writing section of the site, named "Ideas" in the navigation.
-_Avoid_: Blog, Ideas & guides (old label)
+The writing section of the site, named "Ideas" in the navigation. Its page title is "Ideas & Guides" and its hero reads "Ideas and Guides".
+_Avoid_: Blog, Ideas & guides as the navigation label (old label)
 
 ## Layout
 

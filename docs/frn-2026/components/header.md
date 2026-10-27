@@ -68,7 +68,7 @@ Values from [`_tokens.md`](_tokens.md).
 
 ## Content rules
 
-- Nav labels are fixed in the partial: Start here `/`, Work with me `/studio/`, Ideas `/writing/` (G1; the old repo label was "Ideas & guides"). The `/writing/` heading and `<title>` stay, Artmaking `/art/`, About `/about/`, Say hello `#contact` (the footer's Contact section, on every page).
+- Nav labels are fixed in the partial: Start here `/`, Work with me `/studio/`, Ideas `/writing/` (G1; the old repo label was "Ideas & guides"). The `/writing/` page `<title>` is "Ideas & Guides" and its hero "Ideas and Guides" (#68), Artmaking `/art/`, About `/about/`, Say hello `#contact` (the footer's Contact section, on every page).
 - **"Case studies" leaves the nav** (Q16, Q32). Anything that linked to `/work/` points at `/#case-studies`, the homepage's Featured heading.
 - Current page: `/writing/…` posts and type pages mark Ideas; `/studio/…` service pages mark Work with me; case studies mark nothing.
 - Minimal: the "To main site" link goes to `/`. The page selects the Minimal header with front matter, e.g. `header: minimal`.
