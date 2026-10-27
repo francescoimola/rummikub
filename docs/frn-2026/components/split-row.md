@@ -1,6 +1,6 @@
 # Split row
 
-**Layer:** Composite · **Status:** figma · **Figma:** `2357:19451` · **Code:** `src/_includes/_split-row.njk`, `.split-row` + a plain two-column image grid ([Masonry](masonry.md) is dropped)
+**Layer:** Composite · **Status:** code · **Figma:** `2357:19451` · **Code:** `src/_includes/_split-row.njk`, `.split-row` + a plain two-column image grid ([Masonry](masonry.md) is dropped)
 
 ## Purpose
 
@@ -82,6 +82,8 @@ Only the link: global link style, and the arrow nudge from [Icon link](icon-link
 - Images keep their natural ratio (G37, G43); `artProjects.json` gets no `ratio` field.
 - Replace `.masonry` with the plain two-column grid ([Masonry](masonry.md)).
 - The year moves beside the title and stays dimmed at body size (G25).
+- **Ported (#38):** `.split-row` is one column: `div.split-row__text` (grid, 2-up from `@container (min-width: $bp-s)`, capped at `--grid-width-l`) then `ul.grid-cols-2.split-row__images`. The `$bp-xl` `1fr 2fr` block is gone. The year is skipped when empty. The Figma instance draws the year under the description; code follows G24 (beside the title).
+- The page intro is a plain Section labelled "Philosophy", as in the WIP frame.
 
 ## Open questions
 

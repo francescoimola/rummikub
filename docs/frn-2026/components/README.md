@@ -37,7 +37,7 @@ Status tracks the **redesign**: `planned` (a pattern with no Figma component) â†
 | Service card | [service-card.md](service-card.md) | `2292:1547` | `_service-card.njk` | code |
 | Quote card | [quote-card.md](quote-card.md) | `2380:19851` | `_quote-card.njk` | code |
 | Pricing item | [pricing-item.md](pricing-item.md) | `2380:19857` | `.pricing-list>li` | code |
-| Split row | [split-row.md](split-row.md) | `2357:19451` | `_split-row.njk` | figma |
+| Split row | [split-row.md](split-row.md) | `2357:19451` | `_split-row.njk` | code |
 | Ordered list | [ordered-list.md](ordered-list.md) | (pattern) | `ol` | code |
 | Media pair | [media-pair.md](media-pair.md) | (pattern) | `.grid-cols-2` + `{% mediaPair %}` shortcode (G40) | code |
 | Masonry | [masonry.md](masonry.md) | (pattern) | `.masonry` | dropped |

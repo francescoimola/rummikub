@@ -12,9 +12,10 @@ eleventyNavigation:
 {% from "_page-header.njk" import pageHeader %}
 <div full-width class="flow has-gap-3xl-4xl">
   {{ pageHeader("", "I make things out of words and pixels, including poems, essays, photos, and designs.<br><br>Occasionally, you’ll find me getting people together to share ideas.") }}
-  <header class="flow has-gap-xs">
-    <p style="max-inline-size: var(--inline-size)">The act of noticing and surfacing what's been hiding in plain sight—be it an everyday place, a mundane object, someone who doesn't get heard, or the infrastructure around us—is the thread that connects it all.</p> 
-  </header>
+  <section class="section">
+    <h2>Philosophy</h2>
+    <p>The act of noticing and surfacing what's been hiding in plain sight—be it an everyday place, a mundane object, someone who doesn't get heard, or the infrastructure around us—is the thread that connects it all.</p>
+  </section>
   {% for item in artProjects %}
     {{ splitRow(item) }}
   {% endfor %}

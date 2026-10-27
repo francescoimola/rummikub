@@ -39,7 +39,7 @@ A test costs you nothing while the code is untouched. It costs you time in one m
 
 These check the actual shipped site in `public/`, so they catch mistakes anywhere in the chain — template, config, or data.
 
-- **src/built-css.test.js** — one stylesheet, no runtime `@import`, layer order, icon glyphs, masonry rules
+- **src/built-css.test.js** — one stylesheet, no runtime `@import`, layer order, icon glyphs, KC font
 - **src/built-feeds.test.js** — both RSS feeds carry the right categories; hidden posts stay out
 - **src/built-landmarks.test.js** — every page has correct landmark markup (skip link, banner, main)
 - **src/built-markdown.test.js** — every page ships its `.md` twin, plus `llms.txt`

@@ -35,37 +35,6 @@ describe('built stylesheet', () => {
     expect(existsSync('public/css/vendor/cleacss.css')).toBe(false);
   });
 
-  // The base rule is the one outside @supports — grid-lanes adds a second .masonry{} block below it.
-  const masonryBaseRule = () => css().match(/\.masonry\{([^}]*)\}/);
-
-  // WebKit's column balancer overshoots on unbreakable cards, so a set with one tall image lands as
-  // one long column plus a stub. Grid never balances, so the layout can't regress that way again.
-  it('lays the masonry out as a grid, never multicol', () => {
-    const rule = masonryBaseRule();
-    expect(rule).not.toBeNull();
-    expect(rule[1]).toMatch(/display:\s*grid/);
-    // Lookbehind so grid-template-columns doesn't read as a multicol declaration.
-    expect(css()).not.toMatch(/\.masonry[^{]*\{[^}]*(?<![-\w])columns:/);
-  });
-
-  // .masonry is a grid item of .split-row, so it stretches to the row height. align-content defaults
-  // to stretch, which spreads the rows apart to fill it — this is what pins them to the top.
-  it('keeps the masonry from being stretched by its grid row', () => {
-    const rule = masonryBaseRule();
-    expect(rule).not.toBeNull();
-    expect(rule[1]).toMatch(/align-self:\s*start/);
-  });
-
-  it('folds the masonry to two columns', () => {
-    expect(css()).toMatch(/\.masonry[^{]*\{[^}]*grid-template-columns:\s*(?:1fr 1fr|repeat\(2,\s*1fr\))/);
-  });
-
-  // Progressive enhancement for Safari 26.4+. LightningCSS must not drop the unknown display value.
-  it('upgrades to native masonry where grid-lanes is supported', () => {
-    expect(css()).toMatch(/@supports \(display:\s*grid-lanes\)/);
-    expect(css()).toMatch(/display:\s*grid-lanes/);
-  });
-
   // `main svg` (Illustrations) pads every SVG in <main>. On a UI icon that padding exceeds the
   // declared size, so the border-box inflates and the icon viewport collapses to 0 — visible as a
   // clickable-but-invisible control. Any icon inside <main> must cancel the padding explicitly.
