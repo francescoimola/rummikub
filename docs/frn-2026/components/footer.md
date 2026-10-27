@@ -92,6 +92,7 @@ Static. The links and the copy button inside use the global hover and focus ring
 - Replace the duplicated desktop and mobile markup with one footer driven by a container query.
 - **Ported (#24):** one `footer.site-footer` after `.layout`, with `section#contact` (the header's "Say hello" target). Narrow is the base stack in `_components.scss`; Wide is `@container footer (width >= $bp-xl)` in `_responsive.scss`, a two-column grid inside `--grid-width-l` with the drawing bleeding right (`overflow-x: clip` on the footer).
 - The drawing is the existing `mailstorm.svg` (same paths as `Illustration/footer`, scaled), inlined with `{% icon %}` and coloured `--brand-900`.
+- **Narrow spacing (#66):** the drawing sits `space/3xl-4xl` below the Contact cards and `space/3xl-4xl` above the Colophon. The drawing's `margin-block-start` and the Colophon's `margin-block-start` each top the grid's row gap up to that value; the drawing has no bottom margin, which would add a second gap below it.
 - Badges: Design Declares is inlined (`design-declares.svg`, `currentColor` so it follows dark mode; the Figma fill is the same near-black); the Creatives for Climate sticker is a full-colour `<img eleventy:ignore>` from `src/assets/images/badges/`.
 - The © year is `buildYear`, a global data value in `eleventy.config.js`.
 - The "Not sure what to say?" card keeps the template-email dialog (id `contact-template`).
