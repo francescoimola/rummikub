@@ -1,6 +1,6 @@
 # Quote card
 
-**Layer:** Composite · **Status:** figma · **Figma:** `2380:19851` · **Code:** `src/studio.njk`, `src/collaborate.njk` `<figure class="card outline"><blockquote>`; `.card:has(blockquote)` in `_components.scss`
+**Layer:** Composite · **Status:** code · **Figma:** `2380:19851` · **Code:** `src/studio.njk`, `src/collaborate.njk` `<figure class="card outline"><blockquote>`; `.card:has(blockquote)` in `_components.scss`
 
 ## Purpose
 
@@ -67,6 +67,7 @@ None on the card. The company link inside the attribution uses the global link s
 - Repo cards use `border-radius-s`; Figma matches.
 - Add a `quoteCard` macro (e.g. `quoteCard(quote, name, role, link)`) so the markup has one source (G28). The copy stays inline in each page, with no `testimonials.json`.
 - `.case-study>blockquote` (long-form posts) is a separate rule that `@extend`s `.card` and `.outline`. Leave it.
+- **Ported (#29):** `_quote-card.njk` exports `quoteCard(quote, name, role, link)`. `link` is `{ url, label }`: with a label it renders "role, <company link>"; without one the name links (Sarah Brown). Links carry `data-icon="arrow-ext"` and open in a new tab. Work with me (5) and Collaborate (1) use it; Collaborate's quote now has curly quotes and a `<p>` like the rest. Repo copy kept where Figma differs (Carly Anchal's role, Sarah Brown's link).
 
 ## Open questions
 

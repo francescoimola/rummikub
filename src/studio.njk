@@ -11,6 +11,7 @@ eleventyNavigation:
 {% from "_service-card.njk" import serviceCard %}
 {% from "_cta-card.njk" import ctaCard %}
 {% from "_page-header.njk" import pageHeader %}
+{% from "_quote-card.njk" import quoteCard %}
 {{ pageHeader("runner", "break free from suffocating marketing practices, and chart a more freeing way forward. Together.") }}
 <div class="card flow has-gap-xl" style="padding-bottom: var(--space-xl);">
     {% projectVideo "/assets/video/work_showreel.mp4",
@@ -42,40 +43,11 @@ eleventyNavigation:
 <section class="flow has-gap-s">
     <h2 class="highlight-header has-mb-xs">Happy humans</h2>
     <div class="flow has-gap-xs">
-        <figure class="card outline flow has-gap-s">
-            <blockquote>
-                <p>“I have never worked with someone so deeply reliable, who has gone above and beyond my expectations. The sheer detail, diligence and attention Fran has to his work is worth its weight in gold, tenfold! [...] He’s turned the weight on my shoulders into air.”</p>
-            </blockquote>
-            <figcaption>Cairo Woodward<br>Co-founder, <a href="https://www.theloftstudio.uk" target="_blank" rel="noopener noreferrer">The Loft</a>
-            </figcaption>
-        </figure>
-        <figure class="card outline flow has-gap-s">
-            <blockquote>
-                <p>“Francesco has the rare talent of being able to embed himself in a niche that he previously knew nothing about, quickly understanding the intricacies and writing with the confidence of an insider.”</p>
-            </blockquote>
-            <figcaption>Rob Cowen<br>Founder, <a href="https://www.seatingplan.com" target="_blank" rel="noopener noreferrer">Mega Seating Plan</a>
-            </figcaption>
-        </figure>
-        <figure class="card outline flow has-gap-s">
-            <blockquote>
-                <p>“Francesco provided excellent tech support and reassurance for a web project. He’s been very easy to work with.”</p>
-            </blockquote>
-            <figcaption>Liv Pennington<br>Artist &amp; Arts Programmer</figcaption>
-        </figure>
-        <figure class="card outline flow has-gap-s">
-            <blockquote>
-                <p>“Great to work with. Helped me to rework my website copy to align with a new direction I wanted to take. He’s quick and responsive.”</p>
-            </blockquote>
-            <figcaption>
-                <a href="https://www.sarahyuklan.com/" target="_blank" rel="noopener noreferrer">Sarah Brown</a><br>Holistic Coach
-                </figcaption>
-        </figure>
-        <figure class="card outline flow has-gap-s">
-            <blockquote>
-                <p>“A dream collaborator. Organised and strategic, he asks the right questions, does his research, and presents fantastic options.”</p>
-            </blockquote>
-            <figcaption>Carly Anchal<br>Marketing &amp; Talent Manager</figcaption>
-        </figure>
+        {{ quoteCard("“I have never worked with someone so deeply reliable, who has gone above and beyond my expectations. The sheer detail, diligence and attention Fran has to his work is worth its weight in gold, tenfold! [...] He’s turned the weight on my shoulders into air.”", "Cairo Woodward", "Co-founder", { url: "https://www.theloftstudio.uk", label: "The Loft" }) }}
+        {{ quoteCard("“Francesco has the rare talent of being able to embed himself in a niche that he previously knew nothing about, quickly understanding the intricacies and writing with the confidence of an insider.”", "Rob Cowen", "Founder", { url: "https://www.seatingplan.com", label: "Mega Seating Plan" }) }}
+        {{ quoteCard("“Francesco provided excellent tech support and reassurance for a web project. He’s been very easy to work with.”", "Liv Pennington", "Artist & Arts Programmer") }}
+        {{ quoteCard("“Great to work with. Helped me to rework my website copy to align with a new direction I wanted to take. He’s quick and responsive.”", "Sarah Brown", "Holistic Coach", { url: "https://www.sarahyuklan.com/" }) }}
+        {{ quoteCard("“A dream collaborator. Organised and strategic, he asks the right questions, does his research, and presents fantastic options.”", "Carly Anchal", "Marketing & Talent Manager") }}
     </div>
 </section>
 <figure view-animation="breakout">
