@@ -16,7 +16,7 @@
         <a href="https://cal.com/francescoimola/intro" data-icon="phone" rel="noopener noreferrer" target="_blank">Talk to me face to face</a>
         {% endcall %}
         {% call contactCard("Not sure what to say?") %}
-        <button type="button" data-dialog-open="contact-template">Copy this template email</button>
+        <button type="button" data-dialog-open="contact-template" data-icon="email">Copy this template email</button>
         <dialog id="contact-template" aria-labelledby="contact-template-title">
             <div class="flow has-gap-xl">
                 <h2 id="contact-template-title" class="sr-only">Template enquiry email</h2>
@@ -28,7 +28,7 @@
                     <p>Thanks</p>
                 </div>
                 <div class="flow has-gap-xs">
-                    <button type="button" data-dialog-copy data-icon-before="copy">Copy to clipboard</button>
+                    <button type="button" data-dialog-copy data-icon="copy">Copy to clipboard</button>
                     <button type="button" data-dialog-close>Close</button>
                     <p role="status" class="sr-only" data-dialog-status></p>
                 </div>
