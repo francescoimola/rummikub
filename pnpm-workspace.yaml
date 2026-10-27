@@ -5,6 +5,12 @@ allowBuilds:
 onlyBuiltDependencies:
   - esbuild
 
+peerDependencyRules:
+  allowedVersions:
+    # fdir@6.5.0 declares an exact optional peer picomatch@4.0.4, but tinyglobby and @parcel/watcher
+    # resolve the newer 4.0.7. Accept it here rather than downgrading (the overrides floor is 4.0.4).
+    fdir>picomatch: '>=4.0.4'
+
 overrides:
   browserslist: 4.24.0
   ws: '^8.21.0'
