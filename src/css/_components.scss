@@ -845,8 +845,15 @@ main svg.illustration-wide {
     }
 }
 
+// Top and bottom room match, so the title sits as far from the header as the image sits from the intro
 .case-study__intro {
+    padding-block-start: var(--space-2xl-3xl);
     margin-block-end: var(--space-2xl-3xl);
+    text-align: center;
+
+    > * {
+        margin-inline: auto; // h1 has its own max-inline-size, so centre the box too, not just the text
+    }
 }
 
 // ---- Writing (index + per-type listings) ----
