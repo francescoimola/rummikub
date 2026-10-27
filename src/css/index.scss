@@ -466,64 +466,6 @@ main>*{
     align-items: stretch;
 }
 
-// Scroll-driven and animated breakout
-// Hero media settles on case studies and writing posts; later media breaks out on writing posts only (G13). breakout uses view() to retrigger per element, settle uses scroll() since view() would already be mid-range at first paint
-$breakout-targets: '[view-animation="breakout"], .writing-post > :is(figure, p:has(> :is(img, picture))):not(.case-study__intro + *)';
-$settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:has(> :is(img, picture)))';
-
-@media (prefers-reduced-motion: no-preference) and (width > #{scale.$bp-xl}) {
-    @keyframes breakout {
-        from {
-            max-inline-size: 100cqi; // main's container, not the parent — so a breakout element can sit nested inside a section
-        }
-
-        to {
-            max-inline-size: var(--settled-size, var(--inline-size));
-        }
-    }
-
-    #{$breakout-targets},
-    #{$settle-targets} {
-        box-sizing: border-box;
-        inline-size: calc(100vw - (var(--gutter-x) *2));
-        margin-left: 50%;
-        transform: translate(-50%);
-        animation: breakout ease-out both; // settle shares breakout's keyframes (identical bleed-in); they differ only in timeline/range
-    }
-
-    @supports (animation-timeline: view()) {
-        #{$breakout-targets} {
-            animation-timeline: view();
-            animation-range: cover 0% cover 50%; // first peek from bottom → centred in viewport
-        }
-
-        #{$settle-targets} {
-            animation-timeline: scroll(root block);
-            animation-range: 0 50vh; // full-bleed on load → 40rem after one viewport of scroll; length-based so it's page-height independent
-        }
-    }
-
-    // Firefox: a paused 1s run scrubbed by negative delay replays the same keyframes; scroll-fallback.js writes --scroll-p from scroll position
-    @supports not (animation-timeline: view()) {
-        #{$breakout-targets},
-        #{$settle-targets} {
-            animation-duration: 1s;
-            animation-play-state: paused;
-            animation-delay: calc(var(--scroll-p) * -1s);
-        }
-
-        #{$breakout-targets} {
-            --scroll-fallback: breakout; // the JS hook — it finds targets by this, so selectors and breakpoint live only here
-            --scroll-p: 1; // settled until the script measures it
-        }
-
-        #{$settle-targets} {
-            --scroll-fallback: settle;
-            --scroll-p: 0; // full-bleed at the page top, as with scroll()
-        }
-    }
-}
-
 details {
     border: none;
     padding: 0;
