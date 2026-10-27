@@ -1,5 +1,5 @@
 // Brand palette + light/dark toggles. Applies a choice to <html> (data-brand / data-theme),
-// keeps both sidebar instances' aria-pressed in sync, and persists to localStorage.
+// keeps both toggle instances' aria-pressed in sync, and persists to localStorage.
 // The pre-paint inline script in _head.njk applies stored choices before first paint; this only reconciles state + wires clicks.
 
 var root = document.documentElement;

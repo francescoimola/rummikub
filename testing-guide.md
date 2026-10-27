@@ -63,7 +63,6 @@ Run in jsdom. These files are IIFE-style with no exports, so the pattern is: set
 - **video-controller.test.js** — the fiddliest code in the repo: lazy-load via `IntersectionObserver`, play/pause, reduced motion, data-saver. Failure modes are silent — keep this one.
 - **look-toggles.test.js** — theme/palette toggles stay in sync across instances and survive storage failures (silent persistence logic)
 - **webmcp.test.js** — WebMCP tool registration; pins tool names to `src/well-known/webmcp.json`
-- **stretch-text.test.js** — SVG viewBox fitting with a stubbed `getBBox`
 
 ## Rules
 
