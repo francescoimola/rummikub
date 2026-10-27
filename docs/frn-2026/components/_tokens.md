@@ -8,7 +8,7 @@ Figma `space/s-m` = CSS `--space-s-m`; `step/2` = `--step-2`; `layout/content-wi
 
 | Figma | CSS | Min → Max |
 | --- | --- | --- |
-| `step/-1` | `--step--1` | 11.25 → 12.66 |
+| `step/-1` | `--step--1` (also the figcaption size, G12) | 11.25 → 12.66 |
 | `step/0` | `--step-0` | 15 → 16.88 |
 | `step/1` | `--step-1` | 20 → 22.49 |
 | `step/2` | `--step-2` | 26.65 → 29.99 |
@@ -18,7 +18,6 @@ Figma `space/s-m` = CSS `--space-s-m`; `step/2` = `--step-2`; `layout/content-wi
 | `step/2-4` | `--step-2-4 (new pair)` | 26.65 → 53.28 |
 | `step/hero` | `--step-hero (new, content width ÷ 5.196)` | 63.51 → 173.21 |
 | `type/small` | `small` | 12.5 → 14.06 |
-| `font-size-7` | `figcaption` | 12.75 → 15 |
 | `line-height/body` | — | 22.5 → 25.31 |
 | `line-height/hero` | — | 47 → 128.18 |
 | `letter-spacing/hero` | — | -1.91 → -5.2 |

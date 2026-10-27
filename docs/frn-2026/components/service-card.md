@@ -12,7 +12,7 @@ An offer on Work with me. **Default** links to a service page. **Accordion** is 
 
 - **Heading**: **Number** (`site/body`, `neutral/900-alpha`) + **Title** (`site/heading-sm`). Code: `h3`; the number comes from CSS (`.has-counter`).
 - **Description**: `site/body`. Code: `p`.
-- **CTA**: label (`site/link`, `color-accent`) + [Icon/Arrow-right](icon.md) instance. Code: `span[data-icon="arrow-right"]`.
+- **CTA**: label (`site/link`, `color-accent`) + [Icon/Arrow-right](icon.md) instance. Code: `span[data-icon="arrow-right"]`. The arrow stays here (G44).
 
 **Accordion** (`details.card.link-card`):
 
@@ -30,7 +30,7 @@ An offer on Work with me. **Default** links to a service page. **Accordion** is 
 | Number | text, "01" | Default only |
 | Open | boolean, false | Accordion only; shows the Panel |
 
-The repo also has `type="adhoc"` (a link card ending in an email action). Figma has no variant for it.
+The repo's `type="adhoc"` is deleted from the macro (G23), so no variant is needed.
 
 ## Layout
 
@@ -62,7 +62,7 @@ Values from [`_tokens.md`](_tokens.md).
 ## Content rules
 
 - Title, description and CTA are macro arguments in `studio.njk`.
-- Accordion link kinds: `https://…` opens a new tab with Icon/External (`arrow-ext`); `mailto:` uses the email glyph. Figma draws the arrow-right in both (F39). Repo wins on existing glyphs unless the design says otherwise.
+- Accordion CTA glyph follows the link type (G22): `https://…` opens a new tab with Icon/External (`arrow-ext`, ↗); `mailto:` uses the email glyph. Figma drew the arrow-right in both (F39); redraw them to match.
 
 ## HTML & accessibility
 
@@ -79,10 +79,10 @@ Values from [`_tokens.md`](_tokens.md).
 ## Port notes
 
 - Figma's Accordion hides the Number; the repo counter applies only to Default. No change.
-- The Accordion CTA icon is Arrow-right in Figma but `arrow-ext` or `email` in the repo. Decide per link kind (Open question).
+- The Accordion CTA icon is Arrow-right in Figma but `arrow-ext` or `email` in the repo. The repo wins: glyph by link type (G22).
+- Delete the `adhoc` type from `_service-card.njk` and any page that passes it (G23).
 - Summary gap is now a bound minimum, not a fixed 392 (F39).
 
 ## Open questions
 
-- Should the Accordion CTA use the arrow for every link, or keep external ↗ and email glyphs by link type?
-- Should the `adhoc` type get a Figma variant, or be removed from the macro?
+None. Settled in Phase 18 (G22, G23, G44).

@@ -12,7 +12,7 @@ One case-study listing row: image, title, services and an optional "Read case st
 - **Body** (`.project-item__body`):
   - **Title**: style `site/heading`. Code: `h2`.
   - **Services**: style `site/body`. Code: `p.project-item__services`.
-  - **CTA** (`Show CTA`): "Read case study", style `site/link`, colour `color-accent`. Code: `a.project-item__cta`.
+  - **CTA** (`Show CTA`): "Read case study", style `site/link`, colour `color-accent`, no arrow (G19). Code: `a.project-item__cta`.
 
 ## Props & variants
 
@@ -29,7 +29,7 @@ The CTA label is not bound to a text property in Figma. The macro's label is fix
 
 - **Split** is a 2-column grid: Media left, Body right. **Stacked** is one column, Media then Body.
 - In code both come from one `.project-item`. The fold is a container query against `main` at `$bp-l`, not a viewport breakpoint (`_responsive.scss`, block for `min-width: $bp-l`). Below it the item stacks.
-- At `$bp-2xl` the body becomes a row: title left, CTA pushed to the far edge, `white-space: nowrap`. Figma doesn't draw this wide-body row; the Split frames show the vertical body.
+- The body is vertical at every width (G20). The old `$bp-2xl` row (title left, CTA pushed to the far edge) is dropped, which matches the Split frames.
 - Frames: Split on 1512 and 834, Stacked on 390 (Q25: container-driven, frames are visual checks).
 
 ## Tokens
@@ -75,10 +75,10 @@ Values from [`_tokens.md`](_tokens.md).
 ## Port notes
 
 - The image becomes an [Image](image.md) with a `ratio` of 3:2 (`aspect-ratio` + `object-fit: cover`).
-- The existing `$bp-l` / `$bp-2xl` container folds already match Split / Stacked. Keep them.
-- Optional: the CTA gets an arrow ([Icon/Arrow-right](icon.md)) if the design adds one. Figma has none today.
+- The existing `$bp-l` container fold already matches Split / Stacked. Keep it.
+- Delete the `$bp-2xl` block for `.project-item` from `_responsive.scss` (G20).
+- The CTA gets no arrow (G19): "Read case study" already says it opens a page (README, arrow rule).
 
 ## Open questions
 
-- Should the CTA carry [Icon/Arrow-right](icon.md), as other internal "more" links do (README, Cross-cutting behaviour)? Figma draws none.
-- Figma's Split body is vertical at every width; the repo's title-left, CTA-right row at `$bp-2xl` isn't drawn. Keep it?
+None. Settled in Phase 18 (G19, G20).

@@ -45,7 +45,7 @@ Values from [`_tokens.md`](_tokens.md). Repo: the gap is `--icon-gap` (default `
 
 ## Content rules
 
-- Pick the glyph by meaning: [External](icon.md) for links that open a new tab, [Arrow-right](icon.md) for internal "more", [Phone](icon.md) for call, [Copy](icon.md) for copy to clipboard.
+- Pick the glyph by meaning: [External](icon.md) for links that open a new tab, [Arrow-right](icon.md) only under the arrow rule (README, Cross-cutting behaviour), [Phone](icon.md) for call, [Copy](icon.md) for copy to clipboard.
 - External links need `target="_blank" rel="noopener noreferrer"`.
 - Labels are short, sentence case.
 
@@ -57,14 +57,15 @@ Values from [`_tokens.md`](_tokens.md). Repo: the gap is `--icon-gap` (default `
 ```
 
 - The glyph is a CSS mask with no text, so the name is the label alone.
-- The copy action is a `<button>`, not a link. It keeps the same look.
+- The copy action stays a `<button>`, not a `mailto:` link (G9). It keeps the same look.
 - Copy feedback goes to a `role="status"` live region (as in today's footer).
 
 ## Port notes
 
 - Today the leading form `data-icon-before` is used in the footer (`copy`, `phone`). The redesign puts every glyph after the label: switch to `data-icon`.
+- The glyph is `currentColor` (G8).
 - Figma has no Hover state; the gap nudge already exists in `_icons.scss`.
 
 ## Open questions
 
-- Should the copy action stay a `<button>` styled as an Icon link, or become a link to a `mailto:`? Figma treats it as the same component.
+None. Settled in Phase 18 (G8, G9).

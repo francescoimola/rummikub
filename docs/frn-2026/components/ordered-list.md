@@ -24,9 +24,8 @@ None, fluid only. The marker hugs (about 10 to 14 wide) and the text fills. Line
 
 | Use | Figma variable | Min → Max |
 | --- | --- | --- |
-| Row gap (Web design) | `space/s` | 15 → 16.88 |
-| Row gap (Consultations) | `space/m` | 22.5 → 25.31 |
-| Marker ↔ text | `space/xs` | 11.25 → 13.13 |
+| Row gap (both service pages) | `space/s` (G35) | 15 → 16.88 |
+| Marker ↔ text (Figma only) | `space/xs` | 11.25 → 13.13 |
 | Marker, title | `neutral/950-alpha`, `step/0` | 15 → 16.88 |
 | Description | `neutral/900-alpha` | n/a |
 
@@ -54,11 +53,10 @@ None.
 
 ## Port notes
 
-- Already in the repo (`design.njk`, `consultations.njk`). Figma's row gap `space/xs` between marker and text should be matched with `::marker` and `padding-inline-start`, since a marker cannot take a `gap`.
-- The row gap varies (`has-gap-s` on Web design, `has-gap-m` on Consultations): both already exist.
+- Already in the repo (`design.njk`, `consultations.njk`). The browser `::marker` stays (G35). Figma's marker ↔ text gap `space/xs` is a snapshot, since a marker cannot take a `gap`.
+- One row gap, `has-gap-s`, on both pages (G35). Change Consultations from `has-gap-m`, and the Figma Consultations list to `space/s`.
 - Bulleted lists use native bullets in Figma and the repo; no change.
 
 ## Open questions
 
-- Should the Consultations list gap (`space/m`) match Web design's (`space/s`)?
-- Marker alignment: keep the browser `::marker`, or draw a counter so it matches Figma's marker ↔ text gap exactly?
+None. Settled in Phase 18 (G35).

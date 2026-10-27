@@ -8,7 +8,7 @@ The closing call to action on Collaborate and both service pages: a large tinted
 
 ## Anatomy
 
-- **Card Heading**: width capped at `layout/content-width`, holds the heading in KC Pelletier Sans, style `site/cta/heading`. Code: `h2`.
+- **Card Heading**: width capped at `layout/content-width`, holds the heading in KC Pelletier Sans, style `site/cta/heading`. Code: `h2` on every page (G18).
 - **Body**: `site/body`, width capped at `layout/inline-size`. Code: `p`.
 - **Actions**: two [Icon link](icon-link.md) instances, stacked.
   - **Call link**: [Icon/Phone](icon.md), "Book free intro call". Code: `a[data-icon="phone"]`, new tab.
@@ -50,12 +50,13 @@ Values from [`_tokens.md`](_tokens.md). The heading uses style `site/cta/heading
 
 - Links: see [Icon link](icon-link.md) (hover, nudge).
 - Copy email: a click copies the address and announces it through the `role="status"` region (`mailto-copy.js`).
-- The card enters with `breakout` on scroll; Firefox gets the JS fallback. Reduced motion shows it static.
+- The card enters with `breakout` on scroll. It is a developer opt-in via `view-animation="breakout"` (G13); Firefox gets the JS fallback. Reduced motion shows it static.
 
 ## Content rules
 
 - Heading and body are macro arguments. Service headings: Web design "Let's talk about your website"; Consultations "Book a website consultation and get sound expert advice" (Q34); Collaborate "I don't bite".
 - Empty body: omit the `<p>`.
+- The heading is always an `h2`, whatever the page outline (G18).
 
 ## HTML & accessibility
 
@@ -81,4 +82,4 @@ Values from [`_tokens.md`](_tokens.md). The heading uses style `site/cta/heading
 
 ## Open questions
 
-- Is `h2` right on every page, or should it follow the page's heading outline?
+None. Settled in Phase 18 (G18).

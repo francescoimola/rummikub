@@ -1,10 +1,10 @@
 # Media pair
 
-**Layer:** Composite · **Status:** planned · **Figma:** (pattern) examples `2300:10144` (The Loft, desktop), `2344:10024` (The Loft, tablet), `2344:10761` (The Loft, mobile), `2327:9733` (writing post) · **Code:** `.grid-cols-2-fixed`
+**Layer:** Composite · **Status:** planned · **Figma:** (pattern) examples `2300:10144` (The Loft, desktop), `2344:10024` (The Loft, tablet), `2344:10761` (The Loft, mobile), `2327:9733` (writing post) · **Code:** `.grid-cols-2` (renamed from `.grid-cols-2-fixed`, G42) + `{% mediaPair %}`
 
 ## Purpose
 
-Two [Figure](figure.md)s side by side in a long-form post. Used twice in The Loft and twice in the flyer guide (12 frames over the three sizes). Media pairs stay full-bleed grids, while single media are capped at `layout/content-width` (decisions, Phase 15).
+Two [Figure](figure.md)s side by side in a long-form post. Used twice in The Loft and twice in the flyer guide (12 frames over the three sizes). A pair sits at content width, like single media (G13; earlier decisions had it full-bleed).
 
 ## Anatomy
 
@@ -19,7 +19,7 @@ None. Each Figure keeps its own ratio, so pairs can differ (2:1 beside 16:9), an
 
 - **Desktop and tablet:** two equal columns.
 - **Mobile:** one column, the second figure below the first.
-- Figma changes the mode (tablet 2-up, mobile 1-up). In code today `.grid-cols-2-fixed` is `1fr 1fr` at every width, so it never stacks. The stacked form needs a fold: a `@container` at `$bp-s` in `_responsive.scss` (Q25).
+- Figma changes the mode (tablet 2-up, mobile 1-up). The existing two-column class, `.grid-cols-2-fixed`, was `1fr 1fr` at every width and never stacked. It is renamed `.grid-cols-2` and stacks below a `@container` fold (`$bp-s`, in `_responsive.scss`; G36, G42, Q25). About and Collaborate change with it.
 
 ## Tokens
 
@@ -35,17 +35,17 @@ Values from [`_tokens.md`](_tokens.md).
 
 ## States & interactions
 
-Each figure scrolls in with `breakout` (README, Scroll animation). A video follows the Videos rule.
+No `breakout`: a pair sits at content width (G13). A video follows the Videos rule.
 
 ## Content rules
 
-- In a post, use two `figureImg` calls inside a wrapper (not markdown `![]()`), or a `mediaPair` shortcode (not built).
+- Author a pair with the paired shortcode `{% mediaPair %}` (G40), defined in `src/config/eleventy/shortcodes.js`. It wraps two figures. Never markdown `![]()`.
 - Pair figures of similar weight. Captions are optional and per figure.
 
 ## HTML & accessibility
 
 ```html
-<div class="grid-cols-2-fixed has-gap-s">
+<div class="grid-cols-2 has-gap-s">
   <figure>…<figcaption>…</figcaption></figure>
   <figure>…</figure>
 </div>
@@ -55,11 +55,11 @@ Each figure scrolls in with `breakout` (README, Scroll animation). A video follo
 
 ## Port notes
 
-- `.grid-cols-2-fixed` is also used on About (profile) and Collaborate. The name says "fixed", so add the mobile fold in a **separate** class (e.g. `.media-pair`) to avoid changing those.
+- Rename `.grid-cols-2-fixed` to `.grid-cols-2` everywhere (G42) and add the container fold so it stacks (G36). About (profile) and Collaborate use it, so they stack too.
+- Add the `mediaPair` paired shortcode to `src/config/eleventy/shortcodes.js` (G40, approved).
 - Figma frames named `Frame 2` and `Frame 3` on The Loft are the same pattern; they should be named `Media pair`.
 - The post-media rhythm still keys off `.case-study__intro` (AGENTS.md, Long-form pages).
 
 ## Open questions
 
-- New `.media-pair` class with a fold, or add the fold to `.grid-cols-2-fixed` and fix About and Collaborate?
-- Add a `mediaPair` shortcode, or keep the wrapper in the markdown?
+None. Settled in Phase 18 (G13, G36, G40, G42).

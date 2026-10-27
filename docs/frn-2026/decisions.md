@@ -465,3 +465,85 @@ Findings register: `docs/frn-2026/audit.md` (IDs F01…, status, owner). Facts c
 - `components/` written: README (index, conventions, cross-cutting rules, open questions), `_template.md`, `_tokens.md` (resolved Min → Max), and 28 docs (22 components, 6 patterns).
 - Every Figma component links to its doc (GitHub `development` blob URL) with a one-line description. Descriptions use curly quotes and no angle brackets, because the plugin API re-escapes them (F45).
 - Open questions from the docs are listed in `components/README.md`, to be settled in a grilling round before the port.
+
+## Phase 18: Component grilling (2026-10-27)
+
+Settles the open questions in `components/README.md`. Numbered G1… so they don't clash with Phase 17's Q1–Q40.
+
+### Round 1
+
+| # | Question | Answer |
+|---|---|---|
+| G1 | Nav label | "Ideas" in header, breadcrumb and any footer link. The `/writing/` heading and `<title>` stay |
+| G2 | Wide Look toggles | Pinned to the right edge, as drawn |
+| G3 | Nav hover bullet | Slides in over `--dur-fast` (0s under reduced motion) |
+| G4 | Footer nav | Dropped: the footer is Contact cards + colophon only |
+| G5 | Badges | Design Declares → `https://designdeclares.com/`; Creatives for Climate → `https://www.creativesforclimate.co/about` |
+| G6 | Contact card prompt | Re-asked (the repo's "Up for a chat?" footer sits in Explorations, which is out of scope) |
+| G7 | Theme switch glyph | Repo wins: sized with `--space-s-m`; bind the Figma glyph to it |
+| G8 | Icon colour | `currentColor` in code; Figma glyphs rebound to `color-accent` |
+| G9 | Copy email | Stays a `<button>` |
+| G10 | Illustrations | Footer drawing inline SVG with `currentColor`; hero illustrations keep `currentColor` |
+| G11 | Image ratios | Token names state the ratio (`--ratio-3-2`, `--ratio-2-1`, `--ratio-1-1`, `--ratio-4-3`, `--ratio-16-9`, portraits `--ratio-2-3`, `--ratio-3-4`, `--ratio-9-16`). No `ratio=` → natural shape, no crop, no build-time measuring |
+| G12 | `font-size-7` | Don't keep it: snap to the nearest Utopia step (see round 2) |
+| G13 | Scroll animation | `settle` stays on hero media (case studies, writing posts). `breakout` stops on case studies, including where used today; it runs only on writing posts and where a developer opts in with `view-animation="breakout"`. Media pairs sit at content width |
+| G14 | Carousel controls | CSS only: scroll-snap + `::scroll-button()`. No JS; browsers without support swipe/scroll |
+| G15 | Carousel content | Six slides from `src/_data/explorations.json`, no links, no auto-advance, **editable in Pages CMS** |
+| G16 | Page header illustration | Add a "Show illustration" boolean |
+| G17 | Page header blurb | Dropped (macro param + Figma property) |
+| G18 | CTA heading | `h2` everywhere |
+| G20 | Project item `$bp-2xl` row | Dropped; vertical at every width |
+| G22 | Service card accordion CTAs | Glyph by link type (↗ external, email glyph for `mailto:`) |
+| G23 | `adhoc` service type | Deleted from the macro |
+| G25 | Art year | Dimmed (`neutral/900-alpha`), body size |
+| G26 | FAQ items | Hand-written `<details>` replaced by data, **editable in Pages CMS** (see round 2); each item opens independently |
+| G27 | Quote card bar | Drawn in Figma |
+| G28 | Quote card data | `quoteCard` macro, copy inline per page |
+| G29 | Consultations £225 | Stays a bold paragraph, not a Pricing item |
+| G30 | Pricing item markup | Inline `<li>` in `.pricing-list` |
+| G31 | Section column gap | `space/s` everywhere |
+| G32 | Highlight flag | A class on the `h2`, not an attribute on `<section>` |
+| G33 | Ideas type sections | Use the Section grid |
+| G34 | Card | Real Figma component (`Style=Outline/Featured`); Collaborate radius `border-radius-s` |
+| G35 | Ordered list | One gap `space/s`; browser `::marker` |
+| G38 | Data list | Figma's layout (year column beside label over value), fold as `@container` |
+
+Re-asked in round 2: G6, G19, G21, G24, G36, G37.
+
+### Round 2
+
+| # | Question | Answer |
+|---|---|---|
+| G39 | "Explorations" | Two things were sharing the name. The Figma idea-testing area is now **"Trial and error"** (`2246:3661`, hidden, out of scope, like the archive). The real site is designed under the francescoimola.com section. **Explorations** means only the homepage carousel: self-initiated or experimental work with no client attached. Data in `src/_data/explorations.json` |
+| G6 | Footer headings | The footer's "Contact" title is the `h2`; each Contact card prompt is an `h3`, styled `site/heading` as now |
+| G19 | Project item arrow | No arrow. **Arrow rule:** an arrow marks a link that leaves the page only when the label doesn't already say so. "Read case study" implies a new page, so no arrow; "More about me" could be an in-page action, so it gets →. Applies site-wide |
+| G21 | Writing item thumb | Fluid: the thumb scales with its container. The narrower thumb on tablet/mobile is intentional, so the text doesn't wrap onto too many lines. Code approach: round 3 |
+| G24 | Split row text | Two columns as drawn (title + year left, description right), folding to one column on a `@container` query against its parent |
+| G36 | Media pair | Change the existing two-column class so it stacks on narrow containers. About and Collaborate change with it |
+| G40 | Media pair authoring | New paired shortcode `{% mediaPair %}` in `shortcodes.js` (approved by the user) |
+| G37 | Masonry | Dropped, `display: grid-lanes` included. A plain two-column grid, children top-aligned (`align-items: start`), every image at its **natural** ratio (no preset ratio) |
+| G12 | Caption size | `step/-1` (11.25 → 12.66) replaces `font-size-7` |
+| G26 | FAQ data | `src/_data/faqs.json`, one list per page (`about`, `design`, `consultations`); items have `question` + `answer` (Markdown, CMS `text` field); `faqList(items)` macro renders the `<details>` |
+
+### Round 3
+
+| # | Question | Answer |
+|---|---|---|
+| G41 | Writing item thumb in CSS | One grid: thumb `3fr` \| body `5fr`, thumb a square filling its column. One `@container` rule switches to `1fr 3fr` when the row is narrow; type pages add `.writing-item--compact` (always `1fr 3fr`). Roughly 75 px mobile, 150 px `/writing/` desktop, 210 px type pages |
+| G42 | `.grid-cols-2-fixed` | Renamed `.grid-cols-2` (it stacks now, G36) |
+| G43 | Art image ratios | Figma keeps its Phase 13 crops as an approximation; code shows natural ratio; `artProjects.json` gets **no** `ratio` field |
+| G44 | Arrow rule, applied | Arrows stay on "More about me", "Here's what I can offer you", "How this website is built", "Learn about its accessibility", "See what other brands left with", the Service card Default CTA, and **"To main site"**: it leaves the page in a way that's hard to undo, which also earns an arrow. "See what I've done" exists only in the repo (`index.njk`, `collaborate.njk`), not in the redesign, so it goes with the port |
+| G45 | Carousel crop | Slides crop to 3:2, the one exception to "natural ratio", so CMS uploads of any shape line up |
+
+### Applied (2026-10-27)
+
+- **Docs:** every component doc, the README and `_tokens.md` updated to G1–G45; no open questions remain. `masonry.md` kept as a "Dropped (G37)" note. Doc-writer calls to check at port: `::scroll-button()` has no wrap-around, so the carousel stops at 6 instead of looping to 1; the G32 h2 class is drafted as `highlight-header`.
+- **Figma (WIP + Components board):**
+  - Theme glyphs bound to `space/s` and button padding to `space/2xs`. The code's `--space-s-m` is capped at `1rem`, so `space/s` is its effective value (G7).
+  - Icon/External and Icon/Arrow-right strokes now `color-accent`. Chevron and Plus stay neutral (G8).
+  - `site/figcaption` font size bound to `step/-1` (G12).
+  - Page header: new `Show illustration` boolean, off on the 9 instances that had no illustration (Artmaking, 404, **Web design**). The Blurb layer and its two properties are deleted (G16, G17).
+  - Quote card's inner-shadow bar bound to `accent-surface` and `space/3xs` (G27).
+  - Badges link to Design Declares and Creatives for Climate (G5).
+  - New **Card** set `2403:20009` (`Style=Default/Outline/Featured`, padding `space/s-m`, radius `border-radius-s`). The Components board now hugs its content (G34).
+  - Project item: no arrow existed, so nothing changed (G19).

@@ -20,7 +20,7 @@ Status tracks the **redesign**: `planned` (a pattern with no Figma component) �
 | Icon link | [icon-link.md](icon-link.md) | `2352:18813` | `a[data-icon]` | figma |
 | Nav link | [nav-link.md](nav-link.md) | `2291:779` | `<li>` in `_header.njk` | figma |
 | Section heading | [section-heading.md](section-heading.md) | `2380:19847` | `h2.highlight-header` | figma |
-| Card | [card.md](card.md) | (pattern) | `.card` | planned |
+| Card | [card.md](card.md) | `2403:20009` | `.card` | figma |
 
 ### Composites
 
@@ -38,8 +38,8 @@ Status tracks the **redesign**: `planned` (a pattern with no Figma component) �
 | Pricing item | [pricing-item.md](pricing-item.md) | `2380:19857` | (none) | figma |
 | Split row | [split-row.md](split-row.md) | `2357:19451` | `_split-row.njk` | figma |
 | Ordered list | [ordered-list.md](ordered-list.md) | (pattern) | `ol` | planned |
-| Media pair | [media-pair.md](media-pair.md) | (pattern) | `.grid-cols-2-fixed` | planned |
-| Masonry | [masonry.md](masonry.md) | (pattern) | `.masonry` | planned |
+| Media pair | [media-pair.md](media-pair.md) | (pattern) | `.grid-cols-2` (renamed, G42) + `{% mediaPair %}` shortcode (G40) | planned |
+| Masonry | [masonry.md](masonry.md) | (pattern) | `.masonry` | dropped |
 | Data list | [data-list.md](data-list.md) | (pattern) | `.data-list` | planned |
 
 ### Sections
@@ -84,14 +84,17 @@ These rules apply site-wide; component docs refer to them instead of repeating t
 | Behaviour | Rule |
 | --- | --- |
 | Motion | `--dur-fast` 0.2s and `--dur-medium` 0.25s with `--ease`. Both are 0s unless the visitor allows motion, so reduced motion is the default state, not an override. |
-| Scroll animation | `view-animation="settle"` (first media, page headers) and `breakout` (later media) key off `.case-study__intro`. Firefox gets the JS fallback (`scroll-fallback.js`). |
+| Scroll animation | `settle` stays on the hero media of case studies and writing posts. `breakout` never runs on case studies. It runs only on writing posts, and where a developer opts in with `view-animation="breakout"` (G13). Media pairs sit at content width. Both key off `.case-study__intro`. Firefox gets the JS fallback (`scroll-fallback.js`). |
 | External links | [Icon/External](icon.md) ↗ (`data-icon="arrow-ext"`, drawn, never a typed character), `target="_blank" rel="noopener noreferrer"`. |
-| Internal "more" links | [Icon/Arrow-right](icon.md) → after the label. |
+| Arrow rule | [Icon/Arrow-right](icon.md) → after the label, only when the label doesn't already make clear the link leaves the page, or when leaving is hard to undo ("To main site"). "Read case study" gets none (G19, G44). Arrows stay on "More about me", "Here's what I can offer you", "How this website is built", "Learn about its accessibility", "See what other brands left with", the Service card Default CTA and "To main site". |
+| Nav label | The writing section is "Ideas" in the header, breadcrumb and any footer link (G1). The `/writing/` heading and `<title>` stay. |
 | Icons | Opt-in per element via `data-icon` / `data-icon-before`. Nothing keys off `href`. |
-| Images | Lazy by default; body images go through `figureImg`, never markdown `![]()`. |
+| Images | Lazy by default; body images go through `figureImg`, never markdown `![]()`. With no `ratio=` an image keeps its natural shape: no crop, no build-time measuring (G11). Ratio token names state the ratio: `--ratio-3-2`, `--ratio-2-1`, `--ratio-1-1`, `--ratio-4-3`, `--ratio-16-9`, and portraits `--ratio-2-3`, `--ratio-3-4`, `--ratio-9-16`. The carousel crops to 3:2, the one exception (G45). `artProjects.json` gets no `ratio` field (G43). |
 | Videos | `projectVideo`: lazy, autoplay in view, muted; the control shows only when the constraints apply (AGENTS.md, Project videos). |
 | Anchors | The homepage Featured heading gets `id="case-studies"`; every former `/work/` link points there (Q32). |
 | Fonts | Ronzino for everything except the hero and CTA headings, which use KC Pelletier Sans. The typeface is never swapped. |
+
+Masonry is dropped (G37): images use a plain two-column grid with `align-items: start` and natural ratios, with no `grid-lanes`. The doc stays as a note on what the port removes.
 
 ## Doc template
 
@@ -99,43 +102,4 @@ Copy [`_template.md`](_template.md) for each new component.
 
 ## Open questions
 
-Raised while writing the docs (2026-10-27). Each one is detailed in its doc. They get settled in a grilling round before the port.
-
-**Site chrome**
-
-- [Header](header.md): the nav label "Ideas" vs the repo's "Ideas & guides" (also [Breadcrumb](breadcrumb.md)); whether the Wide Look toggles sit inside the 900 column.
-- [Nav link](nav-link.md): whether the hover bullet animates in (as in Figma) or just appears (as in the repo).
-- [Footer](footer.md): the "Looking around?" nav is gone, so confirm there are no links beyond the Contact cards; where the second badge points.
-- [Contact card](contact-card.md): whether the Prompt is a heading or a paragraph.
-- [Look toggles](look-toggles.md): whether the theme switch scales with type like the swatches do.
-
-**Icons and media**
-
-- [Icon](icon.md): glyph colour, `color-accent` fill (Copy, Phone) vs `brand/800` stroke (External, Arrow-right), or `currentColor` in code.
-- [Icon link](icon-link.md): the copy action stays a `<button>`, or becomes a `mailto:` link.
-- [Illustration](illustration.md): inline SVG vs `<img>` for the footer drawing (an `<img>` can't follow the theme).
-- [Image](image.md): names for the five `--ratio-*` tokens; whether every image states its ratio.
-- [Figure](figure.md): renaming `font-size-7`; keeping both the media-pair grid and the scroll breakout.
-- [Carousel](carousel.md): new JS needs approval (rule 10), or scroll-snap with no buttons; where the slides live; links and auto-advance.
-
-**Content**
-
-- [Page header](page-header.md): a "Show illustration" switch for Artmaking and 404; whether any page needs the blurb.
-- [CTA card](cta-card.md): `h2` on every page, or follow the page outline.
-- [Project item](project-item.md): an arrow on the CTA; whether the `$bp-2xl` title-left/CTA-right row stays.
-- [Writing item](writing-item.md): the Expanded thumb scales, or stays the fixed `--space-2xl` square.
-- [Service card](service-card.md): the Accordion CTA glyphs; a Figma variant for `adhoc`.
-- [Split row](split-row.md): the description beside or under the title; the year in `site/body` vs `site/small`.
-- [FAQ item](faq-item.md): a macro or hand-written `<details>`; whether opening one closes the others.
-- [Quote card](quote-card.md): draw the left accent bar in Figma or drop it; a `quoteCard` macro plus `testimonials.json`, or inline copy.
-- [Pricing item](pricing-item.md): Consultations' £225 as a Pricing item; a macro or an inline `<li>` (`.pricing-list` already exists).
-- [Section heading](section-heading.md): the `highlight-header` flag as a section attribute or an h2 class.
-
-**Patterns**
-
-- [Section](section.md): column gap `space/s` (Work with me) vs `space/3xs-m` (About); whether the Ideas type sections share the grid.
-- [Card](card.md): a real Figma Card component (Outline, Featured); Collaborate's card radius.
-- [Ordered list](ordered-list.md): one gap for both service pages; the browser `::marker` or a drawn counter.
-- [Media pair](media-pair.md): a new `.media-pair` with a fold, or fold `.grid-cols-2-fixed` (which never stacks today); a `mediaPair` shortcode.
-- [Masonry](masonry.md): whether Figma draws the grid-lanes packing.
-- [Data list](data-list.md): the repo's layout or Figma's; the Narrow fold as a `@container` rule.
+All the open questions raised while writing these docs were settled in Phase 18 (G1 to G45, three rounds). See [`../decisions.md`](../decisions.md). Nothing is still open. The docs state the settled answers and cite the G number.

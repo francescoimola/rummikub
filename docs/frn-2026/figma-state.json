@@ -40,9 +40,6 @@
         "step/0": "VariableID:2271:2232",
         "space/s-m": "VariableID:2271:2254",
         "layout/gutter": "VariableID:2271:2278"
-      },
-      "added": {
-        "step/2-4": "VariableID:2380:660"
       }
     },
     "Border": {
@@ -294,5 +291,7 @@
     "Minimal/Wide": "2378:20352",
     "Minimal/Narrow/Closed": "2378:20378",
     "Minimal/Narrow/Open": "2378:20385"
-  }
+  },
+  "trial_and_error": "2246:3661",
+  "trial_and_error_status": "hidden, out of scope: idea testing, not the real site (user, 2026-10-27). Formerly called Explorations"
 }

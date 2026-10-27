@@ -1,6 +1,6 @@
 # FAQ item
 
-**Layer:** Composite · **Status:** figma · **Figma:** `2353:18925` · **Code:** `<details>` on About and service pages (no partial yet)
+**Layer:** Composite · **Status:** figma · **Figma:** `2353:18925` · **Code:** `faqList(items)` macro over `src/_data/faqs.json`, `<details>`
 
 ## Purpose
 
@@ -47,7 +47,9 @@ Values from [`_tokens.md`](_tokens.md). The radius is bound but there is no fill
 
 ## Content rules
 
-- Copy is authored in the page's HTML, word for word (`about.njk`, `studio/design.njk`, `studio/consultations.njk`).
+- Copy lives in `src/_data/faqs.json` (G26), one list per page: `about`, `design`, `consultations`. Each item has `question` and `answer`.
+- `answer` is Markdown, a CMS `text` field. The file is **editable in Pages CMS**, with a `.pages.yml` entry like `artProjects`.
+- The `faqList(items)` macro renders the `<details>` list, so the pages stop hand-writing them.
 - Answers can hold links; external ones follow the README rule.
 - An item with no answer is not valid.
 
@@ -64,15 +66,15 @@ Values from [`_tokens.md`](_tokens.md). The radius is bound but there is no fill
 ```
 
 - Native `<details>` / `<summary>` provides the role and the expanded state.
-- Do not add `aria-expanded`. Do not use `name=` grouping unless exclusive opening is wanted; none is designed.
+- Do not add `aria-expanded`. No `name=` grouping: each item opens independently (G26).
 
 ## Port notes
 
-- Today the markup is hand-written per page. A `faqItem(question, answer)` macro would remove the repeats, but only if it saves more than it costs (AGENTS.md rule 10 favours deleting).
-- `about.njk` has an unclosed `<p>` in the third answer; fix when touched.
+- Add `src/_data/faqs.json` (`about`, `design`, `consultations`) and the `.pages.yml` entry (G26).
+- Add a `faqList(items)` macro (a partial, no JS) and use it in `about.njk`, `studio/design.njk` and `studio/consultations.njk`.
+- The unclosed `<p>` in the third About answer goes with the hand-written markup.
 - Figma's Open frame is the reference for the open spacing.
 
 ## Open questions
 
-- Add a macro, or keep the hand-written `<details>`?
-- Should opening one close the others? Not designed; default no.
+None. Settled in Phase 18 (G26).
