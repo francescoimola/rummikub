@@ -1,6 +1,6 @@
 # Page header
 
-**Layer:** Section · **Status:** figma · **Figma:** `2357:19433` · **Code:** `src/_includes/_page-header.njk`, macro `pageHeader(iconName, label)`
+**Layer:** Section · **Status:** figma · **Figma:** `2405:19762` (set; `Layout=Default` `2357:19433`, `Layout=Tablet` `2405:19759`) · **Code:** `src/_includes/_page-header.njk`, macro `pageHeader(iconName, label)`
 
 ## Purpose
 
@@ -27,7 +27,7 @@ No variants.
 
 ## Layout
 
-None, fluid only. A vertical stack, centred, gap `space/2xl-3xl`. The heading is capped at whichever is wider, `layout/inline-size` (600) or `layout/content-width` (330 → 900) (G46). Tablet frames show the 600 cap, so the heading doesn't wrap onto as many lines as it does on mobile. Code: `max-inline-size: max(var(--inline-size), <content-width>)`. No breakpoint: on phones the parent is narrower than 600, so the heading just fills it.
+None, fluid only. A vertical stack, centred, gap `space/2xl-3xl`. The heading is capped at whichever is wider, `layout/inline-size` (600) or `layout/content-width` (330 → 900) (G46). In Figma this is a `Layout=Tablet` variant: the heading sits in an "Introduction cap" frame with max width `layout/inline-size`, because the plugin can't bind a text layer's max width. All six tablet instances use it. The variant is only how Figma draws it: code has no tablet variant. Code: `max-inline-size: max(var(--inline-size), <content-width>)`. No breakpoint: on phones the parent is narrower than 600, so the heading just fills it.
 
 ## Tokens
 
