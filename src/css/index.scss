@@ -228,7 +228,7 @@ h1.stretch {
     text-wrap: balance;
 }
 
-[highlight-header]>h2:first-child {
+h2.highlight-header {
     background-color: var(--accent-surface);
     inline-size: fit-content;
     padding-block: var(--space-3xs-2xs);
