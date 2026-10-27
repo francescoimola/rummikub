@@ -1,0 +1,14 @@
+{# Testimonial: quote, then name and role (G27, G28). Copy stays inline in each page; there is no data file. #}
+{# link = { url, label }: with a label it's the company after the role, without one the name itself links. #}
+{% macro quoteCard(quote, name, role, link) %}
+{%- set ext %} target="_blank" rel="noopener noreferrer" data-icon="arrow-ext"{% endset -%}
+<figure class="card outline flow has-gap-s">
+    <blockquote>
+        <p>{{ quote }}</p>
+    </blockquote>
+    <figcaption>
+        {%- if link and not link.label %}<a href="{{ link.url }}"{{ ext | safe }}>{{ name }}</a>{% else %}{{ name }}{% endif %}<br>
+        {{- role }}{% if link and link.label %}, <a href="{{ link.url }}"{{ ext | safe }}>{{ link.label }}</a>{% endif -%}
+    </figcaption>
+</figure>
+{% endmacro %}

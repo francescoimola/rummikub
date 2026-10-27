@@ -35,7 +35,7 @@ Status tracks the **redesign**: `planned` (a pattern with no Figma component) â†
 | Project item | [project-item.md](project-item.md) | `2292:1007` | `_project-item.njk` | figma |
 | Writing item | [writing-item.md](writing-item.md) | `2329:9102` | `_writing-item.njk` | figma |
 | Service card | [service-card.md](service-card.md) | `2292:1547` | `_service-card.njk` | figma |
-| Quote card | [quote-card.md](quote-card.md) | `2380:19851` | `blockquote` card | figma |
+| Quote card | [quote-card.md](quote-card.md) | `2380:19851` | `_quote-card.njk` | code |
 | Pricing item | [pricing-item.md](pricing-item.md) | `2380:19857` | (none) | figma |
 | Split row | [split-row.md](split-row.md) | `2357:19451` | `_split-row.njk` | figma |
 | Ordered list | [ordered-list.md](ordered-list.md) | (pattern) | `ol` | planned |

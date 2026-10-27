@@ -10,6 +10,7 @@ eleventyNavigation:
 ---
 {% from "_project-item.njk" import projectItem %}
 {% from "_cta-card.njk" import ctaCard %}
+{% from "_quote-card.njk" import quoteCard %}
 <header class="flow has-gap-xs">
     <h1>Available for hire<br>
         <span class="dimmed">Web and content designer based in Kent</span></h1>
@@ -64,13 +65,7 @@ eleventyNavigation:
             <p>As long as I'm working with people who care deeply about what they do as much as they care about each other, I WILL stick around no matter how messy things get.</p>
             <p>Found yourself in uncharted waters? We'll cross them together. Are your design and marketing teams struggling to agree on what needs doing? I may not have all the answers, but I'll support them as they search for them.
         </div>
-        <figure class="card outline flow has-gap-s">
-            <blockquote>
-                I have never worked with someone so deeply reliable, who has gone above and beyond my expectations. The sheer detail, diligence and attention Fran has to his work is worth its weight in gold, tenfold! [...] He's turned the weight on my shoulders into air.
-            </blockquote>
-            <figcaption>Cairo Woodward<br>Co-founder, <a href="https://www.theloftstudio.uk" target="_blank" rel="noopener noreferrer">The Loft</a>
-            </figcaption>
-        </figure>
+        {{ quoteCard("“I have never worked with someone so deeply reliable, who has gone above and beyond my expectations. The sheer detail, diligence and attention Fran has to his work is worth its weight in gold, tenfold! [...] He’s turned the weight on my shoulders into air.”", "Cairo Woodward", "Co-founder", { url: "https://www.theloftstudio.uk", label: "The Loft" }) }}
     </section>
     <section class="flow has-gap-s">
         <h2 class="highlight-header has-mb-xs">What does he have that others don't?</h2>
