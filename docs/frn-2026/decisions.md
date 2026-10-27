@@ -552,7 +552,7 @@ Re-asked in round 2: G6, G19, G21, G24, G36, G37.
 
 | # | Question | Answer |
 |---|---|---|
-| G46 | Page header heading width | On tablet, `layout/content-width` (330 in Min) is too narrow. The cap becomes the wider of `layout/inline-size` (600) and `layout/content-width`, with no breakpoint. In Figma, the 6 tablet instances bind `layout/inline-size` (user to do by hand: the API can't bind `maxWidth` on text). The user also restored the Web design illustration |
+| G46 | Page header heading width | On tablet, `layout/content-width` (330 in Min) is too narrow. The cap becomes the wider of `layout/inline-size` (600) and `layout/content-width`, with no breakpoint. Neither the API nor the UI can bind a text layer's `maxWidth`, so Figma gets a `Layout=Tablet` variant (set `2405:19762`, variant `2405:19759`): the heading is wrapped in an "Introduction cap" frame capped at `layout/inline-size`. All six tablet instances (Work with me, Ideas, Artmaking, 404, Web design, Consultations) use it. Code has no variant, only the `max()` cap. The user also restored the Web design illustration |
 | G47 | Carousel ends | No wrap-around. First slide shows only Next, last slide only Previous, the slides between show both |
 | G48 | Badge frames | Renamed "Creatives for Climate" (`2293:1553`, `2293:1825`) |
 
