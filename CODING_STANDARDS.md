@@ -6,7 +6,9 @@ Judgement rules for review. Mechanical rules are checked by `pnpm lint` (`script
 
 - **The repo wins on existing values.** When Figma and the repo disagree on a value the repo already sets, the repo's value stays, unless a decision (`Qnn`/`Gnn` in `decisions.md`) says otherwise.
 - **Figma px are a snapshot.** Every size is a Utopia token or a `clamp()`; layout comes from fluid scales, intrinsic grids and `@container` queries, with a viewport breakpoint only as a fallback. A raw px copied from Figma is a finding.
-- **A diff matches its component doc.** Markup, classes, tokens and states follow the doc the component links to; a deliberate departure updates the doc in the same diff.
+- **The live frame beats the doc.** Docs are a snapshot of Figma, which keeps changing. Re-read the frame before porting; where the doc disagrees, the diff fixes the doc. A diff otherwise matches the component doc it links to (markup, classes, tokens, states).
+- **One fix per shared pattern.** A layout bug fixed on one page is fixed in the pattern: find every caller (the hero bleed needed `.home-hero`, `.page-header` and `.collab-hero` alike).
+- **A page contains what its frame draws.** An element the repo has and the frame lacks (an extra CTA, an arrow) is removed, unless a decision keeps it.
 - **Typefaces are fixed.** KC Pelletier Sans for the hero and CTA headings, Ronzino for everything else.
 
 ## Content and markup

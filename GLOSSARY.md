@@ -21,3 +21,9 @@ _Avoid_: Art projects page, gallery
 **Ideas**:
 The writing section of the site, named "Ideas" in the navigation.
 _Avoid_: Blog, Ideas & guides (old label)
+
+## Layout
+
+**Content light**:
+The white-tinted background behind page content (`--content-light`), set per page with `contentMode: contrast`. Figma draws it on every page.
+_Avoid_: Contrast mode, white content
