@@ -1,6 +1,6 @@
 # CTA card
 
-**Layer:** Section · **Status:** figma · **Figma:** `2378:20633` · **Code:** `src/_includes/_cta-card.njk`, `.card.giant.featured`
+**Layer:** Section · **Status:** code · **Figma:** `2378:20633` · **Code:** `src/_includes/_cta-card.njk`, `.card.giant.featured`
 
 ## Purpose
 
@@ -79,6 +79,7 @@ Values from [`_tokens.md`](_tokens.md). The heading uses style `site/cta/heading
 - `ctaCard` gains an `emailFirst` param (default false) that swaps the two links (Q18). Collaborate passes `emailFirst = true`.
 - The heading uses KC Pelletier Sans at `--step-2-4`, a new pair token (`_tokens.md`). Today `.giant h2` has no KC face.
 - Card padding block stays the repo's `--space-xl-4xl` (`.giant`); Figma's `space/3xl-4xl` is a snapshot drift (repo wins).
+- **Ported (#28):** `ctaCard(heading, body, …, emailFirst = false)` builds both links once and emits them in the chosen order. Collaborate passes `emailFirst = true`. An empty body drops the `<p>`. `.card.cta-card>h2` sets KC Pelletier at `--step-2-4`, capped at content width, `--space-xs` below. Consultations' heading is now "Book a website consultation and get sound expert advice" (Q34); Work with me keeps its own heading until its page ticket.
 
 ## Open questions
 
