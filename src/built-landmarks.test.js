@@ -51,14 +51,23 @@ describe("built landmarks", () => {
     }
   });
 
-  // <header>'s content model forbids footer descendants, and the sidebar's desktop footer is a
-  // sibling of the banner — which is exactly why .sidebar itself cannot be the <header>.
-  it("keeps the sidebar footer outside the banner", () => {
+  // The current marker is set by URL prefix in _header.njk; a second match would show two bullets.
+  const primaryNav = (page) => page.slice(page.indexOf('<nav aria-label="Primary">'), page.indexOf("</nav>", page.indexOf('<nav aria-label="Primary">')));
+  const currentLabel = (file) => (primaryNav(html(file)).match(/aria-current="page">([^<]*)</) || [])[1];
+
+  it("marks at most one primary nav link as current", () => {
     for (const file of pages()) {
-      const page = html(file);
-      const banner = page.slice(page.indexOf('<header class="site-banner">'), page.indexOf("</header>"));
-      expect(banner, file).not.toContain("<footer");
+      expect((primaryNav(html(file)).match(/aria-current=/g) || []).length, file).toBeLessThanOrEqual(1);
     }
+  });
+
+  it("marks Ideas on writing posts and nothing on case studies", () => {
+    const posts = globSync("public/writing/*/index.html");
+    const caseStudies = globSync("public/work/*/index.html");
+    expect(posts.length).toBeGreaterThan(0);
+    expect(caseStudies.length).toBeGreaterThan(0);
+    for (const file of posts) expect(currentLabel(file), file).toBe("Ideas");
+    for (const file of caseStudies) expect(currentLabel(file), file).toBeUndefined();
   });
 
   it("keeps a single main landmark with the skip-link target", () => {
@@ -68,7 +77,7 @@ describe("built landmarks", () => {
     }
   });
 
-  // Both footers are always in the DOM; only the media queries keep them from both rendering.
+  // Both stopgap footers are always in the DOM; only the media queries keep them from both rendering.
   // If these two folds ever stop being complementary the page ships two contentinfo landmarks.
   it("hides exactly one of the two footers at every width", () => {
     expect(enclosingAtRule(".desktop-only{display:none}")).toBe("@media (width<49rem)");

@@ -88,7 +88,7 @@
     &.featured {
         background: var(--accent-surface);
         // light: brand-800 on --accent-surface is 4.35:1 (fails AA) — darken accent to brand-900; dark already passes (7.35)
-        // mirror the .sidebar footer pattern: scope the accent tokens, keep dark mode unchanged
+        // scope the accent tokens to this surface, keep dark mode unchanged
         --color-accent: light-dark(var(--brand-900), var(--brand-800));
         --accent-hover: light-dark(var(--brand-950), var(--brand-900));
     }
@@ -217,7 +217,7 @@
     aspect-ratio: 1;
     border: var(--input-border-width) solid var(--input-border-color);
     border-radius: var(--border-radius-s);
-    // each swatch previews that brand's sidebar tint — mirrors --brand-150's formula at a fixed hue (keep in sync with _colors.scss)
+    // each swatch previews that brand's banner tint — mirrors --brand-150's formula at a fixed hue (keep in sync with _colors.scss)
     background: light-dark(oklch(0.943 calc(0.073 * var(--brand-chroma)) calc(var(--picker-hue) - 0.2)),
             oklch(0.399 calc(0.101 * var(--brand-chroma)) calc(var(--picker-hue) + 6.7)));
 }

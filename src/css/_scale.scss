@@ -11,7 +11,7 @@ $bp-xl: 64rem; // tablet (viewport)
 $bp-2xl: 70rem; // project-item title/CTA row (container) — was viewport 86rem
 $bp-3xl: 86rem; // small-desktop (viewport)
 
-// Freezes the cqi --gutter-y to an absolute <length> on `.content` so descendants main can stick flush to it
+// Freezes the cqi --gutter-y to an absolute <length> on `.layout` so descendants main can stick flush to it
 @property --gutter-y-sticky {
   syntax: "<length>";
   inherits: true;
@@ -72,7 +72,6 @@ $type-config: (
     // Layout padding (gutter) tokens
     --gutter-y: var(--space-s-m);
     --gutter-x: var(--space-s-m);
-    --sidebar-width: clamp(22rem, 28cqi, 28rem); // desktop floor; content wins if wider. cqi resolves against .layout
 
     --max-inline-size: calc(var(--grid-width-2xl) * var(--type-ratio));
 

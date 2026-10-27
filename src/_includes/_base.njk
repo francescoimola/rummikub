@@ -3,35 +3,25 @@
 {% include "_head.njk" %}
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
+  {%- include "_header.njk" %}
   <div class="layout"{% if contentMode == "contrast" %} data-content="contrast"{% endif %}>
-    {# Stays a div: the banner is the <header> inside _header.njk, which cannot contain this <footer>. #}
-    <div class="sidebar">
-      {%- include "_header.njk" -%}
-      <div class="desktop-only has-mt-xl">
-        {%- include "_footer.njk" -%}
-        <div class="flow-row has-gap-2xs">
-          {%- include "_look-toggles.njk" -%}
-        </div>
+    {% if tags and ("work" in tags or "writing" in tags) %}
+    <main id="main-content" class="case-study text{% if "writing" in tags %} writing-post{% endif %}">
+      <div class="flow has-gap-3xs case-study__intro">
+        <h1>{{ title }}</h1>
+        {% if services %}<p class="dimmed">{{ services }}</p>
+        {% elif "writing" in tags and date %}<p class="dimmed"><time datetime="{{ date | isoMonth }}">{{ date | longDate }}</time>{% if type and writingTypes[type] %} · {{ writingTypes[type].short }}{% endif %}</p>{% endif %}
       </div>
-    </div>
-    <div class="content">
-      {% if tags and ("work" in tags or "writing" in tags) %}
-      <main id="main-content" class="case-study text{% if "writing" in tags %} writing-post{% endif %}">
-        <div class="flow has-gap-3xs case-study__intro">
-          <h1>{{ title }}</h1>
-          {% if services %}<p class="dimmed">{{ services }}</p>
-          {% elif "writing" in tags and date %}<p class="dimmed"><time datetime="{{ date | isoMonth }}">{{ date | longDate }}</time>{% if type and writingTypes[type] %} · {{ writingTypes[type].short }}{% endif %}</p>{% endif %}
-        </div>
-        {{ content | safe }}
-      </main>
-      {% elif isFullWidth %}
-      <main id="main-content" class="flow-row has-gap-s-m" full-width>{{ content | safe }}</main>
-      {% else %}
-      <main id="main-content" class="flow has-gap-3xl">{{ content | safe }}</main>
-      {% endif %}
-      <div class="mobile-only">
-        {%- include "_footer.njk" -%}
-      </div>
+      {{ content | safe }}
+    </main>
+    {% elif isFullWidth %}
+    <main id="main-content" class="flow-row has-gap-s-m" full-width>{{ content | safe }}</main>
+    {% else %}
+    <main id="main-content" class="flow has-gap-3xl">{{ content | safe }}</main>
+    {% endif %}
+    {# Stopgap until the Footer ticket (#24): the old footers, with the "Say hello" anchor target. #}
+    <div id="contact">
+      {%- include "_footer.njk" -%}
     </div>
   </div>
   <script src="/assets/scripts/lenis.min.js"></script>

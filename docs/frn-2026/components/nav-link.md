@@ -1,6 +1,6 @@
 # Nav link
 
-**Layer:** Primitive · **Status:** figma · **Figma:** `2291:779` · **Code:** `src/_includes/_header.njk` (`<li><a>` in `.nav-menu__panel > ul`)
+**Layer:** Primitive · **Status:** code · **Figma:** `2291:779` · **Code:** `src/_includes/_header.njk` (`navItem` macro, `<li><a>` in `.nav-menu__panel > ul`)
 
 ## Purpose
 
@@ -62,9 +62,8 @@ Values from [`_tokens.md`](_tokens.md).
 
 ## Port notes
 
-- Today's `_header.njk` has no marker. Add a `::before` bullet for `[aria-current="page"]` and `:hover`.
-- The partial still lists "Case studies" and "Ideas & guides". The Header doc covers both (G1).
-- No new file: this stays inside `_header.njk` (a macro is optional).
+- **Ported (#22):** the bullet is `nav li::before`, absolutely placed `--nav-indent` before the label so it never shifts the row. It shows on `[aria-current="page"]`, `:hover` and `:focus-within`, fading and sliding in over `--dur-fast` (0s under reduced motion).
+- Labels and the current-page rule live in the `navItem` macro calls in `_header.njk`; "Case studies" is gone and "Ideas & guides" reads "Ideas" (G1).
 
 ## Open questions
 

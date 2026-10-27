@@ -61,7 +61,7 @@ Each config module exports a function that registers things with Eleventy. Tests
 Run in jsdom. These files are IIFE-style with no exports, so the pattern is: set up the DOM, then `await import("./the-file.js")` inside the test, with `vi.resetModules()` in `beforeEach` for a fresh import.
 
 - **video-controller.test.js** — the fiddliest code in the repo: lazy-load via `IntersectionObserver`, play/pause, reduced motion, data-saver. Failure modes are silent — keep this one.
-- **look-toggles.test.js** — theme/palette toggles stay in sync across sidebars and survive storage failures (silent persistence logic)
+- **look-toggles.test.js** — theme/palette toggles stay in sync across instances and survive storage failures (silent persistence logic)
 - **webmcp.test.js** — WebMCP tool registration; pins tool names to `src/well-known/webmcp.json`
 - **stretch-text.test.js** — SVG viewBox fitting with a stubbed `getBBox`
 
