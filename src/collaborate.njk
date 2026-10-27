@@ -55,7 +55,7 @@ eleventyNavigation:
     <div class="flow has-gap-s">
         <p>I’ll stick around no matter how messy things get, as long as I'm working with people who care deeply about what they do as much as they care about each other.</p>
         <p>Found yourself in uncharted waters? We'll cross them together. Is your design or marketing team struggling to agree on what needs doing? I may not have all the answers, but I'll support them as they search for them.</p>
-        {{ quoteCard("“Working with Fran on the development and delivery of Open Art Folke has been a great experience. His approach to design is multifaceted and incisive. To work with he is a careful listener, independent and is able to create and deliver work which is incredibly considered and point whilst having a warm and heartfelt simplicity, making things accessible to all.”", "Steven Aaron Williams", "Brand Lead", { url: "https://openartfolke.com", label: "Open Art Folke" }) }}
+        {% for t in testimonials.collaborate %}{{ quoteCard(t) }}{% endfor %}
     </div>
 </section>
 <section class="section">
