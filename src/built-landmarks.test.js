@@ -75,6 +75,36 @@ describe("built landmarks", () => {
     expect((html("public/index.html").match(/id="case-studies"/g) || []).length).toBe(1);
   });
 
+  // /work/ and /contact/ are retired (FRN-2026): their traffic lands on homepage and footer anchors.
+  const redirects = () =>
+    readFileSync("public/_redirects", "utf8")
+      .split("\n")
+      .filter((line) => line.trim() && !line.startsWith("#"))
+      .map((line) => line.trim().split(/\s+/));
+  const normalise = (path) => path.replace(/#.*$/, "").replace(/(.)\/$/, "$1");
+
+  it("redirects the retired /work and /contact pages to their anchors", () => {
+    const map = Object.fromEntries(redirects().map(([from, to, code]) => [from, [to, code]]));
+    expect(map["/work"]).toEqual(["/#case-studies", "301"]);
+    expect(map["/contact"]).toEqual(["/#contact", "301"]);
+    expect(existsSync("public/work/index.html")).toBe(false);
+    expect(existsSync("public/contact/index.html")).toBe(false);
+  });
+
+  // A target that is itself a source would chain two hops (or loop).
+  it("never redirects to another redirect source", () => {
+    const sources = new Set(redirects().map(([from]) => normalise(from)));
+    for (const [from, to] of redirects()) {
+      expect(sources.has(normalise(to)), `${from} -> ${to}`).toBe(false);
+    }
+  });
+
+  it("leaves the retired pages out of the sitemap", () => {
+    const sitemap = readFileSync("public/sitemap.xml", "utf8");
+    expect(sitemap).not.toMatch(/\/work\/<\/loc>/);
+    expect(sitemap).not.toMatch(/\/contact\/<\/loc>/);
+  });
+
   it("keeps a single main landmark with the skip-link target", () => {
     for (const file of pages()) {
       expect((html(file).match(/<main\b/g) || []).length, file).toBe(1);
