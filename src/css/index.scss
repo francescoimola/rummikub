@@ -239,17 +239,6 @@ blockquote+figcaption {
     border:  calc(var(--input-border-width)/4) solid var(--neutral-50-alpha); // border-like edge so white-fill media stays visible on contrast (white) pages
 }
 
-img {
-    &.ratio-1-1 {
-        aspect-ratio: 1 / 1;
-    }
-
-    &.ratio-3-4 {
-        aspect-ratio: var(--ratio-3-4);
-        object-fit: cover;
-    }
-}
-
 time {
     display: inline;
     line-height: 100%;
