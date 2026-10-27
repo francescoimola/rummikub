@@ -658,15 +658,6 @@ footer a {
 
 // ---- Utilities ----
 
-.stick {
-    position: sticky;
-
-    &-pos-top {
-        align-self: start;
-        top: var(--gutter-y-sticky); // frozen length, not raw --gutter-y (which re-resolves cqi against the narrower `main`)
-    }
-}
-
 .has-counter {
     counter-reset: standard;
 }

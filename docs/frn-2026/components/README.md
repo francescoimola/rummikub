@@ -41,7 +41,7 @@ Status tracks the **redesign**: `planned` (a pattern with no Figma component) â†
 | Ordered list | [ordered-list.md](ordered-list.md) | (pattern) | `ol` | code |
 | Media pair | [media-pair.md](media-pair.md) | (pattern) | `.grid-cols-2` + `{% mediaPair %}` shortcode (G40) | code |
 | Masonry | [masonry.md](masonry.md) | (pattern) | `.masonry` | dropped |
-| Data list | [data-list.md](data-list.md) | (pattern) | `.data-list` | planned |
+| Data list | [data-list.md](data-list.md) | (pattern) | `.data-list` | code |
 
 ### Sections
 

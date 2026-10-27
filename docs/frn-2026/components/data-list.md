@@ -1,6 +1,6 @@
 # Data list
 
-**Layer:** Composite · **Status:** planned · **Figma:** (pattern) examples `2275:1461` (Recognition item, About), `2304:4218` (tablet), `2304:4992` (mobile), `2275:1460` (the list) · **Code:** `.data-list`, `.data-list__item`, `.data-list__label`, `.data-list__value` in `_components.scss`
+**Layer:** Composite · **Status:** code · **Figma:** (pattern) examples `2275:1461` (Recognition item, About), `2304:4218` (tablet), `2304:4992` (mobile), `2275:1460` (the list) · **Code:** `.data-list`, `.data-list__item`, `.data-list__year`, `.data-list__body`, `.data-list__entry`, `.data-list__label` in `_components.scss`
 
 ## Purpose
 
@@ -68,6 +68,7 @@ None. Any link in a value uses global link styles.
 - Figma's layout (year column | label over value) replaces the repo's (year heading above, label | value row) (G38). Rework `about.njk` and `.data-list*` to match.
 - Move the inline `style="flex-direction: column; gap…"` into a `.data-list__value--stack` modifier.
 - The 10rem label width is a raw rem, fine under CSS rule 5.
+- **Ported (#37):** `dt.data-list__year` beside `dd.data-list__body` on a `1fr 4fr` grid; each `p.data-list__entry` is a column with the dimmed label `span` first. Every entry stacks, so no modifier is needed and the inline style is gone. Figma keeps the year column at 345 wide, so there is no fold: the subgrid, the 10rem label width and the `< $bp-m` viewport block are deleted.
 
 ## Open questions
 

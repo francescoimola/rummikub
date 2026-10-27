@@ -190,7 +190,7 @@
     gap: var(--space-s);
     max-inline-size: var(--grid-width-l);
 
-    >h2 {
+    >:is(h1, h2) {
         align-self: start; // the row stretches its items; keep the pill hugging its text
         margin: 0;
     }
@@ -540,33 +540,37 @@ main svg.illustration-wide {
 // ---- Data list ----
 
 .data-list {
-    display: grid;
-    inline-size: 100%;
-    grid-template-columns: auto 1fr;
-    gap: var(--space-xs);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
     overflow-wrap: anywhere;
-    text-align: start;
     margin: 0;
 }
 
+// G38: year column beside label-over-value; Figma's 1 + 4 column split holds down to phone widths
 .data-list__item {
     display: grid;
-    grid-template-columns: subgrid;
-    grid-column: span 2;
-    gap: inherit;
-    align-items: baseline;
+    grid-template-columns: 1fr 4fr;
+}
+
+.data-list__year {
+    color: var(--neutral-900-alpha);
+}
+
+.data-list__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin: 0;
+}
+
+.data-list__entry {
+    display: flex;
+    flex-direction: column;
 }
 
 .data-list__label {
-    display: flex;
     color: var(--neutral-800-alpha);
-    min-inline-size: 10rem;
-}
-
-.data-list__value {
-    display: flex;
-    margin: 0;
-    min-inline-size: 0;
 }
 
 // Video styling — neutral placeholder visible while video deferred/loading (see projectVideo shortcode + app-core.js)
@@ -842,18 +846,6 @@ main svg.illustration-wide {
 // the source label is inert text inside the card link, so pin its arrow; beats [data-icon]:hover in _icons.scss on source order
 .writing-item [data-icon] {
     --icon-gap: var(--space-4xs);
-}
-
-// ---- About page ----
-
-.profile-picture_inner {
-    display: grid;
-    visibility: visible;
-}
-
-.profile-picture_outer {
-    display: none;
-    visibility: hidden;
 }
 
 // ---- Pricing list ----
