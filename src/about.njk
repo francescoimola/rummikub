@@ -6,6 +6,7 @@ isFullWidth: true
 eleventyNavigation:
   key: Home
 ---
+{% from "_faq-list.njk" import faqList %}
 <div class="flow has-gap-3xl">
     <header class="flow has-gap-s">
         <h1>About</h1>
@@ -29,29 +30,7 @@ eleventyNavigation:
     </section>
     <section class="flow has-gap-m" >
         <h2>Infrequently asked questions</h2>
-        <div class="flow has-gap-s">
-            <details>
-                <summary>How do you think about design?</summary>
-                <p>Your car, your phone, your dad's beloved charcoal barbecue that takes ages to heat up but, once it's hot, it really is a joy to cook with. Design is the lens through which we experience the world, and on a good day, my job is to shape those lenses by asking the question: how can I make this thing better, or more helpful?</p>
-                <p>If I had to sum up my design manifesto, the synopsis would probably state "there is no good design without compromise". Good design is all about choosing the right trade-off for your audience, which may mean choosing to follow a trend, or sticking to the tried and tested, being playful or being dead serious, or bending the process in your favour. Compromise might also mean skipping the steps you deem unnecessary, starting from the answer and working backwards, trusting your gut, or making something for no better reason than to make someone smile.</p>
-                <p>Ultimately, good design is imperceptible—that is, it's harder to spot than bad design. And though it may be impossible to achieve, good design is always worth aiming for.</p>
-            </details>
-            <hr>
-            <details>
-                <summary>Why trust based marketing?</summary>
-                <p>With so many people losing trust in the messages being pushed by mainstream marketing, an approach based on trust is how you get people to choose you, because, well, they trust you. Not because you manipulated them, chased them with an axe or pushed them to their limit.</p>
-                <p>It's a vast and wild frontier that many marketers and brands have only begun to explore, and it's very much one of the pillars of my work.</p>
-                <p>To borrow the <a href="https://x.com/ungatedlife/status/1584621315998486528" rel="noopener noreferrer" target="_blank">words of Rob Hardy</a>, the main guy <a href="https://forest.quest/non-coercive-marketing-primer/" rel="noopener noreferrer" target="_blank">who championed the term</a>, "the big secret is that non-coercive marketing isn't actually about marketing at all, but instead about how we relate to ourselves and to others, and healing the wounds of distrust that ripple through generations."</p>
-                <p>My work in this field incorporates everything I have learnt from working in marketing (mostly content and inbound), internal communications, exhibition design, and graphic design over the last 8 years.</p>
-            </details>
-            <hr>
-            <details>
-                <summary>Are there any clients you wouldn't take on?</summary>
-                <p>I'm not going to work with clients in the fossil fuel sector, or anyone who's directly tied to that industry. I'm not interested in areas like fast fashion, weight loss or gambling either.
-                    <p>When it comes to working practices, I steer clear of briefs that call for dark design patterns, manipulative marketing, or anything that makes the user feel worthless in order to win a sale—though luckily these are becoming less common occurrences.</p>
-                    <p>On the other hand, I get on best with folks who have something meaningful to share or who have spent a long time developing a solid product/service that they want to see succeed. This category includes charities, indie makers and small businesses with a long-standing presence.</p>
-            </details>
-        </div>
+        {{ faqList(faqs.about) }}
     </section>
     <section class="flow has-gap-m" >
         <h2>Recognition</h2>

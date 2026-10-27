@@ -306,6 +306,12 @@
     }
 }
 
+// ---- FAQ list ----
+// Figma Open state: space/s below the answer, before the <hr>
+.faq-answer {
+    padding-block-end: var(--space-s);
+}
+
 // ---- Carousel ----
 // The track is the 3:2 viewport and the scroll container; ::scroll-button() boxes are its siblings, placed against .carousel
 .carousel {

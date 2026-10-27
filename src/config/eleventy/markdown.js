@@ -59,4 +59,9 @@ module.exports = function (eleventyConfig) {
   };
 
   eleventyConfig.setLibrary("md", md);
+
+  // Same renderer for Markdown held in data files (faqs.json answers), so external links get the same rel/target
+  eleventyConfig.addFilter("markdown", function (text) {
+    return md.render(text || "");
+  });
 };
