@@ -25,15 +25,19 @@ document.querySelectorAll("[data-dialog-open]").forEach(function (trigger) {
   if (!dialog) return;
 
   var status = dialog.querySelector("[data-dialog-status]");
+  var copyBtn = dialog.querySelector("[data-dialog-copy]");
+  var label = copyBtn ? copyBtn.textContent : "";
   var timer;
 
-  // Announce, then clear after RESET_DELAY so a repeat copy re-announces.
-  function announce(text) {
-    if (!status) return;
-    status.textContent = text;
+  // Show the result on the button and announce it, then restore both after RESET_DELAY so a repeat copy re-announces.
+  // The icon is an ::after pseudo-element, so swapping textContent leaves it intact.
+  function announce(text, buttonText) {
+    if (copyBtn) copyBtn.textContent = buttonText;
+    if (status) status.textContent = text;
     clearTimeout(timer);
     timer = setTimeout(function () {
-      status.textContent = "";
+      if (copyBtn) copyBtn.textContent = label;
+      if (status) status.textContent = "";
     }, RESET_DELAY);
   }
 
@@ -50,10 +54,10 @@ document.querySelectorAll("[data-dialog-open]").forEach(function (trigger) {
 
     copy(content)
       .then(function () {
-        announce("Copied to clipboard");
+        announce("Copied to clipboard", "Copied!");
       })
       .catch(function () {
-        announce("Copy failed");
+        announce("Copy failed", "Copy failed");
       });
   });
 });
