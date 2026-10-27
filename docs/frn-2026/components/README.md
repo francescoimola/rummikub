@@ -3,6 +3,7 @@
 The FRN-2026 component library: designed in Figma, built as Nunjucks partials and SCSS in this repo. **This folder is the source of truth** for the port. Each Figma component's description links to its doc here. Decisions are in [`../decisions.md`](../decisions.md) (Phase 17 = the pre-migration audit) and findings in [`../audit.md`](../audit.md).
 
 - **Figma:** file `UkQphRf7GwINc1c8vORtUm`, page `2246:754`, WIP section `2275:725`, **Components** board `2291:769`. The section `2260:2139` is an archive: read it, never edit it.
+- **Snapshot:** these docs mirror Figma as of 2026-10-27 (#51), and Figma keeps changing. Re-read the frame before porting; the frame wins over a doc or decision that disagrees, and the diff fixes the doc.
 - **Frames:** desktop 1512 (Utopia Max), tablet 834 and mobile 390 (Utopia Min). Node IDs are in [`../figma-state.json`](../figma-state.json).
 - **Token values:** [`_tokens.md`](_tokens.md).
 - **Scripting Figma:** read [`../figma-gotchas.md`](../figma-gotchas.md) before any `use_figma` call.
