@@ -1,6 +1,6 @@
 # Writing item
 
-**Layer:** Composite · **Status:** figma · **Figma:** `2329:9102` · **Code:** `src/_includes/_writing-item.njk`, `.card.writing-item`
+**Layer:** Composite · **Status:** code · **Figma:** `2329:9102` · **Code:** `src/_includes/_writing-item.njk`, `.card.writing-item`
 
 ## Purpose
 
@@ -92,6 +92,7 @@ Values from [`_tokens.md`](_tokens.md).
 - Add a `compact` param to `writingItem` that adds `.writing-item--compact` (G41). Replace the fixed `--space-2xl` thumb with the fluid grid and its `@container` rule in `_responsive.scss`.
 - Source icon: the repo glyph is `arrow-ext`; Figma now uses an Icon/External instance (F39). Same glyph.
 - Thumb becomes an [Image](image.md) with ratio 1:1.
+- **Ported (#32):** `.writing-item` is a `3fr 5fr` grid (gap `--space-s-m`); `@container (width < $bp-s)` and `.writing-item--compact` switch it to `1fr 3fr`. The thumb is `aspect-ratio: var(--ratio-1-1)` filling its column; the tint placeholder is unchanged. `writingItem(item, thumbColor, compact = false)`; type pages pass `compact = true`. Ideas' type sections sit on the [Section](section.md) grid (title | blurb, three latest items, "See all").
 
 ## Open questions
 

@@ -767,12 +767,21 @@ main svg {
 
 // ---- Writing (index + per-type listings) ----
 
-// Small 1:1 lead-in: cover image when present, else a build-picked translucent brand tint
+// Fluid thumb | body grid (G21, G41): 3fr 5fr, 1fr 3fr when the row is narrow (_responsive.scss) or on type pages (--compact)
+.writing-item {
+    display: grid;
+    grid-template-columns: 3fr 5fr;
+    gap: var(--space-s-m);
+    align-items: start;
+}
+
+.writing-item--compact {
+    grid-template-columns: 1fr 3fr;
+}
+
+// 1:1 lead-in: cover image when present, else a build-picked translucent brand tint
 .writing-item__thumb {
-    flex-shrink: 0;
-    inline-size: var(--space-2xl);
-    block-size: var(--space-2xl);
-    aspect-ratio: 1 / 1;
+    aspect-ratio: var(--ratio-1-1);
 
     :is(picture, img) {
         display: block; // picture defaults to inline, so block-size is ignored — force it to fill the square box
@@ -790,7 +799,6 @@ main svg {
 }
 
 .writing-item__body {
-    flex: 1;
     min-inline-size: 0;
 }
 

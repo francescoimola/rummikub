@@ -1,9 +1,10 @@
-{% macro writingItem(item, thumbColor) %}
-<a class="card writing-item flow-row has-gap-s-m"
+{# compact (type pages) keeps the narrow 1fr 3fr thumb at every width #}
+{% macro writingItem(item, thumbColor, compact = false) %}
+<a class="card writing-item{% if compact %} writing-item--compact{% endif %}"
    href="{{ item.data.external or item.url }}"
    {% if item.data.external %}target="_blank" rel="noopener noreferrer"{% endif %}>
   {% if item.data.image %}
-  <span class="writing-item__thumb"><img src="{{ item.data.image }}" alt="{{ item.data.alt }}" loading="lazy" decoding="async" sizes="5rem"></span>
+  <span class="writing-item__thumb"><img src="{{ item.data.image }}" alt="{{ item.data.alt }}" loading="lazy" decoding="async" sizes="14rem"></span>
   {% else %}
   <span class="writing-item__thumb" style="--thumb-fill: {{ thumbColor }}" aria-hidden="true"></span>
   {% endif %}

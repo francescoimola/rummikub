@@ -28,12 +28,12 @@ Status tracks the **redesign**: `planned` (a pattern with no Figma component) â†
 | Component | Doc | Figma | Repo today | Status |
 | --- | --- | --- | --- | --- |
 | Look toggles | [look-toggles.md](look-toggles.md) | `2353:19425` | `_look-toggles.njk` | code |
-| Breadcrumb | [breadcrumb.md](breadcrumb.md) | `2353:19355` | `_breadcrumb.njk` | figma |
+| Breadcrumb | [breadcrumb.md](breadcrumb.md) | `2353:19355` | `_breadcrumb.njk` | code |
 | Figure | [figure.md](figure.md) | `2355:19174` | `figureImg` / `projectVideo` | code |
 | FAQ item | [faq-item.md](faq-item.md) | `2353:18925` | `_faq-list.njk` | code |
 | Contact card | [contact-card.md](contact-card.md) | `2293:1269` | `_contact-card.njk` | code |
 | Project item | [project-item.md](project-item.md) | `2292:1007` | `_project-item.njk` | figma |
-| Writing item | [writing-item.md](writing-item.md) | `2329:9102` | `_writing-item.njk` | figma |
+| Writing item | [writing-item.md](writing-item.md) | `2329:9102` | `_writing-item.njk` | code |
 | Service card | [service-card.md](service-card.md) | `2292:1547` | `_service-card.njk` | figma |
 | Quote card | [quote-card.md](quote-card.md) | `2380:19851` | `_quote-card.njk` | code |
 | Pricing item | [pricing-item.md](pricing-item.md) | `2380:19857` | (none) | figma |
