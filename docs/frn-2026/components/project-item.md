@@ -53,7 +53,7 @@ Values from [`_tokens.md`](_tokens.md).
 
 ## Content rules
 
-- `work.njk` passes `title`, `services`, `image`, `alt` and `url` from each project's frontmatter. `url` is empty for `permalink: false`, which drops both links.
+- The homepage (`index.njk`) passes `title`, `services`, `image`, `alt` and `url` from each project's frontmatter. `url` is empty for `permalink: false`, which drops both links.
 - Featured is capped at 3; the Index holds the rest, `endDate` descending (AGENTS.md, Project structure).
 - Services is one line of comma-separated disciplines, in `neutral/950-alpha` (not dimmed).
 

@@ -20,13 +20,17 @@
 # Work projects renamed in the rebuild
 /work/open-art                           /work/open-art-folke/                        301
 
-# Old case-study pages that are listing-only in the rebuild → work index
-/work/folkestone-bookshop                /work/                                       301
-/work/folks-directory                    /work/                                       301
-/work/greenwichgalleries                 /work/                                       301
-/work/not-bad                            /work/                                       301
-/work/sarah-holistic-coach               /work/                                       301
-/work/tedx                               /work/                                       301
+# Old case-study pages that are listing-only in the rebuild → the homepage Featured heading
+/work/folkestone-bookshop                /#case-studies                               301
+/work/folks-directory                    /#case-studies                               301
+/work/greenwichgalleries                 /#case-studies                               301
+/work/not-bad                            /#case-studies                               301
+/work/sarah-holistic-coach               /#case-studies                               301
+/work/tedx                               /#case-studies                               301
+
+# Retired in the FRN-2026 redesign: case studies live on the homepage, contact in the footer
+/work                                    /#case-studies                               301
+/contact                                 /#contact                                    301
 
 # Old Astro sitemap location → new sitemap
 /sitemap-index.xml                       /sitemap.xml                                 301
