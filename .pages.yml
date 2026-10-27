@@ -297,6 +297,32 @@ content:
         type: string
         list: true
 
+  - name: recognition
+    label: Recognition
+    type: file
+    path: src/_data/recognition.json
+    format: json
+    list: true
+    fields:
+      - name: year
+        label: Year
+        type: string
+        required: true
+      - name: entries
+        label: Awards and features
+        type: object
+        list:
+          collapsible: true
+        fields:
+          - name: label
+            label: Awarding body or publication
+            type: string
+            required: true
+          - name: items
+            label: Items
+            type: string
+            list: true
+
   - name: headers
     label: HTTP headers
     type: file
