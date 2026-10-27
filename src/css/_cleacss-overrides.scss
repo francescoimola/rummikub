@@ -1,6 +1,6 @@
 @use '../../node_modules/utopia-core-scss/src/utopia' as utopia;
 
-// Every token here collides with a cleacss unlayered default, so it must stay unlayered too — see AGENTS.md CSS rule 3
+// Every token here collides with a cleacss unlayered default, so it must stay unlayered too — see docs/css-architecture.md rule 3
 @mixin overrides {
   :root {
     // Utopia-generated --space-* scale, cqi/container-relative
