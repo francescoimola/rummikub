@@ -449,7 +449,7 @@ $carousel-arrow: oklch(0.351 0.034 121.6);
 
 .site-footer__art {
     color: var(--brand-900);
-    margin-block: calc(var(--space-3xl-4xl) - var(--space-s-m)); // Figma Narrow: 135 above and below the drawing; the grid's row gap already supplies the rest
+    margin-block-start: calc(var(--space-3xl-4xl) - var(--space-s-m)); // Figma Narrow: 3xl-4xl above the drawing, the row gap supplies the rest; the colophon's margin does the same below
 
     svg {
         display: block;

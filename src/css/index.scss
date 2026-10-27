@@ -468,6 +468,28 @@ details {
         @include reveal-open;
     }
 
+    // No interpolate-size (Firefox): block-size can't tween to auto, so tween a 0fr to 1fr grid row instead
+    @supports not (interpolate-size: allow-keywords) {
+        &:not(.nav-menu)::details-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            block-size: auto;
+            transition:
+                grid-template-rows var(--dur-medium) var(--ease),
+                opacity var(--dur-medium) var(--ease),
+                content-visibility var(--dur-medium) allow-discrete;
+        }
+
+        &:not(.nav-menu)[open]::details-content {
+            grid-template-rows: 1fr;
+        }
+
+        &:not(.nav-menu)>:not(summary) {
+            min-block-size: 0;
+            overflow: clip;
+        }
+    }
+
     &>:is(.nav-menu__panel) {
         margin-top: revert;
     }
