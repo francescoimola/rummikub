@@ -1,6 +1,6 @@
 # Section heading
 
-**Layer:** Primitive · **Status:** figma · **Figma:** `2380:19847` · **Code:** `src/css/index.scss` `[highlight-header]>h2:first-child` today, `h2.highlight-header` after the port
+**Layer:** Primitive · **Status:** code · **Figma:** `2380:19847` · **Code:** `src/css/index.scss` `h2.highlight-header`
 
 ## Purpose
 
@@ -62,8 +62,8 @@ None. It is not interactive and has no hover. The pill colour follows the page b
 
 ## Port notes
 
-- Today's rule, `[highlight-header]>h2:first-child` in `src/css/index.scss`, already has the right look (same padding tokens, `--border-radius-s`, `--accent-surface`). Re-key it to `h2.highlight-header` (G32) and move the attribute from each `<section>` onto its `h2`.
-- Plain is the absence of the class, so nothing else is needed. Add `highlight-header` to the FAQ headings that lack it on the service pages (F34).
+- **Ported (#21):** the rule is re-keyed from `[highlight-header]>h2:first-child` to `h2.highlight-header` (G32), and the flag moved from each `<section>` onto its `h2` on Work with me, the service pages and Collaborate. Same look: padding tokens, `--border-radius-s`, `--accent-surface`.
+- Plain is the absence of the class, so nothing else is needed. The service FAQ headings already carried the pill in the repo (F34).
 - Figma pads the pill with `space/3xs-2xs`, the repo with `--space-3xs-2xs`. They agree.
 
 ## Open questions
