@@ -96,7 +96,7 @@
 
         .grid-responsive-cols,
         .grid-cols-2,
-        .section {
+        .section:not(.section--stacked) {
             grid-template-columns: repeat(2, 1fr);
         }
 
