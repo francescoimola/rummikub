@@ -18,7 +18,7 @@ eleventyNavigation:
     <h2>{{ t.short }}</h2>
     <div class="flow has-gap-s">
       <p class="dimmed balance">{{ t.blurb }}</p>
-      {% set items = collections.writing | byType(typeSlug) | limit(3) %}
+      {% set items = collections.writing | byType(typeSlug) | limit(2) %}
       {% set thumbColors = items | writingThumbColors %}
       {% for item in items %}
         {{ writingItem(item, thumbColors[loop.index0]) }}
