@@ -163,11 +163,11 @@
 
     // Wide banner: name at the page column's start, links at its end, look toggles pinned right outside it
     @container banner (width >= #{scale.$bp-xl}) {
-        .site-banner nav {
+        .site-banner__inner {
             padding-inline: var(--space-s) var(--space-l);
         }
 
-        .site-banner nav,
+        .site-banner__inner,
         .nav-menu__panel {
             grid-template-columns: 1fr minmax(0, var(--grid-width-l)) 1fr;
             column-gap: var(--space-l);
@@ -178,7 +178,7 @@
             grid-column: 2;
         }
 
-        .site-banner nav > .nav-menu {
+        .site-banner__inner > .nav-menu {
             grid-column: 1 / -1;
         }
 
@@ -208,6 +208,18 @@
         .nav-menu__toggles {
             justify-self: end;
             flex-wrap: nowrap;
+        }
+
+        // Minimal: the controls row sits inside the page column, ending at its edge
+        .site-banner--minimal .site-banner__inner > .nav-menu {
+            grid-column: 2;
+        }
+
+        .site-banner--minimal .nav-menu__panel {
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            gap: var(--space-l);
         }
     }
 

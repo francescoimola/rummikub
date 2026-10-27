@@ -1,6 +1,6 @@
 # Look toggles
 
-**Layer:** Composite · **Status:** figma · **Figma:** `2353:19425` · **Code:** `src/_includes/_look-toggles.njk`, `.theme-switch`, `.brand-picker`
+**Layer:** Composite · **Status:** code · **Figma:** `2353:19425` · **Code:** `src/_includes/_look-toggles.njk`, `.theme-switch`, `.brand-picker`
 
 ## Purpose
 
@@ -69,7 +69,7 @@ Values from [`_tokens.md`](_tokens.md). Pink and Orange swatch fills are raw col
 ## Port notes
 
 - Figma now matches the code: glyph `space/s`, button padding `space/2xs` (G7). No code change.
-- The markup and CSS already match Figma. The change is where it sits: inside the new top bar, and in the Minimal header (see [Header](header.md)).
+- **Ported (#22, #23):** one instance in `.nav-menu__toggles`, in both the Full and Minimal headers (see [Header](header.md)). Both toggle groups run as rows.
 - The theme icons are `sun.svg` and `moon.svg` in `src/assets/icons/`, inlined by the `icon` shortcode.
 - Swatch fills in CSS are computed from `--brand-hue-*`; keep that formula in sync with `_colors.scss`.
 

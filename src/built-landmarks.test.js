@@ -44,16 +44,33 @@ describe("built landmarks", () => {
   it("gives every page exactly one banner, ahead of main", () => {
     for (const file of pages()) {
       const page = html(file);
-      const banner = page.indexOf('<header class="site-banner">');
+      const banner = page.indexOf('<header class="site-banner');
       expect(banner, `no banner in ${file}`).toBeGreaterThan(-1);
       expect(banner, `banner is not before main in ${file}`).toBeLessThan(page.indexOf("<main"));
-      expect((page.match(/<header class="site-banner">/g) || []).length, file).toBe(1);
+      expect((page.match(/<header class="site-banner/g) || []).length, file).toBe(1);
     }
   });
 
   // The current marker is set by URL prefix in _header.njk; a second match would show two bullets.
-  const primaryNav = (page) => page.slice(page.indexOf('<nav aria-label="Primary">'), page.indexOf("</nav>", page.indexOf('<nav aria-label="Primary">')));
+  const primaryNav = (page) => {
+    const start = page.indexOf('<nav aria-label="Primary"');
+    return start < 0 ? "" : page.slice(start, page.indexOf("</nav>", start));
+  };
   const currentLabel = (file) => (primaryNav(html(file)).match(/aria-current="page">([^<]*)</) || [])[1];
+
+  // Collaborate, Accessibility and 404 stand apart from the main site: Minimal header, no nav landmark.
+  const minimalPages = ["public/collaborate/index.html", "public/about/accessibility/index.html", "public/404.html"];
+
+  it("gives Full pages one Primary nav and Minimal pages none", () => {
+    for (const file of pages()) {
+      const count = (html(file).match(/<nav aria-label="Primary"/g) || []).length;
+      expect(count, file).toBe(minimalPages.includes(file) ? 0 : 1);
+    }
+    for (const file of minimalPages) {
+      expect(html(file), file).toContain("site-banner--minimal");
+      expect(html(file), file).not.toMatch(/<nav\b[^>]*aria-label="Primary"/);
+    }
+  });
 
   it("marks at most one primary nav link as current", () => {
     for (const file of pages()) {

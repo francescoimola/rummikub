@@ -1,6 +1,6 @@
 # Header
 
-**Layer:** Section · **Status:** figma · **Figma:** `2291:838` · **Code:** `src/_includes/_header.njk`, `.site-banner` + `.nav-menu`
+**Layer:** Section · **Status:** code · **Figma:** `2291:838` · **Code:** `src/_includes/_header.njk`, `.site-banner` + `.nav-menu`
 
 ## Purpose
 
@@ -100,7 +100,8 @@ Values from [`_tokens.md`](_tokens.md).
 - `_header.njk` gains a `minimal` branch, e.g. `{% if header == "minimal" %}`.
 - Drop the "Case studies" `<li>`.
 - **Full ported (#22):** the sidebar is gone; `_base.njk` renders skip link → banner → `.layout` (main, then the old footers as a stopgap until the Footer ticket). Wide is an `@container banner (width >= $bp-xl)` block in `_responsive.scss`: nav and panel share a `1fr minmax(0, --grid-width-l) 1fr` grid, so the name sits at the column start, links at its end and the toggles in the right track. Narrow is the base: name overlays the `<details>` bar in one grid cell, so the panel spans the full width.
-- "Say hello" links to `#contact` (the footer's id). The Minimal branch is the next ticket, so Header stays `figma` until it lands.
+- "Say hello" links to `#contact` (the footer's id).
+- **Minimal ported (#23):** `header: minimal` front matter (Collaborate, Accessibility, 404) renders `.site-banner--minimal`: a `div.site-banner__inner` instead of the `<nav>`, and the panel holds the toggles plus `.nav-menu__exit` ("To main site", `data-icon="arrow-right"`). Wide puts that controls row inside the page column, ending at its edge.
 - Rename the nav label "Ideas & guides" to "Ideas" (G1).
 
 ## Open questions

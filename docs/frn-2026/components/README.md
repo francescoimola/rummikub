@@ -27,7 +27,7 @@ Status tracks the **redesign**: `planned` (a pattern with no Figma component) â†
 
 | Component | Doc | Figma | Repo today | Status |
 | --- | --- | --- | --- | --- |
-| Look toggles | [look-toggles.md](look-toggles.md) | `2353:19425` | `_look-toggles.njk` | figma |
+| Look toggles | [look-toggles.md](look-toggles.md) | `2353:19425` | `_look-toggles.njk` | code |
 | Breadcrumb | [breadcrumb.md](breadcrumb.md) | `2353:19355` | `_breadcrumb.njk` | figma |
 | Figure | [figure.md](figure.md) | `2355:19174` | `figureImg` / `projectVideo` | figma |
 | FAQ item | [faq-item.md](faq-item.md) | `2353:18925` | `<details>` | figma |
@@ -47,7 +47,7 @@ Status tracks the **redesign**: `planned` (a pattern with no Figma component) â†
 
 | Component | Doc | Figma | Repo today | Status |
 | --- | --- | --- | --- | --- |
-| Header | [header.md](header.md) | `2291:838` | `_header.njk` | figma |
+| Header | [header.md](header.md) | `2291:838` | `_header.njk` | code |
 | Footer | [footer.md](footer.md) | `2293:2112` | `_footer.njk` | figma |
 | Page header | [page-header.md](page-header.md) | `2405:19762` | `_page-header.njk` | figma |
 | CTA card | [cta-card.md](cta-card.md) | `2378:20633` | `_cta-card.njk` | figma |
