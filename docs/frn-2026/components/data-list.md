@@ -13,7 +13,7 @@ In Figma, a **Recognition item** has:
 - **Year** (text): one narrow column.
 - **Container** (vertical): **Award organization** (dimmed label), then one or more lines of detail text.
 
-Code splits it differently: the year is an `h3` above each `dl`, and each row is a `div.data-list__item` with a `dt` (label) and `dd` (value).
+Today's code splits it differently: the year is an `h3` above each `dl`, and each row is a `div.data-list__item` with a `dt` (label) and `dd` (value). The port follows Figma (G38): a year column beside the label-over-value group.
 
 ## Props & variants
 
@@ -21,9 +21,8 @@ None. A value is one line or several lines (a column of `span`s).
 
 ## Layout
 
-- **Wide:** two columns, label then value (`grid-template-columns: auto 1fr`, items on a `subgrid`), aligned on the baseline.
-- **Narrow:** one column, label above value (gap `space/3xs`). This is a viewport block in `_responsive.scss`. It should become a container query (Q25).
-- Figma builds the item as a 5-column grid: the year takes 1 column and the container 4. Tablet and mobile keep that (year 35 wide).
+- **Figma layout (G38):** a year column beside a container, with the label (dimmed) above the value. Figma builds the item as a 5-column grid: the year takes 1 column and the container 4. Tablet and mobile keep that (year 35 wide).
+- **Fold:** a `@container` rule (against the parent), not a viewport block (Q25, G38). The old `auto 1fr` subgrid and the narrow "label above value" `_responsive.scss` block go.
 
 ## Tokens
 
@@ -50,25 +49,26 @@ None. Any link in a value uses global link styles.
 ## HTML & accessibility
 
 ```html
-<h3 class="dimmed">2026</h3>
 <dl class="data-list">
   <div class="data-list__item">
-    <dt class="data-list__label">CSS Design Awards</dt>
-    <dd class="data-list__value">Public Award for Best UI, UX & Innovation</dd>
+    <dt class="data-list__year dimmed">2026</dt>
+    <dd class="data-list__body">
+      <span class="data-list__label">CSS Design Awards</span>
+      <span class="data-list__value">Public Award for Best UI, UX & Innovation</span>
+    </dd>
   </div>
 </dl>
 ```
 
 - A `dl` with `div` groups is valid HTML and keeps term and description paired.
-- The year `h3` is the heading for the list that follows.
+- The markup above is a sketch of the Figma layout; the final class names are set at the port. Keep term and description paired.
 
 ## Port notes
 
-- Figma's layout (year column | label over value) differs from the repo (year heading above, label | value row). **Repo wins on existing values** unless a decision says otherwise; none does yet.
+- Figma's layout (year column | label over value) replaces the repo's (year heading above, label | value row) (G38). Rework `about.njk` and `.data-list*` to match.
 - Move the inline `style="flex-direction: column; gap…"` into a `.data-list__value--stack` modifier.
 - The 10rem label width is a raw rem, fine under CSS rule 5.
 
 ## Open questions
 
-- Which layout ships: the repo's year heading above a label | value list, or Figma's year column beside label over value?
-- Should the Narrow fold become a `@container` rule?
+None. Settled in Phase 18 (G38).

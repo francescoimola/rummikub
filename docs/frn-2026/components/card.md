@@ -1,10 +1,10 @@
 # Card
 
-**Layer:** Primitive · **Status:** planned · **Figma:** (pattern) examples `2322:9190` (Collaborate), `2292:1548` (Service card), `2380:19851` (Quote card), `2339:9812` (Accessibility) · **Code:** `.card` in `src/css/_components.scss`
+**Layer:** Primitive · **Status:** figma · **Figma:** `2403:20009` (`Style=Default/Outline/Featured`, G34); page examples `2322:9190` (Collaborate), `2292:1548` (Service card), `2380:19851` (Quote card), `2339:9812` (Accessibility) · **Code:** `.card` in `src/css/_components.scss`
 
 ## Purpose
 
-A padded, rounded surface that groups related content. The base of [Service card](service-card.md), [Quote card](quote-card.md), [Contact card](contact-card.md), [CTA card](cta-card.md) and the Artmaking image cards. Figma has no generic Card component: 39 loose "Card" frames across pages, with varying padding (Q29).
+A padded, rounded surface that groups related content. The base of [Service card](service-card.md), [Quote card](quote-card.md), [Contact card](contact-card.md), [CTA card](cta-card.md) and the Artmaking image cards. Figma had no generic Card, only 39 loose "Card" frames with varying padding (Q29). It gets a real component with `Style=Outline/Featured` (G34).
 
 ## Anatomy
 
@@ -14,7 +14,7 @@ A padded, rounded surface that groups related content. The base of [Service card
 
 ## Props & variants
 
-Repo modifiers, all on `.card`:
+Figma component (to build, G34): property `Style`, Outline or Featured. Repo modifiers, all on `.card`:
 
 | Class / element | Effect |
 | --- | --- |
@@ -35,7 +35,7 @@ None, fluid only. `inline-size: 100%`, so it fills its parent. Stacks and grids 
 | --- | --- | --- |
 | Padding (`--pad`) | `space/s-m` | 15 → 25.31 |
 | Fill | `card-bg` | follows theme |
-| Radius | `border-radius-s` (some Collaborate cards use `border-radius`) | repo wins |
+| Radius | `border-radius-s`, including Collaborate (G34) | style value |
 | Inner gap | `space/3xs` to `space/s`, per use | see the component |
 
 Values from [`_tokens.md`](_tokens.md).
@@ -67,9 +67,9 @@ Values from [`_tokens.md`](_tokens.md).
 ## Port notes
 
 - Figma cards vary (Collaborate fixed heights were fixed in F32; Accessibility has a Card inside a Card). Build instances from the repo class, not from the loose frames.
-- Collaborate "What I do" cards use `border-radius` in Figma, not `-s`. Repo wins: `border-radius-s`.
+- Collaborate "What I do" cards use `border-radius` in Figma, not `-s`. Rebind them to `border-radius-s` (G34).
+- Build the Card component in Figma with `Style=Outline` and `Style=Featured`, then swap the loose frames for instances.
 
 ## Open questions
 
-- Should Figma get a real Card component with `Outline` and `Featured` variants?
-- Collaborate card radius `border-radius` vs `border-radius-s`: confirm `-s`.
+None. Settled in Phase 18 (G34).

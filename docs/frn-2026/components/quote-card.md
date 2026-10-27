@@ -8,7 +8,7 @@ A client testimonial: the quote and who said it. Used 15 times on Work with me (
 
 ## Anatomy
 
-- **Card**: outlined, vertical, transparent fill.
+- **Card**: outlined, vertical, transparent fill, with an accent bar on the left edge (G27).
 - **Quote** (text): the quote in dimmed body text, `<blockquote>`.
 - **Attribution** (text): name, then role and company on a second line, `<figcaption>`. The company can be a link.
 
@@ -44,7 +44,7 @@ None on the card. The company link inside the attribution uses the global link s
 
 ## Content rules
 
-- Source today: inline in the page. There is no data file. Work with me has 5 quotes, Collaborate has 1.
+- Source: inline in the page, passed to the `quoteCard` macro (G28). There is no data file. Work with me has 5 quotes, Collaborate has 1.
 - Keep quotes as the client wrote them, with `[...]` for cuts.
 - The company link is optional (Liv Pennington and Carly Anchal have none).
 - Collaborate's repo quote has no curly quotes and no `<p>`; Work with me's has both. Figma uses curly quotes.
@@ -63,12 +63,11 @@ None on the card. The company link inside the attribution uses the global link s
 
 ## Port notes
 
-- Repo wins on existing values: the accent bar `.card:has(blockquote) { box-shadow: inset var(--space-3xs) 0 var(--accent-surface) }` is in the repo but is **not drawn in Figma**. See Open questions.
+- The accent bar `.card:has(blockquote) { box-shadow: inset var(--space-3xs) 0 var(--accent-surface) }` stays, and is drawn in Figma (G27). Add a left bar to the Quote card in Figma.
 - Repo cards use `border-radius-s`; Figma matches.
-- Wrap the markup in a macro (e.g. `quoteCard(quote, name, role, link)`) so the 6 pages' copies share one source. Not done yet.
+- Add a `quoteCard` macro (e.g. `quoteCard(quote, name, role, link)`) so the markup has one source (G28). The copy stays inline in each page, with no `testimonials.json`.
 - `.case-study>blockquote` (long-form posts) is a separate rule that `@extend`s `.card` and `.outline`. Leave it.
 
 ## Open questions
 
-- Should the left accent bar (`box-shadow: inset … var(--accent-surface)`) be drawn in Figma, or dropped from the repo?
-- Do we want a `quoteCard` macro and a `testimonials.json`, or keep the copy in each page?
+None. Settled in Phase 18 (G27, G28).

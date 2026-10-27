@@ -1,18 +1,19 @@
 # Page header
 
-**Layer:** Section · **Status:** figma · **Figma:** `2357:19433` · **Code:** `src/_includes/_page-header.njk`, macro `pageHeader(iconName, label, blurb)`
+**Layer:** Section · **Status:** figma · **Figma:** `2357:19433` · **Code:** `src/_includes/_page-header.njk`, macro `pageHeader(iconName, label)`
 
 ## Purpose
 
-The hero at the top of the section pages: an illustration over a large centred heading, on a `brand/150` band. 18 instances across six pages (3 frame sizes each): Work with me, Ideas & guides, Artmaking, 404, Web design, Website consultations.
+The hero at the top of the section pages: an illustration over a large centred heading, on a `brand/150` band. 18 instances across six pages (3 frame sizes each): Work with me, Ideas, Artmaking, 404, Web design, Website consultations.
 
 ## Anatomy
 
-- **Illustration**: an [Illustration/*](illustration.md) instance, height `size/hero-illustration`. Exposed through the Illustration swap.
+- **Illustration** (`Show illustration`, G16): an [Illustration/*](illustration.md) instance, height `size/hero-illustration`. Exposed through the Illustration swap.
 - **Introduction**: the heading. Text style `site/hero`, KC Pelletier Sans, size `step/2-4`, centred, max width `layout/content-width`.
-- **Blurb**: a `site/body` line, hidden by default.
 
-Code: `<header class="page-header">` with the illustration, an `<h1>` and a `<p>`.
+There is no blurb (G17).
+
+Code: `<header class="page-header">` with the illustration and an `<h1>`.
 
 ## Props & variants
 
@@ -20,8 +21,7 @@ Code: `<header class="page-header">` with the illustration, an `<h1>` and a `<p>
 | --- | --- | --- |
 | Illustration | instance swap, default `Illustration/deskgarden` | Four hero drawings (preferred values set) |
 | Heading | text | The page's `<h1>` |
-| Blurb | text, default "For small businesses and social enterprises" | |
-| Show blurb | boolean, default false | Off on all instances (matches the current heroes) |
+| Show illustration | boolean `Show illustration#2403:0`, default true | Off on Artmaking, 404 and Web design (G16) |
 
 No variants.
 
@@ -39,7 +39,6 @@ None, fluid only. A vertical stack, centred, gap `space/2xl-3xl`. The heading wi
 | Illustration height | `size/hero-illustration` | 154 → 220 |
 | Heading size | `step/2-4` | 26.65 → 53.28 |
 | Heading max width | `layout/content-width` | 330 → 900 |
-| Blurb size | `step/0` | 15 → 16.88 |
 | Fill | `brand/150` | colour |
 
 Values from [`_tokens.md`](_tokens.md). `step/2-4` is the new section-hero pair (Q20).
@@ -50,9 +49,9 @@ Static. The band enters with `view-animation="settle"` and the first media after
 
 ## Content rules
 
-- Heading, blurb and drawing come from the page: `pageHeader(icon, label, blurb)`.
+- Heading and drawing come from the page: `pageHeader(icon, label)`. An empty `icon` means no illustration (G16).
 - The 404 and Artmaking headings are long sentences. Keep the heading to a few lines at 900 wide.
-- Blurb is optional, off by default. A page that sets one turns Show blurb on.
+- The blurb is removed (G17): the macro param and the Figma property both go.
 - Heading text starts lowercase on Work with me ("break free …") and ends with a stray space before the full stop ("Together ."). Fix the copy in Figma, not in code.
 
 ## HTML & accessibility
@@ -61,7 +60,6 @@ Static. The band enters with `view-animation="settle"` and the first media after
 <header class="page-header" view-animation="settle">
   <svg aria-hidden="true" …>…</svg>
   <h1>Unapologetically simple websites</h1>
-  <p>For small businesses and social enterprises</p>
 </header>
 ```
 
@@ -72,11 +70,10 @@ Static. The band enters with `view-animation="settle"` and the first media after
 
 - Today's macro wraps a `.card` with inline styles (`padding-block-end: var(--space-l-xl)`). Replace with `.page-header` rules in `_components.scss`.
 - The heading moves from Ronzino `<h1>` to KC Pelletier Sans bound to `--step-2-4`.
-- Add an illustration-optional path: skip the `icon` call when `iconName` is empty. Needed by Artmaking and 404.
+- Add an illustration-optional path: skip the `icon` call when `iconName` is empty (G16). Needed by Artmaking and 404. Figma gets the matching `Show illustration` boolean.
+- Remove the `blurb` param (G17). The pages that pass one today drop it at the port: `writing.njk`, `writing-types.njk`, `studio/design.njk` and `studio/consultations.njk`. Delete the Blurb layer and Show blurb property in Figma.
 - Home uses its own hero, not Page header (`step/hero`).
 
 ## Open questions
 
-- Artmaking and 404 instances have no illustration (the layer is deleted inside the instance), but the component has no "Show illustration" switch. Add the boolean, or build a separate variant?
-- Show blurb is off everywhere. Do any pages need it (the Web design page passes a blurb today)?
-- The Blurb layer is fill-width with no max width, so it would run wider than the 900 heading. Cap it?
+None. Settled in Phase 18 (G16, G17).

@@ -26,20 +26,21 @@ Body media with an optional caption, in posts, case studies and service pages. I
 
 ## Layout
 
-- A single figure is capped at `layout/content-width` (Phase 13) with `space/l` sides. In a [Media pair](media-pair.md) the figures sit in a full-bleed 2-column grid.
-- The width and the scroll breakout belong to the page (`.case-study` rhythm, `settle` / `breakout`; see Long-form pages in AGENTS.md), not to the component.
+- A single figure is capped at `layout/content-width` (Phase 13) with `space/l` sides. A [Media pair](media-pair.md) also sits at content width (G13).
+- The width and the scroll animation belong to the page (`.case-study` rhythm, `settle` / `breakout`; see Long-form pages in AGENTS.md), not to the component.
+- **Scroll animation (G13):** `settle` stays on the hero media of case studies and writing posts. `breakout` never runs on case studies. It runs only on writing posts, and where a developer opts in with `view-animation="breakout"`.
 
 ## Tokens
 
 | Use | Figma variable | Min → Max |
 | --- | --- | --- |
 | Media ↔ caption | `space/2xs` | 7.5 → 8.44 |
-| Caption size | `font-size-7` | 12.75 → 15 |
+| Caption size | `step/-1` | 11.25 → 12.66 |
 | Caption colour | `neutral/900-alpha` | light-dark |
 | Width cap | `layout/content-width` | 330 → 900 |
 | Intro → first media | `space/xl-2xl` | 45 → 67.5 (Q26) |
 
-Values from [`_tokens.md`](_tokens.md). `font-size-7` is an odd name for the figcaption size (`figcaption` in the token table).
+Values from [`_tokens.md`](_tokens.md). `step/-1` replaces `font-size-7` (G12): the caption snaps to the nearest Utopia step.
 
 ## States & interactions
 
@@ -69,9 +70,9 @@ Values from [`_tokens.md`](_tokens.md). `font-size-7` is an odd name for the fig
 
 - Add `ratio=` to both shortcodes ([Image](image.md)).
 - The shortcodes are in `src/config/eleventy/shortcodes.js` and `render-helpers.js`, not `eleventy.config.js`.
-- Phase 12 media-pair rule replaces the scroll breakout for consecutive media unless Francesco keeps both.
+- `breakout` stops on case studies, including where it is used today (G13).
+- Caption CSS moves from `font-size-7` to `--step--1` (G12).
 
 ## Open questions
 
-- Rename `font-size-7` to something descriptive?
-- Keep both the pair-grid and the scroll breakout, or only the grid (Phase 12)?
+None. Settled in Phase 18 (G12, G13).

@@ -13,7 +13,7 @@ The site banner on every page. **Full** carries the site name, the primary nav a
 - **Navigation - Primary** (`nav[aria-label="Primary"]`), width `layout/content-width`, aligned to the page column:
   - **brand/francesco-imola**: the site name, linking home.
   - **List** (`ul`): six [Nav link](nav-link.md) instances: Start here, Work with me, Ideas, Artmaking, About, Say hello.
-- **Look toggles**: pinned to the right edge, outside the column.
+- **Look toggles**: pinned to the right edge, outside the column (G2).
 
 **Full, Narrow** (`details.nav-menu`):
 
@@ -63,12 +63,12 @@ Values from [`_tokens.md`](_tokens.md).
 
 - **Menu (Narrow):** a click toggles Closed ↔ Open. In Figma this is wired as a prototype with smart animate. Icon/Plus rotates −45° to read as ×, and the panel opens below the bar. In code this is the native `<details>` toggle, with `::details-content` animated over `--dur-medium`. Under reduced motion the durations are 0s.
 - **Nav links:** see [Nav link](nav-link.md) for Default, Hover and Current.
-- **Main-site link:** a neutral text link (underlined); its hover is the global link hover.
+- **Main-site link:** a neutral text link (underlined); its hover is the global link hover. It keeps its arrow: it leaves the page in a way that's hard to undo (G44).
 - **Focus:** the global `:focus-visible` ring (2px `--color-accent`, offset 2px) on the summary, the links and the toggles.
 
 ## Content rules
 
-- Nav labels are fixed in the partial: Start here `/`, Work with me `/studio/`, Ideas `/writing/` ("Ideas & guides" in the repo, see Open questions), Artmaking `/art/`, About `/about/`, Say hello `/contact/`.
+- Nav labels are fixed in the partial: Start here `/`, Work with me `/studio/`, Ideas `/writing/` (G1; the old repo label was "Ideas & guides"). The `/writing/` heading and `<title>` stay, Artmaking `/art/`, About `/about/`, Say hello `/contact/`.
 - **"Case studies" leaves the nav** (Q16, Q32). Anything that linked to `/work/` points at `/#case-studies`, the homepage's Featured heading.
 - Current page: `/writing/…` posts and type pages mark Ideas; `/studio/…` service pages mark Work with me; case studies mark nothing.
 - Minimal: the "To main site" link goes to `/`. The page selects the Minimal header with front matter, e.g. `header: minimal`.
@@ -100,8 +100,8 @@ Values from [`_tokens.md`](_tokens.md).
 - `_header.njk` gains a `minimal` branch, e.g. `{% if header == "minimal" %}`.
 - Drop the "Case studies" `<li>`.
 - The desktop sidebar layout (`.sidebar` grid in `_responsive.scss`) is replaced by the top bar.
+- Rename the nav label "Ideas & guides" to "Ideas" (G1).
 
 ## Open questions
 
-- Nav label: Figma says "Ideas", the repo says "Ideas & guides". Which one ships?
-- Should the Wide Look toggles sit inside the 900 column, or stay pinned to the right edge as drawn?
+None. Settled in Phase 18 (G1 label, G2 toggles).

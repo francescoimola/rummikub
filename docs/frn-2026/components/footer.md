@@ -12,10 +12,10 @@ Both layouts have a **Contact row** and a **Colophon**, on a `brand/150` fill.
 
 - **Contact row**
   - **Footer Illustration**: [Illustration/footer](illustration.md), in a frame.
-  - **Contact**: a **Header** (the "Contact" title and the intro, "Ready to talk shop or want to discuss an idea? Get in touch and I'll reply within a day.") then four [Contact card](contact-card.md) instances.
+  - **Contact**: a **Header** (the "Contact" title, which is the `h2` (G6), and the intro, "Ready to talk shop or want to discuss an idea? Get in touch and I'll reply within a day.") then four [Contact card](contact-card.md) instances.
 - **Colophon**, in this order (F43):
   1. **Site note**: `site/body` paragraph.
-  2. **Badges**: Design Declares logo and a linked badge.
+  2. **Badges**: two linked badges. Design Declares goes to `https://designdeclares.com/`, Creatives for Climate to `https://www.creativesforclimate.co/about` (G5).
   3. **Copyright**: "© Francesco Imola, 2026".
 
 Both Footer variants use the same colophon order.
@@ -64,7 +64,8 @@ Static. The links and the copy button inside use the global hover and focus ring
 ## Content rules
 
 - Site note is one paragraph set in the Footer's `Site note` property. Keep the default site-wide.
-- Contact cards and their rows come from [Contact card](contact-card.md).
+- Contact cards and their rows come from [Contact card](contact-card.md). Each card prompt is an `h3` under the "Contact" `h2` (G6).
+- The footer has no nav list and no links beyond the Contact cards and badges (G4).
 - The Copyright year is "2026". Use the build year in code.
 
 ## HTML & accessibility
@@ -80,16 +81,16 @@ Static. The links and the copy button inside use the global hover and focus ring
 ```
 
 - `<footer>` is the page's contentinfo landmark. The illustration is decorative (`aria-hidden`).
-- Badge links need names (Design Declares and the second badge).
+- Badge links need names ("Design Declares", "Creatives for Climate"). Both open in a new tab.
 - Tab order follows the DOM: cards, badges.
 
 ## Port notes
 
-- Today there are two footers (`desktop-only`, `mobile-only`) holding "Up for a chat?" plus a "Looking around?" nav. The redesign has one footer in two layouts and no footer nav: drop the `nav[aria-label="Footer"]`.
+- Today there are two footers (`desktop-only`, `mobile-only`) holding "Up for a chat?" plus a "Looking around?" nav. The redesign has one footer in two layouts and no footer nav (G4): drop the `nav[aria-label="Footer"]`.
+- The old "Up for a chat?" heading is replaced by the "Contact" `h2` (G6).
 - The footer sits under `main` on the page. The old `.sidebar footer` rule goes with the sidebar.
 - Replace the duplicated desktop and mobile markup with one footer driven by a container query.
 
 ## Open questions
 
-- The nav list ("Looking around?") is gone from Figma. Confirm the footer carries no links beyond the contact cards.
-- The badges' second link (`2293:1553`) has no destination recorded in Figma. What does it link to?
+None. Settled in Phase 18 (G4 nav, G5 badges, G6 headings).

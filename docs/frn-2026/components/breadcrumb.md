@@ -18,7 +18,7 @@ Code: `<ul class="small flow-row has-gap-2xs">` with an `<li>` per crumb and a s
 
 | Property | Values | Notes |
 | --- | --- | --- |
-| Parent | text, default "Ideas & guides" | The link |
+| Parent | text, default "Ideas" (G1) | The link |
 | Current | text, default "Essays" | The page title |
 
 No variants. Two levels only.
@@ -47,14 +47,15 @@ Values from [`_tokens.md`](_tokens.md).
 ## Content rules
 
 - Built from the Eleventy navigation tree (`eleventyNavigationBreadcrumb`, `includeSelf`). The home crumb is skipped.
-- Labels are capitalised by the template (`capitalize`). Figma shows "Ideas & guides" with sentence case: see Open questions.
+- Labels are capitalised by the template (`capitalize`). Figma shows sentence case, so the template stops capitalising.
+- The parent reads "Ideas", the same as the header nav (G1).
 
 ## HTML & accessibility
 
 ```html
 <nav aria-label="Breadcrumb">
   <ol class="small flow-row has-gap-2xs">
-    <li><a href="/writing/" class="dimmed">Ideas &amp; guides</a></li>
+    <li><a href="/writing/" class="dimmed">Ideas</a></li>
     <li aria-hidden="true"><span data-icon-before="chevron-right"></span></li>
     <li aria-current="page">Essays</li>
   </ol>
@@ -68,8 +69,9 @@ Values from [`_tokens.md`](_tokens.md).
 
 - `_breadcrumb.njk`: add the `<nav>` wrapper and `<ol>`, hide the separator.
 - Drop `capitalize` so the labels read as authored (sentence case).
+- The parent label becomes "Ideas" (G1); update the Figma default text to match.
 - Separator stays `data-icon-before="chevron-right"`; `_icons.scss` already zeroes the gap for an empty glyph.
 
 ## Open questions
 
-- Is the parent label "Ideas & guides" (Figma, repo) or "Ideas" like the header nav? See the Header's open question.
+None. Settled in Phase 18 (G1).

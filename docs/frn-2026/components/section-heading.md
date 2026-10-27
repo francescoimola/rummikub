@@ -1,6 +1,6 @@
 # Section heading
 
-**Layer:** Primitive · **Status:** figma · **Figma:** `2380:19847` · **Code:** `src/css/index.scss` `[highlight-header]>h2:first-child`
+**Layer:** Primitive · **Status:** figma · **Figma:** `2380:19847` · **Code:** `src/css/index.scss` `[highlight-header]>h2:first-child` today, `h2.highlight-header` after the port
 
 ## Purpose
 
@@ -46,26 +46,26 @@ None. It is not interactive and has no hover. The pill colour follows the page b
 ## Content rules
 
 - Sentence case, short. It is the section's title, not a sentence.
-- Highlighted vs Plain is a per-section editorial choice. The markup flag is on the section (see below).
+- Highlighted vs Plain is a per-section editorial choice. The flag is a class on the `h2` (G32, see below).
 
 ## HTML & accessibility
 
 ```html
-<section highlight-header>
-  <h2>What you get</h2>
+<section>
+  <h2 class="highlight-header">What you get</h2>
   …
 </section>
 ```
 
-- A real `h2` inside a `section`. Plain simply omits the `highlight-header` attribute.
+- A real `h2` inside a `section`. Plain simply omits the `highlight-header` class. A heading can switch without touching its parent (G32).
 - The pill is decoration only. Contrast is the page's `accent-surface` against `neutral/950-alpha` text, as today.
 
 ## Port notes
 
-- Today's rule, `[highlight-header]>h2:first-child` in `src/css/index.scss`, already matches Highlighted (same padding tokens, `--border-radius-s`, `--accent-surface`). Keep it.
-- Plain is the absence of the attribute, so no new class is needed. Add `highlight-header` to the FAQ sections that lack it on the service pages (F34).
+- Today's rule, `[highlight-header]>h2:first-child` in `src/css/index.scss`, already has the right look (same padding tokens, `--border-radius-s`, `--accent-surface`). Re-key it to `h2.highlight-header` (G32) and move the attribute from each `<section>` onto its `h2`.
+- Plain is the absence of the class, so nothing else is needed. Add `highlight-header` to the FAQ headings that lack it on the service pages (F34).
 - Figma pads the pill with `space/3xs-2xs`, the repo with `--space-3xs-2xs`. They agree.
 
 ## Open questions
 
-- Should the markup flag stay an attribute on the `section` (`highlight-header`), or become a class on the `h2` so a heading can be switched without its parent?
+None. Settled in Phase 18 (G32).

@@ -1,6 +1,6 @@
 # Section
 
-**Layer:** Section · **Status:** planned · **Figma:** (pattern) examples `2275:1403` (About), `2275:1830` (Work with me), `2275:2290` (Ideas), `2275:1911` (Work with me, vertical) · **Code:** `<section>`, `.flow`, `[highlight-header]`
+**Layer:** Section · **Status:** planned · **Figma:** (pattern) examples `2275:1403` (About), `2275:1830` (Work with me), `2275:2290` (Ideas), `2275:1911` (Work with me, vertical) · **Code:** `<section>`, `.flow`, `h2.highlight-header`
 
 ## Purpose
 
@@ -35,11 +35,11 @@ How Figma builds it today (do not copy):
 
 | Use | Figma variable | Min → Max |
 | --- | --- | --- |
-| Column / row gap | `space/s` (Work with me), `space/3xs-m` (About) | 15 → 16.88 / 3.75 → 25.31 |
+| Column / row gap | `space/s` everywhere (G31) | 15 → 16.88 |
 | Width | `layout/content-width` | 330 → 900 |
 | Content stack gap | `space/s` | 15 → 16.88 |
 
-Values from [`_tokens.md`](_tokens.md). The gap differs between About and Work with me in Figma; code uses one value (see Open questions).
+Values from [`_tokens.md`](_tokens.md). The gap was `space/3xs-m` on About in Figma; it becomes `space/s` like Work with me (G31).
 
 ## States & interactions
 
@@ -48,14 +48,15 @@ None.
 ## Content rules
 
 - Label is a short title. Content order is fixed by the page.
+- Ideas' type sections (title | list) use the same grid (G33).
 - Sections nest only one level: a section's content never holds another section.
 - A section with no label (404 body) is a single column.
 
 ## HTML & accessibility
 
 ```html
-<section class="section" highlight-header>
-  <h2>What you get</h2>
+<section class="section">
+  <h2 class="highlight-header">What you get</h2>
   <div class="flow has-gap-s"> … </div>
 </section>
 ```
@@ -67,9 +68,9 @@ None.
 
 - Today `<section>` is a `.flow` column with the `h2` above its content at every width (`studio.njk`, `design.njk`). Wide is new: add a `.section` class (or reuse `.grid-responsive-cols`) with the label in the first column.
 - Remove inline spacing like `has-mb-xs` on the `h2`. The grid gap replaces it.
+- Rebind About's gap to `space/s` in Figma (G31). Move the Ideas type sections onto the Section grid (G33).
 - The `.flow` rule inside a grid needs `align-items: stretch` (see the comment above `.grid-responsive-cols`).
 
 ## Open questions
 
-- Gap between the columns: `space/s` (Work with me) or `space/3xs-m` (About)? Which becomes the single value?
-- Should Ideas' type sections (title | list) use the same grid?
+None. Settled in Phase 18 (G31, G32, G33).

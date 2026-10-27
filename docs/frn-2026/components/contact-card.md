@@ -8,7 +8,7 @@ One block in the [Footer](footer.md)'s Contact column: a prompt, an optional det
 
 ## Anatomy
 
-- **Prompt**: text, style `site/heading`, `neutral/950-alpha`.
+- **Prompt**: text, style `site/heading`, `neutral/950-alpha`. Code: `h3` (G6).
 - **Detail** (Action only): text, style `site/body`, hidden when Show detail is off.
 - **Action** (Action) or **List** (Links): the rows. Each row is an exposed [Icon link](icon-link.md) instance (F03, Q19), not a loose frame.
 
@@ -61,23 +61,24 @@ Only the rows react: see [Icon link](icon-link.md). The card itself is static.
 
 ```html
 <div class="card flow has-gap-3xs">
-  <p>Send me a good 'ol email</p>
+  <h3>Send me a good 'ol email</h3>
   <p>hi at francescoimola dot com</p>
   <button type="button" data-copy-email="…" data-icon="copy">Copy email address</button>
   <p role="status" class="sr-only" data-copy-status></p>
 </div>
 ```
 
-- Links cards: a `<ul>` of links under the prompt (use a heading level that fits the Footer outline).
+- The prompt is an `h3` styled `site/heading`. The Footer's "Contact" title is the `h2` above the cards (G6).
+- Links cards: a `<ul>` of links under the prompt.
 - The copy button announces success through the status region.
 
 ## Port notes
 
 - No partial exists. Today's `_footer.njk` has one flat "Up for a chat?" block plus a nav. Add `_contact-card.njk` with a `contactCard(prompt, detail, rows)` macro, and render four cards from front matter or `_data`.
+- The copy action stays a `<button>` (G9). Icon colour is `currentColor` (G8).
 - Rows move from `data-icon-before` to trailing `data-icon` (see [Icon link](icon-link.md)).
 - Needs sign-off before a new partial is added (AGENTS.md rule 10 covers JS and tests, not partials, but keep the surface small).
 
 ## Open questions
 
-- Colour tokens differ between glyphs: Copy and Phone fill `color-accent`, External and Arrow-right stroke `brand/800`. Same hue, two token families. Which is canonical in code (`currentColor` from the link)?
-- Is the Prompt a heading (which level) or a paragraph? Figma styles it `site/heading` only.
+None. Settled in Phase 18 (G6 prompt heading, G8 icon colour, G9 copy button).

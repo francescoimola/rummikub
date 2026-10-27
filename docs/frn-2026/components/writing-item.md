@@ -4,7 +4,7 @@
 
 ## Purpose
 
-One row in a writing listing: a square thumbnail, the title, an optional source and a date. Default is used on the Ideas index (2 latest per type). Expanded is used on the per-type pages, where items run wider.
+One row in a writing listing: a square thumbnail, the title, an optional source and a date. Default is used on the Ideas index (2 latest per type). Expanded is used on the per-type pages, where items run wider. In code Expanded is `.writing-item--compact` (G41).
 
 ## Anatomy
 
@@ -29,15 +29,20 @@ The whole row is one card link (`a.card.writing-item`).
 
 ## Layout
 
-An 8-column grid with `space/s` gaps and padding. The spans are the only difference (F38):
+Figma draws an 8-column grid with `space/s` gaps and padding (F38):
 
 | Layout | Thumb | Body |
 | --- | --- | --- |
 | Default | columns 1–3 (span 3) | columns 4–8 (span 5) |
 | Expanded | columns 1–2 (span 2) | columns 3–8 (span 6) |
 
-- Expanded gives the thumbnail less of the row, so it stays small when the card is 900 wide. In code the thumb is a fixed square (`--space-2xl`) and the body is `flex: 1`, so the spans are a Figma device. Port the proportions, not the 8-column grid.
-- Which layout shows is chosen by the page, not by width: `writing.njk` uses Default, `writing-types.njk` uses Expanded.
+Code does not use the 8-column grid (G21, G41). The thumb is fluid and scales with its container. The narrower thumb on tablet and mobile is intentional, so the text does not wrap onto too many lines.
+
+- **One grid:** thumb `3fr` | body `5fr`. The thumb is a square that fills its column.
+- **One `@container` rule** switches the grid to `1fr 3fr` when the row is narrow.
+- **Type pages** add `.writing-item--compact`, which is always `1fr 3fr`.
+- Thumb width is roughly 75 px on mobile, 150 px on `/writing/` desktop and 210 px on type pages.
+- Which layout shows is chosen by the page, not by width: `writing.njk` uses Default, `writing-types.njk` adds `--compact`.
 - Heights hug content: Default 174 at 437 wide (Q11, accepted).
 
 ## Tokens
@@ -84,10 +89,10 @@ Values from [`_tokens.md`](_tokens.md).
 
 ## Port notes
 
-- Add a `layout` param to `writingItem` for Default / Expanded, driving the thumb size.
+- Add a `compact` param to `writingItem` that adds `.writing-item--compact` (G41). Replace the fixed `--space-2xl` thumb with the fluid grid and its `@container` rule in `_responsive.scss`.
 - Source icon: the repo glyph is `arrow-ext`; Figma now uses an Icon/External instance (F39). Same glyph.
 - Thumb becomes an [Image](image.md) with ratio 1:1.
 
 ## Open questions
 
-- Expanded thumb size in code: scale it with the card, or keep today's fixed `--space-2xl` square at both layouts?
+None. Settled in Phase 18 (G21, G41).

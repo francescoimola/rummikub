@@ -4,7 +4,7 @@
 
 ## Purpose
 
-One row of a price list: what it is, an optional note and the price. Used 4 times per frame on Web design (12 in all). Consultations has no list: its price is a bold paragraph (`£225`).
+One row of a price list: what it is, an optional note and the price. Used 4 times per frame on Web design (12 in all). Consultations has no list: its price stays a bold paragraph (`£225`, G29).
 
 ## Anatomy
 
@@ -64,9 +64,9 @@ None. Only the link in a note is interactive (global link hover and ring).
 ## Port notes
 
 - The repo already has this: `.pricing-list>li` (bottom rule) and `.pricing-list>li>p` (`white-space: nowrap` for the price), plus utility classes. Figma matches them. The decision log (Phase 15) called it "new", but it exists in `src/css/_components.scss`.
-- Optional: a `pricingItem` macro to replace the repeated `<li>` markup.
+- No macro: the `<li>` stays inline in `.pricing-list` (G30).
+- Consultations' `£225` stays a bold paragraph, not a Pricing item (G29).
 
 ## Open questions
 
-- Should Consultations' `£225` become a Pricing item too, or stay a bold paragraph?
-- Macro or inline markup for the `<li>`?
+None. Settled in Phase 18 (G29, G30).

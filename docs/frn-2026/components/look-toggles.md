@@ -10,7 +10,7 @@ The visitor's two display choices in the [Header](header.md): light or dark them
 
 A horizontal row of two groups, gap `space/l`:
 
-- **Theme** (`.theme-switch`, `role="group"`): a bordered frame with **Button - Light** and **Button - Dark**. Each holds a 9 × 9 sun or moon vector. The active button is filled `neutral/950-alpha` with a `neutral/50` glyph.
+- **Theme** (`.theme-switch`, `role="group"`): a bordered frame with **Button - Light** and **Button - Dark**. Each holds a sun or moon vector, sized like the code (G7). The active button is filled `neutral/950-alpha` with a `neutral/50` glyph.
 - **Page colour** (`.brand-picker`, `role="group"`): **Button - Green**, **Pink**, **Orange**. Each is a square swatch. Green is filled `brand/150`.
 
 ## Props & variants
@@ -21,7 +21,7 @@ None. One component, no properties. The "To main site" link is not part of it (Q
 
 - Hugs (F44). The component width follows its content, so it does not stay at a fixed 205 px: it was about 170 to 205 px across modes in the file.
 - The Page colour swatches are square and bound to `line-height/body`, so they scale with the type.
-- The Theme group is a hug row, not a grid. It keeps its size across modes.
+- The Theme group is a hug row, not a grid. Its sun and moon glyphs scale with the type like the swatches (G7).
 
 ## Tokens
 
@@ -30,7 +30,8 @@ None. One component, no properties. The "To main site" link is not part of it (Q
 | Theme ↔ Page colour gap | `space/l` | 30 → 33.75 |
 | Theme inner gap | `space/3xs-2xs` | 3.75 → 8.44 |
 | Theme frame padding | `space/4xs` | 1.88 → 1.88 |
-| Theme button padding | `space/3xs` | 3.75 → 4.69 |
+| Theme button padding | `space/2xs` (repo) | 7.5 → 8.44 |
+| Theme glyph size | `space/s` (G7): code is `--space-s-m` capped at `1rem`, so `space/s` is its effective value | 15 → 16.88 |
 | Swatch ↔ swatch gap | `space/3xs` | 3.75 → 4.69 |
 | Swatch size | `line-height/body` | 22.5 → 25.31 |
 | Border weight | `input-border-width` | — |
@@ -67,10 +68,11 @@ Values from [`_tokens.md`](_tokens.md). Pink and Orange swatch fills are raw col
 
 ## Port notes
 
+- Figma now matches the code: glyph `space/s`, button padding `space/2xs` (G7). No code change.
 - The markup and CSS already match Figma. The change is where it sits: inside the new top bar, and in the Minimal header (see [Header](header.md)).
 - The theme icons are `sun.svg` and `moon.svg` in `src/assets/icons/`, inlined by the `icon` shortcode.
 - Swatch fills in CSS are computed from `--brand-hue-*`; keep that formula in sync with `_colors.scss`.
 
 ## Open questions
 
-- Should the Theme group scale with the type like the swatches do? Its buttons use a fixed 9 px glyph in Figma, while code sizes the glyph with `--space-s-m`.
+None. Settled in Phase 18 (G7).

@@ -41,7 +41,7 @@ Values from [`_tokens.md`](_tokens.md).
 
 ## States & interactions
 
-- **Hover:** Figma wires Default → Hover with `ON_HOVER`, change to, smart animate. In code (to build) the marker shows on `a:hover` and on `[aria-current="page"]`, with `--dur-fast`. Reduced motion: no transition.
+- **Hover:** Figma wires Default → Hover with `ON_HOVER`, change to, smart animate. In code (to build) the marker shows on `a:hover` and on `[aria-current="page"]`, sliding in over `--dur-fast` (G3). Under reduced motion `--dur-fast` is 0s, so it just appears.
 - **Current:** set by the page, see the Header's content rules for which page marks which item.
 - **Focus:** the global `:focus-visible` ring.
 
@@ -63,9 +63,9 @@ Values from [`_tokens.md`](_tokens.md).
 ## Port notes
 
 - Today's `_header.njk` has no marker. Add a `::before` bullet for `[aria-current="page"]` and `:hover`.
-- The partial still lists "Case studies" and "Ideas & guides". The Header doc covers both.
+- The partial still lists "Case studies" and "Ideas & guides". The Header doc covers both (G1).
 - No new file: this stays inside `_header.njk` (a macro is optional).
 
 ## Open questions
 
-- Should the hover bullet slide in (smart animate in Figma) or just appear? Figma animates, the repo has no motion on nav links today.
+None. Settled in Phase 18 (G3).
