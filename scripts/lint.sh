@@ -34,5 +34,13 @@ EOF
 )
 [ -n "$hits" ] && report "Invalid JSON or duplicate keys" "$hits"
 
+# AGENTS.md rule 7: 200 lines at most
+lines=$(wc -l < AGENTS.md)
+[ "$lines" -gt 200 ] && report "AGENTS.md is $lines lines; the limit is 200 (AGENTS.md rule 7)" "move reference behind a pointer"
+
+# Decision IDs name one rule each (cited as Gnn/Qnn); B7, B8, G6, G12, G26 predate this check
+hits=$(grep -oE '^\| [A-Z][0-9]+ ' docs/frn-2026/decisions.md | sort | uniq -d | grep -vE '^\| (B7|B8|G6|G12|G26) $')
+[ -n "$hits" ] && report "Duplicate decision ID in docs/frn-2026/decisions.md" "$hits"
+
 [ $fail -eq 0 ] && echo "✓ lint passed"
 exit $fail
