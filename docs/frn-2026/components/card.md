@@ -1,6 +1,6 @@
 # Card
 
-**Layer:** Primitive · **Status:** figma · **Figma:** `2403:20009` (`Style=Default/Outline/Featured`, G34); page examples `2322:9190` (Collaborate), `2292:1548` (Service card), `2380:19851` (Quote card), `2339:9812` (Accessibility) · **Code:** `.card` in `src/css/_components.scss`
+**Layer:** Primitive · **Status:** code · **Figma:** `2403:20009` (`Style=Default/Outline/Featured`, G34); page examples `2322:9190` (Collaborate), `2292:1548` (Service card), `2380:19851` (Quote card), `2339:9812` (Accessibility) · **Code:** `.card` in `src/css/_components.scss`
 
 ## Purpose
 
@@ -68,6 +68,7 @@ Values from [`_tokens.md`](_tokens.md).
 
 - Figma cards vary (Collaborate fixed heights were fixed in F32; Accessibility has a Card inside a Card). Build instances from the repo class, not from the loose frames.
 - Collaborate "What I do" cards use `border-radius` in Figma, not `-s`. Rebind them to `border-radius-s` (G34).
+- **Ported (#39):** `.card` already uses `--border-radius-s` everywhere, Collaborate included, so the code needed no change. Accessibility's email card is one `.card`, not Figma's card in a card.
 - Build the Card component in Figma with `Style=Outline` and `Style=Featured`, then swap the loose frames for instances.
 
 ## Open questions

@@ -110,7 +110,7 @@ html.lenis body {
 }
 
 // ---- Theming ----
-.site-banner, .site-footer, .page-header, .home-hero, .card:is(header) {
+.site-banner, .site-footer, .page-header, .home-hero, .collab-hero, .card:is(header) {
     --color-accent: var(--neutral-950-alpha);
     // dark: brand mix baked over --body-bg so it's opaque (else scrolled content shows through); 16% solved for ΔE_OK 0.08, a step above cards
     background: light-dark(var(--brand-150), color-mix(in oklch, var(--brand-400) 16%, var(--body-bg)));
@@ -265,6 +265,11 @@ blockquote+figcaption {
 img {
     &.ratio-1-1 {
         aspect-ratio: 1 / 1;
+    }
+
+    &.ratio-3-4 {
+        aspect-ratio: var(--ratio-3-4);
+        object-fit: cover;
     }
 }
 
