@@ -6,6 +6,7 @@ The FRN-2026 component library: designed in Figma, built as Nunjucks partials an
 - **Frames:** desktop 1512 (Utopia Max), tablet 834 and mobile 390 (Utopia Min). Node IDs are in [`../figma-state.json`](../figma-state.json).
 - **Token values:** [`_tokens.md`](_tokens.md).
 - **Scripting Figma:** read [`../figma-gotchas.md`](../figma-gotchas.md) before any `use_figma` call.
+- **Code Connect:** the API refuses writes on this plan. Link by hand in Dev Mode from the index below (repo paths on `development`, switch to `main` once merged); see the gotchas file.
 
 ## Index
 

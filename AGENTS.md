@@ -9,6 +9,7 @@
 - **Voice & tone:** `.docs/voice-guide.md` (local-only, gitignored)
 - **Testing:** [testing-guide.md](testing-guide.md) — run `pnpm lint && pnpm build && pnpm test` before committing (the built-output tests read `public/`)
 - **Review:** [CODING_STANDARDS.md](CODING_STANDARDS.md) — judgement rules the reviewer enforces; mechanical ones live in `pnpm lint`
+- **Figma ↔ code:** [docs/frn-2026/components/README.md](docs/frn-2026/components/README.md) — file key, node IDs and the component→repo-file index; read before any Figma work, Code Connect included
 
 ## Commands
 
@@ -119,31 +120,9 @@ Embed lazy, autoplay-in-view videos with the `projectVideo` shortcode (defined i
 - **Formats:** WebM (small) with an MP4 fallback is the safe default — WebM-only drops pre-16 Safari/iOS. Single-format `src` may be `.webm` or `.mp4` (no `type` attr; browser sniffs).
 - **Optimize raw uploads:** drop `<name>.src.{mp4,mov,webm}` into `src/assets/portfolio/`, run `pnpm optimize:video` (needs system `ffmpeg` on PATH) → emits `<name>.mp4`, `<name>.webm`, and a `<name>.jpg` poster.
 
-## CSS architecture rules
+## CSS architecture
 
-1. **No `@import`** — it's deprecated in Dart Sass and removed in 3.0. Every partial, cleacss included, is a `@use` at the top of `index.scss`. Module CSS is emitted in `@use` order, so position in that list is load-bearing.
-
-2. **cleacss is vendored** — Lives at `src/css/vendor/cleacss.css`. Do not `pnpm add` it. Loaded with `@use 'vendor/cleacss'` right after `components` (where the old `@import` emitted it) — `@use` **inlines its contents** into one bundled stylesheet. Never revert to `@import`: besides the deprecation, `@import "x.css"` emits a runtime import (extra render-blocking request, unminified). There is no passthrough copy of `src/css/vendor` — nothing requests it.
-
-3. **`@layer` names in use:** cleacss's `reset`, `layout`, `elements`, `is`, `has` (do not write to them), then ours: `fonts`, `colors`, `type`. Layers are for variable/token declarations only. All other styles go unlayered in `index.scss`.
-
-   **Layer order is pinned, not incidental.** Priority is set by the order layer names *first appear*, so inlining cleacss would otherwise let our `fonts`/`colors`/`type` be named first and flip cleacss's layers above our tokens site-wide, silently. `src/css/_layers.scss` holds one `@layer reset, layout, elements, is, has, fonts, colors, type;` statement and **must stay the first `@use` in `index.scss`** — Sass emits module CSS in `@use` order, so it lands ahead of everything. LightningCSS strips the statement when source order already agrees; that's fine, the emitted order is what matters. `src/css/built-css.test.js` asserts that order against the built CSS.
-
-   **Exception — tokens that collide with cleacss must be unlayered.** cleacss ships its *own* unlayered `--space-*` scale, `--font-weight-bold`, and `--color-{success,warning,error,info}`/`--input-border-color` at `:root`. Per the cascade-layers spec, **unlayered always beats layered regardless of source order or specificity**, so a colliding token placed inside `@layer type`/`@layer colors` silently loses to cleacss's default. Our overriding tokens therefore all live in one unlayered mixin — `cleacss-overrides.overrides` in `src/css/_cleacss-overrides.scss` — that `index.scss` `@include`s **after** the cleacss `@use` (unlayered + later source order = wins). Only genuinely new token names or type-scale (`--step-*`) are collision-free and can stay layered. When adding a token, check whether cleacss already defines that exact name; if so, add it to `_cleacss-overrides.scss`, not a `@layer`.
-
-4. **Colour mode** — cleacss uses `light-dark()` natively. Set `[data-theme="dark"]` on `<html>` to force dark mode manually. OS preference works automatically.
-
-5. **OKLCH colours** — native oklch renders P3-wide automatically. No `@supports (color: color(display-p3))` block needed.
-
-6. **Content modes** — Pages set `contentMode: contrast` in frontmatter to give content a white background with accent-coloured links. Omit `contentMode` for the default layout on the page background. Renders as `data-content="contrast"` on `.layout` in `_base.njk`.
-
-7. **Colour scales** — All colour scales (`--brand-*`, `--neutral-*`, `--success-*`, `--warning-*`, `--error-*`, `--info-*`) use Figma-generated oklch values with `light-dark()` for dark mode. Scales use 50–950 step numbering. The brand scale's tokens are `--brand-{step}` (formerly `--green-*`) — named for their role, since the hue is re-tintable (see rule 9). Neutral has both solid (`--neutral-{step}`) and alpha (`--neutral-{step}-alpha`) variants. Alpha variants use the darkest neutral step as base (950 in light, 50 in dark) with consistent alpha values across modes.
-
-8. **Cleacss semantic overrides** — `--color-success`, `--color-warning`, `--color-error`, `--color-info`, and `--input-border-color` are set in the unlayered `overrides` mixin in `_cleacss-overrides.scss` (see rule 3 for why unlayered) to override cleacss's hardcoded defaults, linking cleacss utility classes (`.has-text-success`, `.has-background-error`, etc.) and form validation states to our Figma scales (500 step). That same mixin also holds the non-colour collisions — the `--space-*` scale and `--font-weight-bold: 550` (vs. cleacss's `700`).
-
-9. **Brand re-tint knobs** — The brand scale (`--brand-{step}`) is parametric: every step's hue is `calc(var(--brand-hue) + <per-step offset>)` and chroma is `calc(<orig> * var(--brand-chroma))`. Both are registered via `@property` (`<number>`, so they animate). Defaults (`--brand-hue: 119.4`, `--brand-chroma: 1`) reproduce the original Figma scale exactly. Per-step hue offsets preserve each mode's hue-twist relative to base 119.4°. Re-tint the whole scale (and everything derived from it — `--color-accent`, hover, surfaces, content tokens) by changing `--brand-hue`/`--brand-chroma`: via the `:root[data-brand="…"]` hook in `_colors.scss` (currently `pink` → hue 350), via `brand: <name>` page frontmatter (rendered as `data-brand` on **`<html>`** in `_base.njk`), or from JS with `document.documentElement.style.setProperty('--brand-hue', 350)`. **The hook must target `:root`/`<html>`** — the `--brand-*` tokens are declared on `:root`, so their `var(--brand-hue)` is substituted there; overriding the hue on a descendant (e.g. `.layout`) only inherits the already-computed values and won't re-tint. Lower `--brand-chroma` (e.g. `0.85`) if a rotated hue looks over-saturated or clips gamut.
-
-10. **Breakpoints live in one file** — every viewport `@media (width …)` and `@container` rule goes in `src/css/_responsive.scss`, one block per condition, so a breakpoint is never written twice. Base rules in `index.scss`/`_components.scss` describe the mobile state; the breakpoint block holds the override. **Why it's a mixin:** Sass emits `@use`'d module CSS *before* the using file's own, so a plain `@use 'responsive'` partial would land at the top and lose — media queries add no specificity, so equal-specificity conflicts resolve on source order alone. Wrapping in `@mixin all` and `@include responsive.all;` as the **last statement** in `index.scss` puts it after everything it overrides. Same trick as `_cleacss-overrides.scss` (rule 3). Block order inside the mixin is load-bearing: max-width ascending, then min-width ascending. **Exception:** feature queries (`hover: hover`, `forced-colors: active`, `prefers-reduced-motion`) stay nested with the rule they modify — they describe one selector's state, not a layout fold. Breakpoint Sass vars (`$bp-*`) still live in `_scale.scss`.
+Before editing `src/css`, read [docs/css-architecture.md](docs/css-architecture.md): the ten numbered rules (`@use` order, `@layer` order, cleacss token collisions, brand re-tint, breakpoints in `_responsive.scss`). Comments cite them as "CSS rule N".
 
 ## Non-negotiable rules
 
@@ -152,12 +131,10 @@ Embed lazy, autoplay-in-view videos with the `projectVideo` shortcode (defined i
 3. **`public/` is build output.** Never commit files to `public/`. Recover missing static assets from `git show main:public/<path>` if needed.
 4. **Semantic HTML.** Single `<h1>` per page. Use `<article>`, `<nav>`, `<section>`, `<aside>` correctly. Skip link (`#main-content`) must remain.
 5. **`rem` for sizing, `dvh`/`dvw` over `vh`/`vw`.** No raw `px` values for layout.
-6. **External links:** always `target="_blank" rel="noopener noreferrer"`.
-7. **`browserslist` pin:** `pnpm-workspace.yaml` pins `browserslist@4.24.0`. Required for Node 22+. Do not remove.
-8. **SCC and CSS Comments are single-line `//`, never wrapped paragraphs.** One comment = one line. Do NOT wrap prose across several consecutive `//` lines, and do not use `/* … */` block comments in SCSS. If a note would exceed ~25 words, don't pad it into a multi-line block — cut it down, and move any property-specific detail onto the line directly above (or trailing, after the `;`) that property. Keep the *why*, drop the essay.
-9. **`AGENTS.md` must be 200 lines or less — never more.** When editing this file, keep the total line count at ≤ 200. Trim content so the count holds.
-10. **Anti-bloat: the JS surface only shrinks.** Prefer deleting or reusing over adding. **Never add a new JS file, npm dependency, or test file without explicitly asking Francesco first.** Unit tests are only for behaviour that fails invisibly (persistence, generated output, media logic); features whose breakage is obvious by clicking the page get no jsdom test — see testing-guide.md.
-11. **Extract hand-rolled null-guard chains into named helpers.** Each link of `a && a.b && a.b.c` or `x || y || z` is a cyclomatic branch, and fallow counts `?.`/`??` identically — modernising the syntax does not lower the score, only moving it does. Pull the chain into a named top-level function (see `thumbSeed`/`trustedLastmodValue` in `src/config/eleventy/filters.js`); the caller drops under threshold and the fallback rule becomes testable alone.
+6. **`browserslist` pin:** `pnpm-workspace.yaml` pins `browserslist@4.24.0`. Required for Node 22+. Do not remove.
+7. **`AGENTS.md` must be 200 lines or less — never more.** When editing this file, keep the total line count at ≤ 200. Trim content so the count holds.
+8. **Anti-bloat: the JS surface only shrinks.** Prefer deleting or reusing over adding. **Never add a new JS file, npm dependency, or test file without explicitly asking Francesco first.** Unit tests are only for behaviour that fails invisibly (persistence, generated output, media logic); features whose breakage is obvious by clicking the page get no jsdom test — see testing-guide.md.
+9. **Extract hand-rolled null-guard chains into named helpers.** Each link of `a && a.b && a.b.c` or `x || y || z` is a cyclomatic branch, and fallow counts `?.`/`??` identically — modernising the syntax does not lower the score, only moving it does. Pull the chain into a named top-level function (see `thumbSeed`/`trustedLastmodValue` in `src/config/eleventy/filters.js`); the caller drops under threshold and the fallback rule becomes testable alone.
 
 ## Common gotchas
 
