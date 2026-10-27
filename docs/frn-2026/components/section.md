@@ -1,6 +1,6 @@
 # Section
 
-**Layer:** Section · **Status:** planned · **Figma:** (pattern) examples `2275:1403` (About), `2275:1830` (Work with me), `2275:2290` (Ideas), `2275:1911` (Work with me, vertical) · **Code:** `<section>`, `.flow`, `h2.highlight-header`
+**Layer:** Section · **Status:** code · **Figma:** (pattern) examples `2275:1403` (About), `2275:1830` (Work with me), `2275:2290` (Ideas), `2275:1911` (Work with me, vertical) · **Code:** `section.section` (`_components.scss`, fold in `_responsive.scss`), `h2.highlight-header`
 
 ## Purpose
 
@@ -70,6 +70,7 @@ None.
 - Remove inline spacing like `has-mb-xs` on the `h2`. The grid gap replaces it.
 - Rebind About's gap to `space/s` in Figma (G31). Move the Ideas type sections onto the Section grid (G33).
 - The `.flow` rule inside a grid needs `align-items: stretch` (see the comment above `.grid-responsive-cols`).
+- **Ported (#26):** `.section` shares the column-grid base (`1fr`, `align-items: stretch`) and folds to `repeat(2, 1fr)` in the `@container (min-width: $bp-s)` block. Gap `--space-s`, capped at `--grid-width-l`; the label `h2` is `align-self: start` with no margin, so no `has-mb-*` is needed. Content goes in one `div.flow.has-gap-s`. First adopter: Consultations "What you get"; the other pages move in their own tickets.
 
 ## Open questions
 

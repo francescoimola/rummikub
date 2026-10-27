@@ -158,6 +158,7 @@
 // align-items: stretch overrides cleacss's .flow (align-items: flex-start, @layer reset) so row items stay equal-height — needed whenever .flow is combined in for its gap token (CSS rule 3)
 .grid-responsive-cols,
 .grid-cols-2,
+.section,
 .split-row {
     display: grid;
     grid-template-columns: 1fr;
@@ -170,6 +171,17 @@
 
 .media-pair {
     gap: var(--space-s);
+}
+
+// Section: label | content at content width (G31); source order label then content, so stacked and 2-up read the same
+.section {
+    gap: var(--space-s);
+    max-inline-size: var(--grid-width-l);
+
+    >h2 {
+        align-self: start; // the row stretches its items; keep the pill hugging its text
+        margin: 0;
+    }
 }
 
 // ---- Masonry ----
