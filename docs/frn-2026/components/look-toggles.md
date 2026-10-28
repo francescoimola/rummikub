@@ -15,7 +15,7 @@ A horizontal row of two groups, gap `space/l`:
 
 ## Props & variants
 
-None. One component, no properties. The "To main site" link is not part of it (Q33); the Minimal header holds it beside the toggles.
+None. One component, no properties. The "To main site" link was never part of it (Q33), and left with the Minimal header (G52).
 
 ## Layout
 
@@ -69,7 +69,7 @@ Values from [`_tokens.md`](_tokens.md). Pink and Orange swatch fills are raw col
 ## Port notes
 
 - Figma now matches the code: glyph `space/s`, button padding `space/2xs` (G7). No code change.
-- **Ported (#22, #23):** one instance in `.nav-menu__toggles`, in both the Full and Minimal headers (see [Header](header.md)). Both toggle groups run as rows.
+- **Ported (#22, #23):** one instance in `.nav-menu__toggles`, in the header on every page (see [Header](header.md)). Both toggle groups run as rows.
 - The theme icons are `sun.svg` and `moon.svg` in `src/assets/icons/`, inlined by the `icon` shortcode.
 - Swatch fills in CSS are computed from `--brand-hue-*`; keep that formula in sync with `_colors.scss`.
 
