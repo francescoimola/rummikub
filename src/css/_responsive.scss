@@ -118,6 +118,7 @@ $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:
     @container banner (width >= #{scale.$bp-banner}) {
         .site-banner__inner {
             padding-inline: var(--gutter-y); // .layout's gutter, so the centre track is the content column
+            block-size: auto; // the panel is the row here, always open, so it sizes the band
         }
 
         .site-banner__inner,
@@ -148,7 +149,8 @@ $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:
 
         .nav-menu__panel {
             grid-template-areas: ". links toggles";
-            padding-block: 0;
+            padding: 0;
+            margin-inline: 0;
         }
 
         .nav-menu__panel > ul {

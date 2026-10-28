@@ -14,6 +14,8 @@
 html {
     font-size: 15px; // overrides cleacss's unlayered 16px (@layer reset)
     overscroll-behavior: auto none;
+    // Anchor jumps and the skip link land below the sticky banner, plus a --space-s breath (#75). Lenis leaves anchors to the browser
+    scroll-padding-block-start: calc(var(--banner-block-size) + var(--space-s));
 }
 
 // Lenis smooth scroll — minimal required styles
@@ -77,6 +79,8 @@ html.lenis body {
 
 :root {
     interpolate-size: allow-keywords;
+    // The Narrow banner's height: its padding plus .site-banner__inner's one body line. Wide (toggles a few px taller) is covered by the scroll-padding breath
+    --banner-block-size: calc(2 * var(--space-s) + var(--step-0) * var(--line-height));
     // Base typography variables (the rest are in _scale.scss)
     --font-family: 'Ronzino', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji';
     --font-family-display: 'KC Pelletier Sans', var(--font-family); // hero + CTA headings only
@@ -116,7 +120,7 @@ html.lenis body {
 }
 
 // ---- Theming ----
-.site-banner, .site-footer, .page-header, .home-hero, .collab-hero {
+.site-banner, .nav-menu__panel, .site-footer, .page-header, .home-hero, .collab-hero {
     --color-accent: var(--neutral-950-alpha);
     // dark: brand mix baked over --body-bg so it's opaque (else scrolled content shows through); 16% solved for ΔE_OK 0.08, a step above cards
     background: light-dark(var(--brand-150), color-mix(in oklch, var(--brand-400) 16%, var(--body-bg)));
@@ -346,16 +350,22 @@ nav li a {
 }
 
 // ---- Site banner ----
-// Narrow by default; the Wide row lives in the banner container block in _responsive.scss
+// Narrow by default; the Wide row lives in the banner container block in _responsive.scss.
+// Pinned at every width (#75). Its only ancestors are body and html, which set no overflow, so nothing breaks the stick
 .site-banner {
     container: banner / inline-size;
     padding-block: var(--space-s);
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 50; // over the page's own stacking contexts (media, cards), under the skip link's 100
 }
 
-// Name and <details> share one grid cell: the name overlays the bar's start, so the open panel spans the full width
+// Name and <details> share one grid cell: the name overlays the bar's start, so the open panel spans the full width.
+// Held to the bar's one line so the open panel overflows over the page instead of pushing it down (#75)
 .site-banner__inner {
     align-items: start;
     padding-inline: var(--space-m-l);
+    block-size: 1lh;
 
     &>* {
         grid-area: 1 / 1;
@@ -384,12 +394,14 @@ nav li a {
     }
 
     // Open panel: look toggles left, links right
+    // Bleeds past .site-banner__inner's padding so the band fill (shared in Theming) spans the viewport under the bar
     &__panel {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-areas: "toggles links";
         column-gap: var(--space-l);
-        padding-block: var(--space-s);
+        padding: var(--space-s) var(--space-m-l) calc(2 * var(--space-s)); // the bottom also stands in for the band's padding it now covers
+        margin-inline: calc(-1 * var(--space-m-l));
     }
 
     &__panel>ul {
