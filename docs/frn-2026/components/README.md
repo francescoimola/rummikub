@@ -87,7 +87,7 @@ These rules apply site-wide; component docs refer to them instead of repeating t
 | Behaviour | Rule |
 | --- | --- |
 | Motion | `--dur-fast` 0.2s and `--dur-medium` 0.25s with `--ease`. Both are 0s unless the visitor allows motion, so reduced motion is the default state, not an override. |
-| Scroll animation | `settle` stays on the hero media of case studies and writing posts. `breakout` never runs on case studies. It runs only on writing posts, and where a developer opts in with `view-animation="breakout"` (G13). Media pairs sit at content width. Both key off `.case-study__intro`. Firefox gets the JS fallback (`scroll-fallback.js`). |
+| Scroll animation | `settle` stays on the hero media of case studies and writing posts, keyed off `.case-study__intro`. Later media never animate: `breakout` was removed (#71). Figures and media pairs sit at the 60rem column. Firefox gets the JS fallback (`scroll-fallback.js`). |
 | External links | [Icon/External](icon.md) ↗ (`data-icon="arrow-ext"`, drawn, never a typed character), `target="_blank" rel="noopener noreferrer"`. |
 | Arrow rule | [Icon/Arrow-right](icon.md) → after the label, only when the label doesn't already make clear the link leaves the page, or when leaving is hard to undo ("To main site"). "Read case study" gets none (G19, G44). Arrows stay on "More about me", "Here's what I can offer you", "How this website is built", "Learn about its accessibility", the Service card Default CTA and "To main site". |
 | Nav label | The writing section is "Ideas" in the header, breadcrumb and any footer link (G1). The `/writing/` heading and `<title>` stay. |

@@ -132,7 +132,7 @@ $carousel-arrow: oklch(0.351 0.034 121.6);
         padding-block: var(--space-xl-4xl);
 
         >* {
-            max-inline-size: calc(var(--inline-size) - 2 * var(--pad)); // settled content width, so text holds still while the card breaks out around it
+            max-inline-size: calc(var(--inline-size) - 2 * var(--pad)); // content width, so text holds still while the card spans wider
             inline-size: 100%;
             margin-inline: auto;
             margin-block: auto;
@@ -817,8 +817,8 @@ main svg.illustration-wide {
 }
 
 // ---- Case study page ----
-// Media = a figure, a media pair, or a markdown image (<p><picture>). Case studies hold it at content width (G13); writing posts keep breakout
-.case-study:not(.writing-post) {
+// Media = a figure, a media pair, or a markdown image (<p><picture>). Every long-form page holds it at the wider 60rem column (G13, #9)
+.case-study {
     --settled-size: var(--grid-width-l); // where settle ends
 
     > :is(figure, .media-pair, p:has(> :is(img, picture))) {
@@ -844,11 +844,6 @@ main svg.illustration-wide {
     >.media-pair,
     >p:has(> :is(img, picture)) {
         margin-block-start: var(--space-xl-2xl);
-    }
-
-    // Trailing space belongs to the gap-owning element below, except at the very end
-    >:is(figure, .media-pair, p:has(> :is(img, picture))):last-child {
-        margin-block-end: var(--space-xl-2xl);
     }
 
     // Anything non-media directly after media — restore the full gap on its top edge
