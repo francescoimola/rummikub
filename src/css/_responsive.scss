@@ -183,18 +183,6 @@ $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:
             justify-self: end;
             flex-wrap: nowrap;
         }
-
-        // Minimal: the controls row sits inside the page column, ending at its edge
-        .site-banner--minimal .site-banner__inner > .nav-menu {
-            grid-column: 2;
-        }
-
-        .site-banner--minimal .nav-menu__panel {
-            display: flex;
-            justify-content: end;
-            align-items: center;
-            gap: var(--space-l);
-        }
     }
 
     // Wide footer: Contact left, the drawing right (bleeding past the column), colophon under Contact
