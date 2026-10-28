@@ -60,7 +60,7 @@ Content and media are editable via Pages CMS, configured in `.pages.yml` at the 
 | `src/assets/portfolio/` | Project videos (mp4/webm) + posters (passthrough copied to `public/assets/portfolio/`) |
 | `src/assets/writing/` | Writing cover + in-body images (passthrough copied to `public/assets/writing/`) |
 | `src/art.njk` | Artmaking index (`/art/`, full width). Content lives in `src/_data/artProjects.json` — no per-project files; the `splitRow` macro (`_split-row.njk`) renders one row per entry — see Artmaking page |
-| `src/assets/art/` | Artmaking images, all 800px-wide sources (passthrough copied to `public/assets/art/`) |
+| `src/assets/art/` | Artmaking images: largest known originals, 1080–6889px wide (#73); `concert-…-3` stays 800px, `poem-for-a-timepiece` 1200px, `what-a-world*` ~1920px. Sources are EXIF-stripped (passthrough copied to `public/assets/art/`) |
 | `src/about.njk` | About page (`/about/`) — bio, Philosophy, FAQ (`<details>`), Recognition (`.data-list`); moved off the home page's old expandable "Read more" section. Linked from the header nav |
 | `scripts/optimize-videos.mjs` | Opt-in ffmpeg optimizer for project videos (`pnpm optimize:video`) |
 | `public/` | Build output — gitignored, do not commit |
