@@ -41,17 +41,14 @@ describe("built landmarks", () => {
   };
   const currentLabel = (file) => (primaryNav(html(file)).match(/aria-current="page">([^<]*)</) || [])[1];
 
-  // Collaborate, Accessibility and 404 stand apart from the main site: Minimal header, no nav landmark.
-  const minimalPages = ["public/collaborate/index.html", "public/about/accessibility/index.html", "public/404.html"];
-
-  it("gives Full pages one Primary nav and Minimal pages none", () => {
+  // Every page, Collaborate, Accessibility and 404 included, gets the full header (#72).
+  it("gives every page exactly one Primary nav", () => {
     for (const file of pages()) {
-      const count = (html(file).match(/<nav aria-label="Primary"/g) || []).length;
-      expect(count, file).toBe(minimalPages.includes(file) ? 0 : 1);
+      expect((html(file).match(/<nav aria-label="Primary"/g) || []).length, file).toBe(1);
     }
-    for (const file of minimalPages) {
-      expect(html(file), file).toContain("site-banner--minimal");
-      expect(html(file), file).not.toMatch(/<nav\b[^>]*aria-label="Primary"/);
+    for (const file of ["public/collaborate/index.html", "public/about/accessibility/index.html", "public/404.html"]) {
+      expect(primaryNav(html(file)), file).toContain('href="/studio/"');
+      expect(html(file), file).not.toContain("site-banner--minimal");
     }
   });
 
