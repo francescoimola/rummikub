@@ -4,7 +4,7 @@
 
 ## Purpose
 
-The site banner on every page. **Full** carries the site name, the primary nav and the [Look toggles](look-toggles.md). **Minimal** drops the nav for pages that stand apart from the main site: Collaborate, Accessibility and 404.
+The site banner, the same on every page: the site name, the primary nav and the [Look toggles](look-toggles.md). The **Minimal** variant (Collaborate, Accessibility, 404) was removed in code (#72, G52); those pages get the full header too.
 
 ## Anatomy
 
@@ -20,8 +20,6 @@ The site banner on every page. **Full** carries the site name, the primary nav a
 - **Navigation - Primary**: the bar (`summary.nav-menu__bar`) holds the **Brand Name** and **Menu**, which is the label "Menu" plus [Icon/Plus](icon.md).
 - **Menu panel** (`.nav-menu__panel`, Open only): Look toggles on the left, **Links** (the same six Nav links, stacked) on the right.
 
-**Minimal** has the same bar, but **Controls** replaces the nav list: the Look toggles, then the **Main-site link**, "To main site" + [Icon/Arrow-right](icon.md). On Narrow, the Open panel shows the Look toggles on the left and that one link on the right.
-
 ## Props & variants
 
 | Type | Layout | State | Shows | Variant ID |
@@ -29,12 +27,10 @@ The site banner on every page. **Full** carries the site name, the primary nav a
 | Full | Wide | Closed | Name + nav list + Look toggles | `2291:827` |
 | Full | Narrow | Closed | Name + "Menu +" | `2291:837` |
 | Full | Narrow | Open | Bar ("Menu ×") + panel: toggles \| six links | `2378:20306` |
-| Minimal | Wide | Closed | Name + Look toggles + "To main site →" | `2378:20352` |
-| Minimal | Narrow | Closed | Name + "Menu +" | `2378:20378` |
-| Minimal | Narrow | Open | Bar + panel: toggles \| "To main site →" | `2378:20385` |
 
 - Wide is used on the 1512 frames, Narrow on the 834 and 390 frames. Wide has no Open state.
-- The current page is set on the matching nested Nav link (`State=Current`). Case study pages, and Minimal pages, mark nothing.
+- Figma still holds the retired `Type=Minimal` variants (`2378:20352`, `2378:20378`, `2378:20385`); code no longer has them (G52).
+- The current page is set on the matching nested Nav link (`State=Current`). Case study pages, Collaborate, Accessibility and 404 mark nothing.
 
 ## Layout
 
@@ -52,7 +48,7 @@ The site banner on every page. **Full** carries the site name, the primary nav a
 | Nav column width | `layout/content-width` | 330 → 900 |
 | Nav list gap (Wide) | `space/s`, wrap gap `space/xs` | 15 → 16.88 |
 | Nav list gap (Narrow panel) | `space/xs` | 11.25 → 13.13 |
-| Toggles ↔ nav / toggles ↔ link | `space/l` | 30 → 33.75 |
+| Toggles ↔ nav | `space/l` | 30 → 33.75 |
 | "Menu" ↔ icon | `space/2xs` | 7.5 → 8.44 |
 | Menu icon size | `step/0` | 15 → 16.88 |
 | Panel padding below | `space/s` | 15 → 16.88 |
@@ -63,7 +59,6 @@ Values from [`_tokens.md`](_tokens.md).
 
 - **Menu (Narrow):** a click toggles Closed ↔ Open. In Figma this is wired as a prototype with smart animate. Icon/Plus rotates −45° to read as ×, and the panel opens below the bar. In code this is the native `<details>` toggle, with `::details-content` animated over `--dur-medium`. Under reduced motion the durations are 0s.
 - **Nav links:** see [Nav link](nav-link.md) for Default, Hover and Current.
-- **Main-site link:** a neutral text link (underlined); its hover is the global link hover. It keeps its arrow: it leaves the page in a way that's hard to undo (G44).
 - **Focus:** the global `:focus-visible` ring (2px `--color-accent`, offset 2px) on the summary, the links and the toggles.
 
 ## Content rules
@@ -71,7 +66,6 @@ Values from [`_tokens.md`](_tokens.md).
 - Nav labels are fixed in the partial: Start here `/`, Work with me `/studio/`, Ideas `/writing/` (G1; the old repo label was "Ideas & guides"). The `/writing/` page `<title>` is "Ideas & Guides" and its hero "Ideas and Guides" (#68), Artmaking `/art/`, About `/about/`, Say hello `#contact` (the footer's Contact section, on every page).
 - **"Case studies" leaves the nav** (Q16, Q32). Anything that linked to `/work/` points at `/#case-studies`, the homepage's Featured heading.
 - Current page: `/writing/…` posts and type pages mark Ideas; `/studio/…` service pages mark Work with me; case studies mark nothing.
-- Minimal: the "To main site" link goes to `/`. The page selects the Minimal header with front matter, e.g. `header: minimal`.
 
 ## HTML & accessibility
 
@@ -92,16 +86,14 @@ Values from [`_tokens.md`](_tokens.md).
 
 - One `<nav aria-label="Primary">`. The current link carries `aria-current="page"`.
 - `<summary>` is the disclosure button. Its text stays "Menu" and the icon is decorative, so `<details>` exposes the expanded state itself.
-- Minimal: `<header>` holds the name link, the Look toggles and "To main site". There is no `<nav>`, because a single link isn't navigation.
 - The skip link (`#main-content`) comes before the header.
 
 ## Port notes
 
-- `_header.njk` gains a `minimal` branch, e.g. `{% if header == "minimal" %}`.
 - Drop the "Case studies" `<li>`.
 - **Full ported (#22):** the sidebar is gone; `_base.njk` renders skip link → banner → `.layout` (main, then the old footers as a stopgap until the Footer ticket). Wide is an `@container banner (width >= $bp-xl)` block in `_responsive.scss`: nav and panel share a `1fr minmax(0, --grid-width-l) 1fr` grid, so the name sits at the column start, links at its end and the toggles in the right track. Narrow is the base: name overlays the `<details>` bar in one grid cell, so the panel spans the full width.
 - "Say hello" links to `#contact` (the footer's id).
-- **Minimal ported (#23):** `header: minimal` front matter (Collaborate, Accessibility, 404) renders `.site-banner--minimal`: a `div.site-banner__inner` instead of the `<nav>`, and the panel holds the toggles plus `.nav-menu__exit` ("To main site", `data-icon="arrow-right"`). Wide puts that controls row inside the page column, ending at its edge.
+- **Minimal removed (#72, G52):** ported in #23, then dropped after recurring layout bugs (a stretched theme toggle among them). The `header: minimal` front matter, the template branch, `.site-banner--minimal` and `.nav-menu__exit` are gone; every page renders the full header.
 - Rename the nav label "Ideas & guides" to "Ideas" (G1).
 
 ## Open questions
