@@ -27,7 +27,7 @@ The closing call to action on Collaborate and both service pages: a large tinted
 
 ## Layout
 
-None, fluid only. The card is full width, centred, with the heading and body held to their max widths. In code `.giant` caps its children at `calc(var(--inline-size) - 2 * var(--pad))` so the text holds still while the card breaks out (`view-animation="breakout"`).
+None, fluid only. The card is full width, centred, with the heading and body held to their max widths. In code `.giant` caps its children at `calc(var(--inline-size) - 2 * var(--pad))` so the text holds still at content width while the card spans full width.
 
 ## Tokens
 
@@ -50,7 +50,7 @@ Values from [`_tokens.md`](_tokens.md). The heading uses style `site/cta/heading
 
 - Links: see [Icon link](icon-link.md) (hover, nudge).
 - Copy email: a click copies the address and announces it through the `role="status"` region (`mailto-copy.js`).
-- The card enters with `breakout` on scroll. It is a developer opt-in via `view-animation="breakout"` (G13); Firefox gets the JS fallback. Reduced motion shows it static.
+- No scroll animation: `breakout` was removed (#71).
 
 ## Content rules
 
@@ -61,7 +61,7 @@ Values from [`_tokens.md`](_tokens.md). The heading uses style `site/cta/heading
 ## HTML & accessibility
 
 ```html
-<section view-animation="breakout" class="card giant featured flow has-gap-xs pretty">
+<section class="card giant featured flow has-gap-xs pretty">
   <h2>I don't bite</h2><p>…</p>
   <div class="flow has-gap-xs has-pt-2xs">
     <button type="button" data-copy-email="…" data-icon="copy">Copy email address</button>
