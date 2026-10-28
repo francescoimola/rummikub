@@ -727,7 +727,7 @@ main svg.illustration-wide {
 .home-hero {
     container-type: inline-size;
     padding-block: var(--space-xl-2xl);
-    padding-inline: var(--space-m-l); // the narrow banner's inset, so hero and nav edges match; wide override in _responsive.scss
+    padding-inline: var(--space-m-l); // the narrow banner's inset, so hero and nav edges match; wide, the h1 caps at 60rem and centres on the content column
 
     h1 {
         inline-size: fit-content;
