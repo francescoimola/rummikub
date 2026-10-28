@@ -60,7 +60,7 @@ Content and media are editable via Pages CMS, configured in `.pages.yml` at the 
 | `src/assets/portfolio/` | Project videos (mp4/webm) + posters (passthrough copied to `public/assets/portfolio/`) |
 | `src/assets/writing/` | Writing cover + in-body images (passthrough copied to `public/assets/writing/`) |
 | `src/art.njk` | Artmaking index (`/art/`, full width). Content lives in `src/_data/artProjects.json` — no per-project files; the `splitRow` macro (`_split-row.njk`) renders one row per entry — see Artmaking page |
-| `src/assets/art/` | Artmaking images, all 800px-wide sources (passthrough copied to `public/assets/art/`) |
+| `src/assets/art/` | Artmaking images: largest known originals, 1080–6889px wide (#73); `concert-…-3` stays 800px, `poem-for-a-timepiece` 1200px, `what-a-world*` ~1920px. Sources are EXIF-stripped (passthrough copied to `public/assets/art/`) |
 | `src/about.njk` | About page (`/about/`) — bio, Philosophy, FAQ (`<details>`), Recognition (`.data-list`); moved off the home page's old expandable "Read more" section. Linked from the header nav |
 | `scripts/optimize-videos.mjs` | Opt-in ffmpeg optimizer for project videos (`pnpm optimize:video`) |
 | `public/` | Build output — gitignored, do not commit |
@@ -82,7 +82,7 @@ Content and media are editable via Pages CMS, configured in `.pages.yml` at the 
 
 Case studies and writing posts share **one** branch in `_base.njk` → `<main class="case-study text">`, writing adding `writing-post`. It renders a `.case-study__intro` (h1 + one dimmed line: `services` on work, `<time>` + type on writing) and nothing else — the opening image is authored as the first `figureImg` **in the body**, not by the template. `image:`/`alt:` frontmatter is listing-thumbnail and OG duty only; a post without one just leads with the intro then text. A standalone page opts into the same shell with `longForm: true` (Accessibility): no `writing-post` class, and the intro line reads "Last updated" from `updated`.
 
-Media rhythm (`.case-study` in `_components.scss`) and the scroll animations (`_responsive.scss`) both key off `.case-study__intro`: the first media after it gets `settle` (bleeds on load, pulls in over 50vh of scroll; case studies settle at content width), later media get `breakout` on scroll-into-view **on writing posts only** (G13; opt in elsewhere with `view-animation="breakout"`). Removing that div silently kills both. Browsers without `animation-timeline` (Firefox) get the same keyframes scrubbed from JS: `app-core.js` dynamically imports `scroll-fallback.js`, which finds targets by the `--scroll-fallback` custom property the CSS sets and writes `--scroll-p` — so target selectors and the breakpoint live only in `_responsive.scss`.
+Media rhythm (`.case-study` in `_components.scss`) and the scroll animation (`_responsive.scss`) both key off `.case-study__intro`: the first media after it gets `settle` (bleeds on load, pulls in over 50vh of scroll). Later media never animate. Figures and media pairs sit at the 60rem column (`--grid-width-l`), wider than the 40rem text, on every long-form page; media ending the page carries no trailing margin. Removing the intro div silently kills `settle`. Browsers without `animation-timeline` (Firefox) get the same keyframes scrubbed from JS: `app-core.js` dynamically imports `scroll-fallback.js`, which finds targets by the `--scroll-fallback` custom property the CSS sets and writes `--scroll-p` — so target selectors and the breakpoint live only in `_responsive.scss`.
 
 **Always use `figureImg` for body images — never markdown `![]()`.** Markdown compiles to `<p><picture>`, and two images on adjacent lines land in the *same* `<p>`, so they stack with no gap and support no caption. `figureImg` emits a real `<figure>` that the spacing and animation selectors match.
 
@@ -144,7 +144,7 @@ Before editing `src/css`, read [docs/css-architecture.md](docs/css-architecture.
 | An inline SVG icon in `<main>` is invisible but still clickable | `header svg, main svg` (Illustrations) pads **every** SVG in `<main>`; padding over the declared size inflates the border-box and collapses the icon viewport to 0. Add `padding: 0; max-inline-size: none` to the icon's own rule |
 | Accordions open instantly or leave a gap on close in Firefox only | Firefox runs no transitions on `::details-content` (checked frame by frame: opacity jumped, a delayed `content-visibility` flip left the answer's padding for `--dur-medium`). `index.scss` has a `@supports (-moz-appearance: none)` block: no transition there, a fade-in keyframe on the answer instead. Chrome/Safari keep the height tween |
 | A style change doesn't show under `pnpm start` | The dev server can keep serving old CSS after an edit to an SCSS partial (`_components.scss`, `_icons.scss`). Compare `curl localhost:8080/css/index.css` with the source, and restart `pnpm start` if they differ |
-| Opening image doesn't bleed, or every image animates the same | `.case-study__intro` is missing or isn't the first child; the `settle`/`breakout` split keys off it |
+| Opening image doesn't bleed, or every image animates the same | `.case-study__intro` is missing or isn't the first child; `settle` keys off it |
 
 ## Browser automation blocklist
 
