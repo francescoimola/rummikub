@@ -132,7 +132,7 @@ $carousel-arrow: oklch(0.351 0.034 121.6);
         padding-block: var(--space-xl-4xl);
 
         >* {
-            max-inline-size: calc(var(--inline-size) - 2 * var(--pad)); // settled content width, so text holds still while the card breaks out around it
+            max-inline-size: calc(var(--inline-size) - 2 * var(--pad)); // content width, so text holds still while the card spans wider
             inline-size: 100%;
             margin-inline: auto;
             margin-block: auto;
@@ -151,6 +151,15 @@ $carousel-arrow: oklch(0.351 0.034 121.6);
     .flow {
         align-items: center;
     }
+}
+
+// Closing band touches the footer: drop main's end margin and the layout's bottom gutter at every width
+.layout:has(> main > .cta-card:last-child) {
+    padding-block-end: 0;
+}
+
+main:has(> .cta-card:last-child) {
+    margin-block-end: 0;
 }
 
 // CTA card heading: KC Pelletier, wider than the body; .card.cta-card outranks .card.giant>*, which caps every child at --inline-size
@@ -214,6 +223,11 @@ $carousel-arrow: oklch(0.351 0.034 121.6);
         align-self: start; // the row stretches its items; keep the pill hugging its text
         margin: 0;
     }
+}
+
+// Body figure widened to the section column, so its edges line up with the label | content sections around it
+main>figure.section-width {
+    max-inline-size: var(--grid-width-l);
 }
 
 // ---- Split row (Artmaking) ----
@@ -505,6 +519,7 @@ main svg.illustration-wide {
     max-inline-size: 100%;
     block-size: auto;
     padding: 0;
+    margin-inline: auto; // main is a start-aligned flex column, and < tablet main>* drops its auto margins
 }
 
 // ---- Page header (section hero) ----
@@ -823,8 +838,8 @@ main svg.illustration-wide {
 }
 
 // ---- Case study page ----
-// Media = a figure, a media pair, or a markdown image (<p><picture>). Case studies hold it at content width (G13); writing posts keep breakout
-.case-study:not(.writing-post) {
+// Media = a figure, a media pair, or a markdown image (<p><picture>). Every long-form page holds it at the wider 60rem column (G13, #9)
+.case-study {
     --settled-size: var(--grid-width-l); // where settle ends
 
     > :is(figure, .media-pair, p:has(> :is(img, picture))) {
@@ -850,11 +865,6 @@ main svg.illustration-wide {
     >.media-pair,
     >p:has(> :is(img, picture)) {
         margin-block-start: var(--space-xl-2xl);
-    }
-
-    // Trailing space belongs to the gap-owning element below, except at the very end
-    >:is(figure, .media-pair, p:has(> :is(img, picture))):last-child {
-        margin-block-end: var(--space-xl-2xl);
     }
 
     // Anything non-media directly after media — restore the full gap on its top edge
@@ -895,8 +905,9 @@ main svg.illustration-wide {
 .writing-item {
     display: grid;
     grid-template-columns: 3fr 5fr;
-    gap: var(--space-s-m);
+    gap: var(--space-s);
     align-items: start;
+    --pad: var(--space-s); // Figma "Writing item" (2329:9102): tighter than the .card default
 }
 
 .writing-item--compact {

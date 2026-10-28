@@ -1,7 +1,6 @@
 @use 'scale';
 
-// Hero media settles on case studies and writing posts; later media breaks out on writing posts only (G13)
-$breakout-targets: '[view-animation="breakout"], .writing-post > :is(figure, p:has(> :is(img, picture))):not(.case-study__intro + *)';
+// Only the hero media animates: it settles on every long-form page; later media stay still (#9)
 $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:has(> :is(img, picture)))';
 
 // Every viewport + container breakpoint rule, one block per condition.
@@ -27,24 +26,14 @@ $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:
         }
     }
 
-    // ---- >= mobile (targets everything above mobile) ----
+    // ---- > tablet, motion allowed (scroll-driven settle) ----
 
-    @media (width >= #{scale.$bp-m}) {
-
-        main:has(> .featured:last-child) {
-            margin-block-end: unset;
-        }
-
-    }
-
-    // ---- > tablet, motion allowed (scroll-driven breakout and settle) ----
-
-    // breakout uses view() per element; settle uses scroll() since view() would be mid-range at first paint
+    // settle uses scroll(), not view(): view() would be mid-range at first paint
 
     @media (prefers-reduced-motion: no-preference) and (width > #{scale.$bp-xl}) {
-        @keyframes breakout {
+        @keyframes settle {
             from {
-                max-inline-size: 100cqi; // main's container, not the parent — so a breakout element can sit nested inside a section
+                max-inline-size: 100cqi; // main's container, not the parent
             }
 
             to {
@@ -52,43 +41,28 @@ $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:
             }
         }
 
-        #{$breakout-targets},
         #{$settle-targets} {
             box-sizing: border-box;
             inline-size: calc(100vw - (var(--gutter-x) *2));
             margin-left: 50%;
             transform: translate(-50%);
-            animation: breakout ease-out both; // settle shares breakout's keyframes (identical bleed-in); they differ only in timeline/range
+            animation: settle ease-out both;
         }
 
         @supports (animation-timeline: view()) {
-            #{$breakout-targets} {
-                animation-timeline: view();
-                animation-range: cover 0% cover 50%; // first peek from bottom → centred in viewport
-            }
-
             #{$settle-targets} {
                 animation-timeline: scroll(root block);
-                animation-range: 0 50vh; // full-bleed on load → 40rem after one viewport of scroll; length-based so it's page-height independent
+                animation-range: 0 50vh; // full-bleed on load → settled after half a viewport of scroll; length-based so it's page-height independent
             }
         }
 
         // Firefox: a paused 1s run scrubbed by negative delay replays the same keyframes; scroll-fallback.js writes --scroll-p from scroll position
         @supports not (animation-timeline: view()) {
-            #{$breakout-targets},
             #{$settle-targets} {
                 animation-duration: 1s;
                 animation-play-state: paused;
                 animation-delay: calc(var(--scroll-p) * -1s);
-            }
-
-            #{$breakout-targets} {
-                --scroll-fallback: breakout; // the JS hook — it finds targets by this, so selectors and breakpoint live only here
-                --scroll-p: 1; // settled until the script measures it
-            }
-
-            #{$settle-targets} {
-                --scroll-fallback: settle;
+                --scroll-fallback: settle; // the JS hook — it finds targets by this, so selectors and breakpoint live only here
                 --scroll-p: 0; // full-bleed at the page top, as with scroll()
             }
         }
