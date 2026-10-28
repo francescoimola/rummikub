@@ -297,17 +297,23 @@ $carousel-arrow: oklch(0.351 0.034 121.6);
 .theme-switch {
     box-sizing: content-box;
     display: flex;
+    flex: none; // never shrinks in a tight header row
     block-size: var(--space-m);
     border: var(--input-border-width) solid var(--input-border-color);
     border-radius: var(--border-radius-s);
     overflow: clip; // the selected fill runs to the border on every side
 }
 
+// Explicit square, not aspect-ratio: Safari resolves aspect-ratio unreliably on unset buttons in a
+// flex row, stretching the switch into a bar or collapsing it to a sliver (#70)
 .theme-switch button {
+    box-sizing: border-box; // padding sits inside the square
     display: flex;
+    flex: none;
     align-items: center;
     justify-content: center;
-    aspect-ratio: 1;
+    inline-size: var(--space-m);
+    block-size: var(--space-m);
     padding: calc(var(--space-3xs) / 2);
 }
 
