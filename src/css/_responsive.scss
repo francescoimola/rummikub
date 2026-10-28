@@ -26,16 +26,6 @@ $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:
         }
     }
 
-    // ---- >= mobile (targets everything above mobile) ----
-
-    @media (width >= #{scale.$bp-m}) {
-
-        main:has(> .featured:last-child) {
-            margin-block-end: unset;
-        }
-
-    }
-
     // ---- >= tablet (targets the wide banner's page column) ----
 
     // Mirrors the wide banner's grid: padding s | l and a --space-l gap each side of the --grid-width-l column (nav and hero edges match)
