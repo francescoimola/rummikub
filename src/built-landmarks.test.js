@@ -140,11 +140,12 @@ const slotWidth = (sizes, viewport) => {
 const thumbSizes = (file) => [...html(file).matchAll(/class="writing-item__thumb">(.*?)<\/span>/gs)]
   .flatMap(([, thumb]) => [...thumb.matchAll(/sizes="([^"]*)"/g)].map(([, sizes]) => sizes));
 
-// Displayed thumb width (CSS px) per viewport, worked out by hand from the CSS (#76): index rows are 3fr 5fr inside a
-// 60rem .section that folds label | content at 48rem of main; type pages are 1fr 3fr in the 40rem column.
+// Displayed thumb width (CSS px) per viewport, worked out from the CSS at its 15px root (#76): index rows are 3fr 5fr in a
+// 60rem .section that folds label | content at 48rem of main (755px is the widest stacked row); type pages are 1fr 3fr
+// across main, capped at the 40rem column from $bp-xl (1000px is just under it).
 const THUMB_WIDTHS = {
-  "public/writing/index.html": { 375: 74, 600: 193, 800: 267, 1440: 158 },
-  "public/writing/guides/index.html": { 375: 74, 800: 148, 1440: 147 },
+  "public/writing/index.html": { 375: 74, 600: 195, 755: 252, 1440: 147 },
+  "public/writing/guides/index.html": { 375: 74, 1000: 228, 1440: 137 },
 };
 
 describe("built writing thumbnails", () => {
