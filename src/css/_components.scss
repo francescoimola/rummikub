@@ -318,8 +318,7 @@ main>figure.section-width {
     overflow: clip; // the selected fill runs to the border on every side
 }
 
-// Explicit square, not aspect-ratio: Safari resolves aspect-ratio unreliably on unset buttons in a
-// flex row, stretching the switch into a bar or collapsing it to a sliver (#70)
+// Explicit square, not aspect-ratio: Safari stretches or collapses aspect-ratio on unset buttons in a flex row (#70)
 .theme-switch button {
     box-sizing: border-box; // padding sits inside the square
     display: flex;
@@ -838,7 +837,7 @@ main svg.illustration-wide {
 }
 
 // ---- Case study page ----
-// Media = a figure, a media pair, or a markdown image (<p><picture>). Every long-form page holds it at the wider 60rem column (G13, #9)
+// Media = a figure, a media pair, or a markdown image (<p><picture>). Every long-form page holds it at the wider 60rem column (G13, #71)
 .case-study {
     --settled-size: var(--grid-width-l); // where settle ends
 

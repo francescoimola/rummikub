@@ -1,7 +1,5 @@
 {# compact (type pages) keeps the narrow 1fr 3fr thumb at every width #}
-{# sizes tracks the thumb's real width (#76; CSS rem is the 15px root, sizes rem the 16px default). Type pages: 1/4 of main
-   (≤234px) until main>* caps at 40rem from $bp-xl (≤138px). Index: 3/8 of the row, ≤252px while .section stacks (main < 48rem,
-   viewport ≈ 47rem), 1/4 under main 32rem (viewport ≈ 32rem), ≤148px once it folds 2-up #}
+{# sizes tracks the thumb's real width (#76): its share of main at each fold, 10rem once capped (sizes rem is 16px, CSS rem 15px) #}
 {% macro writingItem(item, thumbColor, compact = false) %}
 <a class="card writing-item{% if compact %} writing-item--compact{% endif %}"
    href="{{ item.data.external or item.url }}"

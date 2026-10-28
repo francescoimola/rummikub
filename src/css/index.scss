@@ -350,8 +350,7 @@ nav li a {
 }
 
 // ---- Site banner ----
-// Narrow by default; the Wide row lives in the banner container block in _responsive.scss.
-// Pinned at every width (#75). Its only ancestors are body and html, which set no overflow, so nothing breaks the stick
+// Narrow by default (Wide row in _responsive.scss); pinned at every width, as no ancestor sets overflow to break the stick (#75)
 .site-banner {
     container: banner / inline-size;
     padding-block: var(--space-s);
@@ -360,11 +359,12 @@ nav li a {
     z-index: 50; // over the page's own stacking contexts (media, cards), under the skip link's 100
 }
 
-// Name and <details> share one grid cell: the name overlays the bar's start, so the open panel spans the full width.
-// Held to the bar's one line so the open panel overflows over the page instead of pushing it down (#75)
+// Name and <details> share one cell, held to the bar's one line, so the open panel spans the width and overlays the page (#75)
 .site-banner__inner {
+    --banner-inset: var(--space-m-l); // the bar's inline padding, which the open panel bleeds back over
+
     align-items: start;
-    padding-inline: var(--space-m-l);
+    padding-inline: var(--banner-inset);
     block-size: 1lh;
 
     &>* {
@@ -393,15 +393,14 @@ nav li a {
         }
     }
 
-    // Open panel: look toggles left, links right
-    // Bleeds past .site-banner__inner's padding so the band fill (shared in Theming) spans the viewport under the bar
+    // Open panel: toggles left, links right; bleeds past the bar's padding so the band fill spans the viewport
     &__panel {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-areas: "toggles links";
         column-gap: var(--space-l);
-        padding: var(--space-s) var(--space-m-l) calc(2 * var(--space-s)); // the bottom also stands in for the band's padding it now covers
-        margin-inline: calc(-1 * var(--space-m-l));
+        padding: var(--space-s) var(--banner-inset) calc(2 * var(--space-s)); // the bottom also stands in for the band's padding it now covers
+        margin-inline: calc(-1 * var(--banner-inset));
     }
 
     &__panel>ul {
