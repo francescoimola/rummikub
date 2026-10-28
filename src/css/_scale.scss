@@ -10,6 +10,7 @@ $bp-m: 49rem; // mobile (viewport)
 $bp-l: 49rem; // project-item image/body split (container) — was viewport 64rem
 $bp-xl: 64rem; // tablet (viewport)
 $bp-3xl: 86rem; // small-desktop (viewport)
+$bp-banner: 89rem; // wide banner (container): the 60rem column, gutters, --space-l gaps and look toggles all fit (#74); container rem = the 15px root
 
 // Freezes the cqi --gutter-y to an absolute <length> on `.layout` so descendants main can stick flush to it
 @property --gutter-y-sticky {
