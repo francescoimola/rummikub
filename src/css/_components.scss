@@ -227,8 +227,8 @@ main:has(> .cta-card:last-child) {
     }
 }
 
-// Body figure widened to the section column, so its edges line up with the label | content sections around it
-main>figure.section-width {
+// Media = a figure, a media pair, or a markdown image (<p><picture>). Body media sits at the wider 60rem column on every page, so its edges line up with the label | content sections around it (G13, #71)
+main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
     max-inline-size: var(--grid-width-l);
 }
 
@@ -825,13 +825,8 @@ main svg.illustration-wide {
 }
 
 // ---- Case study page ----
-// Media = a figure, a media pair, or a markdown image (<p><picture>). Every long-form page holds it at the wider 60rem column (G13, #71)
 .case-study {
-    --settled-size: var(--grid-width-l); // where settle ends
-
-    > :is(figure, .media-pair, p:has(> :is(img, picture))) {
-        max-inline-size: var(--grid-width-l);
-    }
+    --settled-size: var(--grid-width-l); // where settle ends; body media already holds the same column (see main>* media rule)
 }
 
 .case-study {
