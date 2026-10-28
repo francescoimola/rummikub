@@ -401,12 +401,6 @@ nav li a {
         gap: var(--space-xs);
     }
 
-    // Minimal header's one link, in the links slot
-    &__exit {
-        grid-area: links;
-        justify-self: start;
-    }
-
     &__toggles {
         grid-area: toggles;
         display: flex;
