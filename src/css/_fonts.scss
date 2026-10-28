@@ -5,7 +5,7 @@
     src: url('/assets/fonts/Ronzino-Regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
-    font-display: optional;
+    font-display: swap;
   }
 
   @font-face {
@@ -13,7 +13,7 @@
     src: url('/assets/fonts/Ronzino-Oblique.woff2') format('woff2');
     font-weight: 400;
     font-style: italic;
-    font-display: optional;
+    font-display: swap;
   }
 
   @font-face {
@@ -21,7 +21,7 @@
     src: url('/assets/fonts/Ronzino-Medium.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
-    font-display: optional;
+    font-display: swap;
   }
 
   @font-face {
@@ -29,7 +29,7 @@
     src: url('/assets/fonts/Ronzino-MediumOblique.woff2') format('woff2');
     font-weight: 500;
     font-style: italic;
-    font-display: optional;
+    font-display: swap;
   }
 
   @font-face {
@@ -37,7 +37,7 @@
     src: url('/assets/fonts/Ronzino-Bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
-    font-display: optional;
+    font-display: swap;
   }
 
   @font-face {
@@ -45,7 +45,7 @@
     src: url('/assets/fonts/Ronzino-BoldOblique.woff2') format('woff2');
     font-weight: 700;
     font-style: italic;
-    font-display: optional;
+    font-display: swap;
   }
 
   // Hero + CTA headings only. swap, not Ronzino's optional: these headings must never stay in a fallback face
