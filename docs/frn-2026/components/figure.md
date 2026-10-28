@@ -27,8 +27,8 @@ Body media with an optional caption, in posts, case studies and service pages. I
 ## Layout
 
 - A single figure is capped at `layout/content-width` (Phase 13) with `space/l` sides. A [Media pair](media-pair.md) also sits at content width (G13).
-- The width and the scroll animation belong to the page (`.case-study` rhythm, `settle` / `breakout`; see Long-form pages in AGENTS.md), not to the component.
-- **Scroll animation (G13):** `settle` stays on the hero media of case studies and writing posts. `breakout` never runs on case studies. It runs only on writing posts, and where a developer opts in with `view-animation="breakout"`.
+- The width and the scroll animation belong to the page (`.case-study` rhythm, `settle`; see Long-form pages in AGENTS.md), not to the component.
+- **Scroll animation (G13, #71):** `settle` stays on the hero media of case studies and writing posts. No later media animates; `breakout` was removed.
 
 ## Tokens
 
@@ -73,6 +73,7 @@ Values from [`_tokens.md`](_tokens.md). `step/-1` replaces `font-size-7` (G12): 
 - `breakout` stops on case studies, including where it is used today (G13).
 - Caption CSS moves from `font-size-7` to `--step--1` (G12).
 - **Ported (#25):** `ratio=` on both shortcodes; `figcaption` is `--step--1`; `$breakout-targets` in `_responsive.scss` now match `.writing-post` only, and the `breakout` keyframes end at `--settled-size` (content width on case studies, `--inline-size` otherwise). Case-study figures and media pairs are capped at `--grid-width-l`.
+- **Ported (#71):** `breakout` and `$breakout-targets` are gone; only `settle` remains. Writing posts now cap figures and media pairs at `--grid-width-l` too, and media ending a long-form page has no trailing margin.
 
 ## Open questions
 
