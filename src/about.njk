@@ -8,7 +8,7 @@ eleventyNavigation:
 ---
 {% from "_faq-list.njk" import faqList %}
 {# Plain section labels, no pills (section-heading.md). The first label is the page h1. #}
-<section class="section">
+<section class="section has-mt-xl">
     <h1>About</h1>
     <div class="flow has-gap-s">
         <p>I come from a family of makers, artists, and business owners. As a child I dreamt first of becoming a magician, then of designing chairs. And while neither of those dreams came true, I didn’t land far off.</p>
@@ -48,10 +48,10 @@ eleventyNavigation:
             <dt class="data-list__year">{{ group.year }}</dt>
             <dd class="data-list__body">
                 {% for entry in group.entries %}
-                <p class="data-list__entry">
-                    <span class="data-list__label">{{ entry.label }}</span>
+                <p class="flow has-gap-3xs">
+                    <span class="dimmed">{{ entry.label }}</span>
                     {% for item in entry.items %}
-                    <span>{{ item }}</span>
+                    <small>{{ item }}</small>
                     {% endfor %}
                 </p>
                 {% endfor %}
