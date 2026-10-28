@@ -430,7 +430,7 @@ nav li a {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        align-content: start;
+        align-content: flex-end;
         gap: var(--space-s);
     }
 

@@ -531,7 +531,8 @@ main svg.illustration-wide {
     flex-direction: column;
     align-items: center;
     gap: var(--space-2xl-3xl);
-    padding: var(--space-2xl-3xl) var(--space-xl-2xl);
+    padding-block: var(--space-2xl-3xl) var(--space-xl-2xl);
+    padding-inline: var(--space-m-l);
     text-align: center;
 
     svg {
@@ -627,15 +628,6 @@ main svg.illustration-wide {
     flex-direction: column;
     gap: var(--space-xs);
     margin: 0;
-}
-
-.data-list__entry {
-    display: flex;
-    flex-direction: column;
-}
-
-.data-list__label {
-    color: var(--neutral-800-alpha);
 }
 
 // Video styling — neutral placeholder visible while video deferred/loading (see projectVideo shortcode + app-core.js)
@@ -772,6 +764,7 @@ main svg.illustration-wide {
 .home-intro__statement {
     font-weight: var(--font-weight-medium);
     letter-spacing: var(--letter-spacing-xl);
+    text-wrap: balance;
 }
 
 // Collaborate hero: copy, then two duotone photos, on the brand band at content width
@@ -796,10 +789,9 @@ main svg.illustration-wide {
 // Figma: the photo takes one column of a three-column row
 .home-intro__photo {
     margin-inline: 0; // the global img rule centres it
-    inline-size: calc((100% - 2 * var(--space-2xs)) / 3);
+    max-inline-size: calc(50% - var(--space-s));
     aspect-ratio: var(--ratio-1-1);
     object-fit: cover;
-    border-radius: var(--border-radius);
 }
 
 .home-block {
@@ -830,13 +822,6 @@ main svg.illustration-wide {
     font-size: var(--step-0);
     font-weight: var(--font-weight-bold);
     line-height: 1.5;
-}
-
-.project-item__body {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-3xs); // single-step on purpose — the gap snaps at the breakpoint rather than easing
 }
 
 // ---- Case study page ----
@@ -906,7 +891,7 @@ main svg.illustration-wide {
 // Fluid thumb | body grid (G21, G41): 3fr 5fr, 1fr 3fr when the row is narrow (_responsive.scss) or on type pages (--compact)
 .writing-item {
     display: grid;
-    grid-template-columns: 3fr 5fr;
+    grid-template-columns: 1fr 3fr;
     gap: var(--space-s);
     align-items: start;
     --pad: var(--space-s); // Figma "Writing item" (2329:9102): tighter than the .card default
