@@ -7,6 +7,24 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
 # nosniff above means the declared type is final — these must be explicit or clients get a download.
+/*.css
+  Content-Type: text/css; charset=utf-8
+
+/css/*
+  Content-Type: text/css; charset=utf-8
+
+/*.js
+  Content-Type: application/javascript; charset=utf-8
+
+/assets/scripts/*
+  Content-Type: application/javascript; charset=utf-8
+
+/assets/fonts/*
+  Content-Type: font/woff2
+
+/*.woff2
+  Content-Type: font/woff2
+
 /*.md
   Content-Type: text/markdown; charset=utf-8
 
