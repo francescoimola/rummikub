@@ -119,6 +119,19 @@ html.lenis body {
     }
 }
 
+// ---- Page transitions ----
+// Holds the old page until the new one paints, then crossfades: no blank frame between pages, no JS (Firefox ignores it)
+@media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+        navigation: auto;
+    }
+}
+
+// The banner is the same on every page, so it stays put instead of fading with the rest
+.site-banner {
+    view-transition-name: site-banner;
+}
+
 // ---- Theming ----
 .site-banner, .nav-menu__panel, .site-footer, .page-header, .home-hero, .collab-hero {
     --color-accent: var(--neutral-950-alpha);
