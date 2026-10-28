@@ -3,14 +3,13 @@
 @use '../../node_modules/utopia-core-scss/src/utopia' as utopia;
 
 // Breakpoints — Sass vars because custom properties can't be used in media conditions. Shared by index.scss + _components.scss
-// xs–3xl scale, ascending by rem value ($bp-m and $bp-l are equal), whether read by a @media or a @container query
+// xs–3xl scale, ascending by rem value, whether read by a @media or a @container query
 $bp-s: 32rem; // small (viewport); also the 2-up fold of image grids (container against main)
 $bp-split: 48rem; // label | content fold (container against main); keeps iPad mini portrait (744-768px viewport) on one column
-$bp-m: 49rem; // mobile (viewport)
 $bp-l: 49rem; // project-item image/body split (container) — was viewport 64rem
 $bp-xl: 64rem; // tablet (viewport)
 $bp-3xl: 86rem; // small-desktop (viewport)
-$bp-banner: 89rem; // wide banner (container): the 60rem column, gutters, --space-l gaps and look toggles all fit (#74); container rem = the 15px root
+$bp-banner: 90rem; // wide banner (container): the 60rem column, gutters, --space-l gaps and look toggles all fit (#74); container rem = the 15px root
 
 // Freezes the cqi --gutter-y to an absolute <length> on `.layout` so descendants main can stick flush to it
 @property --gutter-y-sticky {

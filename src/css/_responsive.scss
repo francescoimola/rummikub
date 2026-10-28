@@ -1,6 +1,6 @@
 @use 'scale';
 
-// Only the hero media animates: it settles on every long-form page; later media stay still (#9)
+// Only the hero media animates: it settles on every long-form page; later media stay still (#71)
 $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:has(> :is(img, picture)))';
 
 // Every viewport + container breakpoint rule, one block per condition.
@@ -113,8 +113,16 @@ $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:
         }
     }
 
-    // Wide banner: name and links on the content column's edges, look toggles in the right margin outside it.
-    // Below $bp-banner the toggles would squeeze the column, so the Menu dropdown shows instead (#74)
+    // Narrow banner: the open Menu panel sits under the sticky bar, so cap it to the viewport below and scroll it (landscape phones)
+    @container banner (width < #{scale.$bp-banner}) {
+        .nav-menu__panel {
+            max-block-size: calc(100dvh - var(--banner-block-size));
+            overflow-y: auto;
+            overscroll-behavior: contain;
+        }
+    }
+
+    // Wide banner: links on the column's edge, look toggles in the margin; narrower, they'd squeeze the column, so Menu shows (#74)
     @container banner (width >= #{scale.$bp-banner}) {
         .site-banner__inner {
             padding-inline: var(--gutter-y); // .layout's gutter, so the centre track is the content column
