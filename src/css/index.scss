@@ -462,7 +462,7 @@ nav li a {
 :where(main) {
     flex: 1;
     container-type: inline-size;
-    margin-block-end: var(--space-2xl-3xl);
+    margin-block-end: var(--space-2xl);
 }
 
 main>*{

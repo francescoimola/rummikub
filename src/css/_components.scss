@@ -515,9 +515,10 @@ main svg {
 main svg.illustration-wide {
     display: block;
     inline-size: var(--size-illustration-wide);
-    max-inline-size: 100%;
+    max-inline-size: 50%;
     block-size: auto;
     padding: 0;
+    margin-block: var(--space-2xl);
     margin-inline: auto; // main is a start-aligned flex column, and < tablet main>* drops its auto margins
 }
 
