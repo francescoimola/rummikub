@@ -206,7 +206,7 @@ main:has(> .cta-card:last-child) {
 }
 
 .split-row {
-    gap: var(--space-s-xl);
+    gap: var(--space-s-m);
 }
 
 .media-pair {
@@ -222,6 +222,8 @@ main:has(> .cta-card:last-child) {
     >:is(h1, h2) {
         align-self: start; // the row stretches its items; keep the pill hugging its text
         margin: 0;
+        text-box-edge: cap alphabetic;
+        text-box-trim: trim-both;
     }
 }
 
@@ -234,7 +236,7 @@ main>figure.section-width {
 
 // Text above images (Q25): title | description, dimmed year, link, at content width, 2-up fold at $bp-split in _responsive.scss (G24)
 .split-row__text {
-    gap: var(--space-xs);
+    gap: var(--space-2xs);
     inline-size: 100%;
     max-inline-size: var(--grid-width-l);
     margin-inline: auto;
