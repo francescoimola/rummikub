@@ -612,7 +612,7 @@ main svg.illustration-wide {
 // G38: year column beside label-over-value; Figma's 1 + 4 column split holds down to phone widths
 .data-list__item {
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr 6fr;
 }
 
 .data-list__year {
