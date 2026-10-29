@@ -15,9 +15,9 @@ eleventyNavigation:
 <p>The international guideline most accessibility law points at is WCAG 2.2 AA, and that is what I'm aiming for (and what I aim to achieve on client work as well). This site does not fully meet it yet, because testing against these guidelines is a work in progress as of writing.</p>
 <p>This page goes over what was already done and what gaps remain.</p>
 
-<section class="flow has-gap-s pretty text">
+<section class="flow has-gap-xs pretty text">
     <h2>What has been done (and checked)</h2>
-    <ul class="flow has-gap-2xs">
+    <ul class="flow has-gap-xs">
         <li>Every page opens with a "skip to content" link, so you don't have to tab your way past all the navigation links on every visit to access the main content.</li>
         <li>Every image has a description.</li>
         <li>Headings run in order on all pages, with no levels skipped.</li>
@@ -28,18 +28,20 @@ eleventyNavigation:
     </ul>
 </section>
 
-<section class="flow has-gap-s pretty text">
+<section class="flow has-gap-xs pretty text">
     <h2>What I haven't done yet</h2>
-    <ul class="flow has-gap-2xs">
+    <ul class="flow has-gap-xs">
         <li>I haven't tested this site with a screen reader, so I can't yet promise that every part of it works without a mouse.</li>
         <li>Some of my image and video descriptions name the asset rather than describing what it shows. I'm working through them as I come across them.</li>
         <li>Booking a 1-1 call with me takes place through cal.com, which is someone else's software. I haven't checked how well it works for everyone and I can't make any promises about its accessibility.</li>
     </ul>
 </section>
 
-<section class="flow has-gap-s">
-    <h2>If something gets in your way</h2>
-    <p>Please tell me and I'll do what I can to fix it. Send me an email at the address below. Same goes if you need anything on this site in a different format, ask and I'll sort it out.</p>
+<section class="flow has-gap-s-m">
+    <div class="flow has-gap-xs">
+        <h2>If something gets in your way</h2>
+        <p>Please tell me and I'll do what I can to fix it. Send me an email at the address below. Same goes if you need anything on this site in a different format, ask and I'll sort it out.</p>
+    </div>
     <div class="card flow has-gap-3xs">
         <p><span class="sr-only">{{ site.email }}</span><span aria-hidden="true">{{ site.email | replace("@", " at ") | replace(".", " dot ") }}</span></p>
         <button type="button" data-copy-email="{{ site.email }}" data-icon="copy">Copy email address</button>

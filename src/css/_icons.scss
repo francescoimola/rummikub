@@ -59,7 +59,7 @@ $glyphs: (
 
 // only trailing icons animate — a leading icon's margin sits before the text, so nudging it would shift the whole label
 [data-icon]::after {
-    margin-inline-start: var(--icon-gap, var(--space-2xs));
+    margin-inline-start: var(--icon-gap, var(--space-2xs)); // rhythm-exempt: icon gap, spacing inside one word
     transition: margin-inline-start var(--dur-fast) var(--ease);
 }
 

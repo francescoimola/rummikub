@@ -3,11 +3,12 @@
 {% from "_contact-card.njk" import contactCard %}
 <footer class="site-footer">
 <div class="site-footer__inner">
-    <section id="contact" class="site-footer__contact flow has-gap-xs" aria-labelledby="contact-title">
-        <div class="flow has-gap-xs has-mb-s balance">
+    <section id="contact" class="site-footer__contact flow has-gap-s-m" aria-labelledby="contact-title">
+        <div class="flow has-gap-xs balance">
             <h2 id="contact-title">Contact</h2>
             <p>Ready to talk shop or want to discuss an idea? Get in touch and I’ll reply within a day.</p>
         </div>
+        <div class="flow has-gap-xs">
         {% call contactCard("Send me a good 'ol email", '<span class="sr-only">' + site.email + '</span><span aria-hidden="true">' + (site.email | replace("@", " at ") | replace(".", " dot ")) + '</span>') %}
         <button type="button" data-copy-email="{{ site.email }}" data-icon="copy">Copy email address</button>
         <p role="status" class="sr-only" data-copy-status></p>
@@ -18,9 +19,9 @@
         {% call contactCard("Not sure what to say?") %}
         <button type="button" data-dialog-open="contact-template" data-icon="email">Copy this template email</button>
         <dialog id="contact-template" aria-labelledby="contact-template-title">
-            <div class="flow has-gap-xl">
+            <div class="flow has-gap-l-xl">
                 <h2 id="contact-template-title" class="sr-only">Template enquiry email</h2>
-                <div class="flow has-gap-s" data-dialog-content>
+                <div class="flow has-gap-s-m" data-dialog-content>
                     <p>Hi, I’m <strong>Carla</strong> and I'm a <strong>Marketing Director</strong> at <strong>Company</strong>. I found you through <strong>place, person, or thing</strong>, and love the work you did on <strong>your favourite project</strong>.</p>
                     <p>I'd love to hire you to help us with <strong>project</strong> so we can <strong>business goal</strong>. Our timeline looks like <strong>dates</strong> and we'd like to keep the price about <strong>£3k (with room up to £8k if we can make a solid business case for it)</strong>.</p>
                     <p>Full disclosure: I'm talking with a few other agencies like <strong>these folks</strong>.</p>
@@ -36,12 +37,13 @@
         </dialog>
         {% endcall %}
         {% call contactCard("Feeling social?") %}
-        <ul class="flow has-gap-2xs">
+        <ul class="flow has-gap-xs">
             {% for link in site.social %}
             <li><a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" data-icon="arrow-ext">{{ link.label }}</a></li>
             {% endfor %}
         </ul>
         {% endcall %}
+        </div>
     </section>
     <div class="site-footer__art" aria-hidden="true">{% icon "mailstorm" %}</div>
     <div class="site-footer__colophon flow has-gap-s-m">

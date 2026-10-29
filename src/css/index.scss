@@ -12,7 +12,7 @@
 @include cleacss-overrides.overrides;
 
 html {
-    font-size: 15px; // overrides cleacss's unlayered 16px (@layer reset)
+    font-size: 15px; // rhythm-exempt: the root size every rem is built on; overrides cleacss's unlayered 16px (@layer reset)
     overscroll-behavior: auto none;
     // Anchor jumps and the skip link land below the sticky banner, plus a --space-s breath (#75). Lenis leaves anchors to the browser
     scroll-padding-block-start: calc(var(--banner-block-size) + var(--space-s));
@@ -87,6 +87,10 @@ html.lenis body {
     --line-height: 1.5;
 
     --tap-extend: var(--space-3xs);
+
+    // Stroke weights: a section stroke is thin or thick, always a multiple of the border-width token
+    --stroke-thin: var(--input-border-width);
+    --stroke-thick: calc(var(--input-border-width) * 4);
 
     // Opacity
     --opacity-active: 0.8;
@@ -254,7 +258,7 @@ small, .small, .small>* {
 figcaption {
     font-size: var(--step--1); // G12; beats cleacss's layered font-size-7
     line-height: 1.3;
-    margin-top: var(--space-2xs);
+    margin-top: var(--space-3xs); // Hang: the caption belongs to its image
     text-align: start;
 }
 
@@ -411,7 +415,7 @@ nav li a {
         display: flex;
         justify-content: end;
         align-items: center;
-        gap: var(--space-2xs);
+        gap: var(--space-2xs); // rhythm-exempt: the Menu label beside its icon, spacing inside one word
         cursor: pointer;
 
         &::after {
@@ -424,7 +428,7 @@ nav li a {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-areas: "toggles links";
-        column-gap: var(--space-l);
+        column-gap: var(--space-l); // rhythm-exempt: the wide header's layout track, not rhythm
         padding: var(--space-s) var(--banner-inset) calc(2 * var(--space-s)); // the bottom also stands in for the band's padding it now covers
         margin-inline: calc(-1 * var(--banner-inset));
     }
@@ -444,7 +448,7 @@ nav li a {
         flex-wrap: wrap;
         align-items: center;
         align-content: flex-end;
-        gap: var(--space-s);
+        gap: var(--space-xs);
     }
 
     // Plus glyph (data-icon-before="plus") that rotates 45° into an × when open; 1.2em box so the 14/24 stroke spans about 0.7em
@@ -475,7 +479,7 @@ nav li a {
 :where(main) {
     flex: 1;
     container-type: inline-size;
-    margin-block-end: var(--space-2xl);
+    margin-block-end: var(--space-xl-3xl); // Chapter: the last section to the footer
 }
 
 main>*{
@@ -547,8 +551,23 @@ summary {
 
 hr {
     inline-size: 100%;
+    block-size: auto; // cleacss's .text hr adds a 2px background line; the stroke is the border alone
+    background: none;
     border-style: unset;
-    border-block-start: var(--input-border-width) solid var(--input-border-color);
+    border-block-start: var(--stroke-thin) solid var(--input-border-color);
+}
+
+hr.stroke-thick {
+    border-block-start-width: var(--stroke-thick);
+}
+
+// Where .text meets .flow, flow alone sets the gap: cleacss's .text zeroes the gap and adds a margin instead
+.text.flow {
+    gap: var(--flow-gap);
+
+    >*+* {
+        margin-block-start: 0;
+    }
 }
 
 footer a {
@@ -575,12 +594,6 @@ footer a {
 .flow.has-gap-3xs,
 .flow-row.has-gap-3xs {
     --flow-gap: var(--space-3xs);
-}
-
-// xl on mobile, m on desktop — reverses the usual mobile-shrinks-down direction; see mobile override below
-.flow.has-gap-2xl-m,
-.flow-row.has-gap-2xl-m {
-    --flow-gap: var(--space-m);
 }
 
 dialog {

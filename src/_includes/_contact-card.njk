@@ -1,11 +1,13 @@
 {# _contact-card.njk — one Footer Contact card: an h3 prompt, an optional detail line, then the caller's rows. #}
 {# Rows are Icon links (trailing data-icon) or the copy <button>; a Links card passes a <ul>. #}
 {% macro contactCard(prompt, detail) %}
-<div class="card contact-card flow has-gap-3xs">
-    <h3>{{ prompt }}</h3>
-    {%- if detail %}
-    <p>{{ detail | safe }}</p>
-    {%- endif %}
+<div class="card contact-card flow has-gap-xs">
+    <div class="flow has-gap-3xs">
+        <h3>{{ prompt }}</h3>
+        {%- if detail %}
+        <p>{{ detail | safe }}</p>
+        {%- endif %}
+    </div>
     {{ caller() }}
 </div>
 {% endmacro %}

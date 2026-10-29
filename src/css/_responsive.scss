@@ -19,11 +19,6 @@ $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:
                 margin-inline: unset;
             }
         }
-
-        .flow.has-gap-2xl-m,
-        .flow-row.has-gap-2xl-m {
-            --flow-gap: var(--space-2xl);
-        }
     }
 
     // ---- > tablet, motion allowed (scroll-driven settle) ----
@@ -120,7 +115,7 @@ $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:
         .site-banner__inner,
         .nav-menu__panel {
             grid-template-columns: 1fr minmax(0, var(--grid-width-l)) 1fr;
-            column-gap: var(--space-l);
+            column-gap: var(--space-l); // rhythm-exempt: the wide header's three layout tracks
             align-items: center;
         }
 
@@ -153,7 +148,7 @@ $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: end;
-            gap: var(--space-xs) var(--space-s);
+            gap: var(--space-xs);
         }
 
         .nav-menu__toggles {

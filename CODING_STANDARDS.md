@@ -22,3 +22,10 @@ Judgement rules for review. Mechanical rules are checked by `pnpm lint` (`script
 ## Comments
 
 - **One comment, one line.** SCSS and CSS comments are single-line `//`, never wrapped prose across consecutive lines. A note over ~25 words gets cut down, with property-specific detail on the line above (or trailing) that property. Keep the *why*, drop the essay. (`/* */` blocks are caught by `pnpm lint`.)
+
+## Rhythm
+
+- **The same pair gets the same gap.** Spacing follows the pair table in [docs/design-system/rhythm.md](docs/design-system/rhythm.md): Tight between things that belong together (sideways too), Flow between thoughts, Break above a new idea, Chapter between sections, Hang only for a heading or caption hanging from the thing above. A new gap is a finding unless the pair table names it.
+- **Space belongs to the parent.** Set the gap on the parent's `flow`, never as a margin on the child (`has-mb-*` / `has-mt-*` are caught by `pnpm lint`). Where `.text` meets `flow`, `flow` alone sets the gap.
+- **Four type rungs.** Display, headline, body and small. A new `font-size` or a heading at a size of its own is a finding; h2 and h3 differ by weight, not size.
+- **An exception says why.** A gap or size outside the ladder carries `rhythm-exempt` and a reason on the same line; `pnpm lint` checks the mechanical part.

@@ -14,11 +14,11 @@ key: Home
 </header>
 
 <section class="section" aria-label="Introduction">
-  <div class="flow has-gap-s">
+  <div class="flow has-gap-s-m">
     <p class="home-intro__statement">I'm Francesco Imola, a designer, marketer, and artist based in Folkestone, Kent.</p>
     <img class="home-intro__photo" src="/assets/images/francesco.png" alt="Francesco Imola, smiling in front of a flowering hedge">
   </div>
-  <div class="flow has-gap-s">
+  <div class="flow has-gap-s-m">
     <p>I help brands with big missions stop chasing novelties and start rethinking their fundamentals. My bread and butter are websites, UX, UI, copywriting, brand messaging, and graphic design.</p>
     <p>In other words, if people don't get what you do, I rewrite it; if they can't work out how to buy, I redesign it; and if they can't tell you from the guys next door, I find what makes you different and say it loud.</p>
     <p>When I’m not resuscitating brands from the brink of death, I make art and work with up and coming artists.</p>
@@ -26,11 +26,13 @@ key: Home
   </div>
 </section>
 
-<section class="home-block flow has-gap-s-m" aria-labelledby="case-studies">
+<section class="home-block flow has-gap-xs" aria-labelledby="case-studies">
   <h2 id="case-studies">Featured</h2>
+  <div class="flow has-gap-l-xl">
   {% for project in collections.workFeatured %}
     {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "") }}
   {% endfor %}
+  </div>
 </section>
 
 {# Shown only once Explorations has entries in Pages CMS #}
@@ -41,9 +43,11 @@ key: Home
 </section>
 {% endif %}
 
-<section class="home-block flow has-gap-s-m" aria-labelledby="index">
+<section class="home-block flow has-gap-xs" aria-labelledby="index">
   <h2 id="index">Index</h2>
+  <div class="flow has-gap-l-xl">
   {% for project in collections.workIndex %}
     {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "") }}
   {% endfor %}
+  </div>
 </section>

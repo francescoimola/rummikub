@@ -10,7 +10,7 @@ $carousel-arrow: oklch(0.351 0.034 121.6);
 // ---- Cards ----
 
 .card {
-    --pad: var(--space-s-m); // single source for padding + the media bleed math below — keep them in sync
+    --pad: var(--space-s); // one padding for every card; single source for padding + the media bleed math below — keep them in sync
     background: var(--card-bg);
     overflow: clip;
     display: flex;
@@ -129,7 +129,7 @@ $carousel-arrow: oklch(0.351 0.034 121.6);
     &.giant {
         max-inline-size: unset;
         border-radius: var(--border-radius);
-        padding-block: var(--space-xl-4xl);
+        padding-block: var(--space-xl-3xl);
 
         >* {
             max-inline-size: calc(var(--inline-size) - 2 * var(--pad)); // content width, so text holds still while the card spans wider
@@ -165,7 +165,6 @@ main:has(> .cta-card:last-child) {
 // CTA card heading: KC Pelletier, wider than the body; .card.cta-card outranks .card.giant>*, which caps every child at --inline-size
 .card.cta-card>h2 {
     max-inline-size: min(100%, var(--grid-width-l));
-    padding-block-end: var(--space-xs);
     font-family: var(--font-family-display);
     font-size: var(--step-2-4);
     font-weight: var(--font-weight-base);
@@ -206,16 +205,16 @@ main:has(> .cta-card:last-child) {
 }
 
 .split-row {
-    gap: var(--space-s-m);
+    gap: var(--space-l-xl); // Break: the images are a new block under the text
 }
 
 .media-pair {
-    gap: var(--space-s);
+    gap: var(--space-xs);
 }
 
 // Section: label | content at content width (G31); source order label then content, so stacked and 2-up read the same
 .section {
-    gap: var(--space-s);
+    gap: var(--space-xs); // Tight: a heading over its text, or a label beside it
     max-inline-size: var(--grid-width-l);
     margin-inline: auto; // main>* centres it on most pages; full-width pages (Artmaking) nest it one level down
 
@@ -236,7 +235,7 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
 
 // Text above images (Q25): title | description, dimmed year, link, at content width, 2-up fold at $bp-split in _responsive.scss (G24)
 .split-row__text {
-    gap: var(--space-2xs);
+    gap: var(--space-xs);
     inline-size: 100%;
     max-inline-size: var(--grid-width-l);
     margin-inline: auto;
@@ -264,13 +263,14 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
 .case-study>blockquote {
     @extend .card;
     @extend .outline;
+    margin-block: var(--space-l-xl); // Break above and below a quote in running text
 }
 
 // ---- Look toggles (brand picker + theme switch) ----
 
 .brand-picker {
     display: flex;
-    gap: var(--space-3xs-2xs); // paired token — eases down on mobile
+    gap: var(--space-3xs-2xs); // paired token, eases down on mobile; rhythm-exempt: swatch spacing
 }
 
 .brand-picker button {
@@ -350,9 +350,9 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
 }
 
 // ---- FAQ list ----
-// Figma Open state: space/s below the answer, before the <hr>
+// Open state: Tight below the answer, matching the Tight above the divider
 .faq-answer {
-    padding-block-end: var(--space-s);
+    padding-block-end: var(--space-xs);
 }
 
 // ---- Carousel ----
@@ -431,8 +431,8 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
 // One fixed Previous/Next pair under the strip where ::scroll-button is unsupported; app-core.js reveals and drives it
 .carousel__links {
     display: flex;
-    gap: var(--space-s);
-    padding-block-start: var(--space-2xs);
+    gap: var(--space-xs);
+    padding-block-start: var(--space-xs);
     margin: 0;
 
     &[hidden] {
@@ -453,7 +453,7 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
 .site-footer {
     container: footer / inline-size;
     overflow-x: clip; // the Wide drawing bleeds past the column
-    padding-block: var(--space-xl-2xl) var(--space-3xl-4xl);
+    padding-block: var(--space-xl-2xl) var(--space-3xl-4xl); // rhythm-exempt: Figma-drawn footer spaces
     padding-inline: var(--space-m-l);
     // links on the band: darken the accent for contrast, as .card.featured does
     --color-accent: light-dark(var(--brand-900), var(--brand-800));
@@ -470,7 +470,7 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
 
 .site-footer__art {
     color: var(--brand-900);
-    margin-block-start: calc(var(--space-3xl-4xl) - var(--space-s-m)); // Figma Narrow: 3xl-4xl above the drawing, the row gap supplies the rest; the colophon's margin does the same below
+    margin-block-start: calc(var(--space-3xl-4xl) - var(--space-s-m)); // rhythm-exempt: Figma Narrow: 3xl-4xl above the drawing, the row gap supplies the rest; the colophon's margin does the same below
 
     svg {
         display: block;
@@ -480,13 +480,13 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
 }
 
 .site-footer__colophon {
-    margin-block-start: calc(var(--space-3xl-4xl) - var(--space-s-m)); // row gap tops it up to the Figma 3xl-4xl
+    margin-block-start: calc(var(--space-3xl-4xl) - var(--space-s-m)); // rhythm-exempt: row gap tops it up to the Figma 3xl-4xl
 }
 
 .site-footer__badges {
     display: flex;
     align-items: stretch;
-    gap: var(--space-s-m);
+    gap: var(--space-xs); // badges side by side are Tight
     padding: 0;
     list-style: none;
 
@@ -519,8 +519,8 @@ main svg.illustration-wide {
     inline-size: var(--size-illustration-wide);
     max-inline-size: 50%;
     block-size: auto;
-    padding: 0;
-    margin-block: var(--space-2xl);
+    padding-block: var(--space-l-xl); // illustration band: Break padding inside, Chapter between blocks comes from main's gap
+    padding-inline: 0;
     margin-inline: auto; // main is a start-aligned flex column, and < tablet main>* drops its auto margins
 }
 
@@ -530,8 +530,8 @@ main svg.illustration-wide {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-2xl-3xl);
-    padding-block: var(--space-2xl-3xl) var(--space-xl-2xl);
+    gap: var(--space-xl-3xl);
+    padding-block: var(--space-xl-3xl);
     padding-inline: var(--space-m-l);
     text-align: center;
 
@@ -608,7 +608,7 @@ main svg.illustration-wide {
 .data-list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-s);
+    gap: var(--space-s-m);
     overflow-wrap: anywhere;
     margin: 0;
 }
@@ -617,6 +617,7 @@ main svg.illustration-wide {
 .data-list__item {
     display: grid;
     grid-template-columns: 1fr 6fr;
+    column-gap: var(--space-xs); // sideways Tight: the year beside its entries
 }
 
 .data-list__year {
@@ -735,7 +736,7 @@ main svg.illustration-wide {
 // KC hero band: the band is the container, so --step-hero (100cqi / --hero-line-em) sizes the widest line to the band's content box
 .home-hero {
     container-type: inline-size;
-    padding-block: var(--space-xl-2xl);
+    padding-block: var(--space-xl-3xl);
     padding-inline: var(--space-m-l); // the narrow banner's inset, so hero and nav edges match; wide, the h1 caps at 60rem and centres on the content column
 
     h1 {
@@ -771,8 +772,8 @@ main svg.illustration-wide {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-2xl-3xl);
-    padding: var(--space-2xl-3xl) var(--space-xl-2xl);
+    gap: var(--space-xl-3xl);
+    padding: var(--space-xl-3xl) var(--space-xl-2xl);
 
     >* {
         inline-size: 100%;
@@ -781,7 +782,7 @@ main svg.illustration-wide {
 }
 
 .collab-hero__photos {
-    gap: var(--space-s);
+    gap: var(--space-xs);
     align-items: start; // the portrait and the square keep their own heights
 }
 
@@ -803,7 +804,7 @@ main svg.illustration-wide {
 .project-item {
     display: grid;
     inline-size: 100%;
-    gap: var(--space-s);
+    gap: var(--space-xs);
     grid-template-columns: 1fr;
     align-items: stretch;
     justify-content: start;
@@ -827,24 +828,32 @@ main svg.illustration-wide {
         margin-block-start: var(--space-s-m);
     }
 
-    // Base rhythm — paragraph→paragraph gap (tight)
+    // Base rhythm: Flow between paragraphs, lists and dividers
 
     > :is(h2, h3) {
         margin-block-start: var(--space-l-xl);
     }
 
-    // Extra room above section headings
+    // A standalone page's sections (Accessibility) start with an h2, so they get the same Break above
+    >section {
+        margin-block-start: var(--space-l-xl);
+    }
+
+    // Break above a section heading; the heading hugs its text, or a directly following h3, at Tight
+    > :is(h2, h3)+* {
+        margin-block-start: var(--space-xs);
+    }
 
     // Media (videos = <figure>, markdown images = <p><picture>) get extra room above
     >figure,
     >.media-pair,
     >p:has(> :is(img, picture)) {
-        margin-block-start: var(--space-xl-2xl);
+        margin-block-start: var(--space-l-xl);
     }
 
     // Anything non-media directly after media — restore the full gap on its top edge
     >:is(figure, .media-pair, p:has(> :is(img, picture)))+ :not(:is(figure, .media-pair, p:has(> :is(img, picture)))) {
-        margin-block-start: var(--space-xl-2xl);
+        margin-block-start: var(--space-l-xl);
     }
 
     // Media directly followed by another media item — tighten the shared gap
@@ -854,7 +863,7 @@ main svg.illustration-wide {
 
     // Bullet/numbered list items get a touch of breathing room from each other
     li+li {
-        margin-block-start: var(--space-2xs);
+        margin-block-start: var(--space-xs);
     }
 
     // Better rag on body copy and list items — orphan avoidance, more even line lengths
@@ -865,8 +874,8 @@ main svg.illustration-wide {
 
 // Top and bottom room match, so the title sits as far from the header as the image sits from the intro
 .case-study__intro {
-    padding-block-start: var(--space-2xl-3xl);
-    margin-block-end: var(--space-2xl-3xl);
+    padding-block-start: var(--space-xl-3xl);
+    margin-block-end: var(--space-xl-3xl); // Chapter: the title to the opening image
     text-align: center;
 
     > * {
@@ -880,9 +889,8 @@ main svg.illustration-wide {
 .writing-item {
     display: grid;
     grid-template-columns: 1fr 3fr;
-    gap: var(--space-s);
+    gap: var(--space-xs);
     align-items: start;
-    --pad: var(--space-s); // Figma "Writing item" (2329:9102): tighter than the .card default
 }
 
 .writing-item--compact {

@@ -8,6 +8,7 @@
 
 - **Voice & tone:** `.docs/voice-guide.md` (local-only, gitignored)
 - **Testing:** [testing-guide.md](testing-guide.md) — run `pnpm lint && pnpm build && pnpm test` before committing (the built-output tests read `public/`)
+- **Rhythm:** [docs/design-system/rhythm.md](docs/design-system/rhythm.md) — the four type rungs, the spacing ladder (Tight, Flow, Break, Chapter, Hang) and the pair table; read before changing text sizes or gaps
 - **Review:** [CODING_STANDARDS.md](CODING_STANDARDS.md) — judgement rules the reviewer enforces; mechanical ones live in `pnpm lint`
 - **Figma ↔ code:** [docs/frn-2026/components/README.md](docs/frn-2026/components/README.md) — file key, node IDs and the component→repo-file index; read before any Figma work, Code Connect included
 
@@ -17,7 +18,7 @@
 pnpm install          # Install dependencies
 pnpm start            # Dev server (Eleventy --serve)
 pnpm build            # Production build
-pnpm lint             # Mechanical rules: breakpoints, SCSS comments, external rel, JSON keys
+pnpm lint             # Mechanical rules: breakpoints, SCSS comments, external rel, JSON keys, rhythm ladder
 pnpm clean            # rm -rf public
 ```
 
@@ -114,7 +115,7 @@ Embed videos with the `projectVideo` shortcode. Lazy loading, autoplay-in-view, 
 
 ## CSS architecture
 
-Before editing `src/css`, read [docs/css-architecture.md](docs/css-architecture.md): the ten numbered rules (`@use` order, `@layer` order, cleacss token collisions, brand re-tint, breakpoints in `_responsive.scss`). Comments cite them as "CSS rule N".
+Before editing `src/css`, read [docs/css-architecture.md](docs/css-architecture.md): the eleven numbered rules (`@use` order, `@layer` order, cleacss token collisions, brand re-tint, breakpoints in `_responsive.scss`, the rhythm ladder). Comments cite them as "CSS rule N".
 
 ## Non-negotiable rules
 
