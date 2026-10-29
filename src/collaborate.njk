@@ -52,10 +52,14 @@ eleventyNavigation:
 </section>
 <section class="section">
     <h2 class="highlight-header">Can we rely on him?</h2>
-    <div class="flow has-gap-s-m">
-        <p>I’ll stick around no matter how messy things get, as long as I'm working with people who care deeply about what they do as much as they care about each other.</p>
-        <p>Found yourself in uncharted waters? We'll cross them together. Is your design or marketing team struggling to agree on what needs doing? I may not have all the answers, but I'll support them as they search for them.</p>
-        {% for t in testimonials.collaborate %}{{ quoteCard(t) }}{% endfor %}
+    <div class="flow has-gap-l-xl">
+        <div class="flow has-gap-s-m">
+            <p>I’ll stick around no matter how messy things get, as long as I'm working with people who care deeply about what they do as much as they care about each other.</p>
+            <p>Found yourself in uncharted waters? We'll cross them together. Is your design or marketing team struggling to agree on what needs doing? I may not have all the answers, but I'll support them as they search for them.</p>
+        </div>
+        <div class="flow has-gap-xs">
+            {% for t in testimonials.collaborate %}{{ quoteCard(t) }}{% endfor %}
+        </div>
     </div>
 </section>
 <section class="section">
