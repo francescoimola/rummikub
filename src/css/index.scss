@@ -415,7 +415,7 @@ nav li a {
         display: flex;
         justify-content: end;
         align-items: center;
-        gap: var(--space-2xs);
+        gap: var(--space-2xs); // rhythm-exempt: the Menu label beside its icon, spacing inside one word
         cursor: pointer;
 
         &::after {
@@ -428,7 +428,7 @@ nav li a {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-areas: "toggles links";
-        column-gap: var(--space-l);
+        column-gap: var(--space-l); // rhythm-exempt: the wide header's layout track, not rhythm
         padding: var(--space-s) var(--banner-inset) calc(2 * var(--space-s)); // the bottom also stands in for the band's padding it now covers
         margin-inline: calc(-1 * var(--banner-inset));
     }
@@ -448,7 +448,7 @@ nav li a {
         flex-wrap: wrap;
         align-items: center;
         align-content: flex-end;
-        gap: var(--space-s);
+        gap: var(--space-xs);
     }
 
     // Plus glyph (data-icon-before="plus") that rotates 45° into an × when open; 1.2em box so the 14/24 stroke spans about 0.7em
@@ -479,7 +479,7 @@ nav li a {
 :where(main) {
     flex: 1;
     container-type: inline-size;
-    margin-block-end: var(--space-2xl);
+    margin-block-end: var(--space-xl-3xl); // Chapter: the last section to the footer
 }
 
 main>*{
@@ -594,12 +594,6 @@ footer a {
 .flow.has-gap-3xs,
 .flow-row.has-gap-3xs {
     --flow-gap: var(--space-3xs);
-}
-
-// xl on mobile, m on desktop — reverses the usual mobile-shrinks-down direction; see mobile override below
-.flow.has-gap-2xl-m,
-.flow-row.has-gap-2xl-m {
-    --flow-gap: var(--space-m);
 }
 
 dialog {
