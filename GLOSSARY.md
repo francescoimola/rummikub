@@ -29,7 +29,7 @@ The white-tinted background behind page content (`--content-light`), set per pag
 _Avoid_: Contrast mode, white content
 
 **Tight**:
-The smallest vertical gap: between things that belong together, such as a heading and its own text, text and the link or button under it, list items, and images inside a pair or grid.
+The smallest of the four gaps, vertical or sideways: between things that belong together, such as a heading and its own text, text and the link or button under it, list items, images inside a pair or grid, a row of links, and columns of text beside each other.
 _Avoid_: Small gap, heading gap
 
 **Flow**:
@@ -45,7 +45,7 @@ The largest vertical gap: between sections, and between the page title and the h
 _Avoid_: Section gap
 
 **Hang**:
-The very small gap where a heading hangs from something: under a section stroke, or between a card's heading and its text. A deliberate exception, smaller than the four vertical gaps.
+The very small gap where something hangs from the thing above it: a heading under a section stroke, a card's heading above its text, or a caption under its image. A deliberate exception, smaller than the four gaps.
 _Avoid_: Stroke gap, heading gap
 
 **Section stroke**:
