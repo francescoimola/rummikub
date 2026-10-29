@@ -1,43 +1,70 @@
-{
-  "studio": [
-    {
-      "quote": "“I have never worked with someone so deeply reliable, who has gone above and beyond my expectations. The sheer detail, diligence and attention Fran has to his work is worth its weight in gold, tenfold! [...] He’s turned the weight on my shoulders into air.”",
-      "name": "Cairo Woodward",
-      "role": "Co-founder",
-      "linkUrl": "https://www.theloftstudio.uk",
-      "linkLabel": "The Loft"
-    },
-    {
-      "quote": "“Francesco has the rare talent of being able to embed himself in a niche that he previously knew nothing about, quickly understanding the intricacies and writing with the confidence of an insider.”",
-      "name": "Rob Cowen",
-      "role": "Founder",
-      "linkUrl": "https://www.seatingplan.com",
-      "linkLabel": "Mega Seating Plan"
-    },
-    {
-      "quote": "“Francesco provided excellent tech support and reassurance for a web project. He’s been very easy to work with.”",
-      "name": "Liv Pennington",
-      "role": "Artist & Arts Programmer"
-    },
-    {
-      "quote": "“Great to work with. Helped me to rework my website copy to align with a new direction I wanted to take. He’s quick and responsive.”",
-      "name": "Sarah Brown",
-      "role": "Holistic Coach",
-      "linkUrl": "https://www.sarahyuklan.com/"
-    },
-    {
-      "quote": "“A dream collaborator. Organised and strategic, he asks the right questions, does his research, and presents fantastic options.”",
-      "name": "Carly Anchal",
-      "role": "Marketing & Talent Manager"
-    }
-  ],
-  "collaborate": [
-    {
-      "quote": "“Working with Fran on the development and delivery of Open Art Folke has been a great experience. His approach to design is multifaceted and incisive. To work with he is a careful listener, independent and is able to create and deliver work which is incredibly considered and point whilst having a warm and heartfelt simplicity, making things accessible to all.”",
-      "name": "Steven Aaron Williams",
-      "role": "Brand Lead",
-      "linkUrl": "https://openartfolke.com",
-      "linkLabel": "Open Art Folke"
-    }
-  ]
-}
+[
+   {
+    "quote": "“Francesco is a bright expert who works with integrity and passion. His approach is contemporary and relevant whilst not submitting to short-lived fads. Working with him on the communications for Open Art Folke was a delight from start to finish.”",
+    "name": "Becca Pelly-Fry",
+    "role": "Co-Chair",
+    "linkUrl": "https://openartfolke.com",
+    "linkLabel": "Open Art Folke",
+    "pages": [
+      "studio"
+    ]
+  },
+  {
+    "quote": "“Francesco's approach to design is multifaceted and incisive. To work with, he's a careful listener, independent, and can deliver work which is incredibly considered and pointed, whilst having a warm and heartfelt simplicity.”",
+    "name": "Steven Aaron Williams",
+    "role": "Content Lead",
+    "linkUrl": "https://openartfolke.com",
+    "linkLabel": "Open Art Folke",
+    "pages": [
+      "studio",
+      "collaborate"
+    ]
+  },
+  {
+    "quote": "“I have never worked with someone so deeply reliable, who has gone above and beyond my expectations. The sheer detail, diligence and attention Fran has to his work is worth its weight in gold, tenfold! [...] He’s turned the weight on my shoulders into air.”",
+    "name": "Cairo Woodward",
+    "role": "Co-founder",
+    "linkUrl": "https://www.theloftstudio.uk",
+    "linkLabel": "The Loft",
+    "pages": [
+      "studio",
+      "collaborate"
+    ]
+  },
+  {
+    "quote": "“Francesco has the rare talent of being able to embed himself in a niche that he previously knew nothing about, quickly understanding the intricacies and writing with the confidence of an insider.”",
+    "name": "Rob Cowen",
+    "role": "Founder",
+    "linkUrl": "https://www.seatingplan.com",
+    "linkLabel": "Mega Seating Plan",
+    "pages": [
+      "studio",
+      "collaborate"
+    ]
+  },
+  {
+    "quote": "“Francesco provided excellent tech support and reassurance for a web project. He’s been very easy to work with.”",
+    "name": "Liv Pennington",
+    "role": "Artist & Arts Programmer",
+    "pages": [
+      "studio"
+    ]
+  },
+  {
+    "quote": "“Great to work with. Helped me to rework my website copy to align with a new direction I wanted to take. He’s quick and responsive.”",
+    "name": "Sarah Brown",
+    "role": "Holistic Coach",
+    "linkUrl": "https://www.sarahyuklan.com/",
+    "pages": [
+      "studio"
+    ]
+  },
+  {
+    "quote": "“A dream collaborator. Organised and strategic, he asks the right questions, does his research, and presents fantastic options.”",
+    "name": "Carly Anchal",
+    "role": "Marketing & Talent Manager",
+    "pages": [
+      "studio"
+    ]
+  }
+]

@@ -222,55 +222,35 @@ content:
     type: file
     path: src/_data/testimonials.json
     format: json
+    list: true
     fields:
-      - name: studio
-        label: Work with me
-        type: object
-        list:
-          collapsible: true
-        fields:
-          - name: quote
-            label: Quote
-            type: text
-            required: true
-          - name: name
-            label: Name
-            type: string
-            required: true
-          - name: role
-            label: Role
-            type: string
-            required: true
-          - name: linkUrl
-            label: Link URL (name links to it, or the company label when set)
-            type: string
-          - name: linkLabel
-            label: Company label (after the role)
-            type: string
-      - name: collaborate
-        label: Collaborate
-        type: object
-        list:
-          collapsible: true
-        fields:
-          - name: quote
-            label: Quote
-            type: text
-            required: true
-          - name: name
-            label: Name
-            type: string
-            required: true
-          - name: role
-            label: Role
-            type: string
-            required: true
-          - name: linkUrl
-            label: Link URL (name links to it, or the company label when set)
-            type: string
-          - name: linkLabel
-            label: Company label (after the role)
-            type: string
+      - name: quote
+        label: Quote
+        type: text
+        required: true
+      - name: name
+        label: Name
+        type: string
+        required: true
+      - name: role
+        label: Role
+        type: string
+        required: true
+      - name: linkUrl
+        label: Link URL (name links to it, or the company label when set)
+        type: string
+      - name: linkLabel
+        label: Company label (after the role)
+        type: string
+      - name: pages
+        label: Appears on
+        type: select
+        required: true
+        options:
+          multiple: true
+          values:
+            - { value: studio, label: Work with me }
+            - { value: collaborate, label: Collaborate }
 
   - name: collaborate
     label: Collaborate page
