@@ -10,7 +10,7 @@ $carousel-arrow: oklch(0.351 0.034 121.6);
 // ---- Cards ----
 
 .card {
-    --pad: var(--space-s-m); // single source for padding + the media bleed math below — keep them in sync
+    --pad: var(--space-s); // one padding for every card; single source for padding + the media bleed math below — keep them in sync
     background: var(--card-bg);
     overflow: clip;
     display: flex;
@@ -892,7 +892,6 @@ main svg.illustration-wide {
     grid-template-columns: 1fr 3fr;
     gap: var(--space-xs);
     align-items: start;
-    --pad: var(--space-s); // Figma "Writing item" (2329:9102): tighter than the .card default
 }
 
 .writing-item--compact {
