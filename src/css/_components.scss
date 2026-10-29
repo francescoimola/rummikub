@@ -48,7 +48,6 @@ $carousel-arrow: oklch(0.351 0.034 121.6);
             }
         }
 
-        // the <details> variant holds a real <a>, which nudges itself in _icons.scss
         &:is(a):focus-visible [data-icon] {
             --icon-gap: var(--space-xs);
         }
@@ -57,17 +56,6 @@ $carousel-arrow: oklch(0.351 0.034 121.6);
             color: var(--color-accent);
             text-decoration: underline;
             text-decoration-color: color-mix(in oklch, var(--color-accent) 75%, transparent);
-        }
-    }
-
-    // Accordion cards: <details> as a flex card needs both fixes to open smoothly
-    &:is(details) {
-        summary h3 {
-            display: inline-block; // keep cleacss's floated +/− marker on the title's line
-        }
-
-        &::details-content {
-            min-block-size: 0; // .card is flex, so details-content is a flex item; auto min floors its height and kills the 0→auto reveal
         }
     }
 

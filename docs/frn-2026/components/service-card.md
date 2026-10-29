@@ -1,10 +1,10 @@
 # Service card
 
-**Layer:** Composite · **Status:** code · **Figma:** `2292:1547` · **Code:** `src/_includes/_service-card.njk`, `.card.link-card`
+**Layer:** Composite · **Status:** code · **Figma:** `2292:1547` · **Code:** `src/_includes/_service-card.njk`, `.card.link-card` (Default)
 
 ## Purpose
 
-An offer on Work with me. **Default** links to a service page. **Accordion** is a compact card that opens to a description and one action.
+An offer on Work with me. **Default** links to a service page. **Accordion** is a plain `<details>`, like the FAQ list, that opens to a description and one action.
 
 ## Anatomy
 
@@ -14,7 +14,7 @@ An offer on Work with me. **Default** links to a service page. **Accordion** is 
 - **Description**: `site/body`. Code: `p`.
 - **CTA**: label (`site/link`, `color-accent`) + [Icon/Arrow-right](icon.md) instance. Code: `span[data-icon="arrow-right"]`. The arrow stays here (G44).
 
-**Accordion** (`details.card.link-card`):
+**Accordion** (plain `details`, no card; `studio.njk` puts an `<hr>` between items, as `faqList` does):
 
 - **Summary**: Title (`site/body`) + **Expand** glyph "+". Code: `summary > h3`.
 - **Panel** (shown when `Open`): Description, then the CTA with Icon/Arrow-right. Code: `div.flow` inside `<details>`.
@@ -40,7 +40,7 @@ None, fluid only. Cards fill their grid cell. The pages place them in a grid tha
 
 | Use | Figma variable | Min → Max |
 | --- | --- | --- |
-| Card padding | `space/s-m` | 15 → 25.31 |
+| Card padding (Default) | `space/s-m` | 15 → 25.31 |
 | Default gap | `space/xs` | 11.25 → 13.13 |
 | Number ↔ title | `space/2xs` | 7.5 → 8.44 |
 | Summary gap (minimum) | `space/xs` | 11.25 → 13.13 |
@@ -48,7 +48,8 @@ None, fluid only. Cards fill their grid cell. The pages place them in a grid tha
 | Panel padding top / bottom | `space/m` / `space/xs` | 22.5 → 25.31 / 11.25 → 13.13 |
 | CTA icon gap | `space/2xs` | 7.5 → 8.44 |
 | CTA icon size | `step/0` | 15 → 16.88 |
-| Card fill, radius | `card-bg`, `border-radius-s` | style values |
+| Card fill, radius (Default) | `card-bg`, `border-radius-s` | style values |
+| Accordion list gap (around each `<hr>`) | `space/xs` | 11.25 → 13.13 |
 
 Values from [`_tokens.md`](_tokens.md).
 
@@ -67,7 +68,7 @@ Values from [`_tokens.md`](_tokens.md).
 ## HTML & accessibility
 
 ```html
-<details class="card link-card">
+<details>
   <summary><h3>Graphic Design</h3></summary>
   <div class="flow has-gap-s"><p>…</p><a data-icon="email" href="mailto:…">Enquire</a></div>
 </details>
@@ -83,6 +84,8 @@ Values from [`_tokens.md`](_tokens.md).
 - Delete the `adhoc` type from `_service-card.njk` and any page that passes it (G23).
 - Summary gap is now a bound minimum, not a fixed 392 (F39).
 - **Ported (#35):** `adhoc` is gone from the macro. On Work with me both sets sit in the Section grid; the Default cards' content `div` carries `.has-counter`, so the numbers run 01, 02.
+
+- **Plain accordions (2026-10-29):** the Accordion dropped `.card.link-card` and matches the FAQ list: `<hr>` dividers, Tight gap. Figma `2292:1546` still draws a card; update it to match.
 
 ## Open questions
 

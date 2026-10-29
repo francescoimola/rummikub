@@ -1,7 +1,7 @@
-{# Default: the whole card links to a service page; a .has-counter parent numbers its h3. Accordion: CTA glyph follows the link type (G22). #}
+{# Default: the whole card links to a service page; a .has-counter parent numbers its h3. Accordion: a plain <details> like faqList (the page puts <hr> between); CTA glyph follows the link type (G22). #}
 {% macro serviceCard(title, url, description, type = "default", cta = "Enquire") %}
 {% if type == "accordion" %}
-<details class="card link-card">
+<details>
     <summary><h3>{{ title }}</h3></summary>
     <div class="flow has-gap-xs has-py-xs balance">
         <p>{{ description }}</p>
