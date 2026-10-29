@@ -1,10 +1,10 @@
 {# FAQ list from faqs.json (G26): independent <details> (no name=), <hr> between. Answers are Markdown. #}
 {% macro faqList(items) %}
-<div class="flow has-gap-s">
+<div class="flow has-gap-xs">
     {%- for item in items %}
     <details>
         <summary>{{ item.question }}</summary>
-        <div class="faq-answer text flow has-gap-s">{{ item.answer | markdown | safe }}</div>
+        <div class="faq-answer text flow has-gap-s-m">{{ item.answer | markdown | safe }}</div>
     </details>
     {%- if not loop.last %}
     <hr>

@@ -215,7 +215,7 @@ main:has(> .cta-card:last-child) {
 
 // Section: label | content at content width (G31); source order label then content, so stacked and 2-up read the same
 .section {
-    gap: var(--space-s);
+    gap: var(--space-xs); // Tight: a heading over its text, or a label beside it
     max-inline-size: var(--grid-width-l);
     margin-inline: auto; // main>* centres it on most pages; full-width pages (Artmaking) nest it one level down
 
@@ -350,9 +350,9 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
 }
 
 // ---- FAQ list ----
-// Figma Open state: space/s below the answer, before the <hr>
+// Open state: Tight below the answer, matching the Tight above the divider
 .faq-answer {
-    padding-block-end: var(--space-s);
+    padding-block-end: var(--space-xs);
 }
 
 // ---- Carousel ----
@@ -608,7 +608,7 @@ main svg.illustration-wide {
 .data-list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-s);
+    gap: var(--space-s-m);
     overflow-wrap: anywhere;
     margin: 0;
 }
@@ -617,6 +617,7 @@ main svg.illustration-wide {
 .data-list__item {
     display: grid;
     grid-template-columns: 1fr 6fr;
+    column-gap: var(--space-xs); // sideways Tight: the year beside its entries
 }
 
 .data-list__year {
