@@ -8,7 +8,7 @@
     {# longForm: true opts a standalone page (Accessibility) into the long-form shell, without the writing-post animations #}
     {% if longForm or (tags and ("work" in tags or "writing" in tags)) %}
     <main id="main-content" class="case-study text{% if tags and "writing" in tags %} writing-post{% endif %}">
-      <div class="flow has-gap-3xs case-study__intro">
+      <div class="flow has-gap-xs case-study__intro">
         <h1>{{ title }}</h1>
         {% if services %}<p class="dimmed">{{ services }}</p>
         {% elif tags and "writing" in tags and date %}<p class="dimmed"><time datetime="{{ date | isoMonth }}">{{ date | longDate }}</time>{% if type and writingTypes[type] %} · {{ writingTypes[type].short }}{% endif %}</p>
