@@ -35,7 +35,7 @@ eleventyNavigation:
 <section class="section section--stacked">
     <h2 class="highlight-header">Happy humans</h2>
     <div class="grid-cols-2 flow has-gap-xs">
-        {% for t in testimonials.studio %}{{ quoteCard(t) }}{% endfor %}
+        {% for t in testimonials %}{% if "studio" in t.pages %}{{ quoteCard(t) }}{% endif %}{% endfor %}
     </div>
 </section>
 {% figureImg "/assets/portfolio/the_loft_offerings_section.png", "offerings section of The Loft website, showing class listings", caption="Website design for The Loft", ratio="3:2" %}
