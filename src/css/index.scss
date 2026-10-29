@@ -544,6 +544,10 @@ summary {
         opacity: var(--opacity-active);
     }
 
+    >h3 {
+        display: inline-block; // keep cleacss's floated +/− marker on the title's line
+    }
+
     &+*:not(.nav-menu__panel) {
         padding-block-start: var(--space-xs-s);
     }

@@ -21,7 +21,6 @@ Figma component (to build, G34): property `Style`, Outline or Featured. Repo mod
 | `.outline` | Transparent with a 1px `neutral-400-alpha` border |
 | `.featured` | `accent-surface` fill, darker accent for contrast (AA) |
 | `.link-card` / `a.card` | Whole card is a link, nudges up on hover |
-| `details.card` | Accordion card ([Service card](service-card.md) Accordion) |
 | `.flow-row` | Row direction instead of column |
 | `.has-counter>.card h3::before` | Numbered `01`, `02`… titles |
 
