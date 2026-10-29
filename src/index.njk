@@ -26,11 +26,13 @@ key: Home
   </div>
 </section>
 
-<section class="home-block flow has-gap-s-m" aria-labelledby="case-studies">
+<section class="home-block flow has-gap-xs" aria-labelledby="case-studies">
   <h2 id="case-studies">Featured</h2>
+  <div class="flow has-gap-l-xl">
   {% for project in collections.workFeatured %}
     {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "") }}
   {% endfor %}
+  </div>
 </section>
 
 {# Shown only once Explorations has entries in Pages CMS #}
@@ -41,9 +43,11 @@ key: Home
 </section>
 {% endif %}
 
-<section class="home-block flow has-gap-s-m" aria-labelledby="index">
+<section class="home-block flow has-gap-xs" aria-labelledby="index">
   <h2 id="index">Index</h2>
+  <div class="flow has-gap-l-xl">
   {% for project in collections.workIndex %}
     {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "") }}
   {% endfor %}
+  </div>
 </section>
