@@ -762,11 +762,6 @@ main svg.illustration-wide {
     padding-inline-start: 2.2em; // Figma's indent for the second and last lines
 }
 
-.home-intro__statement {
-    letter-spacing: var(--letter-spacing-xl);
-    text-wrap: balance;
-}
-
 // Collaborate hero: copy, then two duotone photos, on the brand band at content width
 .collab-hero {
     display: flex;
