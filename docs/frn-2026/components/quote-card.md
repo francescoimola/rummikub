@@ -44,7 +44,7 @@ None on the card. The company link inside the attribution uses the global link s
 
 ## Content rules
 
-- Source: `src/_data/testimonials.json` (`studio`, `collaborate`; editable in Pages CMS), passed to the `quoteCard` macro (G28). Work with me has 5 quotes, Collaborate has 1.
+- Source: `src/_data/testimonials.json`, one flat list editable in Pages CMS; each entry's `pages` (`studio`, `collaborate`) says where it appears, passed to the `quoteCard` macro (G28). Work with me has 5 quotes, Collaborate has 1.
 - Keep quotes as the client wrote them, with `[...]` for cuts.
 - The company link is optional (Liv Pennington and Carly Anchal have none).
 - Collaborate's repo quote has no curly quotes and no `<p>`; Work with me's has both. Figma uses curly quotes.
