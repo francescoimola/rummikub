@@ -12,7 +12,7 @@
 @include cleacss-overrides.overrides;
 
 html {
-    font-size: 15px; // overrides cleacss's unlayered 16px (@layer reset)
+    font-size: 15px; // rhythm-exempt: the root size every rem is built on; overrides cleacss's unlayered 16px (@layer reset)
     overscroll-behavior: auto none;
     // Anchor jumps and the skip link land below the sticky banner, plus a --space-s breath (#75). Lenis leaves anchors to the browser
     scroll-padding-block-start: calc(var(--banner-block-size) + var(--space-s));

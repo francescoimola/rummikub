@@ -559,5 +559,6 @@ Re-asked in round 2: G6, G19, G21, G24, G36, G37.
 | G50 | Nav marker | Hover and focus underline the link; the current page is underlined and takes `--brand-900`. No bullet, no slide-in (#42). Supersedes G3 |
 | G51 | Work with me closing CTA | The featured CTA card "See what other brands left with" is removed, as in Figma (#43). Work with me ends on its own contact CTA |
 | G52 | Minimal header removed | Collaborate, Accessibility and 404 get the full header: name, the full primary nav, the Look toggles (#72). The Minimal variant kept causing layout bugs. Supersedes Q12, Q17, Q33 and the Minimal half of Q16; the Figma `Type=Minimal` variants are not yet retired |
+| G53 | One rhythm for text sizes and spacing | Four type rungs (display, headline, body, small) and one spacing ladder: Tight `--space-xs`, Flow `--space-s-m`, Break `--space-l-xl`, Chapter `--space-xl-3xl`, plus Hang `--space-3xs` for a heading or caption hanging from the thing above. Sideways gaps reuse the ladder (Tight). `pnpm lint` enforces it. Rules and pair table in `docs/design-system/rhythm.md` (#77). Supersedes the spacing tokens in G31, G35 and G49 where they differ (G49's intro space is now Chapter) |
 
 - User re-imported `variables-plus-import.json` (62 variables).

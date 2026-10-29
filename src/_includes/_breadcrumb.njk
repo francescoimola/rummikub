@@ -1,7 +1,7 @@
 {#- Labels read as authored: each page's eleventyNavigation title (G1: the writing parent is "Ideas"). -#}
 {%- set crumbs = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true }) %}
 <nav aria-label="Breadcrumb">
-<ol class="small flow-row has-gap-2xs">
+<ol class="small flow-row has-gap-xs">
     {%- for crumb in crumbs %}
     {%- if not loop.first %}
     <li{% if loop.last %} aria-current="page"{% endif %}>{% if not loop.last %}<a href="{{ crumb.url }}" class="dimmed">{{ crumb.title }}</a>{% else %}{{ crumb.title }}{% endif %}</li>
