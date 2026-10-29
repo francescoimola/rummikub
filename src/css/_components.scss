@@ -129,7 +129,7 @@ $carousel-arrow: oklch(0.351 0.034 121.6);
     &.giant {
         max-inline-size: unset;
         border-radius: var(--border-radius);
-        padding-block: var(--space-xl-4xl);
+        padding-block: var(--space-xl-3xl);
 
         >* {
             max-inline-size: calc(var(--inline-size) - 2 * var(--pad)); // content width, so text holds still while the card spans wider
@@ -165,7 +165,6 @@ main:has(> .cta-card:last-child) {
 // CTA card heading: KC Pelletier, wider than the body; .card.cta-card outranks .card.giant>*, which caps every child at --inline-size
 .card.cta-card>h2 {
     max-inline-size: min(100%, var(--grid-width-l));
-    padding-block-end: var(--space-xs);
     font-family: var(--font-family-display);
     font-size: var(--step-2-4);
     font-weight: var(--font-weight-base);
@@ -271,7 +270,7 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
 
 .brand-picker {
     display: flex;
-    gap: var(--space-3xs-2xs); // paired token — eases down on mobile
+    gap: var(--space-3xs-2xs); // paired token, eases down on mobile; rhythm-exempt: swatch spacing
 }
 
 .brand-picker button {
@@ -432,8 +431,8 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
 // One fixed Previous/Next pair under the strip where ::scroll-button is unsupported; app-core.js reveals and drives it
 .carousel__links {
     display: flex;
-    gap: var(--space-s);
-    padding-block-start: var(--space-2xs);
+    gap: var(--space-xs);
+    padding-block-start: var(--space-xs);
     margin: 0;
 
     &[hidden] {
@@ -454,7 +453,7 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
 .site-footer {
     container: footer / inline-size;
     overflow-x: clip; // the Wide drawing bleeds past the column
-    padding-block: var(--space-xl-2xl) var(--space-3xl-4xl);
+    padding-block: var(--space-xl-2xl) var(--space-3xl-4xl); // rhythm-exempt: Figma-drawn footer spaces
     padding-inline: var(--space-m-l);
     // links on the band: darken the accent for contrast, as .card.featured does
     --color-accent: light-dark(var(--brand-900), var(--brand-800));
@@ -471,7 +470,7 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
 
 .site-footer__art {
     color: var(--brand-900);
-    margin-block-start: calc(var(--space-3xl-4xl) - var(--space-s-m)); // Figma Narrow: 3xl-4xl above the drawing, the row gap supplies the rest; the colophon's margin does the same below
+    margin-block-start: calc(var(--space-3xl-4xl) - var(--space-s-m)); // rhythm-exempt: Figma Narrow: 3xl-4xl above the drawing, the row gap supplies the rest; the colophon's margin does the same below
 
     svg {
         display: block;
@@ -481,13 +480,13 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
 }
 
 .site-footer__colophon {
-    margin-block-start: calc(var(--space-3xl-4xl) - var(--space-s-m)); // row gap tops it up to the Figma 3xl-4xl
+    margin-block-start: calc(var(--space-3xl-4xl) - var(--space-s-m)); // rhythm-exempt: row gap tops it up to the Figma 3xl-4xl
 }
 
 .site-footer__badges {
     display: flex;
     align-items: stretch;
-    gap: var(--space-s-m);
+    gap: var(--space-xs); // badges side by side are Tight
     padding: 0;
     list-style: none;
 
@@ -520,8 +519,8 @@ main svg.illustration-wide {
     inline-size: var(--size-illustration-wide);
     max-inline-size: 50%;
     block-size: auto;
-    padding: 0;
-    margin-block: var(--space-2xl);
+    padding-block: var(--space-l-xl); // illustration band: Break padding inside, Chapter between blocks comes from main's gap
+    padding-inline: 0;
     margin-inline: auto; // main is a start-aligned flex column, and < tablet main>* drops its auto margins
 }
 
@@ -531,8 +530,8 @@ main svg.illustration-wide {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-2xl-3xl);
-    padding-block: var(--space-2xl-3xl) var(--space-xl-2xl);
+    gap: var(--space-xl-3xl);
+    padding-block: var(--space-xl-3xl);
     padding-inline: var(--space-m-l);
     text-align: center;
 
@@ -737,7 +736,7 @@ main svg.illustration-wide {
 // KC hero band: the band is the container, so --step-hero (100cqi / --hero-line-em) sizes the widest line to the band's content box
 .home-hero {
     container-type: inline-size;
-    padding-block: var(--space-xl-2xl);
+    padding-block: var(--space-xl-3xl);
     padding-inline: var(--space-m-l); // the narrow banner's inset, so hero and nav edges match; wide, the h1 caps at 60rem and centres on the content column
 
     h1 {
@@ -773,8 +772,8 @@ main svg.illustration-wide {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-2xl-3xl);
-    padding: var(--space-2xl-3xl) var(--space-xl-2xl);
+    gap: var(--space-xl-3xl);
+    padding: var(--space-xl-3xl) var(--space-xl-2xl);
 
     >* {
         inline-size: 100%;
