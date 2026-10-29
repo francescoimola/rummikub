@@ -6,6 +6,7 @@ The FRN-2026 component library: designed in Figma, built as Nunjucks partials an
 - **Snapshot:** these docs mirror Figma as of 2026-10-27 (#51), and Figma keeps changing. Re-read the frame before porting; the frame wins over a doc or decision that disagrees, and the diff fixes the doc.
 - **Frames:** desktop 1512 (Utopia Max), tablet 834 and mobile 390 (Utopia Min). Node IDs are in [`../figma-state.json`](../figma-state.json).
 - **Token values:** [`_tokens.md`](_tokens.md).
+- **Rhythm:** type sizes and gaps follow [`../../design-system/rhythm.md`](../../design-system/rhythm.md) (G53). Where a component doc states a gap or text size that disagrees, the rule set wins until Figma catches up.
 - **Scripting Figma:** read [`../figma-gotchas.md`](../figma-gotchas.md) before any `use_figma` call.
 - **Code Connect:** the API refuses writes on this plan. Link by hand in Dev Mode from the index below (repo paths on `development`, switch to `main` once merged); see the gotchas file.
 

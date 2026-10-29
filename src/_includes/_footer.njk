@@ -19,9 +19,9 @@
         {% call contactCard("Not sure what to say?") %}
         <button type="button" data-dialog-open="contact-template" data-icon="email">Copy this template email</button>
         <dialog id="contact-template" aria-labelledby="contact-template-title">
-            <div class="flow has-gap-xl">
+            <div class="flow has-gap-l-xl">
                 <h2 id="contact-template-title" class="sr-only">Template enquiry email</h2>
-                <div class="flow has-gap-s" data-dialog-content>
+                <div class="flow has-gap-s-m" data-dialog-content>
                     <p>Hi, I’m <strong>Carla</strong> and I'm a <strong>Marketing Director</strong> at <strong>Company</strong>. I found you through <strong>place, person, or thing</strong>, and love the work you did on <strong>your favourite project</strong>.</p>
                     <p>I'd love to hire you to help us with <strong>project</strong> so we can <strong>business goal</strong>. Our timeline looks like <strong>dates</strong> and we'd like to keep the price about <strong>£3k (with room up to £8k if we can make a solid business case for it)</strong>.</p>
                     <p>Full disclosure: I'm talking with a few other agencies like <strong>these folks</strong>.</p>
@@ -37,7 +37,7 @@
         </dialog>
         {% endcall %}
         {% call contactCard("Feeling social?") %}
-        <ul class="flow has-gap-2xs">
+        <ul class="flow has-gap-xs">
             {% for link in site.social %}
             <li><a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" data-icon="arrow-ext">{{ link.label }}</a></li>
             {% endfor %}

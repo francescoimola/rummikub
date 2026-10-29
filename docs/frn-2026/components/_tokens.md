@@ -2,7 +2,7 @@
 
 Resolved Utopia values from the Figma **Utopia** collection (`VariableCollectionId:2271:2222`, 62 variables). Min is the 390 and 834 frames, Max the 1512 frames. In code each one is a fluid `clamp()` from `_scale.scss` / `_cleacss-overrides.scss`, never these px ([port rules](../decisions.md#port-rules-figma-is-a-snapshot-the-repo-stays-fluid-2026-10-25)).
 
-Figma `space/s-m` = CSS `--space-s-m`; `step/2` = `--step-2`; `layout/content-width` and `layout/inline-size` map to the CSS names in the tables.
+Only four of these steps (plus `space/3xs`) are rhythm gaps: see [`../../design-system/rhythm.md`](../../design-system/rhythm.md). Figma `space/s-m` = CSS `--space-s-m`; `step/2` = `--step-2`; `layout/content-width` and `layout/inline-size` map to the CSS names in the tables.
 
 ## Type
 
