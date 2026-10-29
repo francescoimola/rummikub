@@ -221,8 +221,6 @@ main:has(> .cta-card:last-child) {
     >:is(h1, h2) {
         align-self: start; // the row stretches its items; keep the pill hugging its text
         margin: 0;
-        text-box-edge: cap alphabetic;
-        text-box-trim: trim-both;
     }
 }
 
