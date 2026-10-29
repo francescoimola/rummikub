@@ -40,13 +40,15 @@ eleventyNavigation:
         {% endfor %}
     </ul>
 </section>
-<section class="home-block flow has-gap-s-m" aria-labelledby="featured-work">
+<section class="home-block flow has-gap-xs" aria-labelledby="featured-work">
     <h2 id="featured-work">Featured work</h2>
+    <div class="flow has-gap-l-xl">
     {% for slug in collaborate.featured %}
     {% for project in collections.work %}{% if project.fileSlug == slug %}
     {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "") }}
     {% endif %}{% endfor %}
     {% endfor %}
+    </div>
 </section>
 <section class="section">
     <h2 class="highlight-header">Can we rely on him?</h2>
