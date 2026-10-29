@@ -762,7 +762,6 @@ main svg.illustration-wide {
 }
 
 .home-intro__statement {
-    font-weight: var(--font-weight-medium);
     letter-spacing: var(--letter-spacing-xl);
     text-wrap: balance;
 }
@@ -816,12 +815,6 @@ main svg.illustration-wide {
     display: block;
     aspect-ratio: var(--ratio-3-2);
     object-fit: cover;
-}
-
-.project-item h2 {
-    font-size: var(--step-0);
-    font-weight: var(--font-weight-bold);
-    line-height: 1.5;
 }
 
 // ---- Case study page ----
