@@ -3,11 +3,12 @@
 {% from "_contact-card.njk" import contactCard %}
 <footer class="site-footer">
 <div class="site-footer__inner">
-    <section id="contact" class="site-footer__contact flow has-gap-xs" aria-labelledby="contact-title">
-        <div class="flow has-gap-xs has-mb-s balance">
+    <section id="contact" class="site-footer__contact flow has-gap-s-m" aria-labelledby="contact-title">
+        <div class="flow has-gap-xs balance">
             <h2 id="contact-title">Contact</h2>
             <p>Ready to talk shop or want to discuss an idea? Get in touch and I’ll reply within a day.</p>
         </div>
+        <div class="flow has-gap-xs">
         {% call contactCard("Send me a good 'ol email", '<span class="sr-only">' + site.email + '</span><span aria-hidden="true">' + (site.email | replace("@", " at ") | replace(".", " dot ")) + '</span>') %}
         <button type="button" data-copy-email="{{ site.email }}" data-icon="copy">Copy email address</button>
         <p role="status" class="sr-only" data-copy-status></p>
@@ -42,6 +43,7 @@
             {% endfor %}
         </ul>
         {% endcall %}
+        </div>
     </section>
     <div class="site-footer__art" aria-hidden="true">{% icon "mailstorm" %}</div>
     <div class="site-footer__colophon flow has-gap-s-m">

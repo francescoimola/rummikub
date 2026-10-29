@@ -88,6 +88,10 @@ html.lenis body {
 
     --tap-extend: var(--space-3xs);
 
+    // Stroke weights: a section stroke is thin or thick, always a multiple of the border-width token
+    --stroke-thin: var(--input-border-width);
+    --stroke-thick: calc(var(--input-border-width) * 4);
+
     // Opacity
     --opacity-active: 0.8;
     --opacity-disabled: 0.5;
@@ -254,7 +258,7 @@ small, .small, .small>* {
 figcaption {
     font-size: var(--step--1); // G12; beats cleacss's layered font-size-7
     line-height: 1.3;
-    margin-top: var(--space-2xs);
+    margin-top: var(--space-3xs); // Hang: the caption belongs to its image
     text-align: start;
 }
 
@@ -547,8 +551,23 @@ summary {
 
 hr {
     inline-size: 100%;
+    block-size: auto; // cleacss's .text hr adds a 2px background line; the stroke is the border alone
+    background: none;
     border-style: unset;
-    border-block-start: var(--input-border-width) solid var(--input-border-color);
+    border-block-start: var(--stroke-thin) solid var(--input-border-color);
+}
+
+hr.stroke-thick {
+    border-block-start-width: var(--stroke-thick);
+}
+
+// Where .text meets .flow, flow alone sets the gap: cleacss's .text zeroes the gap and adds a margin instead
+.text.flow {
+    gap: var(--flow-gap);
+
+    >*+* {
+        margin-block-start: 0;
+    }
 }
 
 footer a {
