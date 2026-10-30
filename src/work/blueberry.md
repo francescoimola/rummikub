@@ -16,13 +16,11 @@ templateEngineOverride: njk,md
 
 Four months into what was initially a team assistant role, I was tasked to coordinate Blueberry's marketing and communications, a promotion that quickly shifted my workload from manning the phone to covering all marketing operations, brand, content, and events. 
 
-The first problem of the marketing department was operational. The company was paying for a stack of tools that either overlapped or just weren't being used properly, which usually happens when no one's had time to step back and ask what's really needed. 
+The first problem of the marketing department was operational. The company was paying for a stack of tools that either overlapped or just weren't being used properly, which usually happens when no one's had time to step back and ask what's really needed. Thus, I audited the lot and consolidated where I could. By the end of my second year, as a result, yearly marketing costs had dropped by a third while quality and output stayed the same or improved.
 
-A few months into the role, I audited the lot and consolidated where I could. By the end of my second year, yearly marketing costs had dropped by a third while quality and output stayed the same or improved. 
+Budget aside, the marketing team at Blueberry had operated in a silo and was disconnected from the rest of the company; not without some resistance, but I was able to harmonize its work with the everyone else's by moving most of its operations into the same CRM and project management tool used byt he rest of the team. The mean that everyone could finally see work in progress, share ideas, and for the first time understand what our department was doing and why. It also meant I had a proper base to run campaigns, manage content, and keep track of everything. No more relying on stuff bookmarked in the inbox.
 
-Budget aside, marketing at Blueberry had operated as a standalone and somewhat disconnected thing from the rest of the company—in part because it had always been a one person operation. Not without some resistance, but I was able to move most of its operations into the same CRM and project management tool that everyone else used, which meant the wider team could finally see work in progress, share ideas, and for the first time understand what our department was doing and why. It also meant I had a proper base to run campaigns, manage content, and keep track of everything—no more relying on stuff bookmarked in your inbox.
-
-I also worked with the Compliance team to set up processes for GDPR and email list hygiene. Unsexy work I must admit, but it saved—I hope—the business from a world of pain down the line. 
+The final operational puzzle piece was solved by working in tandem with the Compliance team to set up processes for GDPR and email list hygiene. Unsexy work I must admit, but vital in order to save the business from a world of pain down the line. 
 
 ## A slow pivot
 

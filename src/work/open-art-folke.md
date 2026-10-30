@@ -21,17 +21,17 @@ Dubbed Open Art Folke, the initiative is Folkestone's first artist-led, grassroo
 
 The part that brought me the most satisfaction was articulating what Open Art Folke is all about, and how they aim to grow, to the general public, unfamiliar audiences, and artists who had not yet taken part in the festival.
 
-{% projectVideo "/assets/video/open_art_folke.mp4", "Open Art Folke homepage, with an animated title", class="site-recording" %}
+{% figureImg "/assets/portfolio/oaf/OA-Logo-plus-texture.jpg", "The red OA logo over a halftone photo of a colourful Folkestone street" %}
+
+{% projectVideo "/assets/video/OAF_website_walkthrough_uncompressed.mp4", "Scrolling walkthrough of the Open Art Folke website", webm="/assets/video/OAF_website_walkthrough_uncompressed.webm", class="site-recording" %}
 
 ## Going further while staying local
 
 To connect with Open Art's local audience, we knew digital alone wouldn't cut it. Building on the print work OAF had done in earlier years, we secured a budget for a major print campaign, and I led its creative direction and execution.
 
+{% figureImg "/assets/portfolio/oaf/poster_on_pole.jpg", "Open Art Folke poster on a lamppost, with pink and yellow flowers in the foreground" %}
+
 We landed on a printed programme as the hero of the campaign: with detailed info about each open studio, show, and performance, this accessible 56-page booklet acts as a guide for visitors, and as a beautiful keepsake for participating artists. Alongside the programme, I also designed a budget-friendly run of posters and leaflets.
-
-The illustrations featured across all of these were created by [Suze Lawrence](https://suzelawrence.co.uk/), a brilliant local illustrator who took a rather expansive brief and turned it into a gestural, harmonious drawing that symbolises the theme for Open Art Folke 2026: *Art This Way*. Bringing the print campaign to life was a major group effort, and special thanks go to Folkestone Printing for, well, printing; Sangmin Cha and Simon Rickard for their help with gathering content and copy-editing; and Steven Aaron Williams for support with editing and for encouraging me to keep going till the final stretch.
-
-{% figureImg "/assets/portfolio/oaf/cover_scan.jpg", "Front and back covers of the Open Art Folke programme, with Suze Lawrence's illustration of Folkestone's streets" %}
 
 {% figureImg "/assets/portfolio/oaf/3-4.jpg", "Programme spread with the co-chairs' welcome to Open Art Folke" %}
 
@@ -39,7 +39,9 @@ The illustrations featured across all of these were created by [Suze Lawrence](h
 
 {% figureImg "/assets/portfolio/oaf/45-46.jpg", "Programme spread on the Docker Brewery group show, with a full-page painting of a green horse" %}
 
-{% figureImg "/assets/portfolio/oaf/poster_on_pole.jpg", "Open Art Folke poster on a lamppost, with pink and yellow flowers in the foreground" %}
+{% figureImg "/assets/portfolio/oaf/cover_scan.jpg", "Front and back covers of the Open Art Folke programme, with Suze Lawrence's illustration of Folkestone's streets" %}
+
+The illustrations featured across all of these were created by [Suze Lawrence](https://suzelawrence.co.uk/), a brilliant local illustrator who took a rather expansive brief and turned it into a gestural, harmonious drawing that symbolises the theme for Open Art Folke 2026: *Art This Way*. Bringing the print campaign to life was a major group effort, and special thanks go to Folkestone Printing for, well, printing; Sangmin Cha and Simon Rickard for their help with gathering content and copy-editing; and Steven Aaron Williams for support with editing and for encouraging me to keep going till the final stretch.
 
 {% figureImg "/assets/portfolio/oaf/leaflet.jpg", "Hand holding an Open Art Folke leaflet" %}
 
@@ -47,17 +49,20 @@ The illustrations featured across all of these were created by [Suze Lawrence](h
 
 Among all the ways in which Open Art Folke shares their story with the world, their website was what I felt had the most room for improvement. The redesign I gave it focuses on three things: highlighting the great imagery collected over the years, giving sponsors a dedicated space, and dressing Open Art in the most timeless and bold design possible so that their efforts can be recognised, now and in the future, from a mile away.
 
-I built it using a combination of handwritten HTML and CSS, a little help from AI where PHP and JavaScript were unavoidable, along with a ~~maniacal~~ healthy amount of attention to the tiniest details. Its content rests on the shoulders of the fabulous [Kirby CMS](https://getkirby.com/)—whose team was incredibly kind and funded our licence—and [Fortrabbit](https://www.fortrabbit.com)'s fuss-free hosting infrastructure.
+{% figureImg "/assets/portfolio/oaf/Macbook-mockup.jpg", "Laptop on a concrete floor showing the Open Art Folke homepage, with its red headline over a photo of an artist in her studio" %}
 
-To learn more about Open Art Folke, visit <a href="https://openartfolke.com" target="_blank" rel="noopener noreferrer" aria-label="Visit the Open Art Folke website">openartfolke.com</a>.
+{% mediaPair %}
+{% figureImg "/assets/portfolio/oaf/OAF_Homepage.png", "Open Art Folke homepage, with a red headline introducing the festival above a photo of an artist in her studio" %}
+{% figureImg "/assets/portfolio/oaf/oaf_sponsor_page.png", "Open Art Folke sponsor page, with a 'Why support us' section and a grid of sponsor logos" %}
+{% endmediaPair %}
 
-{% projectVideo "/assets/video/open_art_folke_about_page.mp4", "About page on the Open Art Folke website", class="site-recording" %}
+I built it using a combination of handwritten HTML and CSS, a little help from Claude Code where PHP and JavaScript were unavoidable, along with a ~~maniacal~~ healthy amount of attention to the tiniest details. Its content rests on the shoulders of the fabulous [Kirby CMS](https://getkirby.com/)—whose team was incredibly kind and funded our license—and [Fortrabbit](https://www.fortrabbit.com)'s fuss-free hosting infrastructure.
 
-![section on the Open Art Folke website that invites you to sign up for the newsletter](/assets/portfolio/oaf/oaf_signupform.png)
+See it for yourself, visit <a href="https://openartfolke.com" target="_blank" rel="noopener noreferrer" aria-label="Visit the Open Art Folke website">openartfolke.com</a>.
 
-!["About" page, above the fold](/assets/portfolio/oaf/oaf_about.png)
+{% figureImg "/assets/portfolio/oaf/oaf_figma.png", "Figma file with the website's components and the redesigned homepage, about, archive and sponsor pages" %}
 
-!["Sponsor" page, above the fold](/assets/portfolio/oaf/oaf_sponsor.png)
+{% figureImg "/assets/portfolio/oaf/oaf_mobile.png", "Two phones showing the Open Art Folke sponsor page and the 2026 festival programme page" %}
 
 ## A new brand identity for Open Art Folke
 
@@ -67,7 +72,7 @@ Rather than ditch all their hard work and start over, I went for a lighter appro
 
 {% projectVideo "/assets/video/oaf_logo_slides.mp4", "the Open Art Folke logo against different backgrounds" %}
 
-![overview of the Open Art Folke branding guidelines](/assets/portfolio/oaf/oaf_guidelines.png)
+{% figureImg "/assets/portfolio/oaf/guidelines.png", "Overview of the Open Art Folke brand guidelines: logo, colour options, palette and wordmark pages" %}
 
 ## Experiments and work in progress
 
@@ -75,8 +80,4 @@ A lot of my work on the third edition of the festival was intuitive and iterativ
 
 ![flyer with sarcastic, self-aware copy](/assets/portfolio/oaf/leaflet_early.jpg)
 
-![business card that spells out 'here is an idea' on one side and details on the other](/assets/portfolio/oaf/outreach-card-oaf.png)
-
-![desktop wireframes for Open Art Folke website on Figma](/assets/portfolio/oaf/oaf_website_figma.png)
-
-![Figma page where I explore several directions for the new Open Art Folke logo](/assets/portfolio/oaf/oaf_logo_exploration.png)
+![business card that spells out 'here is an idea' in bold stretched type](/assets/portfolio/oaf/oaf-outreach-cards.jpg)
