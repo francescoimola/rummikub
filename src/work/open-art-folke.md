@@ -1,7 +1,8 @@
 ---
 title: Open Art Folke
-metaTitle: "Open Art Folke | Case study | Francesco Imola"
-description: Design, branding, and marketing consulting for Folkestone's biggest artist-led grassroots art festival.
+metaTitle: Open Art Folke | Case study | Francesco Imola
+description: Design, branding, and marketing consulting for Folkestone's biggest
+  artist-led grassroots art festival.
 services: Print, Branding, Web Design, Strategy
 contentMode: contrast
 image: /assets/portfolio/oaf/Outdoor_Hero.jpg
@@ -12,7 +13,6 @@ permalink: /work/open-art-folke/
 layout: _base.njk
 templateEngineOverride: njk,md
 ---
-
 {% figureImg "/assets/portfolio/oaf/Outdoor_Hero.jpg", "The Open Art Folke 2026 programme, Art This Way, propped on a white wall against a blue sky" %}
 
 Every year, the artists, designers, and makers of Folkestone join forces to host a town-wide celebration where they showcase their work, open the doors to their studios, and reimagine streets, cafés, parks, and other unusual spaces.
@@ -73,10 +73,10 @@ Rather than ditch all their hard work and start over, I went for a lighter appro
 
 A lot of my work on the third edition of the festival was intuitive and iterative throughout, and much of it happened behind the scenes. For example, some of the things I designed were only seen by a select few as they were made for specific interim events, including flyers, social media templates, and an outreach-friendly "business card".
 
-![flyer with sarcastic, self-aware copy](/assets/portfolio/oaf/leaflet_early.jpg)
-
-![business card that spells out 'here is an idea' on one side and details on the other](/assets/portfolio/oaf/outreach-card-oaf.png)
+![flyer with sarcastic self-aware copy](/assets/portfolio/oaf/leaflet_early.jpg)
 
 ![desktop wireframes for Open Art Folke website on Figma](/assets/portfolio/oaf/oaf_website_figma.png)
 
 ![Figma page where I explore several directions for the new Open Art Folke logo](/assets/portfolio/oaf/oaf_logo_exploration.png)
+
+![business card that spells out 'here is an idea' in large stretched characters](/assets/portfolio/oaf-outreach-cards.jpg)
