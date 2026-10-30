@@ -1,7 +1,7 @@
 ---
 title: The Collective
 metaTitle: "The Collective | Case study | Francesco Imola"
-description: A website rebuild for a bespoke acoustics manufacturer, made for architects and specifiers. How three competing stakeholder visions became one coherent design.
+description: A website redesign for a bespoke acoustics manufacturer, made for architects and specifiers. How three competing stakeholder visions became one coherent design.
 services: Web Design, Copywriting, UX Consulting
 contentMode: contrast
 image: /assets/portfolio/the_collective_homepage.png
@@ -17,29 +17,27 @@ templateEngineOverride: njk,md
 
 The Collective designs, manufactures, and installs bespoke acoustic solutions for commercial and residential interiors. The majority of their clients are specifiers (architects, interior designers, and contractors) who need less marketing fluff and more technical data and reference images.
 
-Their previous website read like a dull product catalogue, and one of those that on top of lacking character isn't easy to navigate either. To work as a specifier's tool, this needed to be fixed. And so the plan became: surface the right products, hide all potential distractions, and make the company's end-to-end service immediately obvious.
+## What was the problem
 
-## Discovery
-
-After multiple working sessions with the team, a central tension cropped up. The three stakeholders, all senior partners in the business, had genuinely different visions for the site. On one hand, a challenger direction. On the other, a corporate tone. And the last, a preference for the pared back and simple. 
+Their previous website read like a dull product catalogue, and one of those that on top of lacking character isn't easy to navigate either. To work as a specifier's tool, this needed to be fixed. However, after multiple working sessions with the team, a tension cropped up alongside the need for a new site. The three stakeholders, all senior partners in the business, had genuinely different visions for the project. On one hand, a challenger direction. On the other, a corporate tone. And the last, a preference for the pared back and simple. 
 
 Meanwhile, I also learned that their current site was burying their strongest differentiator—that they guide clients from first consultation to final install and don't stop at the design stage—deep down layers of outdated design and jargon.
 
 {% figureImg "/assets/portfolio/tca_oldsite.png", "Two screenshots of the old website", caption="The Collective's previous website", imgClass="has-background-accent-light" %}
 
-## Phase one
+## First pass: working within the constraints
 
-I was initially commissioned to maintain the existing site structure, navigation, and CMS intact. Constraints in mind, I redesigned every page to be less cluttered and to better align with how the team actually speaks to clients face-to-face. 
+The plan became: let's surface the right products, hide all potential distractions, and make the company's end-to-end service immediately obvious.
 
-Although copywriting was never formally part of the brief, my design process always starts with words. So as well as working on the UI, I also wrote headlines and page-level copy.
+I was initially commissioned to maintain the existing site structure, navigation, and CMS intact. Constraints in mind, I redesigned every page to be less cluttered and to better align with how the team actually speaks to clients face-to-face. Although copywriting was never formally part of the brief, my design process always starts with words. So as well as working on the UI, I also wrote headlines and page-level copy.
 
 {% figureImg "/assets/portfolio/tca_phase1_homepage-products.png", "Screenshots of the Homepage and Products pages from the first design phase", caption="First phase redesign of the Homepage and Products pages", imgClass="has-background-accent-light" %}
 
 {% figureImg "/assets/portfolio/tca_phase1_sustainability.png", "Screenshots of the Sustainability page from the first design phase", caption="First phase redesign of the Sustainability page", imgClass="has-background-accent-light" %}
 
-## Phase two
+## Second pass: one concept for three visions
 
-A couple of months in, the brief expanded to a full refresh and most constraints came off. The question at this point became: Can you satisfy three competing visions across an entire new website without producing an incoherent mess? 
+The second version came out of several conversations with the marketing team, and it went a lot further. The brief in fact, by now, expanded to a full refresh and most constraints came off. The question at this point became: Can you satisfy three competing visions across an entire new website while staying coherent? 
 
 I chose a primary direction and built a system flexible enough to hold elements of each vision. The team's ambition to grow into a challenger-brand set the tone, and led to a bolder palette where the brand's earthy colours got pushed toward something more distinctive. I also took the opportunity to inject some personality into the design by using some see-through elements and a few skewed images. 
 
@@ -55,12 +53,16 @@ Simplicity, or rather effortlessness, is the steady hand guiding the user. This 
 
 {% figureImg "/assets/portfolio/tca_process.png", "Section explaining the customer's journey with the business", caption="Visualising the intended customer journey, step by step" %}
 
-{% figureImg "/assets/portfolio/tca_abravenewhome.png", "Presentation slides", caption="Slides covering key ideas and decisions behind the design concepts", class="no-bkg" %}
+## How it helped
 
-## Deliverables
+The three partners walked away with a concept that answered questions their old site never asked, and one direction they could all get behind: bold enough for a challenger brand, simple enough to feel effortless, and modular enough to carry the corporate weight where necessary.
+
+Here's what the team had in hand:
 
 - Identity and UX consultations
 - Competitive analysis
 - Two design phases with static Figma prototypes
 - Page-level copywriting
 - A presentation and a companion document uncovering the rationale behind every design decision
+
+{% figureImg "/assets/portfolio/tca_abravenewhome.png", "Presentation slides", caption="Slides covering key ideas and decisions behind the design concepts", class="no-bkg" %}
