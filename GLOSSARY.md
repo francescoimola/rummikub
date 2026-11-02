@@ -55,3 +55,23 @@ _Avoid_: Divider, hr (an accordion's thin line between questions is a divider, n
 **Illustration band**:
 A wide illustration set on its own between two sections, with space built into the band itself rather than added as a margin on the drawing.
 _Avoid_: Illustration margin
+
+**Intro**:
+The block that opens the homepage: the page title, a pair of photos, a short introduction and the Intro accordions.
+_Avoid_: Home hero, About section
+
+**Intro accordions**:
+The list of expandable topics at the end of the Intro that holds everything the old About page said: who Francesco is, his philosophy, recognition, the site and its credits.
+_Avoid_: About page, About section, FAQ (the Intro accordions mix questions with plain topics)
+
+**Pre-footer hero**:
+The homepage's closing band of large uppercase KC lettering, just above the footer, whose background fades from nothing into the footer colour.
+_Avoid_: Home hero (it no longer opens the page), CTA band (that is the call-to-action card)
+
+**Stacked**:
+A project item with its image above its text, across the full column. Featured items are always Stacked.
+_Avoid_: Vertical, full-width item
+
+**Split**:
+A project item with its image beside its text. Index items are Split when there is room, and fall back to Stacked when narrow.
+_Avoid_: Side-by-side, two-column item

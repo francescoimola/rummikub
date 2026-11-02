@@ -180,7 +180,7 @@ content:
     format: json
     fields:
       - name: about
-        label: About
+        label: Homepage accordions
         type: object
         list:
           collapsible: true

@@ -19,7 +19,7 @@ Four rungs ([Type ladder](https://github.com/francescoimola/rummikub/issues/79),
 
 - **Headings are body size.** Hierarchy between h2 and h3 comes from weight and space, not size. An h3 is dimmed, except inside a card, where the heading is the card's main heading.
 - **Two small sizes became one.** Today `<small>` and captions differ; both are `--step--1`.
-- **Frozen outside the ladder:** the home hero (`--step-hero`) fits its container exactly. The root `font-size: 15px` is the base of every `rem`.
+- **Frozen outside the ladder:** the pre-footer hero (`--step-hero`) fits its container exactly. The root `font-size: 15px` is the base of every `rem`.
 - **Letter spacing is unchanged** by this effort.
 
 ## 2. Spacing ladder
@@ -75,6 +75,8 @@ Which gap sits between which neighbours ([Pair table](https://github.com/frances
 | **Closing call-to-action band** | heading → text **Flow**; text → actions **Flow**; the two actions **Tight**; band padding **Chapter** above and below |
 | **Footer** | Contact heading + intro → first card **Flow**; cards **Tight**; the colophon's lines (text, badges, ©) **Flow**. The big Figma-drawn spaces around the drawing and colophon stay as drawn |
 | **Page hero** | gap between drawing and title, and hero padding: **Chapter** |
+| **Pre-footer hero** (homepage) | band padding **1.5 × Chapter** above and below, a marked `rhythm-exempt` exception for the room the slogan needs; touches the footer |
+| **Intro** (homepage) | title, photos, introduction and Intro accordions **Break** apart; photos **Tight** sideways |
 | **Wide illustration** | an illustration band: **Chapter** between blocks, **Break** padding inside, no margin on the drawing |
 | **Recognition** (About) | year | entries **Tight** (sideways); groups **Flow** apart; the entries in a group keep their Tight stack |
 | **FAQ accordion** | 1px divider centred, **Tight** each side, so an open answer ends with the same gap before the line |

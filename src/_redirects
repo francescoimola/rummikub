@@ -28,9 +28,10 @@
 /work/sarah-holistic-coach               /#case-studies                               301
 /work/tedx                               /#case-studies                               301
 
-# Retired in the FRN-2026 redesign: case studies live on the homepage, contact in the footer
+# Retired in the FRN-2026 redesign: case studies and the About content live on the homepage, contact in the footer
 /work                                    /#case-studies                               301
 /contact                                 /#contact                                    301
+/about                                   /#about                                      301
 
 # Old Astro sitemap location → new sitemap
 /sitemap-index.xml                       /sitemap.xml                                 301

@@ -1,5 +1,6 @@
-{% macro projectItem(title, services, image, alt, url="", ratio="") %}
-<article class="project-item">
+{# layout="stacked": image above text at every width (homepage Featured). Default is Split: image beside text once the item's column is wide enough #}
+{% macro projectItem(title, services, image, alt, url="", ratio="", layout="") %}
+<article class="project-item{% if layout == "stacked" %} project-item--stacked{% endif %}">
   {% if url %}<a class="project-item__media" href="{{ url }}">{% endif %}
     <img class="project-item__img" src="{{ image }}" alt="{{ alt }}"{{ ratio | mediaStyle | safe }}>
   {% if url %}</a>{% endif %}

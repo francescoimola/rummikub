@@ -71,6 +71,37 @@ $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:
         .grid-cols-2 {
             grid-template-columns: repeat(2, 1fr);
         }
+
+        // Homepage intro: photos side by side, so no crossfade and no pause control; the title centres over them
+        .home-intro__title {
+            text-align: center;
+        }
+
+        .home-intro__photos {
+            >img {
+                grid-area: auto;
+            }
+
+            >img:last-of-type {
+                animation: none;
+            }
+        }
+
+        .home-intro__pause,
+        .home-intro__toggle {
+            display: none;
+        }
+
+        // About accordion: photo | links, the links stacked at the photo's foot
+        .home-intro__portrait {
+            grid-template-columns: repeat(2, 1fr);
+
+            >ul {
+                flex-direction: column;
+                align-self: end;
+                gap: var(--space-3xs); // Hang: the stacked links read as one block (Francesco, review); the phone row keeps sideways Tight
+            }
+        }
     }
 
     // Label | content: folds later than the image grids, at iPad mini portrait's container width
@@ -84,13 +115,12 @@ $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:
 
     @container (min-width: #{scale.$bp-l}) {
 
-        // Image left / text right — the item's own fold, independent of the body's
-        .project-item {
+        // Image left / text right (Split) — the item's own fold, independent of the body's. Stacked items (homepage Featured) never fold
+        .project-item:not(.project-item--stacked) {
             grid-template-columns: 1fr 1fr;
         }
 
-        .project-item__media,
-        .project-item__img {
+        .project-item:not(.project-item--stacked) :is(.project-item__media, .project-item__img) {
             grid-column: 1;
             grid-row: 1;
         }

@@ -1,11 +1,16 @@
-{# FAQ list from faqs.json (G26): independent <details> (no name=), <hr> between. Answers are Markdown. #}
+{# One accordion: independent <details> (no name=, G26). The caller supplies the answer. prose=false drops .text for answers that aren't running text (photos, link lists, data lists). #}
+{% macro accordion(title, id="", prose=true) %}
+<details{% if id %} id="{{ id }}"{% endif %}>
+    <summary>{{ title }}</summary>
+    <div class="faq-answer{% if prose %} text{% endif %} flow has-gap-s-m">{{ caller() }}</div>
+</details>
+{% endmacro %}
+
+{# FAQ list from faqs.json: one accordion per item, <hr> between. Answers are Markdown. #}
 {% macro faqList(items) %}
 <div class="flow has-gap-xs">
     {%- for item in items %}
-    <details>
-        <summary>{{ item.question }}</summary>
-        <div class="faq-answer text flow has-gap-s-m">{{ item.answer | markdown | safe }}</div>
-    </details>
+    {% call accordion(item.question) %}{{ item.answer | markdown | safe }}{% endcall %}
     {%- if not loop.last %}
     <hr>
     {%- endif %}
