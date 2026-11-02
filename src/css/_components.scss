@@ -760,12 +760,18 @@ main svg.illustration-wide {
     max-inline-size: none;
     inline-size: calc(100% + 2 * var(--gutter-y-sticky));
     margin-inline: calc(-1 * var(--gutter-y-sticky));
-    padding-inline: var(--space-m-l);
+    padding-inline: var(--gutter-y);
     gap: var(--space-xs);
 
-    >img {
-        inline-size: 100%;
+    // The image transform wraps each <img> in <picture>, so the grid items are the pictures
+    >picture {
+        display: block;
         margin: 0;
+
+        >img {
+            inline-size: 100%;
+            margin: 0;
+        }
     }
 }
 
@@ -777,15 +783,15 @@ main svg.illustration-wide {
 // Phones, motion allowed: one photo space, the second photo fades in and out over the first on a 6s loop. CSS only; the hidden checkbox pauses it (WCAG 2.2.2)
 @media (prefers-reduced-motion: no-preference) {
     .home-intro__photos {
-        >img {
+        >picture {
             grid-area: 1 / 1;
         }
 
-        >img:last-of-type {
+        >picture:last-of-type {
             animation: intro-crossfade 6s var(--ease) infinite;
         }
 
-        &:has(.home-intro__pause:checked)>img:last-of-type {
+        &:has(.home-intro__pause:checked)>picture:last-of-type {
             animation-play-state: paused;
         }
 

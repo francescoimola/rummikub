@@ -78,11 +78,11 @@ $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:
         }
 
         .home-intro__photos {
-            >img {
+            >picture {
                 grid-area: auto;
             }
 
-            >img:last-of-type {
+            >picture:last-of-type {
                 animation: none;
             }
         }
