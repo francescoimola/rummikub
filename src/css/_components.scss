@@ -740,7 +740,7 @@ main svg.illustration-wide {
 // Intro: title, photo pair, introduction, Intro accordions. main>* would cap the block at --inline-size, so each child sets its own width
 .home-intro {
     max-inline-size: none;
-    padding-block-start: var(--space-xl-3xl); // Chapter: the room the old hero band gave the page top (Figma draws ~Chapter above the title)
+    padding-block-start: var(--space-l-xl); // Chapter: the room the old hero band gave the page top (Figma draws ~Chapter above the title)
 
     >* {
         inline-size: 100%;

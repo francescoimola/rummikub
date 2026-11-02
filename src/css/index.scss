@@ -203,6 +203,11 @@ body {
     max-inline-size: var(--max-width-size-6);
     letter-spacing: var(--letter-spacing-xl);
     text-wrap: balance;
+    hyphens: none;
+
+    &.headline {
+        text-wrap: pretty;
+    }
 }
 
 h3,
