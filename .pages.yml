@@ -43,6 +43,11 @@ content:
       - name: alt
         label: Alt text
         type: string
+      - name: thumbRatio
+        label: Thumbnail ratio (blank = 3:2)
+        type: select
+        options:
+          values: ["3:2", "7:5", "4:3", "16:9"]
       - name: endDate
         label: End date (YYYY-MM)
         type: date

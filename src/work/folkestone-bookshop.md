@@ -1,7 +1,8 @@
 ---
 title: The Folkestone Bookshop
-services: Email Marketing, Content Writing, Template Design
+services: Email Marketing, Template Design
 image: /assets/portfolio/bookshop_email.png
 alt: Person holding a stack of books in front of the camera
+thumbRatio: "4:3"
 endDate: 2025-01
 ---
