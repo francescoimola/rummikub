@@ -79,6 +79,6 @@ Both size tokens are rendered px at the 15px root: `fluid-rendered()` in `_scale
 
 ## Ratios
 
-`--ratio-3-2`, `--ratio-2-1`, `--ratio-1-1`, `--ratio-4-3`, `--ratio-16-9`, `--ratio-2-3`, `--ratio-3-4`, `--ratio-9-16`: values like `3 / 2`, for `aspect-ratio` (G11, [image.md](image.md)).
+`--ratio-3-2`, `--ratio-2-1`, `--ratio-1-1`, `--ratio-7-5`, `--ratio-4-3`, `--ratio-16-9`, `--ratio-2-3`, `--ratio-3-4`, `--ratio-9-16`: values like `3 / 2`, for `aspect-ratio` (G11, [image.md](image.md)).
 
 All of these live in `@layer type` in `_scale.scss`; none collides with a cleacss name.

@@ -20,6 +20,7 @@ Radius and stroke are overrides per placement, not part of the component: Projec
 | 3:2 (Figma default) | `3 / 2` | `--ratio-3-2` | Project item, Carousel, Figure, most photos |
 | 2:1 | `2 / 1` | `--ratio-2-1` | Wide art |
 | 1:1 | `1 / 1` | `--ratio-1-1` | Writing thumb |
+| 7:5 | `7 / 5` | `--ratio-7-5` | Work thumbnails (`thumbRatio`) |
 | 4:3 | `4 / 3` | `--ratio-4-3` | |
 | 16:9 | `16 / 9` | `--ratio-16-9` | Video posters |
 | 2:3 | `2 / 3` | `--ratio-2-3` | Portrait |
