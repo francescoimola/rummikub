@@ -1,3 +1,5 @@
+const { mediaStyle } = require("./render-helpers");
+
 // FNV-1a string hash → 32-bit seed, so a post's slug maps to one stable colour
 function hashString(str) {
   let h = 2166136261;
@@ -37,6 +39,11 @@ function trustedLastmodValue(data) {
 }
 
 module.exports = function (eleventyConfig) {
+  // ratio="7:5" → the style attribute figureImg emits, so a work item's thumbRatio is validated the same way
+  eleventyConfig.addFilter("mediaStyle", function (ratio) {
+    return mediaStyle(ratio);
+  });
+
   eleventyConfig.addFilter("longDate", function (date) {
     return new Date(date).toLocaleDateString("en-GB", {
       day: "numeric",

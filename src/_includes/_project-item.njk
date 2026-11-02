@@ -1,7 +1,7 @@
-{% macro projectItem(title, services, image, alt, url="") %}
+{% macro projectItem(title, services, image, alt, url="", ratio="") %}
 <article class="project-item">
   {% if url %}<a class="project-item__media" href="{{ url }}">{% endif %}
-    <img class="project-item__img" src="{{ image }}" alt="{{ alt }}">
+    <img class="project-item__img" src="{{ image }}" alt="{{ alt }}"{{ ratio | mediaStyle | safe }}>
   {% if url %}</a>{% endif %}
   <div class="flow has-gap-3xs">
       <h2>{{ title }}</h2>

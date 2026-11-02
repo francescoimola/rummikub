@@ -45,7 +45,7 @@ eleventyNavigation:
     <div class="flow has-gap-l-xl">
     {% for slug in collaborate.featured %}
     {% for project in collections.work %}{% if project.fileSlug == slug %}
-    {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "") }}
+    {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "", project.data.thumbRatio) }}
     {% endif %}{% endfor %}
     {% endfor %}
     </div>

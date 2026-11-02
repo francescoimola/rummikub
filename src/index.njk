@@ -30,7 +30,7 @@ key: Home
   <h2 id="case-studies">Featured</h2>
   <div class="flow has-gap-l-xl">
   {% for project in collections.workFeatured %}
-    {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "") }}
+    {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "", project.data.thumbRatio) }}
   {% endfor %}
   </div>
 </section>
@@ -47,7 +47,7 @@ key: Home
   <h2 id="index">Index</h2>
   <div class="flow has-gap-l-xl">
   {% for project in collections.workIndex %}
-    {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "") }}
+    {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "", project.data.thumbRatio) }}
   {% endfor %}
   </div>
 </section>

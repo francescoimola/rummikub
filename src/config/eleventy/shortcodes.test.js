@@ -377,6 +377,12 @@ describe("shortcodes.js — ratio=", () => {
     expect(result).toContain('style="aspect-ratio: var(--ratio-3-2); object-fit: cover"');
   });
 
+  it("accepts 7:5, the work-thumbnail ratio", () => {
+    const result = get("figureImg")("/a.jpg", "Alt", { ratio: "7:5" });
+
+    expect(result).toContain('style="aspect-ratio: var(--ratio-7-5); object-fit: cover"');
+  });
+
   it("combines a ratio with an object-position crop", () => {
     const result = get("figureImg")("/a.jpg", "Alt", { ratio: "9:16", position: "62% 18%" });
 
