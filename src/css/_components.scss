@@ -142,11 +142,11 @@ $carousel-arrow: oklch(0.351 0.034 121.6);
 }
 
 // Closing band touches the footer: drop main's end margin and the layout's bottom gutter at every width
-.layout:has(> main > .cta-card:last-child) {
+.layout:has(> main > :is(.cta-card, .prefooter-hero):last-child) {
     padding-block-end: 0;
 }
 
-main:has(> .cta-card:last-child) {
+main:has(> :is(.cta-card, .prefooter-hero):last-child) {
     margin-block-end: 0;
 }
 
@@ -709,43 +709,11 @@ main svg.illustration-wide {
 
 // ---- Hero bands ----
 // Every page's hero bleeds through the layout gutter to the banner and the viewport edges (Figma); main>* would cap it at --inline-size
-.home-hero,
 .page-header,
 .collab-hero {
     max-inline-size: none;
     inline-size: calc(100% + 2 * var(--gutter-y-sticky));
     margin: calc(-1 * var(--gutter-y-sticky)) calc(-1 * var(--gutter-y-sticky)) 0;
-}
-
-// ---- Homepage ----
-
-// KC hero band: the band is the container, so --step-hero (100cqi / --hero-line-em) sizes the widest line to the band's content box
-.home-hero {
-    container-type: inline-size;
-    padding-block: var(--space-xl-3xl);
-    padding-inline: var(--space-m-l); // the narrow banner's inset, so hero and nav edges match; wide, the h1 caps at 60rem and centres on the content column
-
-    h1 {
-        inline-size: fit-content;
-        margin-inline: auto;
-        font-family: var(--font-family-display);
-        font-size: var(--step-hero);
-        font-weight: var(--font-weight-base);
-        line-height: var(--line-height-hero);
-        letter-spacing: var(--letter-spacing-hero);
-        hyphens: none; // cleacss hyphenates h1
-        text-transform: uppercase; // KC is caps-only; keeps the swap fallback in caps too
-        max-inline-size: none;
-    }
-
-    span {
-        display: block;
-        white-space: nowrap;
-    }
-}
-
-.home-hero__indent {
-    padding-inline-start: 2.2em; // Figma's indent for the second and last lines
 }
 
 // Collaborate hero: copy, then two duotone photos, on the brand band at content width
@@ -767,16 +735,130 @@ main svg.illustration-wide {
     align-items: start; // the portrait and the square keep their own heights
 }
 
-// Figma: the photo takes one column of a three-column row
-.home-intro__photo {
-    margin-inline: 0; // the global img rule centres it
-    max-inline-size: calc(50% - var(--space-s));
-    aspect-ratio: var(--ratio-1-1);
-    object-fit: cover;
+// ---- Homepage ----
+
+// Intro: title, photo pair, introduction, Intro accordions. main>* would cap the block at --inline-size, so each child sets its own width
+.home-intro {
+    max-inline-size: none;
+    padding-block-start: var(--space-xl-3xl); // Chapter: the room the old hero band gave the page top (Figma draws ~Chapter above the title)
+
+    >* {
+        inline-size: 100%;
+        max-inline-size: var(--inline-size);
+        margin-inline: auto;
+    }
+}
+
+// Headline rung; left on phones, centred once the photos sit side by side (_responsive.scss)
+.home-intro__title {
+    max-inline-size: var(--grid-width-l);
+}
+
+// Bleeds through the layout gutter to the header inset, so the photo edges line up with the banner. Base = one column (reduced motion: the photos stack)
+.home-intro__photos {
+    position: relative;
+    max-inline-size: none;
+    inline-size: calc(100% + 2 * var(--gutter-y-sticky));
+    margin-inline: calc(-1 * var(--gutter-y-sticky));
+    padding-inline: var(--space-m-l);
+    gap: var(--space-xs);
+
+    >img {
+        inline-size: 100%;
+        margin: 0;
+    }
+}
+
+.home-intro__pause,
+.home-intro__toggle {
+    display: none;
+}
+
+// Phones, motion allowed: one photo space, the second photo fades in and out over the first on a 6s loop. CSS only; the hidden checkbox pauses it (WCAG 2.2.2)
+@media (prefers-reduced-motion: no-preference) {
+    .home-intro__photos {
+        >img {
+            grid-area: 1 / 1;
+        }
+
+        >img:last-of-type {
+            animation: intro-crossfade 6s var(--ease) infinite;
+        }
+
+        &:has(.home-intro__pause:checked)>img:last-of-type {
+            animation-play-state: paused;
+        }
+
+        &:has(.home-intro__pause:focus-visible) {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+    }
+
+    .home-intro__pause {
+        display: block; // .sr-only keeps it invisible but focusable
+    }
+
+    // The tap target: covers the photos, toggles the checkbox
+    .home-intro__toggle {
+        display: block;
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        cursor: pointer;
+    }
+}
+
+// 0–3s the first photo, 3–6s the second, a 0.6s crossfade each way
+@keyframes intro-crossfade {
+    0%, 40% { opacity: 0; }
+    50%, 90% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+// About accordion: photo, then the social links in a row; side by side from $bp-s with the links at the photo's foot (_responsive.scss)
+.home-intro__portrait {
+    display: grid;
+    inline-size: 100%;
+    gap: var(--space-xs);
+
+    >img {
+        inline-size: 100%;
+        margin: 0;
+    }
 }
 
 .home-block {
     max-inline-size: var(--grid-width-l);
+}
+
+// Pre-footer hero: the KC slogan band. Bleeds like the hero bands and fades from the page into the footer colour; the band is the container, so --step-hero sizes the widest line to its content box
+.prefooter-hero {
+    container-type: inline-size;
+    max-inline-size: none;
+    inline-size: calc(100% + 2 * var(--gutter-y-sticky));
+    margin-inline: calc(-1 * var(--gutter-y-sticky));
+    padding-block: calc(1.5 * var(--space-xl-3xl)); // rhythm-exempt: Figma's "plenty of space", 1.5× Chapter (Q6)
+    padding-inline: var(--space-m-l); // the header inset
+    background: linear-gradient(to bottom, transparent, var(--band-bg));
+
+    p {
+        max-inline-size: none;
+        margin: 0;
+        font-family: var(--font-family-display);
+        font-size: var(--step-hero);
+        font-weight: var(--font-weight-base);
+        line-height: var(--line-height-hero);
+        letter-spacing: var(--letter-spacing-hero);
+        text-align: center;
+        text-transform: uppercase; // KC is caps-only; keeps the swap fallback in caps too
+        color: var(--brand-900);
+    }
+
+    span {
+        display: block;
+        white-space: nowrap;
+    }
 }
 
 // ---- Project item (Selected Work listing) ----

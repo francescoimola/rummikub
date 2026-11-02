@@ -75,6 +75,7 @@ Values from [`_tokens.md`](_tokens.md). The radius is bound but there is no fill
 - The unclosed `<p>` in the third About answer goes with the hand-written markup.
 - Figma's Open frame is the reference for the open spacing.
 - **Ported (#31):** `faqs.json` + its `.pages.yml` entry (three object lists, `answer` is `type: text`). `_faq-list.njk` exports `faqList(items)`: independent `<details>`, `<hr>` between, the answer in `div.faq-answer.text.flow` (`--space-s` below) through the new `markdown` filter (same markdown-it instance as posts, so external links get `target`/`rel`). About, Web design and Consultations render from it; the unclosed About `<p>` and the `has-pb-s` paragraph hacks are gone.
+- **Intro accordions (homepage):** `_faq-list.njk` also exports `accordion(title, id, prose)`, one `<details>` whose answer comes from `{% call %}`; `faqList` is built on it. Every homepage accordion is hand-written in `src/index.njk`, none in Pages CMS (`faqs.about` was removed); `prose=false` drops `.text` where the answer isn't running text, `<hr>` between each. `faqs.json` now holds only `design` and `consultations`; the unbuilt `about.njk` still calls `faqList(faqs.about)` and renders nothing.
 
 ## Open questions
 

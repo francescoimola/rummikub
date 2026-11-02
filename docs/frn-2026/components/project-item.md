@@ -31,6 +31,7 @@ The CTA label is not bound to a text property in Figma. The macro's label is fix
 - In code both come from one `.project-item`. The fold is a container query against `main` at `$bp-l`, not a viewport breakpoint (`_responsive.scss`, block for `min-width: $bp-l`). Below it the item stacks.
 - The body is vertical at every width (G20). The old `$bp-2xl` row (title left, CTA pushed to the far edge) is dropped, which matches the Split frames.
 - Frames: Split on 1512 and 834, Stacked on 390 (Q25: container-driven, frames are visual checks).
+- **Homepage Featured is always Stacked** (`projectItem(…, layout="stacked")` → `.project-item--stacked`, which skips the `$bp-l` fold). Index stays Split and stacks when narrow.
 
 ## Tokens
 

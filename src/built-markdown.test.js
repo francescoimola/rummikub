@@ -22,7 +22,7 @@ describe("built markdown twins", () => {
 
   it("opens with frontmatter naming the canonical URL", () => {
     expect(read("index.md")).toMatch(/^---\ntitle: ".+"\nurl: "https:\/\/francescoimola\.com\/"/);
-    expect(read("about/index.md")).toContain('url: "https://francescoimola.com/about/"');
+    expect(read("art/index.md")).toContain('url: "https://francescoimola.com/art/"');
   });
 
   // The whole point is fewer tokens and no DOM noise — a twin carrying markup has failed at both.

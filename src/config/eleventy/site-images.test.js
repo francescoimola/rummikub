@@ -20,12 +20,12 @@ describe('site image tokens resolve to built files', () => {
   });
 
   // personImage is an eleventy-img derivative, not a passthrough copy — it exists only while
-  // about.njk still references the 2560px source. Drop that <img> and the schema URL 404s.
+  // the homepage's About accordion still references the 2560px source. Drop that <img> and the schema URL 404s.
   it('ships the Person headshot derivative', () => {
     expect(existsSync(localPath(site.personImage))).toBe(true);
   });
 
-  it('keeps the source that generates the headshot derivative referenced on /about/', () => {
-    expect(readFileSync('src/about.njk', 'utf8')).toMatch(/francesco-studio-shot\.png/);
+  it('keeps the source that generates the headshot derivative referenced on the homepage', () => {
+    expect(readFileSync('src/index.njk', 'utf8')).toMatch(/francesco-studio-shot\.png/);
   });
 });

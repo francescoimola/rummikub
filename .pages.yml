@@ -179,20 +179,6 @@ content:
     path: src/_data/faqs.json
     format: json
     fields:
-      - name: about
-        label: About
-        type: object
-        list:
-          collapsible: true
-        fields:
-          - name: question
-            label: Question
-            type: string
-            required: true
-          - name: answer
-            label: Answer (Markdown)
-            type: text
-            required: true
       - name: design
         label: Web design
         type: object

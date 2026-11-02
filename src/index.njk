@@ -8,21 +8,108 @@ key: Home
 ---
 {% from "_carousel.njk" import carousel %}
 {% from "_project-item.njk" import projectItem %}
-{# Line breaks and the two indented lines are the design; each span is one line of the KC hero #}
-<header class="home-hero">
-  <h1><span>big-idea</span> <span class="home-hero__indent">person?</span> <span>let’s get</span> <span>your big ideas</span> <span class="home-hero__indent">across</span></h1>
-</header>
+{% from "_faq-list.njk" import accordion %}
+{# Intro: title, photo pair, introduction, then the Intro accordions — everything the retired About page said (about.njk, kept unbuilt). All accordion text is written here, not in Pages CMS #}
+<section class="home-intro flow has-gap-l-xl" aria-labelledby="intro-title">
+  <h1 id="intro-title" class="headline home-intro__title">Hi, my name is Francesco and I am a designer, marketer, and artist based in Folkestone, Kent. My bread and butter are brand messaging, websites, and graphic design.</h1>
 
-<section class="section" aria-label="Introduction">
-  <div class="flow has-gap-s-m">
-    <h2>I'm Francesco Imola, a designer, marketer, and artist based in Folkestone, Kent.</h2>
-    <img class="home-intro__photo" src="/assets/images/francesco.png" alt="Francesco Imola, smiling in front of a flowering hedge">
+  {# Wide: side by side. Narrow: one photo space, crossfading with no JS; the hidden checkbox pauses it (WCAG 2.2.2). Reduced motion: stacked #}
+  <div class="home-intro__photos grid-cols-2">
+    <input type="checkbox" id="intro-photos-pause" class="home-intro__pause sr-only">
+    <label for="intro-photos-pause" class="home-intro__toggle"><span class="sr-only">Pause photos</span></label>
+    <img src="/assets/images/francesco.png" alt="Francesco Imola, smiling in front of a flowering hedge"{{ "3:2" | mediaStyle | safe }}>
+    <img src="/assets/images/musician-intro.jpeg" alt="Francesco performing in a church surrounded by a pensive audience"{{ "3:2" | mediaStyle | safe }}>
   </div>
+
   <div class="flow has-gap-s-m">
-    <p>I help brands with big missions stop chasing novelties and start rethinking their fundamentals. My bread and butter are websites, UX, UI, copywriting, brand messaging, and graphic design.</p>
-    <p>In other words, if people don't get what you do, I rewrite it; if they can't work out how to buy, I redesign it; and if they can't tell you from the guys next door, I find what makes you different and say it loud.</p>
-    <p>When I’m not resuscitating brands from the brink of death, I make art and work with up and coming artists.</p>
-    <a href="/about/" data-icon="arrow-right">More about me</a>
+    <p>I help brands with big missions stop chasing novelties and start rethinking their fundamentals. In other words, if people don't get what you do, I rewrite it; if they can't work out how to buy, I redesign it; and if they can't tell you from the guys next door, I find what makes you different and say it loud.</p>
+    <p>When I’m not resuscitating brands from the brink of death, I make art with words and pixels, and work with up and coming artists.</p>
+  </div>
+
+  <div class="flow has-gap-xs">
+    {% call accordion("About", id="about", prose=false) %}
+      <p>I come from a family of makers, artists, and business owners. As a child I dreamt first of becoming a magician, then of designing chairs. And while neither of those dreams came true, I didn’t land far off.</p>
+      <p>I now live in Folkestone, on the Kent coast, but I was born in Italy in a land called Ciociaria. These days, I spend my time <a href="/studio/">making complex stories a little less complex</a>, and drawing people closer to good products, good services and good talent.</p>
+      <p>I graduated in Digital Arts from the University of Greenwich, which is where much of this started, and then spent six years between cultural institutions and the Film & TV industry. I also <a href="/writing/">write</a>, and volunteer with <a href="https://openartfolke.com" rel="noopener noreferrer" target="_blank">Open Art Folke</a> to support fellow artists. And I <a href="/art/">make art</a> of my own, with words and pixels.</p>
+      {# The 2560px source must stay referenced: it generates the Person schema headshot (site.personImage) #}
+      <div class="home-intro__portrait">
+        <img src="/assets/images/francesco-studio-shot.png" alt="Francesco Imola" width="2560" height="2560"{{ "3:2" | mediaStyle | safe }}>
+        <ul class="flow-row has-gap-xs" aria-label="Find me elsewhere">
+          {% for link in site.social %}
+          <li><a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" data-icon="arrow-ext">{{ link.label }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endcall %}
+    <hr>
+    {% call accordion("Philosophy", prose=false) %}
+      <p>We live in turbulent times. There is an overabundance of information, and in the midst of it I see designers taking on facilitator roles, aka helping people communicate.</p>
+      <p>When it comes to marketing, I specialise in the trust-based kind—or the art of building credibility and long-term relationships by being honest, helpful and consistent with your audience.</p>
+    {% endcall %}
+    <hr>
+    {% call accordion("Working with agencies", prose=false) %}
+      <div class="flow has-gap-xs">
+        <p>It takes all sorts to make a world, and thank goodness for that! I keep an open door policy: I'm open to white-label or overflow briefs from agencies, and I'll consider in-house roles.</p>
+        <a href="/collaborate/" data-icon="arrow-right">Here's what I can offer you</a>
+      </div>
+    {% endcall %}
+    <hr>
+    {% call accordion("Recognition", prose=false) %}
+      <dl class="data-list">
+        {% for group in recognition %}
+        <div class="data-list__item">
+          <dt class="data-list__year">{{ group.year }}</dt>
+          <dd class="data-list__body">
+            {% for entry in group.entries %}
+            <p class="flow has-gap-xs">
+              <span class="dimmed">{{ entry.label }}</span>
+              {% for item in entry.items %}
+              <small>{{ item }}</small>
+              {% endfor %}
+            </p>
+            {% endfor %}
+          </dd>
+        </div>
+        {% endfor %}
+      </dl>
+    {% endcall %}
+    <hr>
+    {% call accordion("Design thinking") %}
+      <p>Your car, your phone, your dad's beloved charcoal barbecue that takes ages to heat up but, once it's hot, it really is a joy to cook with. Design is the lens through which we experience the world, and on a good day, my job is to shape those lenses by asking the question: how can I make this thing better, or more helpful?</p>
+      <p>If I had to sum up my design manifesto, the synopsis would probably state "there is no good design without compromise". Good design is all about choosing the right trade-off for your audience, which may mean choosing to follow a trend, or sticking to the tried and tested, being playful or being dead serious, or bending the process in your favour. Compromise might also mean skipping the steps you deem unnecessary, starting from the answer and working backwards, trusting your gut, or making something for no better reason than to make someone smile.</p>
+      <p>Ultimately, good design is imperceptible—that is, it's harder to spot than bad design. And though it may be impossible to achieve, good design is always worth aiming for.</p>
+    {% endcall %}
+    <hr>
+    {% call accordion("On trust-based marketing") %}
+      <p>With so many people losing trust in the messages being pushed by mainstream marketing, an approach based on trust is how you get people to choose you, because, well, they trust you. Not because you manipulated them, chased them with an axe or pushed them to their limit.</p>
+      <p>It's a vast and wild frontier that many marketers and brands have only begun to explore, and it's very much one of the pillars of my work.</p>
+      <p>To borrow the <a href="https://x.com/ungatedlife/status/1584621315998486528" target="_blank" rel="noopener noreferrer">words of Rob Hardy</a>, the main guy <a href="https://forest.quest/non-coercive-marketing-primer/" target="_blank" rel="noopener noreferrer">who championed the term</a>, "the big secret is that non-coercive marketing isn't actually about marketing at all, but instead about how we relate to ourselves and to others, and healing the wounds of distrust that ripple through generations."</p>
+      <p>My work in this field incorporates everything I have learnt from working in marketing (mostly content and inbound), internal communications, exhibition design, and graphic design over the last 8 years.</p>
+    {% endcall %}
+    <hr>
+    {% call accordion("Favourite projects") %}
+      <p>I get on best with folks who have a meaningful message to share or people who have spent a long time developing a solid product or service that they want to see succeed. This category often includes—but isn’t limited to—charities, indie makers and small businesses with a long-standing presence.</p>
+      <p>That said, I won’t work with clients in the fossil fuel sector, or anyone who's directly tied to the industry. I'm not interested in fast fashion, weight loss or gambling either; and I steer clear of briefs that call for dark design patterns, manipulative marketing, or anything that makes people feel worthless in order to win a sale—though luckily these are becoming less common occurrences.</p>
+    {% endcall %}
+    <hr>
+    {% call accordion("About this website", prose=false) %}
+      <p>This site is not merely a self-promotion machine, but a self-invention machine. An <a href="https://notbadnotbad.substack.com/p/i-hope-someday-i-get-to-visit-your" target="_blank" rel="noopener noreferrer">island</a> to inhabit with my work, ideas, and the things I care about. Built for the long term, but malleable enough to change over time.</p>
+      <p>I've taken steps to make this island as engaging and accessible as possible. I hope that you'll enjoy your stay.</p>
+      <div class="flow has-gap-xs">
+        <a href="/about/colophon/" data-icon="arrow-right">How this website is built</a>
+        <a href="/about/accessibility/" data-icon="arrow-right">Learn about its accessibility</a>
+        <a href="https://github.com/francescoimola/rummikub" data-icon="arrow-ext" rel="noopener noreferrer" target="_blank">See the code on Github</a>
+      </div>
+    {% endcall %}
+    <hr>
+    {% call accordion("Credits") %}
+      <ul class="flow has-gap-xs">
+        <li>The photo in this page is by <a href="https://mooiefeephotography.co.uk" target="_blank" rel="noopener noreferrer">Amy (Mooie Fee) Kolsteren</a>. The rest are mine.</li>
+        <li>Illustration are by <a href="https://drands.atipoillustrations.com/page/about" target="_blank" rel="noopener noreferrer">Atipo</a>.</li>
+        <li>The typefaces in use are <a href="https://www.collletttivo.it/typefaces/ronzino" target="_blank" rel="noopener noreferrer">Ronzino</a> by Collletttivo, and KC Pelletier Sans by <a href="https://www.instagram.com/lukepelletier/" target="_blank" rel="noopener noreferrer">Luke Pelletier</a> for Kern Club, used for the main headings.</li>
+        <li>All graphic design is produced by me, and licensed to me only for marketing and promotional purposes. Please don't use any of the imagery on this site without permission.</li>
+      </ul>
+    {% endcall %}
   </div>
 </section>
 
@@ -30,7 +117,7 @@ key: Home
   <h2 id="case-studies">Featured</h2>
   <div class="flow has-gap-l-xl">
   {% for project in collections.workFeatured %}
-    {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "", project.data.thumbRatio) }}
+    {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "", project.data.thumbRatio, layout="stacked") }}
   {% endfor %}
   </div>
 </section>
@@ -51,3 +138,8 @@ key: Home
   {% endfor %}
   </div>
 </section>
+
+{# Pre-footer hero: a slogan, not a heading (the footer's Contact heading follows). Each span is one line; the band fades into the footer colour #}
+<div class="prefooter-hero">
+  <p><span>big-idea</span> <span>person?</span> <span>let’s get your</span> <span>big ideas across</span></p>
+</div>
