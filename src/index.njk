@@ -9,7 +9,7 @@ key: Home
 {% from "_carousel.njk" import carousel %}
 {% from "_project-item.njk" import projectItem %}
 {% from "_faq-list.njk" import accordion %}
-{# Intro: title, photo pair, introduction, then the Intro accordions — everything the retired About page said (about.njk, kept unbuilt) #}
+{# Intro: title, photo pair, introduction, then the Intro accordions — everything the retired About page said (about.njk, kept unbuilt). All accordion text is written here, not in Pages CMS #}
 <section class="home-intro flow has-gap-l-xl" aria-labelledby="intro-title">
   <h1 id="intro-title" class="headline home-intro__title">Hi, my name is Francesco and I am a designer, marketer, and artist based in Folkestone, Kent. My bread and butter are brand messaging, websites, and graphic design.</h1>
 
@@ -73,11 +73,24 @@ key: Home
         {% endfor %}
       </dl>
     {% endcall %}
-    {# Design thinking, On trust-based marketing, Favourite projects: Pages CMS (faqs.json → about) #}
-    {% for item in faqs.about %}
     <hr>
-    {% call accordion(item.question) %}{{ item.answer | markdown | safe }}{% endcall %}
-    {% endfor %}
+    {% call accordion("Design thinking") %}
+      <p>Your car, your phone, your dad's beloved charcoal barbecue that takes ages to heat up but, once it's hot, it really is a joy to cook with. Design is the lens through which we experience the world, and on a good day, my job is to shape those lenses by asking the question: how can I make this thing better, or more helpful?</p>
+      <p>If I had to sum up my design manifesto, the synopsis would probably state "there is no good design without compromise". Good design is all about choosing the right trade-off for your audience, which may mean choosing to follow a trend, or sticking to the tried and tested, being playful or being dead serious, or bending the process in your favour. Compromise might also mean skipping the steps you deem unnecessary, starting from the answer and working backwards, trusting your gut, or making something for no better reason than to make someone smile.</p>
+      <p>Ultimately, good design is imperceptible—that is, it's harder to spot than bad design. And though it may be impossible to achieve, good design is always worth aiming for.</p>
+    {% endcall %}
+    <hr>
+    {% call accordion("On trust-based marketing") %}
+      <p>With so many people losing trust in the messages being pushed by mainstream marketing, an approach based on trust is how you get people to choose you, because, well, they trust you. Not because you manipulated them, chased them with an axe or pushed them to their limit.</p>
+      <p>It's a vast and wild frontier that many marketers and brands have only begun to explore, and it's very much one of the pillars of my work.</p>
+      <p>To borrow the <a href="https://x.com/ungatedlife/status/1584621315998486528" target="_blank" rel="noopener noreferrer">words of Rob Hardy</a>, the main guy <a href="https://forest.quest/non-coercive-marketing-primer/" target="_blank" rel="noopener noreferrer">who championed the term</a>, "the big secret is that non-coercive marketing isn't actually about marketing at all, but instead about how we relate to ourselves and to others, and healing the wounds of distrust that ripple through generations."</p>
+      <p>My work in this field incorporates everything I have learnt from working in marketing (mostly content and inbound), internal communications, exhibition design, and graphic design over the last 8 years.</p>
+    {% endcall %}
+    <hr>
+    {% call accordion("Favourite projects") %}
+      <p>I get on best with folks who have a meaningful message to share or people who have spent a long time developing a solid product or service that they want to see succeed. This category often includes—but isn’t limited to—charities, indie makers and small businesses with a long-standing presence.</p>
+      <p>That said, I won’t work with clients in the fossil fuel sector, or anyone who's directly tied to the industry. I'm not interested in fast fashion, weight loss or gambling either; and I steer clear of briefs that call for dark design patterns, manipulative marketing, or anything that makes people feel worthless in order to win a sale—though luckily these are becoming less common occurrences.</p>
+    {% endcall %}
     <hr>
     {% call accordion("About this website", prose=false) %}
       <p>This site is not merely a self-promotion machine, but a self-invention machine. An <a href="https://notbadnotbad.substack.com/p/i-hope-someday-i-get-to-visit-your" target="_blank" rel="noopener noreferrer">island</a> to inhabit with my work, ideas, and the things I care about. Built for the long term, but malleable enough to change over time.</p>
