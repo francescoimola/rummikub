@@ -74,7 +74,7 @@ Values from [`_tokens.md`](_tokens.md).
 
 ## Port notes
 
-- The image becomes an [Image](image.md) with a `ratio` of 3:2 (`aspect-ratio` + `object-fit: cover`).
+- The image becomes an [Image](image.md) with a `ratio` of 3:2 by default (`aspect-ratio` + `object-fit: cover`). A work item's `thumbRatio` frontmatter (3:2, 7:5, 4:3 or 16:9) overrides it inline, so each thumbnail crops as little as possible.
 - The existing `$bp-l` container fold already matches Split / Stacked. Keep it.
 - Delete the `$bp-2xl` block for `.project-item` from `_responsive.scss` (G20).
 - The CTA gets no arrow (G19): "Read case study" already says it opens a page (README, arrow rule).

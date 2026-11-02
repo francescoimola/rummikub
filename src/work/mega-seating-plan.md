@@ -5,6 +5,7 @@ description: SEO research and blog writing for an EdTech tool built for teachers
 services: SEO Research, Content Writing
 image: /assets/portfolio/megaseatingplan.png
 alt: Blog post for Mega Seating Plan ranking 4th on Google search results
+thumbRatio: "7:5"
 endDate: 2025-05
 permalink: /work/mega-seating-plan/
 layout: _base.njk
