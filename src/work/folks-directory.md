@@ -1,6 +1,6 @@
 ---
 title: folks.directory
-services: Community Outreach, Web Design, print Design
+services: Strategy, Web & Print Design, Community Outreach
 image: /assets/portfolio/folks-directory.png
 alt: Screenshot of a social walk page on folks.directory
 thumbRatio: "16:9"

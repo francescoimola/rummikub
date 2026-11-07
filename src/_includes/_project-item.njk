@@ -4,7 +4,7 @@
   {% if url %}<a class="project-item__media" href="{{ url }}">{% endif %}
     <img class="project-item__img" src="{{ image }}" alt="{{ alt }}"{{ ratio | mediaStyle | safe }}>
   {% if url %}</a>{% endif %}
-  <div class="flow has-gap-3xs">
+  <div class="flow has-gap-0">
       <h2>{{ title }}</h2>
       <p class="project-item__services">{{ services }}</p>
     {% if url %}
