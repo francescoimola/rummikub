@@ -1,5 +1,5 @@
 // Scroll-timeline stand-in for browsers without animation-timeline (Firefox). Only imported there — see app-core.js.
-// _responsive.scss marks each target with --scroll-fallback and replays the settle keyframes from --scroll-p; this writes --scroll-p.
+// _components.scss marks each target with --scroll-fallback and replays the settle keyframes from --scroll-p; this writes --scroll-p.
 
 var targets = [];
 var last;

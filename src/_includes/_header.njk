@@ -1,6 +1,6 @@
 {# _header.njk #}
 {# The page banner, the same on every page: one nav, one link list and one look-toggles instance serve both layouts. #}
-{# Narrow: the <details> is the "Menu +" disclosure. Wide (_responsive.scss): the bar hides and the panel is forced open. #}
+{# Narrow: the <details> is the "Menu +" disclosure. Wide (the banner @container in index.scss): the bar hides and the panel is forced open. #}
 {%- set url = page.url or "" -%}
 {%- macro navItem(href, label, current) -%}
 <li><a href="{{ href }}"{% if current %} aria-current="page"{% endif %}>{{ label }}</a></li>

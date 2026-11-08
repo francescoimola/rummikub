@@ -287,6 +287,12 @@ main:has(> :is(.cta-card, .prefooter-hero):last-child) {
     align-items: stretch;
 }
 
+.grid-cols-2 {
+    @container (min-width: #{tokens.$bp-s}) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 .split-row {
     gap: var(--space-l-xl); // Break: the images are a new block under the text
 }
@@ -304,6 +310,13 @@ main:has(> :is(.cta-card, .prefooter-hero):last-child) {
     >:is(h1, h2) {
         align-self: start; // the row stretches its items; keep the pill hugging its text
         margin: 0;
+    }
+}
+
+// Label | content: folds later than the image grids, at iPad mini portrait's container width
+@container (min-width: #{tokens.$bp-split}) {
+    .section:not(.section--stacked) {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -479,7 +492,7 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
 }
 
 // ---- Site footer ----
-// One footer on every page; band fill shared with .site-banner in index.scss. Narrow stack here, Wide in the breakpoint block
+// One footer on every page; band fill shared with .site-banner in index.scss. Narrow stack here, Wide at the end of this section
 .site-footer {
     container: footer / inline-size;
     overflow-x: clip; // the Wide drawing bleeds past the column
@@ -530,6 +543,31 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
 .contact-card ul {
     padding: 0;
     list-style: none;
+}
+
+// Wide footer: Contact left, the drawing right (bleeding past the column), colophon under Contact
+@container footer (width >= #{tokens.$bp-xl}) {
+    .site-footer__inner {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .site-footer__contact,
+    .site-footer__colophon {
+        grid-column: 1;
+    }
+
+    .site-footer__art {
+        grid-column: 2;
+        grid-row: 1;
+        align-self: center;
+        margin-block: 0; // the stacked spacing above and below doesn't apply beside Contact
+
+        svg {
+            inline-size: 206%; // Figma: the 987-wide drawing overflows its 479 column
+            max-inline-size: none;
+            margin-inline-start: 5%;
+        }
+    }
 }
 
 // ---- Illustrations ----
@@ -793,9 +831,14 @@ main svg.illustration-wide {
     }
 }
 
-// Headline rung; left on phones, centred on wide screens (the breakpoint block)
+// Headline rung; left on phones, centred on wide screens
 .intro__title {
     max-inline-size: var(--grid-width-l);
+
+    // The title centres on wide screens
+    @container (min-width: #{tokens.$bp-s}) {
+        text-align: center;
+    }
 }
 
 // The photo under the title: the figure column (--grid-width-l), wider than the 40rem text. The image transform wraps each <img> in <picture>
@@ -809,7 +852,7 @@ main svg.illustration-wide {
     }
 }
 
-// About accordion: photo, then the social links in a row; side by side from $bp-s with the links at the photo's foot (the breakpoint block)
+// About accordion: photo, then the social links in a row; side by side from $bp-s with the links at the photo's foot 
 .intro__portrait {
     display: grid;
     inline-size: 100%;
@@ -818,6 +861,17 @@ main svg.illustration-wide {
     >img {
         inline-size: 100%;
         margin: 0;
+    }
+
+    // Photo | links, the links stacked at the photo's foot
+    @container (min-width: #{tokens.$bp-s}) {
+        grid-template-columns: repeat(2, 1fr);
+
+        >ul {
+            flex-direction: column;
+            align-self: end;
+            gap: var(--space-3xs); // Hang: the stacked links read as one block (Francesco, review); the phone row keeps sideways Tight
+        }
     }
 }
 
@@ -872,6 +926,25 @@ main svg.illustration-wide {
     display: block;
     aspect-ratio: var(--ratio-3-2);
     object-fit: cover;
+}
+
+@container (min-width: #{tokens.$bp-l}) {
+
+    // Text left / image right (Split) — the item's own fold, independent of the body's. Stacked items (homepage Featured) never fold
+    .project-item:not(.project-item--stacked) {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    // First child, not a class: eleventy-img wraps an unlinked image in a classless <picture>
+    .project-item:not(.project-item--stacked)>:first-child {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    // Split rows read as a list: Flow apart, one step closer than the Break they keep when stacked
+    .project-rows {
+        --flow-gap: var(--space-s-m);
+    }
 }
 
 // ---- Case study page ----
@@ -939,9 +1012,51 @@ main svg.illustration-wide {
     }
 }
 
+// Only the hero media animates: it settles on every long-form page; later media stay still (#71)
+$settle-targets: '.case-study__intro + :is(figure, p:has(> :is(img, picture)))';
+
+// settle uses scroll(), not view(): view() would be mid-range at first paint
+@media (prefers-reduced-motion: no-preference) and (width > #{tokens.$bp-xl}) {
+    @keyframes settle {
+        from {
+            max-inline-size: 100cqi; // main's container, not the parent
+        }
+
+        to {
+            max-inline-size: var(--settled-size, var(--inline-size));
+        }
+    }
+
+    #{$settle-targets} {
+        box-sizing: border-box;
+        inline-size: calc(100vw - (var(--gutter-x) *2));
+        margin-left: 50%;
+        transform: translate(-50%);
+        animation: settle ease-out both;
+    }
+
+    @supports (animation-timeline: view()) {
+        #{$settle-targets} {
+            animation-timeline: scroll(root block);
+            animation-range: 0 50vh; // full-bleed on load → settled after half a viewport of scroll; length-based so it's page-height independent
+        }
+    }
+
+    // Firefox: a paused 1s run scrubbed by negative delay replays the same keyframes; scroll-fallback.js writes --scroll-p from scroll position
+    @supports not (animation-timeline: view()) {
+        #{$settle-targets} {
+            animation-duration: 1s;
+            animation-play-state: paused;
+            animation-delay: calc(var(--scroll-p) * -1s);
+            --scroll-fallback: settle; // the JS hook — it finds targets by this, so selectors and breakpoint live only here
+            --scroll-p: 0; // full-bleed at the page top, as with scroll()
+        }
+    }
+}
+
 // ---- Writing (index + per-type listings) ----
 
-// Fluid thumb | body grid: 3fr 5fr, 1fr 3fr when the row is narrow (the breakpoint block) or on type pages (--compact)
+// Fluid thumb | body grid: 3fr 5fr, 1fr 3fr when the row is narrow  or on type pages (--compact)
 .writing-item {
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -996,207 +1111,4 @@ main svg.illustration-wide {
 // Direct child only — the price. The nested .dimmed description must stay wrappable
 .pricing-list>li>p {
     white-space: nowrap;
-}
-
-// Only the hero media animates: it settles on every long-form page; later media stay still (#71)
-$settle-targets: '.case-study__intro + :is(figure, p:has(> :is(img, picture)))';
-
-// Every viewport + container breakpoint rule, one block per condition.
-// Block order is load-bearing: max-width ascending, then min-width ascending.
-@mixin responsive {
-
-    // ---- < tablet ----
-
-    @media (width < #{tokens.$bp-xl}) {
-
-        main {
-            flex-direction: column;
-
-            &>* {
-                max-inline-size: unset;
-                margin-inline: unset;
-            }
-        }
-    }
-
-    // ---- > tablet, motion allowed (scroll-driven settle) ----
-
-    // settle uses scroll(), not view(): view() would be mid-range at first paint
-
-    @media (prefers-reduced-motion: no-preference) and (width > #{tokens.$bp-xl}) {
-        @keyframes settle {
-            from {
-                max-inline-size: 100cqi; // main's container, not the parent
-            }
-
-            to {
-                max-inline-size: var(--settled-size, var(--inline-size));
-            }
-        }
-
-        #{$settle-targets} {
-            box-sizing: border-box;
-            inline-size: calc(100vw - (var(--gutter-x) *2));
-            margin-left: 50%;
-            transform: translate(-50%);
-            animation: settle ease-out both;
-        }
-
-        @supports (animation-timeline: view()) {
-            #{$settle-targets} {
-                animation-timeline: scroll(root block);
-                animation-range: 0 50vh; // full-bleed on load → settled after half a viewport of scroll; length-based so it's page-height independent
-            }
-        }
-
-        // Firefox: a paused 1s run scrubbed by negative delay replays the same keyframes; scroll-fallback.js writes --scroll-p from scroll position
-        @supports not (animation-timeline: view()) {
-            #{$settle-targets} {
-                animation-duration: 1s;
-                animation-play-state: paused;
-                animation-delay: calc(var(--scroll-p) * -1s);
-                --scroll-fallback: settle; // the JS hook — it finds targets by this, so selectors and breakpoint live only here
-                --scroll-p: 0; // full-bleed at the page top, as with scroll()
-            }
-        }
-    }
-
-    // ---- Container queries ----
-
-    // Components fold against main's inline-size (viewport minus gutters), not the viewport
-    @container (min-width: #{tokens.$bp-s}) {
-
-        .grid-cols-2 {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        // Homepage intro: the title centres on wide screens
-        .intro__title {
-            text-align: center;
-        }
-
-        // About accordion: photo | links, the links stacked at the photo's foot
-        .intro__portrait {
-            grid-template-columns: repeat(2, 1fr);
-
-            >ul {
-                flex-direction: column;
-                align-self: end;
-                gap: var(--space-3xs); // Hang: the stacked links read as one block (Francesco, review); the phone row keeps sideways Tight
-            }
-        }
-    }
-
-    // Label | content: folds later than the image grids, at iPad mini portrait's container width
-    @container (min-width: #{tokens.$bp-split}) {
-
-        .section:not(.section--stacked) {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @container (min-width: #{tokens.$bp-l}) {
-
-        // Text left / image right (Split) — the item's own fold, independent of the body's. Stacked items (homepage Featured) never fold
-        .project-item:not(.project-item--stacked) {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        // First child, not a class: eleventy-img wraps an unlinked image in a classless <picture>
-        .project-item:not(.project-item--stacked)>:first-child {
-            grid-column: 2;
-            grid-row: 1;
-        }
-
-        // Split rows read as a list: Flow apart, one step closer than the Break they keep when stacked
-        .project-rows {
-            --flow-gap: var(--space-s-m);
-        }
-    }
-
-    // Narrow banner: the open Menu panel sits under the sticky bar, so cap it to the viewport below and scroll it (landscape phones)
-    @container banner (width < #{tokens.$bp-banner}) {
-        .nav-menu__panel {
-            max-block-size: calc(100dvh - var(--banner-block-size));
-            overflow-y: auto;
-            overscroll-behavior: contain;
-        }
-    }
-
-    // Wide banner: links on the column's edge, look toggles in the margin; narrower, they'd squeeze the column, so Menu shows (#74)
-    @container banner (width >= #{tokens.$bp-banner}) {
-        .site-banner__inner {
-            padding-inline: var(--gutter-y); // .layout's gutter, so the centre track is the content column
-            block-size: auto; // the panel is the row here, always open, so it sizes the band
-        }
-
-        .site-banner__inner,
-        .nav-menu__panel {
-            grid-template-columns: 1fr minmax(0, var(--grid-width-l)) 1fr;
-            column-gap: var(--space-l); // rhythm-exempt: the wide header's three layout tracks
-            align-items: center;
-        }
-
-        .site-banner__name {
-            grid-column: 2;
-        }
-
-        .site-banner__inner > .nav-menu {
-            grid-column: 1 / -1;
-        }
-
-        // No disclosure: hide the bar, force the panel permanently open
-        .nav-menu__bar {
-            display: none;
-        }
-
-        .nav-menu::details-content {
-            content-visibility: visible;
-            block-size: auto;
-            opacity: 1;
-        }
-
-        .nav-menu__panel {
-            grid-template-areas: ". links toggles";
-            padding: 0;
-            margin-inline: 0;
-        }
-
-        .nav-menu__panel > ul {
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: end;
-            gap: var(--space-xs);
-        }
-
-        .nav-menu__toggles {
-            justify-self: end;
-            flex-wrap: nowrap;
-        }
-    }
-
-    // Wide footer: Contact left, the drawing right (bleeding past the column), colophon under Contact
-    @container footer (width >= #{tokens.$bp-xl}) {
-        .site-footer__inner {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .site-footer__contact,
-        .site-footer__colophon {
-            grid-column: 1;
-        }
-
-        .site-footer__art {
-            grid-column: 2;
-            grid-row: 1;
-            align-self: center;
-            margin-block: 0; // the stacked spacing above and below doesn't apply beside Contact
-
-            svg {
-                inline-size: 206%; // Figma: the 987-wide drawing overflows its 479 column
-                max-inline-size: none;
-                margin-inline-start: 5%;
-            }
-        }
-    }
 }

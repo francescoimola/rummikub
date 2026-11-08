@@ -380,7 +380,7 @@ nav li a {
 }
 
 // ---- Site banner ----
-// Narrow by default (Wide row in the breakpoint block); pinned at every width, as no ancestor sets overflow to break the stick (#75)
+// Narrow by default (Wide row at the end of this section); pinned at every width, as no ancestor sets overflow to break the stick (#75)
 .site-banner {
     container: banner / inline-size;
     padding-block: var(--space-s);
@@ -463,6 +463,67 @@ nav li a {
     }
 }
 
+// Narrow banner: the open Menu panel sits under the sticky bar, so cap it to the viewport below and scroll it (landscape phones)
+@container banner (width < #{tokens.$bp-banner}) {
+    .nav-menu__panel {
+        max-block-size: calc(100dvh - var(--banner-block-size));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+}
+
+// Wide banner: links on the column's edge, look toggles in the margin; narrower, they'd squeeze the column, so Menu shows (#74)
+@container banner (width >= #{tokens.$bp-banner}) {
+    .site-banner__inner {
+        padding-inline: var(--gutter-y); // .layout's gutter, so the centre track is the content column
+        block-size: auto; // the panel is the row here, always open, so it sizes the band
+    }
+
+    .site-banner__inner,
+    .nav-menu__panel {
+        grid-template-columns: 1fr minmax(0, var(--grid-width-l)) 1fr;
+        column-gap: var(--space-l); // rhythm-exempt: the wide header's three layout tracks
+        align-items: center;
+    }
+
+    .site-banner__name {
+        grid-column: 2;
+    }
+
+    .site-banner__inner > .nav-menu {
+        grid-column: 1 / -1;
+    }
+
+    // No disclosure: hide the bar, force the panel permanently open
+    .nav-menu__bar {
+        display: none;
+    }
+
+    .nav-menu::details-content {
+        content-visibility: visible;
+        block-size: auto;
+        opacity: 1;
+    }
+
+    .nav-menu__panel {
+        grid-template-areas: ". links toggles";
+        padding: 0;
+        margin-inline: 0;
+    }
+
+    .nav-menu__panel > ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: end;
+        gap: var(--space-xs);
+    }
+
+    .nav-menu__toggles {
+        justify-self: end;
+        flex-wrap: nowrap;
+    }
+}
+
 // ---- Layout ----
 .layout {
     display: flex;
@@ -486,6 +547,17 @@ main>*{
     max-inline-size: var(--inline-size);
     inline-size: 100%;
     margin-inline: auto;
+}
+
+@media (width < #{tokens.$bp-xl}) {
+    main {
+        flex-direction: column;
+
+        &>* {
+            max-inline-size: unset;
+            margin-inline: unset;
+        }
+    }
 }
 
 [full-width] {
@@ -609,6 +681,3 @@ dialog {
     --dialog-max-height: 85dvh;
     --dialog-backdrop: lab(0% 0 0 / .85);
 }
-
-// Included last so breakpoint rules land after everything above — media queries add no specificity, only source order does
-@include components.responsive;

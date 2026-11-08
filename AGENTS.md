@@ -37,7 +37,7 @@ Everything else is one file, [docs/site-notes.md](docs/site-notes.md). Read only
 pnpm install          # Install dependencies
 pnpm start            # Dev server (Eleventy --serve)
 pnpm build            # Production build; keeps public/, so a repeat build takes seconds
-pnpm lint             # Mechanical rules: breakpoints, SCSS comments, external rel, JSON keys, rhythm ladder
+pnpm lint             # Mechanical rules: named breakpoint widths, SCSS comments, external rel, JSON keys, rhythm ladder
 pnpm clean            # rm -rf public; run it to start fresh, then expect a 4–10 minute build
 ```
 
@@ -56,7 +56,7 @@ pnpm clean            # rm -rf public; run it to start fresh, then expect a 4–
 | `src/_data/site.json` | Global site data (`url`, `name`, `description`, `image`) plus contact details (`email`, `bookingUrl`, `consultationUrl`, `social`) |
 | `src/css/index.scss` | SCSS entry point + global styles: theme, content modes, interactive, typography, layout. Component-scoped rules live in `_components.scss`, not here |
 | `src/css/_tokens.scss` | Layer order (first thing emitted), `@font-face`, colour scales, Utopia type tokens, the `$bp-*` breakpoint widths, and the unlayered `overrides` mixin for every token that collides with cleacss (`--space-*`, `--font-weight-bold`, `--color-{success,warning,error,info}`, `--input-border-color`). KC Pelletier is for hero + CTA headings only |
-| `src/css/_components.scss` | Unlayered component styles, starting with the icon system (a `$glyphs` map emitted into `[data-icon="x"]::after` / `[data-icon-before="x"]::before`; add a glyph = one map entry), then the single `responsive` mixin holding every breakpoint rule, included last in `index.scss` (CSS rule 10) |
+| `src/css/_components.scss` | Unlayered component styles, starting with the icon system (a `$glyphs` map emitted into `[data-icon="x"]::after` / `[data-icon-before="x"]::before`; add a glyph = one map entry), then every component with its breakpoint rules beside it (CSS rule 10) |
 | `src/css/vendor/cleacss.css` | Vendored cleacss v3.2.0, trimmed to the classes the site uses, with its reset, element styles and tokens intact. Edit it directly; do NOT npm-install. To use a class it no longer has, copy the rule back from upstream |
 | `src/assets/fonts/` | woff2 files only, never source OTFs (gitignored; public repo) (passthrough copied to `public/assets/fonts/`) |
 | `src/assets/favicon/` | Favicon files (passthrough copied) |
