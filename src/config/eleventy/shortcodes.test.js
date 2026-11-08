@@ -437,21 +437,21 @@ describe("shortcodes.js — icon shortcode", () => {
   }
 
   it("inlines the named SVG from src/assets/icons", () => {
-    const result = getIcon()("moon");
+    const result = getIcon()("runner");
 
     expect(result).toContain("<svg");
     expect(result).toContain("</svg>");
   });
 
   it("marks the SVG decorative for assistive tech", () => {
-    const result = getIcon()("moon");
+    const result = getIcon()("runner");
 
     expect(result).toContain('aria-hidden="true"');
     expect(result).toContain('focusable="false"');
   });
 
   it("merges extra attributes into the opening tag", () => {
-    const result = getIcon()("moon", 'class="icon-lg"');
+    const result = getIcon()("runner", 'class="icon-lg"');
 
     expect(result).toContain('class="icon-lg"');
     // extras land on the <svg>, not somewhere in the path data
@@ -465,7 +465,7 @@ describe("shortcodes.js — icon shortcode", () => {
   it("returns identical markup on repeated calls", () => {
     const icon = getIcon();
 
-    expect(icon("moon")).toBe(icon("moon"));
+    expect(icon("runner")).toBe(icon("runner"));
   });
 
   it("reads each icon from disk only once", async () => {
@@ -477,14 +477,14 @@ describe("shortcodes.js — icon shortcode", () => {
     const config = createMockEleventyConfig();
     freshShortcodes(config);
     const icon = config.getShortcode("icon");
-    icon("moon");
-    icon("moon");
-    icon("sun");
+    icon("runner");
+    icon("runner");
+    icon("meditating");
 
     const reads = spy.mock.calls.map((call) => String(call[0]));
 
-    expect(reads.filter((p) => p.endsWith("moon.svg"))).toHaveLength(1);
-    expect(reads.filter((p) => p.endsWith("sun.svg"))).toHaveLength(1);
+    expect(reads.filter((p) => p.endsWith("runner.svg"))).toHaveLength(1);
+    expect(reads.filter((p) => p.endsWith("meditating.svg"))).toHaveLength(1);
     spy.mockRestore();
   });
 

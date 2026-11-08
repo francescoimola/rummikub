@@ -22,7 +22,6 @@ Every component is a square, width and height bound to `step/0` (15 → 16.88), 
 - Link glyphs (Copy, Phone, External, Arrow-right) are all `color-accent` in Figma (G8). Chevron and Plus stay neutral because they follow the surrounding text.
 - Icon/Plus rotates 45° when the menu opens (reads as ×). The repo has a `close` glyph instead, which the redesign replaces.
 - The repo also has `email`, with no Figma icon. Nothing in the redesign uses it.
-- `sun.svg` and `moon.svg` are unused by any page since the light/dark switch was removed; they stay only because `shortcodes.test.js` reads them.
 
 ## Props & variants
 
