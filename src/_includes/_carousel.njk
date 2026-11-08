@@ -1,6 +1,6 @@
-{# Explorations carousel (G14): a scroll-snap strip. Prev/next are ::scroll-button() where supported; #}
+{# Explorations carousel: a scroll-snap strip. Prev/next are ::scroll-button() where supported; #}
 {# elsewhere app-core.js reveals one fixed Previous/Next pair under the strip, which also swipes, scrolls and takes the keyboard (tabindex). #}
-{# Slides crop to 3:2 (G45). #}
+{# Slides crop to 3:2. #}
 {% macro carousel(slides, label) %}
 <section class="carousel" aria-roledescription="carousel" aria-label="{{ label }}">
     <ul class="carousel__track" tabindex="0" role="list">

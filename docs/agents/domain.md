@@ -51,5 +51,3 @@ If your output contradicts an existing ADR, surface it explicitly rather than si
 > _Contradicts ADR-0007 (event-sourced orders), but worth reopening because…_
 
 ## Redesign decision log
-
-The FRN-2026 redesign records its decisions in `docs/frn-2026/decisions.md` (phased log), not as ADRs. Read it before working on anything the redesign touches; treat a contradiction with it like an ADR conflict and surface it.

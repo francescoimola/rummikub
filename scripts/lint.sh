@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Mechanical repo rules (docs/css-architecture.md rule 10, SCSS comments, external-link rel, data files). Run: pnpm lint
+# Mechanical repo rules (docs/site-notes.md CSS rule 10, SCSS comments, external-link rel, data files). Run: pnpm lint
 cd "$(dirname "$0")/.." || exit 1
 fail=0
 report() { echo "✗ $1"; echo "$2" | sed 's/^/    /'; fail=1; }
@@ -10,12 +10,12 @@ hits=$(grep -rnE "@media[^{]*\((min-|max-)?width|@container" src/css --include='
   | grep -vE "prefers-reduced-motion|hover|forced-colors")
 [ -n "$hits" ] && report "Breakpoint outside src/css/_responsive.scss (CSS rule 10)" "$hits"
 
-# CODING_STANDARDS.md, Comments: SCSS comments are single-line //, never /* */, and at most 25 words
+# Site notes, Coding standards: SCSS comments are single-line //, never /* */, and at most 25 words
 hits=$(grep -rn "/\*" src/css --include='*.scss')
-[ -n "$hits" ] && report "Block comment in SCSS; use one // line (CODING_STANDARDS.md)" "$hits"
+[ -n "$hits" ] && report "Block comment in SCSS; use one // line (docs/site-notes.md, Coding standards)" "$hits"
 hits=$(grep -rnE '^[[:space:]]*//' src/css --include='*.scss' \
   | awk '{ line = $0; sub(/^[^:]+:[0-9]+:[[:space:]]*\/\/[[:space:]]*/, ""); if (NF > 25) print line }')
-[ -n "$hits" ] && report "SCSS comment over 25 words; keep the why, cut the rest (CODING_STANDARDS.md)" "$hits"
+[ -n "$hits" ] && report "SCSS comment over 25 words; keep the why, cut the rest (docs/site-notes.md, Coding standards)" "$hits"
 
 # External links: every target=_blank carries rel="noopener noreferrer" (same line)
 hits=$(grep -rn 'target="_blank"' src --include='*.njk' --include='*.md' --include='*.html' --include='*.js' \
@@ -30,7 +30,7 @@ def unique(pairs):
     dup = {k for k in keys if keys.count(k) > 1}
     if dup: raise ValueError("duplicate key(s): " + ", ".join(sorted(dup)))
     return dict(pairs)
-for f in sorted(glob.glob("docs/**/*.json", recursive=True) + glob.glob("src/_data/*.json")):
+for f in sorted(glob.glob("src/_data/*.json")):
     try: json.load(open(f), object_pairs_hook=unique)
     except Exception as e: print(f"{f}: {e}")
 EOF
@@ -41,11 +41,7 @@ EOF
 lines=$(wc -l < AGENTS.md)
 [ "$lines" -gt 200 ] && report "AGENTS.md is $lines lines; the limit is 200 (AGENTS.md rule 7)" "move reference behind a pointer"
 
-# Decision IDs name one rule each (cited as Gnn/Qnn); B7, B8, G6, G12, G26 predate this check
-hits=$(grep -oE '^\| [A-Z][0-9]+ ' docs/frn-2026/decisions.md | sort | uniq -d | grep -vE '^\| (B7|B8|G6|G12|G26) $')
-[ -n "$hits" ] && report "Duplicate decision ID in docs/frn-2026/decisions.md" "$hits"
-
-# Rhythm (docs/design-system/rhythm.md): gaps sit on the ladder, space belongs to the parent, font sizes are --step-* tokens.
+# Rhythm (docs/site-notes.md, Rhythm): gaps sit on the ladder, space belongs to the parent, font sizes are --step-* tokens.
 # A deliberate exception carries "rhythm-exempt" and a reason on the same line (// in SCSS, {# #} in templates).
 hits=$(python3 - <<'EOF'
 import glob, re
@@ -72,7 +68,7 @@ for f, n, line in lines("src/css/**/*.scss"):
         print(f"{f}:{n}: font-size is not a --step-* token; use the rung it belongs to")
 EOF
 )
-[ -n "$hits" ] && report "Off the rhythm ladder (docs/design-system/rhythm.md; mark deliberate exceptions rhythm-exempt)" "$hits"
+[ -n "$hits" ] && report "Off the rhythm ladder (docs/site-notes.md, Rhythm; mark deliberate exceptions rhythm-exempt)" "$hits"
 
 [ $fail -eq 0 ] && echo "✓ lint passed"
 exit $fail

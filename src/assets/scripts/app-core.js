@@ -9,7 +9,7 @@ import { initProjectVideos } from "./video-controller.js";
 
 initProjectVideos();
 
-// Without ::scroll-button (Firefox, Safari) one fixed Previous/Next pair under the strip scrolls it a slide at a time (G47: no wrap-around)
+// Without ::scroll-button (Firefox, Safari) one fixed Previous/Next pair under the strip scrolls it a slide at a time (no wrap-around)
 function initCarouselButtons() {
   document.querySelectorAll(".carousel").forEach(function (carousel) {
     var track = carousel.querySelector(".carousel__track");

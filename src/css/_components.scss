@@ -199,7 +199,7 @@ main:has(> :is(.cta-card, .prefooter-hero):last-child) {
     gap: var(--space-xs);
 }
 
-// Section: label | content at content width (G31); source order label then content, so stacked and 2-up read the same
+// Section: label | content at content width; source order label then content, so stacked and 2-up read the same
 .section {
     gap: var(--space-xs); // Tight: a heading over its text, or a label beside it
     max-inline-size: var(--grid-width-l);
@@ -211,14 +211,14 @@ main:has(> :is(.cta-card, .prefooter-hero):last-child) {
     }
 }
 
-// Media = figure, media pair or markdown image (<p><picture>). Sits at the wider 60rem column, edges aligned with label | content sections (G13, #71)
+// Media = figure, media pair or markdown image (<p><picture>). Sits at the wider 60rem column, edges aligned with label | content sections (#71)
 main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
     max-inline-size: var(--grid-width-l);
 }
 
 // ---- Split row (Artmaking) ----
 
-// Plain 2-up grid at natural ratios, no masonry (G37); the img stays a direct child of .card for the full-bleed rule
+// Plain 2-up grid at natural ratios, no masonry; the img stays a direct child of .card for the full-bleed rule
 .split-row__images {
     gap: var(--space-xs);
     align-items: start; // cards keep their natural height instead of stretching to the row
@@ -322,7 +322,7 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
         scroll-snap-stop: always;
     }
 
-    // G45: the one place media crops regardless of its natural ratio, so CMS uploads of any shape line up
+    // the one place media crops regardless of its natural ratio, so CMS uploads of any shape line up
     :is(picture, img) {
         display: block;
         inline-size: 100%;
@@ -356,7 +356,7 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
         rotate: 180deg;
     }
 
-    // No wrap-around (G47): an end-of-track button is disabled, so it goes
+    // No wrap-around: an end-of-track button is disabled, so it goes
     &::scroll-button(*):disabled {
         display: none;
     }
@@ -377,7 +377,7 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
         text-decoration: none;
 
         &[hidden] {
-            visibility: hidden; // G47: no wrap-around, but the other button keeps its place
+            visibility: hidden; // no wrap-around, but the other button keeps its place
         }
     }
 }
@@ -447,7 +447,7 @@ main svg {
     color: var(--brand-900);
 }
 
-// Wide page illustration (Q36): the token is a width, the drawing's ratio sets the height
+// Wide page illustration: the token is a width, the drawing's ratio sets the height
 main svg.illustration-wide {
     display: block;
     inline-size: var(--size-illustration-wide);
@@ -478,7 +478,7 @@ main svg.illustration-wide {
     }
 
     h1 {
-        max-inline-size: max(var(--inline-size), min(100%, var(--grid-width-l))); // G46: no breakpoint, phones just fill
+        max-inline-size: max(var(--inline-size), min(100%, var(--grid-width-l))); // no breakpoint, phones just fill
         font-family: var(--font-family-display);
         font-size: var(--step-2-4);
         font-weight: var(--font-weight-base);
@@ -547,7 +547,7 @@ main svg.illustration-wide {
     margin: 0;
 }
 
-// G38: year column beside label-over-value; Figma's 1 + 4 column split holds down to phone widths
+// year column beside label-over-value; Figma's 1 + 4 column split holds down to phone widths
 .data-list__item {
     display: grid;
     grid-template-columns: 1fr 6fr;
@@ -735,7 +735,7 @@ main svg.illustration-wide {
     max-inline-size: none;
     inline-size: calc(100% + 2 * var(--gutter-y-sticky));
     margin-inline: calc(-1 * var(--gutter-y-sticky));
-    padding-block: calc(1.5 * var(--space-xl-3xl)); // rhythm-exempt: Figma's "plenty of space", 1.5× Chapter (Q6)
+    padding-block: calc(1.5 * var(--space-xl-3xl)); // rhythm-exempt: Figma's "plenty of space", 1.5× Chapter
     padding-inline: var(--space-m-l); // the header inset
     background: linear-gradient(to bottom, transparent, var(--band-bg));
 
@@ -845,7 +845,7 @@ main svg.illustration-wide {
 
 // ---- Writing (index + per-type listings) ----
 
-// Fluid thumb | body grid (G21, G41): 3fr 5fr, 1fr 3fr when the row is narrow (_responsive.scss) or on type pages (--compact)
+// Fluid thumb | body grid: 3fr 5fr, 1fr 3fr when the row is narrow (_responsive.scss) or on type pages (--compact)
 .writing-item {
     display: grid;
     grid-template-columns: 1fr 3fr;

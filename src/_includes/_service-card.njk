@@ -1,4 +1,4 @@
-{# Default: the whole card links to a service page; a .has-counter parent numbers its h3. Accordion: a plain <details> like faqList (the page puts <hr> between); CTA glyph follows the link type (G22). #}
+{# Default: the whole card links to a service page; a .has-counter parent numbers its h3. Accordion: a plain <details> like faqList (the page puts <hr> between); CTA glyph follows the link type. #}
 {% macro serviceCard(title, url, description, type = "default", cta = "Enquire") %}
 {% if type == "accordion" %}
 <details>

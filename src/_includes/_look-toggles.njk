@@ -1,4 +1,4 @@
-{# _look-toggles.njk — brand swatches (light/dark follows the OS; there is no theme switch, see docs/css-architecture.md rule 4) #}
+{# _look-toggles.njk — brand swatches (light/dark follows the OS; there is no theme switch, see docs/site-notes.md, CSS rule 4) #}
 {%- set activeBrand = brand or "green" -%}
 <div class="brand-picker" role="group" aria-label="Page colour">
     <button type="button" data-brand-choice="green" aria-pressed="{{ "true" if activeBrand == "green" else "false" }}" aria-label="Green"></button>

@@ -14,15 +14,22 @@ This is a one-person repo. Francesco owns, designs and builds it, edits CSS by h
 
 ## Reference docs
 
-- **Voice & tone:** `.private/voice-guide.md` (local-only, gitignored)
-- **Testing:** [testing-guide.md](testing-guide.md) — run `pnpm lint && pnpm build && pnpm test` before committing (the built-output tests read `public/`)
-- **Rhythm:** [docs/design-system/rhythm.md](docs/design-system/rhythm.md) — the four type rungs, the spacing ladder (Tight, Flow, Break, Chapter, Hang) and the pair table; read before changing text sizes or gaps
-- **Review:** [CODING_STANDARDS.md](CODING_STANDARDS.md) — judgement rules the reviewer enforces; mechanical ones live in `pnpm lint`
-- **Figma ↔ code:** [docs/frn-2026/components/README.md](docs/frn-2026/components/README.md) — file key, node IDs and the component→repo-file index; read before any Figma work, Code Connect included
-- **Pages CMS:** [docs/pages-cms.md](docs/pages-cms.md) — read before changing `.pages.yml`, CMS field shapes or the optimize-videos action
-- **Long-form pages:** [docs/long-form-pages.md](docs/long-form-pages.md) — case studies and writing posts: the shared shell, media rhythm, `settle`, `figureImg`, the focal picker
-- **Artmaking page:** [docs/artmaking-page.md](docs/artmaking-page.md) — read before changing `/art/`, `.split-row` or `artProjects.json`
-- **Sitemap:** [docs/sitemap.md](docs/sitemap.md) — `noindex` and `hidden` opt-outs, `updated` and `<lastmod>`
+**Voice & tone:** `.private/voice-guide.md` (local-only, gitignored).
+
+Everything else is one file, [docs/site-notes.md](docs/site-notes.md). Read only the section you need:
+
+- **[Coding standards](docs/site-notes.md#coding-standards):** the judgement rules a code review enforces; mechanical ones live in `pnpm lint`
+- **[CSS architecture](docs/site-notes.md#css-architecture):** before editing `src/css`; numbered rules, cited in comments as "CSS rule N"
+- **[Rhythm](docs/site-notes.md#rhythm):** before changing text sizes or gaps
+- **[Long-form pages](docs/site-notes.md#long-form-pages):** before changing case studies, writing posts, `settle`, `figureImg` or the focal picker
+- **[Artmaking page](docs/site-notes.md#artmaking-page):** before changing `/art/`, `.split-row` or `artProjects.json`
+- **[Pages CMS](docs/site-notes.md#pages-cms):** before changing `.pages.yml`, CMS field shapes or the optimize-videos action
+- **[Project videos](docs/site-notes.md#project-videos):** before changing `video-controller.js` or `.project-video*`
+- **[Sitemap](docs/site-notes.md#sitemap):** when using `noindex` or `hidden`, or setting `updated`
+- **[Testing](docs/site-notes.md#testing):** run `pnpm lint && pnpm build && pnpm test` before committing (the tests read `public/`)
+- **[DevTools probes](docs/site-notes.md#devtools-probes):** for bugs only a browser shows
+
+**Figma:** [docs/figma.md](docs/figma.md) before any Figma work: the file key, how to realign Figma with the code, and where the archived component docs are.
 
 ## Commands
 
@@ -38,7 +45,7 @@ pnpm clean            # rm -rf public; run it to start fresh, then expect a 4–
 
 **Replacing an image:** image filenames carry no content hash, so a new image under an old filename keeps its old optimized files until you run `pnpm clean` and build again. The same goes for a deleted page, which stays in `public/` until then.
 
-**Worktrees:** a build in a fresh checkout takes 4–10 minutes. Build and test in your own worktree, not in the main checkout while another agent works there; in a worktree run git as separate plain commands. Details in [testing-guide.md](testing-guide.md).
+**Worktrees:** a build in a fresh checkout takes 4–10 minutes. Build and test in your own worktree, not in the main checkout while another agent works there; in a worktree run git as separate plain commands.
 
 ## Project structure
 
@@ -65,7 +72,7 @@ pnpm clean            # rm -rf public; run it to start fresh, then expect a 4–
 | `src/assets/writing/` | Writing cover + in-body images (passthrough copied to `public/assets/writing/`) |
 | `src/art.njk` | Artmaking index (`/art/`, full width). Content lives in `src/_data/artProjects.json` — no per-project files; the `splitRow` macro (`_split-row.njk`) renders one row per entry — see Artmaking page |
 | `src/assets/art/` | Artmaking images: largest known originals, 1080–6889px wide (#73); `concert-…-3` stays 800px, `poem-for-a-timepiece` 1200px, `what-a-world*` ~1920px. Sources are EXIF-stripped (passthrough copied to `public/assets/art/`) |
-| `src/about.njk` | **Retired, not built** (`permalink: false`); kept as a layout reference. Its content lives in the homepage's Intro accordions (`src/index.njk`, `accordion` macro in `_faq-list.njk`); `/about/` 301s to `/#about`. `/about/accessibility/` and `/about/colophon/` are separate pages and stay |
+| `docs/about-page.md` | Text of the retired About page; not built. That content lives in the homepage's Intro accordions (`src/index.njk`, `accordion` macro in `_faq-list.njk`); `/about/` 301s to `/#about`. `/about/accessibility/` and `/about/colophon/` are separate pages and stay |
 | `scripts/optimize-videos.mjs` | Opt-in ffmpeg optimizer for project videos (`pnpm optimize:video`) |
 | `public/` | Build output — gitignored, do not commit |
 | `eleventy.config.js` | Eleventy configuration |
@@ -78,11 +85,11 @@ pnpm clean            # rm -rf public; run it to start fresh, then expect a 4–
 
 ## Project videos
 
-Embed videos with the `projectVideo` shortcode. Lazy loading, autoplay-in-view, the hidden play/pause control, iOS Low Power Mode handling, formats and `pnpm optimize:video` are in [docs/project-videos.md](docs/project-videos.md); read it before touching `video-controller.js` or `.project-video*`.
+Embed videos with the `projectVideo` shortcode. Lazy loading, autoplay-in-view, the hidden play/pause control, iOS Low Power Mode handling, formats and `pnpm optimize:video` are in [site notes](docs/site-notes.md#project-videos).
 
 ## CSS architecture
 
-Before editing `src/css`, read [docs/css-architecture.md](docs/css-architecture.md): the eleven numbered rules (`@use` order, `@layer` order, cleacss token collisions, brand re-tint, breakpoints in `_responsive.scss`, the rhythm ladder). Comments cite them as "CSS rule N".
+Before editing `src/css`, read [the CSS section of site notes](docs/site-notes.md#css-architecture): the eleven numbered rules (`@use` order, `@layer` order, cleacss token collisions, brand re-tint, breakpoints in `_responsive.scss`, the rhythm ladder). Comments cite them as "CSS rule N".
 
 ## Non-negotiable rules
 

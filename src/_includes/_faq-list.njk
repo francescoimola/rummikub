@@ -1,4 +1,4 @@
-{# One accordion: independent <details> (no name=, G26). The caller supplies the answer. prose=false drops .text for answers that aren't running text (photos, link lists, data lists). #}
+{# One accordion: independent <details> (no name=). The caller supplies the answer. prose=false drops .text for answers that aren't running text (photos, link lists, data lists). #}
 {% macro accordion(title, id="", prose=true) %}
 <details{% if id %} id="{{ id }}"{% endif %}>
     <summary>{{ title }}</summary>
