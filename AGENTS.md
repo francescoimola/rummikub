@@ -14,7 +14,7 @@ This is a one-person repo. Francesco owns, designs and builds it, edits CSS by h
 
 ## Reference docs
 
-- **Voice & tone:** `.docs/voice-guide.md` (local-only, gitignored)
+- **Voice & tone:** `.private/voice-guide.md` (local-only, gitignored)
 - **Testing:** [testing-guide.md](testing-guide.md) — run `pnpm lint && pnpm build && pnpm test` before committing (the built-output tests read `public/`)
 - **Rhythm:** [docs/design-system/rhythm.md](docs/design-system/rhythm.md) — the four type rungs, the spacing ladder (Tight, Flow, Break, Chapter, Hang) and the pair table; read before changing text sizes or gaps
 - **Review:** [CODING_STANDARDS.md](CODING_STANDARDS.md) — judgement rules the reviewer enforces; mechanical ones live in `pnpm lint`
