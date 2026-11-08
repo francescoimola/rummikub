@@ -7,6 +7,7 @@
     "start": "eleventy --serve",
     "build": "rm -rf public && eleventy",
     "clean": "rm -rf public",
+    "prepare": "git config core.hooksPath scripts/hooks || true",
     "optimize:video": "node scripts/optimize-videos.mjs",
     "compress:assets": "node scripts/compress-assets.mjs",
     "lint": "bash scripts/lint.sh",

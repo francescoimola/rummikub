@@ -100,7 +100,7 @@ html.lenis body {
     --color-accent: light-dark(var(--brand-800), var(--brand-900));
     --accent-hover: light-dark(var(--brand-900), var(--brand-950));
     --accent-surface: var(--brand-100);
-    // Banner, footer and hero bands; the pre-footer hero fades into it. Dark: brand mix baked over --body-bg so it's opaque (else scrolled content shows through); 16% solved for ΔE_OK 0.08, a step above cards
+    // Banner, footer and hero bands. Dark: brand mix baked over --body-bg to stay opaque under scrolled content; 16% solved for ΔE_OK 0.08, above cards
     --band-bg: light-dark(var(--brand-150), color-mix(in oklch, var(--brand-400) 16%, var(--body-bg)));
     --card-bg: light-dark(var(--neutral-100-alpha), color-mix(in oklch, var(--brand-400) 12%, transparent)); // dark: % solved for ΔE_OK 0.07 vs --body-bg (≈3.5 JND), same for all brands
 

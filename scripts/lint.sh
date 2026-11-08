@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Mechanical repo rules (docs/css-architecture.md rules 8 + 10, external-link rel, data files). Run: pnpm lint
+# Mechanical repo rules (docs/css-architecture.md rule 10, SCSS comments, external-link rel, data files). Run: pnpm lint
 cd "$(dirname "$0")/.." || exit 1
 fail=0
 report() { echo "✗ $1"; echo "$2" | sed 's/^/    /'; fail=1; }
@@ -10,9 +10,12 @@ hits=$(grep -rnE "@media[^{]*\((min-|max-)?width|@container" src/css --include='
   | grep -vE "prefers-reduced-motion|hover|forced-colors")
 [ -n "$hits" ] && report "Breakpoint outside src/css/_responsive.scss (CSS rule 10)" "$hits"
 
-# CSS rule 8: SCSS comments are single-line //, never /* */
+# CODING_STANDARDS.md, Comments: SCSS comments are single-line //, never /* */, and at most 25 words
 hits=$(grep -rn "/\*" src/css --include='*.scss')
-[ -n "$hits" ] && report "Block comment in SCSS; use one // line (CSS rule 8)" "$hits"
+[ -n "$hits" ] && report "Block comment in SCSS; use one // line (CODING_STANDARDS.md)" "$hits"
+hits=$(grep -rnE '^[[:space:]]*//' src/css --include='*.scss' \
+  | awk '{ line = $0; sub(/^[^:]+:[0-9]+:[[:space:]]*\/\/[[:space:]]*/, ""); if (NF > 25) print line }')
+[ -n "$hits" ] && report "SCSS comment over 25 words; keep the why, cut the rest (CODING_STANDARDS.md)" "$hits"
 
 # External links: every target=_blank carries rel="noopener noreferrer" (same line)
 hits=$(grep -rn 'target="_blank"' src --include='*.njk' --include='*.md' --include='*.html' --include='*.js' \
@@ -50,21 +53,21 @@ LADDER = {"3xs", "xs", "s-m", "l-xl", "xl-3xl"}
 NEAREST = {"3xs-2xs": "xs", "2xs": "xs", "2xs-xs": "xs", "xs-s": "xs", "s": "xs", "m": "s-m", "m-l": "s-m", "s-l": "s-m",
            "3xs-m": "s-m", "2xs-m": "s-m", "l": "l-xl", "xl": "l-xl", "m-xl": "l-xl", "xl-2xl": "l-xl", "s-xl": "l-xl",
            "2xl": "xl-3xl", "2xl-3xl": "xl-3xl", "3xl": "xl-3xl", "3xl-4xl": "xl-3xl", "4xl": "xl-3xl", "xl-4xl": "xl-3xl"}
-def fix(tok): return NEAREST.get(tok, "the step the pair table names")
+def fix(tok, prefix): return prefix + NEAREST[tok] if tok in NEAREST else "the step the pair table names"
 def lines(pattern):
     for f in sorted(glob.glob(pattern, recursive=True)):
         for n, line in enumerate(open(f, encoding="utf-8"), 1):
             if "rhythm-exempt" not in line: yield f, n, line
 for f, n, line in lines("src/**/*.njk"):
     for m in re.finditer(r"has-gap-([a-z0-9-]+)", line):
-        if m.group(1) not in LADDER: print(f"{f}:{n}: has-gap-{m.group(1)} is off the ladder; use has-gap-{fix(m.group(1))}")
+        if m.group(1) not in LADDER: print(f"{f}:{n}: has-gap-{m.group(1)} is off the ladder; use {fix(m.group(1), 'has-gap-')}")
     if re.search(r"has-m[bt]-", line): print(f"{f}:{n}: has-mb-*/has-mt-*: space belongs to the parent; set the parent's flow gap")
 for f, n, line in lines("src/css/**/*.scss"):
     if line.lstrip().startswith("//"): continue
     m = re.match(r"\s*(gap|column-gap|row-gap|margin[a-z-]*)\s*:(.*)", line)
     if m:
         for tok in re.findall(r"--space-([a-z0-9-]+)", m.group(2)):
-            if tok not in LADDER: print(f"{f}:{n}: --space-{tok} in {m.group(1)} is off the ladder; use --space-{fix(tok)}")
+            if tok not in LADDER: print(f"{f}:{n}: --space-{tok} in {m.group(1)} is off the ladder; use {fix(tok, '--space-')}")
     if re.match(r"\s*font-size\s*:", line) and "var(--step" not in line:
         print(f"{f}:{n}: font-size is not a --step-* token; use the rung it belongs to")
 EOF

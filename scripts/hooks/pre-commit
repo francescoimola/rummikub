@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Runs the mechanical rules on every commit. Build and tests take minutes, so CI runs those.
+exec bash scripts/lint.sh
