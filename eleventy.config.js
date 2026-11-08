@@ -10,12 +10,12 @@ const pluginRss = require("@11ty/eleventy-plugin-rss");
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
 
-const setupMarkdown = require("./src/config/eleventy/markdown");
-const setupTransforms = require("./src/config/eleventy/transforms");
-const setupCollections = require("./src/config/eleventy/collections");
-const setupFilters = require("./src/config/eleventy/filters");
-const setupShortcodes = require("./src/config/eleventy/shortcodes");
-const setupMarkdownTwins = require("./src/config/eleventy/markdown-twins");
+const setupMarkdown = require("./src/config/markdown");
+const setupTransforms = require("./src/config/transforms");
+const setupCollections = require("./src/config/collections");
+const setupFilters = require("./src/config/filters");
+const setupShortcodes = require("./src/config/shortcodes");
+const setupMarkdownTwins = require("./src/config/markdown-twins");
 
 function filenameFormat(_id, src, width, format) {
   var ext = path.extname(src);

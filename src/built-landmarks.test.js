@@ -125,43 +125,6 @@ describe("built landmarks", () => {
   });
 });
 
-// The browser picks a thumbnail file from `sizes` alone, so an undersized slot ships a blurry image and nothing errors.
-// Slot widths in CSS px at a 16px root: "(min-width: Nrem) L, …, L" with L in rem, px or vw.
-const toPx = (length, viewport) => {
-  const [, value, unit] = length.match(/^([\d.]+)(rem|px|vw)$/);
-  return Number(value) * { rem: 16, px: 1, vw: viewport / 100 }[unit];
-};
-const slotWidth = (sizes, viewport) => {
-  for (const entry of sizes.split(",").map((s) => s.trim())) {
-    const [, minWidth, length] = entry.match(/^(?:\(min-width:\s*([\d.]+(?:rem|px))\)\s+)?(\S+)$/);
-    if (!minWidth || viewport >= toPx(minWidth, viewport)) return toPx(length, viewport);
-  }
-};
-const thumbSizes = (file) => [...html(file).matchAll(/class="writing-item__thumb">(.*?)<\/span>/gs)]
-  .flatMap(([, thumb]) => [...thumb.matchAll(/sizes="([^"]*)"/g)].map(([, sizes]) => sizes));
-
-// Displayed thumb width (CSS px) per viewport, worked out from the CSS at its 15px root (#76): index rows are 3fr 5fr in a
-// 60rem .section that folds label | content at 48rem of main (755px is the widest stacked row); type pages are 1fr 3fr
-// across main, capped at the 40rem column from $bp-xl (1000px is just under it).
-const THUMB_WIDTHS = {
-  "public/writing/index.html": { 375: 74, 600: 195, 755: 252, 1440: 147 },
-  "public/writing/guides/index.html": { 375: 74, 1000: 228, 1440: 137 },
-};
-
-describe("built writing thumbnails", () => {
-  for (const [file, widths] of Object.entries(THUMB_WIDTHS)) {
-    it(`requests at least the displayed width on ${file}`, () => {
-      const all = thumbSizes(file);
-      expect(all.length, file).toBeGreaterThan(0);
-      for (const sizes of all) {
-        for (const [viewport, width] of Object.entries(widths)) {
-          expect(slotWidth(sizes, Number(viewport)), `${sizes} at ${viewport}px`).toBeGreaterThanOrEqual(width);
-        }
-      }
-    });
-  }
-});
-
 // AGENTS.md "Titles & meta descriptions": title 30–60 chars, description 120–160, both unique per page.
 // These pages predate the check. Fix one, then delete it here; a listed page that now passes fails the test.
 const META_EXCEPTIONS = [

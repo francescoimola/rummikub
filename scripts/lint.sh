@@ -19,7 +19,7 @@ hits=$(grep -rnE '^[[:space:]]*//' src/css --include='*.scss' \
 
 # External links: every target=_blank carries rel="noopener noreferrer" (same line)
 hits=$(grep -rn 'target="_blank"' src --include='*.njk' --include='*.md' --include='*.html' --include='*.js' \
-  | grep -v '\.test\.js:' | grep -v 'noopener noreferrer')
+  | grep -v 'noopener noreferrer')
 [ -n "$hits" ] && report 'target="_blank" without rel="noopener noreferrer"' "$hits"
 
 # Data files: valid JSON with no duplicate keys (a duplicate silently drops data on rewrite)

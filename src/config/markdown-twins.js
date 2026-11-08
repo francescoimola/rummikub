@@ -4,7 +4,7 @@
 // post-transform HTML, so the twin matches what a browser renders, with no templateContent ordering.
 const { writeFile } = require("fs/promises");
 
-const site = require("../../_data/site.json");
+const site = require("../_data/site.json");
 const { htmlToMarkdownDoc, isNoindex } = require("./markdown-twins-helpers");
 
 // Same guard shape as sitemap.njk: directory-style URLs only, and never a noindex page.

@@ -51,7 +51,7 @@ module.exports = function (eleventyConfig) {
     return renderFigure("  " + img, options.class, options.caption);
   });
 
-  // Two figures side by side at content width (G40); stacks below the .grid-cols-2 container fold.
+  // Two figures side by side at content width; stacks below the .grid-cols-2 container fold.
   // Blank lines are dropped so markdown keeps the whole pair as one HTML block.
   eleventyConfig.addPairedShortcode("mediaPair", function (content) {
     return '<div class="grid-cols-2 media-pair">\n' + content.trim().replace(/\n\s*\n/g, "\n") + "\n</div>";

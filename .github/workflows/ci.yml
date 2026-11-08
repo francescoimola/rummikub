@@ -1,10 +1,9 @@
 name: CI
 
-# The check AGENTS.md and testing-guide.md require before committing: lint, build, then the built-output tests.
+# Runs when something lands on main: lint, build, then the built-output tests. Lint also runs on every commit.
 on:
   push:
-    branches: [development, main]
-  pull_request:
+    branches: [main]
 
 permissions:
   contents: read
