@@ -1,7 +1,7 @@
 @use 'scale';
 
 // Only the hero media animates: it settles on every long-form page; later media stay still (#71)
-$settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:has(> :is(img, picture)))';
+$settle-targets: '.case-study__intro + :is(figure, p:has(> :is(img, picture)))';
 
 // Every viewport + container breakpoint rule, one block per condition.
 // Block order is load-bearing: max-width ascending, then min-width ascending.

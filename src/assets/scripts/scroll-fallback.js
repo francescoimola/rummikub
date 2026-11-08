@@ -9,7 +9,7 @@ var queued = false;
 function collect() {
   targets = [];
   last = undefined;
-  document.querySelectorAll("[view-animation], .case-study > *").forEach(function (el) {
+  document.querySelectorAll(".case-study > *").forEach(function (el) {
     if (getComputedStyle(el).getPropertyValue("--scroll-fallback").trim()) targets.push(el);
   });
 }

@@ -1,10 +1,9 @@
 // fallow-ignore-file coverage-gaps
-// Entry point only: the imports and calls below are covered by each module's own suite.
+// Entry point only.
 import "./mailto-copy.js";
 import "./dialog-copy.js";
 import "./look-toggles.js";
 import "./nav-menu.js";
-import "./webmcp.js";
 import { initProjectVideos } from "./video-controller.js";
 
 initProjectVideos();

@@ -239,7 +239,7 @@ There are four groups of JS in this repo, ~1,300 lines of code total (excluding 
 
 | Where | What | Module style |
 |---|---|---|
-| `src/assets/scripts/` | Code that runs in the browser: video player, palette picker, copy-email buttons, nav menu, WebMCP tools | ESM (`import`/`export`) |
+| `src/assets/scripts/` | Code that runs in the browser: video player, palette picker, copy-email buttons, nav menu | ESM (`import`/`export`) |
 | `src/config/` | Build-time code: filters, shortcodes, collections, transforms, markdown twins. Wired up by `eleventy.config.js` | CommonJS (`require`/`module.exports`) — Eleventy config must be |
 | `scripts/` | One-off maintenance CLIs run by hand: `pnpm optimize:video` (also called by the Pages CMS GitHub workflow — don't delete) and `pnpm compress:assets` | ESM |
 | Repo root | `eleventy.config.js` (build config) and `vitest.config.js` (test config) | CJS / ESM respectively |
