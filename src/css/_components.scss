@@ -264,21 +264,19 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
     aspect-ratio: 1;
     border: var(--input-border-width) solid var(--input-border-color);
     border-radius: var(--border-radius-s);
-    // each swatch previews that brand's banner tint — mirrors --brand-150's formula at a fixed hue (keep in sync with _colors.scss)
-    background: light-dark(oklch(0.943 calc(0.073 * var(--brand-chroma)) calc(var(--picker-hue) - 0.2)),
-            oklch(0.399 calc(0.101 * var(--brand-chroma)) calc(var(--picker-hue) + 6.7)));
 }
 
+// each swatch previews that brand's banner tint
 .brand-picker button[data-brand-choice="green"] {
-    --picker-hue: var(--brand-hue-green);
+    background: var(--brand-150-green);
 }
 
 .brand-picker button[data-brand-choice="pink"] {
-    --picker-hue: var(--brand-hue-pink);
+    background: var(--brand-150-pink);
 }
 
 .brand-picker button[data-brand-choice="orange"] {
-    --picker-hue: var(--brand-hue-orange);
+    background: var(--brand-150-orange);
 }
 
 .brand-picker button[aria-pressed="true"] {

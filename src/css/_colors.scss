@@ -22,6 +22,11 @@
     --brand-hue-pink: 360;
     --brand-hue-orange: 55;
 
+    // Banner tints — read by the data-brand hooks below and by the .brand-picker swatches
+    --brand-150-green: light-dark(oklch(0.943 calc(0.073 * var(--brand-chroma)) calc(var(--brand-hue-green) - 0.2)), oklch(0.399 calc(0.101 * var(--brand-chroma)) calc(var(--brand-hue-green) + 6.7)));
+    --brand-150-pink: light-dark(oklch(0.921 0.048 348.6), oklch(0.399 0.101 6.7));
+    --brand-150-orange: light-dark(oklch(0.924 0.056 69.6), oklch(0.399 0.101 61.7));
+
     // Brand scale — hue = base + per-step offset, chroma = orig × knob
     --brand-50: light-dark(oklch(0.983 calc(0.049 * var(--brand-chroma)) var(--brand-hue)), oklch(0.143 calc(0.041 * var(--brand-chroma)) calc(var(--brand-hue) + 14.6)));
     --brand-100: light-dark(oklch(0.958 calc(0.061 * var(--brand-chroma)) calc(var(--brand-hue) + 0.3)), oklch(0.332 calc(0.088 * var(--brand-chroma)) calc(var(--brand-hue) + 9.7)));
@@ -121,11 +126,32 @@
   }
 
   // Re-tint hooks must target :root so --brand-* rebinds var(--brand-hue); cascades to derived tokens (CSS rule 9)
+  // Literals: steps that leave Display P3 at this hue, clipped to sRGB to match what iOS drew (CSS rule 5)
   :root[data-brand="pink"] {
     --brand-hue: var(--brand-hue-pink); // green ≈119° → pink
+    --brand-50: light-dark(oklch(0.962 0.025 339.8), oklch(0.143 0.041 14.6));
+    --brand-100: light-dark(oklch(0.938 0.038 347.6), oklch(0.332 0.088 9.7));
+    --brand-150: var(--brand-150-pink);
+    --brand-200: light-dark(oklch(0.904 0.059 349.2), oklch(0.465 0.114 3.7));
+    --brand-300: light-dark(oklch(0.844 0.102 349.6), oklch(0.555 0.132 0.9));
+    --brand-400: light-dark(oklch(0.777 0.156 349.9), oklch(0.627 0.147 359.6));
+    --brand-700: light-dark(oklch(0.630 0.154 3.2), oklch(0.765 0.162 352.8));
+    --brand-800: light-dark(oklch(0.541 0.136 5.9), oklch(0.797 0.141 348.9));
+    --brand-900: light-dark(oklch(0.420 0.116 12.3), oklch(0.862 0.088 351.0));
+    --brand-950: light-dark(oklch(0.262 0.089 23.1), oklch(0.904 0.059 349.2));
   }
   :root[data-brand="orange"] {
     --brand-hue: var(--brand-hue-orange); // green ≈119° → orange
+    --brand-50: light-dark(oklch(0.965 0.033 81.3), oklch(0.143 0.041 69.6));
+    --brand-100: light-dark(oklch(0.941 0.046 72.5), oklch(0.332 0.088 64.7));
+    --brand-150: var(--brand-150-orange);
+    --brand-200: light-dark(oklch(0.907 0.067 67.4), oklch(0.465 0.114 58.7));
+    --brand-300: light-dark(oklch(0.846 0.107 62.5), oklch(0.555 0.132 55.9));
+    --brand-400: light-dark(oklch(0.778 0.160 60.6), oklch(0.627 0.147 54.6));
+    --brand-700: light-dark(oklch(0.630 0.154 58.2), oklch(0.765 0.164 56.8));
+    --brand-800: light-dark(oklch(0.541 0.136 60.9), oklch(0.797 0.143 60.5));
+    --brand-900: light-dark(oklch(0.422 0.101 58.0), oklch(0.864 0.093 62.3));
+    --brand-950: light-dark(oklch(0.265 0.063 58.6), oklch(0.907 0.067 67.4));
   }
 }
 
