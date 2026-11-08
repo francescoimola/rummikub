@@ -4,11 +4,11 @@ cd "$(dirname "$0")/.." || exit 1
 fail=0
 report() { echo "✗ $1"; echo "$2" | sed 's/^/    /'; fail=1; }
 
-# CSS rule 10: viewport/container breakpoints only in _responsive.scss (feature queries stay nested)
+# CSS rule 10: viewport/container breakpoints only in _components.scss (feature queries stay nested)
 hits=$(grep -rnE "@media[^{]*\((min-|max-)?width|@container" src/css --include='*.scss' \
-  | grep -v "_responsive.scss" | grep -vE ":[0-9]+:[[:space:]]*//" \
+  | grep -v "_components.scss" | grep -vE ":[0-9]+:[[:space:]]*//" \
   | grep -vE "prefers-reduced-motion|hover|forced-colors")
-[ -n "$hits" ] && report "Breakpoint outside src/css/_responsive.scss (CSS rule 10)" "$hits"
+[ -n "$hits" ] && report "Breakpoint outside src/css/_components.scss (CSS rule 10)" "$hits"
 
 # Site notes, Coding standards: SCSS comments are single-line //, never /* */, and at most 25 words
 hits=$(grep -rn "/\*" src/css --include='*.scss')

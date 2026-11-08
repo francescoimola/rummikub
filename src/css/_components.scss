@@ -1,4 +1,100 @@
-@use 'icons';
+@use 'sass:map';
+@use 'sass:string';
+@use 'tokens';
+
+// Icon glyph system — small SVGs shown via ::before/::after, turned on by a [data-icon] or [data-icon-before] attribute
+
+// How to add a new icon:
+// 1. Get an SVG (24x24 or 16x16), delete width/height/newlines, and switch its fill/stroke to currentColor
+// 2. URL-encode it: only % < > # need escaping, everything else (including spaces) stays as-is
+// 3. Add "name": "encoded-svg" below — this one entry powers both data-icon="name" and data-icon-before="name"
+// 4. Use it in markup: data-icon="name" for a trailing icon, data-icon-before="name" for a leading one
+$glyphs: (
+    "arrow-ext": "%3Csvg fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 17 17 7'/%3E%3Cpath d='M7 7h10v10'/%3E%3C/svg%3E",
+    "arrow-left": "%3Csvg fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19 12H5'/%3E%3Cpath d='m12 19-7-7 7-7'/%3E%3C/svg%3E",
+    "arrow-right": "%3Csvg fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='m12 5 7 7-7 7'/%3E%3C/svg%3E",
+    "chevron-right": "%3Csvg fill='currentColor' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.646 3.146a.5.5 0 0 0 0 .708L9.793 8l-4.147 4.146a.5.5 0 0 0 .708.708l4.5-4.5a.5.5 0 0 0 0-.708l-4.5-4.5a.5.5 0 0 0-.708 0'/%3E%3C/svg%3E",
+    "copy": "%3Csvg fill='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21 7.5V21H7.5V7.5H21ZM21 6H7.5A1.5 1.5 0 0 0 6 7.5V21a1.5 1.5 0 0 0 1.5 1.5H21a1.5 1.5 0 0 0 1.5-1.5V7.5A1.5 1.5 0 0 0 21 6Z'/%3E%3Cpath d='M3 13.5H1.5V3A1.5 1.5 0 0 1 3 1.5h10.5V3H3v10.5Z'/%3E%3C/svg%3E",
+    "email": "%3Csvg fill='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14.25 18H3L2.997 6.68l8.576 5.937a.75.75 0 0 0 .854 0L21 6.682V13.5h1.5V6A1.502 1.502 0 0 0 21 4.5H3A1.502 1.502 0 0 0 1.5 6v12A1.502 1.502 0 0 0 3 19.5h11.25V18Zm5.099-12L12 11.088 4.651 6h14.698Z'/%3E%3Cpath d='M19.5 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z'/%3E%3C/svg%3E",
+    "phone": "%3Csvg fill='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19.5 21.75h-.127C4.635 20.902 2.543 8.467 2.25 4.672A2.25 2.25 0 0 1 4.32 2.25h4.133a1.5 1.5 0 0 1 1.395.945L10.988 6a1.5 1.5 0 0 1-.33 1.62L9.06 9.232a7.027 7.027 0 0 0 5.685 5.7l1.628-1.612A1.499 1.499 0 0 1 18 13.012l2.828 1.133a1.5 1.5 0 0 1 .922 1.395v3.96a2.25 2.25 0 0 1-2.25 2.25Zm-15-18a.75.75 0 0 0-.75.75v.06C4.095 9 6.308 19.5 19.455 20.25a.749.749 0 0 0 .795-.705V15.54l-2.827-1.132-2.153 2.137-.36-.045C8.385 15.682 7.5 9.158 7.5 9.09l-.045-.36 2.13-2.153L8.46 3.75H4.5Z'/%3E%3C/svg%3E",
+    "plus": "%3Csvg fill='none' stroke='currentColor' stroke-linecap='round' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 5v14'/%3E%3Cpath d='M5 12h14'/%3E%3C/svg%3E",
+);
+
+@function replace($text, $find, $with) {
+    $i: string.index($text, $find);
+
+    @if not $i {
+        @return $text;
+    }
+
+    @return string.slice($text, 1, $i - 1) + $with + replace(string.slice($text, $i + string.length($find)), $find, $with);
+}
+
+// A glyph as a sized, coloured data URL, for places a mask can't reach (content on ::scroll-button has no pseudo to mask)
+@function glyph-url($name, $color, $size: 20) {
+    $svg: replace(map.get($glyphs, $name), "currentColor", $color);
+
+    @return url("data:image/svg+xml,#{replace($svg, "viewBox", "width='#{$size}' height='#{$size}' viewBox")}");
+}
+
+// Turns every map entry above into two rules — one per hook — so a glyph is only ever written once
+@each $name, $svg in $glyphs {
+    [data-icon="#{$name}"]::after,
+    [data-icon-before="#{$name}"]::before {
+        --icon: url("data:image/svg+xml,#{$svg}");
+    }
+}
+
+// Shared box + mask for every icon, whichever glyph it ends up showing
+[data-icon]::after,
+[data-icon-before]::before {
+    content: "";
+    display: inline-block;
+    inline-size: 1em;
+    block-size: 1em;
+    background-color: currentColor;
+    vertical-align: var(--icon-align, var(--icon-align-s)); // no-op where the parent is inline-flex; align-items centres the glyph there instead
+    mask: var(--icon, linear-gradient(#0000 0 0)) center / contain no-repeat; // fallback keeps a typo'd data-icon name invisible instead of a solid square
+    -webkit-mask: var(--icon, linear-gradient(#0000 0 0)) center / contain no-repeat;
+}
+
+// only trailing icons animate — a leading icon's margin sits before the text, so nudging it would shift the whole label
+[data-icon]::after {
+    margin-inline-start: var(--icon-gap, var(--space-2xs)); // rhythm-exempt: icon gap, spacing inside one word
+    transition: margin-inline-start var(--dur-fast) var(--ease);
+}
+
+[data-icon-before]::before {
+    margin-inline-end: var(--icon-gap, var(--space-3xs));
+}
+
+// these two glyphs sit visually low against text, so they get nudged up relative to the rest
+:is([data-icon="arrow-right"], [data-icon="phone"])::after,
+:is([data-icon-before="phone"], [data-icon-before="arrow-left"])::before {
+    --icon-align: var(--icon-align-m);
+}
+
+// the external-link arrow reads as part of the last word, so it sits tighter than other trailing icons
+[data-icon="arrow-ext"] {
+    --icon-gap: var(--space-4xs);
+}
+
+// a standalone glyph (the breadcrumb separator) has no label next to it, so its own gap is switched off
+[data-icon-before]:empty {
+    --icon-gap: 0;
+}
+
+// --icon-gap lives on the element, not the pseudo, so a parent like .link-card can set it too on hover
+@media (hover: hover) {
+
+    [data-icon]:hover {
+        --icon-gap: var(--space-xs);
+    }
+}
+
+[data-icon]:focus-visible {
+    --icon-gap: var(--space-xs);
+}
 
 // The carousel chip is --content-light in both themes, so its arrow is a fixed dark neutral (= --neutral-950-alpha in light mode)
 $carousel-arrow: oklch(0.351 0.034 121.6);
@@ -346,12 +442,12 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
     }
 
     &::scroll-button(right) {
-        content: icons.glyph-url("arrow-right", $carousel-arrow) / "Next image";
+        content: glyph-url("arrow-right", $carousel-arrow) / "Next image";
         inset-inline-end: var(--carousel-inset);
     }
 
     &::scroll-button(left) {
-        content: icons.glyph-url("arrow-right", $carousel-arrow) / "Previous image";
+        content: glyph-url("arrow-right", $carousel-arrow) / "Previous image";
         inset-inline-end: calc(var(--carousel-inset) + var(--carousel-button) + var(--space-2xs));
         rotate: 180deg;
     }
@@ -383,7 +479,7 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
 }
 
 // ---- Site footer ----
-// One footer on every page; band fill shared with .site-banner in index.scss. Narrow stack here, Wide in _responsive.scss
+// One footer on every page; band fill shared with .site-banner in index.scss. Narrow stack here, Wide in the breakpoint block
 .site-footer {
     container: footer / inline-size;
     overflow-x: clip; // the Wide drawing bleeds past the column
@@ -697,7 +793,7 @@ main svg.illustration-wide {
     }
 }
 
-// Headline rung; left on phones, centred on wide screens (_responsive.scss)
+// Headline rung; left on phones, centred on wide screens (the breakpoint block)
 .intro__title {
     max-inline-size: var(--grid-width-l);
 }
@@ -713,7 +809,7 @@ main svg.illustration-wide {
     }
 }
 
-// About accordion: photo, then the social links in a row; side by side from $bp-s with the links at the photo's foot (_responsive.scss)
+// About accordion: photo, then the social links in a row; side by side from $bp-s with the links at the photo's foot (the breakpoint block)
 .intro__portrait {
     display: grid;
     inline-size: 100%;
@@ -845,7 +941,7 @@ main svg.illustration-wide {
 
 // ---- Writing (index + per-type listings) ----
 
-// Fluid thumb | body grid: 3fr 5fr, 1fr 3fr when the row is narrow (_responsive.scss) or on type pages (--compact)
+// Fluid thumb | body grid: 3fr 5fr, 1fr 3fr when the row is narrow (the breakpoint block) or on type pages (--compact)
 .writing-item {
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -900,4 +996,207 @@ main svg.illustration-wide {
 // Direct child only — the price. The nested .dimmed description must stay wrappable
 .pricing-list>li>p {
     white-space: nowrap;
+}
+
+// Only the hero media animates: it settles on every long-form page; later media stay still (#71)
+$settle-targets: '.case-study__intro + :is(figure, p:has(> :is(img, picture)))';
+
+// Every viewport + container breakpoint rule, one block per condition.
+// Block order is load-bearing: max-width ascending, then min-width ascending.
+@mixin responsive {
+
+    // ---- < tablet ----
+
+    @media (width < #{tokens.$bp-xl}) {
+
+        main {
+            flex-direction: column;
+
+            &>* {
+                max-inline-size: unset;
+                margin-inline: unset;
+            }
+        }
+    }
+
+    // ---- > tablet, motion allowed (scroll-driven settle) ----
+
+    // settle uses scroll(), not view(): view() would be mid-range at first paint
+
+    @media (prefers-reduced-motion: no-preference) and (width > #{tokens.$bp-xl}) {
+        @keyframes settle {
+            from {
+                max-inline-size: 100cqi; // main's container, not the parent
+            }
+
+            to {
+                max-inline-size: var(--settled-size, var(--inline-size));
+            }
+        }
+
+        #{$settle-targets} {
+            box-sizing: border-box;
+            inline-size: calc(100vw - (var(--gutter-x) *2));
+            margin-left: 50%;
+            transform: translate(-50%);
+            animation: settle ease-out both;
+        }
+
+        @supports (animation-timeline: view()) {
+            #{$settle-targets} {
+                animation-timeline: scroll(root block);
+                animation-range: 0 50vh; // full-bleed on load → settled after half a viewport of scroll; length-based so it's page-height independent
+            }
+        }
+
+        // Firefox: a paused 1s run scrubbed by negative delay replays the same keyframes; scroll-fallback.js writes --scroll-p from scroll position
+        @supports not (animation-timeline: view()) {
+            #{$settle-targets} {
+                animation-duration: 1s;
+                animation-play-state: paused;
+                animation-delay: calc(var(--scroll-p) * -1s);
+                --scroll-fallback: settle; // the JS hook — it finds targets by this, so selectors and breakpoint live only here
+                --scroll-p: 0; // full-bleed at the page top, as with scroll()
+            }
+        }
+    }
+
+    // ---- Container queries ----
+
+    // Components fold against main's inline-size (viewport minus gutters), not the viewport
+    @container (min-width: #{tokens.$bp-s}) {
+
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        // Homepage intro: the title centres on wide screens
+        .intro__title {
+            text-align: center;
+        }
+
+        // About accordion: photo | links, the links stacked at the photo's foot
+        .intro__portrait {
+            grid-template-columns: repeat(2, 1fr);
+
+            >ul {
+                flex-direction: column;
+                align-self: end;
+                gap: var(--space-3xs); // Hang: the stacked links read as one block (Francesco, review); the phone row keeps sideways Tight
+            }
+        }
+    }
+
+    // Label | content: folds later than the image grids, at iPad mini portrait's container width
+    @container (min-width: #{tokens.$bp-split}) {
+
+        .section:not(.section--stacked) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @container (min-width: #{tokens.$bp-l}) {
+
+        // Text left / image right (Split) — the item's own fold, independent of the body's. Stacked items (homepage Featured) never fold
+        .project-item:not(.project-item--stacked) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        // First child, not a class: eleventy-img wraps an unlinked image in a classless <picture>
+        .project-item:not(.project-item--stacked)>:first-child {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        // Split rows read as a list: Flow apart, one step closer than the Break they keep when stacked
+        .project-rows {
+            --flow-gap: var(--space-s-m);
+        }
+    }
+
+    // Narrow banner: the open Menu panel sits under the sticky bar, so cap it to the viewport below and scroll it (landscape phones)
+    @container banner (width < #{tokens.$bp-banner}) {
+        .nav-menu__panel {
+            max-block-size: calc(100dvh - var(--banner-block-size));
+            overflow-y: auto;
+            overscroll-behavior: contain;
+        }
+    }
+
+    // Wide banner: links on the column's edge, look toggles in the margin; narrower, they'd squeeze the column, so Menu shows (#74)
+    @container banner (width >= #{tokens.$bp-banner}) {
+        .site-banner__inner {
+            padding-inline: var(--gutter-y); // .layout's gutter, so the centre track is the content column
+            block-size: auto; // the panel is the row here, always open, so it sizes the band
+        }
+
+        .site-banner__inner,
+        .nav-menu__panel {
+            grid-template-columns: 1fr minmax(0, var(--grid-width-l)) 1fr;
+            column-gap: var(--space-l); // rhythm-exempt: the wide header's three layout tracks
+            align-items: center;
+        }
+
+        .site-banner__name {
+            grid-column: 2;
+        }
+
+        .site-banner__inner > .nav-menu {
+            grid-column: 1 / -1;
+        }
+
+        // No disclosure: hide the bar, force the panel permanently open
+        .nav-menu__bar {
+            display: none;
+        }
+
+        .nav-menu::details-content {
+            content-visibility: visible;
+            block-size: auto;
+            opacity: 1;
+        }
+
+        .nav-menu__panel {
+            grid-template-areas: ". links toggles";
+            padding: 0;
+            margin-inline: 0;
+        }
+
+        .nav-menu__panel > ul {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: end;
+            gap: var(--space-xs);
+        }
+
+        .nav-menu__toggles {
+            justify-self: end;
+            flex-wrap: nowrap;
+        }
+    }
+
+    // Wide footer: Contact left, the drawing right (bleeding past the column), colophon under Contact
+    @container footer (width >= #{tokens.$bp-xl}) {
+        .site-footer__inner {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .site-footer__contact,
+        .site-footer__colophon {
+            grid-column: 1;
+        }
+
+        .site-footer__art {
+            grid-column: 2;
+            grid-row: 1;
+            align-self: center;
+            margin-block: 0; // the stacked spacing above and below doesn't apply beside Contact
+
+            svg {
+                inline-size: 206%; // Figma: the 987-wide drawing overflows its 479 column
+                max-inline-size: none;
+                margin-inline-start: 5%;
+            }
+        }
+    }
 }

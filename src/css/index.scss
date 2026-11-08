@@ -1,15 +1,9 @@
-@use 'layers';
-@use 'fonts';
-@use 'colors';
-@use 'scale';
-@use 'icons';
+@use 'tokens';
 @use 'components';
 @use 'vendor/cleacss'; // extensionless plain-CSS @use inlines the file; sits here so its CSS lands where the old @import did
-@use 'cleacss-overrides';
-@use 'responsive';
 
 // After the cleacss @use so these unlayered tokens override cleacss's own unlayered :root defaults (CSS rule 3)
-@include cleacss-overrides.overrides;
+@include tokens.overrides;
 
 html {
     font-size: 15px; // rhythm-exempt: the root size every rem is built on; overrides cleacss's unlayered 16px (@layer reset)
@@ -81,7 +75,7 @@ html.lenis body {
     interpolate-size: allow-keywords;
     // The Narrow banner's height: its padding plus .site-banner__inner's one body line. Wide (toggles a few px taller) is covered by the scroll-padding breath
     --banner-block-size: calc(2 * var(--space-s) + var(--step-0) * var(--line-height));
-    // Base typography variables (the rest are in _scale.scss)
+    // Base typography variables (the rest are in _tokens.scss)
     --font-family: 'Ronzino', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji';
     --font-family-display: 'KC Pelletier Sans', var(--font-family); // hero + CTA headings only
     --line-height: 1.5;
@@ -386,7 +380,7 @@ nav li a {
 }
 
 // ---- Site banner ----
-// Narrow by default (Wide row in _responsive.scss); pinned at every width, as no ancestor sets overflow to break the stick (#75)
+// Narrow by default (Wide row in the breakpoint block); pinned at every width, as no ancestor sets overflow to break the stick (#75)
 .site-banner {
     container: banner / inline-size;
     padding-block: var(--space-s);
@@ -617,4 +611,4 @@ dialog {
 }
 
 // Included last so breakpoint rules land after everything above — media queries add no specificity, only source order does
-@include responsive.all;
+@include components.responsive;
