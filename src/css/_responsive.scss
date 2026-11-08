@@ -73,12 +73,12 @@ $settle-targets: '.case-study__intro + :is(figure, p:has(> :is(img, picture)))';
         }
 
         // Homepage intro: the title centres on wide screens
-        .home-intro__title {
+        .intro__title {
             text-align: center;
         }
 
         // About accordion: photo | links, the links stacked at the photo's foot
-        .home-intro__portrait {
+        .intro__portrait {
             grid-template-columns: repeat(2, 1fr);
 
             >ul {

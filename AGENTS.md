@@ -63,7 +63,7 @@ pnpm clean            # rm -rf public; run it to start fresh, then expect a 4–
 | `src/css/_scale.scss` | Utopia fluid type tokens (`@layer type`), the `$bp-*` breakpoint Sass vars (consumed by `_responsive.scss`), and the `--gutter-y-sticky` `@property` |
 | `src/css/_layers.scss` | Single `@layer` order statement pinning cleacss's five layers below our three. Must stay the **first** `@use` in `index.scss` (see CSS rule 3) |
 | `src/css/_cleacss-overrides.scss` | Single unlayered `overrides` mixin holding every token that collides with cleacss's own unlayered defaults — the `--space-*` scale (Utopia), `--font-weight-bold`, `--color-{success,warning,error,info}`, `--input-border-color`. `@include`d once in `index.scss` after the cleacss `@use` (see CSS rules 3 & 8) |
-| `src/css/vendor/cleacss.css` | Vendored cleacss v3.2.0 — do NOT npm-install |
+| `src/css/vendor/cleacss.css` | Vendored cleacss v3.2.0, trimmed to the classes the site uses, with its reset, element styles and tokens intact. Edit it directly; do NOT npm-install. To use a class it no longer has, copy the rule back from upstream |
 | `src/assets/fonts/` | woff2 files only, never source OTFs (gitignored; public repo) (passthrough copied to `public/assets/fonts/`) |
 | `src/assets/favicon/` | Favicon files (passthrough copied) |
 | `src/work/` | Portfolio case-study pages (`tag: work`). Frontmatter drives collections in `src/config/collections.js`: sorted by `endDate` (YYYY-MM) desc; `featured: true` → `workFeatured` (homepage Featured, **max 3**), otherwise → `workIndex` (homepage Index). There is no `/work/` index: it redirects to `/#case-studies`, and `/contact/` to the footer's `/#contact` |

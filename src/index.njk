@@ -10,8 +10,8 @@ eleventyNavigation:
 {% from "_project-item.njk" import projectItem %}
 {% from "_faq-list.njk" import accordion %}
 {# Intro: title, photo, introduction, then the Intro accordions — everything the retired About page said (text kept in docs/about-page.md). All accordion text is written here, not in Pages CMS #}
-<section class="home-intro flow has-gap-l-xl" aria-labelledby="intro-title">
-  <h1 id="intro-title" class="headline home-intro__title">My name is Francesco and I'm a designer, marketer, and artist based in Folkestone, England. My bread and butter are brand messaging, websites, and graphic design.</h1>
+<section class="intro flow has-gap-l-xl" aria-labelledby="intro-title">
+  <h1 id="intro-title" class="headline intro__title">My name is Francesco and I'm a designer, marketer, and artist based in Folkestone, England. My bread and butter are brand messaging, websites, and graphic design.</h1>
 
   <img src="/assets/images/francesco.png" alt="Francesco Imola, smiling in front of a flowering hedge"{{ "4:3" | mediaStyle | safe }}>
 
@@ -26,7 +26,7 @@ eleventyNavigation:
       <p>I now live in Folkestone, on the Kent coast, but I was born in Italy in a land called Ciociaria. These days, I spend my time <a href="/studio/">making complex stories a little less complex</a>, and drawing people closer to good products, good services and good talent.</p>
       <p>I graduated in Digital Arts from the University of Greenwich, which is where much of this started, and then spent six years between cultural institutions and the Film & TV industry. I also <a href="/writing/">write</a>, and volunteer with <a href="https://openartfolke.com" rel="noopener noreferrer" target="_blank">Open Art Folke</a> to support fellow artists. And I <a href="/art/">make art</a> of my own, with words and pixels.</p>
       {# The 2560px source must stay referenced: it generates the Person schema headshot (site.personImage) #}
-      <div class="home-intro__portrait">
+      <div class="intro__portrait">
         <img src="/assets/images/francesco-studio-shot.jpg" alt="Francesco Imola" width="2560" height="2560"{{ "3:2" | mediaStyle | safe }}>
         <ul class="flow-row has-gap-xs" aria-label="Find me elsewhere">
           {% for link in site.social %}
@@ -107,7 +107,7 @@ eleventyNavigation:
   </div>
 </section>
 
-<section class="home-block flow has-gap-xs" aria-labelledby="case-studies">
+<section class="page-block flow has-gap-xs" aria-labelledby="case-studies">
   <h2 id="case-studies">Featured</h2>
   <div class="flow has-gap-l-xl">
   {% for project in collections.workFeatured %}
@@ -118,13 +118,13 @@ eleventyNavigation:
 
 {# Shown only once Explorations has entries in Pages CMS #}
 {% if explorations | length %}
-<section class="home-block" aria-labelledby="explorations">
+<section class="page-block" aria-labelledby="explorations">
   <h2 id="explorations">Explorations</h2>
   {{ carousel(explorations, "Explorations") }}
 </section>
 {% endif %}
 
-<section class="home-block flow has-gap-xs" aria-labelledby="index">
+<section class="page-block flow has-gap-xs" aria-labelledby="index">
   <h2 id="index">Index</h2>
   <div class="flow has-gap-l-xl project-rows">
   {% for project in collections.workIndex %}

@@ -686,7 +686,7 @@ main svg.illustration-wide {
 // ---- Homepage ----
 
 // Intro: title, photo, introduction, Intro accordions. main>* would cap the block at --inline-size, so each child sets its own width
-.home-intro {
+.intro {
     max-inline-size: none;
     padding-block-start: var(--space-l-xl); // Chapter: the room the old hero band gave the page top (Figma draws ~Chapter above the title)
 
@@ -698,12 +698,12 @@ main svg.illustration-wide {
 }
 
 // Headline rung; left on phones, centred on wide screens (_responsive.scss)
-.home-intro__title {
+.intro__title {
     max-inline-size: var(--grid-width-l);
 }
 
 // The photo under the title: the figure column (--grid-width-l), wider than the 40rem text. The image transform wraps each <img> in <picture>
-.home-intro>picture {
+.intro>picture {
     display: block;
     max-inline-size: var(--grid-width-l);
 
@@ -714,7 +714,7 @@ main svg.illustration-wide {
 }
 
 // About accordion: photo, then the social links in a row; side by side from $bp-s with the links at the photo's foot (_responsive.scss)
-.home-intro__portrait {
+.intro__portrait {
     display: grid;
     inline-size: 100%;
     gap: var(--space-xs);
@@ -725,7 +725,7 @@ main svg.illustration-wide {
     }
 }
 
-.home-block {
+.page-block {
     max-inline-size: var(--grid-width-l);
 }
 
