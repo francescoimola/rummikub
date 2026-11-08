@@ -9,17 +9,11 @@ key: Home
 {% from "_carousel.njk" import carousel %}
 {% from "_project-item.njk" import projectItem %}
 {% from "_faq-list.njk" import accordion %}
-{# Intro: title, photo pair, introduction, then the Intro accordions — everything the retired About page said (about.njk, kept unbuilt). All accordion text is written here, not in Pages CMS #}
+{# Intro: title, photo, introduction, then the Intro accordions — everything the retired About page said (about.njk, kept unbuilt). All accordion text is written here, not in Pages CMS #}
 <section class="home-intro flow has-gap-l-xl" aria-labelledby="intro-title">
   <h1 id="intro-title" class="headline home-intro__title">My name is Francesco and I'm a designer, marketer, and artist based in Folkestone, England. My bread and butter are brand messaging, websites, and graphic design.</h1>
 
-  {# Wide: side by side. Narrow: one photo space, crossfading with no JS; the hidden checkbox pauses it (WCAG 2.2.2). Reduced motion: stacked #}
-  <div class="home-intro__photos grid-cols-2">
-    <input type="checkbox" id="intro-photos-pause" class="home-intro__pause sr-only">
-    <label for="intro-photos-pause" class="home-intro__toggle"><span class="sr-only">Pause photos</span></label>
-    <img src="/assets/images/francesco.png" alt="Francesco Imola, smiling in front of a flowering hedge"{{ "3:2" | mediaStyle | safe }}>
-    <img src="/assets/images/musician-intro.jpeg" alt="Francesco performing in a church surrounded by a pensive audience"{{ "3:2" | mediaStyle | safe }}>
-  </div>
+  <img src="/assets/images/francesco.png" alt="Francesco Imola, smiling in front of a flowering hedge"{{ "4:3" | mediaStyle | safe }}>
 
   <div class="flow has-gap-s-m">
     <p>I help brands with big missions stop chasing novelties and start rethinking their fundamentals. In other words, if people don't get what you do, I rewrite it; if they can't work out how to buy, I redesign it; and if they can't tell you from the guys next door, I find what makes you different and say it loud.</p>

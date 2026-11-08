@@ -182,11 +182,10 @@ main:has(> :is(.cta-card, .prefooter-hero):last-child) {
 
 // Single-column stacks that fold to two columns at their own container width: $bp-s grids, $bp-split label | content (CSS rule 10)
 // .split-row is its own grid, not cleacss's .grid-reset — that reserves a margin track full-bleed can't use
-// align-items: stretch overrides cleacss's .flow (align-items: flex-start, @layer reset) so row items stay equal-height — needed whenever .flow is combined in for its gap token (CSS rule 3)
+// align-items: stretch overrides cleacss's .flow (flex-start, @layer reset) so row items stay equal-height when .flow supplies the gap token (CSS rule 3)
 .grid-cols-2,
 .section,
-.split-row,
-.split-row__text {
+.split-row{
     display: grid;
     grid-template-columns: 1fr;
     align-items: stretch;
@@ -212,20 +211,12 @@ main:has(> :is(.cta-card, .prefooter-hero):last-child) {
     }
 }
 
-// Media = a figure, a media pair, or a markdown image (<p><picture>). Body media sits at the wider 60rem column on every page, so its edges line up with the label | content sections around it (G13, #71)
+// Media = figure, media pair or markdown image (<p><picture>). Sits at the wider 60rem column, edges aligned with label | content sections (G13, #71)
 main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
     max-inline-size: var(--grid-width-l);
 }
 
 // ---- Split row (Artmaking) ----
-
-// Text above images (Q25): title | description, dimmed year, link, at content width, 2-up fold at $bp-split in _responsive.scss (G24)
-.split-row__text {
-    gap: var(--space-xs);
-    inline-size: 100%;
-    max-inline-size: var(--grid-width-l);
-    margin-inline: auto;
-}
 
 // Plain 2-up grid at natural ratios, no masonry (G37); the img stays a direct child of .card for the full-bleed rule
 .split-row__images {
@@ -735,7 +726,7 @@ main svg.illustration-wide {
 
 // ---- Homepage ----
 
-// Intro: title, photo pair, introduction, Intro accordions. main>* would cap the block at --inline-size, so each child sets its own width
+// Intro: title, photo, introduction, Intro accordions. main>* would cap the block at --inline-size, so each child sets its own width
 .home-intro {
     max-inline-size: none;
     padding-block-start: var(--space-l-xl); // Chapter: the room the old hero band gave the page top (Figma draws ~Chapter above the title)
@@ -747,77 +738,20 @@ main svg.illustration-wide {
     }
 }
 
-// Headline rung; left on phones, centred once the photos sit side by side (_responsive.scss)
+// Headline rung; left on phones, centred on wide screens (_responsive.scss)
 .home-intro__title {
     max-inline-size: var(--grid-width-l);
 }
 
-// Bleeds through the layout gutter to the header inset, so the photo edges line up with the banner. Base = one column (reduced motion: the photos stack)
-.home-intro__photos {
-    position: relative;
-    max-inline-size: none;
-    inline-size: calc(100% + 2 * var(--gutter-y-sticky));
-    margin-inline: calc(-1 * var(--gutter-y-sticky));
-    padding-inline: var(--gutter-y);
-    gap: var(--space-xs);
+// The photo under the title: the figure column (--grid-width-l), wider than the 40rem text. The image transform wraps each <img> in <picture>
+.home-intro>picture {
+    display: block;
+    max-inline-size: var(--grid-width-l);
 
-    // The image transform wraps each <img> in <picture>, so the grid items are the pictures
-    >picture {
-        display: block;
+    >img {
+        inline-size: 100%;
         margin: 0;
-
-        >img {
-            inline-size: 100%;
-            margin: 0;
-        }
     }
-}
-
-.home-intro__pause,
-.home-intro__toggle {
-    display: none;
-}
-
-// Phones, motion allowed: one photo space, the second photo fades in and out over the first on a 6s loop. CSS only; the hidden checkbox pauses it (WCAG 2.2.2)
-@media (prefers-reduced-motion: no-preference) {
-    .home-intro__photos {
-        >picture {
-            grid-area: 1 / 1;
-        }
-
-        >picture:last-of-type {
-            animation: intro-crossfade 6s var(--ease) infinite;
-        }
-
-        &:has(.home-intro__pause:checked)>picture:last-of-type {
-            animation-play-state: paused;
-        }
-
-        &:has(.home-intro__pause:focus-visible) {
-            outline: 2px solid var(--color-accent);
-            outline-offset: 2px;
-        }
-    }
-
-    .home-intro__pause {
-        display: block; // .sr-only keeps it invisible but focusable
-    }
-
-    // The tap target: covers the photos, toggles the checkbox
-    .home-intro__toggle {
-        display: block;
-        position: absolute;
-        inset: 0;
-        z-index: 1;
-        cursor: pointer;
-    }
-}
-
-// 0–3s the first photo, 3–6s the second, a 0.6s crossfade each way
-@keyframes intro-crossfade {
-    0%, 40% { opacity: 0; }
-    50%, 90% { opacity: 1; }
-    100% { opacity: 0; }
 }
 
 // About accordion: photo, then the social links in a row; side by side from $bp-s with the links at the photo's foot (_responsive.scss)
@@ -836,7 +770,7 @@ main svg.illustration-wide {
     max-inline-size: var(--grid-width-l);
 }
 
-// Pre-footer hero: the KC slogan band. Bleeds like the hero bands and fades from the page into the footer colour; the band is the container, so --step-hero sizes the widest line to its content box
+// Pre-footer hero: the KC slogan band. Fades from the page into the footer colour; the band is the container, so --step-hero fits its widest line
 .prefooter-hero {
     container-type: inline-size;
     max-inline-size: none;

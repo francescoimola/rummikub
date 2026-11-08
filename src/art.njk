@@ -9,14 +9,14 @@ eleventyNavigation:
   parent: Home
 ---
 {% from "_split-row.njk" import splitRow %}
-{% from "_page-header.njk" import pageHeader %}
 <div full-width class="flow has-gap-l-xl">
-  {{ pageHeader("", "I make things out of words and pixels, including poems, essays, photos, and designs.<br><br>Occasionally, you’ll find me getting people together to share ideas.") }}
-  <section class="split-row__text">
-    <h2>What inspires the work</h2>
-    <p>The act of noticing and surfacing what's been hiding in plain sight—be it an everyday place, a mundane object, someone who doesn't get heard, or the infrastructure around us—is the thread that connects it all.</p>
+  <section class="home-intro flow has-gap-l-xl" aria-labelledby="intro-title">
+    <h1 id="intro-title" class="headline home-intro__title">
+      I make things out of words and pixels, including poems, essays, photos, and designs. Occasionally, you’ll find me getting people together to share ideas.
+    </h1>
+    <img src="/assets/images/musician-intro.jpeg" alt="Francesco performing in a church surrounded by a pensive audience">
+    <p>My creative practice is an act of noticing and surfacing what's been hiding in plain sight, be it an everyday place, a mundane object, or the infrastructure around us. If there's one thread that connects it all, then this is it.</p>
   </section>
-  <hr class="split-row__text">
   {% for item in artProjects %}
     {{ splitRow(item) }}
   {% endfor %}

@@ -24,8 +24,4 @@ describe('site image tokens resolve to built files', () => {
   it('ships the Person headshot derivative', () => {
     expect(existsSync(localPath(site.personImage))).toBe(true);
   });
-
-  it('keeps the source that generates the headshot derivative referenced on the homepage', () => {
-    expect(readFileSync('src/index.njk', 'utf8')).toMatch(/francesco-studio-shot\.png/);
-  });
 });

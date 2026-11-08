@@ -72,24 +72,9 @@ $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:
             grid-template-columns: repeat(2, 1fr);
         }
 
-        // Homepage intro: photos side by side, so no crossfade and no pause control; the title centres over them
+        // Homepage intro: the title centres on wide screens
         .home-intro__title {
             text-align: center;
-        }
-
-        .home-intro__photos {
-            >picture {
-                grid-area: auto;
-            }
-
-            >picture:last-of-type {
-                animation: none;
-            }
-        }
-
-        .home-intro__pause,
-        .home-intro__toggle {
-            display: none;
         }
 
         // About accordion: photo | links, the links stacked at the photo's foot
@@ -107,8 +92,7 @@ $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:
     // Label | content: folds later than the image grids, at iPad mini portrait's container width
     @container (min-width: #{scale.$bp-split}) {
 
-        .section:not(.section--stacked),
-        .split-row__text {
+        .section:not(.section--stacked) {
             grid-template-columns: repeat(2, 1fr);
         }
     }
