@@ -27,7 +27,7 @@ Body media with an optional caption, in posts, case studies and service pages. I
 ## Layout
 
 - A single figure is capped at `layout/content-width` (Phase 13) with `space/l` sides. A [Media pair](media-pair.md) also sits at content width (G13).
-- The width and the scroll animation belong to the page (`.case-study` rhythm, `settle`; see Long-form pages in AGENTS.md), not to the component.
+- The width and the scroll animation belong to the page (`.case-study` rhythm, `settle`; see [long-form-pages.md](../../long-form-pages.md)), not to the component.
 - **Scroll animation (G13, #71):** `settle` stays on the hero media of case studies and writing posts. No later media animates; `breakout` was removed.
 
 ## Tokens

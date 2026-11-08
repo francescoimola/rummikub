@@ -23,6 +23,8 @@ pnpm test                # all tests, once
 pnpm build && pnpm test  # what to run before committing
 ```
 
+`pnpm lint` also runs as a pre-commit hook from `scripts/hooks/`, wired up by `pnpm install`.
+
 Vitest discovers anything matching `*.test.js` automatically. **The four `built-*` tests (plus `site-images.test.js`) read the `public/` folder, so they need `pnpm build` first** — on a fresh checkout they fail with a message telling you exactly that (`src/config/require-build.js`).
 
 ## What gets a test — and what doesn't
@@ -33,13 +35,13 @@ A test costs you nothing while the code is untouched. It costs you time in one m
 - **Behaviour that fails visibly does not.** A copy-email button, a dialog, the nav menu — click the live site and you know in ten seconds. Tests for these were deliberately deleted (2026-09); don't re-add them.
 - **Escape hatch:** if a browser-script test fails and you can't fix it in a reasonable time, deleting the test is an acceptable outcome. The built-output tier is the one that must always stay green.
 
-## The 15 test files
+## The test files
 
 ### Built-output tests — the most important tier (need `pnpm build` first)
 
 These check the actual shipped site in `public/`, so they catch mistakes anywhere in the chain — template, config, or data.
 
-- **src/built-css.test.js** — one stylesheet, no runtime `@import`, layer order, icon glyphs, KC font
+- **src/css/built-css.test.js** — one stylesheet, no runtime `@import`, layer order, icon glyphs, KC font, brand colours inside Display P3
 - **src/built-feeds.test.js** — both RSS feeds carry the right categories; hidden posts stay out
 - **src/built-landmarks.test.js** — every page has correct landmark markup (skip link, banner, main), and titles/descriptions meet the length targets and are unique (`META_EXCEPTIONS` lists the six older pages that miss them; fix one, then delete it from the list)
 - **src/built-markdown.test.js** — every page ships its `.md` twin, plus `llms.txt`
@@ -76,7 +78,7 @@ Run in jsdom. These files are IIFE-style with no exports, so the pattern is: set
 - `pnpm build` runs `rm -rf public`, and the built-output tests read `public/`. Two builds in one checkout clobber each other; a failed `ELIFECYCLE` build that passes on a quiet re-run was this.
 - Every worktree has its own `public/` and builds cold in 4–10 minutes (images re-optimize because they live in `public/`). Build and test inside your worktree; avoid the main checkout while another agent works there.
 - `pnpm test` reads the current checkout's `public/`. After `pnpm start`, run `pnpm build` again before testing: dev output links the focal picker and fails `built-landmarks`.
-- `vitest.config.js` excludes `.claude/**`, so a checkout runs only its own 14 suites, not sibling worktrees' copies.
+- `vitest.config.js` excludes `.claude/**`, so a checkout runs only its own suites, not sibling worktrees' copies.
 - In a worktree, run git as separate plain commands; merge and push from the main checkout.
 
 ## Bugs only a browser shows

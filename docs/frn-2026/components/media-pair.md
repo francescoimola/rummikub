@@ -58,7 +58,7 @@ No scroll animation: a pair sits at the 60rem column on every long-form page (#7
 - Rename `.grid-cols-2-fixed` to `.grid-cols-2` everywhere (G42) and add the container fold so it stacks (G36). About (profile) and Collaborate use it, so they stack too.
 - Add the `mediaPair` paired shortcode to `src/config/eleventy/shortcodes.js` (G40, approved).
 - Figma frames named `Frame 2` and `Frame 3` on The Loft are the same pattern; they should be named `Media pair`.
-- The post-media rhythm still keys off `.case-study__intro` (AGENTS.md, Long-form pages).
+- The post-media rhythm still keys off `.case-study__intro` ([long-form-pages.md](../../long-form-pages.md)).
 - **No breakout:** the `breakout` animation was removed (#71); only the hero media after the intro animates (`settle`).
 - **About (#37):** the profile photo is now a single full-width 1:1 image in the bio column, as in Figma, so About no longer uses `.grid-cols-2`.
 - **Ported (#25):** `{% mediaPair %}…{% endmediaPair %}` renders `<div class="grid-cols-2 media-pair">` (gap `--space-s`), stacking below `@container (min-width: $bp-s)`. The `.case-study` rhythm treats `.media-pair` as media. Used on The Loft (two pairs; the Ritual mobile walkthrough now follows the second pair) and the flyer guide (two pairs).

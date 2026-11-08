@@ -11,6 +11,10 @@
 - **Rhythm:** [docs/design-system/rhythm.md](docs/design-system/rhythm.md) — the four type rungs, the spacing ladder (Tight, Flow, Break, Chapter, Hang) and the pair table; read before changing text sizes or gaps
 - **Review:** [CODING_STANDARDS.md](CODING_STANDARDS.md) — judgement rules the reviewer enforces; mechanical ones live in `pnpm lint`
 - **Figma ↔ code:** [docs/frn-2026/components/README.md](docs/frn-2026/components/README.md) — file key, node IDs and the component→repo-file index; read before any Figma work, Code Connect included
+- **Pages CMS:** [docs/pages-cms.md](docs/pages-cms.md) — read before changing `.pages.yml`, CMS field shapes or the optimize-videos action
+- **Long-form pages:** [docs/long-form-pages.md](docs/long-form-pages.md) — case studies and writing posts: the shared shell, media rhythm, `settle`, `figureImg`, the focal picker
+- **Artmaking page:** [docs/artmaking-page.md](docs/artmaking-page.md) — read before changing `/art/`, `.split-row` or `artProjects.json`
+- **Sitemap:** [docs/sitemap.md](docs/sitemap.md) — `noindex` and `hidden` opt-outs, `updated` and `<lastmod>`
 
 ## Commands
 
@@ -25,17 +29,6 @@ pnpm clean            # rm -rf public
 **Never run `pnpm dev` / `npm run dev`** — the dev script is `pnpm start`. Do not spin up a dev server unless the user explicitly asks.
 
 **Worktrees:** `pnpm build` wipes `public/` and a cold build takes 4–10 minutes. Build and test in your own worktree, not in the main checkout while another agent works there; in a worktree run git as separate plain commands. Details in [testing-guide.md](testing-guide.md).
-
-## Pages CMS
-
-Content and media are editable via Pages CMS, configured in `.pages.yml` at the repo root (per-branch). Uploads land in `src/assets/` and are written as `/assets/...` URLs.
-
-- **Collections** `work` (`src/work`, sorted by `endDate` desc, `featured` boolean) and `writing` (`src/writing`, sorted by `date` desc, `type` select) edit each `.md`'s frontmatter and body. Add a `writing` entry with `external`+`source` set (leave `permalink`+`body` blank) for a link-only Substack item. `writing.11tydata.js` (excluded from CMS) holds dir metadata + computed permalink.
-- **Structured data files** (`artProjects`, `explorations`, `faqs`, `testimonials`, `collaborate`, `recognition`, and the contact fields in `site.json`) are edited through their `.pages.yml` entries, which hold the field shapes; read the entry before changing a data file. Gotchas: `faqs` answers are Markdown, rendered by the `markdown` filter in `faqList`; `explorations` uploads go to `src/assets/explorations`; `ctaCard` is imported `with context` so its defaults can read `site.json`.
-- **Raw editors** for `_headers`, `_redirects`, `robots.txt` — `format: code`, no structured fields.
-- **`body` fields are `type: text`, never `rich-text`** — posts mix markdown with Nunjucks shortcodes (`figureImg`, `projectVideo`) that a rich-text round-trip would corrupt.
-- `settings.content.merge: true` preserves keys in `artProjects.json` that aren't in the schema.
-- **Optimize-videos action:** the media page's button dispatches `.github/workflows/pages-cms-optimize-videos.yml`, which installs ffmpeg, runs `pnpm optimize:video`, and commits the mp4/webm/jpg back to the branch. Raw `.src.*` files are picked up automatically; existing outputs are skipped (pass `--force` to redo).
 
 ## Project structure
 
@@ -73,42 +66,6 @@ Content and media are editable via Pages CMS, configured in `.pages.yml` at the 
 
 `title` doubles as the on-page `<h1>` for work/writing items (`_base.njk`) and via `pageHeader` elsewhere. Where the h1 must stay short (`The Loft`) or the SEO title differ, set **`metaTitle`** — it overrides `<title>`, `og:title`, `twitter:title` and schema `name`, and leaves the h1 alone. `writingTypes.json` carries `metaTitle`/`metaDescription` per type for the same reason (`blurb`/`label` stay on-page). Writing posts use `teaser` as their description; it also renders in listings.
 
-## Sitemap
-
-`src/sitemap.njk` → `/sitemap.xml`, built from `collections.all` (URL-sorted, trailing-slash pages only). Two opt-outs: `noindex: true` drops the page from the sitemap **and** emits the robots meta; `hidden: true` keeps a live page out of the writing listings and RSS but leaves it in the sitemap (`on-inner-desires`, linked from `/art/`). Never use `eleventyExcludeFromCollections` on a page that renders — it silently orphans it from the sitemap.
-
-`<lastmod>` is emitted only when it's provably accurate: set **`updated: YYYY-MM-DD`** in frontmatter when you materially revise a page; writing posts fall back to `date`. Everything else omits the tag on purpose — Eleventy's default `page.date` is the file's creation time, which a fresh CI clone resets, so every deploy would stamp every URL with the build date and Google would stop trusting the whole file.
-
-## Long-form pages (work + writing)
-
-Case studies and writing posts share **one** branch in `_base.njk` → `<main class="case-study text">`, writing adding `writing-post`. It renders a `.case-study__intro` (h1 + one dimmed line: `services` on work, `<time>` + type on writing) and nothing else — the opening image is authored as the first `figureImg` **in the body**, not by the template. `image:`/`alt:` frontmatter is listing-thumbnail and OG duty only; a post without one just leads with the intro then text. A standalone page opts into the same shell with `longForm: true` (Accessibility): no `writing-post` class, and the intro line reads "Last updated" from `updated`.
-
-Media rhythm (`.case-study` in `_components.scss`) and the scroll animation (`_responsive.scss`) both key off `.case-study__intro`: the first media after it gets `settle` (bleeds on load, pulls in over 50vh of scroll). Later media never animate. Figures and media pairs sit at the 60rem column (`--grid-width-l`), wider than the 40rem text, on every page; media ending the page carries no trailing margin. Removing the intro div silently kills `settle`. Browsers without `animation-timeline` (Firefox) get the same keyframes scrubbed from JS: `app-core.js` dynamically imports `scroll-fallback.js`, which finds targets by the `--scroll-fallback` custom property the CSS sets and writes `--scroll-p` — so target selectors and the breakpoint live only in `_responsive.scss`.
-
-**Always use `figureImg` for body images — never markdown `![]()`.** Markdown compiles to `<p><picture>`, and two images on adjacent lines land in the *same* `<p>`, so they stack with no gap and support no caption. `figureImg` emits a real `<figure>` that the spacing and animation selectors match.
-
-```njk
-{% figureImg "/assets/writing/x.png", "Alt text" %}
-{% figureImg "/assets/writing/x.png", "Alt", caption="Optional caption" %}
-{% figureImg "/assets/writing/x.png", "Alt", href="https://…" %}   {# wraps img in a target=_blank link #}
-{% figureImg "/assets/writing/x.png", "Alt", class="extra" %}      {# extra class on the <figure> #}
-{% figureImg "/assets/writing/x.png", "Alt", imgClass="extra" %}   {# extra class on the <img> itself #}
-{% figureImg "/assets/writing/x.png", "Alt", position="62% 18%" %} {# object-position crop #}
-{% figureImg "/assets/writing/x.png", "Alt", ratio="3:2" %}        {# crop to --ratio-3-2 (also projectVideo); unknown ratio fails the build #}
-{% mediaPair %}{% figureImg … %}{% figureImg … %}{% endmediaPair %} {# two figures side by side, stacking below $bp-s #}
-```
-
-**Object-position picker (dev only):** under `pnpm start`, Alt/Option+click any img or video (videos need a poster) to drag its focal point live and copy the CSS or `position=` value. Lives in `src/dev/focal-picker.js`, copied and linked only in serve mode; `built-landmarks.test.js` asserts it never ships.
-
-## Artmaking page
-
-Each project is a `.split-row` `<article>`: a `.split-row__text` block (title | description + dimmed year + link, 2-up from a `@container` at `$bp-split`) at content width, then a `ul.grid-cols-2.split-row__images` of `.card` `<li>`s spanning the full-width page (Q25, G24). Folds live in `_responsive.scss`.
-
-- **Plain grid, no masonry (G37).** Images keep their natural ratio; `align-items: start` stops them stretching, and `align-self: start` stops `.split-row` stretching the grid (its rows would spread apart). `artProjects.json` has no `ratio` field (G43).
-- **The image is a direct child of `.card`.** That is what triggers `.card`'s full-bleed rule, so images sit flush with no padding. Wrapping it in anything re-introduces the card padding.
-
-Add new projects to `src/_data/artProjects.json`; `year`, `link`, `linkLabel` and `images` are all optional (an empty year renders nothing).
-
 ## Project videos
 
 Embed videos with the `projectVideo` shortcode. Lazy loading, autoplay-in-view, the hidden play/pause control, iOS Low Power Mode handling, formats and `pnpm optimize:video` are in [docs/project-videos.md](docs/project-videos.md); read it before touching `video-controller.js` or `.project-video*`.
@@ -137,8 +94,6 @@ Before editing `src/css`, read [docs/css-architecture.md](docs/css-architecture.
 | cleacss not applying dark mode | Check `[data-theme]` attribute on `<html>`; or verify LightningCSS is processing the output |
 | Text colour not changing with the palette | Text uses `--neutral-*` tokens which are intentionally near-neutral — only `--color-accent` changes with the palette |
 | Font not loading | Check `src/assets/fonts/` has the woff2 file; passthrough copy requires the file to exist at build time |
-| Build fails on Node 22+ | Confirm `browserslist@4.24.0` override is in `pnpm-workspace.yaml` |
-| VS Code TypeScript error in `.njk` or `.js` | `tsconfig.json` at root is intentionally minimal — `checkJs: false` |
 | `fallow health` flags a CRAP score on well-tested code | No coverage provider is installed, so fallow scores every function against a flat 40% coverage guess. Read `cyclomatic` before acting — under 20 with real tests behind it, the estimate fired, not the code |
 | Build throws `Too many featured work projects` | More than 3 `src/work/` posts have `featured: true`; the `workFeatured` collection caps at 3. Drop `featured: true` on the extras |
 | Body image has no spacing, no caption, or two images stack flush | Markdown `![]()` — adjacent ones share one `<p>` and the `.case-study` selectors miss them. Use `figureImg` (see Long-form pages) |
@@ -150,7 +105,3 @@ Before editing `src/css`, read [docs/css-architecture.md](docs/css-architecture.
 ## Browser automation blocklist
 
 **Agents may not install or use puppeteer, playwright, or any browser-automation libraries without explicit user consent.** This includes MCP servers (Chrome DevTools MCP, Firecrawl, etc.) unless the user explicitly requests them for a specific task. Motivation: prevent accidental browser-session automation and ensure transparency around external system interaction.
-
-## License
-
-[GPL-3.0](LICENSE.md) — see [LICENSE.md](LICENSE.md) for full text.
