@@ -78,7 +78,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/robots.txt");
   eleventyConfig.addPassthroughCopy("src/_redirects");
   eleventyConfig.addPassthroughCopy("src/_headers");
-  // Object form: Eleventy skips dot-prefixed source dirs, so author it undotted and rename on copy.
   // Lenis ships from node_modules so `pnpm up lenis` is the whole update; the IIFE build, not the ESM one.
   eleventyConfig.addPassthroughCopy({ "node_modules/lenis/dist/lenis.min.js": "assets/scripts/lenis.min.js" });
   // The build's trailing sourceMappingURL points here — without it DevTools logs a 404

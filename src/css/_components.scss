@@ -311,12 +311,12 @@ main:has(> :is(.cta-card, .prefooter-hero):last-child) {
         align-self: start; // the row stretches its items; keep the pill hugging its text
         margin: 0;
     }
-}
 
-// Label | content: folds later than the image grids, at iPad mini portrait's container width
-@container (min-width: #{tokens.$bp-split}) {
-    .section:not(.section--stacked) {
-        grid-template-columns: repeat(2, 1fr);
+    // Label | content: folds later than the image grids, at iPad mini portrait's container width
+    @container (min-width: #{tokens.$bp-split}) {
+        &:not(.section--stacked) {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 }
 
@@ -852,7 +852,7 @@ main svg.illustration-wide {
     }
 }
 
-// About accordion: photo, then the social links in a row; side by side from $bp-s with the links at the photo's foot 
+// About accordion: photo, then the social links in a row; side by side from $bp-s with the links at the photo's foot
 .intro__portrait {
     display: grid;
     inline-size: 100%;
@@ -1056,7 +1056,7 @@ $settle-targets: '.case-study__intro + :is(figure, p:has(> :is(img, picture)))';
 
 // ---- Writing (index + per-type listings) ----
 
-// Fluid thumb | body grid: 3fr 5fr, 1fr 3fr when the row is narrow  or on type pages (--compact)
+// Fluid thumb | body grid: 3fr 5fr, 1fr 3fr when the row is narrow or on type pages (--compact)
 .writing-item {
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -1096,7 +1096,7 @@ $settle-targets: '.case-study__intro + :is(figure, p:has(> :is(img, picture)))';
     background-color: var(--accent-surface);
 }
 
-// the source label is inert text inside the card link, so pin its arrow; beats [data-icon]:hover in _icons.scss on source order
+// the source label is inert text inside the card link, so pin its arrow; beats [data-icon]:hover earlier in this file on source order
 .writing-item [data-icon] {
     --icon-gap: var(--space-4xs);
 }

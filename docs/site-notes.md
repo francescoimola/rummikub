@@ -40,7 +40,7 @@ Read before editing `src/css`. Source comments and `scripts/lint.sh` cite these 
 
 2. **cleacss is vendored and trimmed** — Lives at `src/css/vendor/cleacss.css`, cut down to the classes the site uses. The file may be edited directly. Do not `pnpm add` it. Loaded with `@use 'vendor/cleacss'` right after `components` (where the old `@import` emitted it) — `@use` **inlines its contents** into one bundled stylesheet. Never revert to `@import`: besides the deprecation, `@import "x.css"` emits a runtime import (extra render-blocking request, unminified). There is no passthrough copy of `src/css/vendor` — nothing requests it.
 
-3. **`@layer` names in use:** cleacss's `reset`, `layout`, `elements`, `is`, `has` (do not write to them), then ours: `fonts`, `colors`, `type`. Layers are for variable/token declarations only. All other styles go unlayered in `index.scss`.
+3. **`@layer` names in use:** cleacss's `reset`, `layout`, `elements`, `is`, `has` (do not write to them), then ours: `fonts`, `colors`, `type`. Layers are for variable/token declarations only. All other styles go unlayered in `index.scss` and `_components.scss`.
 
    **Layer order is pinned, not incidental.** Priority is set by the order layer names *first appear*, so inlining cleacss would otherwise let our `fonts`/`colors`/`type` be named first and flip cleacss's layers above our tokens site-wide, silently. `src/css/_tokens.scss` opens with one `@layer reset, layout, elements, is, has, fonts, colors, type;` statement and **must stay the first `@use` in `index.scss`** — Sass emits module CSS in `@use` order, so it lands ahead of everything. LightningCSS strips the statement when source order already agrees; that's fine, the emitted order is what matters.
 

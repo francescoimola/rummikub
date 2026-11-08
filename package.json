@@ -5,7 +5,7 @@
   "packageManager": "pnpm@12.15.0",
   "scripts": {
     "start": "eleventy --serve",
-    "build": "eleventy",
+    "build": "rm -rf public/assets/dev && eleventy",
     "clean": "rm -rf public",
     "prepare": "git config core.hooksPath scripts/hooks || true",
     "optimize:video": "node scripts/optimize-videos.mjs",
