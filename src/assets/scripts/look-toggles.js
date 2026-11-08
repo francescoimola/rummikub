@@ -1,6 +1,6 @@
-// Brand palette + light/dark toggles. Applies a choice to <html> (data-brand / data-theme),
-// keeps both toggle instances' aria-pressed in sync, and persists to localStorage.
-// The pre-paint inline script in _head.njk applies stored choices before first paint; this only reconciles state + wires clicks.
+// Brand palette picker. Applies a choice to <html> (data-brand), keeps both picker instances'
+// aria-pressed in sync, and persists to localStorage. Light/dark is not a choice here: it follows the OS.
+// The pre-paint inline script in _head.njk applies the stored brand before first paint; this only reconciles state + wires clicks.
 
 var root = document.documentElement;
 
@@ -33,22 +33,5 @@ document.querySelectorAll("[data-brand-choice]").forEach(function (btn) {
   });
 });
 
-// ---- Light / dark (absent data-theme === follow OS) ----
-function currentTheme() {
-  var explicit = root.getAttribute("data-theme");
-  if (explicit) return explicit;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
-
-document.querySelectorAll("[data-theme-choice]").forEach(function (btn) {
-  btn.addEventListener("click", function () {
-    var choice = btn.getAttribute("data-theme-choice");
-    root.setAttribute("data-theme", choice);
-    store("theme", choice);
-    syncPressed("data-theme-choice", choice);
-  });
-});
-
-// Reconcile server-rendered pressed state with the resolved state (stored choice or OS scheme)
+// Reconcile server-rendered pressed state with the resolved state (the stored choice)
 syncPressed("data-brand-choice", currentBrand());
-syncPressed("data-theme-choice", currentTheme());

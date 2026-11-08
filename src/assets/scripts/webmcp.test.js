@@ -4,8 +4,6 @@ import { readFileSync } from "node:fs";
 // Enough of the footer and the toggles for the DOM-reading tools to have something to read.
 const PAGE = `
   <header class="sidebar">
-    <button data-theme-choice="light" aria-pressed="true">Light</button>
-    <button data-theme-choice="dark" aria-pressed="false">Dark</button>
     <button data-brand-choice="green" aria-pressed="true">Green</button>
     <button data-brand-choice="pink" aria-pressed="false">Pink</button>
     <footer>
@@ -104,24 +102,16 @@ describe("webmcp tools", () => {
     expect(details.bookingUrl).toBe("https://cal.com/francescoimola/intro");
   });
 
-  // Clicking the real button hands persistence and aria-pressed sync back to look-toggles.js.
-  it("set_appearance clicks the matching toggle", async () => {
+  // Clicking the real swatch hands persistence and aria-pressed sync back to look-toggles.js.
+  it("set_appearance clicks the matching swatch", async () => {
     const { TOOLS } = await load();
-    const dark = document.querySelector('[data-theme-choice="dark"]');
+    const pink = document.querySelector('[data-brand-choice="pink"]');
     const clicked = vi.fn();
-    dark.addEventListener("click", clicked);
+    pink.addEventListener("click", clicked);
 
-    const applied = JSON.parse(textOf(await byName(TOOLS, "set_appearance").execute({ theme: "dark" })));
+    const applied = JSON.parse(textOf(await byName(TOOLS, "set_appearance").execute({ brand: "pink" })));
     expect(clicked).toHaveBeenCalledOnce();
-    expect(applied).toEqual({ theme: "dark", brand: null });
-  });
-
-  it("set_appearance applies theme and brand together", async () => {
-    const { TOOLS } = await load();
-    const applied = JSON.parse(
-      textOf(await byName(TOOLS, "set_appearance").execute({ theme: "light", brand: "pink" })),
-    );
-    expect(applied).toEqual({ theme: "light", brand: "pink" });
+    expect(applied).toEqual({ brand: "pink" });
   });
 
   it("set_appearance rejects an option the page has no control for", async () => {
@@ -134,7 +124,7 @@ describe("webmcp tools", () => {
   it("set_appearance tolerates being called with nothing", async () => {
     const { TOOLS } = await load();
     const applied = JSON.parse(textOf(await byName(TOOLS, "set_appearance").execute()));
-    expect(applied).toEqual({ theme: null, brand: null });
+    expect(applied).toEqual({ brand: null });
   });
 });
 

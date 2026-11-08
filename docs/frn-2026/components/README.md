@@ -73,7 +73,7 @@ Status tracks the **redesign**: `planned` (a pattern with no Figma component) â†
 
 ### Theme
 
-- Figma frames use the **Color Light** mode. In code, light/dark is `light-dark()` plus `[data-theme]`, and the page colour is `--brand-hue` via `[data-brand]` on `<html>` (CSS rules 4 and 9). Components never hard-code a colour.
+- Figma frames use the **Color Light** mode. In code, light/dark is `light-dark()` following the OS (no manual switch), and the page colour is `--brand-hue` via `[data-brand]` on `<html>` (CSS rules 4 and 9). Components never hard-code a colour.
 - Text uses `neutral/*` tokens. The secondary "dimmed" text is `neutral/900-alpha`. Only `--color-accent` follows the page colour.
 
 ### States

@@ -283,47 +283,6 @@ main>:is(figure, .media-pair, p:has(> :is(img, picture))) {
     // bg stripped in forced colors — border weight is the only signal
 }
 
-// Same height as the swatches so the two sit on one line. content-box because the swatches are
-// <button>s, which `all: unset` leaves content-box — so --space-m excludes their border there too
-.theme-switch {
-    box-sizing: content-box;
-    display: flex;
-    flex: none; // never shrinks in a tight header row
-    block-size: var(--space-m);
-    border: var(--input-border-width) solid var(--input-border-color);
-    border-radius: var(--border-radius-s);
-    overflow: clip; // the selected fill runs to the border on every side
-}
-
-// Explicit square, not aspect-ratio: Safari stretches or collapses aspect-ratio on unset buttons in a flex row (#70)
-.theme-switch button {
-    box-sizing: border-box; // padding sits inside the square
-    display: flex;
-    flex: none;
-    align-items: center;
-    justify-content: center;
-    inline-size: var(--space-m);
-    block-size: var(--space-m);
-    padding: calc(var(--space-3xs) / 2);
-}
-
-.theme-switch button svg {
-    inline-size: 100%;
-    block-size: 100%;
-    background: none; // opt out of the global img/svg placeholder background
-}
-
-.theme-switch button[aria-pressed="true"] {
-    background: var(--neutral-950-alpha);
-    color: var(--neutral-50);
-}
-
-@media (forced-colors: active) {
-    .theme-switch button[aria-pressed="true"] {
-        border: var(--input-border-width) solid CanvasText;
-    }
-}
-
 // ---- FAQ list ----
 // Open state: Tight below the answer, matching the Tight above the divider
 .faq-answer {

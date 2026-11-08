@@ -31,8 +31,8 @@ Across the site, you'll see links to other platforms (e.g. Substack) and to cal.
 
 ## Highlight features
 
-- I can swap the entire colour palette by changing two values in the css, hue and chroma. Users too can swap the entire palette by interacting with the theme toggle in the menu.
-- Light/dark mode is automatic via light-dark(), plus there's a manual toggle users can switch themselves.
+- I can swap the entire colour palette by changing two values in the css, hue and chroma. Users too can swap the entire palette with the colour swatches in the menu.
+- Light/dark mode follows your system setting via light-dark().
 - IntersectionObserver loads videos only when they scroll into view and prefers-reduced-motion and slow connections are respected, within what's feasible.
 - I can make pages either white/black or slightly tint them with the brand colour just by changing a variable in the frontmatter.
 - Near 100% fluid type and spacing, achieved using Utopia, which generates a scale from 16px to 24px with a Perfect Fourth ratio.

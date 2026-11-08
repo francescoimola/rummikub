@@ -17,7 +17,7 @@
     },
     {
       "name": "set_appearance",
-      "description": "Change how this page looks: switch between light and dark mode, and pick the accent colour palette. The choice is remembered across visits."
+      "description": "Change how this page looks by picking the accent colour palette. The choice is remembered across visits. Light and dark mode follow the visitor's system setting and can't be changed here."
     }
   ]
 }

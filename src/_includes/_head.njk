@@ -2,13 +2,13 @@
   <meta charset="utf-8">
   <meta name="color-scheme" content="light dark">
   <script>
-    // Apply stored palette/theme before first paint (no flash). Reconciled by look-toggles.js.
+    // Apply the stored palette before first paint (no flash). Reconciled by look-toggles.js.
     (function () {
       try {
         var b = localStorage.getItem("brand");
         if (b) document.documentElement.setAttribute("data-brand", b);
-        var t = localStorage.getItem("theme");
-        if (t) document.documentElement.setAttribute("data-theme", t);
+        // A theme choice stored by the retired light/dark switch would otherwise pin the page for good
+        localStorage.removeItem("theme");
       } catch (e) {}
     })();
   </script>

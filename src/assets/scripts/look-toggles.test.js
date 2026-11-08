@@ -5,14 +5,10 @@ const TOGGLES = `
   <div class="sidebar">
     <button data-brand-choice="green">Green</button>
     <button data-brand-choice="pink">Pink</button>
-    <button data-theme-choice="light">Light</button>
-    <button data-theme-choice="dark">Dark</button>
   </div>
   <div class="sidebar sidebar--footer">
     <button data-brand-choice="green">Green</button>
     <button data-brand-choice="pink">Pink</button>
-    <button data-theme-choice="light">Light</button>
-    <button data-theme-choice="dark">Dark</button>
   </div>
 `;
 
@@ -38,7 +34,7 @@ function createStorage({ failOn } = {}) {
 let storage;
 
 // The module is a side-effectful IIFE, so the DOM must exist before the import
-async function mount({ brand, theme, prefersDark = false, failOn } = {}) {
+async function mount({ brand, failOn } = {}) {
   storage = createStorage({ failOn });
   Object.defineProperty(globalThis, "localStorage", {
     value: storage,
@@ -47,12 +43,6 @@ async function mount({ brand, theme, prefersDark = false, failOn } = {}) {
   });
 
   if (brand) root.setAttribute("data-brand", brand);
-  if (theme) root.setAttribute("data-theme", theme);
-  window.matchMedia = vi.fn(() => ({
-    matches: prefersDark,
-    addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
-  }));
   document.body.innerHTML = TOGGLES;
   await import("./look-toggles.js");
 }
@@ -67,18 +57,13 @@ function click(attr, value) {
   buttons(attr, value)[0].click();
 }
 
-let originalMatchMedia;
-
 beforeEach(() => {
-  originalMatchMedia = window.matchMedia;
   vi.resetModules();
 });
 
 afterEach(() => {
-  window.matchMedia = originalMatchMedia;
   delete globalThis.localStorage;
   root.removeAttribute("data-brand");
-  root.removeAttribute("data-theme");
   document.body.innerHTML = "";
   vi.restoreAllMocks();
 });
@@ -124,32 +109,6 @@ describe("look-toggles.js — brand palette", () => {
 
     expect(pressedStates("data-brand-choice", "pink")).toEqual(["true", "true"]);
     expect(pressedStates("data-brand-choice", "green")).toEqual(["false", "false"]);
-  });
-});
-
-describe("look-toggles.js — light/dark", () => {
-  it("falls back to the OS scheme when no theme is set", async () => {
-    await mount({ prefersDark: true });
-
-    expect(pressedStates("data-theme-choice", "dark")).toEqual(["true", "true"]);
-    expect(pressedStates("data-theme-choice", "light")).toEqual(["false", "false"]);
-  });
-
-  it("prefers an explicit data-theme over the OS scheme", async () => {
-    await mount({ theme: "light", prefersDark: true });
-
-    expect(pressedStates("data-theme-choice", "light")).toEqual(["true", "true"]);
-    expect(pressedStates("data-theme-choice", "dark")).toEqual(["false", "false"]);
-  });
-
-  it("applies a chosen theme to <html> and persists it", async () => {
-    await mount();
-
-    click("data-theme-choice", "dark");
-
-    expect(root.getAttribute("data-theme")).toBe("dark");
-    expect(storage.getItem("theme")).toBe("dark");
-    expect(pressedStates("data-theme-choice", "dark")).toEqual(["true", "true"]);
   });
 });
 

@@ -6,7 +6,7 @@ There are four groups of JS in this repo, ~1,300 lines of code total (excluding 
 
 | Where | What | Module style |
 |---|---|---|
-| `src/assets/scripts/` | Code that runs in the browser: video player, theme/palette toggles, copy-email buttons, nav menu, WebMCP tools | ESM (`import`/`export`) |
+| `src/assets/scripts/` | Code that runs in the browser: video player, palette picker, copy-email buttons, nav menu, WebMCP tools | ESM (`import`/`export`) |
 | `src/config/eleventy/` | Build-time code: filters, shortcodes, collections, transforms, markdown twins. Wired up by `eleventy.config.js` | CommonJS (`require`/`module.exports`) — Eleventy config must be |
 | `scripts/` | One-off maintenance CLIs run by hand: `pnpm optimize:video` (also called by the Pages CMS GitHub workflow — don't delete) and `pnpm compress:assets` | ESM |
 | Repo root | `eleventy.config.js` (build config) and `vitest.config.js` (test config) | CJS / ESM respectively |
@@ -63,7 +63,7 @@ Each config module exports a function that registers things with Eleventy. Tests
 Run in jsdom. These files are IIFE-style with no exports, so the pattern is: set up the DOM, then `await import("./the-file.js")` inside the test, with `vi.resetModules()` in `beforeEach` for a fresh import.
 
 - **video-controller.test.js** — the fiddliest code in the repo: lazy-load via `IntersectionObserver`, play/pause, reduced motion, data-saver. Failure modes are silent — keep this one.
-- **look-toggles.test.js** — theme/palette toggles stay in sync across instances and survive storage failures (silent persistence logic)
+- **look-toggles.test.js** — the palette picker stays in sync across instances and survive storage failures (silent persistence logic)
 - **webmcp.test.js** — WebMCP tool registration; pins tool names to `src/well-known/webmcp.json`
 
 ## Rules

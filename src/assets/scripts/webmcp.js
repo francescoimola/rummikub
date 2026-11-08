@@ -36,7 +36,7 @@ function contactDetails() {
   };
 }
 
-// Click the real toggle rather than setting the attribute: look-toggles.js owns persistence and
+// Click the real swatch rather than setting the attribute: look-toggles.js owns persistence and
 // aria-pressed sync, and duplicating that here would leave the two out of step.
 function applyChoice(attr, value) {
   if (!value) return null;
@@ -77,20 +77,16 @@ const TOOLS = [
   {
     name: "set_appearance",
     description:
-      "Change how this page looks: switch between light and dark mode, and pick the accent colour palette. The choice is remembered across visits.",
+      "Change how this page looks by picking the accent colour palette. The choice is remembered across visits. Light and dark mode follow the visitor's system setting and can't be changed here.",
     inputSchema: {
       type: "object",
       properties: {
-        theme: { type: "string", enum: ["light", "dark"], description: "Light or dark mode." },
         brand: { type: "string", enum: ["green", "pink", "orange"], description: "Accent colour palette." },
       },
     },
     execute: async function (args) {
       var input = args || {};
-      var applied = {
-        theme: applyChoice("data-theme-choice", input.theme),
-        brand: applyChoice("data-brand-choice", input.brand),
-      };
+      var applied = { brand: applyChoice("data-brand-choice", input.brand) };
       return { content: [{ type: "text", text: JSON.stringify(applied) }] };
     },
   },

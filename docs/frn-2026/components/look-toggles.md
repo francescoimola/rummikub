@@ -1,16 +1,15 @@
 # Look toggles
 
-**Layer:** Composite · **Status:** code · **Figma:** `2353:19425` · **Code:** `src/_includes/_look-toggles.njk`, `.theme-switch`, `.brand-picker`
+**Layer:** Composite · **Status:** code · **Figma:** `2353:19425` · **Code:** `src/_includes/_look-toggles.njk`, `.brand-picker`
 
 ## Purpose
 
-The visitor's two display choices in the [Header](header.md): light or dark theme, and the page colour (green, pink, orange). Used in every Header variant, inline on Wide and in the open panel on Narrow.
+The visitor's display choice in the [Header](header.md): the page colour (green, pink, orange). Light or dark follows the OS; the light/dark switch was removed because it made Safari 26 drop its toolbar tint when it disagreed with the Mac. Used in every Header variant, inline on Wide and in the open panel on Narrow.
 
 ## Anatomy
 
-A horizontal row of two groups, gap `space/l`:
+One group:
 
-- **Theme** (`.theme-switch`, `role="group"`): a bordered frame with **Button - Light** and **Button - Dark**. Each holds a sun or moon vector, sized like the code (G7). The active button is filled `neutral/950-alpha` with a `neutral/50` glyph.
 - **Page colour** (`.brand-picker`, `role="group"`): **Button - Green**, **Pink**, **Orange**. Each is a square swatch. Green is filled `brand/150`.
 
 ## Props & variants
@@ -21,56 +20,45 @@ None. One component, no properties. The "To main site" link was never part of it
 
 - Hugs (F44). The component width follows its content, so it does not stay at a fixed 205 px: it was about 170 to 205 px across modes in the file.
 - The Page colour swatches are square and bound to `line-height/body`, so they scale with the type.
-- The Theme group is a hug row, not a grid. Its sun and moon glyphs scale with the type like the swatches (G7).
 
 ## Tokens
 
 | Use | Figma variable | Min → Max |
 | --- | --- | --- |
-| Theme ↔ Page colour gap | `space/l` | 30 → 33.75 |
-| Theme inner gap | `space/3xs-2xs` | 3.75 → 8.44 |
-| Theme frame padding | `space/4xs` | 1.88 → 1.88 |
-| Theme button padding | `space/2xs` (repo) | 7.5 → 8.44 |
-| Theme glyph size | `space/s` (G7): code is `--space-s-m` capped at `1rem`, so `space/s` is its effective value | 15 → 16.88 |
 | Swatch ↔ swatch gap | `space/3xs` | 3.75 → 4.69 |
 | Swatch size | `line-height/body` | 22.5 → 25.31 |
 | Border weight | `input-border-width` | — |
-| Border colour, Theme and unselected swatches | `neutral/500-alpha` | colour |
+| Border colour, unselected swatches | `neutral/500-alpha` | colour |
 | Selected swatch border | `neutral/950-alpha` | colour |
 
 Values from [`_tokens.md`](_tokens.md). Pink and Orange swatch fills are raw colours, on purpose: they preview other hues, which no variable holds.
 
 ## States & interactions
 
-- **Selected:** Light and Green are drawn selected. Figma has no reactions here; state changes only by editing the layers.
+- **Selected:** Green is drawn selected. Figma has no reactions here; state changes only by editing the layers.
 - **In code:** `aria-pressed` marks the selection. The selected swatch gets a doubled ring, because a one-pixel colour change alone fails non-text contrast. In `forced-colors` the border widens.
-- The choice sets `data-theme` and `data-brand` on `<html>` (CSS rules 4 and 9).
+- The choice sets `data-brand` on `<html>` (CSS rules 4 and 9).
 
 ## Content rules
 
-- Fixed set: Light, Dark, Green, Pink, Orange. A new colour needs a `--brand-hue-*` entry in `_colors.scss`, a swatch and an `aria-label`.
+- Fixed set: Green, Pink, Orange. A new colour needs a `--brand-hue-*` entry in `_colors.scss`, a swatch and an `aria-label`.
 - The current page colour comes from `brand` front matter, default green.
 
 ## HTML & accessibility
 
 ```html
-<div class="theme-switch" role="group" aria-label="Theme">
-  <button type="button" data-theme-choice="light" aria-pressed="true" aria-label="Light">…</button>
-  <button type="button" data-theme-choice="dark" aria-pressed="false" aria-label="Dark">…</button>
-</div>
 <div class="brand-picker" role="group" aria-label="Page colour">
   <button type="button" data-brand-choice="green" aria-pressed="true" aria-label="Green"></button> …
 </div>
 ```
 
-- Every button is a real `<button>` with `aria-label` (the glyphs and swatches carry no text).
-- Tab order: Light, Dark, Green, Pink, Orange. The invisible hit-area rule extends tap targets.
+- Every button is a real `<button>` with `aria-label` (the swatches carry no text).
+- Tab order: Green, Pink, Orange. The invisible hit-area rule extends tap targets.
 
 ## Port notes
 
-- Figma now matches the code: glyph `space/s`, button padding `space/2xs` (G7). No code change.
-- **Ported (#22, #23):** one instance in `.nav-menu__toggles`, in the header on every page (see [Header](header.md)). Both toggle groups run as rows.
-- The theme icons are `sun.svg` and `moon.svg` in `src/assets/icons/`, inlined by the `icon` shortcode.
+- **Figma catch-up owed:** the Theme group (sun and moon) is still in the Figma component and must be deleted to match the code.
+- **Ported (#22, #23):** one instance in `.nav-menu__toggles`, in the header on every page (see [Header](header.md)). 
 - Swatch fills in CSS are computed from `--brand-hue-*`; keep that formula in sync with `_colors.scss`.
 
 ## Open questions

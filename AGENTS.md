@@ -91,7 +91,7 @@ Before editing `src/css`, read [docs/css-architecture.md](docs/css-architecture.
 | Issue | Fix |
 |---|---|
 | A `--space-*` / `--font-weight-bold` / `--color-{success,warning,error,info}` / `--input-border-color` value doesn't match source | cleacss defines that token unlayered; a layered override loses. Put it in the `overrides` mixin in `_cleacss-overrides.scss`, `@include`d after the cleacss `@use` (CSS rule 3) |
-| cleacss not applying dark mode | Check `[data-theme]` attribute on `<html>`; or verify LightningCSS is processing the output |
+| cleacss not applying dark mode | Dark follows the OS (no site switch, by design — Safari 26 drops its toolbar tint when page and Mac themes differ). Verify LightningCSS is processing the output |
 | Text colour not changing with the palette | Text uses `--neutral-*` tokens which are intentionally near-neutral — only `--color-accent` changes with the palette |
 | Font not loading | Check `src/assets/fonts/` has the woff2 file; passthrough copy requires the file to exist at build time |
 | `fallow health` flags a CRAP score on well-tested code | No coverage provider is installed, so fallow scores every function against a flat 40% coverage guess. Read `cyclomatic` before acting — under 20 with real tests behind it, the estimate fired, not the code |
