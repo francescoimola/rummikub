@@ -132,7 +132,7 @@ key: Home
 
 <section class="home-block flow has-gap-xs" aria-labelledby="index">
   <h2 id="index">Index</h2>
-  <div class="flow has-gap-l-xl">
+  <div class="flow has-gap-l-xl project-rows">
   {% for project in collections.workIndex %}
     {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "", project.data.thumbRatio) }}
   {% endfor %}

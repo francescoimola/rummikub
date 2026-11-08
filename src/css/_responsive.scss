@@ -115,14 +115,20 @@ $settle-targets: '[view-animation="settle"], .case-study__intro + :is(figure, p:
 
     @container (min-width: #{scale.$bp-l}) {
 
-        // Image left / text right (Split) — the item's own fold, independent of the body's. Stacked items (homepage Featured) never fold
+        // Text left / image right (Split) — the item's own fold, independent of the body's. Stacked items (homepage Featured) never fold
         .project-item:not(.project-item--stacked) {
             grid-template-columns: 1fr 1fr;
         }
 
-        .project-item:not(.project-item--stacked) :is(.project-item__media, .project-item__img) {
-            grid-column: 1;
+        // First child, not a class: eleventy-img wraps an unlinked image in a classless <picture>
+        .project-item:not(.project-item--stacked)>:first-child {
+            grid-column: 2;
             grid-row: 1;
+        }
+
+        // Split rows read as a list: Flow apart, one step closer than the Break they keep when stacked
+        .project-rows {
+            --flow-gap: var(--space-s-m);
         }
     }
 

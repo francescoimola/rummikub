@@ -63,7 +63,8 @@ Which gap sits between which neighbours ([Pair table](https://github.com/frances
 | image block → image block | **Flow** |
 | above and below an image, pair or grid | **Break** |
 | image → its caption | **Hang** |
-| image-led repeated blocks (home project items, Artmaking rows) | **Break** |
+| image-led repeated blocks (stacked project items, Artmaking rows) | **Break** |
+| project rows, once split text \| image | **Flow** |
 | page title → hero image | **Chapter** |
 
 ### Components

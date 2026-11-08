@@ -42,7 +42,7 @@ eleventyNavigation:
 </section>
 <section class="home-block flow has-gap-xs" aria-labelledby="featured-work">
     <h2 id="featured-work">Featured work</h2>
-    <div class="flow has-gap-l-xl">
+    <div class="flow has-gap-l-xl project-rows">
     {% for slug in collaborate.featured %}
     {% for project in collections.work %}{% if project.fileSlug == slug %}
     {{ projectItem(project.data.title, project.data.services, project.data.image, project.data.alt, project.url or "", project.data.thumbRatio) }}
