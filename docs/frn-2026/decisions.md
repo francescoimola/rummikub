@@ -3,6 +3,8 @@
 Figma file: UkQphRf7GwINc1c8vORtUm (FRN-2026), page `v2`, section `2260:2139` "francescoimola.com - new design".
 Repo: /Users/francescoimola/Repositories/rummikub (read-only this session; no branch, commit or PR).
 
+> Note (2026-11-08): the light/dark switch was removed from the site. Entries below that mention theme toggles, the theme switch or its glyph record the design as it was then. Current behaviour is in [look-toggles.md](components/look-toggles.md).
+
 ## Session scope (2026-10-24)
 
 - Figma only. Skip figma-to-code. No repo files touched.

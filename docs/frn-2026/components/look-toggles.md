@@ -58,7 +58,7 @@ Values from [`_tokens.md`](_tokens.md). Pink and Orange swatch fills are raw col
 ## Port notes
 
 - **Figma catch-up owed:** the Theme group (sun and moon) is still in the Figma component and must be deleted to match the code.
-- **Ported (#22, #23):** one instance in `.nav-menu__toggles`, in the header on every page (see [Header](header.md)). 
+- **Ported (#22, #23):** one instance in `.nav-menu__toggles`, in the header on every page (see [Header](header.md)).
 - Swatch fills in CSS are computed from `--brand-hue-*`; keep that formula in sync with `_colors.scss`.
 
 ## Open questions

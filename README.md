@@ -29,7 +29,7 @@ public/           Build output (gitignored)
 ## Cool things this site can do
 
 - Brand tint: I can swap the entire colour palette by changing --brand-hue and --brand-chroma. 
-- Light/dark mode is automatic via light-dark(), plus there's a manual toggle with data-theme.
+- Light/dark mode follows the OS via light-dark(). There's no manual switch: Safari 26 drops its toolbar tint when the page and the Mac disagree.
 - Lazy video: IntersectionObserver loads project videos only when they scroll into view and prefers-reduced-motion and slow connections are respected, within what's feasible.
 - Content modes: by setting "contentMode: contrast" in frontmatter, I can make pages either white or slightly tint them with the brand colour.
 - Fluid type using Utopia, which generates a scale from 16px to 24px with a Perfect Fourth ratio.

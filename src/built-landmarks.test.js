@@ -119,7 +119,7 @@ describe("built landmarks", () => {
   });
 
   // The Illustrations rule sets padding over the declared icon size; scoped to a <header> it would
-  // inflate the border-box of the sidebar's sun/moon icons and collapse their viewport to zero.
+  // inflate the border-box of a header icon and collapse its viewport to zero.
   it("never applies the illustration padding to a bare header", () => {
     expect(css()).not.toMatch(/(^|[,}])header svg/);
   });

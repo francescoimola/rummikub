@@ -7,7 +7,8 @@
       try {
         var b = localStorage.getItem("brand");
         if (b) document.documentElement.setAttribute("data-brand", b);
-        // A theme choice stored by the retired light/dark switch would otherwise pin the page for good
+        // A theme choice stored by the retired light/dark switch would otherwise pin the page for good.
+        // Added 2026-11-08; delete after 2027-11-08, by when no visitor should still hold a stored theme.
         localStorage.removeItem("theme");
       } catch (e) {}
     })();
