@@ -29,14 +29,16 @@ This is a one-person repo. Francesco owns, designs and builds it, edits CSS by h
 ```bash
 pnpm install          # Install dependencies
 pnpm start            # Dev server (Eleventy --serve)
-pnpm build            # Production build
+pnpm build            # Production build; keeps public/, so a repeat build takes seconds
 pnpm lint             # Mechanical rules: breakpoints, SCSS comments, external rel, JSON keys, rhythm ladder
-pnpm clean            # rm -rf public
+pnpm clean            # rm -rf public; run it to start fresh, then expect a 4–10 minute build
 ```
 
 **Never run `pnpm dev` / `npm run dev`** — the dev script is `pnpm start`. Do not spin up a dev server unless the user explicitly asks.
 
-**Worktrees:** `pnpm build` wipes `public/` and a cold build takes 4–10 minutes. Build and test in your own worktree, not in the main checkout while another agent works there; in a worktree run git as separate plain commands. Details in [testing-guide.md](testing-guide.md).
+**Replacing an image:** image filenames carry no content hash, so a new image under an old filename keeps its old optimized files until you run `pnpm clean` and build again. The same goes for a deleted page, which stays in `public/` until then.
+
+**Worktrees:** a build in a fresh checkout takes 4–10 minutes. Build and test in your own worktree, not in the main checkout while another agent works there; in a worktree run git as separate plain commands. Details in [testing-guide.md](testing-guide.md).
 
 ## Project structure
 
